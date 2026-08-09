@@ -1,0 +1,139 @@
+# AquaIQ — central configuration
+# Every hyperparameter, path, and threshold lives here — nothing hardcoded in source.
+# Matches NFR-M-05 (Configuration Management) from the SRS.
+
+project:
+  name: AquaIQ
+  version: "1.0"
+  seed: 42                    # torch.manual_seed(42), random.seed(42), np.random.seed(42) everywhere
+
+paths:
+  data_raw: "data/raw"
+  data_processed: "data/processed"
+  db_path: "db/aquaiq.db"
+  model_checkpoints: "models/checkpoints"
+  lstm_checkpoint: "models/checkpoints/aquaiq_lstm.pt"
+  xgboost_checkpoint: "models/checkpoints/aquaiq_xgb.json"
+  geojson_boundaries: "data/raw/india_districts.geojson"
+
+data_sources:
+  cgwb:
+    name: "Central Ground Water Board"
+    portal: "https://india-wris.nrsc.gov.in"
+    metric: "groundwater_level"
+  imd:
+    name: "India Meteorological Department"
+    portal: "https://imdpune.gov.in"
+    metric: "rainfall"
+  era5:
+    name: "ECMWF Reanalysis v5"
+    api: "cds.climate.copernicus.eu"
+    metrics: ["temperature", "evapotranspiration"]
+  geojson_source: "datameet.org"   # India district boundaries
+
+date_range:
+  start: "2002-01-01"
+  end: "2024-12-31"
+  train_end: "2019-12-31"
+  val_end: "2022-12-31"
+  test_start: "2023-01-01"
+
+# The 10 features — exact list, exact order. Don't add to this without updating
+# preprocessing/features.py, models/lstm.py input_size, and models/xgboost_model.py.
+features:
+  - GWL_current
+  - GWL_lag_3mo
+  - GWL_lag_6mo
+  - rainfall_current
+  - rainfall_3mo_avg
+  - monsoon_deficit_pct
+  - temperature
+  - evapotranspiration
+  - water_balance_proxy
+  - crop_season_flag
+
+model_hyperparameters:
+  linear_regression:
+    train_years: [2002, 2019]
+    test_years: [2023, 2024]
+
+  fuzzy_logic:
+    inputs: ["rainfall_deficit", "depletion_rate"]
+    rainfall_deficit_bins: ["low", "medium", "high"]        # 0-20% / 20-40% / 40-100%
+    depletion_rate_bins: ["stable", "moderate", "severe"]   # 0-2 / 2-5 / 5+ cm/yr
+    rule_count: 9
+
+  perceptron:
+    hidden_layers: [64]
+    activation: "relu"
+    optimizer: "adam"
+    input_size: 10
+
+  lstm:
+    device: "cpu"             # small model (~500K params) — trains fine on CPU in under an
+                               # hour even with all districts pooled. No paid GPU needed. If
+                               # torch.cuda.is_available() happens to be true, code can still
+                               # use it, but nothing here assumes or requires it.
+    num_layers: 3
+    hidden_size: 128
+    attention_heads: 4
+    dropout: 0.2
+    window_months: 24        # input: 24-month rolling window
+    forecast_months: 6       # output: 6-month forecast
+    loss: "huber"
+    optimizer: "adam"
+    learning_rate: 0.001
+    epochs: 200
+    early_stopping_patience: 20
+    validation_scheme: "walk_forward"   # rolling 2020→2021→2022→2023 windows, then 2023-24 held-out test
+
+  xgboost:
+    n_estimators: 500
+    max_depth: 6
+    learning_rate: 0.01
+    subsample: 0.8
+    random_state: 42
+
+  ensemble:
+    # Weights are FIT on the validation set (optimised against 2015-16 and
+    # 2018-19 drought backtests) — not hand-picked. See models/ensemble.py.
+    # These are placeholder starting values until Week 8's fitting run.
+    initial_weights:
+      lstm_forecast: 0.45
+      xgboost_risk: 0.35
+      drought_frequency: 0.20
+    drought_frequency_percentile: 20   # % of past months below this percentile = "drought month"
+
+crisis_score:
+  tiers:
+    safe: [0, 30]
+    watch: [31, 60]
+    warning: [61, 80]
+    crisis: [81, 100]
+  alert_threshold: 80
+  data_readiness_min_pct: 60   # districts below this: fall back to zone-level, not excluded outright
+
+  # What happens when a district has thin/no CGWB history.
+  # CGWB isn't evenly spread across all 640+ districts — some remote or
+  # hilly districts genuinely have sparse coverage. Rather than reintroducing
+  # satellite data (GRACE's own resolution is ~300km, similar to zone-level
+  # aggregation anyway) or silently failing, fall back in two steps:
+  fallback_strategy:
+    step_1: "zone_fallback"       # aggregate CGWB data across all districts in the
+                                    # same agro_climatic_zone (districts.agro_climatic_zone,
+                                    # built Week 2) — same smoothing effect as a coarse
+                                    # regional estimate, zero new external data source
+    step_2: "insufficient_data"   # only if the zone itself lacks enough history —
+                                    # show this honestly, never fabricate a score
+    min_months_required: 24       # per-district threshold before district_level applies
+
+api:
+  host: "0.0.0.0"
+  port: 5000
+  cors_origins: ["http://localhost:3000"]
+  cache_days: 7                # NFR-Av-02: serve cached predictions if LSTM service is down
+
+testing:
+  min_coverage_pct: 70
+  sample_districts: 10         # used for integration tests, 2 per agro-climatic zone
+  backtest_years: [2015, 2016, 2018, 2019]   # known drought years for validation

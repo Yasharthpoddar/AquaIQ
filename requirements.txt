@@ -1,0 +1,41 @@
+# AquaIQ dependencies — pinned per NFR-R-04 (Reproducibility).
+# Install: pip install -r requirements.txt --break-system-packages  (if on managed Python)
+
+# Data & preprocessing
+pandas==2.1.4
+numpy==1.26.2
+statsmodels==0.14.1          # SARIMA gap-filling
+pyyaml==6.0.1
+
+# Core ML (AS202, CS205, CS303)
+scikit-learn==1.3.2          # Linear Regression, Perceptron MLPClassifier
+scikit-fuzzy==0.4.2          # Fuzzy Inference System
+
+# Advanced ML — self-study extension
+torch==2.1.2                 # LSTM
+xgboost==2.0.3
+shap==0.44.0
+
+# Backend (CS301)
+flask==3.0.0
+flask-cors==4.0.0
+gunicorn==21.2.0             # production WSGI server
+
+# Database (CS204)
+# sqlite3 is in the Python standard library — no install needed
+
+# Testing (CS302)
+pytest==7.4.3
+pytest-cov==4.1.0
+
+# Experiment tracking
+mlflow==2.9.2
+
+# Visualization
+matplotlib==3.8.2
+seaborn==0.13.0
+
+# Utilities
+requests==2.31.0
+python-dotenv==1.0.0
+reportlab==4.0.8              # PDF report generation (FR-14)
