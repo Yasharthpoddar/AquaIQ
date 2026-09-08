@@ -17,10 +17,14 @@ pip install -r requirements.txt --quiet
 
 # 3. Directory structure (idempotent — safe if already created)
 echo "[3/5] Ensuring data/model directories exist..."
-mkdir -p data/raw data/processed models/checkpoints db
+mkdir -p data/raw data/processed models/checkpoints
 
 # 4. Database
-echo "[4/5] Initializing SQLite database..."
+echo "[4/5] Initializing PostgreSQL database tables..."
+if [ ! -f .env ]; then
+  echo "ERROR: .env file not found. Copy .env.example to .env and fill in your PostgreSQL credentials."
+  exit 1
+fi
 python3 db/init_db.py
 
 # 5. Sanity check config

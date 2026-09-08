@@ -22,7 +22,7 @@ flask-cors==4.0.0
 gunicorn==21.2.0             # production WSGI server
 
 # Database (CS204)
-# sqlite3 is in the Python standard library — no install needed
+psycopg2-binary==2.9.9      # PostgreSQL driver (binary wheel — no libpq build needed)
 
 # Testing (CS302)
 pytest==7.4.3

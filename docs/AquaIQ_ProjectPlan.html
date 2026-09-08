@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AquaIQ — Project Plan 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --p1:#2563EB; --p2:#059669; --p3:#7C3AED; --p4:#D97706; --p5:#DC2626;
+  --bg:#F8FAFC; --surface:#FFFFFF; --border:#E2E8F0;
+  --txt:#0F172A; --muted:#64748B; --subtle:#94A3B8;
+  --radius:10px; --shadow:0 1px 3px rgba(0,0,0,.08),0 4px 16px rgba(0,0,0,.06);
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;font-size:14px}
+.site-header{background:linear-gradient(135deg,#0B1F3A 0%,#1E3A5F 60%,#1D4ED8 100%);color:#fff;padding:36px 40px 28px;position:relative;overflow:hidden}
+.site-header::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.header-inner{position:relative;max-width:1100px;margin:0 auto}
+.project-tag{font-family:'JetBrains Mono',monospace;font-size:11px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:14px;letter-spacing:.06em}
+.project-name{font-family:'Space Grotesk',sans-serif;font-size:42px;font-weight:700;letter-spacing:-.02em;line-height:1;margin-bottom:6px}
+.project-sub{font-size:15px;color:rgba(255,255,255,.7);margin-bottom:28px}
+.header-meta{display:flex;gap:24px;flex-wrap:wrap}
+.meta-chip{font-size:12px;color:rgba(255,255,255,.75);display:flex;align-items:center;gap:6px}
+.meta-chip svg{opacity:.7}
+.phase-bar{background:#fff;border-bottom:1px solid var(--border);padding:0 40px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.phase-bar-inner{max-width:1100px;margin:0 auto;display:flex;align-items:stretch;overflow-x:auto;scrollbar-width:none}
+.phase-bar-inner::-webkit-scrollbar{display:none}
+.phase-tab{flex:1;min-width:140px;padding:14px 16px;display:flex;flex-direction:column;gap:3px;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;position:relative}
+.phase-tab:hover{background:#F8FAFC}
+.phase-tab.active{border-bottom-color:var(--p-color)}
+.phase-tab .pt-label{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;color:var(--txt)}
+.phase-tab .pt-date{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)}
+.phase-tab .pt-dot{width:8px;height:8px;border-radius:50%;background:var(--p-color);position:absolute;top:16px;right:16px}
+.filter-bar{max-width:1100px;margin:28px auto 0;padding:0 40px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.filter-label{font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-right:4px}
+.member-btn{display:flex;align-items:center;gap:7px;padding:7px 14px;border-radius:20px;border:1.5px solid var(--border);background:#fff;cursor:pointer;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--muted);transition:all .2s}
+.member-btn:hover{border-color:var(--m-color);color:var(--m-color)}
+.member-btn.active{background:var(--m-color);border-color:var(--m-color);color:#fff}
+.member-btn .dot{width:8px;height:8px;border-radius:50%;background:var(--m-color);transition:background .2s}
+.member-btn.active .dot{background:rgba(255,255,255,.6)}
+.clear-btn{padding:7px 14px;border-radius:20px;border:1.5px dashed var(--border);background:transparent;cursor:pointer;font-size:12px;color:var(--muted);font-family:'Inter',sans-serif;transition:all .2s}
+.clear-btn:hover{border-color:var(--subtle);color:var(--txt)}
+.main{max-width:1100px;margin:0 auto;padding:28px 40px 80px}
+.note-banner{background:#F0F9FF;border:1px solid #BAE6FD;border-radius:var(--radius);padding:12px 16px;display:flex;gap:10px;align-items:flex-start;margin-bottom:16px}
+.note-banner svg{flex-shrink:0;color:#0284C7;margin-top:1px}
+.note-banner p{font-size:12.5px;color:#0C4A6E;line-height:1.6}
+.note-banner.done{background:#F0FDF4;border-color:#BBF7D0}
+.note-banner.done svg{color:#16A34A}
+.note-banner.done p{color:#14532D}
+.phase-section{margin-bottom:44px}
+.phase-header{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid var(--ph-color)}
+.phase-badge{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;padding:4px 12px;border-radius:20px;color:#fff;background:var(--ph-color)}
+.phase-title{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:var(--txt)}
+.phase-eval-date{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 12px;border-radius:6px;background:var(--ph-color);color:#fff;opacity:.85}
+.week-grid{display:grid;grid-template-columns:1fr;gap:12px}
+.week-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.week-card-header{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;user-select:none;transition:background .15s}
+.week-card-header:hover{background:#FAFBFC}
+.wk-num{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;color:#fff;background:var(--ph-color);padding:2px 8px;border-radius:4px;min-width:52px;text-align:center}
+.wk-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;flex:1}
+.wk-dates{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-right:4px}
+.wk-eval{font-size:11px;font-weight:600;color:var(--ph-color);background:color-mix(in srgb,var(--ph-color) 10%,transparent);padding:2px 8px;border-radius:4px}
+.wk-chevron{width:18px;height:18px;color:var(--subtle);transition:transform .2s;flex-shrink:0}
+.week-card-header.open .wk-chevron{transform:rotate(180deg)}
+.week-body{display:none;border-top:1px solid var(--border)}
+.week-body.open{display:block}
+.task-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.task-col{padding:16px 18px;border-right:1px solid var(--border)}
+.task-col:last-child{border-right:none}
+.col-who{display:flex;align-items:center;gap:7px;margin-bottom:10px}
+.col-avatar{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;color:#fff;flex-shrink:0}
+.col-name{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600}
+.task-list-inner{display:flex;flex-direction:column;gap:8px}
+.task-item{display:flex;gap:8px;align-items:flex-start;opacity:1;transition:opacity .2s}
+.task-item.hidden{display:none}
+.task-dot{width:7px;height:7px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.task-text{font-size:13px;color:#334155;line-height:1.5}
+.task-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;padding:1px 6px;border-radius:4px;margin-top:3px;font-weight:500}
+.presents-tag{display:inline-block;font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;padding:1px 6px;border-radius:4px;margin-right:6px;vertical-align:middle}
+.deliverable-bar{background:#F8FAFC;border-top:1px solid var(--border);padding:10px 18px;display:flex;align-items:center;gap:8px}
+.deliv-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);flex-shrink:0}
+.deliv-text{font-size:12px;color:var(--txt)}
+.summary-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
+.summary-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.summary-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--m-color)}
+.sc-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:12px}
+.sc-name{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:var(--txt)}
+.sc-role{font-size:12px;color:var(--muted);margin-bottom:12px}
+.sc-tags{display:flex;flex-wrap:wrap;gap:5px}
+.sc-tag{font-size:11px;padding:2px 8px;border-radius:20px;border:1px solid;font-weight:500}
+.rotation-table{width:100%;border-collapse:collapse;margin-bottom:28px;background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);font-size:12.5px}
+.rotation-table th{background:#0F172A;color:#fff;padding:10px 12px;text-align:left;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:11.5px}
+.rotation-table td{padding:9px 12px;border-bottom:1px solid var(--border)}
+.rotation-table tr:last-child td{border-bottom:none}
+.rot-name{font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.rot-dot{width:7px;height:7px;border-radius:50%;display:inline-block}
+.print-wrap{position:fixed;bottom:24px;right:24px;z-index:200}
+.print-btn{background:#1D4ED8;color:#fff;border:none;border-radius:24px;padding:10px 20px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 16px rgba(29,78,216,.35);display:flex;align-items:center;gap:7px;transition:all .2s}
+.print-btn:hover{background:#1E40AF;transform:translateY(-1px)}
+.section-label{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:var(--txt);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.pipeline-box{background:#0F172A;border-radius:var(--radius);padding:16px 20px;margin-bottom:20px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#94A3B8;line-height:1.9;overflow-x:auto}
+.pipeline-box .hl{color:#7DD3FC}
+.pipeline-box .hl2{color:#86EFAC}
+@media(max-width:768px){
+  .site-header,.main,.filter-bar{padding-left:20px;padding-right:20px}
+  .phase-bar{padding:0 20px}
+  .task-cols{grid-template-columns:1fr}
+  .task-col{border-right:none;border-bottom:1px solid var(--border)}
+  .task-col:last-child{border-bottom:none}
+  .summary-row{grid-template-columns:1fr}
+  .project-name{font-size:32px}
+  .rotation-table{font-size:11px}
+  .rotation-table th,.rotation-table td{padding:7px 8px}
+}
+@media print{
+  .phase-bar,.filter-bar,.print-wrap{display:none!important}
+  .week-body{display:block!important}
+  .week-card{box-shadow:none;border:1px solid #ddd;break-inside:avoid}
+  body{background:#fff}
+  .site-header{background:#1D4ED8!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<div class="site-header">
+  <div class="header-inner">
+    <div class="project-tag">SPIT CSE · Sem V Mini Project I · AY 2026–27</div>
+    <div class="project-name">AquaIQ</div>
+    <div class="project-sub">AI-Powered Groundwater Depletion Forecasting System — Team Build Plan</div>
+    <div class="header-meta">
+      <div class="meta-chip">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        01 Aug – 02 Nov 2026
+      </div>
+      <div class="meta-chip">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Yasharth · Yash · Ayush — equal workload
+      </div>
+      <div class="meta-chip">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        5 Phases · 14 Weeks · 200 Marks
+      </div>
+      <div class="meta-chip">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Rev 2 — 06 Aug 2026
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="phase-bar">
+  <div class="phase-bar-inner">
+    <div class="phase-tab active" style="--p-color:#2563EB" onclick="scrollToPhase('p1')">
+      <div class="pt-dot"></div>
+      <div class="pt-label">Phase I</div>
+      <div class="pt-date">Eval: 17 Aug</div>
+    </div>
+    <div class="phase-tab" style="--p-color:#059669" onclick="scrollToPhase('p2')">
+      <div class="pt-dot"></div>
+      <div class="pt-label">Phase II</div>
+      <div class="pt-date">Eval: 02 Sep</div>
+    </div>
+    <div class="phase-tab" style="--p-color:#7C3AED" onclick="scrollToPhase('p3')">
+      <div class="pt-dot"></div>
+      <div class="pt-label">Phase III</div>
+      <div class="pt-date">Eval: 30 Sep</div>
+    </div>
+    <div class="phase-tab" style="--p-color:#D97706" onclick="scrollToPhase('p4')">
+      <div class="pt-dot"></div>
+      <div class="pt-label">Phase IV</div>
+      <div class="pt-date">Eval: 12 Oct</div>
+    </div>
+    <div class="phase-tab" style="--p-color:#DC2626" onclick="scrollToPhase('p5')">
+      <div class="pt-dot"></div>
+      <div class="pt-label">ESE</div>
+      <div class="pt-date">Eval: 02 Nov</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="filter-bar" style="padding:0">
+    <span class="filter-label">Filter by</span>
+    <button class="member-btn" style="--m-color:#1D4ED8" onclick="filterMember('yasharth',this)">
+      <span class="dot"></span> Yasharth
+    </button>
+    <button class="member-btn" style="--m-color:#0D9488" onclick="filterMember('yash',this)">
+      <span class="dot"></span> Yash
+    </button>
+    <button class="member-btn" style="--m-color:#7C3AED" onclick="filterMember('ayush',this)">
+      <span class="dot"></span> Ayush
+    </button>
+    <button class="clear-btn" onclick="clearFilter()">Show all</button>
+  </div>
+
+  <div style="height:28px"></div>
+
+  <div class="summary-row">
+    <div class="summary-card" style="--m-color:#1D4ED8">
+      <div class="sc-avatar" style="background:#1D4ED8">YT</div>
+      <div class="sc-name">Yasharth</div>
+      <div class="sc-role">2024800092 · Team Member</div>
+      <div class="sc-tags">
+        <span class="sc-tag" style="color:#1D4ED8;border-color:#BFDBFE;background:#EFF6FF">Data Pipeline</span>
+        <span class="sc-tag" style="color:#1D4ED8;border-color:#BFDBFE;background:#EFF6FF">Core & Advanced ML</span>
+        <span class="sc-tag" style="color:#1D4ED8;border-color:#BFDBFE;background:#EFF6FF">Flask API</span>
+        <span class="sc-tag" style="color:#1D4ED8;border-color:#BFDBFE;background:#EFF6FF">React Dashboard</span>
+        <span class="sc-tag" style="color:#1D4ED8;border-color:#BFDBFE;background:#EFF6FF">ESE Report</span>
+        <span class="sc-tag" style="color:#1D4ED8;border-color:#BFDBFE;background:#EFF6FF">Testing & QA</span>
+      </div>
+    </div>
+    <div class="summary-card" style="--m-color:#0D9488">
+      <div class="sc-avatar" style="background:#0D9488">YS</div>
+      <div class="sc-name">Yash</div>
+      <div class="sc-role">Team Member</div>
+      <div class="sc-tags">
+        <span class="sc-tag" style="color:#0D9488;border-color:#99F6E4;background:#F0FDFA">Data Pipeline</span>
+        <span class="sc-tag" style="color:#0D9488;border-color:#99F6E4;background:#F0FDFA">Core & Advanced ML</span>
+        <span class="sc-tag" style="color:#0D9488;border-color:#99F6E4;background:#F0FDFA">Flask API</span>
+        <span class="sc-tag" style="color:#0D9488;border-color:#99F6E4;background:#F0FDFA">React Dashboard</span>
+        <span class="sc-tag" style="color:#0D9488;border-color:#99F6E4;background:#F0FDFA">ESE Report</span>
+        <span class="sc-tag" style="color:#0D9488;border-color:#99F6E4;background:#F0FDFA">Testing & QA</span>
+      </div>
+    </div>
+    <div class="summary-card" style="--m-color:#7C3AED">
+      <div class="sc-avatar" style="background:#7C3AED">AY</div>
+      <div class="sc-name">Ayush</div>
+      <div class="sc-role">Team Member</div>
+      <div class="sc-tags">
+        <span class="sc-tag" style="color:#7C3AED;border-color:#DDD6FE;background:#F5F3FF">Data Pipeline</span>
+        <span class="sc-tag" style="color:#7C3AED;border-color:#DDD6FE;background:#F5F3FF">Core & Advanced ML</span>
+        <span class="sc-tag" style="color:#7C3AED;border-color:#DDD6FE;background:#F5F3FF">Flask API</span>
+        <span class="sc-tag" style="color:#7C3AED;border-color:#DDD6FE;background:#F5F3FF">React Dashboard</span>
+        <span class="sc-tag" style="color:#7C3AED;border-color:#DDD6FE;background:#F5F3FF">ESE Report</span>
+        <span class="sc-tag" style="color:#7C3AED;border-color:#DDD6FE;background:#F5F3FF">Testing & QA</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="note-banner done">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <p><strong>SRS, IEEE proposal, and SPIT title page are already complete and submitted to the guide.</strong> Nothing below is a writing task for those — every item is real build work: data, models, API, dashboard, testing, deployment. The only documents still ahead are the ESE report and poster (both required deliverables for 02 Nov).</p>
+  </div>
+
+  <div class="note-banner">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+    <p>Every workstream — data pipeline, core ML, advanced ML (LSTM/XGBoost/SHAP), the Flask API, the React dashboard, and testing — rotates across all three people through the 14 weeks, so nobody is boxed into one lane. Presentation duty at each evaluation is also split three ways and rotates who covers which section, so everyone presents at every phase.</p>
+  </div>
+
+  <div class="section-label">
+    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+    Exactly where every number comes from — no orphan features
+  </div>
+  <div class="pipeline-box">
+<span class="hl">3 data sources, all downloaded Week 1</span> — nothing later depends on anything not sourced up front<br>
+&nbsp;&nbsp;CGWB (india-wris.nrsc.gov.in) → district GWL readings, monthly, 2002–2024<br>
+&nbsp;&nbsp;IMD (imdpune.gov.in) → district rainfall, monthly, 2002–2024 + 30-yr climatological normal<br>
+&nbsp;&nbsp;ERA5 (cds.climate.copernicus.eu) → temperature + evapotranspiration, monthly<br>
+<br>
+<span class="hl2">10 features engineered — every one traceable to a source above, zero external dependencies</span><br>
+&nbsp;&nbsp;1. GWL_current, 2. GWL_lag_3mo, 3. GWL_lag_6mo <span style="color:#64748B">— from CGWB</span><br>
+&nbsp;&nbsp;4. rainfall_current, 5. rainfall_3mo_avg, 6. monsoon_deficit_pct <span style="color:#64748B">— from IMD</span><br>
+&nbsp;&nbsp;7. temperature, 8. evapotranspiration <span style="color:#64748B">— from ERA5</span><br>
+&nbsp;&nbsp;9. water_balance_proxy = rainfall − ET <span style="color:#64748B">— derived, no new source</span><br>
+&nbsp;&nbsp;10. crop_season_flag <span style="color:#64748B">— calendar rule (Kharif/Rabi/Zaid), no new source</span><br>
+<br>
+<span style="color:#F87171">Dropped from the original scope:</span> GRACE-FO / GLDAS satellite data, NDVI, irrigation_fraction, population_density — none of these ever had a download task, so nobody would have been able to build them anyway. CGWB gives direct well-level ground truth at 15,000+ points, stronger evidence than a satellite proxy <em>where CGWB has coverage</em> — coverage isn't uniform across all 640+ districts though, so thin-data districts fall back to a zone-level aggregate (same agro_climatic_zone) rather than reintroducing GRACE, whose own ~300km resolution wouldn't give real district-level signal there either.
+  </div>
+
+  <div class="section-label">
+    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3v4M8 3v4M2 11h20"/></svg>
+    Who presents what — rotates every evaluation
+  </div>
+  <table class="rotation-table">
+    <tr><th>Evaluation</th><th>Section A</th><th>Section B</th><th>Section C</th></tr>
+    <tr>
+      <td>Phase I · 17 Aug</td>
+      <td><span class="rot-name"><span class="rot-dot" style="background:#1D4ED8"></span>Yasharth</span> — Problem & Architecture</td>
+      <td><span class="rot-name"><span class="rot-dot" style="background:#0D9488"></span>Yash</span> — Dataset & EDA</td>
+      <td><span class="rot-name"><span class="rot-dot" style="background:#7C3AED"></span>Ayush</span> — Literature & Scope</td>
+    </tr>
+    <tr>
+      <td>Phase II · 02 Sep</td>
+      <td><span class="rot-name"><span class="rot-dot" style="background:#0D9488"></span>Yash</span> — Fuzzy Logic & LR Results</td>
+      <td><span class="rot-name"><span class="rot-dot" style="background:#7C3AED"></span>Ayush</span> — Data Pipeline Demo</td>
+      <td><span class="rot-name"><span class="rot-dot" style="background:#1D4ED8"></span>Yasharth</span> — ANN Results & Testing</td>
+    </tr>
+    <tr>
+      <td>Phase III · 30 Sep</td>
+      <td><span class="rot-name"><span class="rot-dot" style="background:#7C3AED"></span>Ayush</span> — LSTM/XGBoost/SHAP Demo</td>
+      <td><span class="rot-name"><span class="rot-dot" style="background:#1D4ED8"></span>Yasharth</span> — API Demo</td>
+      <td><span class="rot-name"><span class="rot-dot" style="background:#0D9488"></span>Yash</span> — Testing & Integration</td>
+    </tr>
+    <tr>
+      <td>Phase IV · 12 Oct</td>
+      <td><span class="rot-name"><span class="rot-dot" style="background:#1D4ED8"></span>Yasharth</span> — Full Live Demo</td>
+      <td><span class="rot-name"><span class="rot-dot" style="background:#0D9488"></span>Yash</span> — Model Validation Results</td>
+      <td><span class="rot-name"><span class="rot-dot" style="background:#7C3AED"></span>Ayush</span> — Dashboard Walkthrough</td>
+    </tr>
+    <tr>
+      <td>ESE · 02 Nov</td>
+      <td><span class="rot-name"><span class="rot-dot" style="background:#0D9488"></span>Yash</span> — Live System Demo</td>
+      <td><span class="rot-name"><span class="rot-dot" style="background:#7C3AED"></span>Ayush</span> — Results & Validation Q&A</td>
+      <td><span class="rot-name"><span class="rot-dot" style="background:#1D4ED8"></span>Yasharth</span> — Poster & Report Q&A</td>
+    </tr>
+  </table>
+
+  <div class="phase-section" id="p1">
+    <div class="phase-header" style="--ph-color:#2563EB">
+      <span class="phase-badge" style="background:#2563EB">Phase I</span>
+      <span class="phase-title">Data Setup & Architecture</span>
+      <span class="phase-eval-date" style="background:#2563EB">★ Eval: 17 Aug 2026 · Guide only · 50 marks</span>
+    </div>
+    <div class="week-grid">
+
+      <div class="week-card">
+        <div class="week-card-header open" onclick="toggleWeek(this)">
+          <span class="wk-num" style="background:#2563EB">Week 1</span>
+          <span class="wk-title">Download All 3 Datasets · Environment Setup</span>
+          <span class="wk-dates">01–07 Aug</span>
+          <svg class="wk-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="week-body open">
+          <div class="task-cols">
+            <div class="task-col" data-member="yasharth">
+              <div class="col-who"><div class="col-avatar" style="background:#1D4ED8">YT</div><span class="col-name" style="color:#1D4ED8">Yasharth</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Create GitHub repo with full folder structure: <span class="task-badge" style="background:#DBEAFE;color:#1D4ED8">data_ingestion/ preprocessing/ models/ api/ dashboard/</span></div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Register and download CGWB borewell water level CSV from india-wris.nrsc.gov.in — verify all 640+ district files received</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Confirm PyTorch runs CPU-only on the team's laptops — the LSTM is small (~500K params), trains fine on CPU in well under an hour even with all districts pooled together. No paid subscription needed; Colab's free tier or Kaggle Notebooks (also free) are zero-cost backups if anyone's laptop is slow</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="yash">
+              <div class="col-who"><div class="col-avatar" style="background:#0D9488">YS</div><span class="col-name" style="color:#0D9488">Yash</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Download IMD gridded rainfall CSV (monthly, district-wise) from imdpune.gov.in — apply for institutional access if required</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Register for ERA5/Copernicus CDS API and download temperature + evapotranspiration data for all districts, 2002–2024</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Write <span class="task-badge" style="background:#CCFBF1;color:#0D9488">requirements.txt</span> with initial pinned library versions (pandas, scikit-learn, torch, xgboost, shap, flask)</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="ayush">
+              <div class="col-who"><div class="col-avatar" style="background:#7C3AED">AY</div><span class="col-name" style="color:#7C3AED">Ayush</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Download India district boundary GeoJSON (datameet.org) — needed for the map in Week 5</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Write <span class="task-badge" style="background:#EDE9FE;color:#7C3AED">config.yaml</span> (hyperparameters, file paths, alert thresholds) and <span class="task-badge" style="background:#EDE9FE;color:#7C3AED">setup.sh</span> (one-command install)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Smoke-test: load one CGWB file and one IMD file into Pandas — confirm both parse cleanly before the team builds on top of them</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="deliverable-bar">
+            <span class="deliv-label">📦 Deliverable</span>
+            <span class="deliv-text">All 3 datasets (CGWB, IMD, ERA5) downloaded · GeoJSON boundaries ready · GitHub repo + config live · Both sample files parse in Pandas</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week-card">
+        <div class="week-card-header" onclick="toggleWeek(this)">
+          <span class="wk-num" style="background:#2563EB">Week 2</span>
+          <span class="wk-title">Database, Architecture & Data Validation</span>
+          <span class="wk-dates">08–16 Aug</span>
+          <svg class="wk-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="week-body">
+          <div class="task-cols">
+            <div class="task-col" data-member="yasharth">
+              <div class="col-who"><div class="col-avatar" style="background:#1D4ED8">YT</div><span class="col-name" style="color:#1D4ED8">Yasharth</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Load CGWB CSV into Pandas — document shape, columns, dtypes, missing value counts, date ranges per district</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Design SQLite database schema: 5 tables — raw_data, features, predictions, shap_values, crisis_scores</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Build district master table: all 640+ district names + state + agro-climatic zone, used for the train-test split later</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="yash">
+              <div class="col-who"><div class="col-avatar" style="background:#0D9488">YS</div><span class="col-name" style="color:#0D9488">Yash</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Design and document the 7-layer system architecture diagram (Data → Preprocessing → Core ML → Advanced ML → Crisis Score → API → Dashboard)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Compute Pearson correlation between monthly rainfall and GWL per district — generate correlation heatmap</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Compute IMD 30-year climatological monthly rainfall normal per district — this is what monsoon_deficit_pct gets compared against in Week 4</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="ayush">
+              <div class="col-who"><div class="col-avatar" style="background:#7C3AED">AY</div><span class="col-name" style="color:#7C3AED">Ayush</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Define all 6 Flask API endpoint schemas: request params, response JSON format, error codes</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Plot district-wise GWL trends (2002–2023) for 5 representative districts</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Validate the GeoJSON district names actually match CGWB district names — build a lookup table to fix any mismatches (common issue with Indian district data)</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="deliverable-bar">
+            <span class="deliv-label">📦 Deliverable</span>
+            <span class="deliv-text">SQLite schema designed · Architecture diagram · District master table · IMD climatological normal computed · GeoJSON-to-CGWB names matched</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week-card" style="border-color:#2563EB;border-width:2px">
+        <div class="week-card-header" onclick="toggleWeek(this)" style="background:linear-gradient(to right,#EFF6FF,#fff)">
+          <span class="wk-num" style="background:#2563EB">Week 3</span>
+          <span class="wk-title">Phase I Evaluation · SQLite Ingestion Live</span>
+          <span class="wk-dates">17–23 Aug</span>
+          <span class="wk-eval">★ Evaluation Day</span>
+          <svg class="wk-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="week-body">
+          <div class="task-cols">
+            <div class="task-col" data-member="yasharth">
+              <div class="col-who"><div class="col-avatar" style="background:#1D4ED8">YT</div><span class="col-name" style="color:#1D4ED8">Yasharth</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text"><span class="presents-tag" style="background:#DBEAFE;color:#1D4ED8">Presents</span>Problem Statement & System Architecture to guide (17 Aug)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Q&A prep: be ready to explain why CGWB direct well readings were chosen over satellite-derived estimates — direct ground truth beats an indirect proxy where CGWB has coverage; where it doesn't, the zone-level fallback (built Week 8) handles it instead of reintroducing satellite data</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Begin PyTorch LSTM model class skeleton — define layer dimensions and attention mechanism</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="yash">
+              <div class="col-who"><div class="col-avatar" style="background:#0D9488">YS</div><span class="col-name" style="color:#0D9488">Yash</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text"><span class="presents-tag" style="background:#CCFBF1;color:#0D9488">Presents</span>Dataset Overview & EDA Findings to guide (17 Aug)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Build SQLite ingestion script — parse and load CGWB + IMD + ERA5 into the <span class="task-badge" style="background:#CCFBF1;color:#0D9488">raw_data</span> table</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Fill and submit weekly progress reports for Weeks 1, 2, and 3</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="ayush">
+              <div class="col-who"><div class="col-avatar" style="background:#7C3AED">AY</div><span class="col-name" style="color:#7C3AED">Ayush</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text"><span class="presents-tag" style="background:#EDE9FE;color:#7C3AED">Presents</span>Literature Survey & Project Scope to guide (17 Aug) — from the already-submitted SRS/proposal</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Begin Fuzzy Inference System design — draft membership functions for rainfall_deficit and depletion_rate</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Draft the policy recommendation lookup table (one suggested action per risk tier: Safe/Watch/Warning/Crisis) — used later for alert messages and the policy simulator</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="deliverable-bar">
+            <span class="deliv-label">📦 Deliverable</span>
+            <span class="deliv-text">Phase I evaluation complete (50 marks) · SQLite ingestion working for all 3 sources · Weekly reports 1–3 submitted</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="phase-section" id="p2">
+    <div class="phase-header" style="--ph-color:#059669">
+      <span class="phase-badge" style="background:#059669">Phase II</span>
+      <span class="phase-title">Feature Engineering · Core ML · Fuzzy Logic · ANN</span>
+      <span class="phase-eval-date" style="background:#059669">★ Eval: 02 Sep 2026 · Guide only · 50 marks</span>
+    </div>
+    <div class="week-grid">
+
+      <div class="week-card">
+        <div class="week-card-header" onclick="toggleWeek(this)">
+          <span class="wk-num" style="background:#059669">Week 4</span>
+          <span class="wk-title">Preprocessing · All 10 Features Built · Fuzzy Logic Coded</span>
+          <span class="wk-dates">24–30 Aug</span>
+          <svg class="wk-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="week-body">
+          <div class="task-cols">
+            <div class="task-col" data-member="yasharth">
+              <div class="col-who"><div class="col-avatar" style="background:#1D4ED8">YT</div><span class="col-name" style="color:#1D4ED8">Yasharth</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Build preprocessing pipeline: linear interpolation for short gaps, SARIMA for longer gaps in district GWL/rainfall series, MinMaxScaler normalisation</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Engineer the 3 CGWB-based features: GWL_current, GWL_lag_3mo, GWL_lag_6mo</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Continue LSTM model — finalise architecture: 3-layer, hidden=128, 4-head attention</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="yash">
+              <div class="col-who"><div class="col-avatar" style="background:#0D9488">YS</div><span class="col-name" style="color:#0D9488">Yash</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Engineer the 3 IMD-based features: rainfall_current, rainfall_3mo_avg, monsoon_deficit_pct (current vs the Week 2 climatological normal)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Design the 80/20 train-test split logic stratified by agro-climatic zone</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Set up React app (Vite) — folder structure /components /pages /hooks /utils — add Leaflet.js and Recharts</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="ayush">
+              <div class="col-who"><div class="col-avatar" style="background:#7C3AED">AY</div><span class="col-name" style="color:#7C3AED">Ayush</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Engineer the 4 remaining features: temperature, evapotranspiration (from ERA5), water_balance_proxy = rainfall − ET, crop_season_flag (calendar rule: Kharif/Rabi/Zaid)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Implement Mamdani Fuzzy Inference System (scikit-fuzzy) with inputs rainfall_deficit and depletion_rate</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Define the 9 fuzzy rules mapping input combinations → Crisis Score output (Safe/Watch/Warning/Crisis)</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="deliverable-bar">
+            <span class="deliv-label">📦 Deliverable</span>
+            <span class="deliv-text">Preprocessing pipeline working · All 10 features built and traced to source · Fuzzy FIS coded · React app skeleton</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week-card">
+        <div class="week-card-header" onclick="toggleWeek(this)">
+          <span class="wk-num" style="background:#059669">Week 5</span>
+          <span class="wk-title">Linear Regression · t-Test · Perceptron ANN · Map Component</span>
+          <span class="wk-dates">31 Aug–01 Sep</span>
+          <svg class="wk-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="week-body">
+          <div class="task-cols">
+            <div class="task-col" data-member="yasharth">
+              <div class="col-who"><div class="col-avatar" style="background:#1D4ED8">YT</div><span class="col-name" style="color:#1D4ED8">Yasharth</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Train Perceptron ANN (scikit-learn MLPClassifier: layers [10,64,4], ReLU, Adam) using Fuzzy Logic output as class labels</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Evaluate ANN: accuracy, precision, recall, F1-score per class, confusion matrix</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Set up MLflow experiment tracking for LSTM hyperparameters and metrics</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="yash">
+              <div class="col-who"><div class="col-avatar" style="background:#0D9488">YS</div><span class="col-name" style="color:#0D9488">Yash</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Train scikit-learn Linear Regression per district (2002–2019 train) — evaluate R², RMSE, MAE on 2023–2024 test set</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Perform two-sample t-test: is the 2020–2024 depletion rate statistically significantly greater than the 2002–2010 baseline (p&lt;0.05)?</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Begin LSTM training loop: Huber loss, Adam optimiser, early stopping — save best checkpoint</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="ayush">
+              <div class="col-who"><div class="col-avatar" style="background:#7C3AED">AY</div><span class="col-name" style="color:#7C3AED">Ayush</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Plot predicted vs actual GWL for 5 districts: Punjab, Rajasthan, Maharashtra, Tamil Nadu, Uttar Pradesh</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Build Leaflet.js India choropleth map using the Week 1 GeoJSON — test with mock scores before the API is ready</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Add district search bar and hover tooltip to the map component</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="deliverable-bar">
+            <span class="deliv-label">📦 Deliverable</span>
+            <span class="deliv-text">Linear Regression trained (R²&gt;0.75 target) · t-test documented · Perceptron ANN trained · LSTM training started · Choropleth map renders with real boundaries</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week-card" style="border-color:#059669;border-width:2px">
+        <div class="week-card-header" onclick="toggleWeek(this)" style="background:linear-gradient(to right,#F0FDF4,#fff)">
+          <span class="wk-num" style="background:#059669">Week 6</span>
+          <span class="wk-title">Phase II Evaluation · Flask API Stubs · Unit Tests Start</span>
+          <span class="wk-dates">02–08 Sep</span>
+          <span class="wk-eval" style="color:#059669;background:#D1FAE5">★ Evaluation Day</span>
+          <svg class="wk-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="week-body">
+          <div class="task-cols">
+            <div class="task-col" data-member="yasharth">
+              <div class="col-who"><div class="col-avatar" style="background:#1D4ED8">YT</div><span class="col-name" style="color:#1D4ED8">Yasharth</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text"><span class="presents-tag" style="background:#DBEAFE;color:#1D4ED8">Presents</span>ANN results and Week 1–5 testing progress to guide (02 Sep)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Set up Flask app factory pattern — register blueprints for each API route group</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Fill and submit weekly progress reports for Weeks 4, 5, and 6</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="yash">
+              <div class="col-who"><div class="col-avatar" style="background:#0D9488">YS</div><span class="col-name" style="color:#0D9488">Yash</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text"><span class="presents-tag" style="background:#CCFBF1;color:#0D9488">Presents</span>Fuzzy Logic Crisis Score & Linear Regression results to guide (02 Sep)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Write pytest unit tests for all 5 preprocessing functions (interpolation, SARIMA fill, normalisation, feature engineering, train-test split)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Continue LSTM training — hyperparameter grid search on CPU (Colab's free tier works too if you want a few runs going in parallel, no Pro needed)</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="ayush">
+              <div class="col-who"><div class="col-avatar" style="background:#7C3AED">AY</div><span class="col-name" style="color:#7C3AED">Ayush</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text"><span class="presents-tag" style="background:#EDE9FE;color:#7C3AED">Presents</span>Data pipeline & choropleth map demo to guide (02 Sep)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Compute and document a Data Completeness Report — % of districts with full CGWB+IMD+ERA5 coverage across 2002–2024</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Add click handler and district-detail routing to the map component</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="deliverable-bar">
+            <span class="deliv-label">📦 Deliverable</span>
+            <span class="deliv-text">Phase II evaluation complete (50 marks) · Flask app skeleton · 5 preprocessing unit tests · Data completeness documented · Weekly reports 4–6 submitted</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="phase-section" id="p3">
+    <div class="phase-header" style="--ph-color:#7C3AED">
+      <span class="phase-badge" style="background:#7C3AED">Phase III</span>
+      <span class="phase-title">LSTM · XGBoost · SHAP · Flask API · Integration Tests</span>
+      <span class="phase-eval-date" style="background:#7C3AED">★ Eval: 30 Sep 2026 · Guide only · 50 marks</span>
+    </div>
+    <div class="week-grid">
+
+      <div class="week-card">
+        <div class="week-card-header" onclick="toggleWeek(this)">
+          <span class="wk-num" style="background:#7C3AED">Week 7</span>
+          <span class="wk-title">LSTM Training · Statistical Validation · React Routing & Charts</span>
+          <span class="wk-dates">09–15 Sep</span>
+          <svg class="wk-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="week-body">
+          <div class="task-cols">
+            <div class="task-col" data-member="yasharth">
+              <div class="col-who"><div class="col-avatar" style="background:#1D4ED8">YT</div><span class="col-name" style="color:#1D4ED8">Yasharth</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Complete Pearson and Spearman correlation heatmap for all 10 features vs GWL — identify top 5 predictors</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Run seasonal decomposition on GWL time series (trend + seasonality + residual) for 10 districts</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Build React routing: /home, /district/:id, /alerts, /simulate — add navigation bar</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="yash">
+              <div class="col-who"><div class="col-avatar" style="background:#0D9488">YS</div><span class="col-name" style="color:#0D9488">Yash</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Final LSTM training run on CPU — 200 epochs with early stopping, seed=42 (small model, no GPU required; use Colab's free tier only if it's genuinely faster than your laptop)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Evaluate using walk-forward validation (rolling 2020→2021→2022→2023 windows, not one fixed split) — report Pearson r, RMSE, NSE per window plus the 2023–2024 held-out test set — save checkpoint as <span class="task-badge" style="background:#CCFBF1;color:#0D9488">aquaiq_lstm.pt</span></div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Cross-check the lag features (GWL_lag_3mo/6mo) don't leak future information into the training set — verify the temporal split is clean</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="ayush">
+              <div class="col-who"><div class="col-avatar" style="background:#7C3AED">AY</div><span class="col-name" style="color:#7C3AED">Ayush</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Build 6-month forecast timeline chart using Recharts (LineChart with confidence band)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Build SHAP attribution bar chart component (top-5 feature contributions) — ready for API connection</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Plot LSTM predicted vs actual GWL for the same 5 districts — comparison chart against Linear Regression</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="deliverable-bar">
+            <span class="deliv-label">📦 Deliverable</span>
+            <span class="deliv-text">LSTM trained (target: Pearson r ≥ 0.85) · Model checkpoint saved · Correlation heatmap · React routing + all chart components built</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week-card">
+        <div class="week-card-header" onclick="toggleWeek(this)">
+          <span class="wk-num" style="background:#7C3AED">Week 8</span>
+          <span class="wk-title">XGBoost · SHAP · Crisis Score Formula · Alerts UI</span>
+          <span class="wk-dates">16–22 Sep</span>
+          <svg class="wk-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="week-body">
+          <div class="task-cols">
+            <div class="task-col" data-member="yasharth">
+              <div class="col-who"><div class="col-avatar" style="background:#1D4ED8">YT</div><span class="col-name" style="color:#1D4ED8">Yasharth</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Write integration tests for 10 districts: raw CSV → preprocessing → features in SQLite — verify end-to-end flow</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Add a per-district Data Readiness Score (% months with valid, non-imputed data). Below the 60% threshold, don't just exclude — build the zone-level fallback: aggregate CGWB data across all districts in the same agro_climatic_zone (from Week 2's district master table) and serve that instead of a fabricated district-specific number</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Build district detail panel: AquaIQ Score badge, Data Readiness indicator, "Download Report" placeholder</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="yash">
+              <div class="col-who"><div class="col-avatar" style="background:#0D9488">YS</div><span class="col-name" style="color:#0D9488">Yash</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Train XGBoost classifier (500 trees, max_depth=6, lr=0.01, subsample=0.8, seed=42) — evaluate accuracy, F1-score, confusion matrix</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Apply SHAP TreeExplainer — summary plot, waterfall plot for 3 crisis districts, force plot for individual predictions</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Build alerts feed component — list of crisis districts with score, top risk factor chip, timestamp</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="ayush">
+              <div class="col-who"><div class="col-avatar" style="background:#7C3AED">AY</div><span class="col-name" style="color:#7C3AED">Ayush</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Compute the final AquaIQ Crisis Score ensemble: fit the LSTM/XGBoost/drought-frequency weights on the validation set — optimise against the 2015–16 and 2018–19 backtests rather than hand-picking them — historical drought frequency = % of past months below the district's 20th percentile GWL, from CGWB's own history → normalise 0–100</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Run full batch preprocessing for all 640+ districts — confirm all records stored with no import errors</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Design Tailwind CSS design tokens — consistent 4-tier colour scheme applied across all components</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="deliverable-bar">
+            <span class="deliv-label">📦 Deliverable</span>
+            <span class="deliv-text">XGBoost trained · SHAP plots generated · Crisis Score formula finalised (fully self-contained, no external drought dataset needed) · 10 integration tests passing · All React components built</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week-card" style="border-color:#7C3AED;border-width:2px">
+        <div class="week-card-header" onclick="toggleWeek(this)" style="background:linear-gradient(to right,#F5F3FF,#fff)">
+          <span class="wk-num" style="background:#7C3AED">Week 9</span>
+          <span class="wk-title">Phase III Evaluation · Full API Live · React ↔ Flask Connect</span>
+          <span class="wk-dates">23–30 Sep</span>
+          <span class="wk-eval" style="color:#7C3AED;background:#EDE9FE">★ Evaluation Day</span>
+          <svg class="wk-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="week-body">
+          <div class="task-cols">
+            <div class="task-col" data-member="yasharth">
+              <div class="col-who"><div class="col-avatar" style="background:#1D4ED8">YT</div><span class="col-name" style="color:#1D4ED8">Yasharth</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text"><span class="presents-tag" style="background:#DBEAFE;color:#1D4ED8">Presents</span>Flask API demo to guide (30 Sep) — build and demo all 6 endpoints integrating LSTM + XGBoost + LR + Fuzzy Logic</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Build all 6 Flask API endpoints: /predict, /district, /shap, /history, /alerts, /simulate</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Add CORS headers, structured error handling, and logging to the Flask app</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="yash">
+              <div class="col-who"><div class="col-avatar" style="background:#0D9488">YS</div><span class="col-name" style="color:#0D9488">Yash</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text"><span class="presents-tag" style="background:#CCFBF1;color:#0D9488">Presents</span>Testing & integration results to guide (30 Sep)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Write pytest unit tests for all 6 API endpoints — happy path, 404, 400, 500 cases for each</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Run pytest --cov to measure test coverage — target ≥70%, fix any gaps</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="ayush">
+              <div class="col-who"><div class="col-avatar" style="background:#7C3AED">AY</div><span class="col-name" style="color:#7C3AED">Ayush</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text"><span class="presents-tag" style="background:#EDE9FE;color:#7C3AED">Presents</span>LSTM + XGBoost + SHAP results live to guide (30 Sep)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Connect all React fetch calls to the live Flask API — replace mock data across map, chart, SHAP panel, alerts</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Fill and submit weekly progress reports for Weeks 7, 8, and 9</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="deliverable-bar">
+            <span class="deliv-label">📦 Deliverable</span>
+            <span class="deliv-text">Phase III evaluation complete (50 marks) · All 6 API endpoints live · React connected to API · ≥70% test coverage · Weekly reports 7–9 submitted</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="phase-section" id="p4">
+    <div class="phase-header" style="--ph-color:#D97706">
+      <span class="phase-badge" style="background:#D97706">Phase IV</span>
+      <span class="phase-title">Dashboard · Policy Simulator · Full Integration</span>
+      <span class="phase-eval-date" style="background:#D97706">★ Eval: 12 Oct 2026 · Guide only · 50 marks</span>
+    </div>
+    <div class="week-grid">
+
+      <div class="week-card">
+        <div class="week-card-header" onclick="toggleWeek(this)">
+          <span class="wk-num" style="background:#D97706">Week 10</span>
+          <span class="wk-title">Full Stack Integration · Batch Predictions · Dashboard Polish</span>
+          <span class="wk-dates">01–07 Oct</span>
+          <svg class="wk-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="week-body">
+          <div class="task-cols">
+            <div class="task-col" data-member="yasharth">
+              <div class="col-who"><div class="col-avatar" style="background:#1D4ED8">YT</div><span class="col-name" style="color:#1D4ED8">Yasharth</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Run full batch prediction for all 640+ districts — verify predictions written to crisis_scores table</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Compile model comparison table: LR vs LSTM vs XGBoost vs ANN — RMSE, Pearson r, R², NSE, Accuracy — export as CSV</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Backtest all models against the 2015–2016 and 2018–2019 drought years (using CGWB's own historical GWL records) — verify crisis alert recall &gt; 85%</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="yash">
+              <div class="col-who"><div class="col-avatar" style="background:#0D9488">YS</div><span class="col-name" style="color:#0D9488">Yash</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Full stack integration testing: React → Flask → SQLite for 10 districts — document bugs found and fixed</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Implement alert generation: auto-detect districts with Score &gt; 80, generate plain-language alert messages using the Week 3 policy lookup table</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Add Bearer token authentication to write-access endpoints (/admin, /simulate) — test with Postman</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="ayush">
+              <div class="col-who"><div class="col-avatar" style="background:#7C3AED">AY</div><span class="col-name" style="color:#7C3AED">Ayush</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Complete district detail panel: Score badge + confidence indicator + forecast chart + SHAP bars + simulator section</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Add "Data last updated" indicator, loading spinners, and empty states across the dashboard</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Implement user-friendly error messages for all API failure states (district not found, timeout, model unavailable)</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="deliverable-bar">
+            <span class="deliv-label">📦 Deliverable</span>
+            <span class="deliv-text">All 640+ district predictions in SQLite · Alert system working · Model comparison CSV ready · District detail panel fully functional</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week-card">
+        <div class="week-card-header" onclick="toggleWeek(this)">
+          <span class="wk-num" style="background:#D97706">Week 11</span>
+          <span class="wk-title">Policy Simulator · PDF Report · Final Data Validation</span>
+          <span class="wk-dates">08–11 Oct</span>
+          <svg class="wk-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="week-body">
+          <div class="task-cols">
+            <div class="task-col" data-member="yasharth">
+              <div class="col-who"><div class="col-avatar" style="background:#1D4ED8">YT</div><span class="col-name" style="color:#1D4ED8">Yasharth</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Build policy simulator UI: 3 sliders (irrigation reduction, rainfall deficit, crop area) + "Simulate" button → before/after score comparison</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Implement PDF report download using ReportLab: score badge, forecast chart, SHAP bars, policy recommendations</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Begin A1 poster layout in Canva/Figma: sections — Problem, Methodology, Results, Impact, Future Work</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="yash">
+              <div class="col-who"><div class="col-avatar" style="background:#0D9488">YS</div><span class="col-name" style="color:#0D9488">Yash</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Final data quality audit: check all 640+ districts have ≥24 months of valid data — flag and document below-threshold districts</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Write model validation section for ESE report: results table, evaluation metric explanations, backtesting results</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Verify all 640+ districts appear on the map with correct colours — cross-check a sample of 20 districts against API output</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="ayush">
+              <div class="col-who"><div class="col-avatar" style="background:#7C3AED">AY</div><span class="col-name" style="color:#7C3AED">Ayush</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Build POST /simulate endpoint logic — modify feature vector, re-run Fuzzy FIS + LR, return updated score vs baseline</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Implement 7-day SQLite cache — serve cached predictions when the LSTM inference service is unreachable</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Write and run the final integration test suite for the full demo flow (search → detail → SHAP → simulate → download)</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="deliverable-bar">
+            <span class="deliv-label">📦 Deliverable</span>
+            <span class="deliv-text">Policy simulator live (UI + API) · PDF report download working · Final data audit complete · ESE report methodology section drafted · Poster draft</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week-card" style="border-color:#D97706;border-width:2px">
+        <div class="week-card-header" onclick="toggleWeek(this)" style="background:linear-gradient(to right,#FFFBEB,#fff)">
+          <span class="wk-num" style="background:#D97706">Week 12</span>
+          <span class="wk-title">Phase IV Evaluation · ESE Report Started · Poster to Print</span>
+          <span class="wk-dates">12–18 Oct</span>
+          <span class="wk-eval" style="color:#D97706;background:#FEF3C7">★ Evaluation Day</span>
+          <svg class="wk-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="week-body">
+          <div class="task-cols">
+            <div class="task-col" data-member="yasharth">
+              <div class="col-who"><div class="col-avatar" style="background:#1D4ED8">YT</div><span class="col-name" style="color:#1D4ED8">Yasharth</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text"><span class="presents-tag" style="background:#DBEAFE;color:#1D4ED8">Presents</span>Full live demo to guide (12 Oct) — district select → score → SHAP → simulate → download PDF</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Deploy Flask API to Render.com — get a public URL for the demo, test all endpoints live</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Write Methodology section of the ESE LaTeX report</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="yash">
+              <div class="col-who"><div class="col-avatar" style="background:#0D9488">YS</div><span class="col-name" style="color:#0D9488">Yash</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text"><span class="presents-tag" style="background:#CCFBF1;color:#0D9488">Presents</span>Model validation and backtesting results to guide (12 Oct)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Write Data & Preprocessing section of the ESE LaTeX report</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Verify the reproduce.sh script works from a clean environment — confirms full reproducibility</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="ayush">
+              <div class="col-who"><div class="col-avatar" style="background:#7C3AED">AY</div><span class="col-name" style="color:#7C3AED">Ayush</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text"><span class="presents-tag" style="background:#EDE9FE;color:#7C3AED">Presents</span>Dashboard and UI walkthrough to guide (12 Oct)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Finalise A1 poster — send for printing at Mumbai vendor (book by this week for pickup next week)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Fill and submit weekly progress reports for Weeks 10, 11, and 12</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="deliverable-bar">
+            <span class="deliv-label">📦 Deliverable</span>
+            <span class="deliv-text">Phase IV evaluation complete (50 marks) · Flask API deployed live · ESE report 3 sections written · Poster sent to print · Weekly reports 10–12 submitted</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="phase-section" id="p5">
+    <div class="phase-header" style="--ph-color:#DC2626">
+      <span class="phase-badge" style="background:#DC2626">ESE</span>
+      <span class="phase-title">Final Report · Poster · Demo Rehearsal · Industry Evaluation</span>
+      <span class="phase-eval-date" style="background:#DC2626">★ Eval: 02 Nov 2026 · Industry Expert / Alumni · 100 marks</span>
+    </div>
+    <div class="week-grid">
+
+      <div class="week-card">
+        <div class="week-card-header" onclick="toggleWeek(this)">
+          <span class="wk-num" style="background:#DC2626">Week 13</span>
+          <span class="wk-title">ESE Report Complete · Bug Fixes · Demo Rehearsal</span>
+          <span class="wk-dates">19–25 Oct</span>
+          <svg class="wk-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="week-body">
+          <div class="task-cols">
+            <div class="task-col" data-member="yasharth">
+              <div class="col-who"><div class="col-avatar" style="background:#1D4ED8">YT</div><span class="col-name" style="color:#1D4ED8">Yasharth</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Finalise Flask API deployment — ensure the live URL is stable, fix any production bugs</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Rehearse the demo pitch — district selection, SHAP explanation, policy simulation walkthrough</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Prepare Q&A answers: LSTM architecture choices, attention mechanism, why CGWB over satellite data, SHAP vs Pearson rationale</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="yash">
+              <div class="col-who"><div class="col-avatar" style="background:#0D9488">YS</div><span class="col-name" style="color:#0D9488">Yash</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Finalise ESE LaTeX report Results section — metric tables, backtesting charts, model comparison figure</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Prepare Q&A answers: data pipeline design, preprocessing decisions, SARIMA justification, t-test interpretation</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Verify pinned requirements.txt — all library versions locked, reproduce.sh installs cleanly on a fresh machine</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="ayush">
+              <div class="col-who"><div class="col-avatar" style="background:#7C3AED">AY</div><span class="col-name" style="color:#7C3AED">Ayush</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Finalise complete ESE LaTeX report — Abstract, Introduction, Conclusion, <strong>Limitations & Future Work</strong> (name vegetation/NDVI, irrigation, soil type, population density, rainwater-harvesting infrastructure explicitly — why excluded, what's next), References — compile to PDF</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Compile all 14 weekly progress reports into one submission bundle — confirm all weeks are signed and complete</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Prepare ESE presentation slides (10–12 slides): problem → data → methodology → results → demo → impact</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="deliverable-bar">
+            <span class="deliv-label">📦 Deliverable</span>
+            <span class="deliv-text">ESE LaTeX report v1 complete · Demo pitch rehearsed · 14 weekly reports compiled · ESE slides ready · Live API stable</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week-card" style="border-color:#DC2626;border-width:2px">
+        <div class="week-card-header" onclick="toggleWeek(this)" style="background:linear-gradient(to right,#FFF1F2,#fff)">
+          <span class="wk-num" style="background:#DC2626">Week 14</span>
+          <span class="wk-title">ESE Evaluation · Live Demo · Q&A · Final GitHub Submission</span>
+          <span class="wk-dates">26 Oct–02 Nov</span>
+          <span class="wk-eval" style="color:#DC2626;background:#FEE2E2">★ ESE — Industry Expert</span>
+          <svg class="wk-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="week-body">
+          <div class="task-cols">
+            <div class="task-col" data-member="yasharth">
+              <div class="col-who"><div class="col-avatar" style="background:#1D4ED8">YT</div><span class="col-name" style="color:#1D4ED8">Yasharth</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text"><span class="presents-tag" style="background:#DBEAFE;color:#1D4ED8">Presents</span>Poster & Report Q&A to ESE panel (02 Nov)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Answer Q&A on: architecture decisions, ensemble formula rationale, deployment approach</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Submit final GitHub repo — README complete, notebooks run cleanly, MIT license added</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="yash">
+              <div class="col-who"><div class="col-avatar" style="background:#0D9488">YS</div><span class="col-name" style="color:#0D9488">Yash</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text"><span class="presents-tag" style="background:#CCFBF1;color:#0D9488">Presents</span>Live system demo to ESE panel (02 Nov) — district select → Crisis Score → SHAP → policy simulation</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Answer Q&A on: LSTM/XGBoost design choices, model comparison, why each evaluation metric was chosen</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Submit 14 weekly reports bundle and final ESE report PDF to SPIT office</div></div>
+              </div>
+            </div>
+            <div class="task-col" data-member="ayush">
+              <div class="col-who"><div class="col-avatar" style="background:#7C3AED">AY</div><span class="col-name" style="color:#7C3AED">Ayush</span></div>
+              <div class="task-list-inner">
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text"><span class="presents-tag" style="background:#EDE9FE;color:#7C3AED">Presents</span>Results & Validation Q&A to ESE panel (02 Nov)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Answer Q&A on: data pipeline, preprocessing rationale, dashboard/UX design decisions</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Archive all project documents (SRS, IEEE proposal, ESE report, poster) into a final submission ZIP</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="deliverable-bar">
+            <span class="deliv-label">📦 Deliverable</span>
+            <span class="deliv-text">ESE evaluation complete (100 marks) · Final GitHub repo submitted · All documents archived · Project complete 🎉</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="print-wrap">
+  <button class="print-btn" onclick="window.print()">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+    Print / Save PDF
+  </button>
+</div>
+
+<script>
+function toggleWeek(header){
+  const body = header.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  header.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+}
+
+let activeFilter = null;
+function filterMember(name, btn) {
+  if (activeFilter === name) { clearFilter(); return; }
+  activeFilter = name;
+  document.querySelectorAll('.member-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  document.querySelectorAll('.week-body').forEach(b => b.classList.add('open'));
+  document.querySelectorAll('.week-card-header').forEach(h => h.classList.add('open'));
+
+  document.querySelectorAll('.task-col').forEach(col => {
+    const m = col.dataset.member;
+    if (m !== name) {
+      col.style.opacity = '0.2';
+      col.style.filter = 'grayscale(1)';
+    } else {
+      col.style.opacity = '1';
+      col.style.filter = '';
+    }
+  });
+}
+function clearFilter() {
+  activeFilter = null;
+  document.querySelectorAll('.member-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.task-col').forEach(col => {
+    col.style.opacity = '';
+    col.style.filter = '';
+  });
+}
+
+function scrollToPhase(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+  document.querySelectorAll('.phase-tab').forEach(t => t.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+}
+
+const sections = ['p1','p2','p3','p4','p5'];
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const idx = sections.indexOf(e.target.id);
+      if (idx >= 0) {
+        document.querySelectorAll('.phase-tab').forEach((t,i) => t.classList.toggle('active', i === idx));
+      }
+    }
+  });
+}, { threshold:0.25 });
+sections.forEach(id => { const el = document.getElementById(id); if(el) observer.observe(el); });
+</script>
+</body>
+</html>

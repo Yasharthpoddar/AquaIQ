@@ -10,7 +10,9 @@ project:
 paths:
   data_raw: "data/raw"
   data_processed: "data/processed"
-  db_path: "db/aquaiq.db"
+  # PostgreSQL — credentials (host/port/user/password) come from .env, not here.
+  # Only the database name is stored in config so it can be overridden per-environment.
+  postgres_db: "aquaiq"
   model_checkpoints: "models/checkpoints"
   lstm_checkpoint: "models/checkpoints/aquaiq_lstm.pt"
   xgboost_checkpoint: "models/checkpoints/aquaiq_xgb.json"
