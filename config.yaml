@@ -14,7 +14,6 @@ paths:
   # Only the database name is stored in config so it can be overridden per-environment.
   postgres_db: "aquaiq"
   model_checkpoints: "models/checkpoints"
-  lstm_checkpoint: "models/checkpoints/aquaiq_lstm.pt"
   xgboost_checkpoint: "models/checkpoints/aquaiq_xgb.json"
   geojson_boundaries: "data/raw/india_districts.geojson"
 
@@ -41,7 +40,7 @@ date_range:
   test_start: "2023-01-01"
 
 # The 10 features — exact list, exact order. Don't add to this without updating
-# preprocessing/features.py, models/lstm.py input_size, and models/xgboost_model.py.
+# preprocessing/features.py and models/xgboost_model.py.
 features:
   - GWL_current
   - GWL_lag_3mo
@@ -71,24 +70,6 @@ model_hyperparameters:
     optimizer: "adam"
     input_size: 10
 
-  lstm:
-    device: "cpu"             # small model (~500K params) — trains fine on CPU in under an
-                               # hour even with all districts pooled. No paid GPU needed. If
-                               # torch.cuda.is_available() happens to be true, code can still
-                               # use it, but nothing here assumes or requires it.
-    num_layers: 3
-    hidden_size: 128
-    attention_heads: 4
-    dropout: 0.2
-    window_months: 24        # input: 24-month rolling window
-    forecast_months: 6       # output: 6-month forecast
-    loss: "huber"
-    optimizer: "adam"
-    learning_rate: 0.001
-    epochs: 200
-    early_stopping_patience: 20
-    validation_scheme: "walk_forward"   # rolling 2020→2021→2022→2023 windows, then 2023-24 held-out test
-
   xgboost:
     n_estimators: 500
     max_depth: 6
@@ -101,7 +82,7 @@ model_hyperparameters:
     # 2018-19 drought backtests) — not hand-picked. See models/ensemble.py.
     # These are placeholder starting values until Week 8's fitting run.
     initial_weights:
-      lstm_forecast: 0.45
+      linear_regression_trend: 0.45
       xgboost_risk: 0.35
       drought_frequency: 0.20
     drought_frequency_percentile: 20   # % of past months below this percentile = "drought month"
@@ -133,7 +114,7 @@ api:
   host: "0.0.0.0"
   port: 5000
   cors_origins: ["http://localhost:3000"]
-  cache_days: 7                # NFR-Av-02: serve cached predictions if LSTM service is down
+  cache_days: 7                # NFR-Av-02: serve cached predictions if model service is down
 
 testing:
   min_coverage_pct: 70

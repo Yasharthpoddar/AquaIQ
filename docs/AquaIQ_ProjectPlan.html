@@ -49,6 +49,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
 .note-banner.done{background:#F0FDF4;border-color:#BBF7D0}
 .note-banner.done svg{color:#16A34A}
 .note-banner.done p{color:#14532D}
+.note-banner.warn{background:#FFFBEB;border-color:#FDE68A}
+.note-banner.warn svg{color:#D97706}
+.note-banner.warn p{color:#78350F}
 .phase-section{margin-bottom:44px}
 .phase-header{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid var(--ph-color)}
 .phase-badge{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;padding:4px 12px;border-radius:20px;color:#fff;background:var(--ph-color)}
@@ -241,6 +244,11 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
     </div>
   </div>
 
+  <div class="note-banner warn">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg>
+    <p><strong>Replanned 10 Sep 2026:</strong> LSTM and SHAP are dropped from scope — the advanced layer is now XGBoost only, and the Crisis Score ensemble is Linear Regression trend + XGBoost risk + historical drought frequency. The database has also moved from SQLite to PostgreSQL. Weeks 7–8 below fold in the preprocessing pipeline, Fuzzy Logic, Linear Regression, Perceptron ANN, and the Flask/React skeletons, since those hadn't landed in the repo as of this replan.</p>
+  </div>
+
   <div class="note-banner done">
     <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
     <p><strong>SRS, IEEE proposal, and SPIT title page are already complete and submitted to the guide.</strong> Nothing below is a writing task for those — every item is real build work: data, models, API, dashboard, testing, deployment. The only documents still ahead are the ESE report and poster (both required deliverables for 02 Nov).</p>
@@ -248,7 +256,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
 
   <div class="note-banner">
     <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-    <p>Every workstream — data pipeline, core ML, advanced ML (LSTM/XGBoost/SHAP), the Flask API, the React dashboard, and testing — rotates across all three people through the 14 weeks, so nobody is boxed into one lane. Presentation duty at each evaluation is also split three ways and rotates who covers which section, so everyone presents at every phase.</p>
+    <p>Every workstream — data pipeline, core ML, advanced ML (XGBoost), the Flask API, the React dashboard, and testing — rotates across all three people through the 14 weeks, so nobody is boxed into one lane. Presentation duty at each evaluation is also split three ways and rotates who covers which section, so everyone presents at every phase.</p>
   </div>
 
   <div class="section-label">
@@ -291,7 +299,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
     </tr>
     <tr>
       <td>Phase III · 30 Sep</td>
-      <td><span class="rot-name"><span class="rot-dot" style="background:#7C3AED"></span>Ayush</span> — LSTM/XGBoost/SHAP Demo</td>
+      <td><span class="rot-name"><span class="rot-dot" style="background:#7C3AED"></span>Ayush</span> — XGBoost & Ensemble Demo</td>
       <td><span class="rot-name"><span class="rot-dot" style="background:#1D4ED8"></span>Yasharth</span> — API Demo</td>
       <td><span class="rot-name"><span class="rot-dot" style="background:#0D9488"></span>Yash</span> — Testing & Integration</td>
     </tr>
@@ -331,7 +339,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
               <div class="task-list-inner">
                 <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Create GitHub repo with full folder structure: <span class="task-badge" style="background:#DBEAFE;color:#1D4ED8">data_ingestion/ preprocessing/ models/ api/ dashboard/</span></div></div>
                 <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Register and download CGWB borewell water level CSV from india-wris.nrsc.gov.in — verify all 640+ district files received</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Confirm PyTorch runs CPU-only on the team's laptops — the LSTM is small (~500K params), trains fine on CPU in well under an hour even with all districts pooled together. No paid subscription needed; Colab's free tier or Kaggle Notebooks (also free) are zero-cost backups if anyone's laptop is slow</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Confirm XGBoost, scikit-learn, and scikit-fuzzy install cleanly on the team's laptops — nothing in the current model stack needs a GPU or paid compute; Colab's free tier or Kaggle Notebooks stay as zero-cost backups only if anyone's laptop struggles</div></div>
               </div>
             </div>
             <div class="task-col" data-member="yash">
@@ -339,7 +347,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
               <div class="task-list-inner">
                 <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Download IMD gridded rainfall CSV (monthly, district-wise) from imdpune.gov.in — apply for institutional access if required</div></div>
                 <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Register for ERA5/Copernicus CDS API and download temperature + evapotranspiration data for all districts, 2002–2024</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Write <span class="task-badge" style="background:#CCFBF1;color:#0D9488">requirements.txt</span> with initial pinned library versions (pandas, scikit-learn, torch, xgboost, shap, flask)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Write <span class="task-badge" style="background:#CCFBF1;color:#0D9488">requirements.txt</span> with initial pinned library versions (pandas, scikit-learn, xgboost, flask, psycopg2)</div></div>
               </div>
             </div>
             <div class="task-col" data-member="ayush">
@@ -371,7 +379,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
               <div class="col-who"><div class="col-avatar" style="background:#1D4ED8">YT</div><span class="col-name" style="color:#1D4ED8">Yasharth</span></div>
               <div class="task-list-inner">
                 <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Load CGWB CSV into Pandas — document shape, columns, dtypes, missing value counts, date ranges per district</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Design SQLite database schema: 5 tables — raw_data, features, predictions, shap_values, crisis_scores</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Design PostgreSQL database schema: 4 tables — raw_data, features, predictions, crisis_scores</div></div>
                 <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Build district master table: all 640+ district names + state + agro-climatic zone, used for the train-test split later</div></div>
               </div>
             </div>
@@ -386,7 +394,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
             <div class="task-col" data-member="ayush">
               <div class="col-who"><div class="col-avatar" style="background:#7C3AED">AY</div><span class="col-name" style="color:#7C3AED">Ayush</span></div>
               <div class="task-list-inner">
-                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Define all 6 Flask API endpoint schemas: request params, response JSON format, error codes</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Define all 5 Flask API endpoint schemas: request params, response JSON format, error codes</div></div>
                 <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Plot district-wise GWL trends (2002–2023) for 5 representative districts</div></div>
                 <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Validate the GeoJSON district names actually match CGWB district names — build a lookup table to fix any mismatches (common issue with Indian district data)</div></div>
               </div>
@@ -394,7 +402,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
           </div>
           <div class="deliverable-bar">
             <span class="deliv-label">📦 Deliverable</span>
-            <span class="deliv-text">SQLite schema designed · Architecture diagram · District master table · IMD climatological normal computed · GeoJSON-to-CGWB names matched</span>
+            <span class="deliv-text">PostgreSQL schema designed · Architecture diagram · District master table · IMD climatological normal computed · GeoJSON-to-CGWB names matched</span>
           </div>
         </div>
       </div>
@@ -402,7 +410,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
       <div class="week-card" style="border-color:#2563EB;border-width:2px">
         <div class="week-card-header" onclick="toggleWeek(this)" style="background:linear-gradient(to right,#EFF6FF,#fff)">
           <span class="wk-num" style="background:#2563EB">Week 3</span>
-          <span class="wk-title">Phase I Evaluation · SQLite Ingestion Live</span>
+          <span class="wk-title">Phase I Evaluation · PostgreSQL Ingestion Live</span>
           <span class="wk-dates">17–23 Aug</span>
           <span class="wk-eval">★ Evaluation Day</span>
           <svg class="wk-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
@@ -414,14 +422,14 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
               <div class="task-list-inner">
                 <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text"><span class="presents-tag" style="background:#DBEAFE;color:#1D4ED8">Presents</span>Problem Statement & System Architecture to guide (17 Aug)</div></div>
                 <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Q&A prep: be ready to explain why CGWB direct well readings were chosen over satellite-derived estimates — direct ground truth beats an indirect proxy where CGWB has coverage; where it doesn't, the zone-level fallback (built Week 8) handles it instead of reintroducing satellite data</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Begin PyTorch LSTM model class skeleton — define layer dimensions and attention mechanism</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Begin XGBoost training pipeline skeleton — define feature matrix construction and train/val/test split logic</div></div>
               </div>
             </div>
             <div class="task-col" data-member="yash">
               <div class="col-who"><div class="col-avatar" style="background:#0D9488">YS</div><span class="col-name" style="color:#0D9488">Yash</span></div>
               <div class="task-list-inner">
                 <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text"><span class="presents-tag" style="background:#CCFBF1;color:#0D9488">Presents</span>Dataset Overview & EDA Findings to guide (17 Aug)</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Build SQLite ingestion script — parse and load CGWB + IMD + ERA5 into the <span class="task-badge" style="background:#CCFBF1;color:#0D9488">raw_data</span> table</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Build PostgreSQL ingestion script — parse and load CGWB + IMD + ERA5 into the <span class="task-badge" style="background:#CCFBF1;color:#0D9488">raw_data</span> table</div></div>
                 <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Fill and submit weekly progress reports for Weeks 1, 2, and 3</div></div>
               </div>
             </div>
@@ -436,7 +444,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
           </div>
           <div class="deliverable-bar">
             <span class="deliv-label">📦 Deliverable</span>
-            <span class="deliv-text">Phase I evaluation complete (50 marks) · SQLite ingestion working for all 3 sources · Weekly reports 1–3 submitted</span>
+            <span class="deliv-text">Phase I evaluation complete (50 marks) · PostgreSQL ingestion working for all 3 sources · Weekly reports 1–3 submitted</span>
           </div>
         </div>
       </div>
@@ -466,7 +474,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
               <div class="task-list-inner">
                 <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Build preprocessing pipeline: linear interpolation for short gaps, SARIMA for longer gaps in district GWL/rainfall series, MinMaxScaler normalisation</div></div>
                 <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Engineer the 3 CGWB-based features: GWL_current, GWL_lag_3mo, GWL_lag_6mo</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Continue LSTM model — finalise architecture: 3-layer, hidden=128, 4-head attention</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Draft an XGBoost feature-importance baseline — quick first-pass fit on available features to sanity-check signal before full tuning in Week 8</div></div>
               </div>
             </div>
             <div class="task-col" data-member="yash">
@@ -507,7 +515,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
               <div class="task-list-inner">
                 <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Train Perceptron ANN (scikit-learn MLPClassifier: layers [10,64,4], ReLU, Adam) using Fuzzy Logic output as class labels</div></div>
                 <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Evaluate ANN: accuracy, precision, recall, F1-score per class, confusion matrix</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Set up MLflow experiment tracking for LSTM hyperparameters and metrics</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Set up MLflow experiment tracking for XGBoost hyperparameters and metrics</div></div>
               </div>
             </div>
             <div class="task-col" data-member="yash">
@@ -515,7 +523,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
               <div class="task-list-inner">
                 <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Train scikit-learn Linear Regression per district (2002–2019 train) — evaluate R², RMSE, MAE on 2023–2024 test set</div></div>
                 <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Perform two-sample t-test: is the 2020–2024 depletion rate statistically significantly greater than the 2002–2010 baseline (p&lt;0.05)?</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Begin LSTM training loop: Huber loss, Adam optimiser, early stopping — save best checkpoint</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Begin XGBoost baseline training — default hyperparameters first pass, establish a reference accuracy before full tuning</div></div>
               </div>
             </div>
             <div class="task-col" data-member="ayush">
@@ -529,7 +537,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
           </div>
           <div class="deliverable-bar">
             <span class="deliv-label">📦 Deliverable</span>
-            <span class="deliv-text">Linear Regression trained (R²&gt;0.75 target) · t-test documented · Perceptron ANN trained · LSTM training started · Choropleth map renders with real boundaries</span>
+            <span class="deliv-text">Linear Regression trained (R²&gt;0.75 target) · t-test documented · Perceptron ANN trained · XGBoost baseline started · Choropleth map renders with real boundaries</span>
           </div>
         </div>
       </div>
@@ -557,7 +565,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
               <div class="task-list-inner">
                 <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text"><span class="presents-tag" style="background:#CCFBF1;color:#0D9488">Presents</span>Fuzzy Logic Crisis Score & Linear Regression results to guide (02 Sep)</div></div>
                 <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Write pytest unit tests for all 5 preprocessing functions (interpolation, SARIMA fill, normalisation, feature engineering, train-test split)</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Continue LSTM training — hyperparameter grid search on CPU (Colab's free tier works too if you want a few runs going in parallel, no Pro needed)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Continue XGBoost tuning — hyperparameter grid search (max_depth, learning_rate, subsample) on CPU, no paid compute needed</div></div>
               </div>
             </div>
             <div class="task-col" data-member="ayush">
@@ -582,7 +590,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
   <div class="phase-section" id="p3">
     <div class="phase-header" style="--ph-color:#7C3AED">
       <span class="phase-badge" style="background:#7C3AED">Phase III</span>
-      <span class="phase-title">LSTM · XGBoost · SHAP · Flask API · Integration Tests</span>
+      <span class="phase-title">XGBoost · Ensemble · Flask API · Integration Tests</span>
       <span class="phase-eval-date" style="background:#7C3AED">★ Eval: 30 Sep 2026 · Guide only · 50 marks</span>
     </div>
     <div class="week-grid">
@@ -590,7 +598,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
       <div class="week-card">
         <div class="week-card-header" onclick="toggleWeek(this)">
           <span class="wk-num" style="background:#7C3AED">Week 7</span>
-          <span class="wk-title">LSTM Training · Statistical Validation · React Routing & Charts</span>
+          <span class="wk-title">Preprocessing Pipeline · Fuzzy Logic · Linear Regression · React Skeleton</span>
           <span class="wk-dates">09–15 Sep</span>
           <svg class="wk-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
@@ -599,31 +607,31 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
             <div class="task-col" data-member="yasharth">
               <div class="col-who"><div class="col-avatar" style="background:#1D4ED8">YT</div><span class="col-name" style="color:#1D4ED8">Yasharth</span></div>
               <div class="task-list-inner">
-                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Complete Pearson and Spearman correlation heatmap for all 10 features vs GWL — identify top 5 predictors</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Run seasonal decomposition on GWL time series (trend + seasonality + residual) for 10 districts</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Build the preprocessing pipeline: linear interpolation for short gaps, SARIMA for longer gaps in district GWL/rainfall series, MinMaxScaler normalisation</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Engineer the 3 CGWB-based features: GWL_current, GWL_lag_3mo, GWL_lag_6mo</div></div>
                 <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Build React routing: /home, /district/:id, /alerts, /simulate — add navigation bar</div></div>
               </div>
             </div>
             <div class="task-col" data-member="yash">
               <div class="col-who"><div class="col-avatar" style="background:#0D9488">YS</div><span class="col-name" style="color:#0D9488">Yash</span></div>
               <div class="task-list-inner">
-                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Final LSTM training run on CPU — 200 epochs with early stopping, seed=42 (small model, no GPU required; use Colab's free tier only if it's genuinely faster than your laptop)</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Evaluate using walk-forward validation (rolling 2020→2021→2022→2023 windows, not one fixed split) — report Pearson r, RMSE, NSE per window plus the 2023–2024 held-out test set — save checkpoint as <span class="task-badge" style="background:#CCFBF1;color:#0D9488">aquaiq_lstm.pt</span></div></div>
-                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Cross-check the lag features (GWL_lag_3mo/6mo) don't leak future information into the training set — verify the temporal split is clean</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Engineer the 3 IMD-based features: rainfall_current, rainfall_3mo_avg, monsoon_deficit_pct — design the 80/20 train-test split stratified by agro-climatic zone</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Train scikit-learn Linear Regression per district (2002–2019 train) — evaluate R², RMSE, MAE on 2023–2024 test set</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Perform two-sample t-test: is the 2020–2024 depletion rate statistically significantly greater than the 2002–2010 baseline (p&lt;0.05)?</div></div>
               </div>
             </div>
             <div class="task-col" data-member="ayush">
               <div class="col-who"><div class="col-avatar" style="background:#7C3AED">AY</div><span class="col-name" style="color:#7C3AED">Ayush</span></div>
               <div class="task-list-inner">
-                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Build 6-month forecast timeline chart using Recharts (LineChart with confidence band)</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Build SHAP attribution bar chart component (top-5 feature contributions) — ready for API connection</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Plot LSTM predicted vs actual GWL for the same 5 districts — comparison chart against Linear Regression</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Engineer the 4 remaining features: temperature, evapotranspiration (from ERA5), water_balance_proxy = rainfall − ET, crop_season_flag (calendar rule: Kharif/Rabi/Zaid)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Implement Mamdani Fuzzy Inference System (scikit-fuzzy) with inputs rainfall_deficit and depletion_rate; define the 9 fuzzy rules → Crisis tier output (Safe/Watch/Warning/Crisis)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Build the 6-month forecast timeline chart using Recharts (LineChart with confidence band) — wire to mock data until the API is live</div></div>
               </div>
             </div>
           </div>
           <div class="deliverable-bar">
             <span class="deliv-label">📦 Deliverable</span>
-            <span class="deliv-text">LSTM trained (target: Pearson r ≥ 0.85) · Model checkpoint saved · Correlation heatmap · React routing + all chart components built</span>
+            <span class="deliv-text">Preprocessing pipeline live · All 10 features built and traced to source · Fuzzy FIS coded · Linear Regression trained (R²&gt;0.75 target) · React routing + forecast chart built</span>
           </div>
         </div>
       </div>
@@ -631,7 +639,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
       <div class="week-card">
         <div class="week-card-header" onclick="toggleWeek(this)">
           <span class="wk-num" style="background:#7C3AED">Week 8</span>
-          <span class="wk-title">XGBoost · SHAP · Crisis Score Formula · Alerts UI</span>
+          <span class="wk-title">Perceptron ANN · XGBoost · Ensemble Formula · Flask Skeleton</span>
           <span class="wk-dates">16–22 Sep</span>
           <svg class="wk-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
@@ -640,35 +648,34 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
             <div class="task-col" data-member="yasharth">
               <div class="col-who"><div class="col-avatar" style="background:#1D4ED8">YT</div><span class="col-name" style="color:#1D4ED8">Yasharth</span></div>
               <div class="task-list-inner">
-                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Write integration tests for 10 districts: raw CSV → preprocessing → features in SQLite — verify end-to-end flow</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Add a per-district Data Readiness Score (% months with valid, non-imputed data). Below the 60% threshold, don't just exclude — build the zone-level fallback: aggregate CGWB data across all districts in the same agro_climatic_zone (from Week 2's district master table) and serve that instead of a fabricated district-specific number</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Build district detail panel: AquaIQ Score badge, Data Readiness indicator, "Download Report" placeholder</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Train Perceptron ANN (scikit-learn MLPClassifier: layers [10,64,4], ReLU, Adam) using Fuzzy Logic output as class labels</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Evaluate ANN: accuracy, precision, recall, F1-score per class, confusion matrix</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Set up Flask app factory pattern — register blueprints for each API route group</div></div>
               </div>
             </div>
             <div class="task-col" data-member="yash">
               <div class="col-who"><div class="col-avatar" style="background:#0D9488">YS</div><span class="col-name" style="color:#0D9488">Yash</span></div>
               <div class="task-list-inner">
-                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Train XGBoost classifier (500 trees, max_depth=6, lr=0.01, subsample=0.8, seed=42) — evaluate accuracy, F1-score, confusion matrix</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Apply SHAP TreeExplainer — summary plot, waterfall plot for 3 crisis districts, force plot for individual predictions</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Build alerts feed component — list of crisis districts with score, top risk factor chip, timestamp</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Train XGBoost (500 trees, max_depth=6, lr=0.01, subsample=0.8, seed=42) on the lag features to forecast GWL 6 months out — evaluate accuracy, F1-score, confusion matrix</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Evaluate using walk-forward validation (rolling 2020→2021→2022→2023 windows, not one fixed split) — report RMSE, R², NSE per window plus the 2023–2024 held-out test set — save model as <span class="task-badge" style="background:#CCFBF1;color:#0D9488">aquaiq_xgboost.pkl</span></div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Write pytest unit tests for all 5 preprocessing functions (interpolation, SARIMA fill, normalisation, feature engineering, train-test split)</div></div>
               </div>
             </div>
             <div class="task-col" data-member="ayush">
               <div class="col-who"><div class="col-avatar" style="background:#7C3AED">AY</div><span class="col-name" style="color:#7C3AED">Ayush</span></div>
               <div class="task-list-inner">
-                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Compute the final AquaIQ Crisis Score ensemble: fit the LSTM/XGBoost/drought-frequency weights on the validation set — optimise against the 2015–16 and 2018–19 backtests rather than hand-picking them — historical drought frequency = % of past months below the district's 20th percentile GWL, from CGWB's own history → normalise 0–100</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Run full batch preprocessing for all 640+ districts — confirm all records stored with no import errors</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Design Tailwind CSS design tokens — consistent 4-tier colour scheme applied across all components</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Compute the final AquaIQ Crisis Score ensemble: fit the Linear Regression/XGBoost/drought-frequency weights on the validation set — optimise against the 2015–16 and 2018–19 backtests rather than hand-picking them — historical drought frequency = % of past months below the district's 20th percentile GWL, from CGWB's own history → normalise 0–100</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Build Leaflet.js India choropleth map using the Week 1 GeoJSON — test with mock scores before the API is ready</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Add district search bar and hover tooltip to the map component</div></div>
               </div>
             </div>
           </div>
           <div class="deliverable-bar">
             <span class="deliv-label">📦 Deliverable</span>
-            <span class="deliv-text">XGBoost trained · SHAP plots generated · Crisis Score formula finalised (fully self-contained, no external drought dataset needed) · 10 integration tests passing · All React components built</span>
+            <span class="deliv-text">Perceptron ANN trained · XGBoost trained and walk-forward validated · Crisis Score ensemble formula finalised (fully self-contained, no external drought dataset needed) · Flask app skeleton · 5 preprocessing unit tests · Choropleth map renders with real boundaries</span>
           </div>
         </div>
       </div>
-
       <div class="week-card" style="border-color:#7C3AED;border-width:2px">
         <div class="week-card-header" onclick="toggleWeek(this)" style="background:linear-gradient(to right,#F5F3FF,#fff)">
           <span class="wk-num" style="background:#7C3AED">Week 9</span>
@@ -682,31 +689,31 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
             <div class="task-col" data-member="yasharth">
               <div class="col-who"><div class="col-avatar" style="background:#1D4ED8">YT</div><span class="col-name" style="color:#1D4ED8">Yasharth</span></div>
               <div class="task-list-inner">
-                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text"><span class="presents-tag" style="background:#DBEAFE;color:#1D4ED8">Presents</span>Flask API demo to guide (30 Sep) — build and demo all 6 endpoints integrating LSTM + XGBoost + LR + Fuzzy Logic</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Build all 6 Flask API endpoints: /predict, /district, /shap, /history, /alerts, /simulate</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Add CORS headers, structured error handling, and logging to the Flask app</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text"><span class="presents-tag" style="background:#DBEAFE;color:#1D4ED8">Presents</span>Flask API demo to guide (30 Sep) — build and demo all 5 endpoints integrating XGBoost + Linear Regression + Fuzzy Logic + Perceptron ANN</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Build all 5 Flask API endpoints: /predict, /district, /history, /alerts, /simulate — add CORS headers, structured error handling, and logging</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Add a per-district Data Readiness Score (% months with valid, non-imputed data) — below the 60% threshold, aggregate CGWB data across all districts in the same agro_climatic_zone (from the Week 2 district master table) and serve that as a zone-level fallback instead of a fabricated district-specific number</div></div>
               </div>
             </div>
             <div class="task-col" data-member="yash">
               <div class="col-who"><div class="col-avatar" style="background:#0D9488">YS</div><span class="col-name" style="color:#0D9488">Yash</span></div>
               <div class="task-list-inner">
                 <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text"><span class="presents-tag" style="background:#CCFBF1;color:#0D9488">Presents</span>Testing & integration results to guide (30 Sep)</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Write pytest unit tests for all 6 API endpoints — happy path, 404, 400, 500 cases for each</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Write pytest unit tests for all 5 API endpoints — happy path, 404, 400, 500 cases for each</div></div>
                 <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Run pytest --cov to measure test coverage — target ≥70%, fix any gaps</div></div>
               </div>
             </div>
             <div class="task-col" data-member="ayush">
               <div class="col-who"><div class="col-avatar" style="background:#7C3AED">AY</div><span class="col-name" style="color:#7C3AED">Ayush</span></div>
               <div class="task-list-inner">
-                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text"><span class="presents-tag" style="background:#EDE9FE;color:#7C3AED">Presents</span>LSTM + XGBoost + SHAP results live to guide (30 Sep)</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Connect all React fetch calls to the live Flask API — replace mock data across map, chart, SHAP panel, alerts</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text"><span class="presents-tag" style="background:#EDE9FE;color:#7C3AED">Presents</span>XGBoost + Ensemble Crisis Score results live to guide (30 Sep)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Connect all React fetch calls to the live Flask API — replace mock data across map, chart, alerts</div></div>
                 <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Fill and submit weekly progress reports for Weeks 7, 8, and 9</div></div>
               </div>
             </div>
           </div>
           <div class="deliverable-bar">
             <span class="deliv-label">📦 Deliverable</span>
-            <span class="deliv-text">Phase III evaluation complete (50 marks) · All 6 API endpoints live · React connected to API · ≥70% test coverage · Weekly reports 7–9 submitted</span>
+            <span class="deliv-text">Phase III evaluation complete (50 marks) · All 5 API endpoints live · React connected to API · ≥70% test coverage · Weekly reports 7–9 submitted</span>
           </div>
         </div>
       </div>
@@ -735,14 +742,14 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
               <div class="col-who"><div class="col-avatar" style="background:#1D4ED8">YT</div><span class="col-name" style="color:#1D4ED8">Yasharth</span></div>
               <div class="task-list-inner">
                 <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Run full batch prediction for all 640+ districts — verify predictions written to crisis_scores table</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Compile model comparison table: LR vs LSTM vs XGBoost vs ANN — RMSE, Pearson r, R², NSE, Accuracy — export as CSV</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Compile model comparison table: Linear Regression vs XGBoost vs Perceptron ANN — RMSE, Pearson r, R², NSE, Accuracy — export as CSV</div></div>
                 <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Backtest all models against the 2015–2016 and 2018–2019 drought years (using CGWB's own historical GWL records) — verify crisis alert recall &gt; 85%</div></div>
               </div>
             </div>
             <div class="task-col" data-member="yash">
               <div class="col-who"><div class="col-avatar" style="background:#0D9488">YS</div><span class="col-name" style="color:#0D9488">Yash</span></div>
               <div class="task-list-inner">
-                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Full stack integration testing: React → Flask → SQLite for 10 districts — document bugs found and fixed</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Full stack integration testing: React → Flask → PostgreSQL for 10 districts — document bugs found and fixed</div></div>
                 <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Implement alert generation: auto-detect districts with Score &gt; 80, generate plain-language alert messages using the Week 3 policy lookup table</div></div>
                 <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Add Bearer token authentication to write-access endpoints (/admin, /simulate) — test with Postman</div></div>
               </div>
@@ -750,7 +757,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
             <div class="task-col" data-member="ayush">
               <div class="col-who"><div class="col-avatar" style="background:#7C3AED">AY</div><span class="col-name" style="color:#7C3AED">Ayush</span></div>
               <div class="task-list-inner">
-                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Complete district detail panel: Score badge + confidence indicator + forecast chart + SHAP bars + simulator section</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Complete district detail panel: Score badge + confidence indicator + Data Readiness indicator + forecast chart + top-feature breakdown + simulator section</div></div>
                 <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Add "Data last updated" indicator, loading spinners, and empty states across the dashboard</div></div>
                 <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Implement user-friendly error messages for all API failure states (district not found, timeout, model unavailable)</div></div>
               </div>
@@ -758,7 +765,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
           </div>
           <div class="deliverable-bar">
             <span class="deliv-label">📦 Deliverable</span>
-            <span class="deliv-text">All 640+ district predictions in SQLite · Alert system working · Model comparison CSV ready · District detail panel fully functional</span>
+            <span class="deliv-text">All 640+ district predictions in PostgreSQL · Alert system working · Model comparison CSV ready · District detail panel fully functional</span>
           </div>
         </div>
       </div>
@@ -776,7 +783,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
               <div class="col-who"><div class="col-avatar" style="background:#1D4ED8">YT</div><span class="col-name" style="color:#1D4ED8">Yasharth</span></div>
               <div class="task-list-inner">
                 <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Build policy simulator UI: 3 sliders (irrigation reduction, rainfall deficit, crop area) + "Simulate" button → before/after score comparison</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Implement PDF report download using ReportLab: score badge, forecast chart, SHAP bars, policy recommendations</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Implement PDF report download using ReportLab: score badge, forecast chart, top-feature breakdown, policy recommendations</div></div>
                 <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Begin A1 poster layout in Canva/Figma: sections — Problem, Methodology, Results, Impact, Future Work</div></div>
               </div>
             </div>
@@ -792,8 +799,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
               <div class="col-who"><div class="col-avatar" style="background:#7C3AED">AY</div><span class="col-name" style="color:#7C3AED">Ayush</span></div>
               <div class="task-list-inner">
                 <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Build POST /simulate endpoint logic — modify feature vector, re-run Fuzzy FIS + LR, return updated score vs baseline</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Implement 7-day SQLite cache — serve cached predictions when the LSTM inference service is unreachable</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Write and run the final integration test suite for the full demo flow (search → detail → SHAP → simulate → download)</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Implement a 7-day prediction cache (Postgres materialised view or Redis) — serve cached results if a model inference call is slow or fails</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#7C3AED"></span><div class="task-text">Write and run the final integration test suite for the full demo flow (search → detail → forecast → simulate → download)</div></div>
               </div>
             </div>
           </div>
@@ -817,7 +824,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
             <div class="task-col" data-member="yasharth">
               <div class="col-who"><div class="col-avatar" style="background:#1D4ED8">YT</div><span class="col-name" style="color:#1D4ED8">Yasharth</span></div>
               <div class="task-list-inner">
-                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text"><span class="presents-tag" style="background:#DBEAFE;color:#1D4ED8">Presents</span>Full live demo to guide (12 Oct) — district select → score → SHAP → simulate → download PDF</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text"><span class="presents-tag" style="background:#DBEAFE;color:#1D4ED8">Presents</span>Full live demo to guide (12 Oct) — district select → score → forecast → simulate → download PDF</div></div>
                 <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Deploy Flask API to Render.com — get a public URL for the demo, test all endpoints live</div></div>
                 <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Write Methodology section of the ESE LaTeX report</div></div>
               </div>
@@ -870,8 +877,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
               <div class="col-who"><div class="col-avatar" style="background:#1D4ED8">YT</div><span class="col-name" style="color:#1D4ED8">Yasharth</span></div>
               <div class="task-list-inner">
                 <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Finalise Flask API deployment — ensure the live URL is stable, fix any production bugs</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Rehearse the demo pitch — district selection, SHAP explanation, policy simulation walkthrough</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Prepare Q&A answers: LSTM architecture choices, attention mechanism, why CGWB over satellite data, SHAP vs Pearson rationale</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Rehearse the demo pitch — district selection, Crisis Score explanation, policy simulation walkthrough</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#1D4ED8"></span><div class="task-text">Prepare Q&A answers: why XGBoost over a deep-learning model at this data size, why CGWB over satellite data, model evaluation metric rationale</div></div>
               </div>
             </div>
             <div class="task-col" data-member="yash">
@@ -919,8 +926,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-h
             <div class="task-col" data-member="yash">
               <div class="col-who"><div class="col-avatar" style="background:#0D9488">YS</div><span class="col-name" style="color:#0D9488">Yash</span></div>
               <div class="task-list-inner">
-                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text"><span class="presents-tag" style="background:#CCFBF1;color:#0D9488">Presents</span>Live system demo to ESE panel (02 Nov) — district select → Crisis Score → SHAP → policy simulation</div></div>
-                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Answer Q&A on: LSTM/XGBoost design choices, model comparison, why each evaluation metric was chosen</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text"><span class="presents-tag" style="background:#CCFBF1;color:#0D9488">Presents</span>Live system demo to ESE panel (02 Nov) — district select → Crisis Score → forecast → policy simulation</div></div>
+                <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Answer Q&A on: XGBoost design choices, model comparison, why each evaluation metric was chosen</div></div>
                 <div class="task-item"><span class="task-dot" style="background:#0D9488"></span><div class="task-text">Submit 14 weekly reports bundle and final ESE report PDF to SPIT office</div></div>
               </div>
             </div>

@@ -43,27 +43,19 @@ CREATE TABLE IF NOT EXISTS features (
     UNIQUE(district_id, date)
 );
 
--- Model outputs. Every model (LR, Perceptron, LSTM, XGBoost) writes here.
+-- Model outputs. Every model (LR, Perceptron, XGBoost) writes here.
 CREATE TABLE IF NOT EXISTS predictions (
     id                   SERIAL PRIMARY KEY,
     district_id          VARCHAR(50) NOT NULL REFERENCES districts(district_id),
     forecast_date        DATE NOT NULL,
-    model_name           TEXT NOT NULL CHECK(model_name IN ('linear_regression', 'perceptron', 'lstm', 'xgboost')),
+    model_name           TEXT NOT NULL CHECK(model_name IN ('linear_regression', 'perceptron', 'xgboost')),
     predicted_gwl        REAL,
     predicted_risk_tier  TEXT CHECK(predicted_risk_tier IN ('Safe', 'Watch', 'Warning', 'Crisis')),
     confidence           REAL,
     created_at           TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- SHAP attribution, per district per feature per forecast.
-CREATE TABLE IF NOT EXISTS shap_values (
-    id             SERIAL PRIMARY KEY,
-    district_id    VARCHAR(50) NOT NULL REFERENCES districts(district_id),
-    forecast_date  DATE NOT NULL,
-    feature_name   TEXT NOT NULL,
-    shap_value     REAL,
-    feature_value  REAL
-);
+
 
 -- Final ensemble AquaIQ Score — what the dashboard actually reads.
 -- estimate_type matters: not every district has enough CGWB history for its

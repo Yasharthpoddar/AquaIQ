@@ -1,6 +1,6 @@
 # AquaIQ — Flask API Specification
 
-Defines the request/response contract for all 6 endpoints, agreed before backend implementation (Week 6) begins. Field names match the `predictions`, `crisis_scores`, `shap_values`, `raw_data`, and `districts` SQLite tables.
+Defines the request/response contract for all 5 endpoints, agreed before backend implementation begins. Field names match the `predictions`, `crisis_scores`, `raw_data`, and `districts` PostgreSQL tables.
 
 ---
 
@@ -49,31 +49,7 @@ Returns static metadata for a district.
 
 ---
 
-## 3. `GET /shap/{district_id}`
-Returns SHAP feature contribution values for the district's latest prediction.
-
-**Request**
-- Path param: `district_id` (string)
-
-**Response — 200 OK**
-```json
-{
-  "district_id": "MH-Pune",
-  "feature_contributions": {
-    "GWL_lag_3mo": 0.31,
-    "monsoon_deficit_pct": 0.24,
-    "rainfall_3mo_avg": -0.12
-  }
-}
-```
-
-**Errors**
-- `404 Not Found` — district_id does not exist
-- `422 Unprocessable Entity` — SHAP values not yet computed for this district
-
----
-
-## 4. `GET /history/{district_id}`
+## 3. `GET /history/{district_id}`
 Returns historical GWL readings, used to render the Recharts timeline.
 
 **Request**
@@ -97,7 +73,7 @@ Returns historical GWL readings, used to render the Recharts timeline.
 
 ---
 
-## 5. `GET /alerts`
+## 4. `GET /alerts`
 Returns all districts currently in Warning or Crisis tier.
 
 **Request**
@@ -117,7 +93,7 @@ Returns all districts currently in Warning or Crisis tier.
 
 ---
 
-## 6. `POST /simulate`
+## 5. `POST /simulate`
 Runs a policy "what-if" simulation and returns an adjusted Crisis Score.
 
 **Request — JSON body**

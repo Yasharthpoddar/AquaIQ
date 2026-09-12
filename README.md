@@ -2,11 +2,11 @@
 
 AI-powered groundwater depletion forecasting for India's districts. SPIT CSE, Sem V Mini Project I, AY 2026–27. Maps to SIH25068 (Ministry of Jal Shakti).
 
-Forecasts district-level groundwater levels 6 months ahead using a two-layer ML system — a core layer mapped to the Sem I–V syllabus (Linear Regression, Fuzzy Logic, Perceptron ANN) and an advanced self-study layer (LSTM, XGBoost, SHAP) — and outputs a 0–100 Crisis Score per district through a Flask API + React dashboard.
+Forecasts district-level groundwater levels 6 months ahead using a two-layer ML system — a core layer mapped to the Sem I–V syllabus (Linear Regression, Fuzzy Logic, Perceptron ANN) and an advanced self-study layer (XGBoost) — and outputs a 0–100 Crisis Score per district through a Flask API + React dashboard.
 
 ## Team
 
-Yasharth (2024800092) · Yash · Ayush — task ownership rotates across all three every week; see `AquaIQ_ProjectPlan.html` for the full 14-week breakdown.
+Yasharth (2024800092) · Yash · Ayush — task ownership rotates across all three every week; see `docs/AquaIQ_ProjectPlan.html` for the full 14-week breakdown.
 
 ## Quick start
 
@@ -17,9 +17,9 @@ bash setup.sh
 source venv/bin/activate
 ```
 
-`setup.sh` creates a virtualenv, installs pinned dependencies, and initializes the SQLite database. It does **not** download data — that needs your own registration on each portal (see below).
+`setup.sh` creates a virtualenv, installs pinned dependencies, and initializes the PostgreSQL database. It does **not** download data — that needs your own registration on each portal (see below).
 
-**No paid compute needed.** The LSTM is small (~500K params, 3 layers, hidden=128) and trains in well under an hour on a normal laptop CPU, even with all 640 districts pooled into one training run. XGBoost and the Perceptron are CPU-native by design. If a laptop turns out to be slow, Google Colab's **free** tier or Kaggle Notebooks (also free) work as backups — nobody needs a paid subscription for this project.
+**No paid compute needed.** XGBoost (500 trees), Fuzzy Logic, Perceptron ANN, and Linear Regression all run fine on a normal laptop CPU. Google Colab's **free** tier or Kaggle Notebooks (also free) work as zero-cost backups if anyone's laptop struggles.
 
 ## Data sources — download these into `data/raw/` before running anything
 
@@ -66,25 +66,26 @@ All ten trace back to one of the three sources above — nothing is invented:
 AquaIQ/
 ├── data_ingestion/     # CSV/API parsers for CGWB, IMD, ERA5
 ├── preprocessing/      # cleaning, SARIMA gap-fill, feature engineering
-├── models/             # linear_regression.py, fuzzy_logic.py, perceptron.py, lstm.py, xgboost_model.py, ensemble.py
-├── api/                # Flask app + 6 REST endpoints
-├── dashboard/          # React frontend (added Week 4)
+├── models/             # linear_regression.py, fuzzy_logic.py, perceptron.py, xgboost_model.py, ensemble.py
+├── api/                # Flask app + 5 REST endpoints
+├── dashboard/          # React frontend
 ├── db/                 # schema.sql + init_db.py
+├── docs/               # architecture diagrams, project plan, context brief
+├── notebooks/          # exploratory / reproducibility notebooks
 ├── data/raw/           # downloaded, gitignored
 ├── data/processed/     # engineered features, gitignored
-├── notebooks/          # exploratory / reproducibility notebooks
 ├── tests/              # pytest suite, target ≥70% coverage
 └── config.yaml         # every hyperparameter, path, and threshold — nothing hardcoded
 ```
 
 ## API endpoints (built Week 9)
 
-`GET /predict/{district_id}` · `GET /district/{district_id}` · `GET /shap/{district_id}` · `GET /history/{district_id}` · `GET /alerts` · `POST /simulate`
+`GET /predict/{district_id}` · `GET /district/{district_id}` · `GET /history/{district_id}` · `GET /alerts` · `POST /simulate`
 
 ## Evaluation targets
 
-LSTM Pearson r ≥ 0.85 · RMSE < 2.5cm · Linear Regression R² > 0.75, RMSE < 4.0cm · Test coverage ≥ 70% · API response < 3s
+Linear Regression R² > 0.75, RMSE < 4.0cm · Test coverage ≥ 70% · API response < 3s
 
 ## Full project plan
 
-See `AquaIQ_ProjectPlan.html` for the week-by-week task breakdown, and `AquaIQ_Context_Brief.md` for the full architecture/decision record — both are the source of truth for anything not covered here.
+See `docs/AquaIQ_ProjectPlan.html` for the week-by-week task breakdown, and `docs/AquaIQ_Context_Brief.md` for the full architecture/decision record — both are the source of truth for anything not covered here.

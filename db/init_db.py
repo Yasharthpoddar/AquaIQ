@@ -5,7 +5,7 @@ Run once during setup (setup.sh calls this automatically):
     python3 db/init_db.py
 
 Reads PostgreSQL credentials from .env (via python-dotenv).
-Creates all 6 tables from schema.sql if they don't already exist.
+Creates all 5 tables from schema.sql if they don't already exist.
 Safe to re-run — every CREATE TABLE uses IF NOT EXISTS.
 
 Prerequisites:
@@ -46,11 +46,11 @@ def init_db():
             cur.execute("""
                 SELECT count(*) FROM information_schema.tables 
                 WHERE table_schema = 'public' 
-                AND table_name IN ('districts', 'raw_data', 'features', 'predictions', 'shap_values', 'crisis_scores');
+                AND table_name IN ('districts', 'raw_data', 'features', 'predictions', 'crisis_scores');
             """)
             count = cur.fetchone()[0]
             
-            if count >= 6:
+            if count >= 5:
                 print("Database already initialized. Skipping schema creation.")
             else:
                 schema_path = Path(__file__).parent / "schema.sql"
@@ -59,7 +59,7 @@ def init_db():
                 cur.execute(schema_sql)
                 conn.commit()
                 print("AquaIQ PostgreSQL database initialized successfully.")
-                print("Tables: districts, raw_data, features, predictions, shap_values, crisis_scores")
+                print("Tables: districts, raw_data, features, predictions, crisis_scores")
         
         print(f"  Host : {os.getenv('POSTGRES_HOST')}:{os.getenv('POSTGRES_PORT')}")
         print(f"  DB   : {os.getenv('POSTGRES_DB')}")

@@ -3,7 +3,7 @@ AquaIQ -- ERA5 NetCDF -> District Monthly (Yash, Week 3 prep)
 --------------------------------------------------------------------
 Takes the ERA5 file downloaded in Week 1 and collapses it to district-monthly
 temperature + evapotranspiration, same pattern as imd_district_climatology.py
-did for rainfall. Needed before the SQLite ingestion script can load ERA5.
+did for rainfall. Needed before the PostgreSQL ingestion script can load ERA5.
 
 Auto-handles the .zip if you haven't extracted it yet.
 """
