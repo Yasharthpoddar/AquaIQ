@@ -19,6 +19,7 @@ graph TB
     User["District Water Authority"]
     PM["Policy Maker"]
     Admin["System Admin"]
+    Citizen["General Public"]
 
     User --> UC1
     User --> UC2
@@ -28,6 +29,8 @@ graph TB
     PM --> UC1
     PM --> UC3
     PM --> UC4
+    Citizen --> UC1
+    Citizen --> UC2
     Admin --> UC6
     Admin --> UC7
     Admin --> UC8

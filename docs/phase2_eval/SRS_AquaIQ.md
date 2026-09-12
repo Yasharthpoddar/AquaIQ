@@ -172,6 +172,11 @@ The system shall provide:
 - Review feature importance and model accuracy
 - Validate against local monitoring data
 
+**General Public / Citizen**
+- View district-level groundwater availability and forecasts
+- Access public maps to understand local water crisis risk
+- Download publicly available reports
+
 ### 2.4 Operating Environment
 
 - **Server:** Python 3.11+, Flask, PostgreSQL 15+, Node.js 18+
