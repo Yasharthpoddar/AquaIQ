@@ -6,27 +6,32 @@ import { Link } from 'react-router-dom';
  */
 
 const MOCK_ALERTS = [
-  { district_id: "GJ-Mehsana", name: "Mehsana", state: "Gujarat", score: 88, tier: "Crisis",
-    action: "Declare water-stressed zone — emergency conservation and supply measures." },
   { district_id: "HR-Kurukshetra", name: "Kurukshetra", state: "Haryana", score: 91, tier: "Crisis",
+    action: "Declare water-stressed zone — emergency conservation and supply measures." },
+  { district_id: "GJ-Mehsana", name: "Mehsana", state: "Gujarat", score: 88, tier: "Crisis",
     action: "Declare water-stressed zone — emergency conservation and supply measures." },
   { district_id: "RJ-Jaipur", name: "Jaipur", state: "Rajasthan", score: 72, tier: "Warning",
     action: "Restrict new extraction permits and enforce conservation measures." },
+  { district_id: "PB-Ludhiana", name: "Ludhiana", state: "Punjab", score: 67, tier: "Warning",
+    action: "Implement rainwater harvesting incentives and monitor extraction rates." },
 ];
 
 const TIER_COLORS = {
-  Warning: "#ef4444",
-  Crisis: "#dc2626",
+  Warning: "#f97316",
+  Crisis: "#ef4444",
 };
 
 function Alerts() {
   return (
     <div className="page">
       <h1>Active Alerts</h1>
-      <p className="subtitle">Districts requiring immediate attention</p>
+      <p className="subtitle">Districts requiring immediate policy intervention</p>
 
       {MOCK_ALERTS.length === 0 ? (
-        <div className="empty-state">No active alerts. All districts are Safe or Watch.</div>
+        <div className="empty-state">
+          <p style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>✓</p>
+          No active alerts. All districts are Safe or Watch.
+        </div>
       ) : (
         <div className="alert-list">
           {MOCK_ALERTS.map(alert => (
