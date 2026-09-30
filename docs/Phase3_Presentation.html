@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AquaIQ – Phase III Presentation</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --border: #334155;
+  --txt: #f1f5f9;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+  --green: #10b981;
+  --orange: #f59e0b;
+  --red: #ef4444;
+  --purple: #8b5cf6;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--txt);
+  overflow: hidden;
+  height: 100vh;
+}
+
+.slide {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  padding: 60px 80px;
+  flex-direction: column;
+  justify-content: center;
+}
+.slide.active { display: flex; }
+
+.slide-number {
+  position: fixed;
+  bottom: 24px;
+  right: 40px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.nav-hint {
+  position: fixed;
+  bottom: 24px;
+  left: 40px;
+  font-size: 12px;
+  color: var(--muted);
+  opacity: 0.5;
+}
+
+/* Title Slide */
+.title-slide {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.title-slide .tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding: 6px 16px;
+  border: 1px solid var(--accent);
+  border-radius: 20px;
+  display: inline-block;
+}
+.title-slide h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 72px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 16px;
+}
+.title-slide .subtitle {
+  font-size: 22px;
+  color: var(--muted);
+  margin-bottom: 40px;
+}
+.title-slide .team {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+}
+.title-slide .member {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+}
+.member-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* Content Slides */
+h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.slide-subtitle {
+  font-size: 16px;
+  color: var(--muted);
+  margin-bottom: 40px;
+}
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent);
+}
+.card.green::before { background: var(--green); }
+.card.orange::before { background: var(--orange); }
+.card.red::before { background: var(--red); }
+.card.purple::before { background: var(--purple); }
+
+.card h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.card p, .card li {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.card ul { padding-left: 18px; }
+
+.code-block {
+  background: #0b1120;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: #7dd3fc;
+  line-height: 1.8;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.metric-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.metric {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 28px;
+  text-align: center;
+  flex: 1;
+}
+.metric .value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+}
+.metric .label {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.branch-tree {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  line-height: 2;
+  color: var(--muted);
+}
+.branch-tree .branch { color: var(--green); }
+.branch-tree .merge { color: var(--purple); }
+.branch-tree .commit { color: var(--accent); }
+
+.tier-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+th {
+  background: var(--surface);
+  padding: 12px 16px;
+  text-align: left;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  border-bottom: 2px solid var(--border);
+}
+td {
+  padding: 10px 16px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.progress-bar {
+  background: var(--surface);
+  border-radius: 8px;
+  height: 8px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 8px;
+  transition: width 0.3s;
+}
+</style>
+</head>
+<body>
+
+<!-- Slide 1: Title -->
+<div class="slide title-slide active" id="s1">
+  <div class="tag">SPIT CSE-A · Sem V · Mini Project I · Phase III Evaluation</div>
+  <h1>AquaIQ</h1>
+  <div class="subtitle">AI-Powered Groundwater Depletion Forecasting System</div>
+  <div class="team">
+    <div class="member"><div class="member-dot" style="background:#3b82f6"></div>Yasharth Poddar</div>
+    <div class="member"><div class="member-dot" style="background:#10b981"></div>Yash</div>
+    <div class="member"><div class="member-dot" style="background:#8b5cf6"></div>Ayush</div>
+  </div>
+</div>
+
+<!-- Slide 2: Agenda -->
+<div class="slide" id="s2">
+  <h2>📋 What We'll Cover</h2>
+  <div class="slide-subtitle">Phase III deliverables — Weeks 7–9 (15 Sep – 30 Sep 2026)</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>1. Module-wise Coding (P1)</h3>
+      <ul>
+        <li>XGBoost walk-forward validation</li>
+        <li>Ensemble crisis score formula</li>
+        <li>Flask API wired to models + DB</li>
+        <li>React dashboard — live API integration</li>
+        <li>Pytest API test suite</li>
+      </ul>
+    </div>
+    <div class="card green">
+      <h3>2. Git Repository (P2)</h3>
+      <ul>
+        <li>GitHub repo structure</li>
+        <li>14 files changed, 548+ lines added</li>
+      </ul>
+    </div>
+    <div class="card purple">
+      <h3>3. Branching Strategy (P3)</h3>
+      <ul>
+        <li>GitFlow: main → develop → feature/*</li>
+        <li>5 feature branches, --no-ff merges</li>
+        <li>Conventional commit messages</li>
+      </ul>
+    </div>
+    <div class="card orange">
+      <h3>4. Presentation (P4)</h3>
+      <ul>
+        <li>This slide deck!</li>
+        <li>Live demo of the system</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 3: System Architecture -->
+<div class="slide" id="s3">
+  <h2>🏗️ System Architecture</h2>
+  <div class="slide-subtitle">End-to-end data flow from raw sources to the dashboard</div>
+  <div class="code-block">
+Data Sources (CGWB + IMD + ERA5)
+  ↓ Ingestion & Gap-fill (SARIMA interpolation)
+  ↓ Feature Engineering → 10-feature matrix
+  ↓ Core ML:  Linear Regression (trend) · Fuzzy Logic (crisis) · Perceptron ANN (tier)
+  ↓ Advanced: XGBoost (500 trees, walk-forward validated)
+  ↓ Ensemble: Crisis Score = 0.25×LR + 0.50×XGBoost + 0.25×DroughtFreq
+  ↓ Flask REST API (6 endpoints) ←→ PostgreSQL
+  ↓ React + Leaflet + Recharts Dashboard</div>
+  <div class="metric-row" style="margin-top:28px">
+    <div class="metric"><div class="value" style="color:var(--accent)">10</div><div class="label">Features</div></div>
+    <div class="metric"><div class="value" style="color:var(--green)">6</div><div class="label">API Endpoints</div></div>
+    <div class="metric"><div class="value" style="color:var(--purple)">4</div><div class="label">ML Models</div></div>
+    <div class="metric"><div class="value" style="color:var(--orange)">4</div><div class="label">Dashboard Pages</div></div>
+  </div>
+</div>
+
+<!-- Slide 4: XGBoost Walk-Forward -->
+<div class="slide" id="s4">
+  <h2>🎯 XGBoost Walk-Forward Validation</h2>
+  <div class="slide-subtitle">True expanding-window validation to prevent data leakage</div>
+  <div class="grid-2">
+    <div>
+      <div class="card">
+        <h3>How It Works</h3>
+        <ul>
+          <li><strong>Window 1:</strong> Train on 2002–2019 → Predict 2020</li>
+          <li><strong>Window 2:</strong> Train on 2002–2020 → Predict 2021</li>
+          <li><strong>Window 3:</strong> Train on 2002–2021 → Predict 2022</li>
+          <li>Fresh XGBoost model retrained per window</li>
+          <li>Metrics: RMSE, R², NSE per window</li>
+        </ul>
+      </div>
+      <div class="card green" style="margin-top:20px">
+        <h3>Why Walk-Forward?</h3>
+        <p>Standard k-fold leaks future data into the past. Walk-forward respects temporal ordering — the same way models will be used in production.</p>
+      </div>
+    </div>
+    <div>
+      <div class="code-block" style="font-size:12px">for year in [2020, 2021, 2022]:
+    test_window = val_df[val_df["year"] == year]
+
+    # Train model on EXPANDING window
+    model = xgb.XGBRegressor(
+        n_estimators=500,
+        max_depth=6,
+        learning_rate=0.05
+    )
+    model.fit(X_train, y_train)
+
+    # Predict & evaluate
+    y_pred = model.predict(X_test)
+    rmse = sqrt(mean_squared_error(...))
+    r2   = r2_score(...)
+    nse  = nash_sutcliffe_efficiency(...)
+
+    # Expand training window
+    current_train = concat([
+        current_train, test_window
+    ])</div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 5: Ensemble Crisis Score -->
+<div class="slide" id="s5">
+  <h2>⚡ Ensemble Crisis Score</h2>
+  <div class="slide-subtitle">Weighted combination of three components → single 0–100 score</div>
+  <div class="grid-3">
+    <div class="card">
+      <h3>Linear Regression Trend</h3>
+      <p style="font-size:28px;font-weight:700;color:var(--accent);margin:8px 0">25%</p>
+      <p>Long-term directional trend in GWL. Rising depth = declining water table.</p>
+    </div>
+    <div class="card red">
+      <h3>XGBoost Risk</h3>
+      <p style="font-size:28px;font-weight:700;color:var(--red);margin:8px 0">50%</p>
+      <p>Absolute current depth prediction. Scaled against 30m threshold for max risk.</p>
+    </div>
+    <div class="card orange">
+      <h3>Drought Frequency</h3>
+      <p style="font-size:28px;font-weight:700;color:var(--orange);margin:8px 0">25%</p>
+      <p>% of months above 80th percentile GWL depth (historically). High = chronic stress.</p>
+    </div>
+  </div>
+  <div style="margin-top:28px">
+    <table>
+      <tr><th>Tier</th><th>Score Range</th><th>Policy Action</th></tr>
+      <tr><td><span class="tier-badge" style="background:var(--green)">Safe</span></td><td>0 – 30</td><td>Routine monitoring</td></tr>
+      <tr><td><span class="tier-badge" style="background:var(--orange)">Watch</span></td><td>31 – 60</td><td>Promote rainwater harvesting</td></tr>
+      <tr><td><span class="tier-badge" style="background:#f97316">Warning</span></td><td>61 – 80</td><td>Restrict new extraction permits</td></tr>
+      <tr><td><span class="tier-badge" style="background:var(--red)">Crisis</span></td><td>81 – 100</td><td>Declare water-stressed zone — emergency measures</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- Slide 6: Flask API -->
+<div class="slide" id="s6">
+  <h2>🔌 Flask REST API — 6 Endpoints</h2>
+  <div class="slide-subtitle">All stubs replaced with real model inference and database queries</div>
+  <table>
+    <tr><th>Method</th><th>Endpoint</th><th>Description</th><th>Status</th></tr>
+    <tr><td>GET</td><td><code>/api/predict/&lt;district_id&gt;</code></td><td>6-month GWL forecast + crisis score from ensemble</td><td style="color:var(--green)">✓ Wired</td></tr>
+    <tr><td>GET</td><td><code>/api/district/&lt;district_id&gt;</code></td><td>District metadata + crisis score + data readiness</td><td style="color:var(--green)">✓ New</td></tr>
+    <tr><td>GET</td><td><code>/api/history/&lt;district_id&gt;</code></td><td>Historical GWL + rainfall from features table</td><td style="color:var(--green)">✓ Wired</td></tr>
+    <tr><td>GET</td><td><code>/api/alerts</code></td><td>All districts in Warning/Crisis tier</td><td style="color:var(--green)">✓ Wired</td></tr>
+    <tr><td>POST</td><td><code>/api/simulate</code></td><td>What-if: rainfall/extraction → new crisis score</td><td style="color:var(--green)">✓ Wired</td></tr>
+    <tr><td>GET</td><td><code>/api/health</code></td><td>Server health check</td><td style="color:var(--green)">✓ Exists</td></tr>
+  </table>
+  <div style="margin-top:24px">
+    <div class="card" style="padding:16px 20px">
+      <h3 style="font-size:14px">Data Readiness Fallback</h3>
+      <p>If a district has &lt;60% valid data months → system falls back to agro-climatic zone aggregation instead of per-district prediction.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 7: React Dashboard -->
+<div class="slide" id="s7">
+  <h2>🖥️ React Dashboard Integration</h2>
+  <div class="slide-subtitle">All 4 pages now fetch live data from Flask API — zero mock data</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Home Page</h3>
+      <ul>
+        <li>Leaflet choropleth map (India districts)</li>
+        <li>Summary cards: Safe / Watch / Warning / Crisis</li>
+        <li>District list sorted by crisis score</li>
+        <li><code>fetch('/api/alerts')</code> on mount</li>
+      </ul>
+    </div>
+    <div class="card red">
+      <h3>District Detail</h3>
+      <ul>
+        <li>Crisis score badge with tier color</li>
+        <li>6-month GWL forecast (Recharts AreaChart)</li>
+        <li>Concurrent fetch: <code>/district</code> + <code>/history</code> + <code>/predict</code></li>
+      </ul>
+    </div>
+    <div class="card orange">
+      <h3>Alerts Page</h3>
+      <ul>
+        <li>Warning + Crisis districts only</li>
+        <li>Policy recommendations per tier</li>
+        <li><code>fetch('/api/alerts')</code> with tier filter</li>
+      </ul>
+    </div>
+    <div class="card purple">
+      <h3>Policy Simulator</h3>
+      <ul>
+        <li>Sliders: rainfall change, extraction change</li>
+        <li>Before/after score comparison</li>
+        <li><code>POST /api/simulate</code> on click</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 8: Git Branching -->
+<div class="slide" id="s8">
+  <h2>🌳 Git Branching Strategy</h2>
+  <div class="slide-subtitle">GitFlow model with conventional commits</div>
+  <div class="grid-2">
+    <div>
+      <div class="branch-tree">
+<span class="branch">main</span> ← production release<br>
+  └── <span class="merge">merge: develop into main (Phase III)</span><br>
+      <span class="branch">develop</span> ← integration branch<br>
+        ├── <span class="branch">feature/xgboost-walkforward</span><br>
+        │   └── <span class="commit">feat(models): walk-forward validation</span><br>
+        ├── <span class="branch">feature/ensemble-crisis-score</span><br>
+        │   └── <span class="commit">feat(models): crisis score + data readiness</span><br>
+        ├── <span class="branch">feature/api-integration</span><br>
+        │   └── <span class="commit">feat(api): wire endpoints to models</span><br>
+        ├── <span class="branch">feature/frontend-integration</span><br>
+        │   └── <span class="commit">feat(dashboard): React API integration</span><br>
+        └── <span class="branch">feature/api-tests</span><br>
+            └── <span class="commit">test(api): pytest for 6 endpoints</span><br>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>Commit Convention</h3>
+        <p style="margin-bottom:12px">Following <strong>Conventional Commits</strong> spec:</p>
+        <ul>
+          <li><code>feat(scope):</code> — new feature</li>
+          <li><code>test(scope):</code> — test addition</li>
+          <li><code>merge:</code> — branch merge</li>
+          <li><code>chore:</code> — maintenance</li>
+        </ul>
+      </div>
+      <div class="card green" style="margin-top:20px">
+        <h3>Key Stats</h3>
+        <ul>
+          <li>7 branches (main + develop + 5 feature)</li>
+          <li>5 feature commits + 5 merge commits</li>
+          <li>All merges use <code>--no-ff</code></li>
+          <li>Co-authored-by tags for team rotation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 9: Testing -->
+<div class="slide" id="s9">
+  <h2>🧪 Testing & Quality</h2>
+  <div class="slide-subtitle">8 pytest tests covering all API endpoints</div>
+  <div class="grid-2">
+    <div>
+      <table>
+        <tr><th>Test</th><th>Endpoint</th><th>Status</th></tr>
+        <tr><td>test_health_endpoint</td><td>/api/health</td><td style="color:var(--green)">✓ PASS</td></tr>
+        <tr><td>test_district_endpoint</td><td>/api/district/:id</td><td style="color:var(--green)">✓ PASS</td></tr>
+        <tr><td>test_predict_endpoint</td><td>/api/predict/:id</td><td style="color:var(--green)">✓ PASS</td></tr>
+        <tr><td>test_history_endpoint</td><td>/api/history/:id</td><td style="color:var(--green)">✓ PASS</td></tr>
+        <tr><td>test_alerts_endpoint</td><td>/api/alerts</td><td style="color:var(--green)">✓ PASS</td></tr>
+        <tr><td>test_alerts_with_filter</td><td>/api/alerts?tier=</td><td style="color:var(--green)">✓ PASS</td></tr>
+        <tr><td>test_simulate_endpoint</td><td>POST /api/simulate</td><td style="color:var(--green)">✓ PASS</td></tr>
+        <tr><td>test_404_error</td><td>/api/nonexistent</td><td style="color:var(--green)">✓ PASS</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="metric-row" style="flex-direction:column;gap:16px">
+        <div class="metric"><div class="value" style="color:var(--green)">8/8</div><div class="label">Tests Passing</div></div>
+        <div class="metric"><div class="value" style="color:var(--accent)">4.48s</div><div class="label">Execution Time</div></div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <h3>Target</h3>
+        <p>Linear Regression R² &gt; 0.75</p>
+        <p>API response &lt; 3s</p>
+        <p>Test coverage ≥ 70%</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 10: Summary -->
+<div class="slide" id="s10">
+  <h2>✅ Phase III Summary</h2>
+  <div class="slide-subtitle">All deliverables complete for 30 Sep evaluation</div>
+  <div class="grid-2">
+    <div>
+      <div class="card">
+        <h3>What Was Built (Weeks 7–9)</h3>
+        <ul>
+          <li>✅ XGBoost walk-forward validation (expanding window)</li>
+          <li>✅ Ensemble crisis score (LR + XGB + drought freq)</li>
+          <li>✅ Data readiness module with zone fallback</li>
+          <li>✅ 6 Flask API endpoints wired to models + DB</li>
+          <li>✅ React dashboard fully integrated with API</li>
+          <li>✅ 8 pytest tests — all passing</li>
+          <li>✅ GitFlow branching with conventional commits</li>
+          <li>✅ 7 branches pushed to GitHub</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="card purple">
+        <h3>Phase IV Preview (Oct 1–12)</h3>
+        <ul>
+          <li>Poster design and printing</li>
+          <li>Performance optimization</li>
+          <li>Documentation finalization</li>
+          <li>Deployment preparation</li>
+        </ul>
+      </div>
+      <div class="card green" style="margin-top:20px">
+        <h3>Repo</h3>
+        <p style="font-size:16px;color:var(--accent)">github.com/Yasharthpoddar/AquaIQ</p>
+        <p style="margin-top:8px">14 files changed · 548 insertions · 125 deletions</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 11: Thank You -->
+<div class="slide title-slide" id="s11">
+  <div class="tag">Phase III · 30 Sep 2026</div>
+  <h1>Thank You</h1>
+  <div class="subtitle">Questions?</div>
+  <div class="team" style="margin-top:20px">
+    <div class="member"><div class="member-dot" style="background:#3b82f6"></div>Yasharth Poddar</div>
+    <div class="member"><div class="member-dot" style="background:#10b981"></div>Yash</div>
+    <div class="member"><div class="member-dot" style="background:#8b5cf6"></div>Ayush</div>
+  </div>
+  <p style="margin-top:40px;color:var(--muted);font-size:14px">github.com/Yasharthpoddar/AquaIQ</p>
+</div>
+
+<div class="slide-number"><span id="currentSlide">1</span> / <span id="totalSlides">11</span></div>
+<div class="nav-hint">← → Arrow keys to navigate</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+let current = 0;
+
+function showSlide(n) {
+  slides.forEach(s => s.classList.remove('active'));
+  current = Math.max(0, Math.min(n, slides.length - 1));
+  slides[current].classList.add('active');
+  document.getElementById('currentSlide').textContent = current + 1;
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); showSlide(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); showSlide(current - 1); }
+});
+
+document.addEventListener('click', e => {
+  if (e.clientX > window.innerWidth / 2) showSlide(current + 1);
+  else showSlide(current - 1);
+});
+</script>
+</body>
+</html>
