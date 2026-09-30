@@ -149,25 +149,47 @@ def nash_sutcliffe_efficiency(y_true, y_pred):
     return 1 - (ss_res / ss_tot)
 
 
-def walk_forward_validate(model, val_df: pd.DataFrame, feature_cols: list) -> dict:
+def walk_forward_validate(train_df: pd.DataFrame, val_df: pd.DataFrame, feature_cols: list) -> dict:
     """
     Walk-forward validation: train on expanding window, predict next period.
     Windows: 2020, 2020-2021, 2020-2022 (predict the next year each time).
     
     Returns dict of metrics per window.
     """
+    import xgboost as xgb
     val_df = val_df.copy()
     val_df["year"] = val_df["date"].dt.year
     years = sorted(val_df["year"].unique())
 
     results = []
+    # Base training set
+    current_train = train_df.copy()
+
     for i, year in enumerate(years):
         test_mask = val_df["year"] == year
-        y_true = val_df.loc[test_mask, "target_gwl_6mo"].values
-        X_test = val_df.loc[test_mask, feature_cols].values
+        test_window = val_df[test_mask]
+        
+        y_true = test_window["target_gwl_6mo"].values
+        X_test = test_window[feature_cols].values
 
         if len(y_true) == 0:
             continue
+
+        # Train model on current expanding window
+        X_train = current_train[feature_cols].values
+        y_train = current_train["target_gwl_6mo"].values
+        
+        model = xgb.XGBRegressor(
+            n_estimators=XGB_PARAMS["n_estimators"],
+            max_depth=XGB_PARAMS["max_depth"],
+            learning_rate=XGB_PARAMS["learning_rate"],
+            subsample=XGB_PARAMS["subsample"],
+            random_state=XGB_PARAMS["random_state"],
+            objective="reg:squarederror",
+            eval_metric="rmse",
+            verbosity=0,
+        )
+        model.fit(X_train, y_train, verbose=False)
 
         y_pred = model.predict(X_test)
         rmse = np.sqrt(mean_squared_error(y_true, y_pred))
@@ -182,6 +204,9 @@ def walk_forward_validate(model, val_df: pd.DataFrame, feature_cols: list) -> di
             "nse": round(nse, 4),
         })
         print(f"    Window {year}: RMSE={rmse:.4f}  R2={r2:.4f}  NSE={nse:.4f}  (n={len(y_true)})")
+        
+        # Expand training window with the current test window
+        current_train = pd.concat([current_train, test_window])
 
     return results
 
@@ -316,8 +341,9 @@ def main():
         model = train_xgboost(train, val, feature_cols)
 
     # Walk-forward validation
-    print("\n  Walk-forward validation:")
-    walk_forward_validate(model, val, feature_cols)
+    if not args.eval:
+        print("\n  Walk-forward validation:")
+        walk_forward_validate(train, val, feature_cols)
 
     # Test set evaluation
     evaluate_on_test(model, test, feature_cols)
