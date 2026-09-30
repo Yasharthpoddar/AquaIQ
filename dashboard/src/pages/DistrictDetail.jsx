@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from 'recharts';
 
@@ -5,16 +6,6 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
  * District detail page — score badge, forecast chart, feature breakdown.
  * Route: /district/:id
  */
-
-// Mock 6-month forecast data
-const MOCK_FORECAST = [
-  { month: "Jan '27", gwl: 8.2, predicted: 8.5 },
-  { month: "Feb '27", gwl: 8.5, predicted: 8.9 },
-  { month: "Mar '27", gwl: 9.1, predicted: 9.4 },
-  { month: "Apr '27", gwl: null, predicted: 10.1 },
-  { month: "May '27", gwl: null, predicted: 10.8 },
-  { month: "Jun '27", gwl: null, predicted: 11.2 },
-];
 
 const DISTRICT_NAMES = {
   "RJ-Jaipur": { name: "Jaipur", state: "Rajasthan", score: 72, tier: "Warning" },
@@ -36,7 +27,47 @@ const TIER_COLORS = {
 
 function DistrictDetail() {
   const { id } = useParams();
-  const info = DISTRICT_NAMES[id] || { name: id, state: "", score: 72, tier: "Warning" };
+  
+  const [info, setInfo] = useState({ name: id, state: "", score: 50, tier: "Watch" });
+  const [chartData, setChartData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Fetch district info, history, and forecast concurrently
+    Promise.all([
+      fetch(`http://localhost:5000/api/district/${id}`).then(res => res.json()),
+      fetch(`http://localhost:5000/api/history/${id}?start=2024-07&end=2024-12`).then(res => res.json()),
+      fetch(`http://localhost:5000/api/predict/${id}`).then(res => res.json())
+    ]).then(([distData, histData, predData]) => {
+      
+      setInfo({
+        name: distData.metadata?.name || id.split('-')[1] || id,
+        state: distData.metadata?.state || id.split('-')[0] || "",
+        score: distData.crisis_score || 50,
+        tier: distData.tier || "Watch"
+      });
+      
+      const combined = [];
+      if (histData.data && Array.isArray(histData.data)) {
+         histData.data.forEach(d => {
+            combined.push({ month: d.month || d.date, gwl: d.gwl, predicted: null });
+         });
+      }
+      
+      if (predData.forecast && Array.isArray(predData.forecast)) {
+         predData.forecast.forEach(d => {
+            combined.push({ month: d.month, gwl: null, predicted: d.predicted_gwl });
+         });
+      }
+      
+      setChartData(combined);
+      setLoading(false);
+    }).catch(err => {
+      console.error("Error fetching district detail:", err);
+      setLoading(false);
+    });
+  }, [id]);
+
   const tierColor = TIER_COLORS[info.tier] || "#f97316";
   const badgeClass = info.tier === "Crisis" ? "crisis" : info.tier === "Warning" ? "warning" : "";
 
@@ -55,9 +86,10 @@ function DistrictDetail() {
 
       {/* 6-month forecast chart */}
       <h2>6-Month GWL Forecast</h2>
+      {loading ? <p>Loading chart data...</p> : (
       <div className="chart-container">
         <ResponsiveContainer width="100%" height={320}>
-          <AreaChart data={MOCK_FORECAST}>
+          <AreaChart data={chartData}>
             <defs>
               <linearGradient id="gradObserved" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3} />
@@ -89,8 +121,7 @@ function DistrictDetail() {
           </AreaChart>
         </ResponsiveContainer>
       </div>
-
-      <p className="chart-note">Mock data — connects to /history and /predict API in Week 9</p>
+      )}
     </div>
   );
 }

@@ -43,12 +43,14 @@ def create_app(config_override=None):
 
     # Register blueprints
     from api.routes.predict import predict_bp
+    from api.routes.district import district_bp
     from api.routes.history import history_bp
     from api.routes.alerts import alerts_bp
     from api.routes.simulate import simulate_bp
     from api.routes.health import health_bp
 
     app.register_blueprint(predict_bp, url_prefix="/api")
+    app.register_blueprint(district_bp, url_prefix="/api")
     app.register_blueprint(history_bp, url_prefix="/api")
     app.register_blueprint(alerts_bp, url_prefix="/api")
     app.register_blueprint(simulate_bp, url_prefix="/api")
@@ -62,6 +64,7 @@ def create_app(config_override=None):
             "version": "1.0.0",
             "endpoints": [
                 "/api/predict/<district_id>",
+                "/api/district/<district_id>",
                 "/api/history/<district_id>",
                 "/api/alerts",
                 "/api/simulate",
