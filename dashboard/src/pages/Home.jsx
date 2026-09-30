@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MapComponent from '../components/MapComponent';
 import '../App.css';
@@ -5,20 +6,8 @@ import '../App.css';
 /**
  * Home page — India choropleth map + summary stats.
  * Uses the Leaflet MapComponent with GeoJSON boundaries.
- * Wired to mock data until the Flask API is live.
+ * Wired to Flask API.
  */
-
-// Mock crisis scores for demo (replaced with API data in Week 9)
-const MOCK_SCORES = [
-  { district_id: "RJ-Jaipur", name: "Jaipur", state: "Rajasthan", score: 72, tier: "Warning" },
-  { district_id: "GJ-Mehsana", name: "Mehsana", state: "Gujarat", score: 88, tier: "Crisis" },
-  { district_id: "MH-Pune", name: "Pune", state: "Maharashtra", score: 35, tier: "Watch" },
-  { district_id: "TN-Chennai", name: "Chennai", state: "Tamil Nadu", score: 22, tier: "Safe" },
-  { district_id: "HR-Kurukshetra", name: "Kurukshetra", state: "Haryana", score: 91, tier: "Crisis" },
-  { district_id: "KA-Bangalore", name: "Bangalore Urban", state: "Karnataka", score: 45, tier: "Watch" },
-  { district_id: "PB-Ludhiana", name: "Ludhiana", state: "Punjab", score: 67, tier: "Warning" },
-  { district_id: "UP-Lucknow", name: "Lucknow", state: "Uttar Pradesh", score: 18, tier: "Safe" },
-];
 
 // GeoJSON path — served from public/ folder
 const GEOJSON_URL = "/india_districts.geojson";
@@ -39,12 +28,27 @@ const TIER_ICONS = {
 
 function Home() {
   const navigate = useNavigate();
+  const [scores, setScores] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/alerts')
+      .then(res => res.json())
+      .then(data => {
+        setScores(data.alerts || []);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Error fetching alerts:", err);
+        setLoading(false);
+      });
+  }, []);
 
   const crisisCounts = {
-    Safe: MOCK_SCORES.filter(d => d.tier === "Safe").length,
-    Watch: MOCK_SCORES.filter(d => d.tier === "Watch").length,
-    Warning: MOCK_SCORES.filter(d => d.tier === "Warning").length,
-    Crisis: MOCK_SCORES.filter(d => d.tier === "Crisis").length,
+    Safe: scores.filter(d => d.tier === "Safe").length,
+    Watch: scores.filter(d => d.tier === "Watch").length,
+    Warning: scores.filter(d => d.tier === "Warning").length,
+    Crisis: scores.filter(d => d.tier === "Crisis").length,
   };
 
   const handleDistrictClick = (districtId) => {
@@ -81,16 +85,18 @@ function Home() {
       </div>
 
       {/* Leaflet choropleth map */}
-      <MapComponent
-        scores={MOCK_SCORES}
-        geojsonUrl={GEOJSON_URL}
-        onDistrictClick={handleDistrictClick}
-      />
+      {loading ? <p>Loading map data...</p> : (
+        <MapComponent
+          scores={scores}
+          geojsonUrl={GEOJSON_URL}
+          onDistrictClick={handleDistrictClick}
+        />
+      )}
 
       {/* District list */}
       <h2>Monitored Districts</h2>
       <div className="district-list">
-        {MOCK_SCORES.sort((a, b) => b.score - a.score).map(d => (
+        {loading ? <p>Loading districts...</p> : scores.sort((a, b) => b.score - a.score).map(d => (
           <div
             key={d.district_id}
             className="district-row"

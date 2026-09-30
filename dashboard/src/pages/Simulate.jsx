@@ -12,15 +12,27 @@ function Simulate() {
   const [extractionChange, setExtractionChange] = useState(0);
   const [result, setResult] = useState(null);
 
-  const handleSimulate = () => {
-    // Mock simulation — replaced with POST /simulate API call in Week 9
-    const baselineScore = 72;
-    const delta = (rainfallChange * -0.3) + (extractionChange * 0.5);
-    const simulated = Math.max(0, Math.min(100, baselineScore + delta));
-    setResult({
-      baseline: baselineScore,
-      simulated: Math.round(simulated),
-    });
+  const handleSimulate = async () => {
+    try {
+      const res = await fetch('http://localhost:5000/api/simulate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          district_id: districtId,
+          rainfall_change_pct: rainfallChange,
+          extraction_change_pct: extractionChange
+        })
+      });
+      const data = await res.json();
+      setResult({
+        baseline: data.baseline_score,
+        simulated: data.simulated_score,
+      });
+    } catch (err) {
+      console.error("Simulation error:", err);
+    }
   };
 
   return (
@@ -78,7 +90,6 @@ function Simulate() {
         </div>
       )}
 
-      <p className="chart-note">Mock simulation — connects to POST /simulate API in Week 9</p>
     </div>
   );
 }
