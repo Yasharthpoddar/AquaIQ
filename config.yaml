@@ -1,122 +1,154 @@
-# AquaIQ — central configuration
-# Every hyperparameter, path, and threshold lives here — nothing hardcoded in source.
-# Matches NFR-M-05 (Configuration Management) from the SRS.
-
 project:
   name: AquaIQ
-  version: "1.0"
-  seed: 42                    # torch.manual_seed(42), random.seed(42), np.random.seed(42) everywhere
-
+  version: '1.0'
+  seed: 42
 paths:
-  data_raw: "data/raw"
-  data_processed: "data/processed"
-  # PostgreSQL — credentials (host/port/user/password) come from .env, not here.
-  # Only the database name is stored in config so it can be overridden per-environment.
-  postgres_db: "aquaiq"
-  model_checkpoints: "models/checkpoints"
-  xgboost_checkpoint: "models/checkpoints/aquaiq_xgb.json"
-  geojson_boundaries: "data/raw/india_districts.geojson"
-
+  data_raw: data/raw
+  data_processed: data/processed
+  postgres_db: aquaiq
+  model_checkpoints: models/checkpoints
+  xgboost_checkpoint: models/checkpoints/aquaiq_xgb.json
+  geojson_boundaries: data/raw/india_districts.geojson
 data_sources:
   cgwb:
-    name: "Central Ground Water Board"
-    portal: "https://india-wris.nrsc.gov.in"
-    metric: "groundwater_level"
+    name: Central Ground Water Board
+    portal: https://india-wris.nrsc.gov.in
+    metric: groundwater_level
   imd:
-    name: "India Meteorological Department"
-    portal: "https://imdpune.gov.in"
-    metric: "rainfall"
+    name: India Meteorological Department
+    portal: https://imdpune.gov.in
+    metric: rainfall
   era5:
-    name: "ECMWF Reanalysis v5"
-    api: "cds.climate.copernicus.eu"
-    metrics: ["temperature", "evapotranspiration"]
-  geojson_source: "datameet.org"   # India district boundaries
-
+    name: ECMWF Reanalysis v5
+    api: cds.climate.copernicus.eu
+    metrics:
+    - temperature
+    - evapotranspiration
+  geojson_source: datameet.org
 date_range:
-  start: "2002-01-01"
-  end: "2024-12-31"
-  train_end: "2019-12-31"
-  val_end: "2022-12-31"
-  test_start: "2023-01-01"
-
-# The 10 features — exact list, exact order. Don't add to this without updating
-# preprocessing/features.py and models/xgboost_model.py.
+  start: '2002-01-01'
+  end: '2024-12-31'
+  train_end: '2019-12-31'
+  val_end: '2022-12-31'
+  test_start: '2023-01-01'
 features:
-  - GWL_current
-  - GWL_lag_3mo
-  - GWL_lag_6mo
-  - rainfall_current
-  - rainfall_3mo_avg
-  - monsoon_deficit_pct
-  - temperature
-  - evapotranspiration
-  - water_balance_proxy
-  - crop_season_flag
-
+- GWL_current
+- GWL_lag_3mo
+- GWL_lag_6mo
+- rainfall_current
+- rainfall_3mo_avg
+- monsoon_deficit_pct
+- temperature
+- evapotranspiration
+- water_balance_proxy
+- crop_season_flag
 model_hyperparameters:
   linear_regression:
-    train_years: [2002, 2019]
-    test_years: [2023, 2024]
-
+    train_years:
+    - 2002
+    - 2019
+    test_years:
+    - 2023
+    - 2024
   fuzzy_logic:
-    inputs: ["rainfall_deficit", "depletion_rate"]
-    rainfall_deficit_bins: ["low", "medium", "high"]        # 0-20% / 20-40% / 40-100%
-    depletion_rate_bins: ["stable", "moderate", "severe"]   # 0-2 / 2-5 / 5+ cm/yr
+    inputs:
+    - rainfall_deficit
+    - depletion_rate
+    rainfall_deficit_bins:
+    - low
+    - medium
+    - high
+    depletion_rate_bins:
+    - stable
+    - moderate
+    - severe
     rule_count: 9
-
   perceptron:
-    hidden_layers: [64]
-    activation: "relu"
-    optimizer: "adam"
+    hidden_layers:
+    - 64
+    activation: relu
+    optimizer: adam
     input_size: 10
-
   xgboost:
     n_estimators: 500
     max_depth: 6
     learning_rate: 0.01
     subsample: 0.8
     random_state: 42
-
   ensemble:
-    # Weights are FIT on the validation set (optimised against 2015-16 and
-    # 2018-19 drought backtests) — not hand-picked. See models/ensemble.py.
-    # These are placeholder starting values until Week 8's fitting run.
     initial_weights:
       linear_regression_trend: 0.45
       xgboost_risk: 0.35
-      drought_frequency: 0.20
-    drought_frequency_percentile: 20   # % of past months below this percentile = "drought month"
-
+      drought_frequency: 0.2
+    drought_frequency_percentile: 20
+    fitted_weights: &id001
+      linear_regression_trend: -0.0826
+      xgboost_risk: 0.9584
+      drought_frequency: 0.1243
 crisis_score:
   tiers:
-    safe: [0, 30]
-    watch: [31, 60]
-    warning: [61, 80]
-    crisis: [81, 100]
+    safe:
+    - 0
+    - 30
+    watch:
+    - 31
+    - 60
+    warning:
+    - 61
+    - 80
+    crisis:
+    - 81
+    - 100
   alert_threshold: 80
-  data_readiness_min_pct: 60   # districts below this: fall back to zone-level, not excluded outright
-
-  # What happens when a district has thin/no CGWB history.
-  # CGWB isn't evenly spread across all 640+ districts — some remote or
-  # hilly districts genuinely have sparse coverage. Rather than reintroducing
-  # satellite data (GRACE's own resolution is ~300km, similar to zone-level
-  # aggregation anyway) or silently failing, fall back in two steps:
+  data_readiness_min_pct: 60
   fallback_strategy:
-    step_1: "zone_fallback"       # aggregate CGWB data across all districts in the
-                                    # same agro_climatic_zone (districts.agro_climatic_zone,
-                                    # built Week 2) — same smoothing effect as a coarse
-                                    # regional estimate, zero new external data source
-    step_2: "insufficient_data"   # only if the zone itself lacks enough history —
-                                    # show this honestly, never fabricate a score
-    min_months_required: 24       # per-district threshold before district_level applies
-
+    step_1: zone_fallback
+    step_2: insufficient_data
+    min_months_required: 24
 api:
-  host: "0.0.0.0"
+  host: 0.0.0.0
   port: 5000
-  cors_origins: ["http://localhost:3000"]
-  cache_days: 7                # NFR-Av-02: serve cached predictions if model service is down
-
+  cors_origins:
+  - http://localhost:3000
+  cache_days: 7
 testing:
   min_coverage_pct: 70
-  sample_districts: 10         # used for integration tests, 2 per agro-climatic zone
-  backtest_years: [2015, 2016, 2018, 2019]   # known drought years for validation
+  sample_districts: 10
+  backtest_years:
+  - 2015
+  - 2016
+  - 2018
+  - 2019
+backtest_results:
+  ensemble_weights: *id001
+  walkforward_validation:
+  - fold: train->2020
+    n_train: 10800
+    n_test: 600
+    rmse: 0.9367
+    r2: 0.9635
+    nse: 0.9635
+  - fold: train->2021
+    n_train: 11400
+    n_test: 600
+    rmse: 0.9596
+    r2: 0.9616
+    nse: 0.9616
+  - fold: train->2022
+    n_train: 12000
+    n_test: 600
+    rmse: 0.9266
+    r2: 0.9638
+    nse: 0.9638
+  - fold: train->2023
+    n_train: 12600
+    n_test: 600
+    rmse: 0.9386
+    r2: 0.9641
+    nse: 0.9641
+  - fold: held-out 2023-2024
+    n_train: 12600
+    n_test: 900
+    rmse: 0.9229
+    r2: 0.9648
+    nse: 0.9648

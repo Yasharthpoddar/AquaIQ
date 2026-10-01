@@ -36,6 +36,7 @@ import yaml
 from dotenv import load_dotenv
 
 ROOT = Path(__file__).parent.parent
+sys.path.insert(0, str(ROOT))
 load_dotenv(ROOT / ".env")
 
 with open(ROOT / "config.yaml") as f:

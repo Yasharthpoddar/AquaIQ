@@ -120,6 +120,8 @@ STATE_TO_ZONE = {
 
 def normalize(name: str) -> str:
     """Normalize district/state names for matching."""
+    if not isinstance(name, str):
+        return ""
     return name.strip().lower().replace("&", "and").replace("-", " ")
 
 

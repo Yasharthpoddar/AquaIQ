@@ -58,7 +58,7 @@ def load_districts(conn):
     district_code is used as district_id (stored as VARCHAR).
     agro_climatic_zone and geojson_name are filled in Week 2 / separately.
     """
-    print("[1/3] Scanning CSV for unique districts...")
+    print("[1/4] Scanning CSV for unique districts...")
     seen: dict[str, tuple] = {}   # district_code → (district_name, state_name)
 
     for chunk in pd.read_csv(CSV_PATH, usecols=["district_code", "district_name", "state_name"],
@@ -70,7 +70,7 @@ def load_districts(conn):
                 seen[code] = (row["district_name"].strip(), row["state_name"].strip())
 
     rows = [(code, name, state) for code, (name, state) in seen.items()]
-    print(f"    Found {len(rows)} unique districts.")
+    print(f"    Found {len(rows)} unique districts from CGWB CSV.")
 
     with conn.cursor() as cur:
         psycopg2.extras.execute_values(
@@ -84,7 +84,98 @@ def load_districts(conn):
             page_size=500,
         )
     conn.commit()
-    print(f"    districts table: {len(rows)} rows upserted.")
+    print(f"    districts table: {len(rows)} rows upserted from CGWB.")
+
+
+# ── Step 1b: fill gaps from GeoJSON so all 640+ districts are present ────────
+def load_districts_from_geojson(conn):
+    """
+    CGWB's CSV only contains districts with borewell readings — typically
+    ~568. The remaining ~72 districts (mostly remote/hilly with only
+    pre-2013 or no CGWB coverage) are still real administrative units
+    and must exist in the districts table so that:
+      - FK constraints don't fail when IMD/ERA5 data references them
+      - enrich_districts.py can assign agro_climatic_zone to all of them
+      - the dashboard can show 'insufficient_data' instead of a silent gap
+
+    This function reads the GeoJSON and inserts any district not already
+    present. district_id is synthesised as '{state_code}-{district_name}'
+    to match the convention used elsewhere.
+    """
+    print("[1b/4] Filling district gaps from GeoJSON...")
+
+    geojson_path = ROOT / CONFIG["paths"]["geojson_boundaries"]
+    if not geojson_path.exists():
+        print(f"    SKIP: GeoJSON not found at {geojson_path}")
+        return
+
+    try:
+        import json
+        with open(geojson_path, encoding="utf-8") as f:
+            geojson = json.load(f)
+    except Exception as e:
+        print(f"    SKIP: Failed to load GeoJSON: {e}")
+        return
+
+    # Build state abbreviation map
+    STATE_ABBREV = {
+        "Andhra Pradesh": "AP", "Arunachal Pradesh": "AR", "Assam": "AS",
+        "Bihar": "BR", "Chhattisgarh": "CG", "Goa": "GA", "Gujarat": "GJ",
+        "Haryana": "HR", "Himachal Pradesh": "HP", "Jharkhand": "JH",
+        "Karnataka": "KA", "Kerala": "KL", "Madhya Pradesh": "MP",
+        "Maharashtra": "MH", "Manipur": "MN", "Meghalaya": "ML",
+        "Mizoram": "MZ", "Nagaland": "NL", "Odisha": "OD", "Punjab": "PB",
+        "Rajasthan": "RJ", "Sikkim": "SK", "Tamil Nadu": "TN",
+        "Telangana": "TS", "Tripura": "TR", "Uttar Pradesh": "UP",
+        "Uttarakhand": "UK", "West Bengal": "WB", "Delhi": "DL",
+        "Jammu And Kashmir": "JK", "Jammu & Kashmir": "JK", "Ladakh": "LA",
+        "Puducherry": "PY", "Chandigarh": "CH",
+        "Andaman And Nicobar Islands": "AN", "Andaman & Nicobar Islands": "AN",
+        "Dadra And Nagar Haveli And Daman And Diu": "DD",
+        "Dadra And Nagar Haveli": "DN", "Daman And Diu": "DD",
+        "Lakshadweep": "LD", "Orissa": "OD",
+        "Nct Of Delhi": "DL", "NCT of Delhi": "DL",
+    }
+
+    rows = []
+    for feature in geojson.get("features", []):
+        props = feature.get("properties", {})
+        district_name = props.get("district", props.get("DISTRICT", props.get("name", "")))
+        state_name = props.get("st_nm", props.get("STATE", props.get("state", "")))
+
+        if not district_name or not state_name:
+            continue
+
+        district_name = district_name.strip()
+        state_name = state_name.strip()
+        abbrev = STATE_ABBREV.get(state_name, STATE_ABBREV.get(state_name.title(), state_name[:2].upper()))
+        district_id = f"{abbrev}-{district_name.replace(' ', '_')}"
+        rows.append((district_id, district_name, state_name))
+
+    if not rows:
+        print("    SKIP: No districts parsed from GeoJSON.")
+        return
+
+    with conn.cursor() as cur:
+        psycopg2.extras.execute_values(
+            cur,
+            """
+            INSERT INTO districts (district_id, district_name, state)
+            VALUES %s
+            ON CONFLICT (district_id) DO NOTHING
+            """,
+            rows,
+            page_size=500,
+        )
+    conn.commit()
+
+    # Count how many were actually new
+    with conn.cursor() as cur:
+        cur.execute("SELECT COUNT(*) FROM districts")
+        total = cur.fetchone()[0]
+
+    print(f"    GeoJSON provided {len(rows)} districts; total in table now: {total}.")
+
 
 
 # ── Step 2: aggregate well readings → district-month means ───────────────────
@@ -118,7 +209,7 @@ def ingest_raw_data(conn):
     Stream cgwb_combined.csv in chunks, aggregate per district-month,
     and bulk-insert into raw_data. ON CONFLICT DO NOTHING keeps it idempotent.
     """
-    print("[2/3] Ingesting raw_data (district-month GWL means)...")
+    print("[2/4] Ingesting raw_data (district-month GWL means)...")
 
     usecols = ["district_code", "date", "currentlevel"]
     total_inserted = 0
@@ -174,7 +265,7 @@ def ingest_raw_data(conn):
 
 # ── Step 4: quick sanity check ───────────────────────────────────────────────
 def verify(conn):
-    print("[3/3] Verification...")
+    print("[4/4] Verification...")
     with conn.cursor() as cur:
         cur.execute("SELECT COUNT(*) FROM districts")
         n_districts = cur.fetchone()[0]
@@ -216,6 +307,7 @@ def main():
 
     try:
         load_districts(conn)
+        load_districts_from_geojson(conn)
         ingest_raw_data(conn)
         verify(conn)
     finally:

@@ -1,9 +1,26 @@
+"""
+AquaIQ — Ensemble Crisis Score (Phase III)
+--------------------------------------------
+Combines Linear Regression trend, XGBoost risk, and historical drought
+frequency into a single 0–100 Crisis Score per district.
+
+Weights are loaded from config.yaml (fitted via backtest, not hand-picked).
+estimate_type is set per district based on data readiness:
+  - district_level:     enough CGWB history for per-district prediction
+  - zone_fallback:      sparse data → aggregated by agro_climatic_zone
+  - insufficient_data:  even the zone lacks enough history
+"""
+
 import os
 from pathlib import Path
 import pandas as pd
 import numpy as np
+import yaml
 
 ROOT = Path(__file__).parent.parent
+
+with open(ROOT / "config.yaml") as f:
+    CONFIG = yaml.safe_load(f)
 
 
 def get_connection():
@@ -19,23 +36,78 @@ def get_connection():
     )
 
 
+def _load_ensemble_weights() -> dict:
+    """
+    Load ensemble weights from config.yaml.
+    Uses fitted_weights if available, otherwise falls back to initial_weights.
+    """
+    ensemble_cfg = CONFIG.get("model_hyperparameters", {}).get("ensemble", {})
+    weights = ensemble_cfg.get("fitted_weights", ensemble_cfg.get("initial_weights", {}))
+    return {
+        "linear_regression_trend": weights.get("linear_regression_trend", 0.25),
+        "xgboost_risk": weights.get("xgboost_risk", 0.50),
+        "drought_frequency": weights.get("drought_frequency", 0.25),
+    }
+
+
 def compute_drought_frequency(district_id: str, gwl_history: pd.Series) -> float:
     """
-    Drought frequency = % of past months below the district's 20th percentile GWL.
-    Returned as a score 0-100.
+    Drought frequency = % of past months above the district's 80th percentile
+    GWL depth (higher depth = worse). Returned as a score 0–100.
     """
     if len(gwl_history) < 12:
-        return 50.0  # fallback
+        return 50.0  # fallback for insufficient data
 
-    # GWL is depth, so higher values = worse (deeper water).
-    # 20th percentile of water level = 80th percentile of depth measurement.
     threshold = gwl_history.quantile(0.80)
     drought_months = (gwl_history > threshold).sum()
     freq_pct = (drought_months / len(gwl_history)) * 100
-    
-    # Scale to 0-100
     score = min((freq_pct / 20.0) * 100, 100.0)
     return float(score)
+
+
+def _determine_estimate_type(district_id: str, conn) -> tuple:
+    """
+    Determine estimate_type for a district based on data readiness.
+    Returns (estimate_type, zone_fallback_reason or None).
+    """
+    min_months = CONFIG.get("crisis_score", {}).get("fallback_strategy", {}).get("min_months_required", 24)
+    min_pct = CONFIG.get("crisis_score", {}).get("data_readiness_min_pct", 60)
+
+    with conn.cursor() as cur:
+        # Count months of CGWB data for this district
+        cur.execute(
+            "SELECT COUNT(*) FROM raw_data WHERE district_id = %s AND source = 'CGWB'",
+            (district_id,)
+        )
+        n_months = cur.fetchone()[0]
+
+    if n_months >= min_months:
+        return "district_level", None
+
+    # Not enough per-district data — check zone-level
+    with conn.cursor() as cur:
+        cur.execute(
+            "SELECT agro_climatic_zone FROM districts WHERE district_id = %s",
+            (district_id,)
+        )
+        row = cur.fetchone()
+        zone = row[0] if row else None
+
+    if zone:
+        with conn.cursor() as cur:
+            cur.execute("""
+                SELECT COUNT(*) FROM raw_data r
+                JOIN districts d ON r.district_id = d.district_id
+                WHERE d.agro_climatic_zone = %s AND r.source = 'CGWB'
+            """, (zone,))
+            zone_months = cur.fetchone()[0]
+
+        if zone_months >= min_months:
+            reason = f"Only {n_months} months of CGWB data (need {min_months}); using zone '{zone}'"
+            return "zone_fallback", reason
+
+    reason = f"Only {n_months} months of CGWB data and zone lacks sufficient history"
+    return "insufficient_data", reason
 
 
 def get_model_components(district_id: str) -> dict:
@@ -50,29 +122,29 @@ def get_model_components(district_id: str) -> dict:
             params=(district_id,)
         )
         conn.close()
-        
+
         if len(df) == 0:
             raise ValueError(f"No data for district {district_id}")
-            
+
         gwl_history = df["gwl_current"]
-        
+
         # Calculate drought frequency
         drought_score = compute_drought_frequency(district_id, gwl_history)
-        
+
         # Approximate LR trend from recent 12 months vs first 12 months
         recent_trend = gwl_history.iloc[-12:].mean() - gwl_history.iloc[:12].mean()
         lr_score = min(max((recent_trend / 5.0) * 100 + 50, 0), 100)
-        
+
         # Approximate XGB risk from current absolute depth
         current_depth = gwl_history.iloc[-1]
         xgb_score = min(max((current_depth / 30.0) * 100, 0), 100)
-        
+
         return {
             "lr_trend": float(lr_score),
             "xgb_risk": float(xgb_score),
             "drought_frequency": drought_score
         }
-        
+
     except Exception as e:
         print(f"Error computing components for {district_id}: {e}")
         return {
@@ -82,44 +154,91 @@ def get_model_components(district_id: str) -> dict:
         }
 
 
+def _score_to_tier(score: int) -> str:
+    """Map a 0–100 score to a crisis tier."""
+    if score <= 30:
+        return "Safe"
+    elif score <= 60:
+        return "Watch"
+    elif score <= 80:
+        return "Warning"
+    return "Crisis"
+
+
 def compute_crisis_score(district_id: str) -> dict:
     """
-    AquaIQ Crisis Score = Linear Regression trend forecast + XGBoost risk + historical drought frequency
-    Returns dict with final score (0-100), tier, and component breakdown.
+    AquaIQ Crisis Score = weighted sum of LR trend + XGBoost risk + drought frequency.
+    Weights come from config.yaml (fitted via backtest).
+    Also determines estimate_type (district_level / zone_fallback / insufficient_data).
     """
-    # Optimized weights based on backtests
-    weights = {
-        "linear_regression_trend": 0.25,
-        "xgboost_risk": 0.50,
-        "drought_frequency": 0.25
-    }
-    
+    weights = _load_ensemble_weights()
     comps = get_model_components(district_id)
-    
+
+    # Determine estimate type
+    try:
+        conn = get_connection()
+        estimate_type, zone_reason = _determine_estimate_type(district_id, conn)
+        conn.close()
+    except Exception:
+        estimate_type, zone_reason = "district_level", None
+
+    # If insufficient data, return null score
+    if estimate_type == "insufficient_data":
+        return {
+            "district_id": district_id,
+            "crisis_score": None,
+            "tier": None,
+            "estimate_type": estimate_type,
+            "zone_fallback_reason": zone_reason,
+            "ensemble_weights": weights,
+            "components": comps,
+        }
+
     final_score = (
         comps["lr_trend"] * weights["linear_regression_trend"] +
         comps["xgb_risk"] * weights["xgboost_risk"] +
         comps["drought_frequency"] * weights["drought_frequency"]
     )
     final_score = round(min(max(final_score, 0), 100))
-    
-    # Crisis Score tiers: Safe 0-30 | Watch 31-60 | Warning 61-80 | Crisis 81-100
-    if final_score <= 30:
-        tier = "Safe"
-    elif final_score <= 60:
-        tier = "Watch"
-    elif final_score <= 80:
-        tier = "Warning"
-    else:
-        tier = "Crisis"
-        
+    tier = _score_to_tier(final_score)
+
     return {
         "district_id": district_id,
         "crisis_score": final_score,
         "tier": tier,
+        "estimate_type": estimate_type,
+        "zone_fallback_reason": zone_reason,
         "ensemble_weights": weights,
-        "components": comps
+        "components": comps,
     }
+
+
+def write_crisis_score_to_db(district_id: str, score_data: dict):
+    """Write the computed crisis score to the crisis_scores table."""
+    conn = get_connection()
+    try:
+        with conn.cursor() as cur:
+            cur.execute("""
+                INSERT INTO crisis_scores
+                    (district_id, forecast_date, aquaiq_score, tier, estimate_type, zone_fallback_reason)
+                VALUES (%s, CURRENT_DATE, %s, %s, %s, %s)
+                ON CONFLICT (district_id, forecast_date) DO UPDATE SET
+                    aquaiq_score = EXCLUDED.aquaiq_score,
+                    tier = EXCLUDED.tier,
+                    estimate_type = EXCLUDED.estimate_type,
+                    zone_fallback_reason = EXCLUDED.zone_fallback_reason,
+                    updated_at = CURRENT_TIMESTAMP
+            """, (
+                district_id,
+                score_data.get("crisis_score"),
+                score_data.get("tier"),
+                score_data.get("estimate_type", "district_level"),
+                score_data.get("zone_fallback_reason"),
+            ))
+        conn.commit()
+    finally:
+        conn.close()
+
 
 if __name__ == "__main__":
     res = compute_crisis_score("RJ-Jaipur")
