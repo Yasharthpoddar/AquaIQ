@@ -113,27 +113,66 @@ def _determine_estimate_type(district_id: str, conn) -> tuple:
 def get_model_components(district_id: str) -> dict:
     """
     Fetch the underlying predictions from LR and XGBoost, and history for drought frequency.
+    Tries the resolved district ID if the given one has no GWL data.
     """
     try:
+        # Try to resolve to an ID that has actual GWL data
+        try:
+            from api.district_resolver import resolve_district_id
+            resolved_id = resolve_district_id(district_id)
+        except ImportError:
+            resolved_id = district_id
+
         conn = get_connection()
         df = pd.read_sql(
             "SELECT date, gwl_current FROM features WHERE district_id = %s ORDER BY date",
             conn,
-            params=(district_id,)
+            params=(resolved_id,)
         )
+
+        # If resolved ID has no non-null GWL, try all IDs for same district name
+        if df["gwl_current"].dropna().empty and resolved_id == district_id:
+            name_df = pd.read_sql(
+                "SELECT district_name FROM districts WHERE district_id = %s",
+                conn, params=(district_id,)
+            )
+            if not name_df.empty:
+                name = name_df.iloc[0]["district_name"]
+                alt_df = pd.read_sql(
+                    "SELECT district_id FROM districts WHERE LOWER(district_name) = LOWER(%s)",
+                    conn, params=(name,)
+                )
+                for _, row in alt_df.iterrows():
+                    alt_id = row["district_id"]
+                    if alt_id != district_id:
+                        alt_data = pd.read_sql(
+                            "SELECT date, gwl_current FROM features WHERE district_id = %s ORDER BY date",
+                            conn, params=(alt_id,)
+                        )
+                        if not alt_data["gwl_current"].dropna().empty:
+                            df = alt_data
+                            break
+
         conn.close()
 
         if len(df) == 0:
             raise ValueError(f"No data for district {district_id}")
 
-        gwl_history = df["gwl_current"]
+        gwl_history = df["gwl_current"].dropna()
+
+        if len(gwl_history) < 2:
+            raise ValueError(f"Insufficient non-null GWL data for {district_id}")
 
         # Calculate drought frequency
         drought_score = compute_drought_frequency(district_id, gwl_history)
 
         # Approximate LR trend from recent 12 months vs first 12 months
-        recent_trend = gwl_history.iloc[-12:].mean() - gwl_history.iloc[:12].mean()
-        lr_score = min(max((recent_trend / 5.0) * 100 + 50, 0), 100)
+        n = min(12, len(gwl_history) // 2)
+        if n > 0:
+            recent_trend = gwl_history.iloc[-n:].mean() - gwl_history.iloc[:n].mean()
+            lr_score = min(max((recent_trend / 5.0) * 100 + 50, 0), 100)
+        else:
+            lr_score = 50.0
 
         # Approximate XGB risk from current absolute depth
         current_depth = gwl_history.iloc[-1]

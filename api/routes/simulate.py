@@ -5,6 +5,7 @@ What-if policy simulator: adjusts inputs and returns new crisis score.
 
 from flask import Blueprint, jsonify, request
 from models.ensemble import compute_crisis_score
+from api.district_resolver import resolve_district_id
 
 simulate_bp = Blueprint("simulate", __name__)
 
@@ -36,13 +37,15 @@ def simulate():
 
     # Fetch real baseline score from ensemble
     try:
-        score_data = compute_crisis_score(district_id)
-        if score_data["crisis_score"] != 50 or score_data["tier"] != "Watch":
-            baseline = score_data["crisis_score"]
-        else:
-            baseline = 72 # fallback if DB is empty
+        resolved_id = resolve_district_id(district_id)
+        score_data = compute_crisis_score(resolved_id)
+        baseline = score_data["crisis_score"]
+        if baseline is None:
+            baseline = 50
     except Exception:
-        baseline = 72
+        baseline = 50
+
+    # Simulate effect: decreased rainfall worsens, increased extraction worsens
     delta = (rainfall_change * -0.3) + (extraction_change * 0.5)
     simulated = max(0, min(100, baseline + delta))
 

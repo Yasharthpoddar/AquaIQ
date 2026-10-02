@@ -5,6 +5,7 @@ Returns historical GWL + rainfall data for a district.
 
 from flask import Blueprint, jsonify, request
 from models.ensemble import get_connection
+from api.district_resolver import resolve_district_id
 import pandas as pd
 
 history_bp = Blueprint("history", __name__)
@@ -27,6 +28,7 @@ def get_history(district_id):
     end = request.args.get("end", "2024-12")
 
     try:
+        resolved_id = resolve_district_id(district_id)
         conn = get_connection()
         query = """
             SELECT to_char(date, 'YYYY-MM') as month, gwl_current as gwl, rainfall_current as rainfall
@@ -36,13 +38,13 @@ def get_history(district_id):
         """
         # Append -01 to YYYY-MM for the DB date format
         start_date = f"{start}-01" if len(start) == 7 else start
-        end_date = f"{end}-28" if len(end) == 7 else end # simplified end date logic
-        
-        df = pd.read_sql(query, conn, params=(district_id, start_date, end_date))
+        end_date = f"{end}-28" if len(end) == 7 else end
+
+        df = pd.read_sql(query, conn, params=(resolved_id, start_date, end_date))
         conn.close()
-        
+
         data = df.to_dict(orient="records") if len(df) > 0 else []
-        
+
         return jsonify({
             "district_id": district_id,
             "start": start,

@@ -26,7 +26,7 @@ Registration is required for IMD (institutional access) and ERA5 (free CDS API k
 Deliberately not used: GRACE-FO, GLDAS, NDVI, irrigation/population census data. Considered during design, excluded because a fully-traceable 3-source pipeline was worth more than partial satellite coverage for a project this size. Full reasoning is in the ESE report's Limitations & Future Work section.
 
 ## When a district has thin or no CGWB history
-CGWB's ~15,000 wells aren't evenly spread across all 640+ districts — some remote or hilly districts genuinely have sparse coverage. Rather than reintroducing satellite data (GRACE's own resolution is ~300km, similar to what zone-level aggregation already gives) or silently failing, the fallback is two-stepped:
+CGWB's ~15,000 wells aren't evenly spread across all 640+ districts — some remote or hilly districts genuinely have sparse coverage. Rather than reintroducing satellite data or silently failing, the fallback is two-stepped:
 1. Zone fallback — below data_readiness_min_pct (config.yaml), aggregate CGWB data across every district in the same agro_climatic_zone instead of training on that one district alone.
 2. Insufficient data — only if the zone itself lacks enough history. Shown honestly on the dashboard, never fabricated.
 
