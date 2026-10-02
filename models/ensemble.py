@@ -166,17 +166,18 @@ def get_model_components(district_id: str) -> dict:
         # Calculate drought frequency
         drought_score = compute_drought_frequency(district_id, gwl_history)
 
-        # Approximate LR trend from recent 12 months vs first 12 months
+        # Approximate LR trend from recent 12 months vs first 12 months (scaled data in [0,1])
         n = min(12, len(gwl_history) // 2)
         if n > 0:
             recent_trend = gwl_history.iloc[-n:].mean() - gwl_history.iloc[:n].mean()
-            lr_score = min(max((recent_trend / 5.0) * 100 + 50, 0), 100)
+            # recent_trend is in [-1, 1] roughly. multiply by 100.
+            lr_score = min(max(recent_trend * 100 + 50, 0), 100)
         else:
             lr_score = 50.0
 
-        # Approximate XGB risk from current absolute depth
+        # Approximate XGB risk from current relative depth (scaled [0, 1])
         current_depth = gwl_history.iloc[-1]
-        xgb_score = min(max((current_depth / 30.0) * 100, 0), 100)
+        xgb_score = min(max(current_depth * 100, 0), 100)
 
         return {
             "lr_trend": float(lr_score),
@@ -195,11 +196,11 @@ def get_model_components(district_id: str) -> dict:
 
 def _score_to_tier(score: int) -> str:
     """Map a 0–100 score to a crisis tier."""
-    if score <= 30:
+    if score <= 20:
         return "Safe"
-    elif score <= 60:
+    elif score <= 40:
         return "Watch"
-    elif score <= 80:
+    elif score <= 60:
         return "Warning"
     return "Crisis"
 

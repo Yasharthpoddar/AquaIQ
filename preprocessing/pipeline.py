@@ -276,9 +276,9 @@ def run_pipeline(df: pd.DataFrame, sample_districts: int = None) -> pd.DataFrame
         for col in numeric_cols:
             if col in district_df.columns:
                 # Stage 1: linear interpolation for short gaps
-                district_df[col] = interpolate_gaps(district_df[col].reset_index(drop=True))
+                district_df[col] = interpolate_gaps(district_df[col])
                 # Stage 2: SARIMA for remaining gaps
-                district_df[col] = sarima_fill(district_df[col].reset_index(drop=True))
+                district_df[col] = sarima_fill(district_df[col])
 
         filled_frames.append(district_df)
 
