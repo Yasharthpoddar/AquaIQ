@@ -306,16 +306,16 @@ td {
   <div class="slide-subtitle">End-to-end data flow from raw sources to the dashboard</div>
   <div class="code-block">
 Data Sources (CGWB + IMD + ERA5)
-  ↓ Ingestion & Gap-fill (SARIMA interpolation)
-  ↓ Feature Engineering → 10-feature matrix
+  ↓ Ingestion & Gap-fill (Linear Interpolation + SARIMA)
+  ↓ Feature Engineering → 10-feature matrix (238,560 rows)
   ↓ Core ML:  Linear Regression (trend) · Fuzzy Logic (crisis) · Perceptron ANN (tier)
-  ↓ Advanced: XGBoost (500 trees, walk-forward validated)
-  ↓ Ensemble: Crisis Score = 0.25×LR + 0.50×XGBoost + 0.25×DroughtFreq
-  ↓ Flask REST API (6 endpoints) ←→ PostgreSQL
+  ↓ Advanced: XGBoost (500 trees, walk-forward validated, R²=0.964)
+  ↓ Ensemble: Score = −0.08×LR + 0.96×XGBoost + 0.12×DroughtFreq (backtest-fitted)
+  ↓ Flask REST API (5 endpoints + health) ←→ PostgreSQL (1,264 districts)
   ↓ React + Leaflet + Recharts Dashboard</div>
   <div class="metric-row" style="margin-top:28px">
     <div class="metric"><div class="value" style="color:var(--accent)">10</div><div class="label">Features</div></div>
-    <div class="metric"><div class="value" style="color:var(--green)">6</div><div class="label">API Endpoints</div></div>
+    <div class="metric"><div class="value" style="color:var(--green)">5</div><div class="label">API Endpoints</div></div>
     <div class="metric"><div class="value" style="color:var(--purple)">4</div><div class="label">ML Models</div></div>
     <div class="metric"><div class="value" style="color:var(--orange)">4</div><div class="label">Dashboard Pages</div></div>
   </div>
@@ -375,48 +375,53 @@ Data Sources (CGWB + IMD + ERA5)
   <div class="grid-3">
     <div class="card">
       <h3>Linear Regression Trend</h3>
-      <p style="font-size:28px;font-weight:700;color:var(--accent);margin:8px 0">25%</p>
-      <p>Long-term directional trend in GWL. Rising depth = declining water table.</p>
+      <p style="font-size:28px;font-weight:700;color:var(--accent);margin:8px 0">−8.3%</p>
+      <p>Long-term directional trend in GWL. Negative weight = improving trend <em>reduces</em> score (as expected).</p>
     </div>
     <div class="card red">
       <h3>XGBoost Risk</h3>
-      <p style="font-size:28px;font-weight:700;color:var(--red);margin:8px 0">50%</p>
-      <p>Absolute current depth prediction. Scaled against 30m threshold for max risk.</p>
+      <p style="font-size:28px;font-weight:700;color:var(--red);margin:8px 0">95.8%</p>
+      <p>Absolute current depth (MinMax-scaled). Dominant component — deeper water table = higher risk.</p>
     </div>
     <div class="card orange">
       <h3>Drought Frequency</h3>
-      <p style="font-size:28px;font-weight:700;color:var(--orange);margin:8px 0">25%</p>
-      <p>% of months above 80th percentile GWL depth (historically). High = chronic stress.</p>
+      <p style="font-size:28px;font-weight:700;color:var(--orange);margin:8px 0">12.4%</p>
+      <p>% of months above 80th percentile GWL depth (historically). Captures chronic stress.</p>
     </div>
   </div>
   <div style="margin-top:28px">
     <table>
       <tr><th>Tier</th><th>Score Range</th><th>Policy Action</th></tr>
-      <tr><td><span class="tier-badge" style="background:var(--green)">Safe</span></td><td>0 – 30</td><td>Routine monitoring</td></tr>
-      <tr><td><span class="tier-badge" style="background:var(--orange)">Watch</span></td><td>31 – 60</td><td>Promote rainwater harvesting</td></tr>
-      <tr><td><span class="tier-badge" style="background:#f97316">Warning</span></td><td>61 – 80</td><td>Restrict new extraction permits</td></tr>
-      <tr><td><span class="tier-badge" style="background:var(--red)">Crisis</span></td><td>81 – 100</td><td>Declare water-stressed zone — emergency measures</td></tr>
+      <tr><td><span class="tier-badge" style="background:var(--green)">Safe</span></td><td>0 – 20</td><td>Routine monitoring</td></tr>
+      <tr><td><span class="tier-badge" style="background:var(--orange)">Watch</span></td><td>21 – 40</td><td>Promote rainwater harvesting</td></tr>
+      <tr><td><span class="tier-badge" style="background:#f97316">Warning</span></td><td>41 – 60</td><td>Restrict new extraction permits</td></tr>
+      <tr><td><span class="tier-badge" style="background:var(--red)">Crisis</span></td><td>61 – 100</td><td>Declare water-stressed zone — emergency measures</td></tr>
     </table>
   </div>
 </div>
 
 <!-- Slide 6: Flask API -->
 <div class="slide" id="s6">
-  <h2>🔌 Flask REST API — 6 Endpoints</h2>
+  <h2>🔌 Flask REST API — 5 Endpoints + Health</h2>
   <div class="slide-subtitle">All stubs replaced with real model inference and database queries</div>
   <table>
     <tr><th>Method</th><th>Endpoint</th><th>Description</th><th>Status</th></tr>
     <tr><td>GET</td><td><code>/api/predict/&lt;district_id&gt;</code></td><td>6-month GWL forecast + crisis score from ensemble</td><td style="color:var(--green)">✓ Wired</td></tr>
-    <tr><td>GET</td><td><code>/api/district/&lt;district_id&gt;</code></td><td>District metadata + crisis score + data readiness</td><td style="color:var(--green)">✓ New</td></tr>
+    <tr><td>GET</td><td><code>/api/district/&lt;district_id&gt;</code></td><td>District metadata + crisis score + data readiness</td><td style="color:var(--green)">✓ Wired</td></tr>
     <tr><td>GET</td><td><code>/api/history/&lt;district_id&gt;</code></td><td>Historical GWL + rainfall from features table</td><td style="color:var(--green)">✓ Wired</td></tr>
-    <tr><td>GET</td><td><code>/api/alerts</code></td><td>All districts in Warning/Crisis tier</td><td style="color:var(--green)">✓ Wired</td></tr>
+    <tr><td>GET</td><td><code>/api/alerts</code></td><td>Top 30 monitored districts by crisis score (all tiers)</td><td style="color:var(--green)">✓ Wired</td></tr>
     <tr><td>POST</td><td><code>/api/simulate</code></td><td>What-if: rainfall/extraction → new crisis score</td><td style="color:var(--green)">✓ Wired</td></tr>
-    <tr><td>GET</td><td><code>/api/health</code></td><td>Server health check</td><td style="color:var(--green)">✓ Exists</td></tr>
   </table>
   <div style="margin-top:24px">
-    <div class="card" style="padding:16px 20px">
-      <h3 style="font-size:14px">Data Readiness Fallback</h3>
-      <p>If a district has &lt;60% valid data months → system falls back to agro-climatic zone aggregation instead of per-district prediction.</p>
+    <div class="grid-2">
+      <div class="card" style="padding:16px 20px">
+        <h3 style="font-size:14px">District ID Resolver</h3>
+        <p>Bridges numeric CGWB IDs ↔ composite GeoJSON IDs (e.g., 446 ↔ GJ-Gandhinagar). Dashboard and API communicate seamlessly.</p>
+      </div>
+      <div class="card" style="padding:16px 20px">
+        <h3 style="font-size:14px">Data Readiness Fallback</h3>
+        <p>If a district has &lt;60% valid data months → system falls back to agro-climatic zone aggregation instead of per-district prediction.</p>
+      </div>
     </div>
   </div>
 </div>
@@ -446,9 +451,9 @@ Data Sources (CGWB + IMD + ERA5)
     <div class="card orange">
       <h3>Alerts Page</h3>
       <ul>
-        <li>Warning + Crisis districts only</li>
+        <li>All tiers — Safe, Watch, Warning, Crisis</li>
         <li>Policy recommendations per tier</li>
-        <li><code>fetch('/api/alerts')</code> with tier filter</li>
+        <li><code>fetch('/api/alerts')</code> with optional tier filter</li>
       </ul>
     </div>
     <div class="card purple">
@@ -511,31 +516,31 @@ Data Sources (CGWB + IMD + ERA5)
 <!-- Slide 9: Testing -->
 <div class="slide" id="s9">
   <h2>🧪 Testing & Quality</h2>
-  <div class="slide-subtitle">8 pytest tests covering all API endpoints</div>
+  <div class="slide-subtitle">28 pytest tests covering API, ingestion, and preprocessing</div>
   <div class="grid-2">
     <div>
       <table>
-        <tr><th>Test</th><th>Endpoint</th><th>Status</th></tr>
-        <tr><td>test_health_endpoint</td><td>/api/health</td><td style="color:var(--green)">✓ PASS</td></tr>
-        <tr><td>test_district_endpoint</td><td>/api/district/:id</td><td style="color:var(--green)">✓ PASS</td></tr>
-        <tr><td>test_predict_endpoint</td><td>/api/predict/:id</td><td style="color:var(--green)">✓ PASS</td></tr>
-        <tr><td>test_history_endpoint</td><td>/api/history/:id</td><td style="color:var(--green)">✓ PASS</td></tr>
-        <tr><td>test_alerts_endpoint</td><td>/api/alerts</td><td style="color:var(--green)">✓ PASS</td></tr>
-        <tr><td>test_alerts_with_filter</td><td>/api/alerts?tier=</td><td style="color:var(--green)">✓ PASS</td></tr>
-        <tr><td>test_simulate_endpoint</td><td>POST /api/simulate</td><td style="color:var(--green)">✓ PASS</td></tr>
-        <tr><td>test_404_error</td><td>/api/nonexistent</td><td style="color:var(--green)">✓ PASS</td></tr>
+        <tr><th>Suite</th><th>Tests</th><th>Coverage</th></tr>
+        <tr><td>API (test_api.py)</td><td style="color:var(--green)">10 ✓</td><td>health, predict, district, history, alerts, simulate</td></tr>
+        <tr><td>Ingestion (test_ingestion.py)</td><td style="color:var(--green)">1 ✓</td><td>district table schema &amp; row count</td></tr>
+        <tr><td>Preprocessing (test_preprocessing.py)</td><td style="color:var(--green)">17 ✓</td><td>pipeline stages, feature builders, scaler</td></tr>
       </table>
+      <div class="card" style="margin-top:16px">
+        <h3>Walk-Forward Validation</h3>
+        <table style="margin-top:8px">
+          <tr><th>Fold</th><th>RMSE</th><th>R²</th></tr>
+          <tr><td>→ 2020</td><td>0.937</td><td style="color:var(--green)">0.964</td></tr>
+          <tr><td>→ 2021</td><td>0.960</td><td style="color:var(--green)">0.962</td></tr>
+          <tr><td>→ 2022</td><td>0.927</td><td style="color:var(--green)">0.964</td></tr>
+          <tr><td>Held-out</td><td>0.923</td><td style="color:var(--green)">0.965</td></tr>
+        </table>
+      </div>
     </div>
     <div>
       <div class="metric-row" style="flex-direction:column;gap:16px">
-        <div class="metric"><div class="value" style="color:var(--green)">8/8</div><div class="label">Tests Passing</div></div>
-        <div class="metric"><div class="value" style="color:var(--accent)">4.48s</div><div class="label">Execution Time</div></div>
-      </div>
-      <div class="card" style="margin-top:16px">
-        <h3>Target</h3>
-        <p>Linear Regression R² &gt; 0.75</p>
-        <p>API response &lt; 3s</p>
-        <p>Test coverage ≥ 70%</p>
+        <div class="metric"><div class="value" style="color:var(--green)">28/28</div><div class="label">Tests Passing</div></div>
+        <div class="metric"><div class="value" style="color:var(--accent)">10.6s</div><div class="label">Execution Time</div></div>
+        <div class="metric"><div class="value" style="color:var(--purple)">R² = 0.965</div><div class="label">Held-out Accuracy</div></div>
       </div>
     </div>
   </div>
@@ -544,20 +549,20 @@ Data Sources (CGWB + IMD + ERA5)
 <!-- Slide 10: Summary -->
 <div class="slide" id="s10">
   <h2>✅ Phase III Summary</h2>
-  <div class="slide-subtitle">All deliverables complete for 30 Sep evaluation</div>
+  <div class="slide-subtitle">All deliverables complete — 2 Oct 2026</div>
   <div class="grid-2">
     <div>
       <div class="card">
         <h3>What Was Built (Weeks 7–9)</h3>
         <ul>
-          <li>✅ XGBoost walk-forward validation (expanding window)</li>
-          <li>✅ Ensemble crisis score (LR + XGB + drought freq)</li>
-          <li>✅ Data readiness module with zone fallback</li>
-          <li>✅ 6 Flask API endpoints wired to models + DB</li>
-          <li>✅ React dashboard fully integrated with API</li>
-          <li>✅ 8 pytest tests — all passing</li>
-          <li>✅ GitFlow branching with conventional commits</li>
-          <li>✅ 7 branches pushed to GitHub</li>
+          <li>✅ XGBoost walk-forward validation (R²=0.965, 5 folds)</li>
+          <li>✅ Ensemble crisis score (backtest-fitted weights)</li>
+          <li>✅ Data readiness + zone fallback + district ID resolver</li>
+          <li>✅ 5 Flask API endpoints wired to models + PostgreSQL</li>
+          <li>✅ React dashboard with live API (Leaflet + Recharts)</li>
+          <li>✅ 28 pytest tests — all passing (API + ingestion + preprocessing)</li>
+          <li>✅ Pipeline bug fix: NaN propagation from index misalignment</li>
+          <li>✅ 1,264 districts ingested · 238,560 feature rows</li>
         </ul>
       </div>
     </div>
@@ -574,7 +579,7 @@ Data Sources (CGWB + IMD + ERA5)
       <div class="card green" style="margin-top:20px">
         <h3>Repo</h3>
         <p style="font-size:16px;color:var(--accent)">github.com/Yasharthpoddar/AquaIQ</p>
-        <p style="margin-top:8px">14 files changed · 548 insertions · 125 deletions</p>
+        <p style="margin-top:8px">21 files changed · 2,464 insertions · 328 deletions · 27 commits</p>
       </div>
     </div>
   </div>
