@@ -13,6 +13,8 @@ from dotenv import load_dotenv
 ROOT = Path(__file__).parent.parent
 load_dotenv(ROOT / ".env")
 
+pytestmark = pytest.mark.requires_db
+
 
 @pytest.fixture(scope="module")
 def db_connection():

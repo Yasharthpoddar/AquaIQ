@@ -41,6 +41,7 @@ def test_predict_endpoint_success(client):
     assert "estimate_type" in data
 
 
+@pytest.mark.requires_db
 def test_history_endpoint_success(client):
     response = client.get("/api/history/RJ-Jaipur?start=2020-01&end=2024-12")
     assert response.status_code == 200
