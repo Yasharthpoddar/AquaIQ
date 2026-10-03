@@ -392,10 +392,10 @@ Data Sources (CGWB + IMD + ERA5)
   <div style="margin-top:28px">
     <table>
       <tr><th>Tier</th><th>Score Range</th><th>Policy Action</th></tr>
-      <tr><td><span class="tier-badge" style="background:var(--green)">Safe</span></td><td>0 – 20</td><td>Routine monitoring</td></tr>
-      <tr><td><span class="tier-badge" style="background:var(--orange)">Watch</span></td><td>21 – 40</td><td>Promote rainwater harvesting</td></tr>
-      <tr><td><span class="tier-badge" style="background:#f97316">Warning</span></td><td>41 – 60</td><td>Restrict new extraction permits</td></tr>
-      <tr><td><span class="tier-badge" style="background:var(--red)">Crisis</span></td><td>61 – 100</td><td>Declare water-stressed zone — emergency measures</td></tr>
+      <tr><td><span class="tier-badge" style="background:var(--green)">Safe</span></td><td>0 – 30</td><td>Routine monitoring</td></tr>
+      <tr><td><span class="tier-badge" style="background:var(--orange)">Watch</span></td><td>31 – 60</td><td>Promote rainwater harvesting</td></tr>
+      <tr><td><span class="tier-badge" style="background:#f97316">Warning</span></td><td>61 – 80</td><td>Restrict new extraction permits</td></tr>
+      <tr><td><span class="tier-badge" style="background:var(--red)">Crisis</span></td><td>81 – 100</td><td>Declare water-stressed zone — emergency measures</td></tr>
     </table>
   </div>
 </div>
@@ -503,8 +503,8 @@ Data Sources (CGWB + IMD + ERA5)
       <div class="card green" style="margin-top:20px">
         <h3>Key Stats</h3>
         <ul>
-          <li>7 branches (main + develop + 5 feature)</li>
-          <li>5 feature commits + 5 merge commits</li>
+          <li>9 branches (main + develop + 7 feature)</li>
+          <li>7 merge commits</li>
           <li>All merges use <code>--no-ff</code></li>
           <li>Co-authored-by tags for team rotation</li>
         </ul>
@@ -516,7 +516,7 @@ Data Sources (CGWB + IMD + ERA5)
 <!-- Slide 9: Testing -->
 <div class="slide" id="s9">
   <h2>🧪 Testing & Quality</h2>
-  <div class="slide-subtitle">28 pytest tests covering API, ingestion, and preprocessing</div>
+  <div class="slide-subtitle">51 pytest tests covering API, ingestion, preprocessing and backtest</div>
   <div class="grid-2">
     <div>
       <table>
@@ -538,7 +538,7 @@ Data Sources (CGWB + IMD + ERA5)
     </div>
     <div>
       <div class="metric-row" style="flex-direction:column;gap:16px">
-        <div class="metric"><div class="value" style="color:var(--green)">28/28</div><div class="label">Tests Passing</div></div>
+        <div class="metric"><div class="value" style="color:var(--green)">51/51</div><div class="label">Tests Passing</div></div>
         <div class="metric"><div class="value" style="color:var(--accent)">10.6s</div><div class="label">Execution Time</div></div>
         <div class="metric"><div class="value" style="color:var(--purple)">R² = 0.965</div><div class="label">Held-out Accuracy</div></div>
       </div>
@@ -560,7 +560,7 @@ Data Sources (CGWB + IMD + ERA5)
           <li>✅ Data readiness + zone fallback + district ID resolver</li>
           <li>✅ 5 Flask API endpoints wired to models + PostgreSQL</li>
           <li>✅ React dashboard with live API (Leaflet + Recharts)</li>
-          <li>✅ 28 pytest tests — all passing (API + ingestion + preprocessing)</li>
+          <li>✅ 51 pytest tests — all passing (API + ingestion + preprocessing)</li>
           <li>✅ Pipeline bug fix: NaN propagation from index misalignment</li>
           <li>✅ 1,264 districts ingested · 238,560 feature rows</li>
         </ul>

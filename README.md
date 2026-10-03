@@ -50,7 +50,7 @@ All ten trace back to one of the three sources above — nothing is invented:
 ## Project structure
 data_ingestion/ — CSV/API parsers for CGWB, IMD, ERA5
 preprocessing/ — cleaning, SARIMA gap-fill, feature engineering
-models/ — linear_regression.py, fuzzy_logic.py, perceptron.py, xgboost_model.py, ensemble.py
+models/ — linear_regression.py, fuzzy_logic.py, perceptron.py, xgboost_model.py, ensemble.py, tiers.py, backtest.py
 api/ — Flask app + 5 REST endpoints
 dashboard/ — React frontend
 db/ — schema.sql + init_db.py

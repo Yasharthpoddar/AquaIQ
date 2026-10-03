@@ -13,6 +13,7 @@ Run:
     python models/backtest.py
 """
 
+import argparse
 import os
 import sys
 from pathlib import Path
@@ -30,6 +31,14 @@ load_dotenv(ROOT / ".env")
 CONFIG_PATH = ROOT / "config.yaml"
 with open(CONFIG_PATH) as f:
     CONFIG = yaml.safe_load(f)
+
+try:
+    from models.ensemble import components_from_history
+except ImportError:  # executed as a script: python models/backtest.py
+    sys.path.insert(0, str(ROOT))
+    from models.ensemble import components_from_history
+
+HORIZON_MONTHS = 6  # the Crisis Score anticipates groundwater depth six months ahead
 
 
 def get_connection():
@@ -52,8 +61,15 @@ def nash_sutcliffe_efficiency(y_true, y_pred):
     return 1 - (ss_res / ss_tot)
 
 
-def load_feature_matrix():
-    """Load feature matrix from DB or CSV fallback."""
+def load_feature_matrix(allow_synthetic: bool = False) -> pd.DataFrame:
+    """
+    Load the feature matrix from the DB, falling back to the processed CSV.
+    Where the data came from is recorded in df.attrs["data_source"].
+
+    Synthetic data is generated ONLY when allow_synthetic=True (--synthetic).
+    Such results are a smoke test of this script and must never be reported as
+    model performance on real districts.
+    """
     csv_path = ROOT / "data" / "processed" / "features_matrix.csv"
     try:
         conn = get_connection()
@@ -61,6 +77,7 @@ def load_feature_matrix():
         conn.close()
         if len(df) > 0:
             print(f"  Loaded {len(df):,} rows from features table")
+            df.attrs["data_source"] = "features table (PostgreSQL)"
             return df
     except Exception:
         pass
@@ -68,11 +85,21 @@ def load_feature_matrix():
     if csv_path.exists():
         df = pd.read_csv(csv_path, parse_dates=["date"])
         print(f"  Loaded {len(df):,} rows from {csv_path.name}")
+        df.attrs["data_source"] = csv_path.name
         return df
 
-    # Generate synthetic data for backtest validation
-    print("  No feature data found — generating synthetic data for backtest.")
-    return _generate_synthetic_features()
+    if not allow_synthetic:
+        raise SystemExit(
+            "ERROR: no feature data found (features table empty or unreachable, and "
+            f"{csv_path.relative_to(ROOT)} is missing).\\n"
+            "Run the ingestion + preprocessing pipeline first, or pass --synthetic for a "
+            "smoke test whose results must not be reported."
+        )
+
+    print("  --synthetic: generating SYNTHETIC data (smoke test only).")
+    df = _generate_synthetic_features()
+    df.attrs["data_source"] = "synthetic"
+    return df
 
 
 def _generate_synthetic_features():
@@ -110,110 +137,114 @@ def _generate_synthetic_features():
                                       "Rabi", "Rabi", "Rabi", "Rabi",
                                       "Zaid", "Zaid", "Zaid"][month - 1],
             })
-    return pd.DataFrame(rows)
+    df = pd.DataFrame(rows)
+    # The real features table stores MinMax-scaled GWL ([0, 1]); mimic that so the
+    # ensemble components behave as they do in the live API.
+    gwl_cols = ["gwl_current", "gwl_lag_3mo", "gwl_lag_6mo"]
+    lo, hi = df[gwl_cols].min().min(), df[gwl_cols].max().max()
+    df[gwl_cols] = (df[gwl_cols] - lo) / (hi - lo)
+    return df
 
 
 # ─── Part (a): Ensemble Weight Fitting ──────────────────────────────────────
 
-def _compute_component_scores(df):
+def _compute_component_scores(df, years=None):
     """
-    For each district-date, compute the three ensemble components:
-    lr_trend, xgb_risk, drought_frequency as 0-100 scores.
+    For each district-month t, compute the three ensemble components from the GWL
+    history up to t -- with models.ensemble.components_from_history, the same
+    function the live API uses -- plus the target: that district's GWL
+    HORIZON_MONTHS later. Months without an observed GWL at t or at t+HORIZON are
+    skipped; ``years`` optionally restricts t to those calendar years.
+    Assumes one row per month per district (the features table is gap-filled).
     """
+    columns = ["district_id", "date", "gwl_actual", "gwl_future",
+               "lr_score", "xgb_score", "drought_score"]
     results = []
     for did, group in df.groupby("district_id"):
-        group = group.sort_values("date").copy()
-        gwl = group["gwl_current"]
-
-        # LR trend: compare recent 12 vs first 12 months
+        group = group.sort_values("date")
+        dates = pd.to_datetime(group["date"]).reset_index(drop=True)
+        gwl = group["gwl_current"].reset_index(drop=True)
         if len(gwl) < 24:
             continue
-        first_12 = gwl.iloc[:12].mean()
-        for idx in range(12, len(group)):
-            recent_12 = gwl.iloc[max(0, idx-12):idx].mean()
-            trend = recent_12 - first_12
-            lr_score = min(max((trend / 5.0) * 100 + 50, 0), 100)
 
-            # XGB risk from absolute depth
-            depth = gwl.iloc[idx]
-            xgb_score = min(max((depth / 30.0) * 100, 0), 100)
+        for idx in range(12, len(gwl) - HORIZON_MONTHS):
+            if years is not None and dates.iloc[idx].year not in years:
+                continue
+            gap = dates.iloc[idx + HORIZON_MONTHS].to_period("M") - dates.iloc[idx].to_period("M")
+            current, future = gwl.iloc[idx], gwl.iloc[idx + HORIZON_MONTHS]
+            if gap.n != HORIZON_MONTHS or pd.isna(current) or pd.isna(future):
+                continue
 
-            # Drought frequency up to this point
-            threshold = gwl.iloc[:idx].quantile(0.80)
-            drought_months = (gwl.iloc[:idx] > threshold).sum()
-            freq_pct = (drought_months / idx) * 100
-            drought_score = min((freq_pct / 20.0) * 100, 100.0)
-
+            comps = components_from_history(gwl.iloc[: idx + 1].dropna(), str(did))
             results.append({
                 "district_id": did,
-                "date": group["date"].iloc[idx],
-                "gwl_actual": gwl.iloc[idx],
-                "lr_score": lr_score,
-                "xgb_score": xgb_score,
-                "drought_score": drought_score,
+                "date": dates.iloc[idx],
+                "gwl_actual": current,
+                "gwl_future": future,
+                "lr_score": comps["lr_trend"],
+                "xgb_score": comps["xgb_risk"],
+                "drought_score": comps["drought_frequency"],
             })
 
-    return pd.DataFrame(results)
+    return pd.DataFrame(results, columns=columns)
 
 
 def fit_ensemble_weights(df):
     """
-    Fit weights w1, w2, w3 by minimising MAE on the 2015-16 and 2018-19
-    drought backtesting windows.
+    Fit weights w1, w2, w3 by minimising MAE on the drought backtesting windows
+    (testing.backtest_years in config.yaml).
+
+    Components are computed exactly as in the live API (models/ensemble.py); the
+    target is each district's GWL six months later, rescaled to 0-100 (deeper =
+    worse). Weights are constrained to be non-negative and to sum to 1 (softmax
+    parametrisation), so every component can only add to the Crisis Score.
     """
-    print("\n== Part (a): Ensemble Weight Fitting ==")
+    print("\\n== Part (a): Ensemble Weight Fitting ==")
 
-    comp_df = _compute_component_scores(df)
-    comp_df["date"] = pd.to_datetime(comp_df["date"])
-
-    # Filter to drought years
     backtest_years = CONFIG.get("testing", {}).get("backtest_years", [2015, 2016, 2018, 2019])
-    mask = comp_df["date"].dt.year.isin(backtest_years)
-    bt = comp_df[mask].copy()
+    bt = _compute_component_scores(df, years=backtest_years)
 
     if len(bt) == 0:
-        print("  WARNING: No data in drought windows — using default weights.")
+        print("  WARNING: No data in drought windows --- using initial weights.")
         return CONFIG["model_hyperparameters"]["ensemble"]["initial_weights"]
 
-    print(f"  Backtest samples: {len(bt):,} (years {backtest_years})")
+    print(f"  Backtest samples: {len(bt):,} (years {backtest_years}, "
+          f"target = GWL {HORIZON_MONTHS} months ahead)")
 
-    # Target: normalised GWL as a crisis proxy (higher depth = higher crisis)
-    gwl_min, gwl_max = bt["gwl_actual"].min(), bt["gwl_actual"].max()
-    if gwl_max == gwl_min:
-        gwl_max = gwl_min + 1
-    bt["crisis_target"] = ((bt["gwl_actual"] - gwl_min) / (gwl_max - gwl_min)) * 100
-
+    lo, hi = bt["gwl_future"].min(), bt["gwl_future"].max()
+    if hi == lo:
+        hi = lo + 1
+    y = ((bt["gwl_future"] - lo) / (hi - lo) * 100).values
     X = bt[["lr_score", "xgb_score", "drought_score"]].values
-    y = bt["crisis_target"].values
 
-    def objective(w):
-        w_norm = w / w.sum()  # ensure weights sum to 1
-        predicted = X @ w_norm
-        return np.mean(np.abs(y - predicted))
+    def to_weights(z):
+        e = np.exp(z - np.max(z))
+        return e / e.sum()
 
-    # Initial guess from config
+    def objective(z):
+        return np.mean(np.abs(y - X @ to_weights(z)))
+
     initial = CONFIG["model_hyperparameters"]["ensemble"]["initial_weights"]
-    x0 = np.array([
+    x0 = np.log(np.clip([
         initial.get("linear_regression_trend", 0.45),
         initial.get("xgboost_risk", 0.35),
         initial.get("drought_frequency", 0.20),
-    ])
+    ], 1e-6, None))
 
     result = minimize(
         objective, x0,
         method="Nelder-Mead",
-        options={"maxiter": 5000, "xatol": 1e-6}
+        options={"maxiter": 5000, "xatol": 1e-6, "fatol": 1e-9},
     )
 
-    fitted = result.x / result.x.sum()
+    fitted = to_weights(result.x)
     fitted_weights = {
         "linear_regression_trend": round(float(fitted[0]), 4),
         "xgboost_risk": round(float(fitted[1]), 4),
         "drought_frequency": round(float(fitted[2]), 4),
     }
 
-    # Report
-    print(f"  Fitted weights:")
+    print("  Fitted weights:")
     for k, v in fitted_weights.items():
         print(f"    {k}: {v}")
     print(f"  MAE (backtest): {result.fun:.4f}")
@@ -363,8 +394,8 @@ def run_walkforward_validation(df):
 
 # ─── Save to config.yaml ────────────────────────────────────────────────────
 
-def save_to_config(fitted_weights, walkforward_results):
-    """Save fitted weights and backtest metrics to config.yaml."""
+def save_to_config(fitted_weights, walkforward_results, data_source):
+    """Save fitted weights and backtest metrics (with their data source) to config.yaml."""
     with open(CONFIG_PATH) as f:
         config = yaml.safe_load(f)
 
@@ -373,6 +404,7 @@ def save_to_config(fitted_weights, walkforward_results):
 
     # Save backtest metrics
     config["backtest_results"] = {
+        "data_source": data_source,
         "ensemble_weights": fitted_weights,
         "walkforward_validation": walkforward_results,
     }
@@ -380,17 +412,29 @@ def save_to_config(fitted_weights, walkforward_results):
     with open(CONFIG_PATH, "w") as f:
         yaml.dump(config, f, default_flow_style=False, sort_keys=False, allow_unicode=True)
 
-    print(f"\n  Saved fitted weights and metrics to {CONFIG_PATH}")
+    print(f"\\n  Saved fitted weights and metrics to {CONFIG_PATH}")
+
+
+def should_write_config(data_source: str) -> bool:
+    """Results from synthetic smoke-test data are never written to config.yaml."""
+    return data_source != "synthetic"
 
 
 # ─── Main ────────────────────────────────────────────────────────────────────
 
-def main():
-    print("AquaIQ — Ensemble Backtest & Walk-Forward Validation\n")
+def main(argv=None):
+    parser = argparse.ArgumentParser(description="AquaIQ ensemble backtest & walk-forward validation")
+    parser.add_argument("--synthetic", action="store_true",
+                        help="run on generated data as a smoke test (results are NOT saved to config.yaml)")
+    args = parser.parse_args(argv)
+
+    print("AquaIQ — Ensemble Backtest & Walk-Forward Validation\\n")
 
     # Load data
     print("[1/3] Loading feature matrix...")
-    df = load_feature_matrix()
+    df = load_feature_matrix(allow_synthetic=args.synthetic)
+    data_source = df.attrs.get("data_source", "unknown")
+    print(f"  Data source: {data_source} ({df['district_id'].nunique()} districts)")
 
     # Part (a): Fit ensemble weights
     print("[2/3] Fitting ensemble weights on drought backtests...")
@@ -400,10 +444,12 @@ def main():
     print("[3/3] Running XGBoost walk-forward validation...")
     wf_results = run_walkforward_validation(df)
 
-    # Save to config
-    save_to_config(fitted_weights, wf_results)
+    if should_write_config(data_source):
+        save_to_config(fitted_weights, wf_results, data_source)
+    else:
+        print("\\n  Synthetic smoke test: config.yaml was NOT updated.")
 
-    print("\n=== Done ===")
+    print("\\n=== Done ===")
 
 
 if __name__ == "__main__":
