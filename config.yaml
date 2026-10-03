@@ -82,9 +82,9 @@ model_hyperparameters:
       drought_frequency: 0.2
     drought_frequency_percentile: 20
     fitted_weights: &id001
-      linear_regression_trend: -0.0826
-      xgboost_risk: 0.9584
-      drought_frequency: 0.1243
+      linear_regression_trend: 0.34
+      xgboost_risk: 0.66
+      drought_frequency: 0.0
 crisis_score:
   tiers:
     safe:
@@ -120,35 +120,24 @@ testing:
   - 2018
   - 2019
 backtest_results:
+  data_source: features table (PostgreSQL)
   ensemble_weights: *id001
   walkforward_validation:
   - fold: train->2020
-    n_train: 10800
-    n_test: 600
-    rmse: 0.9367
-    r2: 0.9635
-    nse: 0.9635
+    n_train: 42630
+    n_test: 75
+    rmse: 0.0129
+    r2: 0.9691
+    nse: 0.9691
   - fold: train->2021
-    n_train: 11400
-    n_test: 600
-    rmse: 0.9596
-    r2: 0.9616
-    nse: 0.9616
+    n_train: 42705
+    n_test: 48
+    rmse: 0.0077
+    r2: 0.9399
+    nse: 0.9399
   - fold: train->2022
-    n_train: 12000
-    n_test: 600
-    rmse: 0.9266
-    r2: 0.9638
-    nse: 0.9638
-  - fold: train->2023
-    n_train: 12600
-    n_test: 600
-    rmse: 0.9386
-    r2: 0.9641
-    nse: 0.9641
-  - fold: held-out 2023-2024
-    n_train: 12600
-    n_test: 900
-    rmse: 0.9229
-    r2: 0.9648
-    nse: 0.9648
+    n_train: 42753
+    n_test: 34
+    rmse: 0.0039
+    r2: 0.9852
+    nse: 0.9852
