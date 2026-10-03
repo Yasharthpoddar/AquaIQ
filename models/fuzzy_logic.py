@@ -31,6 +31,11 @@ from pathlib import Path
 import numpy as np
 import yaml
 
+try:  # single tier definition shared with the API (see models/tiers.py)
+    from models.tiers import score_to_tier
+except ImportError:  # executed as a script: python models/fuzzy_logic.py
+    from tiers import score_to_tier
+
 ROOT = Path(__file__).parent.parent
 with open(ROOT / "config.yaml") as f:
     CONFIG = yaml.safe_load(f)
@@ -109,12 +114,7 @@ def build_fuzzy_system():
     return sim, rainfall_deficit, depletion_rate, crisis_score
 
 
-def score_to_tier(score: float) -> str:
-    """Map a 0-100 crisis score to its tier label."""
-    for tier, (low, high) in CRISIS_TIERS.items():
-        if low <= score <= high:
-            return tier.capitalize()
-    return "Crisis" if score > 80 else "Safe"
+
 
 
 def compute_crisis_score(sim, rainfall_deficit_val: float, depletion_rate_val: float) -> tuple:

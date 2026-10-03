@@ -17,6 +17,11 @@ import pandas as pd
 import numpy as np
 import yaml
 
+try:
+    from models.tiers import score_to_tier
+except ImportError:  # executed as a script: python models/ensemble.py
+    from tiers import score_to_tier
+
 ROOT = Path(__file__).parent.parent
 
 with open(ROOT / "config.yaml") as f:
@@ -194,15 +199,7 @@ def get_model_components(district_id: str) -> dict:
         }
 
 
-def _score_to_tier(score: int) -> str:
-    """Map a 0–100 score to a crisis tier."""
-    if score <= 20:
-        return "Safe"
-    elif score <= 40:
-        return "Watch"
-    elif score <= 60:
-        return "Warning"
-    return "Crisis"
+
 
 
 def compute_crisis_score(district_id: str) -> dict:
@@ -240,7 +237,7 @@ def compute_crisis_score(district_id: str) -> dict:
         comps["drought_frequency"] * weights["drought_frequency"]
     )
     final_score = round(min(max(final_score, 0), 100))
-    tier = _score_to_tier(final_score)
+    tier = score_to_tier(final_score)
 
     return {
         "district_id": district_id,

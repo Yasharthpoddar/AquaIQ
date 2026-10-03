@@ -5,6 +5,7 @@ What-if policy simulator: adjusts inputs and returns new crisis score.
 
 from flask import Blueprint, jsonify, request
 from models.ensemble import compute_crisis_score
+from models.tiers import score_to_tier
 from api.district_resolver import resolve_district_id
 
 simulate_bp = Blueprint("simulate", __name__)
@@ -49,11 +50,7 @@ def simulate():
     delta = (rainfall_change * -0.3) + (extraction_change * 0.5)
     simulated = max(0, min(100, baseline + delta))
 
-    def score_to_tier(s):
-        if s >= 81: return "Crisis"
-        if s >= 61: return "Warning"
-        if s >= 31: return "Watch"
-        return "Safe"
+
 
     return jsonify({
         "district_id": district_id,
