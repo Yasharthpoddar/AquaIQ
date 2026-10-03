@@ -103,3 +103,16 @@ def test_district_has_estimate_type(client):
     assert response.status_code == 200
     data = response.json
     assert data["estimate_type"] in ["district_level", "zone_fallback", "insufficient_data"]
+
+
+def test_predict_and_simulate_label_the_same_score_identically(client):
+    """/simulate with no change applied must report the /predict score and tier."""
+    predicted = client.get("/api/predict/RJ-Jaipur").json
+    simulated = client.post(
+        "/api/simulate",
+        json={"district_id": "RJ-Jaipur", "rainfall_change_pct": 0, "extraction_change_pct": 0},
+    ).json
+    if predicted["crisis_score"] is None:  # insufficient_data: /simulate substitutes a neutral 50
+        pytest.skip("no crisis score available for this district")
+    assert simulated["baseline_score"] == predicted["crisis_score"]
+    assert simulated["baseline_tier"] == predicted["tier"]
