@@ -110,6 +110,39 @@ def _determine_estimate_type(district_id: str, conn) -> tuple:
     return "insufficient_data", reason
 
 
+def lr_trend_score(gwl: pd.Series) -> float:
+    """
+    LR-trend component, 0-100 (50 = no change). A proxy computed from the stored
+    (MinMax-scaled, roughly [0, 1]) GWL history: mean of the last n months minus
+    mean of the first n months, with n = min(12, len // 2).
+    """
+    n = min(12, len(gwl) // 2)
+    if n <= 0:
+        return 50.0
+    trend = gwl.iloc[-n:].mean() - gwl.iloc[:n].mean()
+    return float(min(max(trend * 100 + 50, 0), 100))
+
+
+def xgb_risk_score(gwl: pd.Series) -> float:
+    """Depth-risk component, 0-100: current relative depth of the (scaled) GWL series."""
+    return float(min(max(gwl.iloc[-1] * 100, 0), 100))
+
+
+def components_from_history(gwl: pd.Series, district_id: str = "") -> dict:
+    """
+    The three ensemble components (each 0-100) for one district, from its GWL
+    history ordered oldest -> newest with NaNs removed.
+
+    Shared by the live API (get_model_components) and models/backtest.py, so the
+    ensemble weights are fitted on exactly the scores they are later applied to.
+    """
+    return {
+        "lr_trend": lr_trend_score(gwl),
+        "xgb_risk": xgb_risk_score(gwl),
+        "drought_frequency": compute_drought_frequency(district_id, gwl),
+    }
+
+
 def get_model_components(district_id: str) -> dict:
     """
     Fetch the underlying predictions from LR and XGBoost, and history for drought frequency.
@@ -163,27 +196,7 @@ def get_model_components(district_id: str) -> dict:
         if len(gwl_history) < 2:
             raise ValueError(f"Insufficient non-null GWL data for {district_id}")
 
-        # Calculate drought frequency
-        drought_score = compute_drought_frequency(district_id, gwl_history)
-
-        # Approximate LR trend from recent 12 months vs first 12 months (scaled data in [0,1])
-        n = min(12, len(gwl_history) // 2)
-        if n > 0:
-            recent_trend = gwl_history.iloc[-n:].mean() - gwl_history.iloc[:n].mean()
-            # recent_trend is in [-1, 1] roughly. multiply by 100.
-            lr_score = min(max(recent_trend * 100 + 50, 0), 100)
-        else:
-            lr_score = 50.0
-
-        # Approximate XGB risk from current relative depth (scaled [0, 1])
-        current_depth = gwl_history.iloc[-1]
-        xgb_score = min(max(current_depth * 100, 0), 100)
-
-        return {
-            "lr_trend": float(lr_score),
-            "xgb_risk": float(xgb_score),
-            "drought_frequency": drought_score
-        }
+        return components_from_history(gwl_history, district_id)
 
     except Exception as e:
         print(f"Error computing components for {district_id}: {e}")
