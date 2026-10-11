@@ -14,19 +14,19 @@ CONFIG = yaml.safe_load((Path(__file__).parent.parent / "config.yaml").read_text
 
 
 @pytest.mark.parametrize("score, tier", [
-    (0, "Safe"), (30, "Safe"),
-    (31, "Watch"), (60, "Watch"),
-    (61, "Warning"), (80, "Warning"),
-    (81, "Crisis"), (100, "Crisis"),
+    (0, "Safe"), (25, "Safe"),
+    (26, "Watch"), (37, "Watch"),
+    (38, "Warning"), (43, "Warning"),
+    (44, "Crisis"), (100, "Crisis"),
 ])
 def test_integer_boundaries(score, tier):
     assert score_to_tier(score) == tier
 
 
 @pytest.mark.parametrize("score, tier", [
-    (30.4, "Safe"), (30.6, "Watch"),
-    (60.4, "Watch"), (60.6, "Warning"),
-    (80.4, "Warning"), (80.6, "Crisis"),
+    (25.4, "Safe"), (25.6, "Watch"),
+    (37.4, "Watch"), (37.6, "Warning"),
+    (43.4, "Warning"), (43.6, "Crisis"),
 ])
 def test_fractional_scores_do_not_fall_between_ranges(score, tier):
     assert score_to_tier(score) == tier

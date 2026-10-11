@@ -89,15 +89,15 @@ crisis_score:
   tiers:
     safe:
     - 0
-    - 30
+    - 25
     watch:
-    - 31
-    - 60
+    - 26
+    - 37
     warning:
-    - 61
-    - 80
+    - 38
+    - 43
     crisis:
-    - 81
+    - 44
     - 100
   alert_threshold: 80
   data_readiness_min_pct: 60

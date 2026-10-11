@@ -16,6 +16,7 @@ from pathlib import Path
 import pandas as pd
 import numpy as np
 import yaml
+from functools import lru_cache
 
 try:
     from models.tiers import score_to_tier
@@ -215,6 +216,7 @@ def get_model_components(district_id: str) -> dict:
 
 
 
+@lru_cache(maxsize=1024)
 def compute_crisis_score(district_id: str) -> dict:
     """
     AquaIQ Crisis Score = weighted sum of LR trend + XGBoost risk + drought frequency.
