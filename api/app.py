@@ -54,6 +54,24 @@ def create_app(config_override=None):
     app.register_blueprint(history_bp, url_prefix="/api")
     app.register_blueprint(alerts_bp, url_prefix="/api")
     app.register_blueprint(simulate_bp, url_prefix="/api")
+
+    # Pre-warm the alerts cache in a background thread so the first
+    # request doesn't block for ~20 s while the DB query runs.
+    import threading
+
+    def _warm_alerts_cache():
+        with app.app_context():
+            try:
+                from api.routes.alerts import _get_monitored_districts
+                from models.ensemble import compute_crisis_score
+                districts = _get_monitored_districts()
+                for d in districts:
+                    compute_crisis_score(d["id"])
+                print(f"[AquaIQ] Alerts cache warmed: {len(districts)} districts scored")
+            except Exception as exc:
+                print(f"[AquaIQ] Cache warming failed (non-fatal): {exc}")
+
+    threading.Thread(target=_warm_alerts_cache, daemon=True).start()
     app.register_blueprint(health_bp, url_prefix="/api")
 
     # Root route
