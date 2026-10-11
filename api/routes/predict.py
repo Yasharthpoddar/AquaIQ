@@ -1,10 +1,11 @@
 """
 GET /api/predict/<district_id>
 Returns 6-month GWL forecast + crisis score for a district.
+Uses the trained XGBoost model for forecasting.
 """
 
 from flask import Blueprint, jsonify, request
-from models.ensemble import compute_crisis_score
+from models.ensemble import compute_crisis_score, xgb_forecast_6mo
 from api.district_resolver import resolve_district_id
 import pandas as pd
 
@@ -31,36 +32,39 @@ def get_prediction(district_id):
         resolved_id = resolve_district_id(district_id)
         crisis_data = compute_crisis_score(resolved_id)
 
-        # Build 6-month forecast from the features table
-        forecast = []
-        try:
-            from models.ensemble import get_connection
-            conn = get_connection()
-            df = pd.read_sql(
-                "SELECT date, gwl_current FROM features WHERE district_id = %s AND gwl_current IS NOT NULL ORDER BY date DESC LIMIT 12",
-                conn, params=(resolved_id,)
-            )
-            conn.close()
+        # Generate 6-month forecast using the trained XGBoost model
+        forecast = xgb_forecast_6mo(resolved_id)
 
-            if len(df) >= 6:
-                recent_gwl = df["gwl_current"].iloc[:6].values
-                trend = (recent_gwl[0] - recent_gwl[-1]) / 6
-                base = recent_gwl[0]
+        # Fallback: if XGBoost forecast fails, use linear extrapolation
+        if not forecast:
+            try:
+                from models.ensemble import get_connection
+                conn = get_connection()
+                df = pd.read_sql(
+                    "SELECT date, gwl_current FROM features WHERE district_id = %s AND gwl_current IS NOT NULL ORDER BY date DESC LIMIT 12",
+                    conn, params=(resolved_id,)
+                )
+                conn.close()
+
+                if len(df) >= 6:
+                    recent_gwl = df["gwl_current"].iloc[:6].values
+                    trend = (recent_gwl[0] - recent_gwl[-1]) / 6
+                    base = recent_gwl[0]
+                    for i in range(1, 7):
+                        forecast.append({
+                            "month": f"2025-{i:02d}",
+                            "predicted_gwl": round(float(base + trend * i), 2)
+                        })
+                else:
+                    raise ValueError("Not enough data")
+            except Exception:
+                # Hardcoded fallback
+                base_gwl = 8.5
                 for i in range(1, 7):
                     forecast.append({
                         "month": f"2025-{i:02d}",
-                        "predicted_gwl": round(float(base + trend * i), 2)
+                        "predicted_gwl": round(base_gwl + (i * 0.4), 1)
                     })
-            else:
-                raise ValueError("Not enough data")
-        except Exception:
-            # Fallback forecast
-            base_gwl = 8.5
-            for i in range(1, 7):
-                forecast.append({
-                    "month": f"2025-{i:02d}",
-                    "predicted_gwl": round(base_gwl + (i * 0.4), 1)
-                })
 
         # Policy recommendation based on tier
         tier = crisis_data["tier"]

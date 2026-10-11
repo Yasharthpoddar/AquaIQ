@@ -13,17 +13,31 @@ import '../App.css';
 const GEOJSON_URL = "/india_districts.geojson";
 
 const TIER_COLORS = {
-  Safe: "#10b981",
-  Watch: "#f59e0b",
-  Warning: "#f97316",
-  Crisis: "#ef4444",
+  Safe: "#16a34a",
+  Watch: "#d97706",
+  Warning: "#ea580c",
+  Crisis: "#dc2626",
+};
+
+const TIER_GLOWS = {
+  Safe: "rgba(22, 163, 74, 0.12)",
+  Watch: "rgba(217, 119, 6, 0.12)",
+  Warning: "rgba(234, 88, 12, 0.12)",
+  Crisis: "rgba(220, 38, 38, 0.12)",
 };
 
 const TIER_ICONS = {
-  Safe: "✓",
-  Watch: "⚡",
-  Warning: "⚠",
-  Crisis: "🔴",
+  Safe: "🛡️",
+  Watch: "👁️",
+  Warning: "⚠️",
+  Crisis: "🚨",
+};
+
+const TIER_DESC = {
+  Safe: "Routine monitoring",
+  Watch: "Increased monitoring",
+  Warning: "Active intervention",
+  Crisis: "Emergency response",
 };
 
 function Home() {
@@ -62,52 +76,94 @@ function Home() {
 
       {/* Summary cards */}
       <div className="summary-cards">
-        {Object.entries(crisisCounts).map(([tier, count]) => (
+        {Object.entries(crisisCounts).map(([tier, count], i) => (
           <div
             key={tier}
-            className="summary-card"
+            className={`summary-card fade-in fade-in-delay-${i + 1}`}
             style={{
-              borderColor: TIER_COLORS[tier],
               '--card-color': TIER_COLORS[tier],
+              '--card-glow': TIER_GLOWS[tier],
             }}
           >
-            <div style={{
-              position: 'absolute', top: 0, left: 0, right: 0, height: '3px',
-              background: TIER_COLORS[tier],
-              borderRadius: '16px 16px 0 0'
-            }} />
+            <span className="card-icon">{TIER_ICONS[tier]}</span>
             <div className="card-count" style={{ color: TIER_COLORS[tier] }}>
-              {TIER_ICONS[tier]} {count}
+              {loading ? '-' : count}
             </div>
             <div className="card-label">{tier}</div>
           </div>
         ))}
       </div>
 
+      {/* Stats bar */}
+      {!loading && (
+        <div className="stats-bar fade-in">
+          <div className="stat-item">
+            <span>📊</span>
+            <span>Total monitored:</span>
+            <span className="stat-value">{scores.length}</span>
+          </div>
+          <div className="stat-item">
+            <span>🎯</span>
+            <span>Avg score:</span>
+            <span className="stat-value">
+              {scores.length > 0 ? Math.round(scores.reduce((a, b) => a + b.score, 0) / scores.length) : 0}
+            </span>
+          </div>
+          <div className="stat-item">
+            <span>⚡</span>
+            <span>Highest risk:</span>
+            <span className="stat-value">
+              {scores.length > 0 ? scores.reduce((a, b) => a.score > b.score ? a : b).name : '—'}
+            </span>
+          </div>
+        </div>
+      )}
+
       {/* Leaflet choropleth map */}
-      {loading ? <p>Loading map data...</p> : (
-        <MapComponent
-          scores={scores}
-          geojsonUrl={GEOJSON_URL}
-          onDistrictClick={handleDistrictClick}
-        />
+      {loading ? (
+        <div className="loading-container">
+          <div className="loading-spinner" />
+          <div className="loading-text">Loading map data...</div>
+        </div>
+      ) : (
+        <div className="fade-in">
+          <MapComponent
+            scores={scores}
+            geojsonUrl={GEOJSON_URL}
+            onDistrictClick={handleDistrictClick}
+          />
+        </div>
       )}
 
       {/* District list */}
       <h2>Monitored Districts</h2>
       <div className="district-list">
-        {loading ? <p>Loading districts...</p> : scores.sort((a, b) => b.score - a.score).map(d => (
-          <div
-            key={d.district_id}
-            className="district-row"
-            onClick={() => navigate(`/district/${d.district_id}`)}
-          >
-            <span className="district-name">{d.name}, {d.state}</span>
-            <span className="district-score" style={{ background: TIER_COLORS[d.tier] }}>
-              {d.score} — {d.tier}
-            </span>
-          </div>
-        ))}
+        {loading ? (
+          <>
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="skeleton-pulse" style={{ height: '56px', marginBottom: '8px' }} />
+            ))}
+          </>
+        ) : (
+          [...scores].sort((a, b) => b.score - a.score).map((d, i) => (
+            <div
+              key={d.district_id}
+              className={`district-row fade-in`}
+              style={{ animationDelay: `${i * 0.05}s` }}
+              onClick={() => navigate(`/district/${d.district_id}`)}
+            >
+              <div>
+                <span className="district-name">{d.name}, {d.state}</span>
+                <div className="district-meta">
+                  {TIER_DESC[d.tier]} · {d.estimate_type === "zone_fallback" ? "Zone estimate" : "District-level data"}
+                </div>
+              </div>
+              <span className="district-score" style={{ background: TIER_COLORS[d.tier] }}>
+                {TIER_ICONS[d.tier]} {d.score} — {d.tier}
+              </span>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

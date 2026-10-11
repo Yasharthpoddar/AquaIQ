@@ -60,9 +60,10 @@ def get_alerts():
     tier_filter = request.args.get("tier")
     monitored = _get_monitored_districts()
     
-    tier_limits = {"Safe": 5, "Watch": 5, "Warning": 2, "Crisis": 2}
+    tier_limits = {"Safe": 8, "Watch": 8, "Warning": 8, "Crisis": 8}
     buckets = {t: [] for t in tier_limits}
     filtered_alerts = []
+    total_processed = 0
 
     for d in monitored:
         try:
@@ -98,18 +99,22 @@ def get_alerts():
             "recommendation": rec,
         }
 
+        total_processed += 1
+
         # Early exit logic to drastically speed up loading
         if tier_filter:
             if tier.lower() == tier_filter.lower():
                 filtered_alerts.append(alert_obj)
-                if len(filtered_alerts) >= 15:  # Cap at 15 for a specific tier filter
+                if len(filtered_alerts) >= 15:
                     break
         else:
             if tier in buckets and len(buckets[tier]) < tier_limits[tier]:
                 buckets[tier].append(alert_obj)
             
-            # Stop if we have fulfilled all our quotas (5, 5, 2, 2)
+            # Stop if we have fulfilled all our quotas or processed enough
             if all(len(b) >= tier_limits[t] for t, b in buckets.items()):
+                break
+            if total_processed >= 60:  # hard cap to prevent timeout
                 break
 
     if not tier_filter:

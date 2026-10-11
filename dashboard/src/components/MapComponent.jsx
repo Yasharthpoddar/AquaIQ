@@ -12,10 +12,10 @@ import 'leaflet/dist/leaflet.css';
  */
 
 const TIER_COLORS = {
-  Safe: '#10b981',
-  Watch: '#f59e0b',
-  Warning: '#f97316',
-  Crisis: '#ef4444',
+  Safe: '#16a34a',
+  Watch: '#d97706',
+  Warning: '#ea580c',
+  Crisis: '#dc2626',
 };
 
 const DEFAULT_COLOR = '#e2e8f0';

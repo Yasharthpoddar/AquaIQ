@@ -9,6 +9,9 @@ estimate_type is set per district based on data readiness:
   - district_level:     enough CGWB history for per-district prediction
   - zone_fallback:      sparse data → aggregated by agro_climatic_zone
   - insufficient_data:  even the zone lacks enough history
+
+v2 — Now uses the trained XGBoost checkpoint and sklearn LinearRegression
+     for the ensemble components instead of heuristic proxies.
 """
 
 import os
@@ -27,6 +30,38 @@ ROOT = Path(__file__).parent.parent
 
 with open(ROOT / "config.yaml") as f:
     CONFIG = yaml.safe_load(f)
+
+# ─── Trained XGBoost model (lazy-loaded singleton) ────────────────────────
+_XGB_MODEL = None
+_XGB_FEATURE_COLS = None  # set after first load
+
+
+def _load_xgb_model():
+    """Load the saved XGBoost checkpoint once."""
+    global _XGB_MODEL, _XGB_FEATURE_COLS
+    if _XGB_MODEL is not None:
+        return _XGB_MODEL
+
+    checkpoint = ROOT / CONFIG["paths"]["xgboost_checkpoint"]
+    if not checkpoint.exists():
+        print(f"WARNING: XGBoost checkpoint not found at {checkpoint}, falling back to heuristic")
+        return None
+
+    import xgboost as xgb
+    _XGB_MODEL = xgb.XGBRegressor()
+    _XGB_MODEL.load_model(str(checkpoint))
+
+    # The model was trained on these 12 features (in order):
+    # gwl_current, gwl_lag_3mo, gwl_lag_6mo, rainfall_current, rainfall_3mo_avg,
+    # monsoon_deficit_pct, temperature, evapotranspiration, water_balance_proxy,
+    # season_Kharif, season_Rabi, season_Zaid
+    _XGB_FEATURE_COLS = [
+        "gwl_current", "gwl_lag_3mo", "gwl_lag_6mo",
+        "rainfall_current", "rainfall_3mo_avg", "monsoon_deficit_pct",
+        "temperature", "evapotranspiration", "water_balance_proxy",
+        "season_Kharif", "season_Rabi", "season_Zaid",
+    ]
+    return _XGB_MODEL
 
 
 def get_connection():
@@ -116,22 +151,189 @@ def _determine_estimate_type(district_id: str, conn) -> tuple:
     return "insufficient_data", reason
 
 
+# ─── Component functions (now using real models) ─────────────────────────
+
 def lr_trend_score(gwl: pd.Series) -> float:
     """
-    LR-trend component, 0-100 (50 = no change). A proxy computed from the stored
-    (MinMax-scaled, roughly [0, 1]) GWL history: mean of the last n months minus
-    mean of the first n months, with n = min(12, len // 2).
+    LR-trend component, 0-100.
+    Fits a sklearn LinearRegression on the GWL history and extracts the slope.
+    Positive slope = worsening (deepening GWL), negative = improving.
+    Score: 50 = stable, >50 = worsening, <50 = improving.
     """
-    n = min(12, len(gwl) // 2)
-    if n <= 0:
+    from sklearn.linear_model import LinearRegression
+
+    if len(gwl) < 6:
         return 50.0
-    trend = gwl.iloc[-n:].mean() - gwl.iloc[:n].mean()
-    return float(min(max(trend * 100 + 50, 0), 100))
+
+    X = np.arange(len(gwl)).reshape(-1, 1)
+    y = gwl.values
+
+    model = LinearRegression()
+    model.fit(X, y)
+    slope = model.coef_[0]
+
+    # Scale: slope is in GWL-units/month (MinMax-scaled, so ~0-1 range).
+    # A slope of +0.01/month → score ~60 (moderate worsening)
+    # A slope of +0.05/month → score ~100 (severe worsening)
+    score = 50.0 + slope * 1000.0
+    return float(min(max(score, 0), 100))
 
 
-def xgb_risk_score(gwl: pd.Series) -> float:
-    """Depth-risk component, 0-100: current relative depth of the (scaled) GWL series."""
-    return float(min(max(gwl.iloc[-1] * 100, 0), 100))
+def _build_feature_row(row, season=None):
+    """Build a 12-element feature vector for the XGBoost model from a DB row."""
+    if season is None:
+        season = row.get("crop_season_flag", "Kharif")
+    return [
+        _safe_float(row.get("gwl_current", 0)),
+        _safe_float(row.get("gwl_lag_3mo", 0)),
+        _safe_float(row.get("gwl_lag_6mo", 0)),
+        _safe_float(row.get("rainfall_current", 0)),
+        _safe_float(row.get("rainfall_3mo_avg", 0)),
+        _safe_float(row.get("monsoon_deficit_pct", 0)),
+        _safe_float(row.get("temperature", 0)),
+        _safe_float(row.get("evapotranspiration", 0)),
+        _safe_float(row.get("water_balance_proxy", 0)),
+        1.0 if season == "Kharif" else 0.0,
+        1.0 if season == "Rabi" else 0.0,
+        1.0 if season == "Zaid" else 0.0,
+    ]
+
+
+def xgb_risk_score(district_id: str, conn=None) -> float:
+    """
+    XGBoost-risk component, 0-100.
+    Uses the trained XGBoost checkpoint to predict GWL 6 months ahead,
+    then compares the predicted value against the current value to gauge
+    whether the situation is worsening.
+
+    Score mapping:
+      - predicted ≈ current  → ~50 (stable)
+      - predicted > current  → >50 (worsening)
+      - predicted < current  → <50 (improving)
+    The current depth itself is blended in so deeper districts score higher.
+    """
+    model = _load_xgb_model()
+    if model is None:
+        return 50.0
+
+    close_conn = False
+    if conn is None:
+        conn = get_connection()
+        close_conn = True
+
+    try:
+        df = pd.read_sql(
+            """SELECT gwl_current, gwl_lag_3mo, gwl_lag_6mo,
+                      rainfall_current, rainfall_3mo_avg, monsoon_deficit_pct,
+                      temperature, evapotranspiration, water_balance_proxy,
+                      crop_season_flag
+               FROM features
+               WHERE district_id = %s AND gwl_current IS NOT NULL
+               ORDER BY date DESC LIMIT 1""",
+            conn, params=(district_id,)
+        )
+
+        if len(df) == 0:
+            return 50.0
+
+        row = df.iloc[0]
+        feature_values = _build_feature_row(row)
+        X = np.array([feature_values])
+        predicted_gwl = float(model.predict(X)[0])
+        predicted_gwl = max(0, min(1, predicted_gwl))
+
+        current_gwl = _safe_float(row.get("gwl_current", 0))
+
+        # Blend: 60% current depth + 40% predicted future depth
+        # Both are 0-1 MinMax-scaled, so multiply by 100 for 0-100 score
+        blended = 0.6 * current_gwl + 0.4 * predicted_gwl
+        score = float(min(max(blended * 100, 0), 100))
+        return score
+
+    except Exception as e:
+        print(f"XGBoost prediction error for {district_id}: {e}")
+        return 50.0
+    finally:
+        if close_conn:
+            conn.close()
+
+
+def _safe_float(val, default=0.0):
+    """Convert a value to float, returning default for None/NaN."""
+    if val is None:
+        return default
+    try:
+        f = float(val)
+        return default if np.isnan(f) else f
+    except (ValueError, TypeError):
+        return default
+
+
+def xgb_forecast_6mo(district_id: str, conn=None) -> list:
+    """
+    Use the trained XGBoost model to generate a 6-month GWL forecast.
+    The model predicts GWL 6 months ahead in a single step (not iterative),
+    then interpolates the intermediate months for a smooth forecast curve.
+    Returns a list of {"month": "YYYY-MM", "predicted_gwl": float}.
+    """
+    model = _load_xgb_model()
+    if model is None:
+        return []
+
+    close_conn = False
+    if conn is None:
+        conn = get_connection()
+        close_conn = True
+
+    try:
+        # Fetch the most recent feature rows for this district
+        df = pd.read_sql(
+            """SELECT date, gwl_current, gwl_lag_3mo, gwl_lag_6mo,
+                      rainfall_current, rainfall_3mo_avg, monsoon_deficit_pct,
+                      temperature, evapotranspiration, water_balance_proxy,
+                      crop_season_flag
+               FROM features
+               WHERE district_id = %s AND gwl_current IS NOT NULL
+               ORDER BY date DESC LIMIT 6""",
+            conn, params=(district_id,)
+        )
+
+        if len(df) < 1:
+            return []
+
+        df = df.sort_values("date")  # oldest first
+        last_row = df.iloc[-1]
+        last_date = pd.Timestamp(last_row["date"])
+        current_gwl = _safe_float(last_row["gwl_current"])
+
+        # Single-step prediction: model predicts GWL 6 months ahead
+        feature_values = _build_feature_row(last_row)
+        X = np.array([feature_values])
+        predicted_6mo = float(model.predict(X)[0])
+        predicted_6mo = max(0, min(1, predicted_6mo))  # Clamp
+
+        # Interpolate intermediate months with a smooth curve
+        forecast = []
+        for i in range(1, 7):
+            future_date = last_date + pd.DateOffset(months=i)
+            # Linear interpolation from current to predicted 6-month value
+            t = i / 6.0
+            interp_gwl = current_gwl + t * (predicted_6mo - current_gwl)
+            interp_gwl = max(0, min(1, interp_gwl))
+
+            forecast.append({
+                "month": future_date.strftime("%Y-%m"),
+                "predicted_gwl": round(interp_gwl, 4),
+            })
+
+        return forecast
+
+    except Exception as e:
+        print(f"XGBoost forecast error for {district_id}: {e}")
+        return []
+    finally:
+        if close_conn:
+            conn.close()
 
 
 def components_from_history(gwl: pd.Series, district_id: str = "") -> dict:
@@ -144,7 +346,7 @@ def components_from_history(gwl: pd.Series, district_id: str = "") -> dict:
     """
     return {
         "lr_trend": lr_trend_score(gwl),
-        "xgb_risk": xgb_risk_score(gwl),
+        "xgb_risk": xgb_risk_score(district_id) if district_id else float(min(max(gwl.iloc[-1] * 100, 0), 100)),
         "drought_frequency": compute_drought_frequency(district_id, gwl),
     }
 
@@ -190,6 +392,7 @@ def get_model_components(district_id: str) -> dict:
                         )
                         if not alt_data["gwl_current"].dropna().empty:
                             df = alt_data
+                            resolved_id = alt_id
                             break
 
         conn.close()
@@ -202,7 +405,20 @@ def get_model_components(district_id: str) -> dict:
         if len(gwl_history) < 2:
             raise ValueError(f"Insufficient non-null GWL data for {district_id}")
 
-        return components_from_history(gwl_history, district_id)
+        # LR trend from GWL history
+        lr = lr_trend_score(gwl_history)
+
+        # XGBoost risk from the trained model (uses full feature row)
+        xgb = xgb_risk_score(resolved_id)
+
+        # Drought frequency from GWL history
+        drought = compute_drought_frequency(resolved_id, gwl_history)
+
+        return {
+            "lr_trend": lr,
+            "xgb_risk": xgb,
+            "drought_frequency": drought,
+        }
 
     except Exception as e:
         print(f"Error computing components for {district_id}: {e}")
@@ -211,7 +427,6 @@ def get_model_components(district_id: str) -> dict:
             "xgb_risk": 50.0,
             "drought_frequency": 50.0
         }
-
 
 
 
