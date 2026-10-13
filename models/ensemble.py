@@ -1,512 +1,355 @@
+"""Causal scoring from observed district or explicit zone evidence.
+
+Missing evidence is unavailable. A trained six-month endpoint is never
+expanded into unvalidated monthly or calendar-year curves.
 """
-AquaIQ — Ensemble Crisis Score (Phase III)
---------------------------------------------
-Combines Linear Regression trend, XGBoost risk, and historical drought
-frequency into a single 0–100 Crisis Score per district.
-
-Weights are loaded from config.yaml (fitted via backtest, not hand-picked).
-estimate_type is set per district based on data readiness:
-  - district_level:     enough CGWB history for per-district prediction
-  - zone_fallback:      sparse data → aggregated by agro_climatic_zone
-  - insufficient_data:  even the zone lacks enough history
-
-v2 — Now uses the trained XGBoost checkpoint and sklearn LinearRegression
-     for the ensemble components instead of heuristic proxies.
-"""
-
-import os
+import json
+import hashlib
+import math
 from pathlib import Path
-import pandas as pd
+from datetime import date
 import numpy as np
+import pandas as pd
 import yaml
-from functools import lru_cache
+from threading import local
+from db.connection import get_connection, read_frame, finite_json
+from models.tiers import score_to_tier
 
-try:
-    from models.tiers import score_to_tier
-except ImportError:  # executed as a script: python models/ensemble.py
-    from tiers import score_to_tier
+ROOT = Path(__file__).resolve().parents[1]
+CONFIG = yaml.safe_load((ROOT / 'config.yaml').read_text(encoding='utf-8'))
+NUMERIC_FEATURES = ['gwl_current','gwl_lag_3mo','gwl_lag_6mo','rainfall_current',
+    'rainfall_3mo_avg','monsoon_deficit_pct','temperature','evapotranspiration','water_balance_proxy']
+_BUNDLE_CACHE = {}
+_FUZZY_CONTEXT = local()
 
-ROOT = Path(__file__).parent.parent
 
-with open(ROOT / "config.yaml") as f:
-    CONFIG = yaml.safe_load(f)
+def _as_of(value=None):
+    cutoff = pd.Timestamp(value or date.today()).normalize()
+    if cutoff > pd.Timestamp(date.today()):
+        raise ValueError('as_of cannot be in the future.')
+    return cutoff
 
-# ─── Trained XGBoost model (lazy-loaded singleton) ────────────────────────
-_XGB_MODEL = None
-_XGB_FEATURE_COLS = None  # set after first load
+
+def _completed_feature_month(cutoff):
+    """Monthly aggregates are available only after their calendar month ends."""
+    month = cutoff.to_period('M')
+    return month.to_timestamp() if cutoff >= month.end_time.normalize() else (month-1).to_timestamp()
+
+
+def feature_generation():
+    manifest = json.loads((ROOT / 'data/processed/feature_manifest.json').read_text(encoding='utf-8'))
+    generation = manifest.get('generation_id')
+    if not generation or not generation.startswith('physical-v3-causal-monthly-'):
+        raise RuntimeError('Physical feature generation has not been rebuilt.')
+    return generation
+
+
+def _load_bundle():
+    from models.xgboost_model import load_model_bundle
+    checkpoint = ROOT / CONFIG['paths']['xgboost_checkpoint']
+    generation = feature_generation()
+    try:
+        stat = checkpoint.stat()
+        manifest = json.loads(checkpoint.read_text(encoding='utf-8'))
+        assets = []
+        for name in ('model_path','card_path'):
+            asset = (checkpoint.parent / manifest[name]).resolve()
+            if not asset.is_relative_to(checkpoint.parent.resolve()):
+                raise ValueError('Model asset path escapes checkpoint directory.')
+            asset_stat = asset.stat()
+            assets.append((str(asset),asset_stat.st_mtime_ns,asset_stat.st_size))
+        key = (str(checkpoint), stat.st_mtime_ns, stat.st_size, generation, tuple(assets))
+    except (OSError,KeyError,ValueError) as error:
+        raise RuntimeError('Model bundle is unavailable or incompatible.') from error
+    if key not in _BUNDLE_CACHE:
+        _BUNDLE_CACHE.clear()
+        try:
+            _BUNDLE_CACHE[key] = load_model_bundle(checkpoint, expected_generation=generation)
+        except ValueError as error:
+            raise RuntimeError('Model bundle is unavailable or incompatible.') from error
+    return _BUNDLE_CACHE[key]
 
 
 def _load_xgb_model():
-    """Load the saved XGBoost checkpoint once."""
-    global _XGB_MODEL, _XGB_FEATURE_COLS
-    if _XGB_MODEL is not None:
-        return _XGB_MODEL
-
-    checkpoint = ROOT / CONFIG["paths"]["xgboost_checkpoint"]
-    if not checkpoint.exists():
-        print(f"WARNING: XGBoost checkpoint not found at {checkpoint}, falling back to heuristic")
-        return None
-
-    import xgboost as xgb
-    _XGB_MODEL = xgb.XGBRegressor()
-    _XGB_MODEL.load_model(str(checkpoint))
-
-    # The model was trained on these 12 features (in order):
-    # gwl_current, gwl_lag_3mo, gwl_lag_6mo, rainfall_current, rainfall_3mo_avg,
-    # monsoon_deficit_pct, temperature, evapotranspiration, water_balance_proxy,
-    # season_Kharif, season_Rabi, season_Zaid
-    _XGB_FEATURE_COLS = [
-        "gwl_current", "gwl_lag_3mo", "gwl_lag_6mo",
-        "rainfall_current", "rainfall_3mo_avg", "monsoon_deficit_pct",
-        "temperature", "evapotranspiration", "water_balance_proxy",
-        "season_Kharif", "season_Rabi", "season_Zaid",
-    ]
-    return _XGB_MODEL
+    return _load_bundle()[0]
 
 
-def get_connection():
-    import psycopg2
-    from dotenv import load_dotenv
-    load_dotenv(ROOT / ".env")
-    return psycopg2.connect(
-        host=os.getenv("POSTGRES_HOST", "localhost"),
-        port=int(os.getenv("POSTGRES_PORT", 5432)),
-        dbname=os.getenv("POSTGRES_DB", "aquaiq"),
-        user=os.getenv("POSTGRES_USER", "aquaiq_user"),
-        password=os.getenv("POSTGRES_PASSWORD", ""),
-    )
-
-
-def _load_ensemble_weights() -> dict:
-    """
-    Load ensemble weights from config.yaml.
-    Uses fitted_weights if available, otherwise falls back to initial_weights.
-    """
-    ensemble_cfg = CONFIG.get("model_hyperparameters", {}).get("ensemble", {})
-    weights = ensemble_cfg.get("fitted_weights", ensemble_cfg.get("initial_weights", {}))
-    return {
-        "linear_regression_trend": weights.get("linear_regression_trend", 0.25),
-        "xgboost_risk": weights.get("xgboost_risk", 0.50),
-        "drought_frequency": weights.get("drought_frequency", 0.25),
-    }
-
-
-def compute_drought_frequency(district_id: str, gwl_history: pd.Series) -> float:
-    """
-    Drought frequency = % of past months above the district's 80th percentile
-    GWL depth (higher depth = worse). Returned as a score 0–100.
-    """
-    if len(gwl_history) < 12:
-        return 50.0  # fallback for insufficient data
-
-    threshold = gwl_history.quantile(0.80)
-    drought_months = (gwl_history > threshold).sum()
-    freq_pct = (drought_months / len(gwl_history)) * 100
-    score = min((freq_pct / 20.0) * 100, 100.0)
-    return float(score)
-
-
-def _determine_estimate_type(district_id: str, conn) -> tuple:
-    """
-    Determine estimate_type for a district based on data readiness.
-    Returns (estimate_type, zone_fallback_reason or None).
-    """
-    min_months = CONFIG.get("crisis_score", {}).get("fallback_strategy", {}).get("min_months_required", 24)
-    min_pct = CONFIG.get("crisis_score", {}).get("data_readiness_min_pct", 60)
-
-    with conn.cursor() as cur:
-        # Count months of CGWB data for this district
-        cur.execute(
-            "SELECT COUNT(*) FROM raw_data WHERE district_id = %s AND source = 'CGWB'",
-            (district_id,)
-        )
-        n_months = cur.fetchone()[0]
-
-    if n_months >= min_months:
-        return "district_level", None
-
-    # Not enough per-district data — check zone-level
-    with conn.cursor() as cur:
-        cur.execute(
-            "SELECT agro_climatic_zone FROM districts WHERE district_id = %s",
-            (district_id,)
-        )
-        row = cur.fetchone()
-        zone = row[0] if row else None
-
-    if zone:
-        with conn.cursor() as cur:
-            cur.execute("""
-                SELECT COUNT(*) FROM raw_data r
-                JOIN districts d ON r.district_id = d.district_id
-                WHERE d.agro_climatic_zone = %s AND r.source = 'CGWB'
-            """, (zone,))
-            zone_months = cur.fetchone()[0]
-
-        if zone_months >= min_months:
-            reason = f"Only {n_months} months of CGWB data (need {min_months}); using zone '{zone}'"
-            return "zone_fallback", reason
-
-    reason = f"Only {n_months} months of CGWB data and zone lacks sufficient history"
-    return "insufficient_data", reason
-
-
-# ─── Component functions (now using real models) ─────────────────────────
-
-def lr_trend_score(gwl: pd.Series) -> float:
-    """
-    LR-trend component, 0-100.
-    Fits a sklearn LinearRegression on the GWL history and extracts the slope.
-    Positive slope = worsening (deepening GWL), negative = improving.
-    Score: 50 = stable, >50 = worsening, <50 = improving.
-    """
-    from sklearn.linear_model import LinearRegression
-
-    if len(gwl) < 6:
-        return 50.0
-
-    X = np.arange(len(gwl)).reshape(-1, 1)
-    y = gwl.values
-
-    model = LinearRegression()
-    model.fit(X, y)
-    slope = model.coef_[0]
-
-    # Scale: slope is in GWL-units/month (MinMax-scaled, so ~0-1 range).
-    # A slope of +0.01/month → score ~60 (moderate worsening)
-    # A slope of +0.05/month → score ~100 (severe worsening)
-    score = 50.0 + slope * 1000.0
-    return float(min(max(score, 0), 100))
-
-
-def _build_feature_row(row, season=None):
-    """Build a 12-element feature vector for the XGBoost model from a DB row."""
-    if season is None:
-        season = row.get("crop_season_flag", "Kharif")
-    return [
-        _safe_float(row.get("gwl_current", 0)),
-        _safe_float(row.get("gwl_lag_3mo", 0)),
-        _safe_float(row.get("gwl_lag_6mo", 0)),
-        _safe_float(row.get("rainfall_current", 0)),
-        _safe_float(row.get("rainfall_3mo_avg", 0)),
-        _safe_float(row.get("monsoon_deficit_pct", 0)),
-        _safe_float(row.get("temperature", 0)),
-        _safe_float(row.get("evapotranspiration", 0)),
-        _safe_float(row.get("water_balance_proxy", 0)),
-        1.0 if season == "Kharif" else 0.0,
-        1.0 if season == "Rabi" else 0.0,
-        1.0 if season == "Zaid" else 0.0,
-    ]
-
-
-def xgb_risk_score(district_id: str, conn=None) -> float:
-    """
-    XGBoost-risk component, 0-100.
-    Uses the trained XGBoost checkpoint to predict GWL 6 months ahead,
-    then compares the predicted value against the current value to gauge
-    whether the situation is worsening.
-
-    Score mapping:
-      - predicted ≈ current  → ~50 (stable)
-      - predicted > current  → >50 (worsening)
-      - predicted < current  → <50 (improving)
-    The current depth itself is blended in so deeper districts score higher.
-    """
-    model = _load_xgb_model()
-    if model is None:
-        return 50.0
-
-    close_conn = False
-    if conn is None:
-        conn = get_connection()
-        close_conn = True
-
+def _safe_float(value, default=np.nan):
     try:
-        df = pd.read_sql(
-            """SELECT gwl_current, gwl_lag_3mo, gwl_lag_6mo,
-                      rainfall_current, rainfall_3mo_avg, monsoon_deficit_pct,
-                      temperature, evapotranspiration, water_balance_proxy,
-                      crop_season_flag
-               FROM features
-               WHERE district_id = %s AND gwl_current IS NOT NULL
-               ORDER BY date DESC LIMIT 1""",
-            conn, params=(district_id,)
-        )
-
-        if len(df) == 0:
-            return 50.0
-
-        row = df.iloc[0]
-        feature_values = _build_feature_row(row)
-        X = np.array([feature_values])
-        predicted_gwl = float(model.predict(X)[0])
-        predicted_gwl = max(0, min(1, predicted_gwl))
-
-        current_gwl = _safe_float(row.get("gwl_current", 0))
-
-        # Blend: 60% current depth + 40% predicted future depth
-        # Both are 0-1 MinMax-scaled, so multiply by 100 for 0-100 score
-        blended = 0.6 * current_gwl + 0.4 * predicted_gwl
-        score = float(min(max(blended * 100, 0), 100))
-        return score
-
-    except Exception as e:
-        print(f"XGBoost prediction error for {district_id}: {e}")
-        return 50.0
-    finally:
-        if close_conn:
-            conn.close()
-
-
-def _safe_float(val, default=0.0):
-    """Convert a value to float, returning default for None/NaN."""
-    if val is None:
-        return default
-    try:
-        f = float(val)
-        return default if np.isnan(f) else f
+        result = float(value)
+        return result if math.isfinite(result) else default
     except (ValueError, TypeError):
         return default
 
 
-def xgb_forecast_6mo(district_id: str, conn=None) -> list:
-    """
-    Use the trained XGBoost model to generate a 6-month GWL forecast.
-    The model predicts GWL 6 months ahead in a single step (not iterative),
-    then interpolates the intermediate months for a smooth forecast curve.
-    Returns a list of {"month": "YYYY-MM", "predicted_gwl": float}.
-    """
-    model = _load_xgb_model()
-    if model is None:
-        return []
+def _build_feature_row(row, season=None):
+    season = season or row.get('crop_season_flag')
+    if season not in ('Kharif','Rabi','Zaid'):
+        raise ValueError('Feature crop season is missing or invalid.')
+    return [_safe_float(row.get(column)) for column in NUMERIC_FEATURES] + [float(season == s) for s in ('Kharif','Rabi','Zaid')]
 
-    close_conn = False
-    if conn is None:
-        conn = get_connection()
-        close_conn = True
 
+def depth_to_score(depth):
+    """Project-defined depth risk scale; depth is metres below ground level."""
+    depth = _safe_float(depth)
+    if not np.isfinite(depth):
+        return None
+    if depth <= 5:
+        return max(0., depth * 6.)
+    if depth <= 10:
+        return 30. + (depth - 5.) * 6.
+    if depth <= 20:
+        return 60. + (depth - 10.) * 2.
+    return min(100., 80. + depth - 20.)
+
+
+def _load_ensemble_weights():
+    settings = yaml.safe_load((ROOT / 'config.yaml').read_text(encoding='utf-8'))['model_hyperparameters']['ensemble']
+    # A historical proxy fit is not a calibration of this serving pipeline.
+    raw = settings.get('validated_weights') or settings['initial_weights']
+    keys = ('linear_regression_trend','xgboost_risk','drought_frequency','fuzzy_logic')
+    weights = {key: float(raw.get(key,0.)) for key in keys}
+    total = sum(weights.values())
+    if total <= 0 or any(not math.isfinite(v) or v < 0 for v in weights.values()):
+        raise ValueError('Ensemble weights must be finite, nonnegative, and have positive total.')
+    return {key:value/total for key,value in weights.items()}
+
+
+def scoring_signature():
+    settings = yaml.safe_load((ROOT/'config.yaml').read_text(encoding='utf-8'))
+    digest = hashlib.sha256(json.dumps({'weights':_load_ensemble_weights(),
+        'crisis_score':settings['crisis_score']},sort_keys=True).encode())
+    for name in ('ensemble.py','fuzzy_logic.py','tiers.py'):
+        digest.update((ROOT/'models'/name).read_bytes())
+    return digest.hexdigest()
+
+
+def _gwl_series(history):
+    if isinstance(history, pd.DataFrame):
+        values = pd.to_numeric(history.gwl_current, errors='coerce')
+        index = pd.to_datetime(history.date)
+        series = pd.Series(values.to_numpy(), index=index)
+    else:
+        series = pd.to_numeric(history,errors='coerce').copy()
+    return series[np.isfinite(series)].sort_index()
+
+
+def lr_trend_score(history):
+    series = _gwl_series(history)
+    if len(series) < 6:
+        return None
+    if isinstance(series.index,pd.DatetimeIndex):
+        x = np.array([d.year*12+d.month for d in series.index],dtype=float)
+    else:
+        x = np.arange(len(series),dtype=float)
+    slope = np.polyfit(x-x.min(), series.to_numpy(),1)[0]
+    return float(np.clip(50. + slope*12.*50., 0.,100.))
+
+
+def compute_drought_frequency(district_id, history):
+    series = _gwl_series(history)
+    if len(series) < 24:
+        return None
+    baseline = series.iloc[:min(len(series),216)]
+    threshold = baseline.quantile(.8)
+    recent = series.tail(min(len(series),36))
+    return float((recent > threshold).mean()*100.)
+
+
+def compute_fuzzy_score(rainfall_deficit, depletion_rate):
+    if not all(np.isfinite(_safe_float(v)) for v in (rainfall_deficit,depletion_rate)):
+        return None
+    from models.fuzzy_logic import build_fuzzy_system, compute_crisis_score as fis_score
+    if not hasattr(_FUZZY_CONTEXT,'simulation'):
+        _FUZZY_CONTEXT.simulation = build_fuzzy_system()[0]
+    simulation = _FUZZY_CONTEXT.simulation
+    value, _ = fis_score(simulation, float(np.clip(rainfall_deficit,0,100)),float(np.clip(depletion_rate,0,15)))
+    if not np.isfinite(value):
+        raise ValueError('Fuzzy inference produced a non-finite result.')
+    return float(value)
+
+
+def components_from_history(history, predicted_depth=None):
+    if isinstance(history,pd.DataFrame) and 'is_observed' in history:
+        from models.xgboost_model import observed_mask
+        history = history.loc[observed_mask(history)].copy()
+    series = _gwl_series(history)
+    if series.empty:
+        return {key:None for key in ('lr_trend','xgb_risk','drought_frequency','fuzzy_logic')}
+    current = float(series.iloc[-1])
+    xgb = depth_to_score(.6*current + .4*predicted_depth) if predicted_depth is not None and np.isfinite(predicted_depth) else None
+    fuzzy = None
+    if isinstance(history,pd.DataFrame) and isinstance(series.index,pd.DatetimeIndex):
+        last = series.index[-1]
+        prior = last - pd.DateOffset(months=12)
+        deficit_rows = history[pd.to_datetime(history.date) == last]
+        anomaly = _safe_float(deficit_rows.iloc[-1].get('monsoon_deficit_pct')) if len(deficit_rows) else np.nan
+        if prior in series.index and np.isfinite(anomaly):
+            fuzzy = compute_fuzzy_score(max(0.,-anomaly),max(0.,(current-float(series.loc[prior]))*100.))
+    return {'lr_trend':lr_trend_score(series),'xgb_risk':xgb,
+        'drought_frequency':compute_drought_frequency('',series),'fuzzy_logic':fuzzy}
+
+
+def blend_components(components, weights=None):
+    weights = weights or _load_ensemble_weights()
+    mapping = {'linear_regression_trend':'lr_trend','xgboost_risk':'xgb_risk','drought_frequency':'drought_frequency','fuzzy_logic':'fuzzy_logic'}
+    active = {key:weight for key,weight in weights.items() if components.get(mapping[key]) is not None and weight > 0}
+    if not active:
+        return None, {}
+    total = sum(active.values())
+    normalized = {key:weight/total for key,weight in active.items()}
+    value = sum(components[mapping[key]]*weight for key,weight in normalized.items())
+    return round(float(np.clip(value,0,100))), normalized
+
+
+def _readiness(frame, cutoff):
+    observed = frame[frame.is_observed.fillna(False) & np.isfinite(pd.to_numeric(frame.gwl_current,errors='coerce'))]
+    start = pd.Timestamp(CONFIG['date_range']['start'])
+    end = min(cutoff,pd.Timestamp(CONFIG['date_range']['end']))
+    interval = CONFIG.get('crisis_score',{}).get('observation_interval_months',3)
+    months = max(1,(end.year-start.year)*12+end.month-start.month+1)
+    expected = math.ceil(months/interval)
+    count = observed.date.nunique()
+    pct = min(100.,100.*count/expected)
+    minimum = CONFIG['crisis_score']['fallback_strategy']['min_months_required']
+    return {'observed_months':count,'expected_monitoring_rounds':expected,'observation_interval_months':interval,
+        'readiness_score':round(pct,1),'eligible':count>=minimum and pct>=CONFIG['crisis_score']['data_readiness_min_pct']}
+
+
+def select_evidence(district_id, as_of=None, conn=None, zone_cache=None):
+    cutoff = _as_of(as_of)
+    available_month = _completed_feature_month(cutoff)
+    generation = feature_generation()
+    own = conn is None
+    conn = conn or get_connection()
     try:
-        # Fetch the most recent feature rows for this district
-        df = pd.read_sql(
-            """SELECT date, gwl_current, gwl_lag_3mo, gwl_lag_6mo,
-                      rainfall_current, rainfall_3mo_avg, monsoon_deficit_pct,
-                      temperature, evapotranspiration, water_balance_proxy,
-                      crop_season_flag
-               FROM features
-               WHERE district_id = %s AND gwl_current IS NOT NULL
-               ORDER BY date DESC LIMIT 6""",
-            conn, params=(district_id,)
-        )
-
-        if len(df) < 1:
-            return []
-
-        df = df.sort_values("date")  # oldest first
-        last_row = df.iloc[-1]
-        last_date = pd.Timestamp(last_row["date"])
-        current_gwl = _safe_float(last_row["gwl_current"])
-
-        # Single-step prediction: model predicts GWL 6 months ahead
-        feature_values = _build_feature_row(last_row)
-        X = np.array([feature_values])
-        predicted_6mo = float(model.predict(X)[0])
-        predicted_6mo = max(0, min(1, predicted_6mo))  # Clamp
-
-        # Interpolate intermediate months with a smooth curve
-        forecast = []
-        for i in range(1, 7):
-            future_date = last_date + pd.DateOffset(months=i)
-            # Linear interpolation from current to predicted 6-month value
-            t = i / 6.0
-            interp_gwl = current_gwl + t * (predicted_6mo - current_gwl)
-            interp_gwl = max(0, min(1, interp_gwl))
-
-            forecast.append({
-                "month": future_date.strftime("%Y-%m"),
-                "predicted_gwl": round(interp_gwl, 4),
-            })
-
-        return forecast
-
-    except Exception as e:
-        print(f"XGBoost forecast error for {district_id}: {e}")
-        return []
+        meta = read_frame('SELECT district_id,district_name,state,agro_climatic_zone FROM districts WHERE district_id=%s',conn,(district_id,))
+        if meta.empty:
+            raise LookupError('Unknown canonical district ID.')
+        frame = read_frame('SELECT * FROM features WHERE district_id=%s AND date<=%s AND feature_generation=%s ORDER BY date',conn,(district_id,available_month.date(),generation))
+        if not frame.empty:
+            frame['date'] = pd.to_datetime(frame.date)
+        else:
+            frame = pd.DataFrame(columns=['date','is_observed','gwl_current'])
+        readiness = _readiness(frame,cutoff)
+        zone = meta.iloc[0].agro_climatic_zone
+        estimate = 'district_level'
+        reason = None
+        if not readiness['eligible']:
+            estimate = 'zone_fallback'
+            reason = f"District has {readiness['observed_months']} observed months and {readiness['readiness_score']}% monitoring-round coverage."
+            if zone:
+                expressions = ','.join(f"AVG(f.{column}) {'FILTER(WHERE f.is_observed)' if column=='gwl_current' else ''} AS {column}" for column in NUMERIC_FEATURES)
+                cache_key=(zone,cutoff.isoformat(),generation)
+                frame = zone_cache.get(cache_key) if zone_cache is not None else None
+                if frame is None:
+                    frame = read_frame(f'''SELECT f.date,{expressions},
+                    BOOL_OR(f.is_observed) AS is_observed, BOOL_AND(f.is_imputed) AS is_imputed,
+                    COUNT(DISTINCT f.district_id) FILTER(WHERE f.is_observed) AS reporting_districts
+                    FROM features f JOIN districts d ON d.district_id=f.district_id
+                    WHERE d.agro_climatic_zone=%s AND f.date<=%s AND f.feature_generation=%s
+                    GROUP BY f.date ORDER BY f.date''',conn,(zone,available_month.date(),generation))
+                    if zone_cache is not None:
+                        zone_cache[cache_key]=frame
+                frame=frame.copy()
+                frame['date'] = pd.to_datetime(frame.date)
+                original_gwl = pd.to_numeric(frame.gwl_current,errors='coerce')
+                frame['gwl_current'] = original_gwl.ffill(limit=3)
+                frame['is_imputed'] = original_gwl.isna() & frame.gwl_current.notna()
+                for lag in (3,6):
+                    frame[f'gwl_lag_{lag}mo'] = frame.gwl_current.shift(lag)
+                frame['crop_season_flag'] = frame.date.dt.month.map(lambda m:'Kharif' if 6<=m<=10 else 'Rabi' if m in (11,12,1,2,3) else 'Zaid')
+            zone_ready = _readiness(frame,cutoff)
+            readiness['zone_readiness'] = zone_ready
+            if not zone or not zone_ready['eligible']:
+                estimate = 'insufficient_data'
+                reason += ' The zone also lacks enough observed history.'
+        observed = frame[frame.is_observed.fillna(False) & np.isfinite(pd.to_numeric(frame.gwl_current,errors='coerce'))].copy()
+        origin = pd.Timestamp(observed.date.max()) if len(observed) else None
+        return {'district_id':district_id,'as_of':cutoff,'generation':generation,'frame':frame,
+            'history':observed,'origin':origin,'estimate_type':estimate,'zone':zone if estimate=='zone_fallback' else None,
+            'reason':reason,'readiness':readiness}
     finally:
-        if close_conn:
+        if own:
             conn.close()
 
 
-def components_from_history(gwl: pd.Series, district_id: str = "") -> dict:
-    """
-    The three ensemble components (each 0-100) for one district, from its GWL
-    history ordered oldest -> newest with NaNs removed.
-
-    Shared by the live API (get_model_components) and models/backtest.py, so the
-    ensemble weights are fitted on exactly the scores they are later applied to.
-    """
-    return {
-        "lr_trend": lr_trend_score(gwl),
-        "xgb_risk": xgb_risk_score(district_id) if district_id else float(min(max(gwl.iloc[-1] * 100, 0), 100)),
-        "drought_frequency": compute_drought_frequency(district_id, gwl),
-    }
-
-
-def get_model_components(district_id: str) -> dict:
-    """
-    Fetch the underlying predictions from LR and XGBoost, and history for drought frequency.
-    Tries the resolved district ID if the given one has no GWL data.
-    """
-    try:
-        # Try to resolve to an ID that has actual GWL data
-        try:
-            from api.district_resolver import resolve_district_id
-            resolved_id = resolve_district_id(district_id)
-        except ImportError:
-            resolved_id = district_id
-
-        conn = get_connection()
-        df = pd.read_sql(
-            "SELECT date, gwl_current FROM features WHERE district_id = %s ORDER BY date",
-            conn,
-            params=(resolved_id,)
-        )
-
-        # If resolved ID has no non-null GWL, try all IDs for same district name
-        if df["gwl_current"].dropna().empty and resolved_id == district_id:
-            name_df = pd.read_sql(
-                "SELECT district_name FROM districts WHERE district_id = %s",
-                conn, params=(district_id,)
-            )
-            if not name_df.empty:
-                name = name_df.iloc[0]["district_name"]
-                alt_df = pd.read_sql(
-                    "SELECT district_id FROM districts WHERE LOWER(district_name) = LOWER(%s)",
-                    conn, params=(name,)
-                )
-                for _, row in alt_df.iterrows():
-                    alt_id = row["district_id"]
-                    if alt_id != district_id:
-                        alt_data = pd.read_sql(
-                            "SELECT date, gwl_current FROM features WHERE district_id = %s ORDER BY date",
-                            conn, params=(alt_id,)
-                        )
-                        if not alt_data["gwl_current"].dropna().empty:
-                            df = alt_data
-                            resolved_id = alt_id
-                            break
-
-        conn.close()
-
-        if len(df) == 0:
-            raise ValueError(f"No data for district {district_id}")
-
-        gwl_history = df["gwl_current"].dropna()
-
-        if len(gwl_history) < 2:
-            raise ValueError(f"Insufficient non-null GWL data for {district_id}")
-
-        # LR trend from GWL history
-        lr = lr_trend_score(gwl_history)
-
-        # XGBoost risk from the trained model (uses full feature row)
-        xgb = xgb_risk_score(resolved_id)
-
-        # Drought frequency from GWL history
-        drought = compute_drought_frequency(resolved_id, gwl_history)
-
-        return {
-            "lr_trend": lr,
-            "xgb_risk": xgb,
-            "drought_frequency": drought,
-        }
-
-    except Exception as e:
-        print(f"Error computing components for {district_id}: {e}")
-        return {
-            "lr_trend": 50.0,
-            "xgb_risk": 50.0,
-            "drought_frequency": 50.0
-        }
+def forecast_from_evidence(evidence, feature_override=None):
+    origin = evidence['origin']
+    result = {'district_id':evidence['district_id'],'status':'insufficient_data','forecast':[],
+        'estimate_type':evidence['estimate_type'],'zone_fallback_reason':evidence['reason'],
+        'source_zone':evidence['zone'],'as_of':evidence['as_of'].date().isoformat(),
+        'last_observed_date':origin.date().isoformat() if origin is not None else None,
+        'forecast_origin':origin.date().isoformat() if origin is not None else None,
+        'observation_month_completed_on':(origin+pd.offsets.MonthEnd(0)).date().isoformat() if origin is not None else None,
+        'feature_generation':evidence['generation'],'projection_method':'direct_xgboost_6_month_endpoint',
+        'horizon_months':6,'data_age_months':None,'model_version':None}
+    if evidence['estimate_type']=='insufficient_data' or origin is None:
+        return result
+    model, card = _load_bundle()
+    result['model_version'] = card['version']
+    result['model_sha256'] = card.get('model_sha256')
+    result['model_validation'] = card.get('validation_assessment',{'status':'unassessed'})
+    trained_through = pd.Timestamp(card['train_target_cutoff'])
+    if origin < trained_through:
+        result.update(status='unavailable',message='This checkpoint was trained after the requested observation origin; causal forecast unavailable.')
+        return result
+    row = evidence['frame'][evidence['frame'].date==origin].iloc[-1].copy()
+    if feature_override:
+        for key,value in feature_override.items():
+            row[key] = value
+    values = pd.DataFrame([_build_feature_row(row)],columns=card['features'],dtype=float)
+    predicted = float(model.predict(values)[0])
+    if not np.isfinite(predicted) or predicted < 0:
+        raise RuntimeError('Model produced an invalid groundwater depth.')
+    target = origin + pd.DateOffset(months=6)
+    age = (evidence['as_of'].year-origin.year)*12+evidence['as_of'].month-origin.month
+    result.update(status='historical_forecast' if target < evidence['as_of'] else 'success',data_age_months=age,
+        feature_cutoff=origin.date().isoformat(),forecast_start=target.strftime('%Y-%m'),
+        forecast_horizon='6-month ahead endpoint',forecast=[{'month':target.strftime('%Y-%m'),'predicted_gwl':round(predicted,4)}])
+    return result
 
 
+def score_evidence(evidence, forecast=None):
+    forecast = forecast or forecast_from_evidence(evidence)
+    result = dict(forecast)
+    result.update(crisis_score=None,tier=None,components={},ensemble_weights={},data_readiness=evidence['readiness'])
+    if not forecast['forecast']:
+        return result
+    components = components_from_history(evidence['history'],forecast['forecast'][0]['predicted_gwl'])
+    score, weights = blend_components(components)
+    result.update(crisis_score=score,tier=score_to_tier(score) if score is not None else None,
+        components=components,ensemble_weights=weights,weights_status='validated' if CONFIG['model_hyperparameters']['ensemble'].get('validated_weights') else 'initial_uncalibrated')
+    return finite_json(result)
 
 
-@lru_cache(maxsize=1024)
-def compute_crisis_score(district_id: str) -> dict:
-    """
-    AquaIQ Crisis Score = weighted sum of LR trend + XGBoost risk + drought frequency.
-    Weights come from config.yaml (fitted via backtest).
-    Also determines estimate_type (district_level / zone_fallback / insufficient_data).
-    """
-    weights = _load_ensemble_weights()
-    comps = get_model_components(district_id)
-
-    # Determine estimate type
-    try:
-        conn = get_connection()
-        estimate_type, zone_reason = _determine_estimate_type(district_id, conn)
-        conn.close()
-    except Exception:
-        estimate_type, zone_reason = "district_level", None
-
-    # If insufficient data, return null score
-    if estimate_type == "insufficient_data":
-        return {
-            "district_id": district_id,
-            "crisis_score": None,
-            "tier": None,
-            "estimate_type": estimate_type,
-            "zone_fallback_reason": zone_reason,
-            "ensemble_weights": weights,
-            "components": comps,
-        }
-
-    final_score = (
-        comps["lr_trend"] * weights["linear_regression_trend"] +
-        comps["xgb_risk"] * weights["xgboost_risk"] +
-        comps["drought_frequency"] * weights["drought_frequency"]
-    )
-    final_score = round(min(max(final_score, 0), 100))
-    tier = score_to_tier(final_score)
-
-    return {
-        "district_id": district_id,
-        "crisis_score": final_score,
-        "tier": tier,
-        "estimate_type": estimate_type,
-        "zone_fallback_reason": zone_reason,
-        "ensemble_weights": weights,
-        "components": comps,
-    }
+def compute_crisis_score(district_id, as_of=None, conn=None, zone_cache=None):
+    evidence = select_evidence(district_id,as_of,conn,zone_cache)
+    return score_evidence(evidence)
 
 
-def write_crisis_score_to_db(district_id: str, score_data: dict):
-    """Write the computed crisis score to the crisis_scores table."""
-    conn = get_connection()
-    try:
-        with conn.cursor() as cur:
-            cur.execute("""
-                INSERT INTO crisis_scores
-                    (district_id, forecast_date, aquaiq_score, tier, estimate_type, zone_fallback_reason)
-                VALUES (%s, CURRENT_DATE, %s, %s, %s, %s)
-                ON CONFLICT (district_id, forecast_date) DO UPDATE SET
-                    aquaiq_score = EXCLUDED.aquaiq_score,
-                    tier = EXCLUDED.tier,
-                    estimate_type = EXCLUDED.estimate_type,
-                    zone_fallback_reason = EXCLUDED.zone_fallback_reason,
-                    updated_at = CURRENT_TIMESTAMP
-            """, (
-                district_id,
-                score_data.get("crisis_score"),
-                score_data.get("tier"),
-                score_data.get("estimate_type", "district_level"),
-                score_data.get("zone_fallback_reason"),
-            ))
-        conn.commit()
-    finally:
-        conn.close()
+def forecast_result(district_id, as_of=None, conn=None):
+    return compute_crisis_score(district_id,as_of,conn)
 
 
-if __name__ == "__main__":
-    res = compute_crisis_score("RJ-Jaipur")
-    print(res)
+def get_model_components(district_id, as_of=None):
+    return compute_crisis_score(district_id,as_of)['components']
+
+
+def xgb_risk_score(district_id,conn=None,as_of=None):
+    return compute_crisis_score(district_id,as_of,conn)['components'].get('xgb_risk')
+
+
+def xgb_forecast_6mo(district_id,conn=None,target_year=None,start_month=None,n_months=6,as_of=None):
+    if target_year or start_month or n_months!=6:
+        raise ValueError('Only the validated six-month endpoint from available observed data is supported.')
+    return forecast_result(district_id,None if as_of in (None,'today','last_observed') else as_of,conn)['forecast']
+
+
+def main(argv=None):
+    from models.score_all import main as batch_main
+    batch_main(argv)
+
+
+if __name__=='__main__':
+    main()

@@ -35,29 +35,50 @@ with open(ROOT / "config.yaml") as f:
 PROCESSED_DIR = ROOT / CONFIG["paths"]["data_processed"]
 
 
+def get_connection():
+    import psycopg2
+    return psycopg2.connect(
+        host=os.getenv("POSTGRES_HOST", "localhost"),
+        port=int(os.getenv("POSTGRES_PORT", 5432)),
+        dbname=os.getenv("POSTGRES_DB", "aquaiq"),
+        user=os.getenv("POSTGRES_USER", "aquaiq_user"),
+        password=os.getenv("POSTGRES_PASSWORD", ""),
+    )
+
+
 def load_gwl_data() -> pd.DataFrame:
-    """Load GWL data from features matrix or raw CGWB."""
+    """Load GWL data from features table or processed CSV."""
+    # 1. Try PostgreSQL features table
+    try:
+        conn = get_connection()
+        df = pd.read_sql("SELECT district_id, date, gwl_current FROM features WHERE gwl_current IS NOT NULL ORDER BY district_id, date", conn)
+        conn.close()
+        if len(df) > 0:
+            df["GWL_current"] = df["gwl_current"]
+            df["date"] = pd.to_datetime(df["date"])
+            return df[["district_id", "date", "GWL_current"]]
+    except Exception:
+        pass
+
+    # 2. Try features CSV
     path = PROCESSED_DIR / "features_matrix.csv"
     if path.exists():
         df = pd.read_csv(path, parse_dates=["date"])
-        if "GWL_current" in df.columns:
-            return df[["district_id", "date", "GWL_current"]].copy()
+        col = "gwl_current" if "gwl_current" in df.columns else ("GWL_current" if "GWL_current" in df.columns else None)
+        if col:
+            df["GWL_current"] = df[col]
+            return df[["district_id", "date", "GWL_current"]].dropna().copy()
 
-    # Fallback: raw CGWB
-    cgwb_path = ROOT / CONFIG["paths"]["data_raw"] / "cgwb_combined.csv"
-    if not cgwb_path.exists():
-        print("ERROR: No GWL data found.")
-        sys.exit(1)
+    # 3. Fallback: preprocessed_wide.csv
+    wide_path = PROCESSED_DIR / "preprocessed_wide.csv"
+    if wide_path.exists():
+        df = pd.read_csv(wide_path, parse_dates=["date"])
+        if "gwl" in df.columns:
+            df["GWL_current"] = df["gwl"]
+            return df[["district_id", "date", "GWL_current"]].dropna().copy()
 
-    raw = pd.read_csv(cgwb_path, dtype=str, low_memory=False)
-    raw["GWL_current"] = pd.to_numeric(raw["currentlevel"], errors="coerce")
-    raw["date"] = pd.to_datetime(raw["date"], errors="coerce")
-    raw = raw.dropna(subset=["GWL_current", "date", "district_code"])
-    raw["date"] = raw["date"].dt.to_period("M").dt.to_timestamp()
-
-    df = raw.groupby(["district_code", "date"])["GWL_current"].mean().reset_index()
-    df = df.rename(columns={"district_code": "district_id"})
-    return df
+    print("ERROR: No GWL data found.")
+    sys.exit(1)
 
 
 def compute_depletion_rate(df: pd.DataFrame) -> pd.DataFrame:

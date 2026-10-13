@@ -1,55 +1,44 @@
-"""
-GET /api/history/<district_id>
-Returns historical GWL + rainfall data for a district.
-"""
-
-from flask import Blueprint, jsonify, request
-from models.ensemble import get_connection
-from api.district_resolver import resolve_district_id
+"""Historical physical values, retaining observation/imputation provenance."""
+from datetime import date
 import pandas as pd
+from flask import Blueprint, request
+from db.connection import get_connection, read_frame
+from api.district_resolver import resolve_district_id
+from api.contracts import response, failure
+from models.ensemble import feature_generation
 
-history_bp = Blueprint("history", __name__)
+history_bp=Blueprint('history',__name__)
 
+def _month(value):
+    if len(value)==7:
+        return date.fromisoformat(value+'-01')
+    return date.fromisoformat(value)
 
-@history_bp.route("/history/<district_id>", methods=["GET"])
+@history_bp.route('/history/<district_id>')
 def get_history(district_id):
-    """
-    Query params: ?start=2020-01&end=2024-12
-    Response:
-    {
-      "district_id": "RJ-Jaipur",
-      "data": [
-        {"date": "2024-01", "gwl": 7.2, "rainfall": 12.5},
-        ...
-      ]
-    }
-    """
-    start = request.args.get("start", "2020-01")
-    end = request.args.get("end", "2024-12")
-
+    connection=None
     try:
-        resolved_id = resolve_district_id(district_id)
-        conn = get_connection()
-        query = """
-            SELECT to_char(date, 'YYYY-MM') as month, gwl_current as gwl, rainfall_current as rainfall
-            FROM features
-            WHERE district_id = %s AND date >= %s AND date <= %s
-            ORDER BY date
-        """
-        # Append -01 to YYYY-MM for the DB date format
-        start_date = f"{start}-01" if len(start) == 7 else start
-        end_date = f"{end}-28" if len(end) == 7 else end
-
-        df = pd.read_sql(query, conn, params=(resolved_id, start_date, end_date))
-        conn.close()
-
-        data = df.to_dict(orient="records") if len(df) > 0 else []
-
-        return jsonify({
-            "district_id": district_id,
-            "start": start,
-            "end": end,
-            "data": data,
-        })
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        start=_month(request.args.get('start','2002-01'))
+        end=_month(request.args.get('end',date.today().strftime('%Y-%m')))
+        if start>end:
+            raise ValueError('start must precede or equal end.')
+        count=int(request.args['months']) if 'months' in request.args else None
+        if count is not None and not 1<=count<=1200:
+            raise ValueError('months must be an integer between 1 and 1200.')
+        canonical=resolve_district_id(district_id)
+        connection=get_connection()
+        frame=read_frame('''SELECT to_char(date,'YYYY-MM') AS month,gwl_current AS gwl,rainfall_current AS rainfall,
+            is_observed,is_imputed,months_since_observation,feature_generation FROM features
+            WHERE district_id=%s AND date>=%s AND date<=%s AND feature_generation=%s ORDER BY date''',
+            connection,(canonical,start,end,feature_generation()))
+        if count is not None:
+            frame=frame.tail(count)
+        rows=frame.to_dict('records')
+        for row in rows:
+            row['date']=row['month']
+        return response({'district_id':canonical,'requested_id':district_id,'start':start,'end':end,'data':rows,'history':rows})
+    except Exception as error:
+        return failure(error)
+    finally:
+        if connection is not None:
+            connection.close()

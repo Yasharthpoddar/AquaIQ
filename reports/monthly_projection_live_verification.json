@@ -1,0 +1,325 @@
+{
+  "as_of": "2026-10-13",
+  "expected_months": [
+    "2026-11",
+    "2026-12",
+    "2027-01",
+    "2027-02",
+    "2027-03",
+    "2027-04"
+  ],
+  "districts_checked": 725,
+  "status_counts": {
+    "insufficient_data": 4,
+    "projection": 721
+  },
+  "source_counts": {
+    "insufficient_data": 4,
+    "zone_fallback": 294,
+    "district_level": 427
+  },
+  "errors": [],
+  "api": {
+    "GJ-Gandhinagar": {
+      "as_of": "2026-10-13",
+      "data_age_months": 69,
+      "district_id": "GJ-Gandhinagar",
+      "estimate_type": "district_level",
+      "estimated_current_gwl": 105.2631,
+      "feature_cutoff": "2021-01-01",
+      "feature_generation": "physical-v3-causal-monthly-90a24f1f2574",
+      "fit_details": {
+        "annual_seasonality": true,
+        "history_end": "2021-01-01",
+        "history_sha256": "b155841efec6bc824f600576a3466c6641e124c0ade6b98e05728df9fe08bcef",
+        "history_start": "2011-01-01",
+        "observed_months": 38,
+        "trend_damping_months": 36.0,
+        "trend_m_per_year": 1.8345442471412772
+      },
+      "forecast": [
+        {
+          "date": "2026-11-01",
+          "month": "2026-11",
+          "predicted_gwl": 106.1719
+        },
+        {
+          "date": "2026-12-01",
+          "month": "2026-12",
+          "predicted_gwl": 106.9039
+        },
+        {
+          "date": "2027-01-01",
+          "month": "2027-01",
+          "predicted_gwl": 107.2688
+        },
+        {
+          "date": "2027-02-01",
+          "month": "2027-02",
+          "predicted_gwl": 107.1744
+        },
+        {
+          "date": "2027-03-01",
+          "month": "2027-03",
+          "predicted_gwl": 106.6516
+        },
+        {
+          "date": "2027-04-01",
+          "month": "2027-04",
+          "predicted_gwl": 105.8457
+        }
+      ],
+      "forecast_end": "2027-04",
+      "forecast_horizon": "next six full calendar months",
+      "forecast_origin": "2026-10-13",
+      "forecast_start": "2026-11",
+      "horizon_months": 6,
+      "last_observed_date": "2021-01-01",
+      "last_observed_gwl": 102.51,
+      "limitations": [
+        "These are statistical monthly depth estimates, not actual measurements.",
+        "The unobserved gap is estimated from historical trend and seasonality; fresh readings are needed to verify current conditions.",
+        "Future rainfall, pumping and weather are not known or included in this projection.",
+        "Monthly projections and the estimated current level have not been independently validated for operational use."
+      ],
+      "model_version": "1.0-observed-seasonal-trend",
+      "projection_method": "damped_seasonal_trend",
+      "requested_id": "GJ-Gandhinagar",
+      "resolved_id": "GJ-Gandhinagar",
+      "source_zone": null,
+      "status": "projection",
+      "units": "m_bgl",
+      "validation": {
+        "status": "unvalidated_current_projection",
+        "sufficient_for_operational_use": false
+      },
+      "zone_fallback_reason": null
+    },
+    "RJ-Jaipur": {
+      "as_of": "2026-10-13",
+      "data_age_months": 69,
+      "district_id": "RJ-Jaipur",
+      "estimate_type": "district_level",
+      "estimated_current_gwl": 32.0927,
+      "feature_cutoff": "2021-01-01",
+      "feature_generation": "physical-v3-causal-monthly-90a24f1f2574",
+      "fit_details": {
+        "annual_seasonality": true,
+        "history_end": "2021-01-01",
+        "history_sha256": "14e71d1bb661d053b4eda06c587f04e5dc07cdb389ea18c31e97287ee7d522bd",
+        "history_start": "2011-01-01",
+        "observed_months": 39,
+        "trend_damping_months": 36.0,
+        "trend_m_per_year": 0.006808582523067076
+      },
+      "forecast": [
+        {
+          "date": "2026-11-01",
+          "month": "2026-11",
+          "predicted_gwl": 32.1384
+        },
+        {
+          "date": "2026-12-01",
+          "month": "2026-12",
+          "predicted_gwl": 32.3763
+        },
+        {
+          "date": "2027-01-01",
+          "month": "2027-01",
+          "predicted_gwl": 32.7428
+        },
+        {
+          "date": "2027-02-01",
+          "month": "2027-02",
+          "predicted_gwl": 33.1395
+        },
+        {
+          "date": "2027-03-01",
+          "month": "2027-03",
+          "predicted_gwl": 33.4604
+        },
+        {
+          "date": "2027-04-01",
+          "month": "2027-04",
+          "predicted_gwl": 33.6193
+        }
+      ],
+      "forecast_end": "2027-04",
+      "forecast_horizon": "next six full calendar months",
+      "forecast_origin": "2026-10-13",
+      "forecast_start": "2026-11",
+      "horizon_months": 6,
+      "last_observed_date": "2021-01-01",
+      "last_observed_gwl": 32.513424,
+      "limitations": [
+        "These are statistical monthly depth estimates, not actual measurements.",
+        "The unobserved gap is estimated from historical trend and seasonality; fresh readings are needed to verify current conditions.",
+        "Future rainfall, pumping and weather are not known or included in this projection.",
+        "Monthly projections and the estimated current level have not been independently validated for operational use."
+      ],
+      "model_version": "1.0-observed-seasonal-trend",
+      "projection_method": "damped_seasonal_trend",
+      "requested_id": "RJ-Jaipur",
+      "resolved_id": "RJ-Jaipur",
+      "source_zone": null,
+      "status": "projection",
+      "units": "m_bgl",
+      "validation": {
+        "status": "unvalidated_current_projection",
+        "sufficient_for_operational_use": false
+      },
+      "zone_fallback_reason": null
+    },
+    "MH-Mumbai_Suburban": {
+      "as_of": "2026-10-13",
+      "data_age_months": 69,
+      "district_id": "MH-Mumbai_Suburban",
+      "estimate_type": "district_level",
+      "estimated_current_gwl": 0.0,
+      "feature_cutoff": "2021-01-01",
+      "feature_generation": "physical-v3-causal-monthly-90a24f1f2574",
+      "fit_details": {
+        "annual_seasonality": true,
+        "history_end": "2021-01-01",
+        "history_sha256": "7c3e11f558b4a3ca2f546b516273c24719121e33ee2f175006b110f28a6c9e86",
+        "history_start": "2011-01-01",
+        "observed_months": 36,
+        "trend_damping_months": 36.0,
+        "trend_m_per_year": -0.548789335430964
+      },
+      "forecast": [
+        {
+          "date": "2026-11-01",
+          "month": "2026-11",
+          "predicted_gwl": 0.0
+        },
+        {
+          "date": "2026-12-01",
+          "month": "2026-12",
+          "predicted_gwl": 0.9617
+        },
+        {
+          "date": "2027-01-01",
+          "month": "2027-01",
+          "predicted_gwl": 2.1138
+        },
+        {
+          "date": "2027-02-01",
+          "month": "2027-02",
+          "predicted_gwl": 3.0953
+        },
+        {
+          "date": "2027-03-01",
+          "month": "2027-03",
+          "predicted_gwl": 3.6418
+        },
+        {
+          "date": "2027-04-01",
+          "month": "2027-04",
+          "predicted_gwl": 3.605
+        }
+      ],
+      "forecast_end": "2027-04",
+      "forecast_horizon": "next six full calendar months",
+      "forecast_origin": "2026-10-13",
+      "forecast_start": "2026-11",
+      "horizon_months": 6,
+      "last_observed_date": "2021-01-01",
+      "last_observed_gwl": 3.5373333,
+      "limitations": [
+        "These are statistical monthly depth estimates, not actual measurements.",
+        "The unobserved gap is estimated from historical trend and seasonality; fresh readings are needed to verify current conditions.",
+        "Future rainfall, pumping and weather are not known or included in this projection.",
+        "Monthly projections and the estimated current level have not been independently validated for operational use."
+      ],
+      "model_version": "1.0-observed-seasonal-trend",
+      "projection_method": "damped_seasonal_trend",
+      "requested_id": "MH-Mumbai_Suburban",
+      "resolved_id": "MH-Mumbai_Suburban",
+      "source_zone": null,
+      "status": "projection",
+      "units": "m_bgl",
+      "validation": {
+        "status": "unvalidated_current_projection",
+        "sufficient_for_operational_use": false
+      },
+      "zone_fallback_reason": null
+    },
+    "PY-Mahe": {
+      "as_of": "2026-10-13",
+      "data_age_months": 43,
+      "district_id": "PY-Mahe",
+      "estimate_type": "zone_fallback",
+      "estimated_current_gwl": 8.0744,
+      "feature_cutoff": "2023-03-01",
+      "feature_generation": "physical-v3-causal-monthly-90a24f1f2574",
+      "fit_details": {
+        "annual_seasonality": true,
+        "history_end": "2023-03-01",
+        "history_sha256": "85065a82a6c4f197a0cbcbadcb8df66b766500270c7c377b307a8b73ff7f818d",
+        "history_start": "2013-03-01",
+        "observed_months": 121,
+        "trend_damping_months": 36.0,
+        "trend_m_per_year": -0.06731477464625636
+      },
+      "forecast": [
+        {
+          "date": "2026-11-01",
+          "month": "2026-11",
+          "predicted_gwl": 7.9179
+        },
+        {
+          "date": "2026-12-01",
+          "month": "2026-12",
+          "predicted_gwl": 7.8226
+        },
+        {
+          "date": "2027-01-01",
+          "month": "2027-01",
+          "predicted_gwl": 7.8135
+        },
+        {
+          "date": "2027-02-01",
+          "month": "2027-02",
+          "predicted_gwl": 7.8927
+        },
+        {
+          "date": "2027-03-01",
+          "month": "2027-03",
+          "predicted_gwl": 8.0384
+        },
+        {
+          "date": "2027-04-01",
+          "month": "2027-04",
+          "predicted_gwl": 8.2114
+        }
+      ],
+      "forecast_end": "2027-04",
+      "forecast_horizon": "next six full calendar months",
+      "forecast_origin": "2026-10-13",
+      "forecast_start": "2026-11",
+      "horizon_months": 6,
+      "last_observed_date": "2023-03-01",
+      "last_observed_gwl": 8.045499920845032,
+      "limitations": [
+        "These are statistical monthly depth estimates, not actual measurements.",
+        "The unobserved gap is estimated from historical trend and seasonality; fresh readings are needed to verify current conditions.",
+        "Future rainfall, pumping and weather are not known or included in this projection.",
+        "Monthly projections and the estimated current level have not been independently validated for operational use."
+      ],
+      "model_version": "1.0-observed-seasonal-trend",
+      "projection_method": "damped_seasonal_trend",
+      "requested_id": "PY-Mahe",
+      "resolved_id": "PY-Mahe",
+      "source_zone": "East Coast Plains and Hills",
+      "status": "projection",
+      "units": "m_bgl",
+      "validation": {
+        "status": "unvalidated_current_projection",
+        "sufficient_for_operational_use": false
+      },
+      "zone_fallback_reason": "District has 0 observed months and 0.0% monitoring-round coverage."
+    }
+  },
+  "legacy_endpoint_unchanged": true
+}

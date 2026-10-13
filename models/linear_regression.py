@@ -27,6 +27,9 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 ROOT = Path(__file__).parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from models import xgboost_model as forecast
 load_dotenv(ROOT / ".env")
 
 with open(ROOT / "config.yaml") as f:
@@ -37,37 +40,20 @@ TRAIN_END = pd.Timestamp(CONFIG["date_range"]["train_end"])
 TEST_START = pd.Timestamp(CONFIG["date_range"]["test_start"])
 
 
+def get_connection():
+    import psycopg2
+    return psycopg2.connect(
+        host=os.getenv("POSTGRES_HOST", "localhost"),
+        port=int(os.getenv("POSTGRES_PORT", 5432)),
+        dbname=os.getenv("POSTGRES_DB", "aquaiq"),
+        user=os.getenv("POSTGRES_USER", "aquaiq_user"),
+        password=os.getenv("POSTGRES_PASSWORD", ""),
+    )
+
+
 def load_features() -> pd.DataFrame:
-    """Load feature matrix from CSV."""
-    path = PROCESSED_DIR / "features_matrix.csv"
-    if not path.exists():
-        # Fallback: build from raw CGWB data directly
-        print("  features_matrix.csv not found, loading raw CGWB...")
-        cgwb_path = ROOT / CONFIG["paths"]["data_raw"] / "cgwb_combined.csv"
-        if not cgwb_path.exists():
-            print("ERROR: No data source. Run preprocessing/features.py first.")
-            sys.exit(1)
-
-        raw = pd.read_csv(cgwb_path, dtype=str, low_memory=False)
-        raw["currentlevel"] = pd.to_numeric(raw["currentlevel"], errors="coerce")
-        raw["date"] = pd.to_datetime(raw["date"], errors="coerce")
-        raw = raw.dropna(subset=["currentlevel", "date", "district_code"])
-        raw["month_date"] = raw["date"].dt.to_period("M").dt.to_timestamp()
-
-        df = raw.groupby(["district_code", "month_date"]).agg(
-            GWL_current=("currentlevel", "mean")
-        ).reset_index()
-        df = df.rename(columns={"district_code": "district_id", "month_date": "date"})
-        df = df.sort_values(["district_id", "date"])
-
-        # Build lags
-        df["GWL_lag_3mo"] = df.groupby("district_id")["GWL_current"].shift(3)
-        df["GWL_lag_6mo"] = df.groupby("district_id")["GWL_current"].shift(6)
-        df = df.dropna()
-        return df
-
-    df = pd.read_csv(path, parse_dates=["date"])
-    return df
+    """Use the same verified physical-unit generation as the forecaster."""
+    return forecast.load_feature_matrix()
 
 
 def train_per_district(df: pd.DataFrame, top_n: int = None) -> pd.DataFrame:
@@ -75,24 +61,8 @@ def train_per_district(df: pd.DataFrame, top_n: int = None) -> pd.DataFrame:
     Train one Linear Regression per district.
     Returns a DataFrame of per-district metrics.
     """
-    feature_cols = [c for c in df.columns
-                    if c.startswith("GWL_") or c in [
-                        "rainfall_current", "rainfall_3mo_avg",
-                        "temperature", "evapotranspiration",
-                        "water_balance_proxy", "monsoon_deficit_pct",
-                    ]]
-
-    # Need at least GWL_current for target
-    if "GWL_current" not in df.columns:
-        print("ERROR: GWL_current column missing.")
-        sys.exit(1)
-
-    # Use available numeric features
-    usable_features = [c for c in feature_cols if c != "GWL_current" and c in df.columns]
-    if not usable_features:
-        # Minimum: use time as feature
-        df["time_idx"] = np.arange(len(df))
-        usable_features = ["time_idx"]
+    df = forecast.create_target(forecast.encode_crop_season(df))
+    usable_features = forecast.get_feature_columns(df)
 
     print(f"  Features: {usable_features}")
 
@@ -116,18 +86,16 @@ def train_per_district(df: pd.DataFrame, top_n: int = None) -> pd.DataFrame:
 
     for district_id in districts:
         ddf = df[df["district_id"] == district_id].copy()
-        ddf = ddf.dropna(subset=usable_features + ["GWL_current"])
-
-        train = ddf[ddf["date"] <= TRAIN_END]
-        test = ddf[ddf["date"] >= TEST_START]
+        ddf = ddf.dropna(subset=usable_features + ["target_gwl_6mo"])
+        train, test = forecast.temporal_split(ddf, TRAIN_END, forecast.heldout_origin_start(TRAIN_END), CONFIG["date_range"]["end"])
 
         if len(train) < 12 or len(test) < 3:
             continue
 
         X_train = train[usable_features].values
-        y_train = train["GWL_current"].values
+        y_train = train["target_gwl_6mo"].values
         X_test = test[usable_features].values
-        y_test = test["GWL_current"].values
+        y_test = test["target_gwl_6mo"].values
 
         model = LinearRegression()
         model.fit(X_train, y_train)
@@ -144,6 +112,7 @@ def train_per_district(df: pd.DataFrame, top_n: int = None) -> pd.DataFrame:
             "r2": round(r2, 4),
             "rmse": round(rmse, 4),
             "mae": round(mae, 4),
+            "units": "m_bgl", "horizon_months": forecast.FORECAST_HORIZON,
         })
         models[district_id] = model
 
@@ -157,6 +126,9 @@ def save_results(results_df: pd.DataFrame):
     os.makedirs(PROCESSED_DIR, exist_ok=True)
     results_df.to_csv(out_path, index=False)
     print(f"  Results saved to {out_path}")
+    if results_df.empty:
+        print("No districts have sufficient observed training/held-out samples.")
+        return
 
     # Aggregate stats
     print(f"\n  Aggregate Metrics ({len(results_df)} districts):")
@@ -187,11 +159,11 @@ def save_results(results_df: pd.DataFrame):
         print(f"    {row['district_id']:>15s}: R2={row['r2']:.4f}  RMSE={row['rmse']:.4f}")
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description="AquaIQ Linear Regression")
     parser.add_argument("--top", type=int, default=None,
                         help="Only train on top-N most data-rich districts")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     print("AquaIQ -- Linear Regression Baseline\n")
 

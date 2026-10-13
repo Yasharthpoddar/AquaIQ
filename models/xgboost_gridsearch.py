@@ -22,6 +22,9 @@ from dotenv import load_dotenv
 from sklearn.metrics import mean_squared_error, r2_score
 
 ROOT = Path(__file__).parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from models import xgboost_model as forecast
 load_dotenv(ROOT / ".env")
 
 with open(ROOT / "config.yaml") as f:
@@ -45,36 +48,22 @@ QUICK_GRID = {
 
 
 def load_data():
-    """Load feature matrix and create target."""
-    path = PROCESSED_DIR / "features_matrix.csv"
-    if not path.exists():
-        print("ERROR: features_matrix.csv not found. Run preprocessing/features.py first.")
-        sys.exit(1)
-    df = pd.read_csv(path, parse_dates=["date"])
-    return df
+    """Search only on the same verified generation as production training."""
+    return forecast.load_feature_matrix()
 
 
 def prepare_data(df):
-    """Build target and split."""
-    df = df.sort_values(["district_id", "date"]).copy()
-    df["target_gwl_6mo"] = df.groupby("district_id")["GWL_current"].shift(-6)
-    df = df.dropna(subset=["target_gwl_6mo"])
-
-    feature_cols = [c for c in CONFIG["features"]
-                    if c in df.columns and c != "crop_season_flag"]
-
-    # One-hot encode crop_season_flag if present
-    if "crop_season_flag" in df.columns:
-        dummies = pd.get_dummies(df["crop_season_flag"], prefix="season", dtype=float)
-        df = pd.concat([df, dummies], axis=1)
-        feature_cols.extend(dummies.columns.tolist())
-
+    """Observed-label validation after the embargo, excluding final test labels."""
+    df = forecast.create_target(forecast.encode_crop_season(df))
+    feature_cols = forecast.get_feature_columns(df)
     train_end = pd.Timestamp(DATE_RANGE["train_end"])
     val_end = pd.Timestamp(DATE_RANGE["val_end"])
-
-    train = df[df["date"] <= train_end]
-    val = df[(df["date"] > train_end) & (df["date"] <= val_end)]
-
+    start = (train_end.to_period("M") + forecast.EMBARGO_MONTHS + 1).to_timestamp()
+    train, val = forecast.temporal_split(df, train_end, start, val_end)
+    val = val[(val["target_date"] <= val_end) &
+              (val["target_date"] < pd.Timestamp(DATE_RANGE["test_start"]))]
+    if train.empty or val.empty:
+        raise ValueError("No observed training/validation labels available for grid search.")
     return train, val, feature_cols
 
 
@@ -82,9 +71,9 @@ def run_grid_search(train, val, feature_cols, grid):
     """Run exhaustive grid search over hyperparameters."""
     import xgboost as xgb
 
-    X_train = train[feature_cols].fillna(0).values
+    X_train = train[feature_cols]
     y_train = train["target_gwl_6mo"].values
-    X_val = val[feature_cols].fillna(0).values
+    X_val = val[feature_cols]
     y_val = val["target_gwl_6mo"].values
 
     keys = list(grid.keys())
@@ -97,23 +86,18 @@ def run_grid_search(train, val, feature_cols, grid):
     for i, values in enumerate(combos):
         params = dict(zip(keys, values))
 
-        model = xgb.XGBRegressor(
-            n_estimators=500,
-            max_depth=params["max_depth"],
-            learning_rate=params["learning_rate"],
-            subsample=params["subsample"],
-            random_state=42,
-            objective="reg:squarederror",
-            verbosity=0,
-        )
-
-        model.fit(X_train, y_train, eval_set=[(X_val, y_val)], verbose=False)
+        model = forecast.new_model(params)
+        model.fit(X_train, y_train)
         y_pred = model.predict(X_val)
 
         rmse = np.sqrt(mean_squared_error(y_val, y_pred))
         r2 = r2_score(y_val, y_pred)
 
-        results.append({**params, "rmse": round(rmse, 4), "r2": round(r2, 4)})
+        paired_metrics = forecast.evaluate_model(model, val, feature_cols)
+        results.append({**params, "rmse_m": float(rmse), "r2": float(r2),
+                        "n_validation_observed": len(val),
+                        "persistence_rmse_m": paired_metrics["persistence_baseline"]["rmse_m"],
+                        "seasonal_paired_n": paired_metrics["seasonal_comparison"]["n"]})
 
         print(f"  [{i+1}/{len(combos)}] depth={params['max_depth']} "
               f"lr={params['learning_rate']} sub={params['subsample']} "
@@ -132,10 +116,10 @@ def run_grid_search(train, val, feature_cols, grid):
     return pd.DataFrame(results)
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description="XGBoost Grid Search")
     parser.add_argument("--quick", action="store_true", help="Use reduced grid")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     print("AquaIQ -- XGBoost Hyperparameter Grid Search\n")
 
@@ -156,12 +140,12 @@ def main():
     print(f"\n  Results saved to {out_path}")
 
     # Best config
-    best = results.loc[results["rmse"].idxmin()]
+    best = results.loc[results["rmse_m"].idxmin()]
     print(f"\n  Best configuration:")
     print(f"    max_depth      = {best['max_depth']}")
     print(f"    learning_rate  = {best['learning_rate']}")
     print(f"    subsample      = {best['subsample']}")
-    print(f"    RMSE           = {best['rmse']}")
+    print(f"    RMSE (metres)  = {best['rmse_m']}")
     print(f"    R2             = {best['r2']}")
 
     print("\nDone.")

@@ -1,131 +1,33 @@
-"""
-GET /api/alerts
-Returns monitored districts with their crisis scores.
-"""
+from flask import Blueprint,request
+from db.connection import get_connection
+from api.routes.scores import latest_scores,score_records
+from api.contracts import response,failure
 
-from flask import Blueprint, jsonify, request
-from models.ensemble import compute_crisis_score, get_connection
-import pandas as pd
-from functools import lru_cache
+alerts_bp=Blueprint('alerts',__name__)
 
-alerts_bp = Blueprint("alerts", __name__)
-
-
-@lru_cache(maxsize=1)
-def _get_monitored_districts():
-    """
-    Get a diverse pool of districts that have actual CGWB GWL data.
-    We pull from three groups to maximise score diversity:
-      - top by peak GWL (historically deep)
-      - top by most-recent GWL (currently deep)
-      - a random spread for variety
-    """
-    try:
-        conn = get_connection()
-        df = pd.read_sql("""
-            WITH base AS (
-                SELECT d.district_id, d.district_name, d.state,
-                       MAX(f.gwl_current) AS peak_gwl,
-                       (ARRAY_AGG(f.gwl_current ORDER BY f.date DESC))[1] AS latest_gwl
-                FROM districts d
-                JOIN features f ON d.district_id = f.district_id
-                WHERE f.gwl_current IS NOT NULL AND CAST(f.gwl_current AS TEXT) != 'NaN'
-                GROUP BY d.district_id, d.district_name, d.state
-                HAVING COUNT(f.gwl_current) >= 12
-            ),
-            by_peak AS   (SELECT * FROM base ORDER BY peak_gwl   DESC LIMIT 50),
-            by_latest AS (SELECT * FROM base ORDER BY latest_gwl DESC LIMIT 50),
-            by_rand AS   (SELECT * FROM base ORDER BY RANDOM()        LIMIT 50)
-            SELECT DISTINCT ON (district_id) * FROM (
-                SELECT * FROM by_peak
-                UNION SELECT * FROM by_latest
-                UNION SELECT * FROM by_rand
-            ) combined
-        """, conn)
-        conn.close()
-
-        if len(df) > 0:
-            return [
-                {"id": row["district_id"], "name": row["district_name"], "state": row["state"]}
-                for _, row in df.iterrows()
-            ]
-    except Exception as e:
-        print(f"Error fetching districts: {e}")
-
-    return []
-
-
-@alerts_bp.route("/alerts", methods=["GET"])
+@alerts_bp.route('/alerts')
 def get_alerts():
-    tier_filter = request.args.get("tier")
-    monitored = _get_monitored_districts()
-    
-    tier_limits = {"Safe": 8, "Watch": 8, "Warning": 8, "Crisis": 8}
-    buckets = {t: [] for t in tier_limits}
-    filtered_alerts = []
-    total_processed = 0
-
-    for d in monitored:
-        try:
-            score_data = compute_crisis_score(d["id"])
-            score = score_data.get("crisis_score")
-            tier = score_data.get("tier")
-            estimate_type = score_data.get("estimate_type", "district_level")
-
-            if score is None:
-                score = 50
-                tier = "Watch"
-        except Exception:
-            score = 50
-            tier = "Watch"
-            estimate_type = "zone_fallback"
-
-        if tier == "Crisis":
-            rec = "Declare water-stressed zone -- emergency conservation and supply measures."
-        elif tier == "Warning":
-            rec = "Restrict new extraction permits and enforce conservation measures."
-        elif tier == "Watch":
-            rec = "Increase monitoring frequency and promote rainwater harvesting."
-        else:
-            rec = "Continue routine monitoring."
-
-        alert_obj = {
-            "district_id": d["id"],
-            "name": d["name"],
-            "state": d["state"],
-            "score": score,
-            "tier": tier,
-            "estimate_type": estimate_type,
-            "recommendation": rec,
-        }
-
-        total_processed += 1
-
-        # Early exit logic to drastically speed up loading
-        if tier_filter:
-            if tier.lower() == tier_filter.lower():
-                filtered_alerts.append(alert_obj)
-                if len(filtered_alerts) >= 15:
-                    break
-        else:
-            if tier in buckets and len(buckets[tier]) < tier_limits[tier]:
-                buckets[tier].append(alert_obj)
-            
-            # Stop if we have fulfilled all our quotas or processed enough
-            if all(len(b) >= tier_limits[t] for t, b in buckets.items()):
-                break
-            if total_processed >= 60:  # hard cap to prevent timeout
-                break
-
-    if not tier_filter:
-        balanced = []
-        for t, limit in tier_limits.items():
-            balanced.extend(sorted(buckets[t], key=lambda x: x["score"], reverse=True))
-        alerts = sorted(balanced, key=lambda x: x["score"], reverse=True)
-    else:
-        alerts = sorted(filtered_alerts, key=lambda x: x["score"], reverse=True)
-
-    return jsonify({
-        "count": len(alerts),
-        "alerts": alerts,
-    })
+    connection=None
+    try:
+        tier=request.args.get('tier','all').lower()
+        if tier not in ('all','safe','watch','warning','crisis'):
+            raise ValueError('tier must be Safe, Watch, Warning, Crisis, or All.')
+        limit=int(request.args.get('limit',100))
+        if not 1<=limit<=1000:
+            raise ValueError('limit must be an integer between 1 and 1000.')
+        connection=get_connection()
+        records=score_records(latest_scores(connection))
+        status='success' if records else 'awaiting_complete_scoring_run'
+        if tier!='all':
+            records=[row for row in records if row['tier'] and row['tier'].lower()==tier]
+        records=sorted(records,key=lambda row:row['score'] if row['score'] is not None else -1,reverse=True)[:limit]
+        for row in records:
+            row['crisis_score']=row['score']
+            row['risk_tier']=row['tier']
+            row['recommendation']='Review observed history and the historical forecast before planning action.' if row['score'] is not None else 'Groundwater evidence is unavailable.'
+        return response({'alerts':records,'count':len(records),'status':status})
+    except Exception as error:
+        return failure(error)
+    finally:
+        if connection is not None:
+            connection.close()

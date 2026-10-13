@@ -1,70 +1,163 @@
 # AquaIQ
 
-AI-powered groundwater depletion forecasting for India's districts. SPIT CSE, Sem V Mini Project I, AY 2026–27. Maps to SIH25068 (Ministry of Jal Shakti).
+AquaIQ uses CGWB groundwater observations, IMD rainfall, and ERA5 weather to estimate groundwater depth six calendar months after an observed origin date. A Flask API and React dashboard expose that endpoint and a project-defined 0–100 crisis score for 725 canonical districts. The district prediction graph separately projects the next six full calendar months from today with one shared monthly XGBoost model that uses the forecast horizon, rainfall, temperature, and evapotranspiration assumptions alongside estimated groundwater depth.
 
-Forecasts district-level groundwater levels 6 months ahead using a two-layer ML system — a core layer mapped to the Sem I–V syllabus (Linear Regression, Fuzzy Logic, Perceptron ANN) and an advanced self-study layer (XGBoost) — and outputs a 0–100 Crisis Score per district through a Flask API + React dashboard.
+The repaired pipeline keeps groundwater in metres below ground level, rainfall and evapotranspiration in millimetres per month, and temperature in degrees Celsius. Features and model bundles carry generation identifiers, units, dates, and checksums. Missing evidence produces an unavailable result; districts with sparse evidence may use an explicitly labelled aggregate of their agro-climatic zone.
 
-## Team
-Yasharth Poddar (2024800092) · Yash Sathe (2025801011) · Ayush Khatavkar (2025801007) — task ownership rotates across all three every week; see AquaIQ_ProjectPlan.html for the full 14-week breakdown.
+## Setup
 
-## Quick start
-Clone the repo, then run: `cd AquaIQ && bash setup.sh && source venv/bin/activate`
-setup.sh creates a virtualenv, installs pinned dependencies, and initializes the database. It does not download data — that needs your own registration on each portal (see below).
+Use Python **3.13**, PostgreSQL **18** (the local verification version), and Node **22.12 or later**. The dashboard's Vite dependencies require Node `^20.19.0 || >=22.12.0`; CI uses Node 22. Create a PostgreSQL database and user, copy `.env.example` to `.env`, and enter that database's credentials. Keep `.env` private.
 
-No paid compute needed. XGBoost and the Perceptron are CPU-native by design — the full pipeline trains in well under an hour on a normal laptop CPU, even with all 640+ districts pooled into one training run. If a laptop turns out to be slow, Google Colab's free tier or Kaggle Notebooks (also free) work as backups — nobody needs a paid subscription for this project.
+On Windows PowerShell, run these commands from the project directory:
 
-## Data sources — download these into data/raw/ before running anything
-| Source | Portal | Gets you |
-| --- | --- | --- |
-| CGWB | india-wris.nrsc.gov.in | Borewell groundwater level readings, ~15,000 wells |
-| IMD | imdpune.gov.in | Monthly district rainfall + 30-year climatological normal |
-| ERA5 | cds.climate.copernicus.eu | Temperature, evapotranspiration |
-| District boundaries | datameet.org | GeoJSON for the dashboard map |
+```powershell
+.\setup.ps1
+.\venv\Scripts\Activate.ps1
+```
 
-Registration is required for IMD (institutional access) and ERA5 (free CDS API key). CGWB and the GeoJSON boundaries are open download.
+On Linux or macOS:
 
-Deliberately not used: GRACE-FO, GLDAS, NDVI, irrigation/population census data. Considered during design, excluded because a fully-traceable 3-source pipeline was worth more than partial satellite coverage for a project this size. Full reasoning is in the ESE report's Limitations & Future Work section.
+```bash
+bash setup.sh
+source venv/bin/activate
+```
 
-## When a district has thin or no CGWB history
-CGWB's ~15,000 wells aren't evenly spread across all 640+ districts — some remote or hilly districts genuinely have sparse coverage. Rather than reintroducing satellite data or silently failing, the fallback is two-stepped:
-1. Zone fallback — below data_readiness_min_pct (config.yaml), aggregate CGWB data across every district in the same agro_climatic_zone instead of training on that one district alone.
-2. Insufficient data — only if the zone itself lacks enough history. Shown honestly on the dashboard, never fabricated.
+Setup installs `requirements.txt`, checks dependency consistency, and initializes the schema and additive provenance migration. Database initialization can be repeated. Setup reuses an existing Python 3.13 environment and stops on errors. Optional extras are installed separately:
 
-Every score in crisis_scores carries an estimate_type (district_level / zone_fallback / insufficient_data) so the dashboard can label which kind of estimate the person is looking at.
+```bash
+python -m pip install -r requirements-download.txt  # CDS downloads and your own CDS credentials
+python -m pip install -r requirements-tracking.txt  # MLflow experiment tracking
+```
 
-## The 10 features
-All ten trace back to one of the three sources above — nothing is invented:
-| # | Feature | Source |
-| --- | --- | --- |
-| 1 | GWL_current | CGWB |
-| 2 | GWL_lag_3mo | CGWB |
-| 3 | GWL_lag_6mo | CGWB |
-| 4 | rainfall_current | IMD |
-| 5 | rainfall_3mo_avg | IMD |
-| 6 | monsoon_deficit_pct | IMD (current vs. 30-yr normal) |
-| 7 | temperature | ERA5 |
-| 8 | evapotranspiration | ERA5 |
-| 9 | water_balance_proxy | derived = rainfall − ET |
-| 10 | crop_season_flag | derived, calendar rule (Kharif/Rabi/Zaid) |
+Core pins match the environment used for local repair verification. They include NetworkX, which fuzzy inference needs. Optional CDS downloads are not part of the core runtime or the offline verification suite.
 
-## Project structure
-data_ingestion/ — CSV/API parsers for CGWB, IMD, ERA5
-preprocessing/ — cleaning, SARIMA gap-fill, feature engineering
-models/ — linear_regression.py, fuzzy_logic.py, perceptron.py, xgboost_model.py, ensemble.py, tiers.py, backtest.py
-api/ — Flask app + 5 REST endpoints
-dashboard/ — React frontend
-db/ — schema.sql + init_db.py
-data/raw/, data/processed/ — gitignored
-notebooks/ — exploratory / reproducibility notebooks
-tests/ — pytest suite, target ≥70% coverage
-config.yaml — every hyperparameter, path, and threshold — nothing hardcoded
+## Data and pipeline
 
-## API endpoints
-GET /predict/{district_id} · GET /district/{district_id} · GET /history/{district_id} · GET /alerts · POST /simulate
-See api_spec.md for the full request/response contract.
+Place the district GeoJSON and source files under `data/raw/` using the paths in `config.yaml` and the ingestion modules. CGWB inputs contain observations; IMD uses daily `.grd` files; ERA5 processing uses a local NetCDF artifact with explicit source units. Download access and authentication are managed through the source portals.
 
-## Evaluation targets
-Linear Regression R² > 0.75, RMSE < 4.0cm · Test coverage ≥ 70% · API response < 3s
+| Source | Data |
+| --- | --- |
+| CGWB / India-WRIS | Observed groundwater depth |
+| IMD | Daily rainfall aggregated to complete monthly totals |
+| ECMWF ERA5 | Temperature and evapotranspiration |
+| District boundaries | State-qualified district polygons for spatial aggregation |
 
-## Full project plan
-See AquaIQ_ProjectPlan.html for the week-by-week task breakdown, and AquaIQ_Context_Brief.md for the full architecture/decision record — both are the source of truth for anything not covered here.
+Regenerate climate artifacts before ingesting them when replacing legacy processed files:
+
+```bash
+python -m data_ingestion.era5_to_district
+python -m data_ingestion.imd_district_climatology --raw-dir data/raw/imd
+```
+
+Both outputs include manifests. The weather ingester rejects artifacts without matching provenance and records corrected existing weather values in `data/processed/weather_corrections/`. Existing CGWB observations are retained.
+
+Run the complete pipeline after the source inputs are available:
+
+```bash
+python scripts/run_pipeline.py --step all
+```
+
+For a database that already contains the ingested source data, run the derived stages individually:
+
+```bash
+python scripts/run_pipeline.py --step preprocess
+python scripts/run_pipeline.py --step features
+python scripts/run_pipeline.py --step train
+python scripts/run_pipeline.py --step backtest
+python scripts/run_pipeline.py --step score_all
+```
+
+Feature rebuilding replaces the derived feature table in one transaction. Back up the database before a full rebuild. A sample preprocessing run is for inspection and cannot replace the production feature generation. Model training uses exact calendar targets and only observed future labels; bounded causal carry-forward values may be input features but never become observed labels. Rainfall anomalies use prior-year same-month history, excluding future climatology.
+
+Sample and CSV-only checks write isolated artifacts, preserving the active feature CSV, manifest, database and checkpoint:
+
+```powershell
+python -m preprocessing.pipeline --sample 10
+python -m preprocessing.features --input-dir reports/samples
+python -m preprocessing.features --sample 10
+python -m preprocessing.features --csv-only
+```
+
+The first two commands build a sample timeline and its features under `reports/samples`. The third samples the production preprocessing input into the same isolated directory. `--csv-only` writes a full candidate feature matrix under `reports/candidates`. Production model loading and training reject sample-only manifests.
+
+The production model defaults to the label cutoff in `config.yaml` (`2019-12-31`). A six-month embargo separates training from evaluation origins, and the final holdout remains independent of model fitting. Training publishes an immutable model/card bundle through one atomic manifest. The training stage builds both the historical endpoint model and the separate monthly climate model. To rebuild only the monthly model, run `python -m models.climate_forecast`; it writes its independent verified bundle and `reports/climate_forecast_evaluation.json`. Backtests and synthetic tests write separate reports and cannot replace the historical checkpoint or automatically promote candidate weights.
+
+For batch scoring, an optional historical cutoff selects only evidence available through that date:
+
+```bash
+python scripts/run_pipeline.py --step score_all --as-of 2023-03-31
+```
+
+`--as-of` on the orchestrator applies to batch scoring. To rebuild an earlier input timeline explicitly, use `python -m preprocessing.pipeline --as-of YYYY-MM-DD`, then regenerate its features and matching model bundle. Scoring rejects future cutoffs and cannot serve a bundle against a different feature generation.
+
+## API and dashboard
+
+Start the API from an activated environment:
+
+```bash
+python -m api.app
+```
+
+For a local WSGI process on Windows or Linux:
+
+```bash
+waitress-serve --listen=127.0.0.1:5000 --call api.app:create_app
+```
+
+Start the dashboard in a second terminal:
+
+```bash
+cd dashboard
+npm ci
+npm run dev
+```
+
+Open `http://localhost:5173`. Vite proxies `/api` to `http://localhost:5000`. The API routes are:
+
+| Route | Purpose |
+| --- | --- |
+| `GET /api/health` | Check PostgreSQL access and both matching verified model bundles |
+| `GET /api/config` | Expose score configuration and calibration status |
+| `GET /api/scores` | Read one complete scoring run for the current model and feature generation |
+| `GET /api/district/<district_id>` | District score, components, readiness, and evidence metadata |
+| `GET /api/history/<district_id>` | Monthly features with observed/imputed flags and strict JSON nulls |
+| `GET /api/predict/<district_id>?months=6` | One validated six-calendar-month endpoint |
+| `GET /api/predict/<district_id>?window=next_six_months` | Six future monthly XGBoost projections using rainfall and weather assumptions |
+| `GET /api/alerts` | Scores and unavailable districts from the same complete run |
+| `POST /api/simulate` | Labelled sensitivity analysis using the same baseline evidence |
+
+District identifiers resolve through the canonical master or recorded legacy crosswalk. They are never borrowed from a similarly named district in a different state. Use `window=next_six_months` for the future monthly graph and `as_of=YYYY-MM-DD` for a retrospective window. Arbitrary target-year requests remain unsupported.
+
+## Interpretation and limitations
+
+The six-month forecast starts at the **last observed groundwater month**, which may precede today's date substantially. If its target is already in the past, the response and dashboard label it as a historical forecast. Forward-filled months do not advance the reported observation date. The supplied observations end in March 2023; current-date scores summarize that historical evidence and are not validated 2026 or 2027 forecasts. New observations and renewed evaluation are required for a current forecast.
+
+The **prediction graph** starts with the next full calendar month after today's month and shows six monthly depth estimates. For example, on 13 October 2026 it covers November 2026 through April 2027. A seasonal regression with a damped trend estimates the current groundwater depth across the unobserved gap. A separate monthly XGBoost model predicts groundwater changes for horizons of one through six months, using the horizon, rainfall, temperature, and evapotranspiration as inputs. An estimated current depth is shown explicitly as an estimate; it is not a newly recorded reading. The history fit needs 24 actual observations spanning 36 months, and sparse districts may use the labelled zone evidence selected by the pipeline. Missing usable groundwater or weather evidence returns an empty graph with a reason.
+
+Future rainfall, temperature, and evapotranspiration are **assumed historical same-month averages**, calculated only from past weather records using up to ten recent usable same-calendar-month reference years per weather field, with at least three years required. They are model inputs, not observed 2026 weather or live weather forecasts. The dashboard shows each month's assumptions beside the graph and reports the last available weather record. Pumping/extraction remains excluded because measured future pumping data is unavailable. This climate-conditioned projection does not replace the historical XGBoost endpoint, crisis score, or simulation baseline. Its present-period accuracy is unvalidated. Inspect source age and the weather assumptions before interpreting the estimates. Historical evaluation does not establish accuracy after the current multi-year observation gap.
+
+The crisis tiers and depth-to-score transformation are project definitions, not official groundwater classifications. Initial ensemble weights are explicitly uncalibrated; candidate backtest weights require independent validation before promotion. A zone fallback is a real zone aggregate and is labelled accordingly. When district and zone evidence are insufficient, the score and tier remain null.
+
+Simulation shows model and heuristic sensitivity to changed inputs. Its extraction adjustment is explicitly heuristic and does not establish a causal policy effect. Zero-change simulation preserves the available baseline, including a null baseline.
+
+Read held-out metrics, their metre units, observed sample counts, and temporal boundaries from `models/checkpoints/aquaiq_xgb_model_card.json`. Older normalized-scale metrics and evaluation targets in planning documents should not be interpreted as the repaired model's measured performance.
+
+## Verification
+
+Run the deterministic regression suite without a database:
+
+```bash
+python -m pytest -v -m "not requires_db"
+python -m pip check
+```
+
+Tests marked `requires_db` are opt-in with `--integration` and assume a populated test dataset. Use an isolated PostgreSQL database for those tests; an empty CI database is used only for schema smoke checks.
+
+```bash
+python -m pytest --integration -m requires_db
+cd dashboard
+npm run lint
+npm run build
+```
+
+CI uses Python 3.13 for unit tests, initializes a PostgreSQL 18 schema twice and checks provenance constraints, and runs strict `npm ci`, lint, request-handling tests (`npm test`), and build on Node 22. Failed initialization or dependency installation fails the workflow.

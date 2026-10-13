@@ -1,39 +1,24 @@
-#!/bin/bash
-# AquaIQ one-command setup.
-# Usage: bash setup.sh
-set -e
+#!/usr/bin/env bash
+# Run from any directory: bash /path/to/AquaIQ/setup.sh
+set -euo pipefail
+cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
 
-echo "=== AquaIQ Setup ==="
-
-# 1. Virtual environment
-echo "[1/5] Creating virtual environment..."
-python3 -m venv venv
-source venv/bin/activate
-
-# 2. Dependencies
-echo "[2/5] Installing dependencies from requirements.txt..."
-pip install --upgrade pip --quiet
-pip install -r requirements.txt --quiet
-
-# 3. Directory structure (idempotent — safe if already created)
-echo "[3/5] Ensuring data/model directories exist..."
-mkdir -p data/raw data/processed models/checkpoints
-
-# 4. Database
-echo "[4/5] Initializing PostgreSQL database tables..."
-if [ ! -f .env ]; then
-  echo "ERROR: .env file not found. Copy .env.example to .env and fill in your PostgreSQL credentials."
+if [[ ! -f .env ]]; then
+  echo 'Copy .env.example to .env and configure an existing PostgreSQL database before setup.' >&2
   exit 1
 fi
-python3 db/init_db.py
 
-# 5. Sanity check config
-echo "[5/5] Validating config.yaml..."
-python3 -c "import yaml; yaml.safe_load(open('config.yaml')); print('config.yaml is valid')"
-
-echo ""
-echo "=== Setup complete ==="
-echo "Next steps:"
-echo "  1. source venv/bin/activate"
-echo "  2. Download CGWB/IMD/ERA5 data into data/raw/ (see README.md)"
-echo "  3. Download India district GeoJSON into data/raw/india_districts.geojson"
+if [[ ! -x venv/bin/python ]]; then
+  python_bin="${PYTHON_BIN:-python3}"
+  "$python_bin" -c 'import sys; assert sys.version_info[:2] == (3, 13), "AquaIQ requires Python 3.13"'
+  "$python_bin" -m venv venv
+fi
+venv/bin/python -c 'import sys; assert sys.version_info[:2] == (3, 13), "Existing venv requires Python 3.13; use a separate new environment"'
+venv/bin/python -m pip install --upgrade pip
+venv/bin/python -m pip install -r requirements.txt
+venv/bin/python -m pip check
+mkdir -p data/raw data/processed models/checkpoints reports
+venv/bin/python -m db.init_db
+venv/bin/python -c 'from pathlib import Path; import yaml; yaml.safe_load(Path("config.yaml").read_text(encoding="utf-8")); print("config.yaml is valid")'
+echo 'Setup complete. Activate with: source venv/bin/activate'
+echo 'See README.md for climate regeneration, pipeline execution, and dashboard setup.'

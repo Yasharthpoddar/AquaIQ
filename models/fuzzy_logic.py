@@ -132,9 +132,8 @@ def compute_crisis_score(sim, rainfall_deficit_val: float, depletion_rate_val: f
     try:
         sim.compute()
         score = float(sim.output["crisis_score"])
-    except Exception:
-        # If FIS can't resolve (e.g., both inputs at exact boundary), default
-        score = 50.0
+    except Exception as error:
+        raise RuntimeError('Fuzzy inference could not resolve the supplied observations.') from error
 
     score = np.clip(score, 0, 100)
     tier = score_to_tier(score)

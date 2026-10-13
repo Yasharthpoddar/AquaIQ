@@ -1,88 +1,28 @@
-"""
-GET /api/predict/<district_id>
-Returns 6-month GWL forecast + crisis score for a district.
-Uses the trained XGBoost model for forecasting.
-"""
-
-from flask import Blueprint, jsonify, request
-from models.ensemble import compute_crisis_score, xgb_forecast_6mo
+"""Historical model endpoint and clearly labelled present-day projections."""
+from flask import Blueprint, request
+from models.ensemble import forecast_result
+from models.monthly_projection import forecast_next_six_months
 from api.district_resolver import resolve_district_id
-import pandas as pd
+from api.contracts import response, parse_as_of, failure
 
-predict_bp = Blueprint("predict", __name__)
+predict_bp=Blueprint('predict',__name__)
 
-
-@predict_bp.route("/predict/<district_id>", methods=["GET"])
+@predict_bp.route('/predict/<district_id>')
 def get_prediction(district_id):
-    """
-    Response:
-    {
-      "district_id": "RJ-Jaipur",
-      "crisis_score": 72,
-      "tier": "Warning",
-      "forecast": [
-        {"month": "2025-01", "predicted_gwl": 8.5},
-        ...
-      ],
-      "ensemble_weights": {...},
-      "recommendation": "..."
-    }
-    """
     try:
-        resolved_id = resolve_district_id(district_id)
-        crisis_data = compute_crisis_score(resolved_id)
-
-        # Generate 6-month forecast using the trained XGBoost model
-        forecast = xgb_forecast_6mo(resolved_id)
-
-        # Fallback: if XGBoost forecast fails, use linear extrapolation
-        if not forecast:
-            try:
-                from models.ensemble import get_connection
-                conn = get_connection()
-                df = pd.read_sql(
-                    "SELECT date, gwl_current FROM features WHERE district_id = %s AND gwl_current IS NOT NULL ORDER BY date DESC LIMIT 12",
-                    conn, params=(resolved_id,)
-                )
-                conn.close()
-
-                if len(df) >= 6:
-                    recent_gwl = df["gwl_current"].iloc[:6].values
-                    trend = (recent_gwl[0] - recent_gwl[-1]) / 6
-                    base = recent_gwl[0]
-                    for i in range(1, 7):
-                        forecast.append({
-                            "month": f"2025-{i:02d}",
-                            "predicted_gwl": round(float(base + trend * i), 2)
-                        })
-                else:
-                    raise ValueError("Not enough data")
-            except Exception:
-                # Hardcoded fallback
-                base_gwl = 8.5
-                for i in range(1, 7):
-                    forecast.append({
-                        "month": f"2025-{i:02d}",
-                        "predicted_gwl": round(base_gwl + (i * 0.4), 1)
-                    })
-
-        # Policy recommendation based on tier
-        tier = crisis_data["tier"]
-        if tier == "Crisis":
-            rec = "Declare water-stressed zone -- emergency conservation and supply measures."
-        elif tier == "Warning":
-            rec = "Restrict new extraction permits and enforce conservation measures."
-        else:
-            rec = "Monitor conditions and promote rainwater harvesting."
-
-        return jsonify({
-            "district_id": district_id,
-            "crisis_score": crisis_data["crisis_score"],
-            "tier": tier,
-            "estimate_type": crisis_data.get("estimate_type", "district_level"),
-            "forecast": forecast,
-            "ensemble_weights": crisis_data["ensemble_weights"],
-            "recommendation": rec,
-        })
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        window=request.args.get('window','observed_endpoint')
+        if window not in ('observed_endpoint','next_six_months'):
+            raise ValueError('window must be observed_endpoint or next_six_months.')
+        if any(key in request.args for key in ('target_year','year','start','start_month')):
+            raise ValueError('year, target_year, start, and start_month are unsupported. Use as_of and window to select the prediction window.')
+        if request.args.get('months','6')!='6':
+            raise ValueError('Only a six-month prediction horizon is supported; months must equal 6.')
+        cutoff=parse_as_of()
+        canonical=resolve_district_id(district_id)
+        data=(forecast_next_six_months(canonical,cutoff) if window=='next_six_months'
+              else forecast_result(canonical,cutoff))
+        data['requested_id']=district_id
+        data['resolved_id']=canonical
+        return response(data)
+    except Exception as error:
+        return failure(error)

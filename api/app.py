@@ -38,8 +38,8 @@ def create_app(config_override=None):
     if config_override:
         app.config.update(config_override)
 
-    # CORS for React dashboard
-    CORS(app, origins=["http://localhost:3000", "http://localhost:5173"])
+    # CORS for React dashboard (localhost and 127.0.0.1)
+    CORS(app, origins=["http://localhost:3000", "http://localhost:5173", "http://127.0.0.1:3000", "http://127.0.0.1:5173"])
 
     # Register blueprints
     from api.routes.predict import predict_bp
@@ -48,31 +48,15 @@ def create_app(config_override=None):
     from api.routes.alerts import alerts_bp
     from api.routes.simulate import simulate_bp
     from api.routes.health import health_bp
+    from api.routes.scores import scores_bp
 
     app.register_blueprint(predict_bp, url_prefix="/api")
     app.register_blueprint(district_bp, url_prefix="/api")
     app.register_blueprint(history_bp, url_prefix="/api")
     app.register_blueprint(alerts_bp, url_prefix="/api")
     app.register_blueprint(simulate_bp, url_prefix="/api")
-
-    # Pre-warm the alerts cache in a background thread so the first
-    # request doesn't block for ~20 s while the DB query runs.
-    import threading
-
-    def _warm_alerts_cache():
-        with app.app_context():
-            try:
-                from api.routes.alerts import _get_monitored_districts
-                from models.ensemble import compute_crisis_score
-                districts = _get_monitored_districts()
-                for d in districts:
-                    compute_crisis_score(d["id"])
-                print(f"[AquaIQ] Alerts cache warmed: {len(districts)} districts scored")
-            except Exception as exc:
-                print(f"[AquaIQ] Cache warming failed (non-fatal): {exc}")
-
-    threading.Thread(target=_warm_alerts_cache, daemon=True).start()
     app.register_blueprint(health_bp, url_prefix="/api")
+    app.register_blueprint(scores_bp, url_prefix="/api")
 
     # Root route
     @app.route("/")
@@ -81,6 +65,8 @@ def create_app(config_override=None):
             "name": "AquaIQ API",
             "version": "1.0.0",
             "endpoints": [
+                "/api/config",
+                "/api/scores",
                 "/api/predict/<district_id>",
                 "/api/district/<district_id>",
                 "/api/history/<district_id>",
@@ -97,4 +83,7 @@ if __name__ == "__main__":
     from dotenv import load_dotenv
     load_dotenv(ROOT / ".env")
     app = create_app()
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    debug_mode = os.getenv("FLASK_DEBUG", "false").lower() in ("true", "1")
+    port = int(os.getenv("FLASK_PORT", 5000))
+    host = os.getenv("FLASK_HOST", "0.0.0.0")
+    app.run(host=host, port=port, debug=debug_mode)

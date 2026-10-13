@@ -1,0 +1,432 @@
+{
+  "reviewed_at_utc": "2026-10-13T09:47:38.659665+00:00",
+  "status": "passed_read_only_implementation_review",
+  "as_of": "2026-10-13",
+  "bundle_model_sha256": "54f535f57bcd62f0bea38cf5c545eb253b37d5bdd6bae1794ec27a3e73a43d97",
+  "bundle_version": "1.0-climate-conditioned-monthly-xgb",
+  "feature_generation_id": "physical-v3-causal-monthly-90a24f1f2574",
+  "source_feature_csv_sha256": "e38995308e3629e756765bfcfb37d0d3936d504e805023a302d0c16ee83a0868",
+  "checks": {
+    "verified_bundle_checksum_schema_units_and_generation": true,
+    "six_calendar_horizons_present": true,
+    "only_observed_origins_and_targets_for_training": true,
+    "max_train_origin": "2019-11-01",
+    "max_train_target_date": "2019-12-01",
+    "min_heldout_origin": "2020-07-01"
+  },
+  "weather_sensitivity": {
+    "district_id": "AP-Krishna",
+    "months": [
+      "2026-11",
+      "2026-12",
+      "2027-01",
+      "2027-02",
+      "2027-03",
+      "2027-04"
+    ],
+    "estimated_current_gwl_m": 2.8681,
+    "baseline_predicted_gwl_m": [
+      3.7428,
+      3.8335,
+      3.9151,
+      4.4382,
+      4.7338,
+      4.9278
+    ],
+    "wetter_assumption": "Each future month rainfall multiplied by 1.5; other weather unchanged.",
+    "wetter_predicted_gwl_m": [
+      3.7167,
+      3.7875,
+      3.8953,
+      4.4184,
+      4.7001,
+      4.8926
+    ],
+    "wetter_depth_delta_m": [
+      -0.0261,
+      -0.046,
+      -0.0198,
+      -0.0198,
+      -0.0337,
+      -0.0352
+    ],
+    "wetter_changed_predicted_depths": true,
+    "warmer_assumption": "Each future month temperature increased by 3 degC and ET multiplied by 1.2; rainfall unchanged.",
+    "warmer_predicted_gwl_m": [
+      3.8471,
+      3.8928,
+      4.3159,
+      4.6912,
+      4.9187,
+      5.6028
+    ],
+    "warmer_depth_delta_m": [
+      0.1043,
+      0.0593,
+      0.4008,
+      0.253,
+      0.1849,
+      0.675
+    ],
+    "warmer_changed_predicted_depths": true,
+    "comparison_policy": "Only predicted_gwl arrays compared, not weather metadata or full forecast dictionaries."
+  },
+  "future_weather_mutation_check": {
+    "district_id": "AP-Krishna",
+    "heldout_origin": "2020-11-01",
+    "observed_labels": 1,
+    "mutated_rows": 49,
+    "mutation": "All rainfall, temperature and ET values strictly after the heldout origin replaced with 9999, retaining original observed target pairs.",
+    "evaluation_and_predictions_unchanged": true,
+    "baseline_evaluation": {
+      "status": "evaluated_assumed_weather",
+      "skipped_labels": 0,
+      "n": 1,
+      "districts": 1,
+      "xgboost": {
+        "n": 1,
+        "rmse_m": 0.3336068630218505,
+        "mae_m": 0.3336068630218505,
+        "r2": null,
+        "nse": null
+      },
+      "persistence": {
+        "n": 1,
+        "rmse_m": 0.6679688000000001,
+        "mae_m": 0.6679688000000001,
+        "r2": null,
+        "nse": null
+      },
+      "seasonal_paired": {
+        "n": 1,
+        "xgboost": {
+          "n": 1,
+          "rmse_m": 0.3336068630218505,
+          "mae_m": 0.3336068630218505,
+          "r2": null,
+          "nse": null
+        },
+        "baseline": {
+          "n": 1,
+          "rmse_m": 0.9583334000000003,
+          "mae_m": 0.9583334000000003,
+          "r2": null,
+          "nse": null
+        }
+      },
+      "by_horizon": {
+        "1": {
+          "n": 0
+        },
+        "2": {
+          "n": 1,
+          "districts": 1,
+          "xgboost": {
+            "n": 1,
+            "rmse_m": 0.3336068630218505,
+            "mae_m": 0.3336068630218505,
+            "r2": null,
+            "nse": null
+          },
+          "persistence": {
+            "n": 1,
+            "rmse_m": 0.6679688000000001,
+            "mae_m": 0.6679688000000001,
+            "r2": null,
+            "nse": null
+          },
+          "seasonal_paired": {
+            "n": 1,
+            "xgboost": {
+              "n": 1,
+              "rmse_m": 0.3336068630218505,
+              "mae_m": 0.3336068630218505,
+              "r2": null,
+              "nse": null
+            },
+            "baseline": {
+              "n": 1,
+              "rmse_m": 0.9583334000000003,
+              "mae_m": 0.9583334000000003,
+              "r2": null,
+              "nse": null
+            }
+          }
+        },
+        "3": {
+          "n": 0
+        },
+        "4": {
+          "n": 0
+        },
+        "5": {
+          "n": 0
+        },
+        "6": {
+          "n": 0
+        }
+      },
+      "weather_policy": "Historical same-month weather means available at each origin, not realized future weather.",
+      "groundwater_origin_policy": "Observed origins; this does not validate estimated current levels after multi-year gaps."
+    }
+  },
+  "historical_evaluation": {
+    "status": "evaluated_assumed_weather",
+    "skipped_labels": 0,
+    "n": 1936,
+    "districts": 510,
+    "xgboost": {
+      "n": 1936,
+      "rmse_m": 2.4555138370448297,
+      "mae_m": 1.233333137015661,
+      "r2": 0.9295826374672006,
+      "nse": 0.9295826374672006
+    },
+    "persistence": {
+      "n": 1936,
+      "rmse_m": 2.7696351562834027,
+      "mae_m": 1.3216653742045454,
+      "r2": 0.9104140074675136,
+      "nse": 0.9104140074675136
+    },
+    "seasonal_paired": {
+      "n": 1893,
+      "xgboost": {
+        "n": 1893,
+        "rmse_m": 2.473261759297191,
+        "mae_m": 1.237512668250916,
+        "r2": 0.9288759377382216,
+        "nse": 0.9288759377382216
+      },
+      "baseline": {
+        "n": 1893,
+        "rmse_m": 2.3976032228516133,
+        "mae_m": 1.225675456840993,
+        "r2": 0.9331608350205681,
+        "nse": 0.9331608350205681
+      }
+    },
+    "by_horizon": {
+      "1": {
+        "n": 149,
+        "districts": 10,
+        "xgboost": {
+          "n": 149,
+          "rmse_m": 1.014929183704093,
+          "mae_m": 0.7011475109311303,
+          "r2": 0.9877820140194071,
+          "nse": 0.9877820140194071
+        },
+        "persistence": {
+          "n": 149,
+          "rmse_m": 0.8888131746636853,
+          "mae_m": 0.315507844295302,
+          "r2": 0.9906297946603617,
+          "nse": 0.9906297946603617
+        },
+        "seasonal_paired": {
+          "n": 139,
+          "xgboost": {
+            "n": 139,
+            "rmse_m": 0.9475409308781075,
+            "mae_m": 0.6805604600624797,
+            "r2": 0.9890879146629001,
+            "nse": 0.9890879146629001
+          },
+          "baseline": {
+            "n": 139,
+            "rmse_m": 1.6487569095112806,
+            "mae_m": 0.7868890942446041,
+            "r2": 0.966961140098841,
+            "nse": 0.966961140098841
+          }
+        }
+      },
+      "2": {
+        "n": 638,
+        "districts": 506,
+        "xgboost": {
+          "n": 638,
+          "rmse_m": 1.5863187757159105,
+          "mae_m": 1.0126017572300783,
+          "r2": 0.9662605287681189,
+          "nse": 0.9662605287681189
+        },
+        "persistence": {
+          "n": 638,
+          "rmse_m": 1.93664299971382,
+          "mae_m": 1.1736317521943573,
+          "r2": 0.9497129124495819,
+          "nse": 0.9497129124495819
+        },
+        "seasonal_paired": {
+          "n": 630,
+          "xgboost": {
+            "n": 630,
+            "rmse_m": 1.5938524936761527,
+            "mae_m": 1.0163194429318334,
+            "r2": 0.9657064577337975,
+            "nse": 0.9657064577337975
+          },
+          "baseline": {
+            "n": 630,
+            "rmse_m": 2.1294003608539325,
+            "mae_m": 1.167110767777778,
+            "r2": 0.9387888215153116,
+            "nse": 0.9387888215153116
+          }
+        }
+      },
+      "3": {
+        "n": 463,
+        "districts": 337,
+        "xgboost": {
+          "n": 463,
+          "rmse_m": 3.4890783052971512,
+          "mae_m": 1.4397790689608514,
+          "r2": 0.8832200542847779,
+          "nse": 0.8832200542847779
+        },
+        "persistence": {
+          "n": 463,
+          "rmse_m": 3.7353636045053005,
+          "mae_m": 1.5963635756587473,
+          "r2": 0.866151779379347,
+          "nse": 0.866151779379347
+        },
+        "seasonal_paired": {
+          "n": 455,
+          "xgboost": {
+            "n": 455,
+            "rmse_m": 3.5105484954469226,
+            "mae_m": 1.4412794525603478,
+            "r2": 0.8830038223063529,
+            "nse": 0.8830038223063529
+          },
+          "baseline": {
+            "n": 455,
+            "rmse_m": 3.1545528432131356,
+            "mae_m": 1.592688453186813,
+            "r2": 0.9055292564801756,
+            "nse": 0.9055292564801756
+          }
+        }
+      },
+      "4": {
+        "n": 126,
+        "districts": 9,
+        "xgboost": {
+          "n": 126,
+          "rmse_m": 1.723193865340863,
+          "mae_m": 1.2903438897151165,
+          "r2": 0.9604328957373779,
+          "nse": 0.9604328957373779
+        },
+        "persistence": {
+          "n": 126,
+          "rmse_m": 1.4602411789270404,
+          "mae_m": 0.5332710944444445,
+          "r2": 0.9715871256651765,
+          "nse": 0.9715871256651765
+        },
+        "seasonal_paired": {
+          "n": 120,
+          "xgboost": {
+            "n": 120,
+            "rmse_m": 1.7456344458632431,
+            "mae_m": 1.3003427731374233,
+            "r2": 0.9600934496810605,
+            "nse": 0.9600934496810605
+          },
+          "baseline": {
+            "n": 120,
+            "rmse_m": 1.7632360678446115,
+            "mae_m": 0.8369334133333333,
+            "r2": 0.9592846190076025,
+            "nse": 0.9592846190076025
+          }
+        }
+      },
+      "5": {
+        "n": 448,
+        "districts": 339,
+        "xgboost": {
+          "n": 448,
+          "rmse_m": 2.7897254982652746,
+          "mae_m": 1.4528665621464865,
+          "r2": 0.9129739981165863,
+          "nse": 0.9129739981165863
+        },
+        "persistence": {
+          "n": 448,
+          "rmse_m": 3.4501293558222246,
+          "mae_m": 1.9950769453794643,
+          "r2": 0.8668942414586276,
+          "nse": 0.8668942414586276
+        },
+        "seasonal_paired": {
+          "n": 442,
+          "xgboost": {
+            "n": 442,
+            "rmse_m": 2.804633299084562,
+            "mae_m": 1.4569741031155927,
+            "r2": 0.9126621048920408,
+            "nse": 0.9126621048920408
+          },
+          "baseline": {
+            "n": 442,
+            "rmse_m": 2.3236067417530832,
+            "mae_m": 1.2645507339366515,
+            "r2": 0.9400518473366163,
+            "nse": 0.9400518473366163
+          }
+        }
+      },
+      "6": {
+        "n": 112,
+        "districts": 10,
+        "xgboost": {
+          "n": 112,
+          "rmse_m": 1.9298239945620237,
+          "mae_m": 1.403007090590954,
+          "r2": 0.9426593054826341,
+          "nse": 0.9426593054826341
+        },
+        "persistence": {
+          "n": 112,
+          "rmse_m": 1.577286477077583,
+          "mae_m": 0.5611917214285714,
+          "r2": 0.961695596394938,
+          "nse": 0.961695596394938
+        },
+        "seasonal_paired": {
+          "n": 107,
+          "xgboost": {
+            "n": 107,
+            "rmse_m": 1.9442520448120433,
+            "mae_m": 1.4198737451841412,
+            "r2": 0.9427860571068629,
+            "nse": 0.9427860571068629
+          },
+          "baseline": {
+            "n": 107,
+            "rmse_m": 1.8345490210605493,
+            "mae_m": 0.8552298299065418,
+            "r2": 0.9490604162903339,
+            "nse": 0.9490604162903339
+          }
+        }
+      }
+    },
+    "weather_policy": "Historical same-month weather means available at each origin, not realized future weather.",
+    "groundwater_origin_policy": "Observed origins; this does not validate estimated current levels after multi-year gaps."
+  },
+  "limitations": [
+    "Default future weather is historical same-calendar-month climatology, not a live meteorological forecast.",
+    "Present groundwater depth is estimated when observations are old; this holdout tests true observed origins and does not validate multi-year gaps.",
+    "XGBoost beats persistence overall, but the paired seasonal baseline performs slightly better overall.",
+    "XGBoost underperforms persistence at horizons 1, 4 and 6; those holdouts cover only 9 or 10 districts.",
+    "R-squared measures pooled depth fit and must not be described as forecast accuracy percentage.",
+    "Small rainfall perturbations can leave individual predictions unchanged due to tree thresholds, especially in very dry months."
+  ]
+}

@@ -1,0 +1,307 @@
+{
+  "verification_source": "Local verified physical feature CSV and matching checkpoint; live database read was sandbox-blocked and automatic approval review timed out.",
+  "GJ-Gandhinagar": {
+    "as_of": "2026-10-13",
+    "status": "historical_forecast",
+    "estimate_type": "district_level",
+    "source_zone": null,
+    "last_observed_date": "2021-01-01",
+    "data_age_months": 69,
+    "crisis_score": 87,
+    "tier": "Crisis",
+    "components": {
+      "lr_trend": 100.0,
+      "xgb_risk": 100.0,
+      "drought_frequency": 38.88888888888889,
+      "fuzzy_logic": 91.67
+    },
+    "ensemble_weights": {
+      "linear_regression_trend": 0.2,
+      "xgboost_risk": 0.45,
+      "drought_frequency": 0.2,
+      "fuzzy_logic": 0.15
+    },
+    "weights_status": "initial_uncalibrated",
+    "forecast": [
+      {
+        "month": "2021-07",
+        "predicted_gwl": 57.0456
+      }
+    ],
+    "projection_method": "direct_xgboost_6_month_endpoint",
+    "real_history": {
+      "n": 74,
+      "first": {
+        "date": "2002-01-01T00:00:00",
+        "gwl_current": 83.42
+      },
+      "last": {
+        "date": "2021-01-01T00:00:00",
+        "gwl_current": 102.51
+      },
+      "linear_depth_trend_m_per_year": 1.9260138517017351,
+      "last_twelve_observations": [
+        {
+          "date": "2017-11-01T00:00:00",
+          "gwl_current": 72.2725
+        },
+        {
+          "date": "2018-01-01T00:00:00",
+          "gwl_current": 74.41095
+        },
+        {
+          "date": "2018-05-01T00:00:00",
+          "gwl_current": 81.921425
+        },
+        {
+          "date": "2018-08-01T00:00:00",
+          "gwl_current": 80.85182
+        },
+        {
+          "date": "2019-01-01T00:00:00",
+          "gwl_current": 96.18
+        },
+        {
+          "date": "2019-05-01T00:00:00",
+          "gwl_current": 84.04294
+        },
+        {
+          "date": "2019-08-01T00:00:00",
+          "gwl_current": 79.35375
+        },
+        {
+          "date": "2019-11-01T00:00:00",
+          "gwl_current": 85.4079
+        },
+        {
+          "date": "2020-01-01T00:00:00",
+          "gwl_current": 89.62
+        },
+        {
+          "date": "2020-08-01T00:00:00",
+          "gwl_current": 98.187
+        },
+        {
+          "date": "2020-11-01T00:00:00",
+          "gwl_current": 106.156
+        },
+        {
+          "date": "2021-01-01T00:00:00",
+          "gwl_current": 102.51
+        }
+      ]
+    },
+    "future_projection": {
+      "status": "projection",
+      "as_of": "2026-10-13",
+      "forecast_start": "2026-11",
+      "forecast_end": "2027-04",
+      "last_observed_date": "2021-01-01",
+      "estimated_current_gwl": 105.2631,
+      "forecast": [
+        {
+          "month": "2026-11",
+          "date": "2026-11-01",
+          "predicted_gwl": 106.1719
+        },
+        {
+          "month": "2026-12",
+          "date": "2026-12-01",
+          "predicted_gwl": 106.9039
+        },
+        {
+          "month": "2027-01",
+          "date": "2027-01-01",
+          "predicted_gwl": 107.2688
+        },
+        {
+          "month": "2027-02",
+          "date": "2027-02-01",
+          "predicted_gwl": 107.1744
+        },
+        {
+          "month": "2027-03",
+          "date": "2027-03-01",
+          "predicted_gwl": 106.6516
+        },
+        {
+          "month": "2027-04",
+          "date": "2027-04-01",
+          "predicted_gwl": 105.8457
+        }
+      ],
+      "fit_details": {
+        "observed_months": 38,
+        "history_start": "2011-01-01",
+        "history_end": "2021-01-01",
+        "annual_seasonality": true,
+        "trend_m_per_year": 1.8345442471412772,
+        "trend_damping_months": 36.0,
+        "history_sha256": "0f57bea8d6057638edde51dcd5110bfead50fea7773a8731a012c0139fd78878"
+      }
+    },
+    "weighted_contributions": {
+      "lr_trend": 20.0,
+      "xgb_risk": 45.0,
+      "drought_frequency": 7.777777777777779,
+      "fuzzy_logic": 13.7505
+    },
+    "weighted_unrounded_score": 86.52827777777777
+  },
+  "AP-Krishna": {
+    "as_of": "2026-10-13",
+    "status": "historical_forecast",
+    "estimate_type": "district_level",
+    "source_zone": null,
+    "last_observed_date": "2021-01-01",
+    "data_age_months": 69,
+    "crisis_score": 30,
+    "tier": "Safe",
+    "components": {
+      "lr_trend": 41.98222315786943,
+      "xgb_risk": 21.978479999999998,
+      "drought_frequency": 8.333333333333332,
+      "fuzzy_logic": 70.0
+    },
+    "ensemble_weights": {
+      "linear_regression_trend": 0.2,
+      "xgboost_risk": 0.45,
+      "drought_frequency": 0.2,
+      "fuzzy_logic": 0.15
+    },
+    "weights_status": "initial_uncalibrated",
+    "forecast": [
+      {
+        "month": "2021-07",
+        "predicted_gwl": 4.1327
+      }
+    ],
+    "projection_method": "direct_xgboost_6_month_endpoint",
+    "real_history": {
+      "n": 75,
+      "first": {
+        "date": "2002-01-01T00:00:00",
+        "gwl_current": 4.9510345
+      },
+      "last": {
+        "date": "2021-01-01T00:00:00",
+        "gwl_current": 3.35
+      },
+      "linear_depth_trend_m_per_year": -0.16035553684261145,
+      "last_twelve_observations": [
+        {
+          "date": "2018-05-01T00:00:00",
+          "gwl_current": 6.5395455
+        },
+        {
+          "date": "2018-08-01T00:00:00",
+          "gwl_current": 2.656923
+        },
+        {
+          "date": "2018-11-01T00:00:00",
+          "gwl_current": 3.8316667
+        },
+        {
+          "date": "2018-12-01T00:00:00",
+          "gwl_current": 3.319
+        },
+        {
+          "date": "2019-01-01T00:00:00",
+          "gwl_current": 5.1686153
+        },
+        {
+          "date": "2019-05-01T00:00:00",
+          "gwl_current": 6.1254687
+        },
+        {
+          "date": "2019-08-01T00:00:00",
+          "gwl_current": 4.6396923
+        },
+        {
+          "date": "2019-10-01T00:00:00",
+          "gwl_current": 3.4923077
+        },
+        {
+          "date": "2019-11-01T00:00:00",
+          "gwl_current": 0.52
+        },
+        {
+          "date": "2020-01-01T00:00:00",
+          "gwl_current": 4.3083334
+        },
+        {
+          "date": "2020-11-01T00:00:00",
+          "gwl_current": 2.6820312
+        },
+        {
+          "date": "2021-01-01T00:00:00",
+          "gwl_current": 3.35
+        }
+      ]
+    },
+    "future_projection": {
+      "status": "projection",
+      "as_of": "2026-10-13",
+      "forecast_start": "2026-11",
+      "forecast_end": "2027-04",
+      "last_observed_date": "2021-01-01",
+      "estimated_current_gwl": 2.8681,
+      "forecast": [
+        {
+          "month": "2026-11",
+          "date": "2026-11-01",
+          "predicted_gwl": 2.8962
+        },
+        {
+          "month": "2026-12",
+          "date": "2026-12-01",
+          "predicted_gwl": 3.2635
+        },
+        {
+          "month": "2027-01",
+          "date": "2027-01-01",
+          "predicted_gwl": 3.8717
+        },
+        {
+          "month": "2027-02",
+          "date": "2027-02-01",
+          "predicted_gwl": 4.5582
+        },
+        {
+          "month": "2027-03",
+          "date": "2027-03-01",
+          "predicted_gwl": 5.1392
+        },
+        {
+          "month": "2027-04",
+          "date": "2027-04-01",
+          "predicted_gwl": 5.4593
+        }
+      ],
+      "fit_details": {
+        "observed_months": 39,
+        "history_start": "2011-01-01",
+        "history_end": "2021-01-01",
+        "annual_seasonality": true,
+        "trend_m_per_year": 0.0782353214710356,
+        "trend_damping_months": 36.0,
+        "history_sha256": "bf92abe84f2461b3384e8fc1b0c4b9477925752cbf541ec0c14aaa162064aebf"
+      }
+    },
+    "weighted_contributions": {
+      "lr_trend": 8.396444631573885,
+      "xgb_risk": 9.890315999999999,
+      "drought_frequency": 1.6666666666666665,
+      "fuzzy_logic": 10.5
+    },
+    "weighted_unrounded_score": 30.453427298240552
+  },
+  "interpretation": {
+    "depth_units": "m_bgl (metres below ground level)",
+    "increasing_depth": "Water table becomes deeper below ground; depletion risk increases.",
+    "decreasing_depth": "Water table becomes shallower; it approaches the ground surface.",
+    "sign_reversal_found": false,
+    "score_horizon": "Historical observed-origin six-month XGBoost endpoint; the separate next-six-month exploratory graph does not determine this score.",
+    "weights_status": "Project defaults, not independently calibrated."
+  }
+}

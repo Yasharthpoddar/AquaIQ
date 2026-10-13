@@ -10,6 +10,8 @@ Architecture (from project plan):
   Output layer: 4 classes (Safe/Watch/Warning/Crisis), softmax
 
 Training labels come from the Fuzzy Logic FIS output (fuzzy_logic.py).
+This is a contemporaneous FIS imitation exercise, not independently validated
+crisis ground truth or a future groundwater forecast.
 
 Course mapping: CS303 — AI & Soft Computing (ANN module).
 
@@ -38,6 +40,9 @@ from sklearn.metrics import (
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 ROOT = Path(__file__).parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from models import xgboost_model as forecast
 load_dotenv(ROOT / ".env")
 
 with open(ROOT / "config.yaml") as f:
@@ -51,31 +56,8 @@ TIER_ORDER = ["Safe", "Watch", "Warning", "Crisis"]
 
 
 def load_features() -> pd.DataFrame:
-    """Load feature matrix."""
-    path = PROCESSED_DIR / "features_matrix.csv"
-    if path.exists():
-        return pd.read_csv(path, parse_dates=["date"])
-
-    # Fallback: build minimal features from raw CGWB
-    print("  features_matrix.csv not found, building minimal features...")
-    cgwb_path = ROOT / CONFIG["paths"]["data_raw"] / "cgwb_combined.csv"
-    if not cgwb_path.exists():
-        print("ERROR: No data source. Run preprocessing/features.py first.")
-        sys.exit(1)
-
-    raw = pd.read_csv(cgwb_path, dtype=str, low_memory=False)
-    raw["GWL_current"] = pd.to_numeric(raw["currentlevel"], errors="coerce")
-    raw["date"] = pd.to_datetime(raw["date"], errors="coerce")
-    raw = raw.dropna(subset=["GWL_current", "date", "district_code"])
-    raw["date"] = raw["date"].dt.to_period("M").dt.to_timestamp()
-
-    df = raw.groupby(["district_code", "date"])["GWL_current"].mean().reset_index()
-    df = df.rename(columns={"district_code": "district_id"})
-    df = df.sort_values(["district_id", "date"])
-    df["GWL_lag_3mo"] = df.groupby("district_id")["GWL_current"].shift(3)
-    df["GWL_lag_6mo"] = df.groupby("district_id")["GWL_current"].shift(6)
-    df = df.dropna()
-    return df
+    """Use verified units, calendar lags and explicit observation provenance."""
+    return forecast.load_feature_matrix()
 
 
 def generate_fuzzy_labels(df: pd.DataFrame) -> pd.Series:
@@ -96,14 +78,16 @@ def generate_fuzzy_labels(df: pd.DataFrame) -> pd.Series:
             # Convert: positive deficit = bad, so negate
             rd = max(0, min(100, -row["monsoon_deficit_pct"]))
         else:
-            rd = 30  # default moderate deficit
+            labels.append(None)
+            continue
 
         # depletion_rate: GWL change rate. Higher GWL_current = deeper = worse.
-        if "GWL_lag_6mo" in df.columns and pd.notna(row.get("GWL_lag_6mo")):
-            depl = max(0, row["GWL_current"] - row["GWL_lag_6mo"])
-            depl = min(15, depl * 2)  # scale to 0-15 range
+        if pd.notna(row.get("gwl_lag_6mo")) and pd.notna(row.get("gwl_current")):
+            # FIS accepts centimetres/year: six-month metres * 2 * 100.
+            depl = min(15, max(0, row["gwl_current"] - row["gwl_lag_6mo"]) * 200)
         else:
-            depl = 2  # default moderate
+            labels.append(None)
+            continue
 
         score, tier = compute_crisis_score(sim, rd, depl)
         labels.append(tier)
@@ -117,12 +101,12 @@ def train_ann(df: pd.DataFrame, max_iter: int = 300):
     Architecture: [10, 64, 4] — Input(10) → Hidden(64, ReLU) → Output(4)
     """
     print("  Generating crisis tier labels from Fuzzy Logic FIS...")
-    df = df.copy()
+    df = forecast.encode_crop_season(df)
     df["tier"] = generate_fuzzy_labels(df)
+    df = df.dropna(subset=["tier"])
 
     # Feature columns
-    feature_cols = [c for c in CONFIG["features"]
-                    if c in df.columns and c != "crop_season_flag"]
+    feature_cols = forecast.get_feature_columns(df)
 
     print(f"  Features ({len(feature_cols)}): {feature_cols}")
     print(f"  Class distribution:")
@@ -140,10 +124,8 @@ def train_ann(df: pd.DataFrame, max_iter: int = 300):
     train = df[df["date"] <= TRAIN_END].copy()
     test = df[df["date"] >= TEST_START].copy()
 
-    if len(test) < 10:
-        # If test set too small, use val period instead
-        val_end = pd.Timestamp(CONFIG["date_range"]["val_end"])
-        test = df[(df["date"] > TRAIN_END) & (df["date"] <= val_end)].copy()
+    if len(test) < 10 or len(train) < 50:
+        raise ValueError("Insufficient train/final-test samples for the FIS imitation evaluation.")
 
     print(f"\n  Train: {len(train):,} samples | Test: {len(test):,} samples")
 
@@ -152,8 +134,14 @@ def train_ann(df: pd.DataFrame, max_iter: int = 300):
 
     # Scale features
     scaler = StandardScaler()
-    X_train = scaler.fit_transform(train[feature_cols].fillna(0))
-    X_test = scaler.transform(test[feature_cols].fillna(0))
+    # Missing signals do not mean zero rainfall/depth. Restrict this auxiliary
+    # classifier to complete rows; the primary XGBoost handles missing values.
+    train = train.dropna(subset=feature_cols)
+    test = test.dropna(subset=feature_cols)
+    if len(test) < 10 or len(train) < 50:
+        raise ValueError("Insufficient complete samples for the FIS imitation evaluation.")
+    X_train = scaler.fit_transform(train[feature_cols])
+    X_test = scaler.transform(test[feature_cols])
     y_train = train["label"].values
     y_test = test["label"].values
 
@@ -208,14 +196,14 @@ def save_results(acc: float, report_path: Path):
     """Save ANN evaluation results."""
     os.makedirs(report_path.parent, exist_ok=True)
     with open(report_path, "w") as f:
-        f.write(f"ANN Classifier Accuracy: {acc:.4f}\n")
+        f.write(f"ANN FIS imitation agreement (not observed crisis accuracy): {acc:.4f}\n")
     print(f"\n  Results saved to {report_path}")
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description="AquaIQ Perceptron ANN Classifier")
     parser.add_argument("--epochs", type=int, default=300, help="Max training iterations")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     print("AquaIQ -- Perceptron ANN Classifier\n")
 

@@ -2,19 +2,17 @@
 AquaIQ — CGWB data ingestion script.
 
 Reads:  data/raw/cgwb_combined.csv  (1.5M rows, 1996–2023)
+        data_ingestion/district_crosswalk.csv
 Writes:
-  • districts  — one row per unique district (district_code as district_id)
-  • raw_data   — one row per district per month, metric='GWL', source='CGWB'
-                 (multiple well readings per district-month are averaged)
+  • districts  — ensures canonical districts exist
+  • raw_data   — one row per canonical district per month, metric='GWL', source='CGWB'
+                 (all well readings per district-month are averaged across the full dataset)
 
 Run:
     py data_ingestion/ingest_cgwb.py
 
-The script is idempotent — safe to re-run. Existing rows are skipped via
-ON CONFLICT DO NOTHING on both tables.
-
-Performance: processes 1.5M rows in chunks (pandas) and bulk-inserts with
-psycopg2 executemany. Expect ~2–5 minutes on a laptop.
+The script is idempotent — safe to re-run. Existing rows are updated via
+ON CONFLICT (district_id, date, source, metric) DO UPDATE SET value = EXCLUDED.value.
 """
 
 import os
@@ -36,7 +34,7 @@ with open(ROOT / "config.yaml") as f:
     CONFIG = yaml.safe_load(f)
 
 CSV_PATH = ROOT / CONFIG["paths"]["data_raw"] / "cgwb_combined.csv"
-CHUNK_SIZE = 100_000   # rows per pandas chunk — tunes memory vs speed
+CROSSWALK_PATH = ROOT / "data_ingestion" / "district_crosswalk.csv"
 
 
 # ── DB connection ─────────────────────────────────────────────────────────────
@@ -50,27 +48,32 @@ def get_connection():
     )
 
 
-# ── Step 1: build districts from the full CSV in one pass ────────────────────
-def load_districts(conn):
-    """
-    Collect every unique (district_code, district_name, state_name) triple
-    from the CSV and upsert into the districts table.
-    district_code is used as district_id (stored as VARCHAR).
-    agro_climatic_zone and geojson_name are filled in Week 2 / separately.
-    """
-    print("[1/4] Scanning CSV for unique districts...")
-    seen: dict[str, tuple] = {}   # district_code → (district_name, state_name)
+# ── Crosswalk Helper ──────────────────────────────────────────────────────────
+def get_crosswalk_mapping() -> dict[str, str]:
+    """Load legacy_district_id -> canonical_district_id mapping from CSV."""
+    if not CROSSWALK_PATH.exists():
+        raise FileNotFoundError(f"Crosswalk CSV not found at {CROSSWALK_PATH}")
+    df = pd.read_csv(CROSSWALK_PATH, dtype=str)
+    return dict(zip(df["legacy_district_id"].str.strip(), df["canonical_district_id"].str.strip()))
 
-    for chunk in pd.read_csv(CSV_PATH, usecols=["district_code", "district_name", "state_name"],
-                             chunksize=CHUNK_SIZE, dtype=str):
-        chunk.dropna(subset=["district_code"], inplace=True)
-        for _, row in chunk.drop_duplicates("district_code").iterrows():
-            code = row["district_code"].strip()
-            if code not in seen:
-                seen[code] = (row["district_name"].strip(), row["state_name"].strip())
 
-    rows = [(code, name, state) for code, (name, state) in seen.items()]
-    print(f"    Found {len(rows)} unique districts from CGWB CSV.")
+# ── Step 1: Ensure Canonical Districts Exist ─────────────────────────────────
+def load_canonical_districts(conn):
+    """
+    Ensure every canonical district in district_crosswalk.csv exists in the districts table.
+    """
+    print("[1/3] Verifying and inserting canonical districts from crosswalk...")
+    df = pd.read_csv(CROSSWALK_PATH, dtype=str)
+    unique_districts = df.drop_duplicates("canonical_district_id")
+
+    rows = [
+        (
+            row["canonical_district_id"].strip(),
+            row["canonical_name"].strip(),
+            row["canonical_state"].strip(),
+        )
+        for _, row in unique_districts.iterrows()
+    ]
 
     with conn.cursor() as cur:
         psycopg2.extras.execute_values(
@@ -84,188 +87,88 @@ def load_districts(conn):
             page_size=500,
         )
     conn.commit()
-    print(f"    districts table: {len(rows)} rows upserted from CGWB.")
+    print(f"    Canonical districts verified: {len(rows)} distinct districts.")
 
 
-# ── Step 1b: fill gaps from GeoJSON so all 640+ districts are present ────────
-def load_districts_from_geojson(conn):
+# ── Step 2: Aggregate Well Readings ───────────────────────────────────────────
+def aggregate_well_readings(df: pd.DataFrame, mapping: dict[str, str]) -> pd.DataFrame:
     """
-    CGWB's CSV only contains districts with borewell readings — typically
-    ~568. The remaining ~72 districts (mostly remote/hilly with only
-    pre-2013 or no CGWB coverage) are still real administrative units
-    and must exist in the districts table so that:
-      - FK constraints don't fail when IMD/ERA5 data references them
-      - enrich_districts.py can assign agro_climatic_zone to all of them
-      - the dashboard can show 'insufficient_data' instead of a silent gap
-
-    This function reads the GeoJSON and inserts any district not already
-    present. district_id is synthesised as '{state_code}-{district_name}'
-    to match the convention used elsewhere.
+    Aggregate well readings to canonical district-month means.
+    1. Parse numeric currentlevel and drop NaNs.
+    2. Normalize date to first of the month.
+    3. Map legacy district_code to canonical_id.
+    4. Group by (district_id, date) and compute exact arithmetic mean.
     """
-    print("[1b/4] Filling district gaps from GeoJSON...")
+    df = df.copy()
+    df["currentlevel"] = pd.to_numeric(df["currentlevel"], errors="coerce")
+    df["district_code"] = df["district_code"].astype(str).str.strip()
+    df.dropna(subset=["currentlevel", "district_code", "date"], inplace=True)
 
-    geojson_path = ROOT / CONFIG["paths"]["geojson_boundaries"]
-    if not geojson_path.exists():
-        print(f"    SKIP: GeoJSON not found at {geojson_path}")
-        return
+    df["month_date"] = pd.to_datetime(df["date"], errors="coerce").dt.to_period("M").dt.to_timestamp()
+    df.dropna(subset=["month_date"], inplace=True)
 
-    try:
-        import json
-        with open(geojson_path, encoding="utf-8") as f:
-            geojson = json.load(f)
-    except Exception as e:
-        print(f"    SKIP: Failed to load GeoJSON: {e}")
-        return
-
-    # Build state abbreviation map
-    STATE_ABBREV = {
-        "Andhra Pradesh": "AP", "Arunachal Pradesh": "AR", "Assam": "AS",
-        "Bihar": "BR", "Chhattisgarh": "CG", "Goa": "GA", "Gujarat": "GJ",
-        "Haryana": "HR", "Himachal Pradesh": "HP", "Jharkhand": "JH",
-        "Karnataka": "KA", "Kerala": "KL", "Madhya Pradesh": "MP",
-        "Maharashtra": "MH", "Manipur": "MN", "Meghalaya": "ML",
-        "Mizoram": "MZ", "Nagaland": "NL", "Odisha": "OD", "Punjab": "PB",
-        "Rajasthan": "RJ", "Sikkim": "SK", "Tamil Nadu": "TN",
-        "Telangana": "TS", "Tripura": "TR", "Uttar Pradesh": "UP",
-        "Uttarakhand": "UK", "West Bengal": "WB", "Delhi": "DL",
-        "Jammu And Kashmir": "JK", "Jammu & Kashmir": "JK", "Ladakh": "LA",
-        "Puducherry": "PY", "Chandigarh": "CH",
-        "Andaman And Nicobar Islands": "AN", "Andaman & Nicobar Islands": "AN",
-        "Dadra And Nagar Haveli And Daman And Diu": "DD",
-        "Dadra And Nagar Haveli": "DN", "Daman And Diu": "DD",
-        "Lakshadweep": "LD", "Orissa": "OD",
-        "Nct Of Delhi": "DL", "NCT of Delhi": "DL",
-    }
-
-    rows = []
-    for feature in geojson.get("features", []):
-        props = feature.get("properties", {})
-        district_name = props.get("district", props.get("DISTRICT", props.get("name", "")))
-        state_name = props.get("st_nm", props.get("STATE", props.get("state", "")))
-
-        if not district_name or not state_name:
-            continue
-
-        district_name = district_name.strip()
-        state_name = state_name.strip()
-        abbrev = STATE_ABBREV.get(state_name, STATE_ABBREV.get(state_name.title(), state_name[:2].upper()))
-        district_id = f"{abbrev}-{district_name.replace(' ', '_')}"
-        rows.append((district_id, district_name, state_name))
-
-    if not rows:
-        print("    SKIP: No districts parsed from GeoJSON.")
-        return
-
-    with conn.cursor() as cur:
-        psycopg2.extras.execute_values(
-            cur,
-            """
-            INSERT INTO districts (district_id, district_name, state)
-            VALUES %s
-            ON CONFLICT (district_id) DO NOTHING
-            """,
-            rows,
-            page_size=500,
-        )
-    conn.commit()
-
-    # Count how many were actually new
-    with conn.cursor() as cur:
-        cur.execute("SELECT COUNT(*) FROM districts")
-        total = cur.fetchone()[0]
-
-    print(f"    GeoJSON provided {len(rows)} districts; total in table now: {total}.")
-
-
-
-# ── Step 2: aggregate well readings → district-month means ───────────────────
-def aggregate_chunk(chunk: pd.DataFrame) -> pd.DataFrame:
-    """
-    Given a raw chunk of well readings, return district-month aggregates.
-
-    • date       → truncated to YYYY-MM-01 (first of month)
-    • currentlevel → converted to float, NaN rows dropped
-    • group by (district_code, month_date) → mean(currentlevel)
-    """
-    chunk = chunk.copy()
-    chunk["currentlevel"] = pd.to_numeric(chunk["currentlevel"], errors="coerce")
-    chunk.dropna(subset=["currentlevel", "district_code"], inplace=True)
-
-    # Normalize to first of month
-    chunk["month_date"] = pd.to_datetime(chunk["date"], errors="coerce").dt.to_period("M").dt.to_timestamp()
-    chunk.dropna(subset=["month_date"], inplace=True)
+    # Map to canonical ID
+    df["district_id"] = df["district_code"].map(mapping)
+    df.dropna(subset=["district_id"], inplace=True)
 
     agg = (
-        chunk.groupby(["district_code", "month_date"], as_index=False)["currentlevel"]
-        .mean()
-        .rename(columns={"currentlevel": "gwl_mean"})
+        df.groupby(["district_id", "month_date"], as_index=False)
+        .agg(gwl_mean=("currentlevel", "mean"), well_count=("currentlevel", "count"))
+        .rename(columns={"month_date": "date"})
     )
     return agg
 
 
-# ── Step 3: insert aggregated rows into raw_data ─────────────────────────────
+# ── Step 3: Ingest Aggregated Rows into raw_data ──────────────────────────────
 def ingest_raw_data(conn):
     """
-    Stream cgwb_combined.csv in chunks, aggregate per district-month,
-    and bulk-insert into raw_data. ON CONFLICT DO NOTHING keeps it idempotent.
+    Read full cgwb_combined.csv, aggregate globally across all well readings,
+    and bulk-upsert into raw_data with ON CONFLICT DO UPDATE.
     """
-    print("[2/4] Ingesting raw_data (district-month GWL means)...")
+    print("[2/3] Loading and aggregating CGWB well observations...")
+    t0 = time.time()
+    mapping = get_crosswalk_mapping()
 
     usecols = ["district_code", "date", "currentlevel"]
-    total_inserted = 0
-    chunk_num = 0
-    t0 = time.time()
+    # Reading 1.5M rows takes <2 seconds in pandas
+    df = pd.read_csv(CSV_PATH, usecols=usecols, dtype=str)
+    print(f"    Loaded {len(df):,} raw records from {CSV_PATH.name} ({time.time() - t0:.1f}s)")
 
+    agg = aggregate_well_readings(df, mapping)
+    print(f"    Aggregated into {len(agg):,} canonical district-months ({time.time() - t0:.1f}s)")
+
+    rows = [
+        (
+            str(row["district_id"]),
+            row["date"].date(),
+            "CGWB",
+            "GWL",
+            float(row["gwl_mean"]),
+        )
+        for _, row in agg.iterrows()
+    ]
+
+    print("    Upserting into raw_data table...")
     with conn.cursor() as cur:
-        for chunk in pd.read_csv(CSV_PATH, usecols=usecols,
-                                 chunksize=CHUNK_SIZE, dtype=str):
-            chunk_num += 1
-            agg = aggregate_chunk(chunk)
-
-            if agg.empty:
-                continue
-
-            rows = [
-                (
-                    str(row["district_code"]).strip(),   # district_id
-                    row["month_date"].date(),             # date (DATE type)
-                    "CGWB",                              # source
-                    "GWL",                               # metric
-                    float(row["gwl_mean"]),              # value
-                )
-                for _, row in agg.iterrows()
-            ]
-
-            psycopg2.extras.execute_values(
-                cur,
-                """
-                INSERT INTO raw_data (district_id, date, source, metric, value)
-                VALUES %s
-                ON CONFLICT (district_id, date, source, metric) DO NOTHING
-                """,
-                rows,
-                page_size=1000,
-            )
-            total_inserted += len(rows)
-
-            elapsed = time.time() - t0
-            rows_processed = chunk_num * CHUNK_SIZE
-            print(
-                f"    Chunk {chunk_num:>3} | ~{rows_processed:>9,} rows read | "
-                f"{total_inserted:>7,} district-months inserted | {elapsed:.1f}s",
-                end="\r",
-            )
-
-        conn.commit()
-
-    print()   # newline after \r progress
-    print(f"    raw_data: {total_inserted:,} district-month rows inserted.")
-    return total_inserted
+        psycopg2.extras.execute_values(
+            cur,
+            """
+            INSERT INTO raw_data (district_id, date, source, metric, value)
+            VALUES %s
+            ON CONFLICT (district_id, date, source, metric)
+            DO UPDATE SET value = EXCLUDED.value
+            """,
+            rows,
+            page_size=2000,
+        )
+    conn.commit()
+    print(f"    raw_data: {len(rows):,} district-month GWL records upserted.")
+    return len(rows)
 
 
-# ── Step 4: quick sanity check ───────────────────────────────────────────────
+# ── Verification ─────────────────────────────────────────────────────────────
 def verify(conn):
-    print("[4/4] Verification...")
+    print("[3/3] Verification...")
     with conn.cursor() as cur:
         cur.execute("SELECT COUNT(*) FROM districts")
         n_districts = cur.fetchone()[0]
@@ -285,29 +188,35 @@ def verify(conn):
         """)
         n_covered = cur.fetchone()[0]
 
+        # Verify no numeric IDs in CGWB data
+        cur.execute("""
+            SELECT COUNT(*) FROM raw_data
+            WHERE source = 'CGWB' AND district_id ~ '^[0-9]+$'
+        """)
+        n_numeric = cur.fetchone()[0]
+
     print(f"    districts table       : {n_districts:,} rows")
     print(f"    raw_data (CGWB GWL)  : {n_gwl:,} district-month rows")
-    print(f"    Date range            : {date_min} → {date_max}")
+    print(f"    Date range            : {date_min} to {date_max}")
     print(f"    Districts with data   : {n_covered:,} / {n_districts:,}")
+    print(f"    Numeric IDs remaining : {n_numeric}")
+    assert n_numeric == 0, f"Error: found {n_numeric} numeric district IDs in raw_data!"
 
 
-# ── Main ──────────────────────────────────────────────────────────────────────
 def main():
     if not CSV_PATH.exists():
         print(f"ERROR: CSV not found at {CSV_PATH}", file=sys.stderr)
         sys.exit(1)
 
-    print(f"AquaIQ CGWB Ingestion")
-    print(f"  Source : {CSV_PATH.name}")
-    print(f"  Size   : {CSV_PATH.stat().st_size / 1_000_000:.1f} MB")
+    print(f"AquaIQ CGWB Ingestion (Canonical ID & Full-Aggregation Engine)")
+    print(f"  Source : {CSV_PATH.name} ({CSV_PATH.stat().st_size / 1_000_000:.1f} MB)")
     print()
 
     t_start = time.time()
     conn = get_connection()
 
     try:
-        load_districts(conn)
-        load_districts_from_geojson(conn)
+        load_canonical_districts(conn)
         ingest_raw_data(conn)
         verify(conn)
     finally:
@@ -315,7 +224,7 @@ def main():
 
     elapsed = time.time() - t_start
     print()
-    print(f"Done in {elapsed:.1f}s ✓")
+    print(f"Done in {elapsed:.1f}s [OK]")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,1203 @@
+{
+  "as_of": "2026-10-13",
+  "districts_checked": 725,
+  "counts": {
+    "insufficient_data": 5,
+    "projection": 720
+  },
+  "errors": [],
+  "expected_months": [
+    "2026-11",
+    "2026-12",
+    "2027-01",
+    "2027-02",
+    "2027-03",
+    "2027-04"
+  ],
+  "median_ms_per_district": 166.5,
+  "cases": {
+    "AP-Krishna": {
+      "district_id": "AP-Krishna",
+      "status": "projection",
+      "forecast": [
+        {
+          "month": "2026-11",
+          "date": "2026-11-01",
+          "predicted_gwl": 3.7428,
+          "weather": {
+            "rainfall_mm": 51.701,
+            "temperature_c": 26.932,
+            "evapotranspiration_mm": 123.215
+          }
+        },
+        {
+          "month": "2026-12",
+          "date": "2026-12-01",
+          "predicted_gwl": 3.8335,
+          "weather": {
+            "rainfall_mm": 34.089,
+            "temperature_c": 25.327,
+            "evapotranspiration_mm": 122.271
+          }
+        },
+        {
+          "month": "2027-01",
+          "date": "2027-01-01",
+          "predicted_gwl": 3.9151,
+          "weather": {
+            "rainfall_mm": 7.4341,
+            "temperature_c": 25.089,
+            "evapotranspiration_mm": 138.383
+          }
+        },
+        {
+          "month": "2027-02",
+          "date": "2027-02-01",
+          "predicted_gwl": 4.4382,
+          "weather": {
+            "rainfall_mm": 2.8606,
+            "temperature_c": 26.625,
+            "evapotranspiration_mm": 158.237
+          }
+        },
+        {
+          "month": "2027-03",
+          "date": "2027-03-01",
+          "predicted_gwl": 4.7338,
+          "weather": {
+            "rainfall_mm": 12.0693,
+            "temperature_c": 29.095,
+            "evapotranspiration_mm": 202.108
+          }
+        },
+        {
+          "month": "2027-04",
+          "date": "2027-04-01",
+          "predicted_gwl": 4.9278,
+          "weather": {
+            "rainfall_mm": 13.5614,
+            "temperature_c": 31.324,
+            "evapotranspiration_mm": 219.3
+          }
+        }
+      ],
+      "as_of": "2026-10-13",
+      "forecast_origin": "2026-10-13",
+      "horizon_months": 6,
+      "forecast_horizon": "next six full calendar months",
+      "units": "m_bgl",
+      "last_observed_date": "2021-01-01",
+      "estimate_type": "district_level",
+      "source_zone": null,
+      "zone_fallback_reason": null,
+      "feature_generation": "physical-v3-causal-monthly-90a24f1f2574",
+      "projection_method": "climate_conditioned_xgboost_monthly",
+      "model_version": "1.0-climate-conditioned-monthly-xgb",
+      "estimated_current_gwl": 2.8681,
+      "data_age_months": 69,
+      "validation": {
+        "status": "unvalidated_current_projection",
+        "sufficient_for_operational_use": false
+      },
+      "limitations": [
+        "Rainfall, temperature and evapotranspiration are inputs to the monthly XGBoost model.",
+        "Future weather uses explicit assumptions; it is not a live weather forecast.",
+        "Current groundwater depth is estimated across the old observation gap; fresh measurements are needed.",
+        "Pumping/extraction is not included in this forecast.",
+        "The current-period climate-conditioned outlook has not been independently validated."
+      ],
+      "forecast_start": "2026-11",
+      "forecast_end": "2027-04",
+      "feature_cutoff": "2021-01-01",
+      "last_observed_gwl": 3.35,
+      "fit_details": {
+        "observed_months": 39,
+        "history_start": "2011-01-01",
+        "history_end": "2021-01-01",
+        "annual_seasonality": true,
+        "trend_m_per_year": 0.0782353214710356,
+        "trend_damping_months": 36.0,
+        "history_sha256": "538b0575c7f5f05d753d1517508d42052dddf4ba086efda20509c3c756580173"
+      },
+      "weather_basis": {
+        "source": "historical_weather_climatology",
+        "units": {
+          "rainfall": "mm/month",
+          "temperature": "degC",
+          "evapotranspiration": "mm/month"
+        },
+        "as_of": "2026-10-13",
+        "completed_through": "2026-09-01",
+        "minimum_reference_years": 3,
+        "maximum_reference_years": 10,
+        "future_weather_is_observed": false,
+        "reference_months": [
+          {
+            "date": "2026-11-01",
+            "fields": {
+              "rainfall": {
+                "sample_years": 10,
+                "reference_start": "2015-11-01",
+                "reference_end": "2024-11-01"
+              },
+              "temperature": {
+                "sample_years": 10,
+                "reference_start": "2015-11-01",
+                "reference_end": "2024-11-01"
+              },
+              "evapotranspiration": {
+                "sample_years": 10,
+                "reference_start": "2015-11-01",
+                "reference_end": "2024-11-01"
+              }
+            }
+          },
+          {
+            "date": "2026-12-01",
+            "fields": {
+              "rainfall": {
+                "sample_years": 10,
+                "reference_start": "2015-12-01",
+                "reference_end": "2024-12-01"
+              },
+              "temperature": {
+                "sample_years": 10,
+                "reference_start": "2015-12-01",
+                "reference_end": "2024-12-01"
+              },
+              "evapotranspiration": {
+                "sample_years": 10,
+                "reference_start": "2015-12-01",
+                "reference_end": "2024-12-01"
+              }
+            }
+          },
+          {
+            "date": "2027-01-01",
+            "fields": {
+              "rainfall": {
+                "sample_years": 10,
+                "reference_start": "2015-01-01",
+                "reference_end": "2024-01-01"
+              },
+              "temperature": {
+                "sample_years": 10,
+                "reference_start": "2015-01-01",
+                "reference_end": "2024-01-01"
+              },
+              "evapotranspiration": {
+                "sample_years": 10,
+                "reference_start": "2015-01-01",
+                "reference_end": "2024-01-01"
+              }
+            }
+          },
+          {
+            "date": "2027-02-01",
+            "fields": {
+              "rainfall": {
+                "sample_years": 10,
+                "reference_start": "2015-02-01",
+                "reference_end": "2024-02-01"
+              },
+              "temperature": {
+                "sample_years": 10,
+                "reference_start": "2015-02-01",
+                "reference_end": "2024-02-01"
+              },
+              "evapotranspiration": {
+                "sample_years": 10,
+                "reference_start": "2015-02-01",
+                "reference_end": "2024-02-01"
+              }
+            }
+          },
+          {
+            "date": "2027-03-01",
+            "fields": {
+              "rainfall": {
+                "sample_years": 10,
+                "reference_start": "2015-03-01",
+                "reference_end": "2024-03-01"
+              },
+              "temperature": {
+                "sample_years": 10,
+                "reference_start": "2015-03-01",
+                "reference_end": "2024-03-01"
+              },
+              "evapotranspiration": {
+                "sample_years": 10,
+                "reference_start": "2015-03-01",
+                "reference_end": "2024-03-01"
+              }
+            }
+          },
+          {
+            "date": "2027-04-01",
+            "fields": {
+              "rainfall": {
+                "sample_years": 10,
+                "reference_start": "2015-04-01",
+                "reference_end": "2024-04-01"
+              },
+              "temperature": {
+                "sample_years": 10,
+                "reference_start": "2015-04-01",
+                "reference_end": "2024-04-01"
+              },
+              "evapotranspiration": {
+                "sample_years": 10,
+                "reference_start": "2015-04-01",
+                "reference_end": "2024-04-01"
+              }
+            }
+          }
+        ],
+        "missing_inputs": [],
+        "assumptions": [
+          "Future weather repeats the historical same-month mean; no live weather forecast is used.",
+          "Weather history may include the feature pipeline's limited causal weather fills when separate weather provenance is unavailable."
+        ],
+        "latest_historical_weather_date": "2024-12-01",
+        "weather_data_age_months": 22,
+        "weather_history_sha256": "3ea605e4157517ab8eaded1931b035c8321982ca85f24c6b6158872e33122f76",
+        "method": "historical_monthly_climatology",
+        "last_observed_weather_date": "2024-12-01",
+        "description": "Assumed future monthly rainfall, temperature and evapotranspiration from historical same-month averages.",
+        "origin_weather": {
+          "method": "historical_monthly_climatology",
+          "rainfall_mm": 134.4963866,
+          "temperature_c": 28.488,
+          "evapotranspiration_mm": 134.301
+        }
+      },
+      "input_features": [
+        "origin_gwl",
+        "origin_gwl_lag_3mo",
+        "origin_gwl_lag_6mo",
+        "origin_rainfall",
+        "origin_temperature",
+        "origin_evapotranspiration",
+        "horizon_months",
+        "origin_month_sin",
+        "origin_month_cos",
+        "target_month_sin",
+        "target_month_cos",
+        "target_rainfall",
+        "target_temperature",
+        "target_evapotranspiration",
+        "cumulative_rainfall",
+        "cumulative_evapotranspiration",
+        "mean_temperature"
+      ],
+      "current_depth_basis": "estimated_from_historical_groundwater",
+      "model_sha256": "54f535f57bcd62f0bea38cf5c545eb253b37d5bdd6bae1794ec27a3e73a43d97",
+      "model_train_target_cutoff": "2019-12-31",
+      "model_validation": {
+        "status": "unvalidated_current_projection",
+        "sufficient_for_operational_use": false,
+        "limitations": [
+          "Current groundwater is estimated when observations are old; training and holdout use observed origins.",
+          "Future weather is assumed from historical monthly averages, not a live meteorological forecast.",
+          "Pumping/extraction is not included.",
+          "Some monthly holdouts cover very few districts.",
+          "Historical source publication and revision times are unavailable."
+        ]
+      }
+    },
+    "GJ-Gandhinagar": {
+      "district_id": "GJ-Gandhinagar",
+      "status": "projection",
+      "forecast": [
+        {
+          "month": "2026-11",
+          "date": "2026-11-01",
+          "predicted_gwl": 102.1519,
+          "weather": {
+            "rainfall_mm": 4.2314,
+            "temperature_c": 24.155,
+            "evapotranspiration_mm": 144.229
+          }
+        },
+        {
+          "month": "2026-12",
+          "date": "2026-12-01",
+          "predicted_gwl": 104.0406,
+          "weather": {
+            "rainfall_mm": 1.8286,
+            "temperature_c": 20.274,
+            "evapotranspiration_mm": 123.881
+          }
+        },
+        {
+          "month": "2027-01",
+          "date": "2027-01-01",
+          "predicted_gwl": 104.4203,
+          "weather": {
+            "rainfall_mm": 0.6102,
+            "temperature_c": 19.078,
+            "evapotranspiration_mm": 123.903
+          }
+        },
+        {
+          "month": "2027-02",
+          "date": "2027-02-01",
+          "predicted_gwl": 102.3207,
+          "weather": {
+            "rainfall_mm": 0.0117,
+            "temperature_c": 22.533,
+            "evapotranspiration_mm": 147.612
+          }
+        },
+        {
+          "month": "2027-03",
+          "date": "2027-03-01",
+          "predicted_gwl": 102.6049,
+          "weather": {
+            "rainfall_mm": 3.1058,
+            "temperature_c": 26.998,
+            "evapotranspiration_mm": 210.36
+          }
+        },
+        {
+          "month": "2027-04",
+          "date": "2027-04-01",
+          "predicted_gwl": 103.196,
+          "weather": {
+            "rainfall_mm": 0.771,
+            "temperature_c": 31.502,
+            "evapotranspiration_mm": 248.853
+          }
+        }
+      ],
+      "as_of": "2026-10-13",
+      "forecast_origin": "2026-10-13",
+      "horizon_months": 6,
+      "forecast_horizon": "next six full calendar months",
+      "units": "m_bgl",
+      "last_observed_date": "2021-01-01",
+      "estimate_type": "district_level",
+      "source_zone": null,
+      "zone_fallback_reason": null,
+      "feature_generation": "physical-v3-causal-monthly-90a24f1f2574",
+      "projection_method": "climate_conditioned_xgboost_monthly",
+      "model_version": "1.0-climate-conditioned-monthly-xgb",
+      "estimated_current_gwl": 105.2631,
+      "data_age_months": 69,
+      "validation": {
+        "status": "unvalidated_current_projection",
+        "sufficient_for_operational_use": false
+      },
+      "limitations": [
+        "Rainfall, temperature and evapotranspiration are inputs to the monthly XGBoost model.",
+        "Future weather uses explicit assumptions; it is not a live weather forecast.",
+        "Current groundwater depth is estimated across the old observation gap; fresh measurements are needed.",
+        "Pumping/extraction is not included in this forecast.",
+        "The current-period climate-conditioned outlook has not been independently validated."
+      ],
+      "forecast_start": "2026-11",
+      "forecast_end": "2027-04",
+      "feature_cutoff": "2021-01-01",
+      "last_observed_gwl": 102.51,
+      "fit_details": {
+        "observed_months": 38,
+        "history_start": "2011-01-01",
+        "history_end": "2021-01-01",
+        "annual_seasonality": true,
+        "trend_m_per_year": 1.8345442471412772,
+        "trend_damping_months": 36.0,
+        "history_sha256": "b155841efec6bc824f600576a3466c6641e124c0ade6b98e05728df9fe08bcef"
+      },
+      "weather_basis": {
+        "source": "historical_weather_climatology",
+        "units": {
+          "rainfall": "mm/month",
+          "temperature": "degC",
+          "evapotranspiration": "mm/month"
+        },
+        "as_of": "2026-10-13",
+        "completed_through": "2026-09-01",
+        "minimum_reference_years": 3,
+        "maximum_reference_years": 10,
+        "future_weather_is_observed": false,
+        "reference_months": [
+          {
+            "date": "2026-11-01",
+            "fields": {
+              "rainfall": {
+                "sample_years": 10,
+                "reference_start": "2015-11-01",
+                "reference_end": "2024-11-01"
+              },
+              "temperature": {
+                "sample_years": 10,
+                "reference_start": "2015-11-01",
+                "reference_end": "2024-11-01"
+              },
+              "evapotranspiration": {
+                "sample_years": 10,
+                "reference_start": "2015-11-01",
+                "reference_end": "2024-11-01"
+              }
+            }
+          },
+          {
+            "date": "2026-12-01",
+            "fields": {
+              "rainfall": {
+                "sample_years": 10,
+                "reference_start": "2015-12-01",
+                "reference_end": "2024-12-01"
+              },
+              "temperature": {
+                "sample_years": 10,
+                "reference_start": "2015-12-01",
+                "reference_end": "2024-12-01"
+              },
+              "evapotranspiration": {
+                "sample_years": 10,
+                "reference_start": "2015-12-01",
+                "reference_end": "2024-12-01"
+              }
+            }
+          },
+          {
+            "date": "2027-01-01",
+            "fields": {
+              "rainfall": {
+                "sample_years": 10,
+                "reference_start": "2015-01-01",
+                "reference_end": "2024-01-01"
+              },
+              "temperature": {
+                "sample_years": 10,
+                "reference_start": "2015-01-01",
+                "reference_end": "2024-01-01"
+              },
+              "evapotranspiration": {
+                "sample_years": 10,
+                "reference_start": "2015-01-01",
+                "reference_end": "2024-01-01"
+              }
+            }
+          },
+          {
+            "date": "2027-02-01",
+            "fields": {
+              "rainfall": {
+                "sample_years": 10,
+                "reference_start": "2015-02-01",
+                "reference_end": "2024-02-01"
+              },
+              "temperature": {
+                "sample_years": 10,
+                "reference_start": "2015-02-01",
+                "reference_end": "2024-02-01"
+              },
+              "evapotranspiration": {
+                "sample_years": 10,
+                "reference_start": "2015-02-01",
+                "reference_end": "2024-02-01"
+              }
+            }
+          },
+          {
+            "date": "2027-03-01",
+            "fields": {
+              "rainfall": {
+                "sample_years": 10,
+                "reference_start": "2015-03-01",
+                "reference_end": "2024-03-01"
+              },
+              "temperature": {
+                "sample_years": 10,
+                "reference_start": "2015-03-01",
+                "reference_end": "2024-03-01"
+              },
+              "evapotranspiration": {
+                "sample_years": 10,
+                "reference_start": "2015-03-01",
+                "reference_end": "2024-03-01"
+              }
+            }
+          },
+          {
+            "date": "2027-04-01",
+            "fields": {
+              "rainfall": {
+                "sample_years": 10,
+                "reference_start": "2015-04-01",
+                "reference_end": "2024-04-01"
+              },
+              "temperature": {
+                "sample_years": 10,
+                "reference_start": "2015-04-01",
+                "reference_end": "2024-04-01"
+              },
+              "evapotranspiration": {
+                "sample_years": 10,
+                "reference_start": "2015-04-01",
+                "reference_end": "2024-04-01"
+              }
+            }
+          }
+        ],
+        "missing_inputs": [],
+        "assumptions": [
+          "Future weather repeats the historical same-month mean; no live weather forecast is used.",
+          "Weather history may include the feature pipeline's limited causal weather fills when separate weather provenance is unavailable."
+        ],
+        "latest_historical_weather_date": "2024-12-01",
+        "weather_data_age_months": 22,
+        "weather_history_sha256": "7089c34a145a02c015f946ad0b2ed7bee9290c83d8d286cdcc7fdea2e6e0d48f",
+        "method": "historical_monthly_climatology",
+        "last_observed_weather_date": "2024-12-01",
+        "description": "Assumed future monthly rainfall, temperature and evapotranspiration from historical same-month averages.",
+        "origin_weather": {
+          "method": "historical_monthly_climatology",
+          "rainfall_mm": 23.725057854000003,
+          "temperature_c": 28.288999999999998,
+          "evapotranspiration_mm": 163.406
+        }
+      },
+      "input_features": [
+        "origin_gwl",
+        "origin_gwl_lag_3mo",
+        "origin_gwl_lag_6mo",
+        "origin_rainfall",
+        "origin_temperature",
+        "origin_evapotranspiration",
+        "horizon_months",
+        "origin_month_sin",
+        "origin_month_cos",
+        "target_month_sin",
+        "target_month_cos",
+        "target_rainfall",
+        "target_temperature",
+        "target_evapotranspiration",
+        "cumulative_rainfall",
+        "cumulative_evapotranspiration",
+        "mean_temperature"
+      ],
+      "current_depth_basis": "estimated_from_historical_groundwater",
+      "model_sha256": "54f535f57bcd62f0bea38cf5c545eb253b37d5bdd6bae1794ec27a3e73a43d97",
+      "model_train_target_cutoff": "2019-12-31",
+      "model_validation": {
+        "status": "unvalidated_current_projection",
+        "sufficient_for_operational_use": false,
+        "limitations": [
+          "Current groundwater is estimated when observations are old; training and holdout use observed origins.",
+          "Future weather is assumed from historical monthly averages, not a live meteorological forecast.",
+          "Pumping/extraction is not included.",
+          "Some monthly holdouts cover very few districts.",
+          "Historical source publication and revision times are unavailable."
+        ]
+      }
+    },
+    "PY-Mahe": {
+      "district_id": "PY-Mahe",
+      "status": "projection",
+      "forecast": [
+        {
+          "month": "2026-11",
+          "date": "2026-11-01",
+          "predicted_gwl": 7.7074,
+          "weather": {
+            "rainfall_mm": 245.3988,
+            "temperature_c": 26.0433,
+            "evapotranspiration_mm": 97.0604
+          }
+        },
+        {
+          "month": "2026-12",
+          "date": "2026-12-01",
+          "predicted_gwl": 7.2415,
+          "weather": {
+            "rainfall_mm": 135.9757,
+            "temperature_c": 25.2938,
+            "evapotranspiration_mm": 106.072
+          }
+        },
+        {
+          "month": "2027-01",
+          "date": "2027-01-01",
+          "predicted_gwl": 7.3663,
+          "weather": {
+            "rainfall_mm": 34.593,
+            "temperature_c": 24.9667,
+            "evapotranspiration_mm": 133.2536
+          }
+        },
+        {
+          "month": "2027-02",
+          "date": "2027-02-01",
+          "predicted_gwl": 7.9984,
+          "weather": {
+            "rainfall_mm": 6.606,
+            "temperature_c": 26.2148,
+            "evapotranspiration_mm": 154.6486
+          }
+        },
+        {
+          "month": "2027-03",
+          "date": "2027-03-01",
+          "predicted_gwl": 8.436,
+          "weather": {
+            "rainfall_mm": 13.5908,
+            "temperature_c": 28.4685,
+            "evapotranspiration_mm": 191.8614
+          }
+        },
+        {
+          "month": "2027-04",
+          "date": "2027-04-01",
+          "predicted_gwl": 8.2719,
+          "weather": {
+            "rainfall_mm": 32.1277,
+            "temperature_c": 30.2274,
+            "evapotranspiration_mm": 189.6913
+          }
+        }
+      ],
+      "as_of": "2026-10-13",
+      "forecast_origin": "2026-10-13",
+      "horizon_months": 6,
+      "forecast_horizon": "next six full calendar months",
+      "units": "m_bgl",
+      "last_observed_date": "2023-03-01",
+      "estimate_type": "zone_fallback",
+      "source_zone": "East Coast Plains and Hills",
+      "zone_fallback_reason": "District has 0 observed months and 0.0% monitoring-round coverage.",
+      "feature_generation": "physical-v3-causal-monthly-90a24f1f2574",
+      "projection_method": "climate_conditioned_xgboost_monthly",
+      "model_version": "1.0-climate-conditioned-monthly-xgb",
+      "estimated_current_gwl": 8.0744,
+      "data_age_months": 43,
+      "validation": {
+        "status": "unvalidated_current_projection",
+        "sufficient_for_operational_use": false
+      },
+      "limitations": [
+        "Rainfall, temperature and evapotranspiration are inputs to the monthly XGBoost model.",
+        "Future weather uses explicit assumptions; it is not a live weather forecast.",
+        "Current groundwater depth is estimated across the old observation gap; fresh measurements are needed.",
+        "Pumping/extraction is not included in this forecast.",
+        "The current-period climate-conditioned outlook has not been independently validated."
+      ],
+      "forecast_start": "2026-11",
+      "forecast_end": "2027-04",
+      "feature_cutoff": "2023-03-01",
+      "last_observed_gwl": 8.045499920845032,
+      "fit_details": {
+        "observed_months": 121,
+        "history_start": "2013-03-01",
+        "history_end": "2023-03-01",
+        "annual_seasonality": true,
+        "trend_m_per_year": -0.06731477464625636,
+        "trend_damping_months": 36.0,
+        "history_sha256": "85065a82a6c4f197a0cbcbadcb8df66b766500270c7c377b307a8b73ff7f818d"
+      },
+      "weather_basis": {
+        "source": "historical_weather_climatology",
+        "units": {
+          "rainfall": "mm/month",
+          "temperature": "degC",
+          "evapotranspiration": "mm/month"
+        },
+        "as_of": "2026-10-13",
+        "completed_through": "2026-09-01",
+        "minimum_reference_years": 3,
+        "maximum_reference_years": 10,
+        "future_weather_is_observed": false,
+        "reference_months": [
+          {
+            "date": "2026-11-01",
+            "fields": {
+              "rainfall": {
+                "sample_years": 10,
+                "reference_start": "2015-11-01",
+                "reference_end": "2024-11-01"
+              },
+              "temperature": {
+                "sample_years": 10,
+                "reference_start": "2015-11-01",
+                "reference_end": "2024-11-01"
+              },
+              "evapotranspiration": {
+                "sample_years": 10,
+                "reference_start": "2015-11-01",
+                "reference_end": "2024-11-01"
+              }
+            }
+          },
+          {
+            "date": "2026-12-01",
+            "fields": {
+              "rainfall": {
+                "sample_years": 10,
+                "reference_start": "2015-12-01",
+                "reference_end": "2024-12-01"
+              },
+              "temperature": {
+                "sample_years": 10,
+                "reference_start": "2015-12-01",
+                "reference_end": "2024-12-01"
+              },
+              "evapotranspiration": {
+                "sample_years": 10,
+                "reference_start": "2015-12-01",
+                "reference_end": "2024-12-01"
+              }
+            }
+          },
+          {
+            "date": "2027-01-01",
+            "fields": {
+              "rainfall": {
+                "sample_years": 10,
+                "reference_start": "2015-01-01",
+                "reference_end": "2024-01-01"
+              },
+              "temperature": {
+                "sample_years": 10,
+                "reference_start": "2015-01-01",
+                "reference_end": "2024-01-01"
+              },
+              "evapotranspiration": {
+                "sample_years": 10,
+                "reference_start": "2015-01-01",
+                "reference_end": "2024-01-01"
+              }
+            }
+          },
+          {
+            "date": "2027-02-01",
+            "fields": {
+              "rainfall": {
+                "sample_years": 10,
+                "reference_start": "2015-02-01",
+                "reference_end": "2024-02-01"
+              },
+              "temperature": {
+                "sample_years": 10,
+                "reference_start": "2015-02-01",
+                "reference_end": "2024-02-01"
+              },
+              "evapotranspiration": {
+                "sample_years": 10,
+                "reference_start": "2015-02-01",
+                "reference_end": "2024-02-01"
+              }
+            }
+          },
+          {
+            "date": "2027-03-01",
+            "fields": {
+              "rainfall": {
+                "sample_years": 10,
+                "reference_start": "2015-03-01",
+                "reference_end": "2024-03-01"
+              },
+              "temperature": {
+                "sample_years": 10,
+                "reference_start": "2015-03-01",
+                "reference_end": "2024-03-01"
+              },
+              "evapotranspiration": {
+                "sample_years": 10,
+                "reference_start": "2015-03-01",
+                "reference_end": "2024-03-01"
+              }
+            }
+          },
+          {
+            "date": "2027-04-01",
+            "fields": {
+              "rainfall": {
+                "sample_years": 10,
+                "reference_start": "2015-04-01",
+                "reference_end": "2024-04-01"
+              },
+              "temperature": {
+                "sample_years": 10,
+                "reference_start": "2015-04-01",
+                "reference_end": "2024-04-01"
+              },
+              "evapotranspiration": {
+                "sample_years": 10,
+                "reference_start": "2015-04-01",
+                "reference_end": "2024-04-01"
+              }
+            }
+          }
+        ],
+        "missing_inputs": [],
+        "assumptions": [
+          "Future weather repeats the historical same-month mean; no live weather forecast is used.",
+          "Weather history may include the feature pipeline's limited causal weather fills when separate weather provenance is unavailable."
+        ],
+        "latest_historical_weather_date": "2024-12-01",
+        "weather_data_age_months": 22,
+        "weather_history_sha256": "dc6de55a094a941828b84eb3fccf1d1aa5b1a68505ae19d278b17283fd1b501e",
+        "method": "historical_monthly_climatology",
+        "last_observed_weather_date": "2024-12-01",
+        "description": "Assumed future monthly rainfall, temperature and evapotranspiration from historical same-month averages.",
+        "origin_weather": {
+          "method": "historical_monthly_climatology",
+          "rainfall_mm": 161.34946002262393,
+          "temperature_c": 27.50268292775968,
+          "evapotranspiration_mm": 128.62873144382382
+        }
+      },
+      "input_features": [
+        "origin_gwl",
+        "origin_gwl_lag_3mo",
+        "origin_gwl_lag_6mo",
+        "origin_rainfall",
+        "origin_temperature",
+        "origin_evapotranspiration",
+        "horizon_months",
+        "origin_month_sin",
+        "origin_month_cos",
+        "target_month_sin",
+        "target_month_cos",
+        "target_rainfall",
+        "target_temperature",
+        "target_evapotranspiration",
+        "cumulative_rainfall",
+        "cumulative_evapotranspiration",
+        "mean_temperature"
+      ],
+      "current_depth_basis": "estimated_from_historical_groundwater",
+      "model_sha256": "54f535f57bcd62f0bea38cf5c545eb253b37d5bdd6bae1794ec27a3e73a43d97",
+      "model_train_target_cutoff": "2019-12-31",
+      "model_validation": {
+        "status": "unvalidated_current_projection",
+        "sufficient_for_operational_use": false,
+        "limitations": [
+          "Current groundwater is estimated when observations are old; training and holdout use observed origins.",
+          "Future weather is assumed from historical monthly averages, not a live meteorological forecast.",
+          "Pumping/extraction is not included.",
+          "Some monthly holdouts cover very few districts.",
+          "Historical source publication and revision times are unavailable."
+        ]
+      }
+    },
+    "RJ-Jaipur": {
+      "district_id": "RJ-Jaipur",
+      "status": "projection",
+      "forecast": [
+        {
+          "month": "2026-11",
+          "date": "2026-11-01",
+          "predicted_gwl": 31.5301,
+          "weather": {
+            "rainfall_mm": 2.0184,
+            "temperature_c": 20.631,
+            "evapotranspiration_mm": 114.736
+          }
+        },
+        {
+          "month": "2026-12",
+          "date": "2026-12-01",
+          "predicted_gwl": 31.6311,
+          "weather": {
+            "rainfall_mm": 2.5314,
+            "temperature_c": 15.488,
+            "evapotranspiration_mm": 87.682
+          }
+        },
+        {
+          "month": "2027-01",
+          "date": "2027-01-01",
+          "predicted_gwl": 31.6375,
+          "weather": {
+            "rainfall_mm": 11.4915,
+            "temperature_c": 14.069,
+            "evapotranspiration_mm": 85.179
+          }
+        },
+        {
+          "month": "2027-02",
+          "date": "2027-02-01",
+          "predicted_gwl": 31.8475,
+          "weather": {
+            "rainfall_mm": 2.1029,
+            "temperature_c": 18.85,
+            "evapotranspiration_mm": 122.031
+          }
+        },
+        {
+          "month": "2027-03",
+          "date": "2027-03-01",
+          "predicted_gwl": 32.032,
+          "weather": {
+            "rainfall_mm": 12.9752,
+            "temperature_c": 24.239,
+            "evapotranspiration_mm": 182.785
+          }
+        },
+        {
+          "month": "2027-04",
+          "date": "2027-04-01",
+          "predicted_gwl": 32.4491,
+          "weather": {
+            "rainfall_mm": 7.182,
+            "temperature_c": 30.375,
+            "evapotranspiration_mm": 242.614
+          }
+        }
+      ],
+      "as_of": "2026-10-13",
+      "forecast_origin": "2026-10-13",
+      "horizon_months": 6,
+      "forecast_horizon": "next six full calendar months",
+      "units": "m_bgl",
+      "last_observed_date": "2021-01-01",
+      "estimate_type": "district_level",
+      "source_zone": null,
+      "zone_fallback_reason": null,
+      "feature_generation": "physical-v3-causal-monthly-90a24f1f2574",
+      "projection_method": "climate_conditioned_xgboost_monthly",
+      "model_version": "1.0-climate-conditioned-monthly-xgb",
+      "estimated_current_gwl": 32.0927,
+      "data_age_months": 69,
+      "validation": {
+        "status": "unvalidated_current_projection",
+        "sufficient_for_operational_use": false
+      },
+      "limitations": [
+        "Rainfall, temperature and evapotranspiration are inputs to the monthly XGBoost model.",
+        "Future weather uses explicit assumptions; it is not a live weather forecast.",
+        "Current groundwater depth is estimated across the old observation gap; fresh measurements are needed.",
+        "Pumping/extraction is not included in this forecast.",
+        "The current-period climate-conditioned outlook has not been independently validated."
+      ],
+      "forecast_start": "2026-11",
+      "forecast_end": "2027-04",
+      "feature_cutoff": "2021-01-01",
+      "last_observed_gwl": 32.513424,
+      "fit_details": {
+        "observed_months": 39,
+        "history_start": "2011-01-01",
+        "history_end": "2021-01-01",
+        "annual_seasonality": true,
+        "trend_m_per_year": 0.006808582523067076,
+        "trend_damping_months": 36.0,
+        "history_sha256": "14e71d1bb661d053b4eda06c587f04e5dc07cdb389ea18c31e97287ee7d522bd"
+      },
+      "weather_basis": {
+        "source": "historical_weather_climatology",
+        "units": {
+          "rainfall": "mm/month",
+          "temperature": "degC",
+          "evapotranspiration": "mm/month"
+        },
+        "as_of": "2026-10-13",
+        "completed_through": "2026-09-01",
+        "minimum_reference_years": 3,
+        "maximum_reference_years": 10,
+        "future_weather_is_observed": false,
+        "reference_months": [
+          {
+            "date": "2026-11-01",
+            "fields": {
+              "rainfall": {
+                "sample_years": 10,
+                "reference_start": "2015-11-01",
+                "reference_end": "2024-11-01"
+              },
+              "temperature": {
+                "sample_years": 10,
+                "reference_start": "2015-11-01",
+                "reference_end": "2024-11-01"
+              },
+              "evapotranspiration": {
+                "sample_years": 10,
+                "reference_start": "2015-11-01",
+                "reference_end": "2024-11-01"
+              }
+            }
+          },
+          {
+            "date": "2026-12-01",
+            "fields": {
+              "rainfall": {
+                "sample_years": 10,
+                "reference_start": "2015-12-01",
+                "reference_end": "2024-12-01"
+              },
+              "temperature": {
+                "sample_years": 10,
+                "reference_start": "2015-12-01",
+                "reference_end": "2024-12-01"
+              },
+              "evapotranspiration": {
+                "sample_years": 10,
+                "reference_start": "2015-12-01",
+                "reference_end": "2024-12-01"
+              }
+            }
+          },
+          {
+            "date": "2027-01-01",
+            "fields": {
+              "rainfall": {
+                "sample_years": 10,
+                "reference_start": "2015-01-01",
+                "reference_end": "2024-01-01"
+              },
+              "temperature": {
+                "sample_years": 10,
+                "reference_start": "2015-01-01",
+                "reference_end": "2024-01-01"
+              },
+              "evapotranspiration": {
+                "sample_years": 10,
+                "reference_start": "2015-01-01",
+                "reference_end": "2024-01-01"
+              }
+            }
+          },
+          {
+            "date": "2027-02-01",
+            "fields": {
+              "rainfall": {
+                "sample_years": 10,
+                "reference_start": "2015-02-01",
+                "reference_end": "2024-02-01"
+              },
+              "temperature": {
+                "sample_years": 10,
+                "reference_start": "2015-02-01",
+                "reference_end": "2024-02-01"
+              },
+              "evapotranspiration": {
+                "sample_years": 10,
+                "reference_start": "2015-02-01",
+                "reference_end": "2024-02-01"
+              }
+            }
+          },
+          {
+            "date": "2027-03-01",
+            "fields": {
+              "rainfall": {
+                "sample_years": 10,
+                "reference_start": "2015-03-01",
+                "reference_end": "2024-03-01"
+              },
+              "temperature": {
+                "sample_years": 10,
+                "reference_start": "2015-03-01",
+                "reference_end": "2024-03-01"
+              },
+              "evapotranspiration": {
+                "sample_years": 10,
+                "reference_start": "2015-03-01",
+                "reference_end": "2024-03-01"
+              }
+            }
+          },
+          {
+            "date": "2027-04-01",
+            "fields": {
+              "rainfall": {
+                "sample_years": 10,
+                "reference_start": "2015-04-01",
+                "reference_end": "2024-04-01"
+              },
+              "temperature": {
+                "sample_years": 10,
+                "reference_start": "2015-04-01",
+                "reference_end": "2024-04-01"
+              },
+              "evapotranspiration": {
+                "sample_years": 10,
+                "reference_start": "2015-04-01",
+                "reference_end": "2024-04-01"
+              }
+            }
+          }
+        ],
+        "missing_inputs": [],
+        "assumptions": [
+          "Future weather repeats the historical same-month mean; no live weather forecast is used.",
+          "Weather history may include the feature pipeline's limited causal weather fills when separate weather provenance is unavailable."
+        ],
+        "latest_historical_weather_date": "2024-12-01",
+        "weather_data_age_months": 22,
+        "weather_history_sha256": "9e38b916544bf6f98a9c654fae19c66aabd0e0177152827b5222be19cc00bcc3",
+        "method": "historical_monthly_climatology",
+        "last_observed_weather_date": "2024-12-01",
+        "description": "Assumed future monthly rainfall, temperature and evapotranspiration from historical same-month averages.",
+        "origin_weather": {
+          "method": "historical_monthly_climatology",
+          "rainfall_mm": 15.377251984,
+          "temperature_c": 26.534,
+          "evapotranspiration_mm": 165.42699999999996
+        }
+      },
+      "input_features": [
+        "origin_gwl",
+        "origin_gwl_lag_3mo",
+        "origin_gwl_lag_6mo",
+        "origin_rainfall",
+        "origin_temperature",
+        "origin_evapotranspiration",
+        "horizon_months",
+        "origin_month_sin",
+        "origin_month_cos",
+        "target_month_sin",
+        "target_month_cos",
+        "target_rainfall",
+        "target_temperature",
+        "target_evapotranspiration",
+        "cumulative_rainfall",
+        "cumulative_evapotranspiration",
+        "mean_temperature"
+      ],
+      "current_depth_basis": "estimated_from_historical_groundwater",
+      "model_sha256": "54f535f57bcd62f0bea38cf5c545eb253b37d5bdd6bae1794ec27a3e73a43d97",
+      "model_train_target_cutoff": "2019-12-31",
+      "model_validation": {
+        "status": "unvalidated_current_projection",
+        "sufficient_for_operational_use": false,
+        "limitations": [
+          "Current groundwater is estimated when observations are old; training and holdout use observed origins.",
+          "Future weather is assumed from historical monthly averages, not a live meteorological forecast.",
+          "Pumping/extraction is not included.",
+          "Some monthly holdouts cover very few districts.",
+          "Historical source publication and revision times are unavailable."
+        ]
+      }
+    }
+  },
+  "api": {
+    "/api/health": {
+      "http": 200,
+      "ms": 405.13,
+      "status": "healthy"
+    },
+    "/api/scores": {
+      "http": 200,
+      "ms": 621.44,
+      "status": "success"
+    },
+    "/api/predict/GJ-Gandhinagar?window=next_six_months": {
+      "http": 200,
+      "ms": 285.36,
+      "status": "projection"
+    },
+    "/api/predict/AP-Krishna?window=next_six_months": {
+      "http": 200,
+      "ms": 294.55,
+      "status": "projection"
+    },
+    "/api/district/GJ-Gandhinagar": {
+      "http": 200,
+      "ms": 1980.89,
+      "status": "historical_forecast"
+    }
+  }
+}

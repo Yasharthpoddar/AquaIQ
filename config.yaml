@@ -77,30 +77,28 @@ model_hyperparameters:
     random_state: 42
   ensemble:
     initial_weights:
-      linear_regression_trend: 0.45
-      xgboost_risk: 0.35
-      drought_frequency: 0.2
+      linear_regression_trend: 0.20
+      xgboost_risk: 0.45
+      drought_frequency: 0.20
+      fuzzy_logic: 0.15
     drought_frequency_percentile: 20
-    fitted_weights: &id001
-      linear_regression_trend: 0.34
-      xgboost_risk: 0.66
-      drought_frequency: 0.0
 crisis_score:
   tiers:
     safe:
     - 0
-    - 25
+    - 30
     watch:
-    - 26
-    - 37
+    - 31
+    - 60
     warning:
-    - 38
-    - 43
+    - 61
+    - 80
     crisis:
-    - 44
+    - 81
     - 100
   alert_threshold: 80
   data_readiness_min_pct: 60
+  observation_interval_months: 3
   fallback_strategy:
     step_1: zone_fallback
     step_2: insufficient_data
@@ -110,7 +108,11 @@ api:
   port: 5000
   cors_origins:
   - http://localhost:3000
+  - http://localhost:5173
   cache_days: 7
+policy_simulation:
+  extraction_heuristic_delta_per_pct: 0.20
+  rainfall_heuristic_delta_per_pct: -0.25
 testing:
   min_coverage_pct: 70
   sample_districts: 10
@@ -119,25 +121,3 @@ testing:
   - 2016
   - 2018
   - 2019
-backtest_results:
-  data_source: features table (PostgreSQL)
-  ensemble_weights: *id001
-  walkforward_validation:
-  - fold: train->2020
-    n_train: 42630
-    n_test: 75
-    rmse: 0.0129
-    r2: 0.9691
-    nse: 0.9691
-  - fold: train->2021
-    n_train: 42705
-    n_test: 48
-    rmse: 0.0077
-    r2: 0.9399
-    nse: 0.9399
-  - fold: train->2022
-    n_train: 42753
-    n_test: 34
-    rmse: 0.0039
-    r2: 0.9852
-    nse: 0.9852

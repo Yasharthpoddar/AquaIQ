@@ -1,0 +1,1292 @@
+legacy_district_id,canonical_district_id,canonical_name,canonical_state,source,match_type,notes
+632,AN-North_and_Middle_Andaman,North and Middle Andaman,Andaman And Nicobar Islands,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+602,AN-South_Andaman,South Andaman,Andaman And Nicobar Islands,CGWB,Spelling/Plural,CGWB uses plural 'South Andamans'; canonical is 'South Andaman'
+AN-Nicobars,AN-Nicobars,Nicobars,Andaman and Nicobar Islands,GeoJSON,Self,Existing canonical hyphenated ID
+AN-North_and_Middle_Andaman,AN-North_and_Middle_Andaman,North and Middle Andaman,Andaman and Nicobar Islands,GeoJSON,Self,Existing canonical hyphenated ID
+AN-South_Andaman,AN-South_Andaman,South Andaman,Andaman and Nicobar Islands,GeoJSON,Self,Existing canonical hyphenated ID
+502,AP-Anantapur,Anantapur,Andhra Pradesh,CGWB,Spelling/Suffix,Telugu suffix -amu in CGWB; canonical 'Anantapur'
+AP-Anantapur,AP-Anantapur,Anantapur,Andhra Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+503,AP-Chittoor,Chittoor,Andhra Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AP-Chittoor,AP-Chittoor,Chittoor,Andhra Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+505,AP-East_Godavari,East Godavari,Andhra Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AP-East_Godavari,AP-East_Godavari,East Godavari,Andhra Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+506,AP-Guntur,Guntur,Andhra Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AP-Guntur,AP-Guntur,Guntur,Andhra Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+510,AP-Krishna,Krishna,Andhra Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AP-Krishna,AP-Krishna,Krishna,Andhra Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+511,AP-Kurnool,Kurnool,Andhra Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AP-Kurnool,AP-Kurnool,Kurnool,Andhra Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+517,AP-Prakasam,Prakasam,Andhra Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AP-Prakasam,AP-Prakasam,Prakasam,Andhra Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+515,AP-S.P.S._Nellore,S.P.S. Nellore,Andhra Pradesh,CGWB,Abbreviation,Full formal name in CGWB; canonical 'S.P.S. Nellore'
+AP-S.P.S._Nellore,AP-S.P.S._Nellore,S.P.S. Nellore,Andhra Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+519,AP-Srikakulam,Srikakulam,Andhra Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AP-Srikakulam,AP-Srikakulam,Srikakulam,Andhra Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+520,AP-Visakhapatnam,Visakhapatnam,Andhra Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AP-Visakhapatnam,AP-Visakhapatnam,Visakhapatnam,Andhra Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+521,AP-Vizianagaram,Vizianagaram,Andhra Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AP-Vizianagaram,AP-Vizianagaram,Vizianagaram,Andhra Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+523,AP-West_Godavari,West Godavari,Andhra Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AP-West_Godavari,AP-West_Godavari,West Godavari,Andhra Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+504,AP-Y.S.R._Kadapa,Y.S.R. Kadapa,Andhra Pradesh,CGWB,Abbreviation,CGWB 'Y.S.R.'; canonical 'Y.S.R. Kadapa'
+AP-Y.S.R._Kadapa,AP-Y.S.R._Kadapa,Y.S.R. Kadapa,Andhra Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+AR-Anjaw,AR-Anjaw,Anjaw,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+229,AR-Changlang,Changlang,Arunachal Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AR-Changlang,AR-Changlang,Changlang,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+AR-East_Kameng,AR-East_Kameng,East Kameng,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+232,AR-East_Siang,East Siang,Arunachal Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AR-East_Siang,AR-East_Siang,East Siang,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+AR-Kamle,AR-Kamle,Kamle,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+AR-Kra_Daadi,AR-Kra_Daadi,Kra Daadi,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+AR-Kurung_Kumey,AR-Kurung_Kumey,Kurung Kumey,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+AR-Lepa_Rada,AR-Lepa_Rada,Lepa Rada,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+234,AR-Lohit,Lohit,Arunachal Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AR-Lohit,AR-Lohit,Lohit,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+AR-Longding,AR-Longding,Longding,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+AR-Lower_Dibang_Valley,AR-Lower_Dibang_Valley,Lower Dibang Valley,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+AR-Lower_Siang,AR-Lower_Siang,Lower Siang,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+AR-Lower_Subansiri,AR-Lower_Subansiri,Lower Subansiri,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+AR-Namsai,AR-Namsai,Namsai,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+AR-Pakke_Kessang,AR-Pakke_Kessang,Pakke Kessang,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+AR-Papum_Pare,AR-Papum_Pare,Papum Pare,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+AR-Shi_Yomi,AR-Shi_Yomi,Shi Yomi,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+AR-Siang,AR-Siang,Siang,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+AR-Tawang,AR-Tawang,Tawang,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+239,AR-Tirap,Tirap,Arunachal Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AR-Tirap,AR-Tirap,Tirap,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+AR-Upper_Dibang_Valley,AR-Upper_Dibang_Valley,Upper Dibang Valley,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+AR-Upper_Siang,AR-Upper_Siang,Upper Siang,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+AR-Upper_Subansiri,AR-Upper_Subansiri,Upper Subansiri,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+AR-West_Kameng,AR-West_Kameng,West Kameng,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+AR-West_Siang,AR-West_Siang,West Siang,Arunachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+616,AS-Baksa,Baksa,Assam,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AS-Baksa,AS-Baksa,Baksa,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+280,AS-Barpeta,Barpeta,Assam,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AS-Barpeta,AS-Barpeta,Barpeta,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+AS-Biswanath,AS-Biswanath,Biswanath,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+281,AS-Bongaigaon,Bongaigaon,Assam,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AS-Bongaigaon,AS-Bongaigaon,Bongaigaon,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+282,AS-Cachar,Cachar,Assam,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AS-Cachar,AS-Cachar,Cachar,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+AS-Charaideo,AS-Charaideo,Charaideo,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+612,AS-Chirang,Chirang,Assam,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AS-Chirang,AS-Chirang,Chirang,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+283,AS-Darrang,Darrang,Assam,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AS-Darrang,AS-Darrang,Darrang,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+284,AS-Dhemaji,Dhemaji,Assam,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AS-Dhemaji,AS-Dhemaji,Dhemaji,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+285,AS-Dhubri,Dhubri,Assam,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AS-Dhubri,AS-Dhubri,Dhubri,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+286,AS-Dibrugarh,Dibrugarh,Assam,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AS-Dibrugarh,AS-Dibrugarh,Dibrugarh,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+AS-Dima_Hasao,AS-Dima_Hasao,Dima Hasao,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+287,AS-Goalpara,Goalpara,Assam,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AS-Goalpara,AS-Goalpara,Goalpara,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+288,AS-Golaghat,Golaghat,Assam,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AS-Golaghat,AS-Golaghat,Golaghat,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+289,AS-Hailakandi,Hailakandi,Assam,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AS-Hailakandi,AS-Hailakandi,Hailakandi,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+AS-Hojai,AS-Hojai,Hojai,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+290,AS-Jorhat,Jorhat,Assam,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AS-Jorhat,AS-Jorhat,Jorhat,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+291,AS-Kamrup,Kamrup,Assam,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AS-Kamrup,AS-Kamrup,Kamrup,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+618,AS-Kamrup_Metropolitan,Kamrup Metropolitan,Assam,CGWB,Abbreviation,CGWB 'Kamrup Metro'; canonical 'Kamrup Metropolitan'
+AS-Kamrup_Metropolitan,AS-Kamrup_Metropolitan,Kamrup Metropolitan,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+292,AS-Karbi_Anglong,Karbi Anglong,Assam,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AS-Karbi_Anglong,AS-Karbi_Anglong,Karbi Anglong,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+293,AS-Karimganj,Karimganj,Assam,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AS-Karimganj,AS-Karimganj,Karimganj,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+294,AS-Kokrajhar,Kokrajhar,Assam,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AS-Kokrajhar,AS-Kokrajhar,Kokrajhar,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+295,AS-Lakhimpur,Lakhimpur,Assam,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AS-Lakhimpur,AS-Lakhimpur,Lakhimpur,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+AS-Majuli,AS-Majuli,Majuli,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+296,AS-Morigaon,Morigaon,Assam,CGWB,Spelling,CGWB transliteration 'Marigaon'; canonical 'Morigaon'
+AS-Morigaon,AS-Morigaon,Morigaon,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+297,AS-Nagaon,Nagaon,Assam,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AS-Nagaon,AS-Nagaon,Nagaon,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+298,AS-Nalbari,Nalbari,Assam,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AS-Nalbari,AS-Nalbari,Nalbari,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+300,AS-Sivasagar,Sivasagar,Assam,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AS-Sivasagar,AS-Sivasagar,Sivasagar,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+301,AS-Sonitpur,Sonitpur,Assam,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AS-Sonitpur,AS-Sonitpur,Sonitpur,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+AS-South_Salmara_Mankachar,AS-South_Salmara_Mankachar,South Salmara Mankachar,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+302,AS-Tinsukia,Tinsukia,Assam,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AS-Tinsukia,AS-Tinsukia,Tinsukia,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+617,AS-Udalguri,Udalguri,Assam,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+AS-Udalguri,AS-Udalguri,Udalguri,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+AS-West_Karbi_Anglong,AS-West_Karbi_Anglong,West Karbi Anglong,Assam,GeoJSON,Self,Existing canonical hyphenated ID
+188,BR-Araria,Araria,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Araria,BR-Araria,Araria,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+611,BR-Arwal,Arwal,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Arwal,BR-Arwal,Arwal,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+189,BR-Aurangabad,Aurangabad,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Aurangabad,BR-Aurangabad,Aurangabad,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+190,BR-Banka,Banka,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Banka,BR-Banka,Banka,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+191,BR-Begusarai,Begusarai,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Begusarai,BR-Begusarai,Begusarai,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+192,BR-Bhagalpur,Bhagalpur,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Bhagalpur,BR-Bhagalpur,Bhagalpur,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+193,BR-Bhojpur,Bhojpur,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Bhojpur,BR-Bhojpur,Bhojpur,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+194,BR-Buxar,Buxar,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Buxar,BR-Buxar,Buxar,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+195,BR-Darbhanga,Darbhanga,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Darbhanga,BR-Darbhanga,Darbhanga,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+213,BR-East_Champaran,East Champaran,Bihar,CGWB,Language Translation,'Purbi' = East; canonical 'East Champaran'
+BR-East_Champaran,BR-East_Champaran,East Champaran,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+196,BR-Gaya,Gaya,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Gaya,BR-Gaya,Gaya,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+197,BR-Gopalganj,Gopalganj,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Gopalganj,BR-Gopalganj,Gopalganj,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+198,BR-Jamui,Jamui,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Jamui,BR-Jamui,Jamui,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+199,BR-Jehanabad,Jehanabad,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Jehanabad,BR-Jehanabad,Jehanabad,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+200,BR-Kaimur,Kaimur,Bihar,CGWB,Parenthetical,CGWB includes district headquarters '(Bhabua)'; canonical 'Kaimur'
+BR-Kaimur,BR-Kaimur,Kaimur,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+201,BR-Katihar,Katihar,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Katihar,BR-Katihar,Katihar,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+202,BR-Khagaria,Khagaria,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Khagaria,BR-Khagaria,Khagaria,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+203,BR-Kishanganj,Kishanganj,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Kishanganj,BR-Kishanganj,Kishanganj,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+204,BR-Lakhisarai,Lakhisarai,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Lakhisarai,BR-Lakhisarai,Lakhisarai,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+205,BR-Madhepura,Madhepura,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Madhepura,BR-Madhepura,Madhepura,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+206,BR-Madhubani,Madhubani,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Madhubani,BR-Madhubani,Madhubani,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+207,BR-Munger,Munger,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Munger,BR-Munger,Munger,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+208,BR-Muzaffarpur,Muzaffarpur,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Muzaffarpur,BR-Muzaffarpur,Muzaffarpur,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+209,BR-Nalanda,Nalanda,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Nalanda,BR-Nalanda,Nalanda,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+210,BR-Nawada,Nawada,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Nawada,BR-Nawada,Nawada,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+212,BR-Patna,Patna,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Patna,BR-Patna,Patna,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+214,BR-Purnia,Purnia,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Purnia,BR-Purnia,Purnia,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+215,BR-Rohtas,Rohtas,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Rohtas,BR-Rohtas,Rohtas,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+216,BR-Saharsa,Saharsa,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Saharsa,BR-Saharsa,Saharsa,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+217,BR-Samastipur,Samastipur,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Samastipur,BR-Samastipur,Samastipur,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+218,BR-Saran,Saran,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Saran,BR-Saran,Saran,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+219,BR-Sheikhpura,Sheikhpura,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Sheikhpura,BR-Sheikhpura,Sheikhpura,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+220,BR-Sheohar,Sheohar,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Sheohar,BR-Sheohar,Sheohar,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+221,BR-Sitamarhi,Sitamarhi,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Sitamarhi,BR-Sitamarhi,Sitamarhi,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+222,BR-Siwan,Siwan,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Siwan,BR-Siwan,Siwan,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+223,BR-Supaul,Supaul,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Supaul,BR-Supaul,Supaul,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+224,BR-Vaishali,Vaishali,Bihar,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+BR-Vaishali,BR-Vaishali,Vaishali,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+211,BR-West_Champaran,West Champaran,Bihar,CGWB,Language Translation,'Pashchim' = West; canonical 'West Champaran' (was incorrectly linked to East Champaran in legacy geojson_name!)
+BR-West_Champaran,BR-West_Champaran,West Champaran,Bihar,GeoJSON,Self,Existing canonical hyphenated ID
+44,CH-Chandigarh,Chandigarh,Chandigarh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+CH-Chandigarh,CH-Chandigarh,Chandigarh,Chandigarh,GeoJSON,Self,Existing canonical hyphenated ID
+CG-Balod,CG-Balod,Balod,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+CG-Baloda_Bazar,CG-Baloda_Bazar,Baloda Bazar,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+CG-Balrampur,CG-Balrampur,Balrampur,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+CG-Bametara,CG-Bametara,Bametara,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+374,CG-Bastar,Bastar,Chhattisgarh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+CG-Bastar,CG-Bastar,Bastar,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+CG-Bijapur,CG-Bijapur,Bijapur,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+375,CG-Bilaspur,Bilaspur,Chhattisgarh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+CG-Bilaspur,CG-Bilaspur,Bilaspur,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+376,CG-Dakshin_Bastar_Dantewada,Dakshin Bastar Dantewada,Chhattisgarh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+CG-Dakshin_Bastar_Dantewada,CG-Dakshin_Bastar_Dantewada,Dakshin Bastar Dantewada,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+377,CG-Dhamtari,Dhamtari,Chhattisgarh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+CG-Dhamtari,CG-Dhamtari,Dhamtari,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+378,CG-Durg,Durg,Chhattisgarh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+CG-Durg,CG-Durg,Durg,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+CG-Gariaband,CG-Gariaband,Gariaband,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+379,CG-Janjgir_Champa,Janjgir Champa,Chhattisgarh,CGWB,Punctuation,Hyphen vs space; canonical 'Janjgir Champa'
+CG-Janjgir_Champa,CG-Janjgir_Champa,Janjgir Champa,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+380,CG-Jashpur,Jashpur,Chhattisgarh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+CG-Jashpur,CG-Jashpur,Jashpur,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+382,CG-Kabeerdham,Kabeerdham,Chhattisgarh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+CG-Kabeerdham,CG-Kabeerdham,Kabeerdham,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+CG-Kondagaon,CG-Kondagaon,Kondagaon,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+383,CG-Korba,Korba,Chhattisgarh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+CG-Korba,CG-Korba,Korba,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+384,CG-Koriya,Koriya,Chhattisgarh,CGWB,Spelling,CGWB Anglicised 'Korea'; canonical 'Koriya' (was incorrectly linked to Korba in legacy geojson_name!)
+CG-Koriya,CG-Koriya,Koriya,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+385,CG-Mahasamund,Mahasamund,Chhattisgarh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+CG-Mahasamund,CG-Mahasamund,Mahasamund,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+CG-Mungeli,CG-Mungeli,Mungeli,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+CG-Narayanpur,CG-Narayanpur,Narayanpur,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+386,CG-Raigarh,Raigarh,Chhattisgarh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+CG-Raigarh,CG-Raigarh,Raigarh,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+387,CG-Raipur,Raipur,Chhattisgarh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+CG-Raipur,CG-Raipur,Raipur,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+388,CG-Rajnandgaon,Rajnandgaon,Chhattisgarh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+CG-Rajnandgaon,CG-Rajnandgaon,Rajnandgaon,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+CG-Sukma,CG-Sukma,Sukma,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+CG-Surajpur,CG-Surajpur,Surajpur,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+389,CG-Surguja,Surguja,Chhattisgarh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+CG-Surguja,CG-Surguja,Surguja,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+381,CG-Uttar_Bastar_Kanker,Uttar Bastar Kanker,Chhattisgarh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+CG-Uttar_Bastar_Kanker,CG-Uttar_Bastar_Kanker,Uttar Bastar Kanker,Chhattisgarh,GeoJSON,Self,Existing canonical hyphenated ID
+DD-Dadra_and_Nagar_Haveli,DD-Dadra_and_Nagar_Haveli,Dadra and Nagar Haveli,Dadra and Nagar Haveli and Daman and Diu,GeoJSON,Self,Existing canonical hyphenated ID
+DD-Daman,DD-Daman,Daman,Dadra and Nagar Haveli and Daman and Diu,GeoJSON,Self,Existing canonical hyphenated ID
+DD-Diu,DD-Diu,Diu,Dadra and Nagar Haveli and Daman and Diu,GeoJSON,Self,Existing canonical hyphenated ID
+77,DL-Delhi,Delhi,Delhi,CGWB,UT Consolidation,"CGWB tracks Delhi revenue district 'Central'; GeoJSON/ERA5/IMD have single unified 'DL-Delhi'. Propose collapsing onto DL-Delhi with GWL averaged, OR retaining DL-Central with state-level climate."
+78,DL-Delhi,Delhi,Delhi,CGWB,UT Consolidation,"CGWB tracks Delhi revenue district 'East'; GeoJSON/ERA5/IMD have single unified 'DL-Delhi'. Propose collapsing onto DL-Delhi with GWL averaged, OR retaining DL-East with state-level climate."
+79,DL-Delhi,Delhi,Delhi,CGWB,UT Consolidation,"CGWB tracks Delhi revenue district 'New Delhi'; GeoJSON/ERA5/IMD have single unified 'DL-Delhi'. Propose collapsing onto DL-Delhi with GWL averaged, OR retaining DL-New_Delhi with state-level climate."
+80,DL-Delhi,Delhi,Delhi,CGWB,UT Consolidation,"CGWB tracks Delhi revenue district 'North'; GeoJSON/ERA5/IMD have single unified 'DL-Delhi'. Propose collapsing onto DL-Delhi with GWL averaged, OR retaining DL-North with state-level climate."
+81,DL-Delhi,Delhi,Delhi,CGWB,UT Consolidation,"CGWB tracks Delhi revenue district 'North East'; GeoJSON/ERA5/IMD have single unified 'DL-Delhi'. Propose collapsing onto DL-Delhi with GWL averaged, OR retaining DL-North_East with state-level climate."
+82,DL-Delhi,Delhi,Delhi,CGWB,UT Consolidation,"CGWB tracks Delhi revenue district 'North West'; GeoJSON/ERA5/IMD have single unified 'DL-Delhi'. Propose collapsing onto DL-Delhi with GWL averaged, OR retaining DL-North_West with state-level climate."
+83,DL-Delhi,Delhi,Delhi,CGWB,UT Consolidation,"CGWB tracks Delhi revenue district 'South'; GeoJSON/ERA5/IMD have single unified 'DL-Delhi'. Propose collapsing onto DL-Delhi with GWL averaged, OR retaining DL-South with state-level climate."
+84,DL-Delhi,Delhi,Delhi,CGWB,UT Consolidation,"CGWB tracks Delhi revenue district 'South West'; GeoJSON/ERA5/IMD have single unified 'DL-Delhi'. Propose collapsing onto DL-Delhi with GWL averaged, OR retaining DL-South_West with state-level climate."
+85,DL-Delhi,Delhi,Delhi,CGWB,UT Consolidation,"CGWB tracks Delhi revenue district 'West'; GeoJSON/ERA5/IMD have single unified 'DL-Delhi'. Propose collapsing onto DL-Delhi with GWL averaged, OR retaining DL-West with state-level climate."
+DL-Delhi,DL-Delhi,Delhi,Delhi,GeoJSON,Self,Existing canonical hyphenated ID
+551,GA-North_Goa,North Goa,Goa,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+GA-North_Goa,GA-North_Goa,North Goa,Goa,GeoJSON,Self,Existing canonical hyphenated ID
+552,GA-South_Goa,South Goa,Goa,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+GA-South_Goa,GA-South_Goa,South Goa,Goa,GeoJSON,Self,Existing canonical hyphenated ID
+438,GJ-Ahmedabad,Ahmedabad,Gujarat,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+GJ-Ahmedabad,GJ-Ahmedabad,Ahmedabad,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+439,GJ-Amreli,Amreli,Gujarat,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+GJ-Amreli,GJ-Amreli,Amreli,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+440,GJ-Anand,Anand,Gujarat,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+GJ-Anand,GJ-Anand,Anand,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+GJ-Aravalli,GJ-Aravalli,Aravalli,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+441,GJ-Banaskantha,Banaskantha,Gujarat,CGWB,Spacing,CGWB separated 'Banas Kantha'; canonical 'Banaskantha'
+GJ-Banaskantha,GJ-Banaskantha,Banaskantha,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+442,GJ-Bharuch,Bharuch,Gujarat,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+GJ-Bharuch,GJ-Bharuch,Bharuch,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+443,GJ-Bhavnagar,Bhavnagar,Gujarat,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+GJ-Bhavnagar,GJ-Bhavnagar,Bhavnagar,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+GJ-Botad,GJ-Botad,Botad,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+GJ-Chhota_Udaipur,GJ-Chhota_Udaipur,Chhota Udaipur,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+445,GJ-Dahod,Dahod,Gujarat,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+GJ-Dahod,GJ-Dahod,Dahod,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+444,GJ-Dang,Dang,Gujarat,CGWB,Plural,CGWB 'Dangs'; canonical 'Dang'
+GJ-Dang,GJ-Dang,Dang,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+GJ-Devbhumi_Dwarka,GJ-Devbhumi_Dwarka,Devbhumi Dwarka,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+446,GJ-Gandhinagar,Gandhinagar,Gujarat,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+GJ-Gandhinagar,GJ-Gandhinagar,Gandhinagar,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+GJ-Gir_Somnath,GJ-Gir_Somnath,Gir Somnath,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+447,GJ-Jamnagar,Jamnagar,Gujarat,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+GJ-Jamnagar,GJ-Jamnagar,Jamnagar,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+448,GJ-Junagadh,Junagadh,Gujarat,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+GJ-Junagadh,GJ-Junagadh,Junagadh,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+450,GJ-Kheda,Kheda,Gujarat,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+GJ-Kheda,GJ-Kheda,Kheda,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+449,GJ-Kutch,Kutch,Gujarat,CGWB,Spelling,CGWB 'Kachchh'; canonical 'Kutch'
+GJ-Kutch,GJ-Kutch,Kutch,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+GJ-Mahisagar,GJ-Mahisagar,Mahisagar,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+451,GJ-Mehsana,Mehsana,Gujarat,CGWB,Spelling,CGWB 'Mahesana'; canonical 'Mehsana'
+GJ-Mehsana,GJ-Mehsana,Mehsana,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+GJ-Morbi,GJ-Morbi,Morbi,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+452,GJ-Narmada,Narmada,Gujarat,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+GJ-Narmada,GJ-Narmada,Narmada,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+453,GJ-Navsari,Navsari,Gujarat,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+GJ-Navsari,GJ-Navsari,Navsari,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+454,GJ-Panchmahal,Panchmahal,Gujarat,CGWB,Spacing/Plural,CGWB 'Panch Mahals'; canonical 'Panchmahal'
+GJ-Panchmahal,GJ-Panchmahal,Panchmahal,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+455,GJ-Patan,Patan,Gujarat,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+GJ-Patan,GJ-Patan,Patan,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+456,GJ-Porbandar,Porbandar,Gujarat,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+GJ-Porbandar,GJ-Porbandar,Porbandar,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+457,GJ-Rajkot,Rajkot,Gujarat,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+GJ-Rajkot,GJ-Rajkot,Rajkot,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+458,GJ-Sabarkantha,Sabarkantha,Gujarat,CGWB,Spacing,CGWB 'Sabar Kantha'; canonical 'Sabarkantha'
+GJ-Sabarkantha,GJ-Sabarkantha,Sabarkantha,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+459,GJ-Surat,Surat,Gujarat,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+GJ-Surat,GJ-Surat,Surat,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+460,GJ-Surendranagar,Surendranagar,Gujarat,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+GJ-Surendranagar,GJ-Surendranagar,Surendranagar,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+641,GJ-Tapi,Tapi,Gujarat,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+GJ-Tapi,GJ-Tapi,Tapi,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+461,GJ-Vadodara,Vadodara,Gujarat,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+GJ-Vadodara,GJ-Vadodara,Vadodara,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+462,GJ-Valsad,Valsad,Gujarat,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+GJ-Valsad,GJ-Valsad,Valsad,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+GJ-Vav-Tharad,GJ-Vav-Tharad,Vav-Tharad,Gujarat,GeoJSON,Self,Existing canonical hyphenated ID
+58,HR-Ambala,Ambala,Haryana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HR-Ambala,HR-Ambala,Ambala,Haryana,GeoJSON,Self,Existing canonical hyphenated ID
+59,HR-Bhiwani,Bhiwani,Haryana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HR-Bhiwani,HR-Bhiwani,Bhiwani,Haryana,GeoJSON,Self,Existing canonical hyphenated ID
+HR-Charkhi_Dadri,HR-Charkhi_Dadri,Charkhi Dadri,Haryana,GeoJSON,Self,Existing canonical hyphenated ID
+60,HR-Faridabad,Faridabad,Haryana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HR-Faridabad,HR-Faridabad,Faridabad,Haryana,GeoJSON,Self,Existing canonical hyphenated ID
+61,HR-Fatehabad,Fatehabad,Haryana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HR-Fatehabad,HR-Fatehabad,Fatehabad,Haryana,GeoJSON,Self,Existing canonical hyphenated ID
+62,HR-Gurugram,Gurugram,Haryana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HR-Gurugram,HR-Gurugram,Gurugram,Haryana,GeoJSON,Self,Existing canonical hyphenated ID
+63,HR-Hisar,Hisar,Haryana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HR-Hisar,HR-Hisar,Hisar,Haryana,GeoJSON,Self,Existing canonical hyphenated ID
+64,HR-Jhajjar,Jhajjar,Haryana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HR-Jhajjar,HR-Jhajjar,Jhajjar,Haryana,GeoJSON,Self,Existing canonical hyphenated ID
+65,HR-Jind,Jind,Haryana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HR-Jind,HR-Jind,Jind,Haryana,GeoJSON,Self,Existing canonical hyphenated ID
+66,HR-Kaithal,Kaithal,Haryana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HR-Kaithal,HR-Kaithal,Kaithal,Haryana,GeoJSON,Self,Existing canonical hyphenated ID
+67,HR-Karnal,Karnal,Haryana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HR-Karnal,HR-Karnal,Karnal,Haryana,GeoJSON,Self,Existing canonical hyphenated ID
+68,HR-Kurukshetra,Kurukshetra,Haryana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HR-Kurukshetra,HR-Kurukshetra,Kurukshetra,Haryana,GeoJSON,Self,Existing canonical hyphenated ID
+69,HR-Mahendragarh,Mahendragarh,Haryana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HR-Mahendragarh,HR-Mahendragarh,Mahendragarh,Haryana,GeoJSON,Self,Existing canonical hyphenated ID
+604,HR-Nuh,Nuh,Haryana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HR-Nuh,HR-Nuh,Nuh,Haryana,GeoJSON,Self,Existing canonical hyphenated ID
+619,HR-Palwal,Palwal,Haryana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HR-Palwal,HR-Palwal,Palwal,Haryana,GeoJSON,Self,Existing canonical hyphenated ID
+70,HR-Panchkula,Panchkula,Haryana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HR-Panchkula,HR-Panchkula,Panchkula,Haryana,GeoJSON,Self,Existing canonical hyphenated ID
+71,HR-Panipat,Panipat,Haryana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HR-Panipat,HR-Panipat,Panipat,Haryana,GeoJSON,Self,Existing canonical hyphenated ID
+72,HR-Rewari,Rewari,Haryana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HR-Rewari,HR-Rewari,Rewari,Haryana,GeoJSON,Self,Existing canonical hyphenated ID
+73,HR-Rohtak,Rohtak,Haryana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HR-Rohtak,HR-Rohtak,Rohtak,Haryana,GeoJSON,Self,Existing canonical hyphenated ID
+74,HR-Sirsa,Sirsa,Haryana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HR-Sirsa,HR-Sirsa,Sirsa,Haryana,GeoJSON,Self,Existing canonical hyphenated ID
+75,HR-Sonipat,Sonipat,Haryana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HR-Sonipat,HR-Sonipat,Sonipat,Haryana,GeoJSON,Self,Existing canonical hyphenated ID
+76,HR-Yamunanagar,Yamunanagar,Haryana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HR-Yamunanagar,HR-Yamunanagar,Yamunanagar,Haryana,GeoJSON,Self,Existing canonical hyphenated ID
+HP-Bilaspur,HP-Bilaspur,Bilaspur,Himachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+HP-Chamba,HP-Chamba,Chamba,Himachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+17,HP-Hamirpur,Hamirpur,Himachal Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HP-Hamirpur,HP-Hamirpur,Hamirpur,Himachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+18,HP-Kangra,Kangra,Himachal Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HP-Kangra,HP-Kangra,Kangra,Himachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+HP-Kinnaur,HP-Kinnaur,Kinnaur,Himachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+20,HP-Kullu,Kullu,Himachal Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HP-Kullu,HP-Kullu,Kullu,Himachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+HP-Lahaul_and_Spiti,HP-Lahaul_and_Spiti,Lahaul and Spiti,Himachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+22,HP-Mandi,Mandi,Himachal Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HP-Mandi,HP-Mandi,Mandi,Himachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+HP-Shimla,HP-Shimla,Shimla,Himachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+24,HP-Sirmaur,Sirmaur,Himachal Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HP-Sirmaur,HP-Sirmaur,Sirmaur,Himachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+25,HP-Solan,Solan,Himachal Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HP-Solan,HP-Solan,Solan,Himachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+26,HP-Una,Una,Himachal Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+HP-Una,HP-Una,Una,Himachal Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+1,JK-Anantnag,Anantnag,Jammu And Kashmir,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+5,JK-Jammu,Jammu,Jammu And Kashmir,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+7,JK-Kathua,Kathua,Jammu And Kashmir,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+12,JK-Rajouri,Rajouri,Jammu And Kashmir,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+627,JK-Reasi,Reasi,Jammu And Kashmir,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+14,JK-Udhampur,Udhampur,Jammu And Kashmir,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+JK-Anantnag,JK-Anantnag,Anantnag,Jammu and Kashmir,GeoJSON,Self,Existing canonical hyphenated ID
+JK-Bandipora,JK-Bandipora,Bandipora,Jammu and Kashmir,GeoJSON,Self,Existing canonical hyphenated ID
+JK-Baramulla,JK-Baramulla,Baramulla,Jammu and Kashmir,GeoJSON,Self,Existing canonical hyphenated ID
+JK-Budgam,JK-Budgam,Budgam,Jammu and Kashmir,GeoJSON,Self,Existing canonical hyphenated ID
+JK-Doda,JK-Doda,Doda,Jammu and Kashmir,GeoJSON,Self,Existing canonical hyphenated ID
+JK-Ganderbal,JK-Ganderbal,Ganderbal,Jammu and Kashmir,GeoJSON,Self,Existing canonical hyphenated ID
+JK-Jammu,JK-Jammu,Jammu,Jammu and Kashmir,GeoJSON,Self,Existing canonical hyphenated ID
+JK-Kathua,JK-Kathua,Kathua,Jammu and Kashmir,GeoJSON,Self,Existing canonical hyphenated ID
+JK-Kishtwar,JK-Kishtwar,Kishtwar,Jammu and Kashmir,GeoJSON,Self,Existing canonical hyphenated ID
+JK-Kulgam,JK-Kulgam,Kulgam,Jammu and Kashmir,GeoJSON,Self,Existing canonical hyphenated ID
+JK-Kupwara,JK-Kupwara,Kupwara,Jammu and Kashmir,GeoJSON,Self,Existing canonical hyphenated ID
+JK-Mirpur,JK-Mirpur,Mirpur,Jammu and Kashmir,GeoJSON,Self,Existing canonical hyphenated ID
+JK-Muzaffarabad,JK-Muzaffarabad,Muzaffarabad,Jammu and Kashmir,GeoJSON,Self,Existing canonical hyphenated ID
+JK-Pulwama,JK-Pulwama,Pulwama,Jammu and Kashmir,GeoJSON,Self,Existing canonical hyphenated ID
+JK-Punch,JK-Punch,Punch,Jammu and Kashmir,GeoJSON,Self,Existing canonical hyphenated ID
+JK-Rajouri,JK-Rajouri,Rajouri,Jammu and Kashmir,GeoJSON,Self,Existing canonical hyphenated ID
+JK-Ramban,JK-Ramban,Ramban,Jammu and Kashmir,GeoJSON,Self,Existing canonical hyphenated ID
+JK-Reasi,JK-Reasi,Reasi,Jammu and Kashmir,GeoJSON,Self,Existing canonical hyphenated ID
+JK-Samba,JK-Samba,Samba,Jammu and Kashmir,GeoJSON,Self,Existing canonical hyphenated ID
+JK-Shopiyan,JK-Shopiyan,Shopiyan,Jammu and Kashmir,GeoJSON,Self,Existing canonical hyphenated ID
+JK-Srinagar,JK-Srinagar,Srinagar,Jammu and Kashmir,GeoJSON,Self,Existing canonical hyphenated ID
+JK-Udhampur,JK-Udhampur,Udhampur,Jammu and Kashmir,GeoJSON,Self,Existing canonical hyphenated ID
+322,JH-Bokaro,Bokaro,Jharkhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+JH-Bokaro,JH-Bokaro,Bokaro,Jharkhand,GeoJSON,Self,Existing canonical hyphenated ID
+323,JH-Chatra,Chatra,Jharkhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+JH-Chatra,JH-Chatra,Chatra,Jharkhand,GeoJSON,Self,Existing canonical hyphenated ID
+324,JH-Deoghar,Deoghar,Jharkhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+JH-Deoghar,JH-Deoghar,Deoghar,Jharkhand,GeoJSON,Self,Existing canonical hyphenated ID
+325,JH-Dhanbad,Dhanbad,Jharkhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+JH-Dhanbad,JH-Dhanbad,Dhanbad,Jharkhand,GeoJSON,Self,Existing canonical hyphenated ID
+326,JH-Dumka,Dumka,Jharkhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+JH-Dumka,JH-Dumka,Dumka,Jharkhand,GeoJSON,Self,Existing canonical hyphenated ID
+327,JH-East_Singhbhum,East Singhbhum,Jharkhand,CGWB,Spelling,CGWB typo 'Singhbum'; canonical 'East Singhbhum'
+JH-East_Singhbhum,JH-East_Singhbhum,East Singhbhum,Jharkhand,GeoJSON,Self,Existing canonical hyphenated ID
+328,JH-Garhwa,Garhwa,Jharkhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+JH-Garhwa,JH-Garhwa,Garhwa,Jharkhand,GeoJSON,Self,Existing canonical hyphenated ID
+329,JH-Giridih,Giridih,Jharkhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+JH-Giridih,JH-Giridih,Giridih,Jharkhand,GeoJSON,Self,Existing canonical hyphenated ID
+330,JH-Godda,Godda,Jharkhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+JH-Godda,JH-Godda,Godda,Jharkhand,GeoJSON,Self,Existing canonical hyphenated ID
+331,JH-Gumla,Gumla,Jharkhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+JH-Gumla,JH-Gumla,Gumla,Jharkhand,GeoJSON,Self,Existing canonical hyphenated ID
+332,JH-Hazaribagh,Hazaribagh,Jharkhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+JH-Hazaribagh,JH-Hazaribagh,Hazaribagh,Jharkhand,GeoJSON,Self,Existing canonical hyphenated ID
+333,JH-Jamtara,Jamtara,Jharkhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+JH-Jamtara,JH-Jamtara,Jamtara,Jharkhand,GeoJSON,Self,Existing canonical hyphenated ID
+606,JH-Khunti,Khunti,Jharkhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+JH-Khunti,JH-Khunti,Khunti,Jharkhand,GeoJSON,Self,Existing canonical hyphenated ID
+334,JH-Koderma,Koderma,Jharkhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+JH-Koderma,JH-Koderma,Koderma,Jharkhand,GeoJSON,Self,Existing canonical hyphenated ID
+335,JH-Latehar,Latehar,Jharkhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+JH-Latehar,JH-Latehar,Latehar,Jharkhand,GeoJSON,Self,Existing canonical hyphenated ID
+336,JH-Lohardaga,Lohardaga,Jharkhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+JH-Lohardaga,JH-Lohardaga,Lohardaga,Jharkhand,GeoJSON,Self,Existing canonical hyphenated ID
+337,JH-Pakur,Pakur,Jharkhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+JH-Pakur,JH-Pakur,Pakur,Jharkhand,GeoJSON,Self,Existing canonical hyphenated ID
+338,JH-Palamu,Palamu,Jharkhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+JH-Palamu,JH-Palamu,Palamu,Jharkhand,GeoJSON,Self,Existing canonical hyphenated ID
+607,JH-Ramgarh,Ramgarh,Jharkhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+JH-Ramgarh,JH-Ramgarh,Ramgarh,Jharkhand,GeoJSON,Self,Existing canonical hyphenated ID
+339,JH-Ranchi,Ranchi,Jharkhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+JH-Ranchi,JH-Ranchi,Ranchi,Jharkhand,GeoJSON,Self,Existing canonical hyphenated ID
+340,JH-Sahibganj,Sahibganj,Jharkhand,CGWB,Spelling,CGWB 'Sahebganj'; canonical 'Sahibganj'
+JH-Sahibganj,JH-Sahibganj,Sahibganj,Jharkhand,GeoJSON,Self,Existing canonical hyphenated ID
+341,JH-Saraikela-Kharsawan,Saraikela-Kharsawan,Jharkhand,CGWB,Punctuation,Hyphenation in canonical 'JH-Saraikela-Kharsawan'
+JH-Saraikela-Kharsawan,JH-Saraikela-Kharsawan,Saraikela-Kharsawan,Jharkhand,GeoJSON,Self,Existing canonical hyphenated ID
+342,JH-Simdega,Simdega,Jharkhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+JH-Simdega,JH-Simdega,Simdega,Jharkhand,GeoJSON,Self,Existing canonical hyphenated ID
+343,JH-West_Singhbhum,West Singhbhum,Jharkhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+JH-West_Singhbhum,JH-West_Singhbhum,West Singhbhum,Jharkhand,GeoJSON,Self,Existing canonical hyphenated ID
+524,KA-Bagalkote,Bagalkote,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Bagalkote,KA-Bagalkote,Bagalkote,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+528,KA-Ballari,Ballari,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Ballari,KA-Ballari,Ballari,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+527,KA-Belagavi,Belagavi,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Belagavi,KA-Belagavi,Belagavi,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+526,KA-Bengaluru_Rural,Bengaluru Rural,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Bengaluru_Rural,KA-Bengaluru_Rural,Bengaluru Rural,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+525,KA-Bengaluru_Urban,Bengaluru Urban,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Bengaluru_Urban,KA-Bengaluru_Urban,Bengaluru Urban,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+529,KA-Bidar,Bidar,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Bidar,KA-Bidar,Bidar,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+531,KA-Chamarajanagara,Chamarajanagara,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Chamarajanagara,KA-Chamarajanagara,Chamarajanagara,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+630,KA-Chikkaballapura,Chikkaballapura,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Chikkaballapura,KA-Chikkaballapura,Chikkaballapura,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+532,KA-Chikkamagaluru,Chikkamagaluru,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Chikkamagaluru,KA-Chikkamagaluru,Chikkamagaluru,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+533,KA-Chitradurga,Chitradurga,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Chitradurga,KA-Chitradurga,Chitradurga,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+534,KA-Dakshina_Kannada,Dakshina Kannada,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Dakshina_Kannada,KA-Dakshina_Kannada,Dakshina Kannada,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+535,KA-Davanagere,Davanagere,Karnataka,CGWB,Spelling,CGWB 'Davangere'; canonical 'Davanagere'
+KA-Davanagere,KA-Davanagere,Davanagere,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+536,KA-Dharwad,Dharwad,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Dharwad,KA-Dharwad,Dharwad,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+537,KA-Gadag,Gadag,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Gadag,KA-Gadag,Gadag,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+539,KA-Hassan,Hassan,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Hassan,KA-Hassan,Hassan,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+540,KA-Haveri,Haveri,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Haveri,KA-Haveri,Haveri,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+538,KA-Kalaburagi,Kalaburagi,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Kalaburagi,KA-Kalaburagi,Kalaburagi,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+541,KA-Kodagu,Kodagu,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Kodagu,KA-Kodagu,Kodagu,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+542,KA-Kolar,Kolar,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Kolar,KA-Kolar,Kolar,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+543,KA-Koppal,Koppal,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Koppal,KA-Koppal,Koppal,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+544,KA-Mandya,Mandya,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Mandya,KA-Mandya,Mandya,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+545,KA-Mysuru,Mysuru,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Mysuru,KA-Mysuru,Mysuru,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+546,KA-Raichur,Raichur,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Raichur,KA-Raichur,Raichur,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+631,KA-Ramanagara,Ramanagara,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Ramanagara,KA-Ramanagara,Ramanagara,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+547,KA-Shivamogga,Shivamogga,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Shivamogga,KA-Shivamogga,Shivamogga,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+548,KA-Tumakuru,Tumakuru,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Tumakuru,KA-Tumakuru,Tumakuru,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+549,KA-Udupi,Udupi,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Udupi,KA-Udupi,Udupi,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+550,KA-Uttara_Kannada,Uttara Kannada,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Uttara_Kannada,KA-Uttara_Kannada,Uttara Kannada,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+530,KA-Vijayapura,Vijayapura,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Vijayapura,KA-Vijayapura,Vijayapura,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+635,KA-Yadgir,Yadgir,Karnataka,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KA-Yadgir,KA-Yadgir,Yadgir,Karnataka,GeoJSON,Self,Existing canonical hyphenated ID
+554,KL-Alappuzha,Alappuzha,Kerala,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KL-Alappuzha,KL-Alappuzha,Alappuzha,Kerala,GeoJSON,Self,Existing canonical hyphenated ID
+555,KL-Ernakulam,Ernakulam,Kerala,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KL-Ernakulam,KL-Ernakulam,Ernakulam,Kerala,GeoJSON,Self,Existing canonical hyphenated ID
+556,KL-Idukki,Idukki,Kerala,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KL-Idukki,KL-Idukki,Idukki,Kerala,GeoJSON,Self,Existing canonical hyphenated ID
+557,KL-Kannur,Kannur,Kerala,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KL-Kannur,KL-Kannur,Kannur,Kerala,GeoJSON,Self,Existing canonical hyphenated ID
+558,KL-Kasaragod,Kasaragod,Kerala,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KL-Kasaragod,KL-Kasaragod,Kasaragod,Kerala,GeoJSON,Self,Existing canonical hyphenated ID
+559,KL-Kollam,Kollam,Kerala,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KL-Kollam,KL-Kollam,Kollam,Kerala,GeoJSON,Self,Existing canonical hyphenated ID
+560,KL-Kottayam,Kottayam,Kerala,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KL-Kottayam,KL-Kottayam,Kottayam,Kerala,GeoJSON,Self,Existing canonical hyphenated ID
+561,KL-Kozhikode,Kozhikode,Kerala,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KL-Kozhikode,KL-Kozhikode,Kozhikode,Kerala,GeoJSON,Self,Existing canonical hyphenated ID
+562,KL-Malappuram,Malappuram,Kerala,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KL-Malappuram,KL-Malappuram,Malappuram,Kerala,GeoJSON,Self,Existing canonical hyphenated ID
+563,KL-Palakkad,Palakkad,Kerala,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KL-Palakkad,KL-Palakkad,Palakkad,Kerala,GeoJSON,Self,Existing canonical hyphenated ID
+564,KL-Pathanamthitta,Pathanamthitta,Kerala,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KL-Pathanamthitta,KL-Pathanamthitta,Pathanamthitta,Kerala,GeoJSON,Self,Existing canonical hyphenated ID
+565,KL-Thiruvananthapuram,Thiruvananthapuram,Kerala,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KL-Thiruvananthapuram,KL-Thiruvananthapuram,Thiruvananthapuram,Kerala,GeoJSON,Self,Existing canonical hyphenated ID
+566,KL-Thrissur,Thrissur,Kerala,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KL-Thrissur,KL-Thrissur,Thrissur,Kerala,GeoJSON,Self,Existing canonical hyphenated ID
+567,KL-Wayanad,Wayanad,Kerala,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+KL-Wayanad,KL-Wayanad,Wayanad,Kerala,GeoJSON,Self,Existing canonical hyphenated ID
+LA-Kargil,LA-Kargil,Kargil,Ladakh,GeoJSON,Self,Existing canonical hyphenated ID
+LA-Leh,LA-Leh,Leh,Ladakh,GeoJSON,Self,Existing canonical hyphenated ID
+LD-Lakshadweep,LD-Lakshadweep,Lakshadweep,Lakshadweep,GeoJSON,Self,Existing canonical hyphenated ID
+MP-Agar_Malwa,MP-Agar_Malwa,Agar Malwa,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+639,MP-Alirajpur,Alirajpur,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Alirajpur,MP-Alirajpur,Alirajpur,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+390,MP-Anuppur,Anuppur,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Anuppur,MP-Anuppur,Anuppur,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+391,MP-Ashoknagar,Ashoknagar,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Ashoknagar,MP-Ashoknagar,Ashoknagar,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+392,MP-Balaghat,Balaghat,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Balaghat,MP-Balaghat,Balaghat,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+393,MP-Barwani,Barwani,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Barwani,MP-Barwani,Barwani,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+394,MP-Betul,Betul,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Betul,MP-Betul,Betul,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+395,MP-Bhind,Bhind,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Bhind,MP-Bhind,Bhind,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+396,MP-Bhopal,Bhopal,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Bhopal,MP-Bhopal,Bhopal,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+397,MP-Burhanpur,Burhanpur,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Burhanpur,MP-Burhanpur,Burhanpur,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+398,MP-Chhatarpur,Chhatarpur,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Chhatarpur,MP-Chhatarpur,Chhatarpur,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+399,MP-Chhindwara,Chhindwara,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Chhindwara,MP-Chhindwara,Chhindwara,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+400,MP-Damoh,Damoh,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Damoh,MP-Damoh,Damoh,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+401,MP-Datia,Datia,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Datia,MP-Datia,Datia,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+402,MP-Dewas,Dewas,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Dewas,MP-Dewas,Dewas,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+403,MP-Dhar,Dhar,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Dhar,MP-Dhar,Dhar,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+404,MP-Dindori,Dindori,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Dindori,MP-Dindori,Dindori,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+406,MP-Guna,Guna,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Guna,MP-Guna,Guna,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+407,MP-Gwalior,Gwalior,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Gwalior,MP-Gwalior,Gwalior,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+408,MP-Harda,Harda,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Harda,MP-Harda,Harda,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+409,MP-Hoshangabad,Hoshangabad,Madhya Pradesh,CGWB,Official Rename,Hoshangabad was renamed Narmadapuram in 2022. GeoJSON uses historical 'Hoshangabad'; canonical 'MP-Hoshangabad'
+MP-Hoshangabad,MP-Hoshangabad,Hoshangabad,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+410,MP-Indore,Indore,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Indore,MP-Indore,Indore,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+411,MP-Jabalpur,Jabalpur,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Jabalpur,MP-Jabalpur,Jabalpur,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+412,MP-Jhabua,Jhabua,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Jhabua,MP-Jhabua,Jhabua,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+413,MP-Katni,Katni,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Katni,MP-Katni,Katni,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+405,MP-Khandwa,Khandwa,Madhya Pradesh,CGWB,Parenthetical,CGWB includes alternate name '(East Nimar)'; canonical 'Khandwa'
+MP-Khandwa,MP-Khandwa,Khandwa,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+414,MP-Khargone,Khargone,Madhya Pradesh,CGWB,Parenthetical,CGWB includes alternate name '(West Nimar)'; canonical 'Khargone'
+MP-Khargone,MP-Khargone,Khargone,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+415,MP-Mandla,Mandla,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Mandla,MP-Mandla,Mandla,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+416,MP-Mandsaur,Mandsaur,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Mandsaur,MP-Mandsaur,Mandsaur,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+417,MP-Morena,Morena,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Morena,MP-Morena,Morena,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+418,MP-Narsinghpur,Narsinghpur,Madhya Pradesh,CGWB,Spelling,CGWB 'Narsimhapur'; canonical 'Narsinghpur'
+MP-Narsinghpur,MP-Narsinghpur,Narsinghpur,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+419,MP-Neemuch,Neemuch,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Neemuch,MP-Neemuch,Neemuch,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+MP-Niwari,MP-Niwari,Niwari,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+420,MP-Panna,Panna,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Panna,MP-Panna,Panna,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+421,MP-Raisen,Raisen,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Raisen,MP-Raisen,Raisen,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+422,MP-Rajgarh,Rajgarh,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Rajgarh,MP-Rajgarh,Rajgarh,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+423,MP-Ratlam,Ratlam,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Ratlam,MP-Ratlam,Ratlam,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+424,MP-Rewa,Rewa,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Rewa,MP-Rewa,Rewa,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+425,MP-Sagar,Sagar,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Sagar,MP-Sagar,Sagar,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+426,MP-Satna,Satna,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Satna,MP-Satna,Satna,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+427,MP-Sehore,Sehore,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Sehore,MP-Sehore,Sehore,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+428,MP-Seoni,Seoni,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Seoni,MP-Seoni,Seoni,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+429,MP-Shahdol,Shahdol,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Shahdol,MP-Shahdol,Shahdol,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+430,MP-Shajapur,Shajapur,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Shajapur,MP-Shajapur,Shajapur,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+431,MP-Sheopur,Sheopur,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Sheopur,MP-Sheopur,Sheopur,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+432,MP-Shivpuri,Shivpuri,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Shivpuri,MP-Shivpuri,Shivpuri,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+433,MP-Sidhi,Sidhi,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Sidhi,MP-Sidhi,Sidhi,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+638,MP-Singrauli,Singrauli,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Singrauli,MP-Singrauli,Singrauli,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+434,MP-Tikamgarh,Tikamgarh,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Tikamgarh,MP-Tikamgarh,Tikamgarh,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+435,MP-Ujjain,Ujjain,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Ujjain,MP-Ujjain,Ujjain,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+436,MP-Umaria,Umaria,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Umaria,MP-Umaria,Umaria,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+437,MP-Vidisha,Vidisha,Madhya Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MP-Vidisha,MP-Vidisha,Vidisha,Madhya Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+466,MH-Ahmednagar,Ahmednagar,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Ahmednagar,MH-Ahmednagar,Ahmednagar,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+467,MH-Akola,Akola,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Akola,MH-Akola,Akola,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+468,MH-Amravati,Amravati,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Amravati,MH-Amravati,Amravati,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+469,MH-Aurangabad,Aurangabad,Maharashtra,CGWB,Official Rename,Aurangabad was renamed Chhatrapati Sambhajinagar in 2022. GeoJSON uses historical 'Aurangabad'; canonical 'MH-Aurangabad'
+MH-Aurangabad,MH-Aurangabad,Aurangabad,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+470,MH-Beed,Beed,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Beed,MH-Beed,Beed,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+471,MH-Bhandara,Bhandara,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Bhandara,MH-Bhandara,Bhandara,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+472,MH-Buldhana,Buldhana,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Buldhana,MH-Buldhana,Buldhana,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+473,MH-Chandrapur,Chandrapur,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Chandrapur,MH-Chandrapur,Chandrapur,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+474,MH-Dhule,Dhule,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Dhule,MH-Dhule,Dhule,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+475,MH-Gadchiroli,Gadchiroli,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Gadchiroli,MH-Gadchiroli,Gadchiroli,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+476,MH-Gondia,Gondia,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Gondia,MH-Gondia,Gondia,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+477,MH-Hingoli,Hingoli,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Hingoli,MH-Hingoli,Hingoli,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+478,MH-Jalgaon,Jalgaon,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Jalgaon,MH-Jalgaon,Jalgaon,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+479,MH-Jalna,Jalna,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Jalna,MH-Jalna,Jalna,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+480,MH-Kolhapur,Kolhapur,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Kolhapur,MH-Kolhapur,Kolhapur,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+481,MH-Latur,Latur,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Latur,MH-Latur,Latur,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+482,MH-Mumbai,Mumbai,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Mumbai,MH-Mumbai,Mumbai,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+483,MH-Mumbai_Suburban,Mumbai Suburban,Maharashtra,CGWB,District Partition,Separate from MH-Mumbai; canonical 'MH-Mumbai_Suburban'
+484,MH-Nagpur,Nagpur,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Nagpur,MH-Nagpur,Nagpur,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+485,MH-Nanded,Nanded,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Nanded,MH-Nanded,Nanded,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+486,MH-Nandurbar,Nandurbar,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Nandurbar,MH-Nandurbar,Nandurbar,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+487,MH-Nashik,Nashik,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Nashik,MH-Nashik,Nashik,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+488,MH-Osmanabad,Osmanabad,Maharashtra,CGWB,Official Rename,Osmanabad was renamed Dharashiv in 2022. GeoJSON uses historical 'Osmanabad'; canonical 'MH-Osmanabad'
+MH-Osmanabad,MH-Osmanabad,Osmanabad,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+MH-Palghar,MH-Palghar,Palghar,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+489,MH-Parbhani,Parbhani,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Parbhani,MH-Parbhani,Parbhani,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+490,MH-Pune,Pune,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Pune,MH-Pune,Pune,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+491,MH-Raigad,Raigad,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Raigad,MH-Raigad,Raigad,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+492,MH-Ratnagiri,Ratnagiri,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Ratnagiri,MH-Ratnagiri,Ratnagiri,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+493,MH-Sangli,Sangli,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Sangli,MH-Sangli,Sangli,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+494,MH-Satara,Satara,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Satara,MH-Satara,Satara,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+495,MH-Sindhudurg,Sindhudurg,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Sindhudurg,MH-Sindhudurg,Sindhudurg,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+496,MH-Solapur,Solapur,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Solapur,MH-Solapur,Solapur,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+497,MH-Thane,Thane,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Thane,MH-Thane,Thane,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+498,MH-Wardha,Wardha,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Wardha,MH-Wardha,Wardha,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+499,MH-Washim,Washim,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Washim,MH-Washim,Washim,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+500,MH-Yavatmal,Yavatmal,Maharashtra,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MH-Yavatmal,MH-Yavatmal,Yavatmal,Maharashtra,GeoJSON,Self,Existing canonical hyphenated ID
+MN-Bishnupur,MN-Bishnupur,Bishnupur,Manipur,GeoJSON,Self,Existing canonical hyphenated ID
+MN-Chandel,MN-Chandel,Chandel,Manipur,GeoJSON,Self,Existing canonical hyphenated ID
+MN-Churachandpur,MN-Churachandpur,Churachandpur,Manipur,GeoJSON,Self,Existing canonical hyphenated ID
+255,MN-Imphal_East,Imphal East,Manipur,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+MN-Imphal_East,MN-Imphal_East,Imphal East,Manipur,GeoJSON,Self,Existing canonical hyphenated ID
+MN-Imphal_West,MN-Imphal_West,Imphal West,Manipur,GeoJSON,Self,Existing canonical hyphenated ID
+MN-Jiribam,MN-Jiribam,Jiribam,Manipur,GeoJSON,Self,Existing canonical hyphenated ID
+MN-Kakching,MN-Kakching,Kakching,Manipur,GeoJSON,Self,Existing canonical hyphenated ID
+MN-Kamjong,MN-Kamjong,Kamjong,Manipur,GeoJSON,Self,Existing canonical hyphenated ID
+MN-Kangpokpi,MN-Kangpokpi,Kangpokpi,Manipur,GeoJSON,Self,Existing canonical hyphenated ID
+MN-Noney,MN-Noney,Noney,Manipur,GeoJSON,Self,Existing canonical hyphenated ID
+MN-Pherzawl,MN-Pherzawl,Pherzawl,Manipur,GeoJSON,Self,Existing canonical hyphenated ID
+MN-Senapati,MN-Senapati,Senapati,Manipur,GeoJSON,Self,Existing canonical hyphenated ID
+MN-Tamenglong,MN-Tamenglong,Tamenglong,Manipur,GeoJSON,Self,Existing canonical hyphenated ID
+MN-Tengnoupal,MN-Tengnoupal,Tengnoupal,Manipur,GeoJSON,Self,Existing canonical hyphenated ID
+MN-Thoubal,MN-Thoubal,Thoubal,Manipur,GeoJSON,Self,Existing canonical hyphenated ID
+MN-Ukhrul,MN-Ukhrul,Ukhrul,Manipur,GeoJSON,Self,Existing canonical hyphenated ID
+273,ML-East_Garo_Hills,East Garo Hills,Meghalaya,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+ML-East_Garo_Hills,ML-East_Garo_Hills,East Garo Hills,Meghalaya,GeoJSON,Self,Existing canonical hyphenated ID
+ML-East_Jaintia_Hills,ML-East_Jaintia_Hills,East Jaintia Hills,Meghalaya,GeoJSON,Self,Existing canonical hyphenated ID
+274,ML-East_Khasi_Hills,East Khasi Hills,Meghalaya,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+ML-East_Khasi_Hills,ML-East_Khasi_Hills,East Khasi Hills,Meghalaya,GeoJSON,Self,Existing canonical hyphenated ID
+ML-North_Garo_Hills,ML-North_Garo_Hills,North Garo Hills,Meghalaya,GeoJSON,Self,Existing canonical hyphenated ID
+276,ML-Ribhoi,Ribhoi,Meghalaya,CGWB,Spacing,CGWB 'Ri Bhoi'; canonical 'Ribhoi'
+ML-Ribhoi,ML-Ribhoi,Ribhoi,Meghalaya,GeoJSON,Self,Existing canonical hyphenated ID
+277,ML-South_Garo_Hills,South Garo Hills,Meghalaya,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+ML-South_Garo_Hills,ML-South_Garo_Hills,South Garo Hills,Meghalaya,GeoJSON,Self,Existing canonical hyphenated ID
+ML-South_West_Garo_Hills,ML-South_West_Garo_Hills,South West Garo Hills,Meghalaya,GeoJSON,Self,Existing canonical hyphenated ID
+ML-South_West_Khasi_Hills,ML-South_West_Khasi_Hills,South West Khasi Hills,Meghalaya,GeoJSON,Self,Existing canonical hyphenated ID
+278,ML-West_Garo_Hills,West Garo Hills,Meghalaya,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+ML-West_Garo_Hills,ML-West_Garo_Hills,West Garo Hills,Meghalaya,GeoJSON,Self,Existing canonical hyphenated ID
+275,ML-West_Jaintia_Hills,West Jaintia Hills,Meghalaya,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+ML-West_Jaintia_Hills,ML-West_Jaintia_Hills,West Jaintia Hills,Meghalaya,GeoJSON,Self,Existing canonical hyphenated ID
+279,ML-West_Khasi_Hills,West Khasi Hills,Meghalaya,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+ML-West_Khasi_Hills,ML-West_Khasi_Hills,West Khasi Hills,Meghalaya,GeoJSON,Self,Existing canonical hyphenated ID
+MZ-Aizawl,MZ-Aizawl,Aizawl,Mizoram,GeoJSON,Self,Existing canonical hyphenated ID
+MZ-Champhai,MZ-Champhai,Champhai,Mizoram,GeoJSON,Self,Existing canonical hyphenated ID
+MZ-Hnahthial,MZ-Hnahthial,Hnahthial,Mizoram,GeoJSON,Self,Existing canonical hyphenated ID
+MZ-Khawzawl,MZ-Khawzawl,Khawzawl,Mizoram,GeoJSON,Self,Existing canonical hyphenated ID
+MZ-Kolasib,MZ-Kolasib,Kolasib,Mizoram,GeoJSON,Self,Existing canonical hyphenated ID
+MZ-Lawngtlai,MZ-Lawngtlai,Lawngtlai,Mizoram,GeoJSON,Self,Existing canonical hyphenated ID
+MZ-Lunglei,MZ-Lunglei,Lunglei,Mizoram,GeoJSON,Self,Existing canonical hyphenated ID
+MZ-Mamit,MZ-Mamit,Mamit,Mizoram,GeoJSON,Self,Existing canonical hyphenated ID
+MZ-Saiha,MZ-Saiha,Saiha,Mizoram,GeoJSON,Self,Existing canonical hyphenated ID
+MZ-Serchhip,MZ-Serchhip,Serchhip,Mizoram,GeoJSON,Self,Existing canonical hyphenated ID
+244,NL-Dimapur,Dimapur,Nagaland,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+NL-Dimapur,NL-Dimapur,Dimapur,Nagaland,GeoJSON,Self,Existing canonical hyphenated ID
+NL-Kiphire,NL-Kiphire,Kiphire,Nagaland,GeoJSON,Self,Existing canonical hyphenated ID
+245,NL-Kohima,Kohima,Nagaland,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+NL-Kohima,NL-Kohima,Kohima,Nagaland,GeoJSON,Self,Existing canonical hyphenated ID
+NL-Longleng,NL-Longleng,Longleng,Nagaland,GeoJSON,Self,Existing canonical hyphenated ID
+246,NL-Mokokchung,Mokokchung,Nagaland,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+NL-Mokokchung,NL-Mokokchung,Mokokchung,Nagaland,GeoJSON,Self,Existing canonical hyphenated ID
+247,NL-Mon,Mon,Nagaland,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+NL-Mon,NL-Mon,Mon,Nagaland,GeoJSON,Self,Existing canonical hyphenated ID
+NL-Peren,NL-Peren,Peren,Nagaland,GeoJSON,Self,Existing canonical hyphenated ID
+NL-Phek,NL-Phek,Phek,Nagaland,GeoJSON,Self,Existing canonical hyphenated ID
+NL-Tuensang,NL-Tuensang,Tuensang,Nagaland,GeoJSON,Self,Existing canonical hyphenated ID
+250,NL-Wokha,Wokha,Nagaland,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+NL-Wokha,NL-Wokha,Wokha,Nagaland,GeoJSON,Self,Existing canonical hyphenated ID
+NL-Zunheboto,NL-Zunheboto,Zunheboto,Nagaland,GeoJSON,Self,Existing canonical hyphenated ID
+344,OD-Angul,Angul,Odisha,CGWB,Spelling,CGWB Odia transliteration 'Anugul'; canonical 'Angul'
+OD-Angul,OD-Angul,Angul,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+345,OD-Balangir,Balangir,Odisha,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+OD-Balangir,OD-Balangir,Balangir,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+346,OD-Balasore,Balasore,Odisha,CGWB,Spelling,CGWB Odia name 'Baleshwar'; canonical Anglicised 'Balasore'
+OD-Balasore,OD-Balasore,Balasore,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+347,OD-Bargarh,Bargarh,Odisha,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+OD-Bargarh,OD-Bargarh,Bargarh,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+348,OD-Bhadrak,Bhadrak,Odisha,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+OD-Bhadrak,OD-Bhadrak,Bhadrak,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+349,OD-Boudh,Boudh,Odisha,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+OD-Boudh,OD-Boudh,Boudh,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+350,OD-Cuttack,Cuttack,Odisha,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+OD-Cuttack,OD-Cuttack,Cuttack,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+351,OD-Deogarh,Deogarh,Odisha,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+OD-Deogarh,OD-Deogarh,Deogarh,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+352,OD-Dhenkanal,Dhenkanal,Odisha,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+OD-Dhenkanal,OD-Dhenkanal,Dhenkanal,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+353,OD-Gajapati,Gajapati,Odisha,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+OD-Gajapati,OD-Gajapati,Gajapati,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+354,OD-Ganjam,Ganjam,Odisha,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+OD-Ganjam,OD-Ganjam,Ganjam,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+355,OD-Jagatsinghpur,Jagatsinghpur,Odisha,CGWB,Spelling,CGWB 'Jagatsinghapur'; canonical 'Jagatsinghpur'
+OD-Jagatsinghpur,OD-Jagatsinghpur,Jagatsinghpur,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+356,OD-Jajpur,Jajpur,Odisha,CGWB,Spelling,CGWB 'Jajapur'; canonical 'Jajpur'
+OD-Jajpur,OD-Jajpur,Jajpur,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+357,OD-Jharsuguda,Jharsuguda,Odisha,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+OD-Jharsuguda,OD-Jharsuguda,Jharsuguda,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+358,OD-Kalahandi,Kalahandi,Odisha,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+OD-Kalahandi,OD-Kalahandi,Kalahandi,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+359,OD-Kandhamal,Kandhamal,Odisha,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+OD-Kandhamal,OD-Kandhamal,Kandhamal,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+360,OD-Kendrapara,Kendrapara,Odisha,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+OD-Kendrapara,OD-Kendrapara,Kendrapara,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+361,OD-Kendujhar,Kendujhar,Odisha,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+OD-Kendujhar,OD-Kendujhar,Kendujhar,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+362,OD-Khordha,Khordha,Odisha,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+OD-Khordha,OD-Khordha,Khordha,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+363,OD-Koraput,Koraput,Odisha,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+OD-Koraput,OD-Koraput,Koraput,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+364,OD-Malkangiri,Malkangiri,Odisha,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+OD-Malkangiri,OD-Malkangiri,Malkangiri,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+365,OD-Mayurbhanj,Mayurbhanj,Odisha,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+OD-Mayurbhanj,OD-Mayurbhanj,Mayurbhanj,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+366,OD-Nabarangapur,Nabarangapur,Odisha,CGWB,Spelling,CGWB 'Nabarangpur'; canonical 'Nabarangapur'
+OD-Nabarangapur,OD-Nabarangapur,Nabarangapur,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+367,OD-Nayagarh,Nayagarh,Odisha,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+OD-Nayagarh,OD-Nayagarh,Nayagarh,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+368,OD-Nuapada,Nuapada,Odisha,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+OD-Nuapada,OD-Nuapada,Nuapada,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+369,OD-Puri,Puri,Odisha,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+OD-Puri,OD-Puri,Puri,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+370,OD-Rayagada,Rayagada,Odisha,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+OD-Rayagada,OD-Rayagada,Rayagada,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+371,OD-Sambalpur,Sambalpur,Odisha,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+OD-Sambalpur,OD-Sambalpur,Sambalpur,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+372,OD-Subarnapur,Subarnapur,Odisha,CGWB,Alternate Name,CGWB colloquial 'Sonepur'; official district name 'Subarnapur'
+OD-Subarnapur,OD-Subarnapur,Subarnapur,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+373,OD-Sundargarh,Sundargarh,Odisha,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+OD-Sundargarh,OD-Sundargarh,Sundargarh,Odisha,GeoJSON,Self,Existing canonical hyphenated ID
+598,PY-Karaikal,Karaikal,Puducherry,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+PY-Karaikal,PY-Karaikal,Karaikal,Puducherry,GeoJSON,Self,Existing canonical hyphenated ID
+PY-Mahe,PY-Mahe,Mahe,Puducherry,GeoJSON,Self,Existing canonical hyphenated ID
+600,PY-Puducherry,Puducherry,Puducherry,CGWB,Official Rename,Colonial name 'Pondicherry'; canonical 'Puducherry'
+PY-Puducherry,PY-Puducherry,Puducherry,Puducherry,GeoJSON,Self,Existing canonical hyphenated ID
+601,PY-Yanam,Yanam,Puducherry,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+PY-Yanam,PY-Yanam,Yanam,Puducherry,GeoJSON,Self,Existing canonical hyphenated ID
+27,PB-Amritsar,Amritsar,Punjab,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+PB-Amritsar,PB-Amritsar,Amritsar,Punjab,GeoJSON,Self,Existing canonical hyphenated ID
+605,PB-Barnala,Barnala,Punjab,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+PB-Barnala,PB-Barnala,Barnala,Punjab,GeoJSON,Self,Existing canonical hyphenated ID
+28,PB-Bathinda,Bathinda,Punjab,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+PB-Bathinda,PB-Bathinda,Bathinda,Punjab,GeoJSON,Self,Existing canonical hyphenated ID
+29,PB-Faridkot,Faridkot,Punjab,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+PB-Faridkot,PB-Faridkot,Faridkot,Punjab,GeoJSON,Self,Existing canonical hyphenated ID
+30,PB-Fatehgarh_Sahib,Fatehgarh Sahib,Punjab,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+PB-Fatehgarh_Sahib,PB-Fatehgarh_Sahib,Fatehgarh Sahib,Punjab,GeoJSON,Self,Existing canonical hyphenated ID
+PB-Fazilka,PB-Fazilka,Fazilka,Punjab,GeoJSON,Self,Existing canonical hyphenated ID
+31,PB-Ferozepur,Ferozepur,Punjab,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+PB-Ferozepur,PB-Ferozepur,Ferozepur,Punjab,GeoJSON,Self,Existing canonical hyphenated ID
+32,PB-Gurdaspur,Gurdaspur,Punjab,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+PB-Gurdaspur,PB-Gurdaspur,Gurdaspur,Punjab,GeoJSON,Self,Existing canonical hyphenated ID
+33,PB-Hoshiarpur,Hoshiarpur,Punjab,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+PB-Hoshiarpur,PB-Hoshiarpur,Hoshiarpur,Punjab,GeoJSON,Self,Existing canonical hyphenated ID
+34,PB-Jalandhar,Jalandhar,Punjab,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+PB-Jalandhar,PB-Jalandhar,Jalandhar,Punjab,GeoJSON,Self,Existing canonical hyphenated ID
+35,PB-Kapurthala,Kapurthala,Punjab,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+PB-Kapurthala,PB-Kapurthala,Kapurthala,Punjab,GeoJSON,Self,Existing canonical hyphenated ID
+36,PB-Ludhiana,Ludhiana,Punjab,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+PB-Ludhiana,PB-Ludhiana,Ludhiana,Punjab,GeoJSON,Self,Existing canonical hyphenated ID
+37,PB-Mansa,Mansa,Punjab,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+PB-Mansa,PB-Mansa,Mansa,Punjab,GeoJSON,Self,Existing canonical hyphenated ID
+38,PB-Moga,Moga,Punjab,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+PB-Moga,PB-Moga,Moga,Punjab,GeoJSON,Self,Existing canonical hyphenated ID
+PB-Pathankot,PB-Pathankot,Pathankot,Punjab,GeoJSON,Self,Existing canonical hyphenated ID
+41,PB-Patiala,Patiala,Punjab,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+PB-Patiala,PB-Patiala,Patiala,Punjab,GeoJSON,Self,Existing canonical hyphenated ID
+42,PB-Rupnagar,Rupnagar,Punjab,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+PB-Rupnagar,PB-Rupnagar,Rupnagar,Punjab,GeoJSON,Self,Existing canonical hyphenated ID
+608,PB-S.A.S._Nagar,S.A.S. Nagar,Punjab,CGWB,Punctuation,Dot/space normalization in 'PB-S.A.S._Nagar'
+PB-S.A.S._Nagar,PB-S.A.S._Nagar,S.A.S. Nagar,Punjab,GeoJSON,Self,Existing canonical hyphenated ID
+43,PB-Sangrur,Sangrur,Punjab,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+PB-Sangrur,PB-Sangrur,Sangrur,Punjab,GeoJSON,Self,Existing canonical hyphenated ID
+40,PB-Shahid_Bhagat_Singh_Nagar,Shahid Bhagat Singh Nagar,Punjab,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+PB-Shahid_Bhagat_Singh_Nagar,PB-Shahid_Bhagat_Singh_Nagar,Shahid Bhagat Singh Nagar,Punjab,GeoJSON,Self,Existing canonical hyphenated ID
+39,PB-Sri_Muktsar_Sahib,Sri Muktsar Sahib,Punjab,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+PB-Sri_Muktsar_Sahib,PB-Sri_Muktsar_Sahib,Sri Muktsar Sahib,Punjab,GeoJSON,Self,Existing canonical hyphenated ID
+609,PB-Tarn_Taran,Tarn Taran,Punjab,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+PB-Tarn_Taran,PB-Tarn_Taran,Tarn Taran,Punjab,GeoJSON,Self,Existing canonical hyphenated ID
+86,RJ-Ajmer,Ajmer,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Ajmer,RJ-Ajmer,Ajmer,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+87,RJ-Alwar,Alwar,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Alwar,RJ-Alwar,Alwar,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+88,RJ-Banswara,Banswara,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Banswara,RJ-Banswara,Banswara,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+89,RJ-Baran,Baran,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Baran,RJ-Baran,Baran,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+90,RJ-Barmer,Barmer,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Barmer,RJ-Barmer,Barmer,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+91,RJ-Bharatpur,Bharatpur,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Bharatpur,RJ-Bharatpur,Bharatpur,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+92,RJ-Bhilwara,Bhilwara,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Bhilwara,RJ-Bhilwara,Bhilwara,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+93,RJ-Bikaner,Bikaner,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Bikaner,RJ-Bikaner,Bikaner,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+94,RJ-Bundi,Bundi,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Bundi,RJ-Bundi,Bundi,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+95,RJ-Chittorgarh,Chittorgarh,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Chittorgarh,RJ-Chittorgarh,Chittorgarh,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+96,RJ-Churu,Churu,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Churu,RJ-Churu,Churu,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+97,RJ-Dausa,Dausa,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Dausa,RJ-Dausa,Dausa,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+98,RJ-Dholpur,Dholpur,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Dholpur,RJ-Dholpur,Dholpur,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+99,RJ-Dungarpur,Dungarpur,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Dungarpur,RJ-Dungarpur,Dungarpur,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+100,RJ-Ganganagar,Ganganagar,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Ganganagar,RJ-Ganganagar,Ganganagar,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+101,RJ-Hanumangarh,Hanumangarh,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Hanumangarh,RJ-Hanumangarh,Hanumangarh,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+102,RJ-Jaipur,Jaipur,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Jaipur,RJ-Jaipur,Jaipur,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+103,RJ-Jaisalmer,Jaisalmer,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Jaisalmer,RJ-Jaisalmer,Jaisalmer,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+104,RJ-Jalore,Jalore,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Jalore,RJ-Jalore,Jalore,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+105,RJ-Jhalawar,Jhalawar,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Jhalawar,RJ-Jhalawar,Jhalawar,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+106,RJ-Jhunjhunu,Jhunjhunu,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Jhunjhunu,RJ-Jhunjhunu,Jhunjhunu,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+107,RJ-Jodhpur,Jodhpur,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Jodhpur,RJ-Jodhpur,Jodhpur,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+108,RJ-Karauli,Karauli,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Karauli,RJ-Karauli,Karauli,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+109,RJ-Kota,Kota,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Kota,RJ-Kota,Kota,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+110,RJ-Nagaur,Nagaur,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Nagaur,RJ-Nagaur,Nagaur,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+111,RJ-Pali,Pali,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Pali,RJ-Pali,Pali,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+629,RJ-Pratapgarh,Pratapgarh,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Pratapgarh,RJ-Pratapgarh,Pratapgarh,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+112,RJ-Rajsamand,Rajsamand,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Rajsamand,RJ-Rajsamand,Rajsamand,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+113,RJ-Sawai_Madhopur,Sawai Madhopur,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Sawai_Madhopur,RJ-Sawai_Madhopur,Sawai Madhopur,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+114,RJ-Sikar,Sikar,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Sikar,RJ-Sikar,Sikar,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+115,RJ-Sirohi,Sirohi,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Sirohi,RJ-Sirohi,Sirohi,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+116,RJ-Tonk,Tonk,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Tonk,RJ-Tonk,Tonk,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+117,RJ-Udaipur,Udaipur,Rajasthan,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+RJ-Udaipur,RJ-Udaipur,Udaipur,Rajasthan,GeoJSON,Self,Existing canonical hyphenated ID
+SK-East_Sikkim,SK-East_Sikkim,East Sikkim,Sikkim,GeoJSON,Self,Existing canonical hyphenated ID
+SK-North_Sikkim,SK-North_Sikkim,North Sikkim,Sikkim,GeoJSON,Self,Existing canonical hyphenated ID
+SK-South_Sikkim,SK-South_Sikkim,South Sikkim,Sikkim,GeoJSON,Self,Existing canonical hyphenated ID
+SK-West_Sikkim,SK-West_Sikkim,West Sikkim,Sikkim,GeoJSON,Self,Existing canonical hyphenated ID
+610,TN-Ariyalur,Ariyalur,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Ariyalur,TN-Ariyalur,Ariyalur,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+TN-Chengalpattu,TN-Chengalpattu,Chengalpattu,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+568,TN-Chennai,Chennai,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Chennai,TN-Chennai,Chennai,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+569,TN-Coimbatore,Coimbatore,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Coimbatore,TN-Coimbatore,Coimbatore,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+570,TN-Cuddalore,Cuddalore,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Cuddalore,TN-Cuddalore,Cuddalore,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+571,TN-Dharmapuri,Dharmapuri,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Dharmapuri,TN-Dharmapuri,Dharmapuri,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+572,TN-Dindigul,Dindigul,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Dindigul,TN-Dindigul,Dindigul,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+573,TN-Erode,Erode,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Erode,TN-Erode,Erode,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+TN-Kallakurichi,TN-Kallakurichi,Kallakurichi,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+574,TN-Kancheepuram,Kancheepuram,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Kancheepuram,TN-Kancheepuram,Kancheepuram,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+575,TN-Kanyakumari,Kanyakumari,Tamil Nadu,CGWB,Spelling,CGWB Tamil transliteration 'Kanniyakumari'; canonical 'Kanyakumari'
+TN-Kanyakumari,TN-Kanyakumari,Kanyakumari,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+576,TN-Karur,Karur,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Karur,TN-Karur,Karur,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+577,TN-Krishnagiri,Krishnagiri,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Krishnagiri,TN-Krishnagiri,Krishnagiri,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+578,TN-Madurai,Madurai,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Madurai,TN-Madurai,Madurai,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+579,TN-Nagapattinam,Nagapattinam,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Nagapattinam,TN-Nagapattinam,Nagapattinam,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+580,TN-Namakkal,Namakkal,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Namakkal,TN-Namakkal,Namakkal,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+587,TN-Nilgiris,Nilgiris,Tamil Nadu,CGWB,Article Prefix,CGWB includes article 'The Nilgiris'; canonical 'Nilgiris'
+TN-Nilgiris,TN-Nilgiris,Nilgiris,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+581,TN-Perambalur,Perambalur,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Perambalur,TN-Perambalur,Perambalur,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+582,TN-Pudukkottai,Pudukkottai,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Pudukkottai,TN-Pudukkottai,Pudukkottai,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+583,TN-Ramanathapuram,Ramanathapuram,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Ramanathapuram,TN-Ramanathapuram,Ramanathapuram,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+TN-Ranipet,TN-Ranipet,Ranipet,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+584,TN-Salem,Salem,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Salem,TN-Salem,Salem,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+585,TN-Sivaganga,Sivaganga,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Sivaganga,TN-Sivaganga,Sivaganga,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+TN-Tenkasi,TN-Tenkasi,Tenkasi,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+586,TN-Thanjavur,Thanjavur,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Thanjavur,TN-Thanjavur,Thanjavur,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+588,TN-Theni,Theni,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Theni,TN-Theni,Theni,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+589,TN-Thiruvallur,Thiruvallur,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Thiruvallur,TN-Thiruvallur,Thiruvallur,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+590,TN-Thiruvarur,Thiruvarur,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Thiruvarur,TN-Thiruvarur,Thiruvarur,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+594,TN-Thoothukkudi,Thoothukkudi,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Thoothukkudi,TN-Thoothukkudi,Thoothukkudi,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+591,TN-Tiruchirappalli,Tiruchirappalli,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Tiruchirappalli,TN-Tiruchirappalli,Tiruchirappalli,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+592,TN-Tirunelveli,Tirunelveli,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Tirunelveli,TN-Tirunelveli,Tirunelveli,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+TN-Tirupathur,TN-Tirupathur,Tirupathur,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+634,TN-Tiruppur,Tiruppur,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Tiruppur,TN-Tiruppur,Tiruppur,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+593,TN-Tiruvannamalai,Tiruvannamalai,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Tiruvannamalai,TN-Tiruvannamalai,Tiruvannamalai,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+595,TN-Vellore,Vellore,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Vellore,TN-Vellore,Vellore,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+596,TN-Viluppuram,Viluppuram,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Viluppuram,TN-Viluppuram,Viluppuram,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+597,TN-Virudhunagar,Virudhunagar,Tamil Nadu,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TN-Virudhunagar,TN-Virudhunagar,Virudhunagar,Tamil Nadu,GeoJSON,Self,Existing canonical hyphenated ID
+501,TS-Adilabad,Adilabad,Telangana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TS-Adilabad,TS-Adilabad,Adilabad,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+TS-Bhadradri_Kothagudem,TS-Bhadradri_Kothagudem,Bhadradri Kothagudem,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+507,TS-Hyderabad,Hyderabad,Telangana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TS-Hyderabad,TS-Hyderabad,Hyderabad,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+TS-Jagtial,TS-Jagtial,Jagtial,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+TS-Jangaon,TS-Jangaon,Jangaon,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+TS-Jayashankar_Bhupalapally,TS-Jayashankar_Bhupalapally,Jayashankar Bhupalapally,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+TS-Jogulamba_Gadwal,TS-Jogulamba_Gadwal,Jogulamba Gadwal,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+TS-Kamareddy,TS-Kamareddy,Kamareddy,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+508,TS-Karimnagar,Karimnagar,Telangana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TS-Karimnagar,TS-Karimnagar,Karimnagar,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+509,TS-Khammam,Khammam,Telangana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TS-Khammam,TS-Khammam,Khammam,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+TS-Komaram_Bheem,TS-Komaram_Bheem,Komaram Bheem,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+TS-Mahabubabad,TS-Mahabubabad,Mahabubabad,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+512,TS-Mahabubnagar,Mahabubnagar,Telangana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TS-Mahabubnagar,TS-Mahabubnagar,Mahabubnagar,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+TS-Mancherial,TS-Mancherial,Mancherial,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+513,TS-Medak,Medak,Telangana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TS-Medak,TS-Medak,Medak,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+TS-Medchal_Malkajgiri,TS-Medchal_Malkajgiri,Medchal Malkajgiri,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+TS-Mulugu,TS-Mulugu,Mulugu,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+TS-Nagarkurnool,TS-Nagarkurnool,Nagarkurnool,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+514,TS-Nalgonda,Nalgonda,Telangana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TS-Nalgonda,TS-Nalgonda,Nalgonda,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+TS-Narayanpet,TS-Narayanpet,Narayanpet,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+TS-Nirmal,TS-Nirmal,Nirmal,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+516,TS-Nizamabad,Nizamabad,Telangana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TS-Nizamabad,TS-Nizamabad,Nizamabad,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+TS-Peddapalli,TS-Peddapalli,Peddapalli,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+TS-Rajanna_Sircilla,TS-Rajanna_Sircilla,Rajanna Sircilla,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+518,TS-Ranga_Reddy,Ranga Reddy,Telangana,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TS-Ranga_Reddy,TS-Ranga_Reddy,Ranga Reddy,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+TS-Sangareddy,TS-Sangareddy,Sangareddy,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+TS-Siddipet,TS-Siddipet,Siddipet,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+TS-Suryapet,TS-Suryapet,Suryapet,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+TS-Vikarabad,TS-Vikarabad,Vikarabad,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+TS-Wanaparthy,TS-Wanaparthy,Wanaparthy,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+TS-Warangal_Rural,TS-Warangal_Rural,Warangal Rural,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+522,TS-Warangal_Urban,Warangal Urban,Telangana,CGWB,District Bifurcation,CGWB historical data is for undivided 'Warangal'. GeoJSON has Warangal Urban and Warangal Rural. Propose mapping to TS-Warangal_Urban (core district) or replicating to both.
+TS-Warangal_Urban,TS-Warangal_Urban,Warangal Urban,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+TS-Yadadri_Bhuvanagiri,TS-Yadadri_Bhuvanagiri,Yadadri Bhuvanagiri,Telangana,GeoJSON,Self,Existing canonical hyphenated ID
+465,DD-Dadra_and_Nagar_Haveli,Dadra and Nagar Haveli,The Dadra And Nagar Haveli And Daman And Diu,CGWB,State Name Cleanup,CGWB state was 'The Dadra And Nagar...'; canonical state is 'Dadra and Nagar Haveli and Daman and Diu'
+463,DD-Daman,Daman,The Dadra And Nagar Haveli And Daman And Diu,CGWB,State Name Cleanup,CGWB state was 'The Dadra And Nagar...'; canonical state is 'Dadra and Nagar Haveli and Daman and Diu'
+464,DD-Diu,Diu,The Dadra And Nagar Haveli And Daman And Diu,CGWB,State Name Cleanup,CGWB state was 'The Dadra And Nagar...'; canonical state is 'Dadra and Nagar Haveli and Daman and Diu'
+269,TR-Dhalai,Dhalai,Tripura,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TR-Dhalai,TR-Dhalai,Dhalai,Tripura,GeoJSON,Self,Existing canonical hyphenated ID
+TR-Gomati,TR-Gomati,Gomati,Tripura,GeoJSON,Self,Existing canonical hyphenated ID
+TR-Khowai,TR-Khowai,Khowai,Tripura,GeoJSON,Self,Existing canonical hyphenated ID
+270,TR-North_Tripura,North Tripura,Tripura,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TR-North_Tripura,TR-North_Tripura,North Tripura,Tripura,GeoJSON,Self,Existing canonical hyphenated ID
+TR-Sipahijala,TR-Sipahijala,Sipahijala,Tripura,GeoJSON,Self,Existing canonical hyphenated ID
+271,TR-South_Tripura,South Tripura,Tripura,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TR-South_Tripura,TR-South_Tripura,South Tripura,Tripura,GeoJSON,Self,Existing canonical hyphenated ID
+TR-Unokoti,TR-Unokoti,Unokoti,Tripura,GeoJSON,Self,Existing canonical hyphenated ID
+272,TR-West_Tripura,West Tripura,Tripura,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+TR-West_Tripura,TR-West_Tripura,West Tripura,Tripura,GeoJSON,Self,Existing canonical hyphenated ID
+118,UP-Agra,Agra,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Agra,UP-Agra,Agra,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+119,UP-Aligarh,Aligarh,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Aligarh,UP-Aligarh,Aligarh,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+121,UP-Ambedkar_Nagar,Ambedkar Nagar,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Ambedkar_Nagar,UP-Ambedkar_Nagar,Ambedkar Nagar,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+UP-Amethi,UP-Amethi,Amethi,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+154,UP-Amroha,Amroha,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Amroha,UP-Amroha,Amroha,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+122,UP-Auraiya,Auraiya,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Auraiya,UP-Auraiya,Auraiya,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+140,UP-Ayodhya,Ayodhya,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Ayodhya,UP-Ayodhya,Ayodhya,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+123,UP-Azamgarh,Azamgarh,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Azamgarh,UP-Azamgarh,Azamgarh,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+124,UP-Baghpat,Baghpat,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Baghpat,UP-Baghpat,Baghpat,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+125,UP-Bahraich,Bahraich,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Bahraich,UP-Bahraich,Bahraich,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+126,UP-Ballia,Ballia,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Ballia,UP-Ballia,Ballia,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+127,UP-Balrampur,Balrampur,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Balrampur,UP-Balrampur,Balrampur,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+128,UP-Banda,Banda,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Banda,UP-Banda,Banda,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+129,UP-Barabanki,Barabanki,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Barabanki,UP-Barabanki,Barabanki,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+130,UP-Bareilly,Bareilly,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Bareilly,UP-Bareilly,Bareilly,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+131,UP-Basti,Basti,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Basti,UP-Basti,Basti,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+179,UP-Bhadohi,Bhadohi,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Bhadohi,UP-Bhadohi,Bhadohi,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+132,UP-Bijnor,Bijnor,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Bijnor,UP-Bijnor,Bijnor,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+133,UP-Budaun,Budaun,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Budaun,UP-Budaun,Budaun,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+134,UP-Bulandshahr,Bulandshahr,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Bulandshahr,UP-Bulandshahr,Bulandshahr,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+135,UP-Chandauli,Chandauli,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Chandauli,UP-Chandauli,Chandauli,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+136,UP-Chitrakoot,Chitrakoot,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Chitrakoot,UP-Chitrakoot,Chitrakoot,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+137,UP-Deoria,Deoria,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Deoria,UP-Deoria,Deoria,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+138,UP-Etah,Etah,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Etah,UP-Etah,Etah,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+139,UP-Etawah,Etawah,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Etawah,UP-Etawah,Etawah,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+141,UP-Farrukhabad,Farrukhabad,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Farrukhabad,UP-Farrukhabad,Farrukhabad,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+142,UP-Fatehpur,Fatehpur,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Fatehpur,UP-Fatehpur,Fatehpur,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+143,UP-Firozabad,Firozabad,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Firozabad,UP-Firozabad,Firozabad,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+144,UP-Gautam_Buddha_Nagar,Gautam Buddha Nagar,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Gautam_Buddha_Nagar,UP-Gautam_Buddha_Nagar,Gautam Buddha Nagar,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+145,UP-Ghaziabad,Ghaziabad,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Ghaziabad,UP-Ghaziabad,Ghaziabad,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+146,UP-Ghazipur,Ghazipur,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Ghazipur,UP-Ghazipur,Ghazipur,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+147,UP-Gonda,Gonda,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Gonda,UP-Gonda,Gonda,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+148,UP-Gorakhpur,Gorakhpur,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Gorakhpur,UP-Gorakhpur,Gorakhpur,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+149,UP-Hamirpur,Hamirpur,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Hamirpur,UP-Hamirpur,Hamirpur,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+UP-Hapur,UP-Hapur,Hapur,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+150,UP-Hardoi,Hardoi,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Hardoi,UP-Hardoi,Hardoi,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+163,UP-Hathras,Hathras,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Hathras,UP-Hathras,Hathras,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+151,UP-Jalaun,Jalaun,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Jalaun,UP-Jalaun,Jalaun,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+152,UP-Jaunpur,Jaunpur,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Jaunpur,UP-Jaunpur,Jaunpur,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+153,UP-Jhansi,Jhansi,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Jhansi,UP-Jhansi,Jhansi,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+155,UP-Kannauj,Kannauj,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Kannauj,UP-Kannauj,Kannauj,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+156,UP-Kanpur_Dehat,Kanpur Dehat,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Kanpur_Dehat,UP-Kanpur_Dehat,Kanpur Dehat,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+157,UP-Kanpur_Nagar,Kanpur Nagar,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Kanpur_Nagar,UP-Kanpur_Nagar,Kanpur Nagar,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+633,UP-Kasganj,Kasganj,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Kasganj,UP-Kasganj,Kasganj,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+158,UP-Kaushambi,Kaushambi,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Kaushambi,UP-Kaushambi,Kaushambi,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+160,UP-Kushinagar,Kushinagar,Uttar Pradesh,CGWB,Spacing,CGWB separated 'Kushi Nagar'; canonical 'Kushinagar'
+UP-Kushinagar,UP-Kushinagar,Kushinagar,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+159,UP-Lakhimpur_Kheri,Lakhimpur Kheri,Uttar Pradesh,CGWB,Alternate Name,CGWB uses short name 'Kheri'; canonical official name is 'Lakhimpur Kheri'
+UP-Lakhimpur_Kheri,UP-Lakhimpur_Kheri,Lakhimpur Kheri,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+161,UP-Lalitpur,Lalitpur,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Lalitpur,UP-Lalitpur,Lalitpur,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+162,UP-Lucknow,Lucknow,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Lucknow,UP-Lucknow,Lucknow,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+164,UP-Maharajganj,Maharajganj,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Maharajganj,UP-Maharajganj,Maharajganj,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+165,UP-Mahoba,Mahoba,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Mahoba,UP-Mahoba,Mahoba,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+166,UP-Mainpuri,Mainpuri,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Mainpuri,UP-Mainpuri,Mainpuri,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+167,UP-Mathura,Mathura,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Mathura,UP-Mathura,Mathura,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+168,UP-Mau,Mau,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Mau,UP-Mau,Mau,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+169,UP-Meerut,Meerut,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Meerut,UP-Meerut,Meerut,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+170,UP-Mirzapur,Mirzapur,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Mirzapur,UP-Mirzapur,Mirzapur,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+171,UP-Moradabad,Moradabad,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Moradabad,UP-Moradabad,Moradabad,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+172,UP-Muzaffarnagar,Muzaffarnagar,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Muzaffarnagar,UP-Muzaffarnagar,Muzaffarnagar,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+173,UP-Pilibhit,Pilibhit,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Pilibhit,UP-Pilibhit,Pilibhit,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+174,UP-Pratapgarh,Pratapgarh,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Pratapgarh,UP-Pratapgarh,Pratapgarh,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+120,UP-Prayagraj,Prayagraj,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Prayagraj,UP-Prayagraj,Prayagraj,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+175,UP-Rae_Bareli,Rae Bareli,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Rae_Bareli,UP-Rae_Bareli,Rae Bareli,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+176,UP-Rampur,Rampur,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Rampur,UP-Rampur,Rampur,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+177,UP-Saharanpur,Saharanpur,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Saharanpur,UP-Saharanpur,Saharanpur,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+UP-Sambhal,UP-Sambhal,Sambhal,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+178,UP-Sant_Kabir_Nagar,Sant Kabir Nagar,Uttar Pradesh,CGWB,Spelling,CGWB 'Sant Kabeer Nagar'; canonical 'Sant Kabir Nagar'
+UP-Sant_Kabir_Nagar,UP-Sant_Kabir_Nagar,Sant Kabir Nagar,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+180,UP-Shahjahanpur,Shahjahanpur,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Shahjahanpur,UP-Shahjahanpur,Shahjahanpur,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+UP-Shamli,UP-Shamli,Shamli,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+181,UP-Shrawasti,Shrawasti,Uttar Pradesh,CGWB,Spelling,CGWB 'Shravasti'; canonical 'Shrawasti'
+UP-Shrawasti,UP-Shrawasti,Shrawasti,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+182,UP-Siddharthnagar,Siddharthnagar,Uttar Pradesh,CGWB,Spacing,CGWB 'Siddharth Nagar'; canonical 'Siddharthnagar'
+UP-Siddharthnagar,UP-Siddharthnagar,Siddharthnagar,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+183,UP-Sitapur,Sitapur,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Sitapur,UP-Sitapur,Sitapur,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+184,UP-Sonbhadra,Sonbhadra,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Sonbhadra,UP-Sonbhadra,Sonbhadra,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+185,UP-Sultanpur,Sultanpur,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Sultanpur,UP-Sultanpur,Sultanpur,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+186,UP-Unnao,Unnao,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Unnao,UP-Unnao,Unnao,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+187,UP-Varanasi,Varanasi,Uttar Pradesh,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UP-Varanasi,UP-Varanasi,Varanasi,Uttar Pradesh,GeoJSON,Self,Existing canonical hyphenated ID
+UK-Almora,UK-Almora,Almora,Uttarakhand,GeoJSON,Self,Existing canonical hyphenated ID
+UK-Bageshwar,UK-Bageshwar,Bageshwar,Uttarakhand,GeoJSON,Self,Existing canonical hyphenated ID
+UK-Chamoli,UK-Chamoli,Chamoli,Uttarakhand,GeoJSON,Self,Existing canonical hyphenated ID
+48,UK-Champawat,Champawat,Uttarakhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UK-Champawat,UK-Champawat,Champawat,Uttarakhand,GeoJSON,Self,Existing canonical hyphenated ID
+49,UK-Dehradun,Dehradun,Uttarakhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UK-Dehradun,UK-Dehradun,Dehradun,Uttarakhand,GeoJSON,Self,Existing canonical hyphenated ID
+50,UK-Haridwar,Haridwar,Uttarakhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UK-Haridwar,UK-Haridwar,Haridwar,Uttarakhand,GeoJSON,Self,Existing canonical hyphenated ID
+51,UK-Nainital,Nainital,Uttarakhand,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+UK-Nainital,UK-Nainital,Nainital,Uttarakhand,GeoJSON,Self,Existing canonical hyphenated ID
+UK-Pauri_Garhwal,UK-Pauri_Garhwal,Pauri Garhwal,Uttarakhand,GeoJSON,Self,Existing canonical hyphenated ID
+UK-Pithoragarh,UK-Pithoragarh,Pithoragarh,Uttarakhand,GeoJSON,Self,Existing canonical hyphenated ID
+UK-Rudraprayag,UK-Rudraprayag,Rudraprayag,Uttarakhand,GeoJSON,Self,Existing canonical hyphenated ID
+UK-Tehri_Garhwal,UK-Tehri_Garhwal,Tehri Garhwal,Uttarakhand,GeoJSON,Self,Existing canonical hyphenated ID
+56,UK-Udham_Singh_Nagar,Udham Singh Nagar,Uttarakhand,CGWB,Spelling,CGWB 'Udam Singh Nagar'; canonical 'Udham Singh Nagar'
+UK-Udham_Singh_Nagar,UK-Udham_Singh_Nagar,Udham Singh Nagar,Uttarakhand,GeoJSON,Self,Existing canonical hyphenated ID
+UK-Uttarkashi,UK-Uttarkashi,Uttarkashi,Uttarakhand,GeoJSON,Self,Existing canonical hyphenated ID
+WB-Alipurduar,WB-Alipurduar,Alipurduar,West Bengal,GeoJSON,Self,Existing canonical hyphenated ID
+305,WB-Bankura,Bankura,West Bengal,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+WB-Bankura,WB-Bankura,Bankura,West Bengal,GeoJSON,Self,Existing canonical hyphenated ID
+307,WB-Birbhum,Birbhum,West Bengal,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+WB-Birbhum,WB-Birbhum,Birbhum,West Bengal,GeoJSON,Self,Existing canonical hyphenated ID
+308,WB-Cooch_Behar,Cooch Behar,West Bengal,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+WB-Cooch_Behar,WB-Cooch_Behar,Cooch Behar,West Bengal,GeoJSON,Self,Existing canonical hyphenated ID
+310,WB-Dakshin_Dinajpur,Dakshin Dinajpur,West Bengal,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+WB-Dakshin_Dinajpur,WB-Dakshin_Dinajpur,Dakshin Dinajpur,West Bengal,GeoJSON,Self,Existing canonical hyphenated ID
+309,WB-Darjeeling,Darjeeling,West Bengal,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+WB-Darjeeling,WB-Darjeeling,Darjeeling,West Bengal,GeoJSON,Self,Existing canonical hyphenated ID
+312,WB-Hooghly,Hooghly,West Bengal,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+WB-Hooghly,WB-Hooghly,Hooghly,West Bengal,GeoJSON,Self,Existing canonical hyphenated ID
+313,WB-Howrah,Howrah,West Bengal,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+WB-Howrah,WB-Howrah,Howrah,West Bengal,GeoJSON,Self,Existing canonical hyphenated ID
+314,WB-Jalpaiguri,Jalpaiguri,West Bengal,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+WB-Jalpaiguri,WB-Jalpaiguri,Jalpaiguri,West Bengal,GeoJSON,Self,Existing canonical hyphenated ID
+WB-Jhargram,WB-Jhargram,Jhargram,West Bengal,GeoJSON,Self,Existing canonical hyphenated ID
+WB-Kalimpong,WB-Kalimpong,Kalimpong,West Bengal,GeoJSON,Self,Existing canonical hyphenated ID
+WB-Kolkata,WB-Kolkata,Kolkata,West Bengal,GeoJSON,Self,Existing canonical hyphenated ID
+316,WB-Malda,Malda,West Bengal,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+WB-Malda,WB-Malda,Malda,West Bengal,GeoJSON,Self,Existing canonical hyphenated ID
+319,WB-Murshidabad,Murshidabad,West Bengal,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+WB-Murshidabad,WB-Murshidabad,Murshidabad,West Bengal,GeoJSON,Self,Existing canonical hyphenated ID
+320,WB-Nadia,Nadia,West Bengal,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+WB-Nadia,WB-Nadia,Nadia,West Bengal,GeoJSON,Self,Existing canonical hyphenated ID
+303,WB-North_24_Parganas,North 24 Parganas,West Bengal,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+WB-North_24_Parganas,WB-North_24_Parganas,North 24 Parganas,West Bengal,GeoJSON,Self,Existing canonical hyphenated ID
+704,WB-Paschim_Bardhaman,Paschim Bardhaman,West Bengal,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+WB-Paschim_Bardhaman,WB-Paschim_Bardhaman,Paschim Bardhaman,West Bengal,GeoJSON,Self,Existing canonical hyphenated ID
+318,WB-Paschim_Medinipur,Paschim Medinipur,West Bengal,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+WB-Paschim_Medinipur,WB-Paschim_Medinipur,Paschim Medinipur,West Bengal,GeoJSON,Self,Existing canonical hyphenated ID
+306,WB-Purba_Bardhaman,Purba Bardhaman,West Bengal,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+WB-Purba_Bardhaman,WB-Purba_Bardhaman,Purba Bardhaman,West Bengal,GeoJSON,Self,Existing canonical hyphenated ID
+317,WB-Purba_Medinipur,Purba Medinipur,West Bengal,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+WB-Purba_Medinipur,WB-Purba_Medinipur,Purba Medinipur,West Bengal,GeoJSON,Self,Existing canonical hyphenated ID
+321,WB-Purulia,Purulia,West Bengal,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+WB-Purulia,WB-Purulia,Purulia,West Bengal,GeoJSON,Self,Existing canonical hyphenated ID
+304,WB-South_24_Parganas,South 24 Parganas,West Bengal,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+WB-South_24_Parganas,WB-South_24_Parganas,South 24 Parganas,West Bengal,GeoJSON,Self,Existing canonical hyphenated ID
+311,WB-Uttar_Dinajpur,Uttar Dinajpur,West Bengal,CGWB,Exact,"Exact (state, district_name) match to GeoJSON"
+WB-Uttar_Dinajpur,WB-Uttar_Dinajpur,Uttar Dinajpur,West Bengal,GeoJSON,Self,Existing canonical hyphenated ID

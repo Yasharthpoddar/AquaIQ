@@ -1,29 +1,30 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MapComponent from '../components/MapComponent';
+import { fetchScores } from '../api';
 import '../App.css';
 
 /**
  * Home page — India choropleth map + summary stats.
  * Uses the Leaflet MapComponent with GeoJSON boundaries.
- * Wired to Flask API.
+ * Loads 725 canonical Indian districts from AquaIQ batch scoring API.
  */
 
 // GeoJSON path — served from public/ folder
 const GEOJSON_URL = "/india_districts.geojson";
 
 const TIER_COLORS = {
-  Safe: "#16a34a",
-  Watch: "#d97706",
-  Warning: "#ea580c",
-  Crisis: "#dc2626",
+  Safe: "#22c55e",
+  Watch: "#eab308",
+  Warning: "#f97316",
+  Crisis: "#ef4444",
 };
 
 const TIER_GLOWS = {
-  Safe: "rgba(22, 163, 74, 0.12)",
-  Watch: "rgba(217, 119, 6, 0.12)",
-  Warning: "rgba(234, 88, 12, 0.12)",
-  Crisis: "rgba(220, 38, 38, 0.12)",
+  Safe: "rgba(34, 197, 94, 0.12)",
+  Watch: "rgba(234, 179, 8, 0.12)",
+  Warning: "rgba(249, 115, 22, 0.12)",
+  Crisis: "rgba(239, 68, 68, 0.12)",
 };
 
 const TIER_ICONS = {
@@ -34,49 +35,87 @@ const TIER_ICONS = {
 };
 
 const TIER_DESC = {
-  Safe: "Routine monitoring",
-  Watch: "Increased monitoring",
-  Warning: "Active intervention",
-  Crisis: "Emergency response",
+  Safe: "Lower stress in available evidence",
+  Watch: "Evidence warrants closer monitoring",
+  Warning: "Elevated stress in available evidence",
+  Crisis: "High stress; review source history",
 };
 
 function Home() {
   const navigate = useNavigate();
   const [scores, setScores] = useState([]);
+  const [tierCounts, setTierCounts] = useState({ Safe: 0, Watch: 0, Warning: 0, Crisis: 0 });
+  const [estimateCounts, setEstimateCounts] = useState({ district_level: 0, zone_fallback: 0 });
+  const [totalDistricts, setTotalDistricts] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [status, setStatus] = useState('loading');
+  const [retry, setRetry] = useState(0);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/alerts')
-      .then(res => res.json())
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+    fetchScores()
       .then(data => {
-        setScores(data.alerts || []);
-        setLoading(false);
+        if (cancelled) return;
+        if (!Array.isArray(data.districts)) throw new Error('The scores response is incomplete.');
+        const rows = data.districts;
+        setScores(rows);
+        setTierCounts(Object.fromEntries(Object.keys(TIER_COLORS).map(tier => [
+          tier, rows.filter(row => Number.isFinite(row.score) && row.tier === tier).length,
+        ])));
+        setEstimateCounts({
+          district_level: rows.filter(row => Number.isFinite(row.score) && row.estimate_type === 'district_level').length,
+          zone_fallback: rows.filter(row => Number.isFinite(row.score) && row.estimate_type === 'zone_fallback').length,
+        });
+        setTotalDistricts(rows.length);
+        setStatus(rows.length ? (data.status || 'success') : 'awaiting_complete_scoring_run');
       })
       .catch(err => {
-        console.error("Error fetching alerts:", err);
-        setLoading(false);
-      });
-  }, []);
-
-  const crisisCounts = {
-    Safe: scores.filter(d => d.tier === "Safe").length,
-    Watch: scores.filter(d => d.tier === "Watch").length,
-    Warning: scores.filter(d => d.tier === "Warning").length,
-    Crisis: scores.filter(d => d.tier === "Crisis").length,
-  };
+        if (cancelled) return;
+        setError(`District scores are unavailable. ${err.message}`);
+        setScores([]);
+        setStatus('error');
+      })
+      .finally(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
+  }, [retry]);
 
   const handleDistrictClick = (districtId) => {
     navigate(`/district/${districtId}`);
   };
 
+  const validScores = scores.filter(s => Number.isFinite(s.score));
+  const avgScore = validScores.length > 0
+    ? Math.round(validScores.reduce((acc, s) => acc + s.score, 0) / validScores.length)
+    : null;
+  const topRisk = validScores.length > 0
+    ? [...validScores].sort((a, b) => b.score - a.score)[0]
+    : null;
+  const observations = validScores.map(row => row.last_observed_date).filter(Boolean).sort();
+  const scoresReady = !loading && !error && status === 'success';
+
   return (
     <div className="page">
       <h1>Groundwater Crisis Dashboard</h1>
-      <p className="subtitle">Real-time 6-month groundwater level forecasts for 640+ Indian districts</p>
+      <p className="subtitle">Groundwater evidence and six-month estimates across 725 districts. Forecast dates reflect the available historical observations.</p>
+      {error && <div className="empty-state" role="alert">
+        <p>{error}</p>
+        <button className="alert-tab" onClick={() => setRetry(value => value + 1)}>Retry scores</button>
+      </div>}
+      {!loading && !error && status === 'awaiting_complete_scoring_run' && <div className="empty-state" role="status">
+        <p>Scores are awaiting a complete scoring run for the current model and data. Risk tiers are unavailable.</p>
+        <button className="alert-tab" onClick={() => setRetry(value => value + 1)}>Check again</button>
+      </div>}
+      {scoresReady && <p className="subtitle" role="status">
+        Project risk scale based on {validScores.length} scored districts; {totalDistricts - validScores.length} districts have unavailable evidence.
+        {observations.length > 0 && ` Last groundwater observations range from ${observations[0]} to ${observations.at(-1)}. Review these historical dates before planning action.`}
+      </p>}
 
       {/* Summary cards */}
       <div className="summary-cards">
-        {Object.entries(crisisCounts).map(([tier, count], i) => (
+        {Object.entries(tierCounts).map(([tier, count], i) => (
           <div
             key={tier}
             className={`summary-card fade-in fade-in-delay-${i + 1}`}
@@ -87,7 +126,7 @@ function Home() {
           >
             <span className="card-icon">{TIER_ICONS[tier]}</span>
             <div className="card-count" style={{ color: TIER_COLORS[tier] }}>
-              {loading ? '-' : count}
+              {scoresReady ? count : '—'}
             </div>
             <div className="card-label">{tier}</div>
           </div>
@@ -95,25 +134,28 @@ function Home() {
       </div>
 
       {/* Stats bar */}
-      {!loading && (
+      {scoresReady && (
         <div className="stats-bar fade-in">
           <div className="stat-item">
             <span>📊</span>
-            <span>Total monitored:</span>
-            <span className="stat-value">{scores.length}</span>
+            <span>Total districts:</span>
+            <span className="stat-value">{totalDistricts}</span>
+          </div>
+          <div className="stat-item">
+            <span>🔬</span>
+            <span>Model coverage:</span>
+            <span className="stat-value">{estimateCounts.district_level} district · {estimateCounts.zone_fallback} zone fallback</span>
           </div>
           <div className="stat-item">
             <span>🎯</span>
-            <span>Avg score:</span>
-            <span className="stat-value">
-              {scores.length > 0 ? Math.round(scores.reduce((a, b) => a + b.score, 0) / scores.length) : 0}
-            </span>
+            <span>Average of available scores:</span>
+            <span className="stat-value">{avgScore ?? 'Unavailable'}</span>
           </div>
           <div className="stat-item">
             <span>⚡</span>
             <span>Highest risk:</span>
             <span className="stat-value">
-              {scores.length > 0 ? scores.reduce((a, b) => a.score > b.score ? a : b).name : '—'}
+              {topRisk ? `${topRisk.name} (${topRisk.score})` : '—'}
             </span>
           </div>
         </div>
@@ -123,9 +165,9 @@ function Home() {
       {loading ? (
         <div className="loading-container">
           <div className="loading-spinner" />
-          <div className="loading-text">Loading map data...</div>
+          <div className="loading-text">Loading nationwide district map...</div>
         </div>
-      ) : (
+      ) : scoresReady ? (
         <div className="fade-in">
           <MapComponent
             scores={scores}
@@ -133,10 +175,10 @@ function Home() {
             onDistrictClick={handleDistrictClick}
           />
         </div>
-      )}
+      ) : null}
 
-      {/* District list */}
-      <h2>Monitored Districts</h2>
+      {/* District list (top risk) */}
+      <h2>High Stress & Monitored Districts</h2>
       <div className="district-list">
         {loading ? (
           <>
@@ -144,26 +186,28 @@ function Home() {
               <div key={i} className="skeleton-pulse" style={{ height: '56px', marginBottom: '8px' }} />
             ))}
           </>
-        ) : (
-          [...scores].sort((a, b) => b.score - a.score).map((d, i) => (
+        ) : scoresReady && validScores.length === 0 ? (
+          <div className="empty-state">Groundwater evidence is unavailable for this scoring run.</div>
+        ) : scoresReady ? (
+          [...validScores].sort((a, b) => b.score - a.score).slice(0, 50).map((d, i) => (
             <div
               key={d.district_id}
-              className={`district-row fade-in`}
-              style={{ animationDelay: `${i * 0.05}s` }}
+              className="district-row fade-in"
+              style={{ animationDelay: `${Math.min(i * 0.03, 0.5)}s` }}
               onClick={() => navigate(`/district/${d.district_id}`)}
             >
               <div>
                 <span className="district-name">{d.name}, {d.state}</span>
                 <div className="district-meta">
-                  {TIER_DESC[d.tier]} · {d.estimate_type === "zone_fallback" ? "Zone estimate" : "District-level data"}
+                  {TIER_DESC[d.tier] || "Review available evidence"} · {d.estimate_type === "zone_fallback" ? "Agro-climatic zone estimate" : "District observations"}
                 </div>
               </div>
-              <span className="district-score" style={{ background: TIER_COLORS[d.tier] }}>
-                {TIER_ICONS[d.tier]} {d.score} — {d.tier}
+              <span className="district-score" style={{ background: TIER_COLORS[d.tier] || '#64748b' }}>
+                {TIER_ICONS[d.tier] || '•'} {d.score} — {d.tier}
               </span>
             </div>
           ))
-        )}
+        ) : null}
       </div>
     </div>
   );

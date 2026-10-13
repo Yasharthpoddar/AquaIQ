@@ -1,0 +1,81 @@
+"""Publish a complete scoring run and its auditable six-month predictions."""
+import argparse
+from datetime import date
+from pathlib import Path
+from uuid import uuid5, NAMESPACE_URL
+import json
+import sys
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT))
+from db.connection import get_connection, read_frame
+from models.ensemble import compute_crisis_score, _load_bundle, feature_generation, _as_of, scoring_signature
+
+
+def _derive_top_factors(components):
+    labels = {'xgb_risk':'Groundwater depth and six-month forecast','lr_trend':'Observed long-term groundwater trend',
+        'drought_frequency':'Observed depth exceedance frequency','fuzzy_logic':'Rainfall anomaly and annual groundwater change'}
+    values = [(value,labels[key]) for key,value in components.items() if key in labels and value is not None and value>30]
+    factors = [label for _,label in sorted(values,reverse=True)[:3]]
+    return tuple((factors+[None]*3)[:3])
+
+
+def score_all_districts(forecast_date=None):
+    cutoff = forecast_date or date.today()
+    if isinstance(cutoff,str):
+        cutoff = date.fromisoformat(cutoff)
+    cutoff = _as_of(cutoff).date()
+    _,card = _load_bundle()
+    generation = feature_generation()
+    signature = scoring_signature()
+    basis = json.dumps([cutoff.isoformat(),generation,card['model_sha256'],signature],sort_keys=True)
+    run_id = str(uuid5(NAMESPACE_URL,'aquaiq:scoring:'+basis))
+    connection = get_connection()
+    try:
+        districts = read_frame('SELECT district_id FROM districts ORDER BY district_id',connection).district_id.tolist()
+        records = []
+        zone_cache = {}
+        for index,district_id in enumerate(districts):
+            records.append(compute_crisis_score(district_id,cutoff,connection,zone_cache))
+            if (index+1)%100==0:
+                print(f'Scored {index+1}/{len(districts)} canonical districts.')
+        # A model/DB exception aborts publication; missing evidence is an explicit null result.
+        with connection:
+            with connection.cursor() as cursor:
+                cursor.execute('''INSERT INTO scoring_runs(run_id,as_of,feature_generation,model_version,model_sha256,district_count,status,scoring_signature)
+                    VALUES(%s,%s,%s,%s,%s,%s,'completed',%s)
+                    ON CONFLICT(run_id) DO UPDATE SET completed_at=CURRENT_TIMESTAMP,district_count=EXCLUDED.district_count''',
+                    (run_id,cutoff,generation,card['version'],card.get('model_sha256',''),len(records),signature))
+                for record in records:
+                    factors = _derive_top_factors(record['components']) if record['crisis_score'] is not None else (None,None,None)
+                    cursor.execute('''INSERT INTO crisis_scores(district_id,forecast_date,aquaiq_score,tier,estimate_type,zone_fallback_reason,
+                        top_factor_1,top_factor_2,top_factor_3,run_id,last_observed_date,feature_generation,model_version)
+                        VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                        ON CONFLICT(district_id,forecast_date) DO UPDATE SET aquaiq_score=EXCLUDED.aquaiq_score,tier=EXCLUDED.tier,
+                        estimate_type=EXCLUDED.estimate_type,zone_fallback_reason=EXCLUDED.zone_fallback_reason,
+                        top_factor_1=EXCLUDED.top_factor_1,top_factor_2=EXCLUDED.top_factor_2,top_factor_3=EXCLUDED.top_factor_3,
+                        run_id=EXCLUDED.run_id,last_observed_date=EXCLUDED.last_observed_date,
+                        feature_generation=EXCLUDED.feature_generation,model_version=EXCLUDED.model_version,updated_at=CURRENT_TIMESTAMP''',
+                        (record['district_id'],cutoff,record['crisis_score'],record['tier'],record['estimate_type'],record.get('zone_fallback_reason'),
+                            *factors,run_id,record.get('last_observed_date'),generation,record.get('model_version')))
+                    for point in record['forecast']:
+                        cursor.execute('''INSERT INTO predictions(district_id,forecast_date,model_name,predicted_gwl,predicted_risk_tier,
+                            run_id,origin_date,as_of_date,model_version,feature_generation,estimate_type,source_zone)
+                            VALUES(%s,%s,'xgboost',%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                            ON CONFLICT(run_id,district_id,forecast_date,model_name) DO NOTHING''',
+                            (record['district_id'],point['month']+'-01',point['predicted_gwl'],record['tier'],run_id,record['forecast_origin'],
+                                cutoff,record['model_version'],generation,record['estimate_type'],record.get('source_zone')))
+        print(f'Published complete run {run_id}: {len(records)} districts, {sum(len(r["forecast"]) for r in records)} forecasts.')
+        return len(records)
+    finally:
+        connection.close()
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--date', type=date.fromisoformat,default=date.today())
+    args = parser.parse_args(argv)
+    score_all_districts(args.date)
+
+
+if __name__=='__main__':
+    main()

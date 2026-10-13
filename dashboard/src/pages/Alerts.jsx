@@ -1,25 +1,26 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { fetchAlerts } from '../api';
 
 /**
- * Alerts page — lists all monitored districts grouped by tier.
+ * Alerts page — lists monitored districts grouped by tier.
  * Route: /alerts
  * Shows tabbed view with Crisis, Warning, Watch, Safe tabs.
- * Wired to Flask API.
+ * Queries AquaIQ crisis_scores table via Flask API.
  */
 
 const TIER_COLORS = {
-  Crisis: "#dc2626",
-  Warning: "#ea580c",
-  Watch: "#d97706",
-  Safe: "#16a34a",
+  Crisis: "#ef4444",
+  Warning: "#f97316",
+  Watch: "#eab308",
+  Safe: "#22c55e",
 };
 
 const TIER_GLOWS = {
-  Crisis: "rgba(220, 38, 38, 0.12)",
-  Warning: "rgba(234, 88, 12, 0.12)",
-  Watch: "rgba(217, 119, 6, 0.12)",
-  Safe: "rgba(22, 163, 74, 0.12)",
+  Crisis: "rgba(239, 68, 68, 0.12)",
+  Warning: "rgba(249, 115, 22, 0.12)",
+  Watch: "rgba(234, 179, 8, 0.12)",
+  Safe: "rgba(34, 197, 94, 0.12)",
 };
 
 const TIER_ICONS = {
@@ -33,36 +34,35 @@ function Alerts() {
   const [alerts, setAlerts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("All");
+  const [error, setError] = useState(null);
+  const [status, setStatus] = useState('loading');
+  const [retry, setRetry] = useState(0);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/alerts')
-      .then(res => res.json())
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+    setAlerts([]);
+    fetchAlerts(activeTab, 100)
       .then(data => {
-        setAlerts(data.alerts || []);
-        setLoading(false);
+        if (cancelled) return;
+        if (!Array.isArray(data.alerts)) throw new Error('The alerts response is incomplete.');
+        setAlerts(data.alerts);
+        setStatus(data.status || 'success');
       })
       .catch(err => {
-        console.error("Error fetching alerts:", err);
-        setLoading(false);
-      });
-  }, []);
-
-  const tierCounts = {
-    All: alerts.length,
-    Crisis: alerts.filter(a => a.tier === "Crisis").length,
-    Warning: alerts.filter(a => a.tier === "Warning").length,
-    Watch: alerts.filter(a => a.tier === "Watch").length,
-    Safe: alerts.filter(a => a.tier === "Safe").length,
-  };
-
-  const filteredAlerts = activeTab === "All"
-    ? alerts
-    : alerts.filter(a => a.tier === activeTab);
+        if (cancelled) return;
+        setError(`Alerts are unavailable. ${err.message}`);
+        setStatus('error');
+      })
+      .finally(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
+  }, [activeTab, retry]);
 
   return (
     <div className="page">
-      <h1>Monitoring Alerts</h1>
-      <p className="subtitle">Real-time groundwater crisis monitoring across all tracked districts</p>
+      <h1>Groundwater Alerts & Advisory</h1>
+      <p className="subtitle">Districts prioritized by the AquaIQ project risk scale using available historical evidence. Review observation and forecast dates before planning action.</p>
 
       {/* Tier filter tabs */}
       <div className="alert-tabs">
@@ -79,7 +79,6 @@ function Alerts() {
           >
             {tab !== "All" && <span>{TIER_ICONS[tab]} </span>}
             {tab}
-            <span className="tab-count">{tierCounts[tab]}</span>
           </button>
         ))}
       </div>
@@ -89,35 +88,53 @@ function Alerts() {
           <div className="loading-spinner" />
           <div className="loading-text">Loading alerts...</div>
         </div>
-      ) : filteredAlerts.length === 0 ? (
+      ) : error ? (
+        <div className="empty-state" role="alert">
+          <p>{error}</p>
+          <button className="alert-tab" onClick={() => setRetry(value => value + 1)}>Retry alerts</button>
+        </div>
+      ) : status === 'awaiting_complete_scoring_run' ? (
+        <div className="empty-state" role="status">
+          <p>Alerts are awaiting a complete scoring run for the current model and data. Risk tiers are unavailable.</p>
+          <button className="alert-tab" onClick={() => setRetry(value => value + 1)}>Check again</button>
+        </div>
+      ) : alerts.length === 0 ? (
         <div className="empty-state">
-          <p style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>✓</p>
-          No alerts in this category.
+          No scored districts in this category for the latest completed run.
         </div>
       ) : (
         <div className="alerts-grid">
-          {filteredAlerts.map((alert, i) => (
+          {alerts.map((alert, i) => (
             <div
               key={alert.district_id}
-              className={`alert-card fade-in`}
+              className="alert-card fade-in"
               style={{
-                borderLeftColor: TIER_COLORS[alert.tier],
-                '--card-glow': TIER_GLOWS[alert.tier],
-                animationDelay: `${i * 0.06}s`,
+                borderLeftColor: TIER_COLORS[alert.tier] || '#64748b',
+                '--card-glow': TIER_GLOWS[alert.tier] || 'rgba(0,0,0,0.05)',
+                animationDelay: `${Math.min(i * 0.04, 0.4)}s`,
               }}
             >
               <div className="alert-header">
                 <Link to={`/district/${alert.district_id}`} className="alert-district">
-                  {TIER_ICONS[alert.tier]} {alert.name}, {alert.state}
+                  {TIER_ICONS[alert.tier] || '•'} {alert.name}, {alert.state}
                 </Link>
-                <span className="alert-badge" style={{ background: TIER_COLORS[alert.tier] }}>
-                  {alert.score} — {alert.tier}
+                <span className="alert-badge" style={{ background: TIER_COLORS[alert.tier] || '#64748b' }}>
+                  {Number.isFinite(alert.score) ? `${alert.score} — ${alert.tier || 'Unclassified'}` : 'Evidence unavailable'}
                 </span>
               </div>
+              {alert.last_observed_date && <p className="alert-recommendation">
+                Last observation: {alert.last_observed_date}{alert.forecast_target && ` · Forecast target: ${alert.forecast_target}`}{alert.as_of && ` · Scored as of: ${alert.as_of}`}
+                {alert.estimate_type === 'zone_fallback' && ' · Agro-climatic zone estimate'}
+              </p>}
               {alert.recommendation && (
                 <p className="alert-recommendation">
                   {alert.recommendation}
                 </p>
+              )}
+              {alert.top_factors && alert.top_factors.length > 0 && (
+                <div style={{ marginTop: '0.5rem', fontSize: '0.78rem', color: '#64748b' }}>
+                  <strong>Key Drivers:</strong> {alert.top_factors.slice(0, 2).join(' · ')}
+                </div>
               )}
             </div>
           ))}

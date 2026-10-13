@@ -1,0 +1,3 @@
+# Optional: download ERA5 from CDS after configuring your own CDS credentials.
+# This extra is not required to process an existing local NetCDF artifact.
+cdsapi>=0.7,<1

@@ -1,0 +1,2 @@
+# Optional experiment tracking; the production pipeline does not require MLflow.
+mlflow==3.17.0
