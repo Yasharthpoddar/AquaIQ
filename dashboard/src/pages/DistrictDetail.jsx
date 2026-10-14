@@ -95,17 +95,12 @@ export default function DistrictDetail() {
       <div className="score-value" style={{color}}>{available ? score : 'Unavailable'}</div>
       <div className="score-label">{historical ? 'Historical crisis score (0–100)' : 'AquaIQ Crisis Score (0–100)'}</div>
       <div className="score-tier" style={{color}}>{available ? `${prediction.tier} Tier` : 'Insufficient evidence for this model'}</div>
-      <p><strong>Observation used:</strong> {prediction.last_observed_date || 'Unavailable'}{isZone ? ' (zone evidence)' : ''}{scoreTargetMonth && <> · <strong>Score model target:</strong> {scoreTargetMonth}</>}</p>
+      <p><strong>Observation used:</strong> {prediction.last_observed_date || 'Unavailable'}{prediction.data_age_months != null ? ` (${prediction.data_age_months} months old)` : ''}{isZone ? ' (zone evidence)' : ''}{scoreTargetMonth && <> · <strong>Score model target:</strong> {scoreTargetMonth}</>}</p>
     </div>
     <p>The crisis score combines groundwater depth, changes in depth, and rainfall and drought conditions. The direction of the plotted line alone does not determine the score.</p>
     {historical && <p style={{color:'#b45309'}}>This score describes the historical observation period. The next-six-month projection below does not update this historical score.</p>}
     {prediction.zone_fallback_reason && <p>{prediction.zone_fallback_reason}</p>}
     {prediction.message && <p role="status">{prediction.message}</p>}
-    <div className="card" style={{padding:'1.25rem',margin:'1.5rem 0'}}>
-      {prediction.data_age_months != null && <p><strong>Observation age:</strong> {prediction.data_age_months} months</p>}
-      {prediction.model_version && <p>Model {prediction.model_version}; ensemble weights {prediction.weights_status === 'validated' ? 'validated' : 'initial, not yet calibrated'}.</p>}
-      {prediction.model_validation?.limitations?.map(message => <p key={message} role="status">{message}</p>)}
-    </div>
     <div className="card" style={{padding:'1.25rem',margin:'1.5rem 0'}}>
       <h2>Prediction for the next six months</h2>
       {projectionLoading && <p role="status">Calculating monthly predictions from today…</p>}
@@ -114,7 +109,11 @@ export default function DistrictDetail() {
         <p><strong>As of:</strong> {projection.as_of || projection.forecast_origin}. The graph starts with the next full calendar month.</p>
         {projectionAvailable && <>
           <p><strong>Rainfall and weather are model inputs.</strong> Monthly XGBoost predictions use rainfall, temperature, and evapotranspiration alongside estimated groundwater depth.</p>
-          <p><strong>Weather assumptions:</strong> historical averages for each calendar month, rather than a live weather forecast.{projection.weather_basis?.last_observed_weather_date && <> Weather records are available through {projection.weather_basis.last_observed_weather_date}.</>}</p>
+          <p><strong>Weather assumptions:</strong> historical averages for each calendar month; no live weather forecast is used.</p>
+          {projection.weather_basis?.latest_historical_weather_dates && <p><strong>Usable weather history through:</strong> {[
+            ['rainfall', 'Rainfall'], ['temperature', 'Temperature'], ['evapotranspiration', 'Evapotranspiration'],
+          ].map(([field, label]) => `${label}: ${projection.weather_basis.latest_historical_weather_dates[field] ? formatMonth(projection.weather_basis.latest_historical_weather_dates[field]) : 'Unavailable'}`).join(' · ')}.</p>}
+          {projection.weather_basis?.weather_history_may_include_filled_values && <p>Usable weather history may include limited filled values. Its end dates do not establish the date of fresh measurements.</p>}
           <p>{depthGuide}</p>
           <ResponsiveContainer width="100%" height={380}>
             <LineChart data={projectionChart} margin={{top:15,right:25,bottom:15,left:15}}>
