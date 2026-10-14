@@ -35,7 +35,7 @@
     5,
     6
   ],
-  "created_at": "2026-10-13T09:41:30.135874+00:00",
+  "created_at": "2026-10-13T17:08:24.579646+00:00",
   "parameters": {
     "n_estimators": 240,
     "max_depth": 3,
@@ -50,9 +50,9 @@
     "tree_method": "hist",
     "objective": "reg:squarederror"
   },
-  "feature_generation_id": "physical-v3-causal-monthly-90a24f1f2574",
+  "feature_generation_id": "physical-v3-causal-monthly-a3f9468a2569",
   "data_source": "verified features_matrix.csv",
-  "data_sha256": "550c69e4d62fcc7ccf48f8ff0cc47a6effb8d391c7dce147b8aa9a5b0c9048d0",
+  "data_sha256": "85d3c2b33c24f26c31380f2878b159a99f6f8cc382fbe363cc50c79a9aa4f3fa",
   "train_target_cutoff": "2019-12-31",
   "max_train_target_date": "2019-12-01",
   "max_train_origin": "2019-11-01",

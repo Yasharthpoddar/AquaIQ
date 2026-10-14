@@ -43,4 +43,8 @@ scratch/
 
 # Generated row-level ingestion audit (can exceed GitHub's file limit)
 reports/collapsed_rows_log.json
+reports/candidates/groundwater_updates/**/*.csv
+reports/candidates/groundwater_updates/**/*.png
+reports/candidates/**/climate_bundles/
+reports/candidates/pytest-*/
 

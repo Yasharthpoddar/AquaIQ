@@ -1,0 +1,8 @@
+{
+  "source_sha256": "b4a23c8073b3b0b61c242a865930eff2c13c3e8ff1433a7a6a7990e27c037beb",
+  "candidate_months": 639,
+  "inserted_months": 639,
+  "retained_existing_months": 0,
+  "newest_observation_month": "2026-01-01",
+  "aggregation_caveat": "Station coverage may differ from earlier observations; district averages do not track identical wells."
+}

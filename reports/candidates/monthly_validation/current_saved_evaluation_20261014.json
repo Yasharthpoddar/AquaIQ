@@ -1,0 +1,277 @@
+{
+  "evaluation_only": true,
+  "created_at": "2026-10-14T02:36:45.258528+00:00",
+  "version": "1.0-climate-conditioned-monthly-xgb",
+  "model_sha256": "54f535f57bcd62f0bea38cf5c545eb253b37d5bdd6bae1794ec27a3e73a43d97",
+  "feature_generation_id": "physical-v3-causal-monthly-a3f9468a2569",
+  "data_source": "verified features_matrix.csv",
+  "data_sha256": "85d3c2b33c24f26c31380f2878b159a99f6f8cc382fbe363cc50c79a9aa4f3fa",
+  "train_target_cutoff": "2019-12-31",
+  "evaluation_protocol": {
+    "embargo_months": 6,
+    "cutoff_source": "verified_checkpoint_model_card",
+    "first_eligible_origin": "2020-07-01"
+  },
+  "evaluation": {
+    "status": "evaluated_assumed_weather",
+    "skipped_labels": 0,
+    "n": 1936,
+    "districts": 510,
+    "xgboost": {
+      "n": 1936,
+      "rmse_m": 2.4555138370448297,
+      "mae_m": 1.233333137015661,
+      "r2": 0.9295826374672006,
+      "nse": 0.9295826374672006
+    },
+    "persistence": {
+      "n": 1936,
+      "rmse_m": 2.7696351562834027,
+      "mae_m": 1.3216653742045454,
+      "r2": 0.9104140074675136,
+      "nse": 0.9104140074675136
+    },
+    "seasonal_paired": {
+      "n": 1893,
+      "xgboost": {
+        "n": 1893,
+        "rmse_m": 2.473261759297191,
+        "mae_m": 1.237512668250916,
+        "r2": 0.9288759377382216,
+        "nse": 0.9288759377382216
+      },
+      "baseline": {
+        "n": 1893,
+        "rmse_m": 2.3976032228516133,
+        "mae_m": 1.225675456840993,
+        "r2": 0.9331608350205681,
+        "nse": 0.9331608350205681
+      }
+    },
+    "by_horizon": {
+      "1": {
+        "n": 149,
+        "districts": 10,
+        "xgboost": {
+          "n": 149,
+          "rmse_m": 1.014929183704093,
+          "mae_m": 0.7011475109311303,
+          "r2": 0.9877820140194071,
+          "nse": 0.9877820140194071
+        },
+        "persistence": {
+          "n": 149,
+          "rmse_m": 0.8888131746636853,
+          "mae_m": 0.315507844295302,
+          "r2": 0.9906297946603617,
+          "nse": 0.9906297946603617
+        },
+        "seasonal_paired": {
+          "n": 139,
+          "xgboost": {
+            "n": 139,
+            "rmse_m": 0.9475409308781075,
+            "mae_m": 0.6805604600624797,
+            "r2": 0.9890879146629001,
+            "nse": 0.9890879146629001
+          },
+          "baseline": {
+            "n": 139,
+            "rmse_m": 1.6487569095112806,
+            "mae_m": 0.7868890942446041,
+            "r2": 0.966961140098841,
+            "nse": 0.966961140098841
+          }
+        }
+      },
+      "2": {
+        "n": 638,
+        "districts": 506,
+        "xgboost": {
+          "n": 638,
+          "rmse_m": 1.5863187757159105,
+          "mae_m": 1.0126017572300783,
+          "r2": 0.9662605287681189,
+          "nse": 0.9662605287681189
+        },
+        "persistence": {
+          "n": 638,
+          "rmse_m": 1.93664299971382,
+          "mae_m": 1.1736317521943573,
+          "r2": 0.9497129124495819,
+          "nse": 0.9497129124495819
+        },
+        "seasonal_paired": {
+          "n": 630,
+          "xgboost": {
+            "n": 630,
+            "rmse_m": 1.5938524936761527,
+            "mae_m": 1.0163194429318334,
+            "r2": 0.9657064577337975,
+            "nse": 0.9657064577337975
+          },
+          "baseline": {
+            "n": 630,
+            "rmse_m": 2.1294003608539325,
+            "mae_m": 1.167110767777778,
+            "r2": 0.9387888215153116,
+            "nse": 0.9387888215153116
+          }
+        }
+      },
+      "3": {
+        "n": 463,
+        "districts": 337,
+        "xgboost": {
+          "n": 463,
+          "rmse_m": 3.4890783052971512,
+          "mae_m": 1.4397790689608514,
+          "r2": 0.8832200542847779,
+          "nse": 0.8832200542847779
+        },
+        "persistence": {
+          "n": 463,
+          "rmse_m": 3.7353636045053005,
+          "mae_m": 1.5963635756587473,
+          "r2": 0.866151779379347,
+          "nse": 0.866151779379347
+        },
+        "seasonal_paired": {
+          "n": 455,
+          "xgboost": {
+            "n": 455,
+            "rmse_m": 3.5105484954469226,
+            "mae_m": 1.4412794525603478,
+            "r2": 0.8830038223063529,
+            "nse": 0.8830038223063529
+          },
+          "baseline": {
+            "n": 455,
+            "rmse_m": 3.1545528432131356,
+            "mae_m": 1.592688453186813,
+            "r2": 0.9055292564801756,
+            "nse": 0.9055292564801756
+          }
+        }
+      },
+      "4": {
+        "n": 126,
+        "districts": 9,
+        "xgboost": {
+          "n": 126,
+          "rmse_m": 1.723193865340863,
+          "mae_m": 1.2903438897151165,
+          "r2": 0.9604328957373779,
+          "nse": 0.9604328957373779
+        },
+        "persistence": {
+          "n": 126,
+          "rmse_m": 1.4602411789270404,
+          "mae_m": 0.5332710944444445,
+          "r2": 0.9715871256651765,
+          "nse": 0.9715871256651765
+        },
+        "seasonal_paired": {
+          "n": 120,
+          "xgboost": {
+            "n": 120,
+            "rmse_m": 1.7456344458632431,
+            "mae_m": 1.3003427731374233,
+            "r2": 0.9600934496810605,
+            "nse": 0.9600934496810605
+          },
+          "baseline": {
+            "n": 120,
+            "rmse_m": 1.7632360678446115,
+            "mae_m": 0.8369334133333333,
+            "r2": 0.9592846190076025,
+            "nse": 0.9592846190076025
+          }
+        }
+      },
+      "5": {
+        "n": 448,
+        "districts": 339,
+        "xgboost": {
+          "n": 448,
+          "rmse_m": 2.7897254982652746,
+          "mae_m": 1.4528665621464865,
+          "r2": 0.9129739981165863,
+          "nse": 0.9129739981165863
+        },
+        "persistence": {
+          "n": 448,
+          "rmse_m": 3.4501293558222246,
+          "mae_m": 1.9950769453794643,
+          "r2": 0.8668942414586276,
+          "nse": 0.8668942414586276
+        },
+        "seasonal_paired": {
+          "n": 442,
+          "xgboost": {
+            "n": 442,
+            "rmse_m": 2.804633299084562,
+            "mae_m": 1.4569741031155927,
+            "r2": 0.9126621048920408,
+            "nse": 0.9126621048920408
+          },
+          "baseline": {
+            "n": 442,
+            "rmse_m": 2.3236067417530832,
+            "mae_m": 1.2645507339366515,
+            "r2": 0.9400518473366163,
+            "nse": 0.9400518473366163
+          }
+        }
+      },
+      "6": {
+        "n": 112,
+        "districts": 10,
+        "xgboost": {
+          "n": 112,
+          "rmse_m": 1.9298239945620237,
+          "mae_m": 1.403007090590954,
+          "r2": 0.9426593054826341,
+          "nse": 0.9426593054826341
+        },
+        "persistence": {
+          "n": 112,
+          "rmse_m": 1.577286477077583,
+          "mae_m": 0.5611917214285714,
+          "r2": 0.961695596394938,
+          "nse": 0.961695596394938
+        },
+        "seasonal_paired": {
+          "n": 107,
+          "xgboost": {
+            "n": 107,
+            "rmse_m": 1.9442520448120433,
+            "mae_m": 1.4198737451841412,
+            "r2": 0.9427860571068629,
+            "nse": 0.9427860571068629
+          },
+          "baseline": {
+            "n": 107,
+            "rmse_m": 1.8345490210605493,
+            "mae_m": 0.8552298299065418,
+            "r2": 0.9490604162903339,
+            "nse": 0.9490604162903339
+          }
+        }
+      }
+    },
+    "weather_policy": "Historical same-month weather means available at each origin, not realized future weather.",
+    "groundwater_origin_policy": "Observed origins; this does not validate estimated current levels after multi-year gaps."
+  },
+  "validation_assessment": {
+    "status": "unvalidated_current_projection",
+    "sufficient_for_operational_use": false,
+    "limitations": [
+      "Current groundwater is estimated when observations are old; training and holdout use observed origins.",
+      "Future weather is assumed from historical monthly averages, not a live meteorological forecast.",
+      "Pumping/extraction is not included.",
+      "Some monthly holdouts cover very few districts.",
+      "Historical source publication and revision times are unavailable."
+    ]
+  }
+}

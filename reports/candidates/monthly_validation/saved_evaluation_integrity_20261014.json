@@ -1,0 +1,37 @@
+{
+  "active_artifacts_preserved": true,
+  "before": {
+    "config.yaml": "2284fe73c5a30fb03045bd96317ea922e40c6dcfa0aba7108c72f6a8a9d5b656",
+    "data\\processed\\features_matrix.csv": "3958737b033a16e722f633a15ad77d80bc5b2a8fb3bea888697f0410362c24ae",
+    "data\\processed\\feature_manifest.json": "afc96a9e13655ffa2ccb2bf18a027b9bb1ed34c21260b901301cef6fd35c8b91",
+    "data\\processed\\imd_rainfall_district_monthly.csv": "0bc3ec52da3648b5f2166c490e604d0fd781fc95c07fc5ab66ab89d73c57ff21",
+    "data\\processed\\imd_rainfall_district_monthly.manifest.json": "659301240e18cd4b01de31a5a1829770e1cf204fb10b5472cf71217c0922d930",
+    "reports\\climate_forecast_evaluation.json": "e9885a71e00c0a1eabaddf3ed850257740293ddbec8ddba2a58a41cdc820a813",
+    "models\\checkpoints\\aquaiq_xgb.json": "e6722ef6cb77242ba982a5763a0ff28499a05d93147df30828ab822bbf26ff92",
+    "models\\checkpoints\\aquaiq_xgb_model_card.json": "aee8c2862268af07300f563a7582ea7cb218d1b74bb729b7bbb2d1341a1e01ee",
+    "models\\checkpoints\\bundles\\20261013T170456589578Z-ca138883556b\\model.json": "ef58264b9c1fa43f727fef9d4d180e59f091c9778eb48f128f2ab81d40a97789",
+    "models\\checkpoints\\bundles\\20261013T170456589578Z-ca138883556b\\model_card.json": "aee8c2862268af07300f563a7582ea7cb218d1b74bb729b7bbb2d1341a1e01ee",
+    "models\\checkpoints\\aquaiq_monthly_climate.json": "59827055a401dee258e8ab9d2c1d7e81bfaab3bf8240f10bd5798f882f52ec43",
+    "models\\checkpoints\\aquaiq_monthly_climate_model_card.json": "e9885a71e00c0a1eabaddf3ed850257740293ddbec8ddba2a58a41cdc820a813",
+    "models\\checkpoints\\climate_bundles\\20261013T170824590468Z-16aefd7cb4\\model.json": "54f535f57bcd62f0bea38cf5c545eb253b37d5bdd6bae1794ec27a3e73a43d97",
+    "models\\checkpoints\\climate_bundles\\20261013T170824590468Z-16aefd7cb4\\model_card.json": "e9885a71e00c0a1eabaddf3ed850257740293ddbec8ddba2a58a41cdc820a813"
+  },
+  "after": {
+    "config.yaml": "2284fe73c5a30fb03045bd96317ea922e40c6dcfa0aba7108c72f6a8a9d5b656",
+    "data\\processed\\features_matrix.csv": "3958737b033a16e722f633a15ad77d80bc5b2a8fb3bea888697f0410362c24ae",
+    "data\\processed\\feature_manifest.json": "afc96a9e13655ffa2ccb2bf18a027b9bb1ed34c21260b901301cef6fd35c8b91",
+    "data\\processed\\imd_rainfall_district_monthly.csv": "0bc3ec52da3648b5f2166c490e604d0fd781fc95c07fc5ab66ab89d73c57ff21",
+    "data\\processed\\imd_rainfall_district_monthly.manifest.json": "659301240e18cd4b01de31a5a1829770e1cf204fb10b5472cf71217c0922d930",
+    "reports\\climate_forecast_evaluation.json": "e9885a71e00c0a1eabaddf3ed850257740293ddbec8ddba2a58a41cdc820a813",
+    "models\\checkpoints\\aquaiq_xgb.json": "e6722ef6cb77242ba982a5763a0ff28499a05d93147df30828ab822bbf26ff92",
+    "models\\checkpoints\\aquaiq_xgb_model_card.json": "aee8c2862268af07300f563a7582ea7cb218d1b74bb729b7bbb2d1341a1e01ee",
+    "models\\checkpoints\\bundles\\20261013T170456589578Z-ca138883556b\\model.json": "ef58264b9c1fa43f727fef9d4d180e59f091c9778eb48f128f2ab81d40a97789",
+    "models\\checkpoints\\bundles\\20261013T170456589578Z-ca138883556b\\model_card.json": "aee8c2862268af07300f563a7582ea7cb218d1b74bb729b7bbb2d1341a1e01ee",
+    "models\\checkpoints\\aquaiq_monthly_climate.json": "59827055a401dee258e8ab9d2c1d7e81bfaab3bf8240f10bd5798f882f52ec43",
+    "models\\checkpoints\\aquaiq_monthly_climate_model_card.json": "e9885a71e00c0a1eabaddf3ed850257740293ddbec8ddba2a58a41cdc820a813",
+    "models\\checkpoints\\climate_bundles\\20261013T170824590468Z-16aefd7cb4\\model.json": "54f535f57bcd62f0bea38cf5c545eb253b37d5bdd6bae1794ec27a3e73a43d97",
+    "models\\checkpoints\\climate_bundles\\20261013T170824590468Z-16aefd7cb4\\model_card.json": "e9885a71e00c0a1eabaddf3ed850257740293ddbec8ddba2a58a41cdc820a813"
+  },
+  "evaluation_report": "C:\\Users\\Yasharth\\Downloads\\AquaIQ\\reports\\candidates\\monthly_validation\\current_saved_evaluation_20261014.json",
+  "production_changes_made": false
+}

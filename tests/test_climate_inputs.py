@@ -113,7 +113,53 @@ def test_empty_history_has_json_safe_missing_evidence():
     result = forecast_weather(pd.DataFrame(), "2026-10-13")
     assert result["status"] == "unavailable" and result["path"].empty
     assert result["metadata"]["latest_historical_weather_date"] is None
+    assert result["metadata"]["latest_historical_weather_dates"] == {
+        "rainfall": None, "temperature": None, "evapotranspiration": None,
+    }
+    assert all(value is None for value in result["metadata"]["weather_data_age_months_by_field"].values())
     assert len(result["metadata"]["missing_inputs"]) == 18
+    json.dumps(result["metadata"], allow_nan=False)
+
+
+def test_rainfall_refresh_reports_separate_usable_temperature_and_et_coverage():
+    frame = weather_history(end="2025-12-01")
+    # The existing feature pipeline can carry December weather into Jan/Feb.
+    frame.loc[frame.date > "2025-02-01", ["temperature", "evapotranspiration"]] = np.nan
+    metadata = forecast_weather(frame, "2026-10-13")["metadata"]
+    assert metadata["latest_historical_weather_date"] == "2025-12-01"
+    assert metadata["latest_historical_weather_dates"] == {
+        "rainfall": "2025-12-01", "temperature": "2025-02-01", "evapotranspiration": "2025-02-01",
+    }
+    assert metadata["weather_data_age_months_by_field"] == {
+        "rainfall": 10, "temperature": 20, "evapotranspiration": 20,
+    }
+    assert metadata["weather_history_may_include_filled_values"] is True
+    assert any("do not establish fresh measurement dates" in text for text in metadata["assumptions"])
+
+
+def test_explicit_weather_fill_flags_keep_coverage_at_last_measured_month():
+    frame = weather_history(end="2025-12-01")
+    frame["rainfall_current_is_imputed"] = False
+    for column in ("temperature", "evapotranspiration"):
+        frame[f"{column}_is_imputed"] = frame.date > "2024-12-01"
+    metadata = forecast_weather(frame, "2026-10-13")["metadata"]
+    assert metadata["latest_historical_weather_dates"] == {
+        "rainfall": "2025-12-01", "temperature": "2024-12-01", "evapotranspiration": "2024-12-01",
+    }
+    assert metadata["weather_data_age_months_by_field"] == {
+        "rainfall": 10, "temperature": 22, "evapotranspiration": 22,
+    }
+    assert metadata["weather_history_may_include_filled_values"] is False
+
+
+def test_unavailable_weather_field_has_no_coverage_date_or_age():
+    frame = weather_history()
+    frame["temperature"] = np.nan
+    result = forecast_weather(frame, "2026-10-13")
+    assert result["status"] == "unavailable"
+    assert result["metadata"]["latest_historical_weather_dates"]["temperature"] is None
+    assert result["metadata"]["weather_data_age_months_by_field"]["temperature"] is None
+    assert result["metadata"]["latest_historical_weather_dates"]["rainfall"] == "2024-12-01"
     json.dumps(result["metadata"], allow_nan=False)
 
 

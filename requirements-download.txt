@@ -1,3 +1,5 @@
 # Optional: download ERA5 from CDS after configuring your own CDS credentials.
 # This extra is not required to process an existing local NetCDF artifact.
 cdsapi>=0.7,<1
+# Optional: extract official borderless CGWB station tables from PDFs.
+pdfplumber>=0.11,<1

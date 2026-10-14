@@ -16,7 +16,7 @@ import pandas as pd
 from db.connection import finite_json
 from models.climate_inputs import (forecast_weather, monthly_features,
                                   MONTHLY_FEATURE_COLUMNS, WEATHER_UNITS)
-from models.ensemble import _as_of, _completed_feature_month, feature_generation, select_evidence
+from models.ensemble import CONFIG, _as_of, _completed_feature_month, feature_generation, select_evidence
 from models.monthly_projection import fit_projection, predict_depth, _design, projection_from_evidence
 from models.xgboost_model import (observed_mask, sha256_file, _json_hash,
                                  _write_json, load_feature_matrix, metrics, DEFAULT_TRAIN_CUTOFF)
@@ -242,7 +242,7 @@ def publish_bundle(model, card, checkpoint=None):
                'model_sha256': card['model_sha256'], 'card_sha256': sha256_file(card_path)}
     _load_files(pointer, checkpoint, card['feature_generation_id'])
     _write_json(checkpoint, pointer)
-    _write_json(checkpoint.parent/'aquaiq_monthly_climate_model_card.json', card)
+    _write_json(checkpoint.with_name(checkpoint.stem+'_model_card.json'), card)
     return card
 
 
@@ -305,7 +305,7 @@ def forecast_from_evidence(evidence, weather_override=None):
     metadata = weather['metadata']
     result['weather_basis'] = {**metadata,
         'method':'historical_monthly_climatology' if weather_override is None else 'specified_weather_scenario',
-        'last_observed_weather_date': metadata.get('latest_historical_weather_date'),
+        'latest_usable_weather_date': metadata.get('latest_historical_weather_date'),
         'description':'Assumed future monthly rainfall, temperature and evapotranspiration from historical same-month averages.'
                       if weather_override is None else 'Specified future monthly weather scenario.'}
     if weather['status'] != 'available':
@@ -352,15 +352,88 @@ def forecast_next_six_months(district_id, as_of=None, weather_override=None):
     return forecast_from_evidence(select_evidence(district_id,as_of), weather_override)
 
 
+def evaluate_saved_checkpoint(frame, checkpoint=None):
+    """Evaluate a verified bundle at its recorded cutoff without fitting or publishing."""
+    generation = frame.attrs.get('feature_generation_id')
+    if not generation or frame.attrs.get('data_source') in (None, 'unknown', 'synthetic'):
+        raise ValueError('Monthly climate evaluation requires verified real features.')
+    model, card = load_bundle(checkpoint, expected_generation=generation)
+    cutoff = card['train_target_cutoff']
+    _, heldout = split_pairs(prepare_pairs(frame), cutoff)
+    return {'evaluation_only': True, 'created_at': datetime.now(timezone.utc).isoformat(),
+            'version': card['version'], 'model_sha256': card['model_sha256'],
+            'feature_generation_id': generation, 'data_source': frame.attrs['data_source'],
+            'data_sha256': frame.attrs.get('data_sha256'), 'train_target_cutoff': cutoff,
+            'evaluation_protocol': {'embargo_months': 6,
+                'cutoff_source': 'verified_checkpoint_model_card',
+                'first_eligible_origin': str((pd.Timestamp(cutoff).to_period('M')+7).start_time.date())},
+            'evaluation': evaluate_assumed_weather(model, frame, heldout),
+            'validation_assessment': card.get('validation_assessment')}
+
+
+def _validate_cli_outputs(parser, checkpoint, report, candidate=False, evaluation=False):
+    """Refuse report/candidate aliases that could replace active data or model assets."""
+    active = CHECKPOINT_PATH.resolve()
+    historical = (ROOT/CONFIG['paths']['xgboost_checkpoint']).resolve()
+    source = Path(checkpoint or CHECKPOINT_PATH).resolve()
+    training_report = (ROOT/'reports/climate_forecast_evaluation.json').resolve()
+    protected = {active, active.with_name(active.stem+'_model_card.json'),
+                 historical, historical.with_name(historical.stem+'_model_card.json'),
+                 (ROOT/'data/processed/feature_manifest.json').resolve(),
+                 (ROOT/'data/processed/features_matrix.csv').resolve()}
+    immutable = {active.parent/'climate_bundles', source.parent/'climate_bundles', historical.parent/'bundles'}
+    if candidate:
+        protected.add(training_report)
+        writes = [source, source.with_name(source.stem+'_model_card.json'), report.resolve()]
+    else:
+        writes = [report.resolve()]
+        if evaluation:
+            protected.update({source, source.with_name(source.stem+'_model_card.json'), training_report})
+    if len(writes) != len(set(writes)):
+        parser.error('Checkpoint, model card and report output paths must be distinct.')
+    for path in writes:
+        if path.suffix.lower() != '.json':
+            parser.error('Checkpoint and report outputs must use a .json extension.')
+        if path in protected or any(path.is_relative_to(directory) for directory in immutable):
+            parser.error('Output would overwrite protected input, active model or training report.')
+
+
 def main(argv=None):
     import argparse
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--train-cutoff',default=DEFAULT_TRAIN_CUTOFF)
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument('--eval', action='store_true', help='Evaluate a verified bundle without fitting or publishing.')
+    mode.add_argument('--candidate-checkpoint', type=Path,
+                      help='Train into a separate candidate pointer instead of the active checkpoint.')
+    parser.add_argument('--checkpoint', type=Path, help='Input bundle pointer for --eval; defaults to the active model.')
+    parser.add_argument('--train-cutoff', help=f'Training label cutoff (default: {DEFAULT_TRAIN_CUTOFF}); invalid with --eval.')
+    parser.add_argument('--output', type=Path, help='JSON report output; evaluation and candidates have separate defaults.')
     args = parser.parse_args(argv)
-    _, card = train(load_feature_matrix(), args.train_cutoff)
-    _write_json(ROOT/'reports/climate_forecast_evaluation.json', card)
-    print(json.dumps({'training_pairs':card['n_train_observed_pairs'],
-                      'evaluation':card['evaluation'], 'feature_importance':card['feature_importance']},indent=2),flush=True)
+    if args.eval and args.train_cutoff is not None:
+        parser.error('--eval uses the verified model card cutoff; --train-cutoff cannot be supplied.')
+    if args.checkpoint is not None and not args.eval:
+        parser.error('--checkpoint is an evaluation input; use --candidate-checkpoint for training experiments.')
+    checkpoint = args.checkpoint if args.eval else args.candidate_checkpoint
+    if args.eval:
+        default_report = ROOT/'reports/climate_forecast_saved_evaluation.json'
+    elif args.candidate_checkpoint is not None:
+        default_report = checkpoint.with_name(checkpoint.stem+'_evaluation.json')
+    else:
+        default_report = ROOT/'reports/climate_forecast_evaluation.json'
+    report = args.output or default_report
+    _validate_cli_outputs(parser, checkpoint, report,
+                          candidate=args.candidate_checkpoint is not None, evaluation=args.eval)
+    frame = load_feature_matrix()
+    if args.eval:
+        result = evaluate_saved_checkpoint(frame, checkpoint)
+        summary = result
+    else:
+        _, result = train(frame, args.train_cutoff or DEFAULT_TRAIN_CUTOFF, checkpoint=checkpoint)
+        summary = {'training_pairs':result['n_train_observed_pairs'],
+                   'evaluation':result['evaluation'], 'feature_importance':result['feature_importance']}
+    _write_json(report, result)
+    print(json.dumps(summary, indent=2, allow_nan=False), flush=True)
+    return result
 
 
 if __name__ == '__main__':

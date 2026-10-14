@@ -51,6 +51,18 @@ python -m data_ingestion.imd_district_climatology --raw-dir data/raw/imd
 
 Both outputs include manifests. The weather ingester rejects artifacts without matching provenance and records corrected existing weather values in `data/processed/weather_corrections/`. Existing CGWB observations are retained.
 
+Incremental daily rainfall can now be staged with bounded retries and resume support:
+
+```powershell
+python -m data_ingestion.imd_realtime --dates 2025-01-01 2025-06-15 2025-09-30 --download --staged-dir data/raw/updates/<run>/overlap
+python -m data_ingestion.imd_realtime_comparison --annual-file data/raw/updates/20261013/imd/Rainfall_ind2025_rfp25.grd --annual-year 2025 --staged-dir data/raw/updates/<run>/overlap --dates 2025-01-01 2025-06-15 2025-09-30 --output reports/candidates/<run>/overlap.json
+python -m data_ingestion.imd_realtime --start 2026-01 --end 2026-09 --download --staged-dir data/raw/updates/<run>/daily
+```
+
+Replace `<run>` with a staging directory name. The default command without `--download` makes an offline plan. Interrupted runs reuse only files that still pass their source/date/checksum/grid checks. Incomplete downloads return exit code 1 and save `download_progress.json`; a passing sampled comparison returns 0, while differences requiring review return 2. Format validation alone does not establish rainfall product identity. Provisional and annual products can differ after quality control; investigate differences instead of widening tolerances to force a pass.
+
+After sampled overlap and every daily file are verified, `python -m data_ingestion.imd_realtime_monthly --start 2026-01 --end 2026-09 --staged-dir data/raw/updates/<run>/daily --overlap-report reports/candidates/<run>/overlap.json --output reports/candidates/<run>/rainfall_monthly.csv --normals-output reports/candidates/<run>/rainfall_normals.csv` creates candidate artifacts. It requires the configured boundaries and writes only candidate/update folders. The data remains provisional and no production ingestion happens automatically. The latest staging result and repeat commands are in `reports/Prediction_Pipeline_Implementation_2026-10-14.md`.
+
 Run the complete pipeline after the source inputs are available:
 
 ```bash
@@ -81,6 +93,17 @@ python -m preprocessing.features --csv-only
 The first two commands build a sample timeline and its features under `reports/samples`. The third samples the production preprocessing input into the same isolated directory. `--csv-only` writes a full candidate feature matrix under `reports/candidates`. Production model loading and training reject sample-only manifests.
 
 The production model defaults to the label cutoff in `config.yaml` (`2019-12-31`). A six-month embargo separates training from evaluation origins, and the final holdout remains independent of model fitting. Training publishes an immutable model/card bundle through one atomic manifest. The training stage builds both the historical endpoint model and the separate monthly climate model. To rebuild only the monthly model, run `python -m models.climate_forecast`; it writes its independent verified bundle and `reports/climate_forecast_evaluation.json`. Backtests and synthetic tests write separate reports and cannot replace the historical checkpoint or automatically promote candidate weights.
+
+Use the evaluation-only or candidate modes for model experiments:
+
+```powershell
+python -m models.climate_forecast --eval
+python -m models.climate_forecast --candidate-checkpoint reports/candidates/monthly/candidate.json
+python -m models.climate_forecast --eval --checkpoint reports/candidates/monthly/candidate.json --output reports/candidates/monthly/saved_evaluation.json
+python -m scripts.validate_monthly_candidates --run --fold all --n-jobs 1
+```
+
+Saved evaluation uses the bundle's recorded cutoff and never fits or republishes it. Candidate training writes a separate pointer, model-card sidecar and report. The development runner excludes all 2020 onward rows before label construction, uses fixed chronological panel folds with six-month embargoes, and writes only experimental candidate reports. Without `--run` it prints a plan. These development comparisons are for model selection, not independent interval calibration or current-period accuracy; later independent observations are still required.
 
 For batch scoring, an optional historical cutoff selects only evidence available through that date:
 
@@ -130,7 +153,7 @@ District identifiers resolve through the canonical master or recorded legacy cro
 
 ## Interpretation and limitations
 
-The six-month forecast starts at the **last observed groundwater month**, which may precede today's date substantially. If its target is already in the past, the response and dashboard label it as a historical forecast. Forward-filled months do not advance the reported observation date. The supplied observations end in March 2023; current-date scores summarize that historical evidence and are not validated 2026 or 2027 forecasts. New observations and renewed evaluation are required for a current forecast.
+The six-month forecast starts at the **last observed groundwater month**, which may precede today's date substantially. If its target is already in the past, the response and dashboard label it as a historical forecast. Forward-filled months do not advance the reported observation date. The October 2026 refresh added January 2026 groundwater for 639 districts and complete rainfall through December 2025; other districts can still have older groundwater observations. ERA5 temperature and potential evaporation remain through December 2024. Inspect each district's observation date and source coverage rather than assuming nationwide current observations. These updates do not independently validate 2026 or 2027 projections. See `reports/AquaIQ_Data_Refresh_Update.md` for the refreshed data snapshot.
 
 The **prediction graph** starts with the next full calendar month after today's month and shows six monthly depth estimates. For example, on 13 October 2026 it covers November 2026 through April 2027. A seasonal regression with a damped trend estimates the current groundwater depth across the unobserved gap. A separate monthly XGBoost model predicts groundwater changes for horizons of one through six months, using the horizon, rainfall, temperature, and evapotranspiration as inputs. An estimated current depth is shown explicitly as an estimate; it is not a newly recorded reading. The history fit needs 24 actual observations spanning 36 months, and sparse districts may use the labelled zone evidence selected by the pipeline. Missing usable groundwater or weather evidence returns an empty graph with a reason.
 

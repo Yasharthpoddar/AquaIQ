@@ -99,6 +99,7 @@ def _weather_history(frame, cutoff):
     if dates.duplicated().any():
         raise ValueError("Weather history contains duplicate months; select one district or aggregate first.")
     result = pd.DataFrame({"date": dates})
+    may_include_filled_values = False
     for column in WEATHER_COLUMNS:
         source = "rainfall_current" if column == "rainfall" and "rainfall_current" in frame else column
         numeric = pd.to_numeric(frame.loc[valid, source], errors="coerce") if source in frame else pd.Series(np.nan, index=dates.index)
@@ -115,8 +116,12 @@ def _weather_history(frame, cutoff):
         if imputed_flag in frame:
             known = frame.loc[valid, imputed_flag].astype("string").str.lower().str.strip()
             numeric = numeric.where(known.isin(["false", "0"]))
+        else:
+            may_include_filled_values = True
         result[column] = numeric
-    return result.sort_values("date").reset_index(drop=True)
+    result = result.sort_values("date").reset_index(drop=True)
+    result.attrs["may_include_filled_values"] = may_include_filled_values
+    return result
 
 
 def forecast_weather(frame, as_of, months=6, overrides=None):
@@ -139,7 +144,6 @@ def forecast_weather(frame, as_of, months=6, overrides=None):
         "future_weather_is_observed": False, "reference_months": [], "missing_inputs": [],
         "assumptions": [
             "Future weather repeats the historical same-month mean; no live weather forecast is used.",
-            "Weather history may include the feature pipeline's limited causal weather fills when separate weather provenance is unavailable.",
         ],
     }
     if overrides is not None:
@@ -154,6 +158,23 @@ def forecast_weather(frame, as_of, months=6, overrides=None):
     latest = history.loc[populated, "date"].max() if populated.any() else None
     metadata["latest_historical_weather_date"] = latest.date().isoformat() if latest is not None else None
     metadata["weather_data_age_months"] = int((as_of.year - latest.year) * 12 + as_of.month - latest.month) if latest is not None else None
+    # A refreshed rainfall series must not imply equally recent temperature/ET.
+    # These dates describe usable feature history, which may include causal fills.
+    latest_by_field = {column: history.loc[history[column].notna(), "date"].max()
+                       for column in WEATHER_COLUMNS}
+    metadata["latest_historical_weather_dates"] = {
+        column: value.date().isoformat() if pd.notna(value) else None
+        for column, value in latest_by_field.items()
+    }
+    metadata["weather_data_age_months_by_field"] = {
+        column: int((as_of.year - value.year) * 12 + as_of.month - value.month)
+        if pd.notna(value) else None for column, value in latest_by_field.items()
+    }
+    metadata["weather_history_may_include_filled_values"] = history.attrs.get("may_include_filled_values", True)
+    if metadata["weather_history_may_include_filled_values"]:
+        metadata["assumptions"].append(
+            "Usable weather history may include limited causal fills; its end dates do not establish fresh measurement dates."
+        )
     rows = []
     for target in targets:
         row = {"date": target}

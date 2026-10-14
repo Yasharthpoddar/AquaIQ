@@ -226,13 +226,27 @@ def test_six_current_future_months_include_weather_values_and_stale_source_prove
     assert result["data_age_months"] == 69
     assert result["current_depth_basis"] == "estimated_from_historical_groundwater"
     assert result["weather_basis"]["method"] == "historical_monthly_climatology"
-    assert result["weather_basis"]["last_observed_weather_date"] == "2024-12-01"
+    assert result["weather_basis"]["latest_usable_weather_date"] == "2024-12-01"
+    assert "last_observed_weather_date" not in result["weather_basis"]
     assert result["weather_basis"]["future_weather_is_observed"] is False
     assert result["model_validation"]["sufficient_for_operational_use"] is False
     assert set(result["forecast"][0]["weather"]) == {"rainfall_mm", "temperature_c", "evapotranspiration_mm"}
     assert list(model.predict.call_args.args[0].columns) == climate.FEATURES
     loader.assert_called_once_with(expected_generation="fixture-physical-generation")
     json.dumps(result, allow_nan=False)
+
+
+def test_served_forecast_keeps_partial_rainfall_refresh_coverage_visible(monkeypatch):
+    install_serving_model(monkeypatch)
+    frame = physical_frame(end="2025-12-01")
+    frame.loc[frame.date > "2025-02-01", ["temperature", "evapotranspiration"]] = np.nan
+    result = climate.forecast_from_evidence(serving_evidence(frame))
+    assert len(result["forecast"]) == 6
+    assert result["weather_basis"]["latest_historical_weather_dates"] == {
+        "rainfall": "2025-12-01", "temperature": "2025-02-01", "evapotranspiration": "2025-02-01",
+    }
+    assert result["weather_basis"]["weather_history_may_include_filled_values"] is True
+    assert "last_observed_weather_date" not in result["weather_basis"]
 
 
 @pytest.mark.parametrize("field,delta", [("rainfall", 100.), ("temperature", 5.), ("evapotranspiration", 40.)])
@@ -335,3 +349,177 @@ def test_pipeline_training_dispatches_both_models_and_honours_dry_run(monkeypatc
     assert calls == []
     assert run_pipeline.step_train()
     assert calls == [("endpoint", []), ("monthly_climate", [])]
+
+
+def test_evaluation_cli_uses_saved_cutoff_and_never_changes_checkpoint_files(tmp_path, monkeypatch, tiny_model):
+    monkeypatch.setattr(climate, "ROOT", tmp_path)
+    checkpoint = tmp_path / "models/checkpoints/aquaiq_monthly_climate.json"
+    monkeypatch.setattr(climate, "CHECKPOINT_PATH", checkpoint)
+    card = {**model_card(), "train_target_cutoff": "2015-12-31", "max_train_target_date": "2015-12-01"}
+    climate.publish_bundle(tiny_model, card)
+    before = {path: path.read_bytes() for path in checkpoint.parent.rglob("*") if path.is_file()}
+    training_report = tmp_path / "reports/climate_forecast_evaluation.json"
+    training_report.parent.mkdir()
+    training_report.write_text('{"existing_training_report": true}', encoding="utf-8")
+    original_report = training_report.read_bytes()
+    frame = physical_frame("2010-01-01", "2017-01-01", "2017-01-01")
+    monkeypatch.setattr(climate, "load_feature_matrix", lambda: frame)
+    train = Mock(side_effect=AssertionError("Evaluation cannot train."))
+    publish = Mock(side_effect=AssertionError("Evaluation cannot publish."))
+    fit = Mock(side_effect=AssertionError("Evaluation cannot fit."))
+    monkeypatch.setattr(climate, "train", train)
+    monkeypatch.setattr(climate, "publish_bundle", publish)
+    monkeypatch.setattr(xgb.XGBRegressor, "fit", fit)
+
+    result = climate.main(["--eval"])
+
+    assert result["evaluation_only"] is True
+    assert result["train_target_cutoff"] == "2015-12-31"
+    assert result["evaluation_protocol"]["first_eligible_origin"] == "2016-07-01"
+    assert result["evaluation"]["n"] == 21
+    assert result["model_sha256"] == json.loads(checkpoint.read_text())["model_sha256"]
+    assert {path: path.read_bytes() for path in checkpoint.parent.rglob("*") if path.is_file()} == before
+    assert training_report.read_bytes() == original_report
+    report = tmp_path / "reports/climate_forecast_saved_evaluation.json"
+    assert json.loads(report.read_text()) == result
+    train.assert_not_called()
+    publish.assert_not_called()
+    fit.assert_not_called()
+
+
+def test_candidate_cli_keeps_active_pointer_and_model_card_unchanged(tmp_path, monkeypatch, tiny_model):
+    monkeypatch.setattr(climate, "ROOT", tmp_path)
+    active = tmp_path / "models/checkpoints/aquaiq_monthly_climate.json"
+    monkeypatch.setattr(climate, "CHECKPOINT_PATH", active)
+    climate.publish_bundle(tiny_model, model_card())
+    active_card = active.with_name(active.stem + "_model_card.json")
+    before = {path: path.read_bytes() for path in active.parent.rglob("*") if path.is_file()}
+    frame = physical_frame()
+    monkeypatch.setattr(climate, "load_feature_matrix", lambda: frame)
+    candidate = active.parent / "candidate.json"
+
+    def train_candidate(frame_arg, cutoff, checkpoint):
+        assert frame_arg is frame and cutoff == "2018-12-31"
+        assert checkpoint == candidate
+        card = {**model_card(), "train_target_cutoff": cutoff, "max_train_target_date": "2018-12-01",
+                "n_train_observed_pairs": 50, "evaluation": {"status": "fixture"}, "feature_importance": {}}
+        return tiny_model, climate.publish_bundle(tiny_model, card, checkpoint)
+
+    monkeypatch.setattr(climate, "train", train_candidate)
+    result = climate.main(["--candidate-checkpoint", str(candidate), "--train-cutoff", "2018-12-31"])
+
+    assert all(path.read_bytes() == content for path, content in before.items())
+    assert active_card.read_bytes() == before[active_card]
+    assert climate.load_bundle(active, frame.attrs["feature_generation_id"])[1]["train_target_cutoff"] == "2019-12-31"
+    assert climate.load_bundle(candidate, frame.attrs["feature_generation_id"])[1] == result
+    assert json.loads(candidate.with_name("candidate_evaluation.json").read_text()) == result
+    assert not (tmp_path / "reports/climate_forecast_evaluation.json").exists()
+
+
+def test_evaluation_cli_reads_an_explicit_candidate_and_writes_only_its_report(tmp_path, monkeypatch, tiny_model):
+    monkeypatch.setattr(climate, "ROOT", tmp_path)
+    active = tmp_path / "models/checkpoints/aquaiq_monthly_climate.json"
+    monkeypatch.setattr(climate, "CHECKPOINT_PATH", active)
+    candidate = tmp_path / "experiment/candidate.json"
+    card = {**model_card(), "train_target_cutoff": "2017-12-31", "max_train_target_date": "2017-12-01"}
+    climate.publish_bundle(tiny_model, card, candidate)
+    before = {path: path.read_bytes() for path in candidate.parent.rglob("*") if path.is_file()}
+    frame = physical_frame("2010-01-01", "2019-01-01", "2019-01-01")
+    monkeypatch.setattr(climate, "load_feature_matrix", lambda: frame)
+    report = tmp_path / "reports/candidate_check.json"
+
+    result = climate.main(["--eval", "--checkpoint", str(candidate), "--output", str(report)])
+
+    assert result["train_target_cutoff"] == "2017-12-31"
+    assert result["evaluation"]["n"] == 21
+    assert {path: path.read_bytes() for path in candidate.parent.rglob("*") if path.is_file()} == before
+    assert json.loads(report.read_text()) == result
+    assert not active.exists()
+
+
+@pytest.mark.parametrize("invalid_provenance", [{"data_source": "synthetic"}, {"feature_generation_id": ""}])
+def test_saved_evaluation_requires_verified_feature_provenance(monkeypatch, invalid_provenance):
+    frame = physical_frame()
+    frame.attrs.update(invalid_provenance)
+    loader = Mock(side_effect=AssertionError("Invalid features must not be evaluated."))
+    monkeypatch.setattr(climate, "load_bundle", loader)
+    with pytest.raises(ValueError, match="verified real features"):
+        climate.evaluate_saved_checkpoint(frame)
+    loader.assert_not_called()
+
+
+def test_default_training_cli_retains_active_checkpoint_and_training_report_defaults(tmp_path, monkeypatch):
+    monkeypatch.setattr(climate, "ROOT", tmp_path)
+    monkeypatch.setattr(climate, "CHECKPOINT_PATH", tmp_path / "models/checkpoints/aquaiq_monthly_climate.json")
+    frame = physical_frame()
+    monkeypatch.setattr(climate, "load_feature_matrix", lambda: frame)
+    card = {"n_train_observed_pairs": 42, "evaluation": {}, "feature_importance": {}}
+    trainer = Mock(return_value=(Mock(), card))
+    monkeypatch.setattr(climate, "train", trainer)
+    assert climate.main([]) == card
+    trainer.assert_called_once_with(frame, climate.DEFAULT_TRAIN_CUTOFF, checkpoint=None)
+    assert json.loads((tmp_path / "reports/climate_forecast_evaluation.json").read_text()) == card
+
+
+@pytest.mark.parametrize("arguments", [
+    ["--eval", "--train-cutoff", "2015-12-31"],
+    ["--eval", "--candidate-checkpoint", "candidate.json"],
+    ["--checkpoint", "candidate.json"],
+    ["--candidate-checkpoint", "candidate.json", "--checkpoint", "input.json"],
+])
+def test_conflicting_cli_flags_fail_before_loading_data(monkeypatch, arguments):
+    loader = Mock(side_effect=AssertionError("Conflicting flags must fail before reading features."))
+    monkeypatch.setattr(climate, "load_feature_matrix", loader)
+    with pytest.raises(SystemExit) as error:
+        climate.main(arguments)
+    assert error.value.code == 2
+    loader.assert_not_called()
+
+
+@pytest.mark.parametrize("output_kind", ["active_pointer", "active_card", "training_report", "bundle_asset", "feature_manifest",
+                                        "historical_pointer", "historical_card", "historical_bundle"])
+def test_evaluation_output_cannot_replace_protected_inputs(tmp_path, monkeypatch, output_kind):
+    monkeypatch.setattr(climate, "ROOT", tmp_path)
+    active = tmp_path / "models/checkpoints/aquaiq_monthly_climate.json"
+    monkeypatch.setattr(climate, "CHECKPOINT_PATH", active)
+    outputs = {"active_pointer": active,
+               "active_card": active.with_name(active.stem + "_model_card.json"),
+               "training_report": tmp_path / "reports/climate_forecast_evaluation.json",
+               "bundle_asset": active.parent / "climate_bundles/existing/model.json",
+               "feature_manifest": tmp_path / "data/processed/feature_manifest.json",
+               "historical_pointer": tmp_path / climate.CONFIG['paths']['xgboost_checkpoint'],
+               "historical_card": tmp_path / "models/checkpoints/aquaiq_xgb_model_card.json",
+               "historical_bundle": tmp_path / "models/checkpoints/bundles/existing/model.json"}
+    loader = Mock(side_effect=AssertionError("Unsafe output must fail before reading features."))
+    monkeypatch.setattr(climate, "load_feature_matrix", loader)
+    with pytest.raises(SystemExit) as error:
+        climate.main(["--eval", "--output", str(outputs[output_kind])])
+    assert error.value.code == 2
+    loader.assert_not_called()
+
+
+@pytest.mark.parametrize("target_kind", ["active_pointer", "active_card", "bundle_asset", "report_alias", "card_alias",
+                                        "historical_pointer", "historical_card", "historical_bundle"])
+def test_candidate_cli_refuses_active_assets_and_aliased_outputs(tmp_path, monkeypatch, target_kind):
+    monkeypatch.setattr(climate, "ROOT", tmp_path)
+    active = tmp_path / "models/checkpoints/aquaiq_monthly_climate.json"
+    monkeypatch.setattr(climate, "CHECKPOINT_PATH", active)
+    targets = {"active_pointer": active,
+               "active_card": active.with_name(active.stem + "_model_card.json"),
+               "bundle_asset": active.parent / "climate_bundles/existing/model.json",
+               "report_alias": tmp_path / "candidate.json", "card_alias": tmp_path / "candidate.json",
+               "historical_pointer": tmp_path / climate.CONFIG['paths']['xgboost_checkpoint'],
+               "historical_card": tmp_path / "models/checkpoints/aquaiq_xgb_model_card.json",
+               "historical_bundle": tmp_path / "models/checkpoints/bundles/existing/model.json"}
+    candidate = targets[target_kind]
+    arguments = ["--candidate-checkpoint", str(candidate)]
+    if target_kind == "report_alias":
+        arguments += ["--output", str(candidate)]
+    elif target_kind == "card_alias":
+        arguments += ["--output", str(candidate.with_name("candidate_model_card.json"))]
+    loader = Mock(side_effect=AssertionError("Unsafe output must fail before reading features."))
+    monkeypatch.setattr(climate, "load_feature_matrix", loader)
+    with pytest.raises(SystemExit) as error:
+        climate.main(arguments)
+    assert error.value.code == 2
+    loader.assert_not_called()

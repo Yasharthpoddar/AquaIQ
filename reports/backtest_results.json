@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-10-13T01:34:48.272979+00:00",
+  "created_at": "2026-10-13T17:10:31.398771+00:00",
   "data_source": "verified features_matrix.csv",
   "candidate_ensemble_weights": {
     "linear_regression_trend": 0.0044924771662880605,
