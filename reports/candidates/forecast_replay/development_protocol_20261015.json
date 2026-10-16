@@ -1,0 +1,10 @@
+{
+  "fit_start": "2002-01-01",
+  "fit_end": "2019-12-31",
+  "development_start": "2020-07-01",
+  "development_end": "2020-12-31",
+  "calibration_start": "2021-01-01",
+  "calibration_end": "2021-12-31",
+  "evaluation_start": "2022-01-01",
+  "evaluation_end": "2022-12-31"
+}

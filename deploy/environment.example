@@ -1,0 +1,13 @@
+# Save privately as deploy/.env (never commit real credentials).
+# Compose reads this file via: docker compose --env-file deploy/.env -f deploy/compose.yaml ...
+POSTGRES_HOST=host.docker.internal
+POSTGRES_PORT=5432
+POSTGRES_DB=aquaiq
+POSTGRES_USER=replace_with_readonly_serving_role
+POSTGRES_PASSWORD=replace_locally
+SECRET_KEY=replace_with_private_random_value
+# Docker Desktop on Windows accepts forward-slash absolute paths.
+AQUAIQ_DATA_DIR=C:/path/to/AquaIQ/data
+AQUAIQ_CHECKPOINT_DIR=C:/path/to/AquaIQ/models/checkpoints
+AQUAIQ_EXPECTED_DISTRICTS=725
+AQUAIQ_WEB_PORT=8080

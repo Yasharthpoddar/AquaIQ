@@ -1,0 +1,11 @@
+FROM python:3.13-slim
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+WORKDIR /app
+RUN apt-get update && apt-get install -y --no-install-recommends libgomp1 && rm -rf /var/lib/apt/lists/*
+COPY requirements.txt ./
+RUN python -m pip install --no-cache-dir -r requirements.txt
+COPY . .
+RUN groupadd --gid 10001 aquaiq && useradd --uid 10001 --gid aquaiq --no-create-home aquaiq
+USER aquaiq
+EXPOSE 5000
+CMD ["python", "-m", "deploy.serve"]

@@ -1,0 +1,17 @@
+.git
+.env
+**/.env
+**/.env.*
+!.env.example
+venv
+**/__pycache__
+**/.pytest_cache
+**/node_modules
+dashboard/dist
+data
+models/checkpoints
+reports
+scratch
+*.dump
+*.log
+.continuation-*

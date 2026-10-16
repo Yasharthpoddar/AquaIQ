@@ -48,3 +48,12 @@ reports/candidates/groundwater_updates/**/*.png
 reports/candidates/**/climate_bundles/
 reports/candidates/pytest-*/
 
+
+# Generated station comparison inputs and source renderings
+reports/candidates/station_history_20261015/**/*.csv
+reports/candidates/station_history_20261015/*.csv
+reports/candidates/station_history_20261015/*.png
+
+reports/candidates/rainfall_refresh/
+
+reports/candidates/forecast_replay/*.csv

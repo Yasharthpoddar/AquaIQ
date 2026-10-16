@@ -14,11 +14,41 @@ Run:
 
 import os
 from pathlib import Path
+from urllib.parse import urlsplit
 
 from flask import Flask
 from flask_cors import CORS
 
 ROOT = Path(__file__).parent.parent
+
+DEFAULT_CORS_ORIGINS = (
+    "http://localhost:3000", "http://localhost:5173",
+    "http://127.0.0.1:3000", "http://127.0.0.1:5173",
+)
+
+
+def cors_origins(value):
+    """Accept explicit web origins; an empty setting disables cross-origin access."""
+    if value is None:
+        return list(DEFAULT_CORS_ORIGINS)
+    if isinstance(value, str):
+        origins = [item.strip() for item in value.split(",") if item.strip()]
+    elif isinstance(value, (list, tuple)) and all(isinstance(item, str) for item in value):
+        origins = [item.strip() for item in value]
+    else:
+        raise ValueError("AQUAIQ_CORS_ORIGINS must be a comma-separated string or list of web origins")
+    for origin in origins:
+        try:
+            parsed = urlsplit(origin)
+            _ = parsed.port  # Parse and range-check a supplied port.
+            if (parsed.scheme not in {"http", "https"} or not parsed.hostname
+                    or parsed.username or parsed.password or parsed.path
+                    or parsed.query or parsed.fragment or origin.endswith(":")
+                    or any(char.isspace() for char in origin) or "*" in origin or "\\" in origin):
+                raise ValueError
+        except ValueError:
+            raise ValueError("CORS origins must be explicit http(s)://host[:port] origins without paths or wildcards") from None
+    return list(dict.fromkeys(origins))
 
 
 def create_app(config_override=None):
@@ -33,13 +63,16 @@ def create_app(config_override=None):
         POSTGRES_DB=os.getenv("POSTGRES_DB", "aquaiq"),
         POSTGRES_USER=os.getenv("POSTGRES_USER", "aquaiq_user"),
         POSTGRES_PASSWORD=os.getenv("POSTGRES_PASSWORD", ""),
+        AQUAIQ_CORS_ORIGINS=os.getenv("AQUAIQ_CORS_ORIGINS"),
     )
 
     if config_override:
         app.config.update(config_override)
 
-    # CORS for React dashboard (localhost and 127.0.0.1)
-    CORS(app, origins=["http://localhost:3000", "http://localhost:5173", "http://127.0.0.1:3000", "http://127.0.0.1:5173"])
+    # A reverse-proxy deployment uses an empty setting and same-origin /api.
+    origins = cors_origins(app.config["AQUAIQ_CORS_ORIGINS"])
+    app.config["AQUAIQ_CORS_ORIGINS"] = origins
+    CORS(app, resources={r"/api/*": {"origins": origins}})
 
     # Register blueprints
     from api.routes.predict import predict_bp

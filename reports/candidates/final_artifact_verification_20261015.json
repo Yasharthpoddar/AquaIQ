@@ -1,0 +1,25 @@
+{
+  "protected_files_checked": 30,
+  "protected_files_changed": [],
+  "prospective_archives": 3,
+  "pending_independent_targets": 18,
+  "districts": [
+    "GJ-Gandhinagar",
+    "AP-Krishna",
+    "DL-Delhi"
+  ],
+  "evidence_sources": [
+    "district_level",
+    "district_level",
+    "zone_fallback"
+  ],
+  "as_of_dates": [
+    "2026-10-15",
+    "2026-10-15",
+    "2026-10-15"
+  ],
+  "forecast_first_month": "2026-11",
+  "forecast_last_month": "2027-04",
+  "production_changes_made": false,
+  "current_period_accuracy_established": false
+}

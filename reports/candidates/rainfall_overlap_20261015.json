@@ -1,0 +1,174 @@
+{
+  "schema_version": "imd-realtime-overlap-v1",
+  "created_at_utc": "2026-10-15T08:07:59.489319+00:00",
+  "status": "review_required",
+  "verified_overlap": false,
+  "review_reasons": [
+    "2025-01-01: rainfall_values_differ_beyond_predeclared_tolerance",
+    "2025-06-15: rainfall_values_differ_beyond_predeclared_tolerance",
+    "2025-09-30: rainfall_values_differ_beyond_predeclared_tolerance"
+  ],
+  "annual_source": {
+    "path": "C:\\Users\\Yasharth\\Downloads\\AquaIQ\\data\\raw\\updates\\20261013\\imd\\Rainfall_ind2025_rfp25.grd",
+    "sidecar_path": "C:\\Users\\Yasharth\\Downloads\\AquaIQ\\data\\raw\\updates\\20261013\\imd\\Rainfall_ind2025_rfp25.download.json",
+    "sidecar_sha256": "bcf6a58988b42f7c95670653620b9b7a1f6bf6d4235586f1231a7a435eecf682",
+    "download_url": "https://imdpune.gov.in/cmpg/Griddata/rainfall.php",
+    "source_page": "https://imdpune.gov.in/cmpg/Griddata/Rainfall_25_Bin.html",
+    "request_method": "POST",
+    "request_form": {
+      "rain": "2025"
+    },
+    "response_content_disposition": "attachment; filename=Rainfall/ind2025_rfp25.grd",
+    "retrieved_at_utc": "2026-10-13T11:53:54.006177+00:00",
+    "year": 2025,
+    "days": 365,
+    "grid": [
+      129,
+      135
+    ],
+    "dtype": "little-endian float32",
+    "size_bytes": 25425900,
+    "units": "mm/day",
+    "first_grid_point": [
+      6.5,
+      66.5
+    ],
+    "grid_step_degrees": 0.25,
+    "negative_values_are_missing": true,
+    "complete_day_records": true,
+    "min_usable_grid_cells_per_day": 4964,
+    "complete_cells_all_days": 4964,
+    "maximum_daily_rainfall_mm": 469.21014404296875,
+    "sha256": "b4fa5ffb389496c0fa7d5a468d1cb47e4db0bcabcd11be4f273c0e6cfa7d611d"
+  },
+  "units": "mm/day",
+  "grid": [
+    129,
+    135
+  ],
+  "grid_orientation": "south_to_north_latitude; longitude_varies_fastest",
+  "first_grid_point": [
+    6.5,
+    66.5
+  ],
+  "grid_step_degrees": 0.25,
+  "thresholds": {
+    "absolute_tolerance_mm": 0.001,
+    "relative_tolerance": 1e-05,
+    "relative_tolerance_reference": "annual_archive_value",
+    "minimum_shared_cells_per_date": 1000,
+    "minimum_shared_fraction_of_union_per_date": 0.95,
+    "require_identical_usable_masks": true,
+    "required_fraction_matching_tolerance": 1.0
+  },
+  "date_coverage": {
+    "minimum_dates": 3,
+    "requested_dates": 3,
+    "unique_months": [
+      1,
+      6,
+      9
+    ],
+    "minimum_distinct_months": 3,
+    "monsoon_sample_months": [
+      6,
+      7,
+      8,
+      9
+    ],
+    "has_june_to_september_sample": true,
+    "has_sample_outside_june_to_september": true,
+    "date_diversity_passed": true
+  },
+  "comparisons": [
+    {
+      "date": "2025-01-01",
+      "annual_day_index_zero_based": 0,
+      "realtime_path": "C:\\Users\\Yasharth\\Downloads\\AquaIQ\\data\\raw\\updates\\rainfall_refresh\\overlap\\2025\\rain_01012025.bin",
+      "realtime_sha256": "ea403270a847be37e71cd39f6e2d32768088083678c04993916783ab40e9917e",
+      "realtime_sidecar_path": "C:\\Users\\Yasharth\\Downloads\\AquaIQ\\data\\raw\\updates\\rainfall_refresh\\overlap\\2025\\rain_01012025.download.json",
+      "realtime_sidecar_sha256": "2d5aa3dd51e394a8a0704c47bb9cfa7f82e71b4e516ee324164873aa08f9661f",
+      "annual_usable_cells": 4964,
+      "realtime_usable_cells": 4964,
+      "shared_usable_cells": 4964,
+      "union_usable_cells": 4964,
+      "shared_usable_fraction_of_union": 1.0,
+      "annual_only_usable_cells": 0,
+      "realtime_only_usable_cells": 0,
+      "mask_mismatch_cells": 0,
+      "both_missing_cells": 12451,
+      "mean_absolute_difference_mm": 2.6091425188071876e-05,
+      "maximum_absolute_difference_mm": 0.09020289033651352,
+      "fraction_matching_tolerance": 0.999597099113618,
+      "cells_outside_tolerance": 2,
+      "rainfall_values_passed": false,
+      "grid_coverage_passed": true,
+      "usable_masks_passed": true,
+      "passed": false,
+      "review_reasons": [
+        "rainfall_values_differ_beyond_predeclared_tolerance"
+      ]
+    },
+    {
+      "date": "2025-06-15",
+      "annual_day_index_zero_based": 165,
+      "realtime_path": "C:\\Users\\Yasharth\\Downloads\\AquaIQ\\data\\raw\\updates\\rainfall_refresh\\overlap\\2025\\rain_15062025.bin",
+      "realtime_sha256": "f7f61b028e3efbd884c8254ba6dab4be749e6b1a5a5b9d368a37fe6ad839a1a7",
+      "realtime_sidecar_path": "C:\\Users\\Yasharth\\Downloads\\AquaIQ\\data\\raw\\updates\\rainfall_refresh\\overlap\\2025\\rain_15062025.download.json",
+      "realtime_sidecar_sha256": "d8267151a9499dfd8ce9d045f88ffe8da4a179026964bbb92029e7bba1a4b6a5",
+      "annual_usable_cells": 4964,
+      "realtime_usable_cells": 4964,
+      "shared_usable_cells": 4964,
+      "union_usable_cells": 4964,
+      "shared_usable_fraction_of_union": 1.0,
+      "annual_only_usable_cells": 0,
+      "realtime_only_usable_cells": 0,
+      "mask_mismatch_cells": 0,
+      "both_missing_cells": 12451,
+      "mean_absolute_difference_mm": 0.1646196982457809,
+      "maximum_absolute_difference_mm": 55.66600799560547,
+      "fraction_matching_tolerance": 0.9302981466559227,
+      "cells_outside_tolerance": 346,
+      "rainfall_values_passed": false,
+      "grid_coverage_passed": true,
+      "usable_masks_passed": true,
+      "passed": false,
+      "review_reasons": [
+        "rainfall_values_differ_beyond_predeclared_tolerance"
+      ]
+    },
+    {
+      "date": "2025-09-30",
+      "annual_day_index_zero_based": 272,
+      "realtime_path": "C:\\Users\\Yasharth\\Downloads\\AquaIQ\\data\\raw\\updates\\rainfall_refresh\\overlap\\2025\\rain_30092025.bin",
+      "realtime_sha256": "124f8d49f64ad49e4e117386ac8165863b2c07ffe20bdcd4e0948c1fe64a89fb",
+      "realtime_sidecar_path": "C:\\Users\\Yasharth\\Downloads\\AquaIQ\\data\\raw\\updates\\rainfall_refresh\\overlap\\2025\\rain_30092025.download.json",
+      "realtime_sidecar_sha256": "56a1488df252a7ab6df05fdc707e1e5f4bd6b003625458766a7ff22af73f361f",
+      "annual_usable_cells": 4964,
+      "realtime_usable_cells": 4964,
+      "shared_usable_cells": 4964,
+      "union_usable_cells": 4964,
+      "shared_usable_fraction_of_union": 1.0,
+      "annual_only_usable_cells": 0,
+      "realtime_only_usable_cells": 0,
+      "mask_mismatch_cells": 0,
+      "both_missing_cells": 12451,
+      "mean_absolute_difference_mm": 0.009501329716351583,
+      "maximum_absolute_difference_mm": 7.852302551269531,
+      "fraction_matching_tolerance": 0.9474214343271555,
+      "cells_outside_tolerance": 261,
+      "rainfall_values_passed": false,
+      "grid_coverage_passed": true,
+      "usable_masks_passed": true,
+      "passed": false,
+      "review_reasons": [
+        "rainfall_values_differ_beyond_predeclared_tolerance"
+      ]
+    }
+  ],
+  "scope_limit": "Agreement covers only the sampled dates and shared grid cells. It does not prove countrywide product identity, all remaining dates, or current-year accuracy.",
+  "product_warning": "Real-time rainfall is provisional; the annual archive can contain quality-control revisions. Differences require review and are never rewritten automatically.",
+  "network_requests_made": 0,
+  "source_data_modified": false,
+  "production_changes_made": false
+}

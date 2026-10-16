@@ -77,3 +77,7 @@ All **528 database-independent Python tests passed**, with 12 opt-in database te
 ## Remaining work
 
 Source availability and actual annual/daily overlap remain unresolved. Current-period accuracy, gap-aware and zone-aware uncertainty calibration, comparable monitoring-station trends, independent crisis-score calibration, unattended update scheduling and production deployment remain separate work. Fresh observations are necessary to evaluate current projections; development residuals alone cannot establish their uncertainty. Code and reports are local changes and have not been pushed by this implementation run.
+
+## Continuation on 15 October 2026
+
+See [the continuation report](Prediction_Pipeline_Continuation_2026-10-15.md) for the implemented validation and operating tools, verified station comparison, failed real rainfall-overlap check, scheduled task and remaining evidence requirements.

@@ -1,0 +1,89 @@
+{
+  "mode": "read_only_native_release_validation",
+  "as_of": "2026-10-15",
+  "release": {
+    "districts": 725,
+    "feature_rows": 215325,
+    "raw_rows": 741628,
+    "scores": 725
+  },
+  "checks": [
+    {
+      "url": "/api/health",
+      "http_status": 200,
+      "seconds": 0.366
+    },
+    {
+      "url": "/api/scores",
+      "http_status": 200,
+      "seconds": 0.357
+    },
+    {
+      "url": "/api/district/GJ-Gandhinagar",
+      "http_status": 200,
+      "seconds": 0.333
+    },
+    {
+      "url": "/api/history/GJ-Gandhinagar",
+      "http_status": 200,
+      "seconds": 0.116
+    },
+    {
+      "url": "/api/predict/GJ-Gandhinagar?window=next_six_months&as_of=2026-10-15",
+      "http_status": 200,
+      "seconds": 0.38,
+      "forecast_dates": [
+        "2026-11-01",
+        "2026-12-01",
+        "2027-01-01",
+        "2027-02-01",
+        "2027-03-01",
+        "2027-04-01"
+      ],
+      "projection_status": "projection"
+    },
+    {
+      "url": "POST /api/simulate (zero change)",
+      "http_status": 200,
+      "baseline_equals_simulated": true
+    }
+  ],
+  "cors_allowlist_verified": true,
+  "zero_change_simulation_verified": true,
+  "protected_files_unchanged": true,
+  "protected_sha256": {
+    "config.yaml": "2284fe73c5a30fb03045bd96317ea922e40c6dcfa0aba7108c72f6a8a9d5b656",
+    "data\\processed\\district_rainfall_gwl_correlation.csv": "12431c4dc09081d3ed888ca545bfcedbe7aa978b7e0809b777a91b711ea6632b",
+    "data\\processed\\era5_district_monthly.csv": "a93d7d938ec9b6cec20363c41786a9aa7863c7093ed324a2fee683b50d35da65",
+    "data\\processed\\features_matrix.csv": "3958737b033a16e722f633a15ad77d80bc5b2a8fb3bea888697f0410362c24ae",
+    "data\\processed\\imd_climatological_normal.csv": "0d85f873a3db4acc945a7e54f6bab56c084faaed2366d4144faf16e493f3a59c",
+    "data\\processed\\imd_rainfall_district_monthly.csv": "0bc3ec52da3648b5f2166c490e604d0fd781fc95c07fc5ab66ab89d73c57ff21",
+    "data\\processed\\preprocessed_wide.csv": "a72e0a3a771f5b0e8013922603933c823ed6a908250e1d95f60ddd9b41605ae3",
+    "data\\processed\\ttest_results.csv": "a814adccc3dc71189e63ac5789bf3ac587c28799b2eec0ec938baa90afcd22d5",
+    "data\\processed\\era5_district_monthly.manifest.json": "25ce5376cc4153a1cfded22e72acfa64ae0429891d91562546c324ab10af833c",
+    "data\\processed\\feature_manifest.json": "afc96a9e13655ffa2ccb2bf18a027b9bb1ed34c21260b901301cef6fd35c8b91",
+    "data\\processed\\imd_climatological_normal.manifest.json": "fabb956bc5b7d6df8c39c08b7ae89813807b05e250f974b8c8a0e835060e00df",
+    "data\\processed\\imd_rainfall_district_monthly.manifest.json": "659301240e18cd4b01de31a5a1829770e1cf204fb10b5472cf71217c0922d930",
+    "data\\processed\\preprocessed_manifest.json": "5fae7981aeb447251a6ce49ee0062c2c3d9d2ac606e7537ed56dc79ed7886a1c",
+    "models\\checkpoints\\aquaiq_monthly_climate.json": "59827055a401dee258e8ab9d2c1d7e81bfaab3bf8240f10bd5798f882f52ec43",
+    "models\\checkpoints\\aquaiq_monthly_climate_model_card.json": "e9885a71e00c0a1eabaddf3ed850257740293ddbec8ddba2a58a41cdc820a813",
+    "models\\checkpoints\\aquaiq_xgb.json": "e6722ef6cb77242ba982a5763a0ff28499a05d93147df30828ab822bbf26ff92",
+    "models\\checkpoints\\aquaiq_xgb_model_card.json": "aee8c2862268af07300f563a7582ea7cb218d1b74bb729b7bbb2d1341a1e01ee",
+    "models\\checkpoints\\bundles\\20261012T214937835187Z-e5aabff0348e\\model.json": "ef58264b9c1fa43f727fef9d4d180e59f091c9778eb48f128f2ab81d40a97789",
+    "models\\checkpoints\\bundles\\20261012T214937835187Z-e5aabff0348e\\model_card.json": "b753f76b24165e6e59ac7e02dc3666d24294e3c1d083d7d136fc558227def0ec",
+    "models\\checkpoints\\bundles\\20261013T011641475277Z-9466f6c90d06\\model.json": "ef58264b9c1fa43f727fef9d4d180e59f091c9778eb48f128f2ab81d40a97789",
+    "models\\checkpoints\\bundles\\20261013T011641475277Z-9466f6c90d06\\model_card.json": "0445c1a5b533d3650a4d36fd2c47209fe0293d9977b97f5cb32572f51d6481a9",
+    "models\\checkpoints\\bundles\\20261013T013412238972Z-e84584e8e6c3\\model.json": "ef58264b9c1fa43f727fef9d4d180e59f091c9778eb48f128f2ab81d40a97789",
+    "models\\checkpoints\\bundles\\20261013T013412238972Z-e84584e8e6c3\\model_card.json": "418f70ce4956f2c78206e558db0d30097d399255cb65428f01fc71612adbab83",
+    "models\\checkpoints\\bundles\\20261013T170456589578Z-ca138883556b\\model.json": "ef58264b9c1fa43f727fef9d4d180e59f091c9778eb48f128f2ab81d40a97789",
+    "models\\checkpoints\\bundles\\20261013T170456589578Z-ca138883556b\\model_card.json": "aee8c2862268af07300f563a7582ea7cb218d1b74bb729b7bbb2d1341a1e01ee",
+    "models\\checkpoints\\climate_bundles\\20261013T094130144099Z-249d486e6a\\model.json": "54f535f57bcd62f0bea38cf5c545eb253b37d5bdd6bae1794ec27a3e73a43d97",
+    "models\\checkpoints\\climate_bundles\\20261013T094130144099Z-249d486e6a\\model_card.json": "49efb86b81c5b5561989b557d98e612b5b3d5eb5ae7445c7f18e3b604660880c",
+    "models\\checkpoints\\climate_bundles\\20261013T170824590468Z-16aefd7cb4\\model.json": "54f535f57bcd62f0bea38cf5c545eb253b37d5bdd6bae1794ec27a3e73a43d97",
+    "models\\checkpoints\\climate_bundles\\20261013T170824590468Z-16aefd7cb4\\model_card.json": "e9885a71e00c0a1eabaddf3ed850257740293ddbec8ddba2a58a41cdc820a813",
+    "models\\checkpoints\\scaler_params.json": "994a73d05a7c20cc89430e7df4e57c46cce83138aad59b07139d97366ee4ab69"
+  },
+  "seconds": 4.681,
+  "container_runtime_tested": false,
+  "public_deployment_performed": false
+}
