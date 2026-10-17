@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { fetchConfig } from '../api';
+import { boundaryCoverage, buildScoreLookup, districtBoundaries, districtName, matchDistrict } from '../districtMap';
 
 /**
  * MapComponent — Leaflet.js India choropleth map
@@ -11,50 +12,6 @@ import { fetchConfig } from '../api';
  *   geojsonUrl: path to the India district GeoJSON
  *   onDistrictClick: callback(district_id) when a district polygon is clicked
  */
-
-const STATE_TO_ABBREV = {
-  "andhra pradesh": "AP",
-  "arunachal pradesh": "AR",
-  "assam": "AS",
-  "bihar": "BR",
-  "chhattisgarh": "CG",
-  "goa": "GA",
-  "gujarat": "GJ",
-  "haryana": "HR",
-  "himachal pradesh": "HP",
-  "jharkhand": "JH",
-  "karnataka": "KA",
-  "kerala": "KL",
-  "madhya pradesh": "MP",
-  "maharashtra": "MH",
-  "manipur": "MN",
-  "meghalaya": "ML",
-  "mizoram": "MZ",
-  "nagaland": "NL",
-  "odisha": "OD",
-  "punjab": "PB",
-  "rajasthan": "RJ",
-  "sikkim": "SK",
-  "tamil nadu": "TN",
-  "telangana": "TS",
-  "tripura": "TR",
-  "uttar pradesh": "UP",
-  "uttarakhand": "UK",
-  "west bengal": "WB",
-  "delhi": "DL",
-  "nct of delhi": "DL",
-  "jammu & kashmir": "JK",
-  "jammu and kashmir": "JK",
-  "ladakh": "LA",
-  "puducherry": "PY",
-  "chandigarh": "CH",
-  "andaman and nicobar islands": "AN",
-  "andaman and nicobar": "AN",
-  "dadra and nagar haveli and daman and diu": "DD",
-  "daman and diu": "DD",
-  "dadra and nagar haveli": "DN",
-  "lakshadweep": "LD",
-};
 
 const DEFAULT_TIER_COLORS = {
   Safe: '#22c55e',
@@ -78,6 +35,7 @@ function MapComponent({ scores = [], geojsonUrl, onDistrictClick }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [tierConfig, setTierConfig] = useState(null);
   const [mapError, setMapError] = useState(null);
+  const [coverage, setCoverage] = useState(null);
   const [retry, setRetry] = useState(0);
 
   // Fetch official tier configuration from backend
@@ -101,46 +59,10 @@ function MapComponent({ scores = [], geojsonUrl, onDistrictClick }) {
   // Match only a canonical ID or a name within the same state.
   const scoreLookup = useRef({});
   useEffect(() => {
-    const lookup = {};
-    scores.forEach(s => {
-      if (s.district_id) {
-        lookup[s.district_id.toLowerCase()] = s;
-      }
-      if (s.state && s.name) {
-        const stateKey = s.state.toLowerCase().trim();
-        const nameKey = s.name.toLowerCase().trim().replace(/\s+/g, '_');
-        lookup[`${stateKey}__${nameKey}`] = s;
-      }
-    });
-    scoreLookup.current = lookup;
+    scoreLookup.current = buildScoreLookup(scores);
   }, [scores]);
 
-  // Match GeoJSON feature to district score
-  const findMatch = (props) => {
-    const dName = (props.district || props.DISTRICT || props.name || '').trim();
-    const sName = (props.st_nm || props.state || props.ST_NM || '').trim();
-    const dNorm = dName.replace(/\s+/g, '_').toLowerCase();
-    const sNorm = sName.toLowerCase();
-    const sAbbr = STATE_TO_ABBREV[sNorm];
-
-    // 1. Try canonical ID "{abbr}-{name}"
-    if (sAbbr) {
-      const canonical = `${sAbbr.toLowerCase()}-${dNorm}`;
-      if (scoreLookup.current[canonical]) return scoreLookup.current[canonical];
-    }
-
-    // 2. Try explicit district_id property if present
-    if (props.district_id && (!sAbbr || props.district_id.toLowerCase().startsWith(`${sAbbr.toLowerCase()}-`))
-      && scoreLookup.current[props.district_id.toLowerCase()]) {
-      return scoreLookup.current[props.district_id.toLowerCase()];
-    }
-
-    // 3. Try state__name
-    const stateNameKey = `${sNorm}__${dNorm}`;
-    if (scoreLookup.current[stateNameKey]) return scoreLookup.current[stateNameKey];
-
-    return null;
-  };
+  const findMatch = props => matchDistrict(props, scoreLookup.current);
 
   // Initialize map
   useEffect(() => {
@@ -174,6 +96,7 @@ function MapComponent({ scores = [], geojsonUrl, onDistrictClick }) {
     const controller = new AbortController();
     const map = mapInstance.current;
     setMapError(null);
+    setCoverage(null);
 
     if (geojsonLayer.current) {
       map.removeLayer(geojsonLayer.current);
@@ -187,7 +110,9 @@ function MapComponent({ scores = [], geojsonUrl, onDistrictClick }) {
       })
       .then(geojson => {
         if (cancelled || mapInstance.current !== map) return;
-        const layer = L.geoJSON(geojson, {
+        const boundaries = districtBoundaries(geojson);
+        setCoverage(boundaryCoverage(boundaries, scores, scoreLookup.current));
+        const layer = L.geoJSON(boundaries, {
           style: (feature) => {
             const match = findMatch(feature.properties || {});
             return {
@@ -200,7 +125,7 @@ function MapComponent({ scores = [], geojsonUrl, onDistrictClick }) {
           },
           onEachFeature: (feature, layer) => {
             const props = feature.properties || {};
-            const dName = props.district || props.DISTRICT || props.name || 'Unknown';
+            const dName = districtName(props) || 'Unknown';
             const sName = props.st_nm || props.state || props.ST_NM || '';
             const match = findMatch(props);
 
@@ -241,7 +166,7 @@ function MapComponent({ scores = [], geojsonUrl, onDistrictClick }) {
 
     const q = query.toLowerCase().trim();
     geojsonLayer.current.eachLayer((layer) => {
-      const dName = (layer.feature?.properties?.district || layer.feature?.properties?.name || '').toLowerCase();
+      const dName = districtName(layer.feature?.properties).toLowerCase();
       if (dName.includes(q)) {
         mapInstance.current.fitBounds(layer.getBounds(), { maxZoom: 8 });
         layer.openTooltip();
@@ -259,6 +184,12 @@ function MapComponent({ scores = [], geojsonUrl, onDistrictClick }) {
       {mapError && <div className="empty-state" role="alert">
         <p>{mapError}</p>
         <button className="alert-tab" onClick={() => setRetry(value => value + 1)}>Retry map</button>
+      </div>}
+      {coverage && <div className="map-coverage" role="status">
+        <p>District boundaries match {coverage.mapped} of {scores.length} scored district records.</p>
+        {coverage.missing.length > 0 && <p>Available without a separate matching boundary: {coverage.missing.map((district, index) => <span key={district.district_id}>
+          {index > 0 && ' · '}<button type="button" className="alert-tab" onClick={() => onDistrictClick?.(district.district_id)}>{district.name}, {district.state}</button>
+        </span>)}. Open a district to review its evidence.</p>}
       </div>}
       <div className="map-search">
         <input

@@ -13,6 +13,18 @@ CREATE TABLE IF NOT EXISTS districts (
     geojson_name        TEXT
 );
 
+-- Identity aliases are needed on a clean database as well as after migration.
+CREATE TABLE IF NOT EXISTS legacy_district_ids (
+    legacy_id VARCHAR(64) PRIMARY KEY,
+    canonical_id VARCHAR(64) NOT NULL,
+    canonical_name TEXT NOT NULL,
+    canonical_state TEXT NOT NULL,
+    source TEXT NOT NULL,
+    match_type TEXT NOT NULL,
+    notes TEXT,
+    migrated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Raw ingested readings from all 3 sources. One row per district/date/source/metric.
 CREATE TABLE IF NOT EXISTS raw_data (
     id           SERIAL PRIMARY KEY,

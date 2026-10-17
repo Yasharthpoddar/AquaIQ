@@ -8,8 +8,9 @@ district_bp=Blueprint('district',__name__)
 @district_bp.route('/district/<district_id>')
 def get_district(district_id):
     try:
+        cutoff=parse_as_of()
         canonical=resolve_district_id(district_id)
-        data=compute_crisis_score(canonical,parse_as_of())
+        data=compute_crisis_score(canonical,cutoff)
         data.update(metadata=get_district_metadata(canonical),resolved_id=canonical,
             ensemble_components=data.get('components',{}))
         return response(data)

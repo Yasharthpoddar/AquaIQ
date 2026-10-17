@@ -1,0 +1,233 @@
+{
+  "created_at": "2026-10-17T04:00:44.306303+00:00",
+  "database_policy": "All API connections explicitly read-only",
+  "requests": [
+    {
+      "path": "/api/health",
+      "http_status": 200,
+      "expected_status": 200,
+      "passed": true
+    },
+    {
+      "path": "/api/config",
+      "http_status": 200,
+      "expected_status": 200,
+      "passed": true
+    },
+    {
+      "path": "/api/scores",
+      "http_status": 200,
+      "expected_status": 200,
+      "passed": true
+    },
+    {
+      "path": "/api/alerts?limit=1000",
+      "http_status": 200,
+      "expected_status": 200,
+      "passed": true
+    },
+    {
+      "path": "/api/alerts",
+      "http_status": 200,
+      "expected_status": 200,
+      "passed": true
+    },
+    {
+      "path": "/api/district/RJ-Jaipur",
+      "http_status": 200,
+      "expected_status": 200,
+      "passed": true
+    },
+    {
+      "path": "/api/history/RJ-Jaipur",
+      "http_status": 200,
+      "expected_status": 200,
+      "passed": true
+    },
+    {
+      "path": "/api/predict/RJ-Jaipur",
+      "http_status": 200,
+      "expected_status": 200,
+      "passed": true
+    },
+    {
+      "path": "/api/predict/RJ-Jaipur?window=next_six_months",
+      "http_status": 200,
+      "expected_status": 200,
+      "passed": true
+    },
+    {
+      "path": "/api/district/MH-Pune",
+      "http_status": 200,
+      "expected_status": 200,
+      "passed": true
+    },
+    {
+      "path": "/api/history/MH-Pune",
+      "http_status": 200,
+      "expected_status": 200,
+      "passed": true
+    },
+    {
+      "path": "/api/predict/MH-Pune",
+      "http_status": 200,
+      "expected_status": 200,
+      "passed": true
+    },
+    {
+      "path": "/api/predict/MH-Pune?window=next_six_months",
+      "http_status": 200,
+      "expected_status": 200,
+      "passed": true
+    },
+    {
+      "path": "/api/district/AN-Nicobars",
+      "http_status": 200,
+      "expected_status": 200,
+      "passed": true
+    },
+    {
+      "path": "/api/history/AN-Nicobars",
+      "http_status": 200,
+      "expected_status": 200,
+      "passed": true
+    },
+    {
+      "path": "/api/predict/AN-Nicobars",
+      "http_status": 200,
+      "expected_status": 200,
+      "passed": true
+    },
+    {
+      "path": "/api/predict/AN-Nicobars?window=next_six_months",
+      "http_status": 200,
+      "expected_status": 200,
+      "passed": true
+    },
+    {
+      "path": "/api/district/not-a-district",
+      "http_status": 404,
+      "expected_status": 404,
+      "passed": true
+    },
+    {
+      "path": "/api/predict/RJ-Jaipur?months=12",
+      "http_status": 400,
+      "expected_status": 400,
+      "passed": true
+    },
+    {
+      "path": "/api/history/RJ-Jaipur?start=bad",
+      "http_status": 400,
+      "expected_status": 400,
+      "passed": true
+    },
+    {
+      "path": "/api/alerts?limit=0",
+      "http_status": 400,
+      "expected_status": 400,
+      "passed": true
+    },
+    {
+      "path": "/api/district/RJ-Jaipur?as_of=20260101",
+      "http_status": 400,
+      "expected_status": 400,
+      "passed": true
+    }
+  ],
+  "health": {
+    "database": "connected",
+    "model_loaded": true,
+    "monthly_climate_model_loaded": true,
+    "status": "healthy",
+    "version": "1.0"
+  },
+  "score_counts": {
+    "total": 725,
+    "tier_counts": {
+      "Crisis": 6,
+      "Safe": 300,
+      "Unknown": 4,
+      "Warning": 50,
+      "Watch": 365
+    },
+    "estimate_counts": {
+      "district_level": 427,
+      "insufficient_data": 4,
+      "zone_fallback": 294
+    },
+    "status": "success"
+  },
+  "scores_equal_stored_publication": true,
+  "alerts": {
+    "count": 725,
+    "total": 725,
+    "has_more": false
+  },
+  "districts": [
+    {
+      "district_id": "RJ-Jaipur",
+      "estimate_type": "district_level",
+      "status": "historical_forecast",
+      "origin": "2026-01-01",
+      "endpoint": [
+        {
+          "month": "2026-07",
+          "predicted_gwl": 24.7791
+        }
+      ],
+      "history_rows": 297,
+      "latest_history_month": "2026-09",
+      "monthly_status": "projection",
+      "monthly_points": 6,
+      "monthly_months": [
+        "2026-11",
+        "2026-12",
+        "2027-01",
+        "2027-02",
+        "2027-03",
+        "2027-04"
+      ],
+      "zero_change_simulation_preserved": true
+    },
+    {
+      "district_id": "MH-Pune",
+      "estimate_type": "district_level",
+      "status": "historical_forecast",
+      "origin": "2026-01-01",
+      "endpoint": [
+        {
+          "month": "2026-07",
+          "predicted_gwl": 4.1152
+        }
+      ],
+      "history_rows": 297,
+      "latest_history_month": "2026-09",
+      "monthly_status": "projection",
+      "monthly_points": 6,
+      "monthly_months": [
+        "2026-11",
+        "2026-12",
+        "2027-01",
+        "2027-02",
+        "2027-03",
+        "2027-04"
+      ],
+      "zero_change_simulation_preserved": true
+    },
+    {
+      "district_id": "AN-Nicobars",
+      "estimate_type": "insufficient_data",
+      "status": "insufficient_data",
+      "origin": "2019-11-01",
+      "endpoint": [],
+      "history_rows": 297,
+      "latest_history_month": "2026-09",
+      "monthly_status": "insufficient_data",
+      "monthly_points": 0,
+      "monthly_months": [],
+      "zero_change_simulation_preserved": true
+    }
+  ],
+  "passed": true
+}

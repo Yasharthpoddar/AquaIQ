@@ -98,6 +98,7 @@ export default function DistrictDetail() {
       <p><strong>Observation used:</strong> {prediction.last_observed_date || 'Unavailable'}{prediction.data_age_months != null ? ` (${prediction.data_age_months} months old)` : ''}{isZone ? ' (zone evidence)' : ''}{scoreTargetMonth && <> · <strong>Score model target:</strong> {scoreTargetMonth}</>}</p>
     </div>
     <p>The crisis score combines groundwater depth, changes in depth, and rainfall and drought conditions. The direction of the plotted line alone does not determine the score.</p>
+    {prediction.weights_status === 'initial_uncalibrated' && <p role="status">This project score uses initial component weights that have not been calibrated against independent crisis outcomes. It is not an accuracy or confidence percentage.</p>}
     {historical && <p style={{color:'#b45309'}}>This score describes the historical observation period. The next-six-month projection below does not update this historical score.</p>}
     {prediction.zone_fallback_reason && <p>{prediction.zone_fallback_reason}</p>}
     {prediction.message && <p role="status">{prediction.message}</p>}

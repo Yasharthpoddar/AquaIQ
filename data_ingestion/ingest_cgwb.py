@@ -15,12 +15,12 @@ The script is idempotent — safe to re-run. Existing rows are updated via
 ON CONFLICT (district_id, date, source, metric) DO UPDATE SET value = EXCLUDED.value.
 """
 
-import os
 import sys
 import time
 from pathlib import Path
 
 import pandas as pd
+import numpy as np
 import psycopg2
 import psycopg2.extras
 import yaml
@@ -28,6 +28,8 @@ from dotenv import load_dotenv
 
 # ── Paths ────────────────────────────────────────────────────────────────────
 ROOT = Path(__file__).parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 load_dotenv(ROOT / ".env")
 
 with open(ROOT / "config.yaml") as f:
@@ -39,13 +41,8 @@ CROSSWALK_PATH = ROOT / "data_ingestion" / "district_crosswalk.csv"
 
 # ── DB connection ─────────────────────────────────────────────────────────────
 def get_connection():
-    return psycopg2.connect(
-        host=os.getenv("POSTGRES_HOST", "localhost"),
-        port=int(os.getenv("POSTGRES_PORT", 5432)),
-        dbname=os.getenv("POSTGRES_DB", "aquaiq"),
-        user=os.getenv("POSTGRES_USER", "aquaiq_user"),
-        password=os.getenv("POSTGRES_PASSWORD", ""),
-    )
+    from db.connection import get_connection as connect
+    return connect()
 
 
 # ── Crosswalk Helper ──────────────────────────────────────────────────────────
@@ -54,7 +51,15 @@ def get_crosswalk_mapping() -> dict[str, str]:
     if not CROSSWALK_PATH.exists():
         raise FileNotFoundError(f"Crosswalk CSV not found at {CROSSWALK_PATH}")
     df = pd.read_csv(CROSSWALK_PATH, dtype=str)
-    return dict(zip(df["legacy_district_id"].str.strip(), df["canonical_district_id"].str.strip()))
+    keys = ["legacy_district_id", "canonical_district_id"]
+    if df[keys].isna().any().any():
+        raise ValueError("Crosswalk identities cannot be missing")
+    df[keys] = df[keys].apply(lambda column: column.str.strip())
+    if df[keys].eq("").any().any():
+        raise ValueError("Crosswalk identities cannot be empty")
+    if df.groupby("legacy_district_id")["canonical_district_id"].nunique().gt(1).any():
+        raise ValueError("Ambiguous legacy district identity in crosswalk")
+    return dict(zip(df[keys[0]], df[keys[1]]))
 
 
 # ── Step 1: Ensure Canonical Districts Exist ─────────────────────────────────
@@ -86,6 +91,20 @@ def load_canonical_districts(conn):
             rows,
             page_size=500,
         )
+        from db.migrations.run_migration_001 import MAPPING_TABLE_SQL, validate_crosswalk
+        cur.execute(MAPPING_TABLE_SQL)
+        cur.execute("SELECT district_id,district_name,state,agro_climatic_zone,geojson_name FROM districts")
+        master = [dict(zip(["district_id", "district_name", "state", "agro_climatic_zone", "geojson_name"], row))
+                  for row in cur.fetchall()]
+        cur.execute("SELECT legacy_id,canonical_id FROM legacy_district_ids")
+        recorded = [dict(zip(["legacy_id", "canonical_id"], row)) for row in cur.fetchall()]
+        validated, _ = validate_crosswalk(df.to_dict("records"), master, recorded)
+        psycopg2.extras.execute_batch(cur, """
+            INSERT INTO legacy_district_ids(legacy_id,canonical_id,canonical_name,canonical_state,source,match_type,notes)
+            VALUES (%(legacy_district_id)s,%(canonical_district_id)s,%(canonical_name)s,%(canonical_state)s,
+                    %(source)s,%(match_type)s,%(notes)s)
+            ON CONFLICT(legacy_id) DO NOTHING
+        """, [{**row, "notes": row.get("notes", "")} for row in validated])
     conn.commit()
     print(f"    Canonical districts verified: {len(rows)} distinct districts.")
 
@@ -100,7 +119,7 @@ def aggregate_well_readings(df: pd.DataFrame, mapping: dict[str, str]) -> pd.Dat
     4. Group by (district_id, date) and compute exact arithmetic mean.
     """
     df = df.copy()
-    df["currentlevel"] = pd.to_numeric(df["currentlevel"], errors="coerce")
+    df["currentlevel"] = pd.to_numeric(df["currentlevel"], errors="coerce").replace([np.inf, -np.inf], np.nan)
     df["district_code"] = df["district_code"].astype(str).str.strip()
     df.dropna(subset=["currentlevel", "district_code", "date"], inplace=True)
 

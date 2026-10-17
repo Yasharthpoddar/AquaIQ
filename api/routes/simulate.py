@@ -2,7 +2,7 @@
 import math
 import numpy as np
 from flask import Blueprint,request
-from api.contracts import response,failure
+from api.contracts import response,failure,parse_as_of_value
 from api.district_resolver import resolve_district_id
 from models.ensemble import select_evidence,score_evidence,forecast_from_evidence,components_from_history,blend_components,CONFIG
 from models.tiers import score_to_tier
@@ -17,12 +17,18 @@ def simulate():
             raise ValueError('Request body must be a JSON object.')
         if not isinstance(body.get('district_id'),str) or not body['district_id'].strip():
             raise ValueError('district_id is required.')
-        rainfall=float(body.get('rainfall_change_pct',0))
-        extraction=float(body.get('extraction_change_pct',0))
+        values=[body.get(name,0) for name in ('rainfall_change_pct','extraction_change_pct')]
+        if any(isinstance(value,bool) or not isinstance(value,(int,float)) for value in values):
+            raise ValueError('Policy changes must be finite numbers between -100 and 100 percent.')
+        try:
+            rainfall,extraction=map(float,values)
+        except OverflowError:
+            raise ValueError('Policy changes must be finite numbers between -100 and 100 percent.') from None
         if not all(math.isfinite(v) and -100<=v<=100 for v in (rainfall,extraction)):
             raise ValueError('Policy changes must be finite numbers between -100 and 100 percent.')
+        cutoff=parse_as_of_value(body.get('as_of'))
         canonical=resolve_district_id(body['district_id'].strip())
-        evidence=select_evidence(canonical,body.get('as_of'))
+        evidence=select_evidence(canonical,cutoff)
         baseline=score_evidence(evidence)
         value=baseline['crisis_score']
         data={'district_id':canonical,'baseline_score':value,'baseline_crisis_score':value,

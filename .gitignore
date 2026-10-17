@@ -57,3 +57,7 @@ reports/candidates/station_history_20261015/*.png
 reports/candidates/rainfall_refresh/
 
 reports/candidates/forecast_replay/*.csv
+
+# Reproducible audit row exports; retain compact aggregate reports in Git.
+reports/audit-*/**/*.csv
+reports/candidates/correlation/

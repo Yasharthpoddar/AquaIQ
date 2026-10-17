@@ -1,0 +1,103 @@
+{
+  "created_at": "2026-10-17T04:06:09.943465+00:00",
+  "as_of": "2026-10-17",
+  "schema": "aquaiq_verify_ffdc4a8b0d404356885791b20dbd38eb",
+  "output": "C:\\Users\\Yasharth\\Downloads\\AquaIQ\\scratch\\audit-pipeline-final-2026-10-17",
+  "status": "passed",
+  "stages": [
+    {
+      "stage": "ingest",
+      "passed": true,
+      "seconds": 107.835
+    },
+    {
+      "stage": "preprocess",
+      "passed": true,
+      "seconds": 20.22
+    },
+    {
+      "stage": "features",
+      "passed": true,
+      "seconds": 69.192
+    },
+    {
+      "stage": "train",
+      "passed": true,
+      "seconds": 67.705
+    },
+    {
+      "stage": "backtest",
+      "passed": true,
+      "seconds": 33.92
+    },
+    {
+      "stage": "score_all",
+      "passed": true,
+      "seconds": 16.631
+    }
+  ],
+  "input_policy": "Existing real raw_data snapshot plus archived source ingestion; no synthetic observations",
+  "production_before": {
+    "districts": {
+      "rows": 725,
+      "sha256": "d18ab4feebd0a787296562ebbee763bc60482973a871a3d09dc696b5f809140c"
+    },
+    "raw_data": {
+      "rows": 741628,
+      "sha256": "a36b6d7a3b63c65d76d06654a3b8bf18227322d1902d18e0413f36ee0226d29a"
+    },
+    "features": {
+      "rows": 215325,
+      "sha256": "784707e400364ab4147d05dc557f01f368ac96f2846739df66902e7271b5957d"
+    },
+    "predictions": {
+      "rows": 4326,
+      "sha256": "825bbea011aa50e303c51a511ed715bac7c310a186ba0a2278479b670cb2a48a"
+    },
+    "crisis_scores": {
+      "rows": 2175,
+      "sha256": "ac70211c10114f9064f56261c8812dd75b7b3c3876a2134c365368455838994c"
+    },
+    "scoring_runs": {
+      "rows": 6,
+      "sha256": "f155b95008ff0771e31d1b2236f9e24b8d82e26845cae51cbd4e518d084bf514"
+    }
+  },
+  "isolated_rows": {
+    "districts": 725,
+    "raw_data": 741628,
+    "features": 215325,
+    "predictions": 721,
+    "crisis_scores": 725,
+    "scoring_runs": 1
+  },
+  "temporary_schema_removed": true,
+  "production_after": {
+    "districts": {
+      "rows": 725,
+      "sha256": "d18ab4feebd0a787296562ebbee763bc60482973a871a3d09dc696b5f809140c"
+    },
+    "raw_data": {
+      "rows": 741628,
+      "sha256": "a36b6d7a3b63c65d76d06654a3b8bf18227322d1902d18e0413f36ee0226d29a"
+    },
+    "features": {
+      "rows": 215325,
+      "sha256": "784707e400364ab4147d05dc557f01f368ac96f2846739df66902e7271b5957d"
+    },
+    "predictions": {
+      "rows": 4326,
+      "sha256": "825bbea011aa50e303c51a511ed715bac7c310a186ba0a2278479b670cb2a48a"
+    },
+    "crisis_scores": {
+      "rows": 2175,
+      "sha256": "ac70211c10114f9064f56261c8812dd75b7b3c3876a2134c365368455838994c"
+    },
+    "scoring_runs": {
+      "rows": 6,
+      "sha256": "f155b95008ff0771e31d1b2236f9e24b8d82e26845cae51cbd4e518d084bf514"
+    }
+  },
+  "production_database_unchanged": true,
+  "production_artifacts_unchanged": true
+}

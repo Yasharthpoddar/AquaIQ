@@ -17,16 +17,15 @@ Prerequisites:
     - data/raw/india_districts.geojson must exist
 """
 
-import os
-import sys
 from pathlib import Path
-from difflib import SequenceMatcher
+import sys
 
-import pandas as pd
 import yaml
 from dotenv import load_dotenv
 
 ROOT = Path(__file__).parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 load_dotenv(ROOT / ".env")
 
 with open(ROOT / "config.yaml") as f:
@@ -118,35 +117,26 @@ STATE_TO_ZONE = {
 }
 
 
-def normalize(name: str) -> str:
-    """Normalize district/state names for matching."""
-    if not isinstance(name, str):
-        return ""
-    return name.strip().lower().replace("&", "and").replace("-", " ")
-
-
-def fuzzy_match(name: str, candidates: list[str], threshold: float = 0.7) -> str | None:
-    """Find the best fuzzy match for a name in a list of candidates."""
-    best_match = None
-    best_score = 0.0
-    name_norm = normalize(name)
-    for c in candidates:
-        score = SequenceMatcher(None, name_norm, normalize(c)).ratio()
-        if score > best_score and score >= threshold:
-            best_score = score
-            best_match = c
-    return best_match
-
-
 def get_connection():
-    import psycopg2
-    return psycopg2.connect(
-        host=os.getenv("POSTGRES_HOST", "localhost"),
-        port=int(os.getenv("POSTGRES_PORT", 5432)),
-        dbname=os.getenv("POSTGRES_DB", "aquaiq"),
-        user=os.getenv("POSTGRES_USER", "aquaiq_user"),
-        password=os.getenv("POSTGRES_PASSWORD", ""),
-    )
+    from db.connection import get_connection as connect
+    return connect()
+
+
+def zone_for_state(state):
+    """Use only an explicit state alias; never guess an administrative identity."""
+    from data_ingestion.ingest_imd_era5 import norm_state
+    zones = {norm_state(name): zone for name, zone in STATE_TO_ZONE.items()}
+    return zones.get(norm_state(state))
+
+
+def match_geojson_name(district_name, state, boundaries):
+    """Resolve one recorded name/alias inside the same normalized state."""
+    from data_ingestion.ingest_imd_era5 import norm_str, norm_state, NAME_ALIASES
+    district = norm_str(district_name)
+    names = {district, *(norm_str(alias) for alias in NAME_ALIASES.get(district, []))}
+    matches = {row.district for row in boundaries.itertuples(index=False)
+               if norm_state(row.st_nm) == norm_state(state) and norm_str(row.district) in names}
+    return next(iter(matches)) if len(matches) == 1 else None
 
 
 def enrich_zones(conn):
@@ -165,15 +155,7 @@ def enrich_zones(conn):
     unmatched_states = set()
     with conn.cursor() as cur:
         for district_id, state in rows:
-            # Try exact match first, then title-cased
-            zone = STATE_TO_ZONE.get(state)
-            if zone is None:
-                zone = STATE_TO_ZONE.get(state.strip().title())
-            if zone is None:
-                # Try fuzzy match
-                matched_state = fuzzy_match(state, list(STATE_TO_ZONE.keys()), 0.8)
-                if matched_state:
-                    zone = STATE_TO_ZONE[matched_state]
+            zone = zone_for_state(state)
 
             if zone:
                 cur.execute(
@@ -207,15 +189,15 @@ def enrich_geojson_names(conn):
         return
 
     gdf = gpd.read_file(geojson_path)
-    geo_names = gdf["district"].tolist() if "district" in gdf.columns else []
-    if not geo_names:
-        print("    SKIP: GeoJSON has no 'district' column.")
+    if not {"district", "st_nm"}.issubset(gdf.columns):
+        print("    SKIP: GeoJSON must contain district and state (st_nm) columns.")
         return
+    boundaries = gdf[["district", "st_nm"]].dropna().drop_duplicates()
 
-    print(f"    GeoJSON has {len(geo_names)} district names.")
+    print(f"    GeoJSON has {len(boundaries)} state-qualified district names.")
 
     with conn.cursor() as cur:
-        cur.execute("SELECT district_id, district_name FROM districts WHERE geojson_name IS NULL")
+        cur.execute("SELECT district_id, district_name, state FROM districts WHERE geojson_name IS NULL")
         rows = cur.fetchall()
 
     if not rows:
@@ -225,17 +207,8 @@ def enrich_geojson_names(conn):
     matched = 0
     unmatched = []
     with conn.cursor() as cur:
-        for district_id, district_name in rows:
-            # Try exact match (case-insensitive)
-            geo_match = None
-            for gn in geo_names:
-                if normalize(gn) == normalize(district_name):
-                    geo_match = gn
-                    break
-
-            # Fuzzy match fallback
-            if geo_match is None:
-                geo_match = fuzzy_match(district_name, geo_names, 0.75)
+        for district_id, district_name, state in rows:
+            geo_match = match_geojson_name(district_name, state, boundaries)
 
             if geo_match:
                 cur.execute(

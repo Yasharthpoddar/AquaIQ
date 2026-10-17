@@ -86,3 +86,14 @@ test('simulation writes are never shared or cached', async () => {
   assert.equal((await first).simulated_score, 30);
   assert.equal((await second).simulated_score, 30);
 });
+
+test('default history includes the source start and lets the API select the current end', async () => {
+  const urls = [];
+  globalThis.fetch = async url => { urls.push(url); return jsonResponse({ data: [] }); };
+  await fetchHistory('RJ-Jaipur');
+  await fetchHistory('RJ-Jaipur', '2025-01', '2026-01');
+  assert.deepEqual(urls, [
+    '/api/history/RJ-Jaipur?start=2002-01',
+    '/api/history/RJ-Jaipur?start=2025-01&end=2026-01',
+  ]);
+});

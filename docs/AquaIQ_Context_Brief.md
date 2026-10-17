@@ -1,4 +1,8 @@
 # AquaIQ — Context Brief
+
+> Historical project context. For current depth-forecast semantics, data coverage,
+> measured model performance and reproducible commands, see [the 17 October audit](../reports/AquaIQ_Audit_2026-10-17.md).
+> Planning targets below are not measured forecast accuracy.
 *Updated 29 Sep 2026. Self-contained — written so it can be pasted into a new chat, tool, or given to a teammate with no other history. This revision folds in the full text of the current SRS, Algorithm Design doc, and UML set (uploaded 29 Sep 2026) — not just the summary version from the last regeneration.*
 
 ## What it is

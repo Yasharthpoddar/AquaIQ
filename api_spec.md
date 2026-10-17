@@ -126,7 +126,7 @@ Unavailable scores and tiers are null; `tier_counts.Unknown` counts null scores.
 
 ## `GET /api/alerts`
 
-Reads the same completed run as `/scores`, orders available scores descending, then unavailable evidence, and returns `alerts`, `count`, and `status`.
+Reads the same completed run as `/scores`, orders available scores descending, then unavailable evidence, and returns `alerts`, `count`, `total`, `has_more`, and `status`. `total` is the number of districts matching the tier before the limit; `has_more` explicitly reports truncation. The dashboard requests up to 1000 rows so the current 725-district master remains visible.
 
 | Query parameter | Meaning |
 | --- | --- |
@@ -137,7 +137,7 @@ The default includes all tiers and unavailable districts; use `tier` for a speci
 
 ## `POST /api/simulate`
 
-Accepts a JSON object with required non-empty string `district_id`, optional `rainfall_change_pct` and `extraction_change_pct` (both default to 0), and optional `as_of` date. Percentage changes must be finite numbers in [-100, 100]. Invalid JSON objects or numeric inputs return 400.
+Accepts a JSON object with required non-empty string `district_id`, optional `rainfall_change_pct` and `extraction_change_pct` (both default to 0), and optional `as_of` date (`YYYY-MM-DD`, `today`, or `last_observed`). Percentage changes must be finite JSON numbers in [-100, 100]; booleans and numeric strings are invalid. Invalid dates, JSON objects, or numeric inputs return 400 before district lookup.
 
 ```json
 {

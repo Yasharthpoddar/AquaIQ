@@ -52,6 +52,10 @@ def step_ingest(dry_run: bool = False) -> bool:
         logger.info("Running canonical district and CGWB observation ingestion...")
         ingest_cgwb_main()
 
+        from data_ingestion.enrich_districts import main as enrich_districts_main
+        logger.info("Enriching district zones and verified state-qualified map names...")
+        enrich_districts_main()
+
         from data_ingestion.ingest_imd_era5 import main as ingest_weather_main
         logger.info("Running IMD & ERA5 weather data ingestion...")
         ingest_weather_main([])

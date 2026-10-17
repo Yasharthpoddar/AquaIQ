@@ -1,5 +1,9 @@
 # AquaIQ: End-to-End Prediction Pipeline Audit & Repair Plan
 
+> Historical audit/plan from 12 October 2026. Current measurements, completed
+> repairs and remaining limitations are in [the 17 October audit](../reports/AquaIQ_Audit_2026-10-17.md).
+> Counts, metrics and proposed work below describe that earlier snapshot.
+
 **Author:** Senior ML/Data Engineer  
 **Date:** October 12, 2026  
 **Repository:** Yasharthpoddar/AquaIQ (`main` at commit `0648958`)  

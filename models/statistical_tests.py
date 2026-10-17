@@ -1,14 +1,16 @@
 """
 AquaIQ — Statistical Tests (Week 5, Yash)
 --------------------------------------------
-Two-sample t-test: Is the 2020-2024 GWL depletion rate statistically
+Exploratory paired district test: Is the 2020-2024 GWL depletion rate
 significantly greater than the 2002-2010 baseline?
 
 Hypothesis:
   H0: mean(depletion_2020_2024) <= mean(depletion_2002_2010)
   H1: mean(depletion_2020_2024) > mean(depletion_2002_2010)
 
-One-sided Welch's t-test, alpha = 0.05.
+One-sided paired test of district period means, alpha = 0.05. Repeated
+district-years are not treated as independent samples. Spatial dependence,
+monitoring-well changes and uneven observed coverage remain limitations.
 
 Course mapping: CS205 — Statistical Methods for AI.
 
@@ -27,6 +29,9 @@ from dotenv import load_dotenv
 from scipy import stats
 
 ROOT = Path(__file__).parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from models import xgboost_model as forecast
 load_dotenv(ROOT / ".env")
 
 with open(ROOT / "config.yaml") as f:
@@ -47,55 +52,41 @@ def get_connection():
 
 
 def load_gwl_data() -> pd.DataFrame:
-    """Load GWL data from features table or processed CSV."""
-    # 1. Try PostgreSQL features table
-    try:
-        conn = get_connection()
-        df = pd.read_sql("SELECT district_id, date, gwl_current FROM features WHERE gwl_current IS NOT NULL ORDER BY district_id, date", conn)
-        conn.close()
-        if len(df) > 0:
-            df["GWL_current"] = df["gwl_current"]
-            df["date"] = pd.to_datetime(df["date"])
-            return df[["district_id", "date", "GWL_current"]]
-    except Exception:
-        pass
-
-    # 2. Try features CSV
-    path = PROCESSED_DIR / "features_matrix.csv"
-    if path.exists():
-        df = pd.read_csv(path, parse_dates=["date"])
-        col = "gwl_current" if "gwl_current" in df.columns else ("GWL_current" if "GWL_current" in df.columns else None)
-        if col:
-            df["GWL_current"] = df[col]
-            return df[["district_id", "date", "GWL_current"]].dropna().copy()
-
-    # 3. Fallback: preprocessed_wide.csv
-    wide_path = PROCESSED_DIR / "preprocessed_wide.csv"
-    if wide_path.exists():
-        df = pd.read_csv(wide_path, parse_dates=["date"])
-        if "gwl" in df.columns:
-            df["GWL_current"] = df["gwl"]
-            return df[["district_id", "date", "GWL_current"]].dropna().copy()
-
-    print("ERROR: No GWL data found.")
-    sys.exit(1)
+    """Use verified physical features and explicitly observed depths only."""
+    frame = forecast.load_feature_matrix()
+    observed = forecast.observed_mask(frame)
+    values = pd.to_numeric(frame.gwl_current, errors='coerce')
+    result = frame.loc[observed & np.isfinite(values) & (values >= 0), ['district_id', 'date']].copy()
+    result['GWL_current'] = values.loc[result.index]
+    if result.empty:
+        raise ValueError('No explicitly observed physical groundwater data for statistical comparison.')
+    return result
 
 
 def compute_depletion_rate(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Compute annual depletion rate (cm/year) per district.
-    Depletion rate = slope of GWL over time (positive = deepening wells = bad).
+    Compare the same observed calendar months in adjacent years (m/year).
+    Missing years and changes in sampled seasons must not create annual rates.
     """
     df = df.sort_values(["district_id", "date"]).copy()
+    df['date'] = pd.to_datetime(df.date)
+    df['month'] = df.date.dt.month
     df["year"] = df["date"].dt.year
+    if df.duplicated(['district_id', 'year', 'month']).any():
+        raise ValueError('Duplicate district-month observations cannot form annual comparisons.')
 
     # Annual mean GWL per district
     annual = df.groupby(["district_id", "year"])["GWL_current"].mean().reset_index()
     annual = annual.rename(columns={"GWL_current": "mean_gwl"})
 
-    # Compute year-over-year change
-    annual = annual.sort_values(["district_id", "year"])
-    annual["gwl_change"] = annual.groupby("district_id")["mean_gwl"].diff()
+    prior = df[['district_id', 'year', 'month', 'GWL_current']].copy()
+    prior['year'] += 1
+    prior = prior.rename(columns={'GWL_current': 'prior_year_gwl'})
+    paired = df.merge(prior, on=['district_id', 'year', 'month'], how='inner', validate='one_to_one')
+    paired['gwl_change'] = paired.GWL_current - paired.prior_year_gwl
+    changes = paired.groupby(['district_id', 'year']).agg(gwl_change=('gwl_change', 'mean'),
+                                                         compared_months=('month', 'size')).reset_index()
+    annual = annual.merge(changes, on=['district_id', 'year'], how='left', validate='one_to_one')
 
     return annual
 
@@ -109,12 +100,14 @@ def run_ttest(annual: pd.DataFrame):
     baseline = annual[(annual["year"] >= 2002) & (annual["year"] <= 2010)]
     recent = annual[(annual["year"] >= 2020) & (annual["year"] <= 2024)]
 
-    # Drop NaN changes (first year per district has no diff)
-    baseline_rates = baseline["gwl_change"].dropna()
-    recent_rates = recent["gwl_change"].dropna()
+    # One mean per district per period, paired across the same districts.
+    compared = pd.concat([baseline.groupby('district_id').gwl_change.mean().rename('baseline'),
+                          recent.groupby('district_id').gwl_change.mean().rename('recent')], axis=1).dropna()
+    baseline_rates, recent_rates = compared.baseline, compared.recent
+    if len(compared) < 2:
+        raise ValueError('At least two districts with comparable observed rates in both periods are required.')
 
-    print(f"  Baseline period (2002-2010): {len(baseline_rates):,} observations")
-    print(f"  Recent period   (2020-2024): {len(recent_rates):,} observations")
+    print(f"  Paired districts with observed rates in both periods: {len(compared):,}")
     print()
     print(f"  Baseline mean depletion: {baseline_rates.mean():.4f} m/year")
     print(f"  Recent mean depletion:   {recent_rates.mean():.4f} m/year")
@@ -122,19 +115,19 @@ def run_ttest(annual: pd.DataFrame):
     print(f"  Recent std:              {recent_rates.std():.4f}")
     print()
 
-    # Welch's t-test (one-sided: recent > baseline)
-    t_stat, p_two_sided = stats.ttest_ind(
+    # Paired district period means; repeated years do not inflate sample size.
+    t_stat, p_two_sided = stats.ttest_rel(
         recent_rates, baseline_rates,
-        equal_var=False,  # Welch's
         alternative="greater",
     )
 
-    print(f"  Welch's t-test (one-sided, H1: recent > baseline):")
+    print(f"  Exploratory paired district test (one-sided, H1: recent > baseline):")
     print(f"    t-statistic = {t_stat:.4f}")
     print(f"    p-value     = {p_two_sided:.6f}")
     print()
 
     alpha = 0.05
+    print('  Limitations: spatial dependence, changing well coverage and source publication dates are not resolved.')
     if p_two_sided < alpha:
         print(f"  RESULT: REJECT H0 (p={p_two_sided:.6f} < alpha={alpha})")
         print("  The 2020-2024 depletion rate is statistically significantly")
@@ -165,6 +158,9 @@ def run_ttest(annual: pd.DataFrame):
         "baseline_mean": round(baseline_rates.mean(), 4),
         "recent_mean": round(recent_rates.mean(), 4),
         "significant": p_two_sided < alpha,
+        "paired_districts": len(compared),
+        "test": "exploratory paired district period means",
+        "units": "m/year",
     }
 
 

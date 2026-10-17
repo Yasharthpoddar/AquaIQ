@@ -92,6 +92,18 @@ def test_default_features_still_publish_full_generation(isolated_project):
     assert json.loads((processed / "feature_manifest.json").read_text())["sample_only"] is False
 
 
+def test_failed_database_publish_preserves_active_feature_files(isolated_project, monkeypatch):
+    _, processed, _ = isolated_project
+    before = _snapshot(processed)
+    def reject_generation(frame):
+        raise RuntimeError("database rejected generation")
+    monkeypatch.setattr(features, "write_to_db", reject_generation)
+    with pytest.raises(RuntimeError, match="database rejected"):
+        features.main([])
+    assert _snapshot(processed) == before
+    assert not list(processed.glob(".features-*"))
+
+
 def test_production_validation_refuses_sample_artifacts():
     with pytest.raises(ValueError, match="Sample-only"):
         xgboost_model.validate_feature_generation(pd.DataFrame(), {"sample_only": True})

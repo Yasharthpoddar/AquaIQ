@@ -1,0 +1,76 @@
+{
+  "rainfall_maximum": {
+    "district": "South West Khasi Hills",
+    "st_nm": "Meghalaya",
+    "year": 2022,
+    "month": 6,
+    "rainfall_mm": 5227.8857,
+    "spatial_method": "within",
+    "distance_m": 0.0,
+    "n_cells": 2,
+    "recomputed_from_daily_grid_mm": 5227.8857421875,
+    "n_complete_cells": 2,
+    "source": "C:\\Users\\Yasharth\\Downloads\\AquaIQ\\data\\raw\\imd\\Rainfall_ind2022_rfp25.grd",
+    "daily_aggregation": "All days required before spatial mean",
+    "interpretation": "Reproduces the archived grid; source accuracy is not independently verified or clipped."
+  },
+  "anomaly_maximum": {
+    "district_id": "GJ-Surat",
+    "date": "2003-02-01",
+    "rainfall_mm": 16.596527,
+    "prior_same_month_mean_mm": 0.004788621545454546,
+    "prior_reference_years": 11,
+    "anomaly_pct": 346482.55705660745,
+    "interpretation": "Large relative anomaly from small positive historical denominator; no future values or clipping used."
+  },
+  "direct_model_sensitivity": [
+    {
+      "case": "baseline",
+      "origin": "2019-11-01",
+      "district_id": "RJ-Jaipur",
+      "inputs_changed": {},
+      "six_month_depth_m_bgl": 33.44883728027344
+    },
+    {
+      "case": "dry_hot",
+      "origin": "2019-11-01",
+      "district_id": "RJ-Jaipur",
+      "inputs_changed": {
+        "rainfall_current": 0.0,
+        "rainfall_3mo_avg": 0.0,
+        "temperature": 37.88,
+        "evapotranspiration": 373.98,
+        "monsoon_deficit_pct": -100.0
+      },
+      "six_month_depth_m_bgl": 33.11870193481445
+    },
+    {
+      "case": "extreme_wet",
+      "origin": "2019-11-01",
+      "district_id": "RJ-Jaipur",
+      "inputs_changed": {
+        "rainfall_current": 5227.8857,
+        "rainfall_3mo_avg": 3194.7485,
+        "temperature": 25.0,
+        "evapotranspiration": 0.0,
+        "monsoon_deficit_pct": 300.0
+      },
+      "six_month_depth_m_bgl": 30.956687927246094
+    },
+    {
+      "case": "cold",
+      "origin": "2019-11-01",
+      "district_id": "RJ-Jaipur",
+      "inputs_changed": {
+        "temperature": -24.39
+      },
+      "six_month_depth_m_bgl": 32.52507019042969
+    }
+  ],
+  "sensitivity_limitation": "Finite outputs only: constructed scenarios are not observed data, causal effects, calibrated uncertainty or validation of extremes.",
+  "candidate_repeated_station_measurements": {
+    "rows": 1514984,
+    "duplicates_excluding_source_record_id": 1,
+    "policy": "Preserved unchanged; identical metadata do not establish whether distinct source records are erroneous duplicates."
+  }
+}

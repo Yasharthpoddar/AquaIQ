@@ -36,6 +36,7 @@ function Alerts() {
   const [activeTab, setActiveTab] = useState("All");
   const [error, setError] = useState(null);
   const [status, setStatus] = useState('loading');
+  const [total, setTotal] = useState(0);
   const [retry, setRetry] = useState(0);
 
   useEffect(() => {
@@ -43,11 +44,12 @@ function Alerts() {
     setLoading(true);
     setError(null);
     setAlerts([]);
-    fetchAlerts(activeTab, 100)
+    fetchAlerts(activeTab, 1000)
       .then(data => {
         if (cancelled) return;
         if (!Array.isArray(data.alerts)) throw new Error('The alerts response is incomplete.');
         setAlerts(data.alerts);
+        setTotal(data.total ?? data.alerts.length);
         setStatus(data.status || 'success');
       })
       .catch(err => {
@@ -63,6 +65,7 @@ function Alerts() {
     <div className="page">
       <h1>Groundwater Alerts & Advisory</h1>
       <p className="subtitle">Districts prioritized by the AquaIQ project risk scale using available historical evidence. Review observation and forecast dates before planning action.</p>
+      {!loading && !error && status === 'success' && <p role="status">Showing {alerts.length} of {total} districts in this category, including unavailable evidence.{total > alerts.length && ' The API result limit has been reached.'}</p>}
 
       {/* Tier filter tabs */}
       <div className="alert-tabs">

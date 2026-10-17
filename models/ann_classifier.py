@@ -153,8 +153,10 @@ def train_ann(df: pd.DataFrame, max_iter: int = 300):
         solver="adam",
         max_iter=max_iter,
         random_state=42,
-        early_stopping=True,
-        validation_fraction=0.15,
+        # sklearn's early_stopping=True reserves a random validation subset.
+        # This auxiliary imitation model uses a fixed iteration budget and its
+        # existing chronological final test, without a random time-series split.
+        early_stopping=False,
         n_iter_no_change=20,
         verbose=False,
     )

@@ -176,3 +176,35 @@ def test_legacy_model_outputs_block_migration_without_silent_merge(isolated_data
                     "VALUES('7','2020-07-01','xgboost',5)")
     with pytest.raises(ValueError, match="Derived predictions/scores"):
         run_migration(conn, write_crosswalk(tmp_path), commit=False)
+
+
+@pytest.mark.requires_db
+def test_clean_ingestion_populates_alias_registry_without_reconciling_source_records(isolated_database, tmp_path, monkeypatch):
+    from data_ingestion import ingest_cgwb
+    from api import district_resolver
+    conn = isolated_database
+    # The fixture has existing real-shaped canonical/legacy identities. All
+    # writes, including ingestion's commit call, stay inside its rolled-back schema.
+    class NoCommit:
+        def cursor(self, *args, **kwargs):
+            return conn.cursor(*args, **kwargs)
+        def commit(self):
+            pass
+        def close(self):
+            pass
+    wrapper = NoCommit()
+    path = tmp_path / 'bootstrap_crosswalk.csv'
+    record = mapping(legacy='42')
+    with path.open('w', newline='', encoding='utf-8') as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(record))
+        writer.writeheader()
+        writer.writerow(record)
+    monkeypatch.setattr(ingest_cgwb, 'CROSSWALK_PATH', path)
+    before = snapshot(conn)
+    ingest_cgwb.load_canonical_districts(wrapper)
+    monkeypatch.setattr(district_resolver, 'get_connection', lambda: wrapper)
+    assert district_resolver.resolve_district_id('42') == 'RJ-Jaipur'
+    with conn.cursor() as cursor:
+        cursor.execute("SELECT canonical_id FROM legacy_district_ids WHERE legacy_id='42'")
+        assert cursor.fetchone()[0] == 'RJ-Jaipur'
+    assert snapshot(conn) == before  # Registry population cannot collapse source rows.

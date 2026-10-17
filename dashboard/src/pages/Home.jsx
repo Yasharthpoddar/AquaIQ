@@ -94,6 +94,7 @@ function Home() {
     ? [...validScores].sort((a, b) => b.score - a.score)[0]
     : null;
   const observations = validScores.map(row => row.last_observed_date).filter(Boolean).sort();
+  const uncalibrated = scores.some(row => row.weights_status === 'initial_uncalibrated');
   const scoresReady = !loading && !error && status === 'success';
 
   return (
@@ -112,6 +113,7 @@ function Home() {
         Project risk scale based on {validScores.length} scored districts; {totalDistricts - validScores.length} districts have unavailable evidence.
         {observations.length > 0 && ` Last groundwater observations range from ${observations[0]} to ${observations.at(-1)}. Review these historical dates before planning action.`}
       </p>}
+      {scoresReady && uncalibrated && <p role="status">These project scores use initial component weights that have not been calibrated against independent crisis outcomes. A score is not an accuracy or confidence percentage.</p>}
 
       {/* Summary cards */}
       <div className="summary-cards">

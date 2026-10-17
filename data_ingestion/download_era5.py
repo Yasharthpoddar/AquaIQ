@@ -17,18 +17,14 @@ ONE-TIME SETUP (do this before running):
    do this manually, even with a valid key -- this is the #1 thing that
    trips people up.
        https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels-monthly-means
-5. pip install cdsapi (already in requirements.txt)
+5. python -m pip install -r requirements-download.txt
 
 Then just run: python download_era5.py
 """
 
-import os
-import cdsapi
+from pathlib import Path
 
-OUTPUT_DIR = "data/raw/era5"
-os.makedirs(OUTPUT_DIR, exist_ok=True)
-
-client = cdsapi.Client()
+OUTPUT_DIR = Path(__file__).resolve().parents[1] / "data/raw/era5"
 
 # India bounding box: [North, West, South, East]
 INDIA_AREA = [38, 68, 6, 98]
@@ -51,20 +47,23 @@ REQUEST = {
     "data_format": "netcdf",
 }
 
-TARGET = os.path.join(OUTPUT_DIR, "era5_temp_pet_india_2002_2024.nc")
+TARGET = OUTPUT_DIR / "era5_temp_pet_india_2002_2024.nc"
 
 if __name__ == "__main__":
+    import cdsapi
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    client = cdsapi.Client()
     print(f"Requesting ERA5 monthly means for {YEARS[0]}-{YEARS[-1]} over India...")
     print("This queues on ECMWF's servers -- for a request this size, expect")
     print("anywhere from a few minutes to a couple hours depending on load.")
     print("The script blocks and downloads automatically once it's ready.\n")
 
-    client.retrieve(DATASET, REQUEST, TARGET)
+    client.retrieve(DATASET, REQUEST, str(TARGET))
 
     print(f"\nDone. Saved to {TARGET}")
     print()
     print("IMPORTANT -- sign convention gotcha for potential_evaporation:")
     print("ERA5 reports evaporation as NEGATIVE (downward-flux convention),")
-    print("in metres of water equivalent. When building water_balance_proxy")
-    print("(feature 9: rainfall - ET) in Week 4, convert first:")
-    print("    pet_mm = pet_raw * -1000   # m (negative) -> mm (positive)")
+    print("in metres of water equivalent. Monthly-mean daily accumulations")
+    print("also require the calendar month's day count. Use era5_to_district.py,")
+    print("which checks source units/aggregation before converting to mm/month.")

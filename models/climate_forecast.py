@@ -152,12 +152,13 @@ def evaluate_assumed_weather(model, frame, pairs):
             skipped += len(labels)
             continue
         prediction = np.maximum(0., depth + model.predict(feature_rows(origin, weather['path'], inputs)))
-        known = district.loc[(pd.to_datetime(district.date) <= origin) & observed_mask(district)].set_index('date').gwl_current
+        known = district.loc[(pd.to_datetime(district.date) <= origin) & observed_mask(district)].sort_values('date').set_index('date').gwl_current
         for label in labels.itertuples():
             horizon = int(label.horizon_months)
             same_month = known[known.index.month == label.target_date.month]
             seasonal = float(same_month.iloc[-1]) if len(same_month) else np.nan
-            records.append({'district_id': district_id, 'horizon': horizon, 'actual': label.actual_gwl,
+            records.append({'district_id': district_id, 'origin_date': origin, 'target_date': label.target_date,
+                            'horizon': horizon, 'actual': label.actual_gwl,
                             'predicted': float(prediction[horizon-1]), 'persistence': depth, 'seasonal': seasonal})
     table = pd.DataFrame(records)
     if table.empty:
@@ -171,6 +172,11 @@ def evaluate_assumed_weather(model, frame, pairs):
                     'xgboost': metrics(paired.actual, paired.predicted) if len(paired) else None,
                     'baseline': metrics(paired.actual, paired.seasonal) if len(paired) else None}}
     return {'status': 'evaluated_assumed_weather', 'skipped_labels': skipped, **summarize(table),
+            'origin_start': table.origin_date.min().date().isoformat(),
+            'origin_end': table.origin_date.max().date().isoformat(),
+            'target_start': table.target_date.min().date().isoformat(),
+            'target_end': table.target_date.max().date().isoformat(),
+            'by_district': {str(district): summarize(part) for district, part in table.groupby('district_id', sort=True)},
             'by_horizon': {str(h): summarize(table.loc[table.horizon == h]) if (table.horizon == h).any() else {'n':0}
                            for h in range(1,7)},
             'weather_policy': 'Historical same-month weather means available at each origin, not realized future weather.',

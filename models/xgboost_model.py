@@ -317,6 +317,13 @@ def _load_bundle_files(model_path, card_path, manifest, expected_generation=None
         raise ValueError("Checkpoint trained on a different feature generation; retrain.")
     if card.get("data_source") in {"synthetic", "unknown", None} or not card.get("train_target_cutoff"):
         raise ValueError("Synthetic or unproven checkpoint is not a production bundle.")
+    cutoff = pd.Timestamp(card["train_target_cutoff"])
+    latest_label = pd.Timestamp(card.get("max_train_target_date"))
+    latest_origin = pd.Timestamp(card.get("max_train_origin"))
+    if (pd.isna(cutoff) or pd.isna(latest_label) or pd.isna(latest_origin)
+            or latest_label > cutoff
+            or latest_origin + pd.DateOffset(months=FORECAST_HORIZON) > latest_label):
+        raise ValueError("Checkpoint training dates violate its cutoff or calendar horizon.")
     import xgboost as xgb
     model = xgb.XGBRegressor()
     model.load_model(str(model_path))

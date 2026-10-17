@@ -20,6 +20,9 @@ import yaml
 from dotenv import load_dotenv
 
 ROOT = Path(__file__).parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from models import xgboost_model as forecast
 load_dotenv(ROOT / ".env")
 
 with open(ROOT / "config.yaml") as f:
@@ -34,29 +37,12 @@ TARGET_STATES = ["Punjab", "Rajasthan", "Maharashtra", "Tamil Nadu", "Uttar Prad
 
 
 def load_data():
-    """Load feature matrix."""
-    path = PROCESSED_DIR / "features_matrix.csv"
-    if path.exists():
-        return pd.read_csv(path, parse_dates=["date"])
-
-    # Fallback: raw CGWB
-    cgwb_path = ROOT / CONFIG["paths"]["data_raw"] / "cgwb_combined.csv"
-    if not cgwb_path.exists():
-        print("ERROR: No data. Run preprocessing/features.py first.")
-        sys.exit(1)
-
-    raw = pd.read_csv(cgwb_path, dtype=str, low_memory=False)
-    raw["GWL_current"] = pd.to_numeric(raw["currentlevel"], errors="coerce")
-    raw["date"] = pd.to_datetime(raw["date"], errors="coerce")
-    raw["state"] = raw.get("state_name", raw.get("state", ""))
-    raw["district"] = raw.get("district_name", raw.get("district", ""))
-    raw = raw.dropna(subset=["GWL_current", "date"])
-    raw["date"] = raw["date"].dt.to_period("M").dt.to_timestamp()
-
-    # Use state+district as ID
-    df = raw.groupby(["state", "district", "date"])["GWL_current"].mean().reset_index()
-    df["district_id"] = df["state"] + "_" + df["district"]
-    return df
+    """Plot explicitly observed depths from the verified physical generation."""
+    frame = forecast.load_feature_matrix()
+    values = pd.to_numeric(frame.gwl_current, errors='coerce')
+    frame = frame.loc[forecast.observed_mask(frame) & np.isfinite(values) & (values >= 0)].copy()
+    frame['GWL_current'] = frame.gwl_current
+    return frame
 
 
 def pick_representative_districts(df: pd.DataFrame) -> dict:
@@ -101,7 +87,8 @@ def plot_district(df: pd.DataFrame, district_id: str, state_name: str, ax):
         return
 
     # Simple time-based regression
-    ddf["time_idx"] = np.arange(len(ddf))
+    month_number = ddf.date.dt.year * 12 + ddf.date.dt.month
+    ddf["time_idx"] = month_number - month_number.min()
     ddf = ddf.dropna(subset=["GWL_current"])
 
     train = ddf[ddf["date"] <= TRAIN_END]

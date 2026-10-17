@@ -30,6 +30,7 @@ import hashlib
 import json
 import os
 import sys
+import tempfile
 from pathlib import Path
 
 import numpy as np
@@ -355,23 +356,29 @@ def main(argv=None):
     output_dir = ROOT / "reports" / "samples" if sample_only else ROOT / "reports" / "candidates" if args.csv_only else PROCESSED_DIR
     output_dir.mkdir(parents=True, exist_ok=True)
     out_path = output_dir / "features_matrix.csv"
-    features.to_csv(out_path, index=False)
-    print(f"  CSV: {out_path} ({len(features):,} rows)")
-
     feature_manifest = {**manifest,
         "generation_id": features["feature_generation"].iloc[0],
-        "feature_csv_sha256": hashlib.sha256(out_path.read_bytes()).hexdigest(),
         "rainfall_normals_method": "expanding_prior_year_same_month", "rainfall_normals_min_prior_years": 3,
         "feature_columns": FEATURES_LIST, "observation_column": "is_observed",
         "sample_only": sample_only,
         "data_readiness_score_meaning": "numeric feature completeness; not observation coverage",
         "rainfall_history_start": str(rainfall_history["date"].min().date()) if rainfall_history is not None else manifest["date_start"],
     }
-    (output_dir / "feature_manifest.json").write_text(json.dumps(feature_manifest, indent=2), encoding="utf-8")
-    if not args.csv_only and not feature_manifest["sample_only"]:
-        write_to_db(features)
-    else:
-        print("  Sample/CSV-only generation: database unchanged")
+    # Finish serialization before a database write. A rejected/failed DB rebuild
+    # must not replace the active model's verified CSV or manifest.
+    with tempfile.TemporaryDirectory(prefix=".features-", dir=output_dir) as staging:
+        staged_csv = Path(staging) / "features_matrix.csv"
+        staged_manifest = Path(staging) / "feature_manifest.json"
+        features.to_csv(staged_csv, index=False)
+        feature_manifest["feature_csv_sha256"] = hashlib.sha256(staged_csv.read_bytes()).hexdigest()
+        staged_manifest.write_text(json.dumps(feature_manifest, indent=2), encoding="utf-8")
+        if not args.csv_only and not feature_manifest["sample_only"]:
+            write_to_db(features)
+        else:
+            print("  Sample/CSV-only generation: database unchanged")
+        os.replace(staged_csv, out_path)
+        os.replace(staged_manifest, output_dir / "feature_manifest.json")
+    print(f"  CSV: {out_path} ({len(features):,} rows)")
 
     train, test = build_train_test_split(features)
     print(f"\n  Train/Test split:")

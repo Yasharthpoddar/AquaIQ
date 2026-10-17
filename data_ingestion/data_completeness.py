@@ -1,189 +1,150 @@
-"""
-AquaIQ — Data Completeness Report (Week 6, Ayush)
-----------------------------------------------------
-Computes the % of districts with full CGWB + IMD + ERA5 coverage
-across the 2002-2024 study period. Outputs a summary CSV and
-console report.
+"""Offline source-CSV coverage using canonical IDs and configured calendar months.
 
-Run:
-    python data_ingestion/data_completeness.py
+Coverage counts distinct months with finite values, never rows or imputed features.
+Reports describe named CSVs; database-only updates are outside their scope.
+Run: python -m data_ingestion.data_completeness
 """
-
-import os
-import sys
 from pathlib import Path
-
+import argparse
+import json
 import numpy as np
 import pandas as pd
 import yaml
-from dotenv import load_dotenv
+from data_ingestion.ingest_imd_era5 import NAME_ALIASES, norm_state, norm_str
 
-ROOT = Path(__file__).parent.parent
-load_dotenv(ROOT / ".env")
-
-with open(ROOT / "config.yaml") as f:
-    CONFIG = yaml.safe_load(f)
-
+ROOT = Path(__file__).resolve().parents[1]
+CONFIG = yaml.safe_load((ROOT / "config.yaml").read_text(encoding="utf-8"))
 DATA_RAW = ROOT / CONFIG["paths"]["data_raw"]
 PROCESSED_DIR = ROOT / CONFIG["paths"]["data_processed"]
-
-# Full study period: 2002-2024, monthly
-EXPECTED_MONTHS = (2024 - 2002 + 1) * 12  # 276 months
+CROSSWALK_PATH = ROOT / "data_ingestion" / "district_crosswalk.csv"
 
 
-def check_cgwb() -> pd.DataFrame:
-    """Count months per district in CGWB data."""
-    cgwb_path = DATA_RAW / "cgwb_combined.csv"
-    if not cgwb_path.exists():
-        print("  CGWB: NOT FOUND")
-        return pd.DataFrame()
-
-    raw = pd.read_csv(cgwb_path, dtype=str, low_memory=False)
-    raw["date"] = pd.to_datetime(raw["date"], errors="coerce")
-    raw["currentlevel"] = pd.to_numeric(raw["currentlevel"], errors="coerce")
-    raw = raw.dropna(subset=["date", "currentlevel"])
-
-    # Get district identifier
-    dist_col = "district_code" if "district_code" in raw.columns else "district_name"
-    if dist_col not in raw.columns:
-        dist_col = raw.columns[0]
-
-    raw["month"] = raw["date"].dt.to_period("M")
-    coverage = raw.groupby(dist_col)["month"].nunique().reset_index()
-    coverage.columns = ["district_id", "cgwb_months"]
-    print(f"  CGWB: {len(coverage)} districts, median {coverage['cgwb_months'].median():.0f} months")
-    return coverage
+def study_months(config=None):
+    """The study window is inclusive and may end during its last month."""
+    dates = (config or CONFIG)["date_range"]
+    start, end = pd.Period(dates["start"], "M"), pd.Period(dates["end"], "M")
+    if end < start:
+        raise ValueError("Study end must not precede its start")
+    return pd.period_range(start, end, freq="M")
 
 
-def check_imd() -> pd.DataFrame:
-    """Count months per district in IMD data."""
-    imd_path = PROCESSED_DIR / "imd_rainfall_district_monthly.csv"
-    if not imd_path.exists():
-        print("  IMD: NOT FOUND")
-        return pd.DataFrame()
-
-    raw = pd.read_csv(imd_path)
-    dist_col = "district" if "district" in raw.columns else raw.columns[0]
-
-    if "year" in raw.columns and "month" in raw.columns:
-        coverage = raw.groupby(dist_col).size().reset_index()
-        coverage.columns = ["district_id", "imd_months"]
-    else:
-        coverage = raw.groupby(dist_col).size().reset_index()
-        coverage.columns = ["district_id", "imd_months"]
-
-    print(f"  IMD: {len(coverage)} districts, median {coverage['imd_months'].median():.0f} months")
-    return coverage
+EXPECTED_MONTHS = len(study_months())
 
 
-def check_era5() -> pd.DataFrame:
-    """Count months per district in ERA5 data."""
-    era5_path = PROCESSED_DIR / "era5_district_monthly.csv"
-    if not era5_path.exists():
-        print("  ERA5: NOT FOUND")
-        return pd.DataFrame()
+def canonical_mapping(crosswalk=None):
+    frame = pd.read_csv(CROSSWALK_PATH, dtype=str) if crosswalk is None else crosswalk.copy()
+    required = {"legacy_district_id", "canonical_district_id", "canonical_name", "canonical_state"}
+    if not required.issubset(frame):
+        raise ValueError("Canonical crosswalk columns are missing")
+    if frame[list(required)].isna().any().any():
+        raise ValueError("Canonical crosswalk identities must not be missing")
+    for col in required:
+        frame[col] = frame[col].str.strip()
+        if frame[col].eq("").any():
+            raise ValueError("Canonical crosswalk identities must not be blank")
+    if (frame.groupby("legacy_district_id").canonical_district_id.nunique() > 1).any():
+        raise ValueError("Ambiguous legacy district ID")
+    legacy = dict(zip(frame.legacy_district_id, frame.canonical_district_id))
+    names = {}
+    for row in frame.itertuples():
+        name, state = norm_str(row.canonical_name), norm_state(row.canonical_state)
+        for alias in [name, *NAME_ALIASES.get(name, [])]:
+            names.setdefault((norm_str(alias), state), set()).add(row.canonical_district_id)
+    return frame, legacy, names
 
-    raw = pd.read_csv(era5_path)
-    dist_col = "district" if "district" in raw.columns else raw.columns[0]
 
-    coverage = raw.groupby(dist_col).size().reset_index()
-    coverage.columns = ["district_id", "era5_months"]
-    print(f"  ERA5: {len(coverage)} districts, median {coverage['era5_months'].median():.0f} months")
-    return coverage
+def _coverage(path, source, mapping, config=None):
+    _, legacy, names = mapping
+    months = study_months(config)
+    result = {}
+    diagnostics = {"path": str(path), "rows": 0, "unmapped_rows": 0,
+                   "invalid_date_rows": 0, "nonfinite_or_missing_rows": 0,
+                   "outside_study_rows": 0, "scope": "source CSV only; excludes database-only updates"}
+    if not Path(path).exists():
+        diagnostics["available"] = False
+        out = pd.DataFrame(columns=["district_id", f"{source}_months"])
+        out.attrs["diagnostics"] = diagnostics
+        return out
+    diagnostics["available"] = True
+    for frame in pd.read_csv(path, dtype=str, chunksize=100_000):
+        diagnostics["rows"] += len(frame)
+        if source == "cgwb":
+            ids = frame["district_code"].str.strip().map(legacy)
+            dates = pd.to_datetime(frame["date"], errors="coerce", format="mixed").dt.to_period("M")
+            values = frame[["currentlevel"]].apply(pd.to_numeric, errors="coerce")
+        else:
+            if not {"district", "st_nm", "year", "month"}.issubset(frame):
+                raise ValueError("Weather coverage requires state, district, year and month")
+            pairs = zip(frame.district.map(norm_str), frame.st_nm.map(norm_state))
+            ids = pd.Series([next(iter(names[p])) if len(names.get(p, ())) == 1 else None
+                             for p in pairs], index=frame.index)
+            dates = pd.to_datetime(dict(year=pd.to_numeric(frame.year, errors="coerce"),
+                                        month=pd.to_numeric(frame.month, errors="coerce"), day=1),
+                                   errors="coerce").dt.to_period("M")
+            cols = ["rainfall_mm"] if source == "imd" else ["temperature", "evapotranspiration"]
+            values = frame[cols].apply(pd.to_numeric, errors="coerce")
+        finite = pd.Series(np.isfinite(values.to_numpy(dtype=float)).all(axis=1), index=frame.index)
+        in_period = dates.isin(months)
+        diagnostics["unmapped_rows"] += int(ids.isna().sum())
+        diagnostics["invalid_date_rows"] += int(dates.isna().sum())
+        diagnostics["nonfinite_or_missing_rows"] += int((~finite).sum())
+        diagnostics["outside_study_rows"] += int((dates.notna() & ~in_period).sum())
+        valid = ids.notna() & dates.notna() & finite & in_period
+        for district, month in zip(ids[valid], dates[valid]):
+            result.setdefault(district, set()).add(month)
+    out = pd.DataFrame([(did, len(dates)) for did, dates in sorted(result.items())],
+                       columns=["district_id", f"{source}_months"])
+    out.attrs["diagnostics"] = diagnostics
+    return out
 
 
-def compute_report():
-    """Merge all three sources and compute completeness."""
-    print("[1/2] Checking individual source coverage...\n")
+def check_cgwb(mapping=None, config=None):
+    return _coverage(DATA_RAW / "cgwb_combined.csv", "cgwb", mapping or canonical_mapping(), config)
 
-    cgwb = check_cgwb()
-    imd = check_imd()
-    era5 = check_era5()
 
-    print(f"\n[2/2] Computing combined completeness...\n")
+def check_imd(mapping=None, config=None):
+    return _coverage(PROCESSED_DIR / "imd_rainfall_district_monthly.csv", "imd", mapping or canonical_mapping(), config)
 
-    if len(cgwb) == 0:
-        print("ERROR: CGWB data missing. Cannot compute completeness.")
-        return None
 
-    # Start with CGWB as base
-    report = cgwb.copy()
+def check_era5(mapping=None, config=None):
+    return _coverage(PROCESSED_DIR / "era5_district_monthly.csv", "era5", mapping or canonical_mapping(), config)
 
-    # Merge IMD if available
-    if len(imd) > 0:
-        report = report.merge(imd, on="district_id", how="left")
-        report["imd_months"] = report["imd_months"].fillna(0).astype(int)
-    else:
-        report["imd_months"] = 0
 
-    # Merge ERA5 if available
-    if len(era5) > 0:
-        report = report.merge(era5, on="district_id", how="left")
-        report["era5_months"] = report["era5_months"].fillna(0).astype(int)
-    else:
-        report["era5_months"] = 0
-
-    # Completeness scores
-    report["cgwb_pct"] = (report["cgwb_months"] / EXPECTED_MONTHS * 100).round(1)
-    report["imd_pct"] = (report["imd_months"] / EXPECTED_MONTHS * 100).round(1)
-    report["era5_pct"] = (report["era5_months"] / EXPECTED_MONTHS * 100).round(1)
-
-    # Overall: minimum coverage across all 3 sources
+def compute_report(crosswalk=None, config=None):
+    mapping = canonical_mapping(crosswalk)
+    report = pd.DataFrame({"district_id": sorted(mapping[0].canonical_district_id.unique())})
+    expected = len(study_months(config))
+    diagnostics = {}
+    for source, loader in [("cgwb", check_cgwb), ("imd", check_imd), ("era5", check_era5)]:
+        coverage = loader(mapping, config)
+        diagnostics[source] = coverage.attrs["diagnostics"]
+        report = report.merge(coverage, on="district_id", how="left", validate="one_to_one")
+        column = f"{source}_months"
+        report[column] = report[column].fillna(0).astype(int)
+        report[f"{source}_pct"] = (report[column] / expected * 100).round(1)
+    report["expected_months"] = expected
     report["overall_pct"] = report[["cgwb_pct", "imd_pct", "era5_pct"]].min(axis=1)
-
-    # Coverage tiers
-    report["coverage_tier"] = pd.cut(
-        report["overall_pct"],
-        bins=[-1, 25, 50, 75, 100],
-        labels=["Poor (<25%)", "Fair (25-50%)", "Good (50-75%)", "Excellent (>75%)"],
-    )
-
+    report["coverage_tier"] = pd.cut(report.overall_pct, [-1, 25, 50, 75, 100],
+                                    labels=["Poor (<25%)", "Fair (25-50%)", "Good (50-75%)", "Excellent (>75%)"])
+    report.attrs["source_diagnostics"] = diagnostics
     return report
 
 
-def print_summary(report: pd.DataFrame):
-    """Print a human-readable summary."""
-    total = len(report)
-    print(f"  Total districts: {total}")
-    print(f"  Expected months per district: {EXPECTED_MONTHS} (2002-2024)\n")
-
-    # Source coverage
-    print(f"  Per-source coverage:")
-    for src in ["cgwb", "imd", "era5"]:
-        col = f"{src}_pct"
-        if col in report.columns:
-            mean = report[col].mean()
-            above50 = (report[col] >= 50).sum()
-            print(f"    {src.upper():5s}: mean={mean:.1f}%  |  {above50}/{total} districts >= 50%")
-
-    # Overall tier distribution
-    print(f"\n  Overall coverage distribution:")
-    for tier in report["coverage_tier"].cat.categories:
-        count = (report["coverage_tier"] == tier).sum()
-        pct = count / total * 100
-        print(f"    {tier:20s}: {count:4d} ({pct:.1f}%)")
-
-    # Full coverage (all 3 sources >= 75%)
-    full = (report["overall_pct"] >= 75).sum()
-    print(f"\n  Districts with full coverage (>= 75% all sources): {full}/{total} ({full/total*100:.1f}%)")
-
-
-def main():
-    print("AquaIQ -- Data Completeness Report\n")
-
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output", type=Path, default=ROOT / "reports" / "data_completeness_report.csv")
+    args = parser.parse_args(argv)
     report = compute_report()
-    if report is None:
-        return
-
-    print_summary(report)
-
-    # Save
-    os.makedirs(PROCESSED_DIR, exist_ok=True)
-    out_path = PROCESSED_DIR / "data_completeness_report.csv"
-    report.to_csv(out_path, index=False)
-    print(f"\n  Full report saved to {out_path}")
-
-    print("\nDone.")
+    output = args.output.resolve()
+    for protected in (DATA_RAW.resolve(), PROCESSED_DIR.resolve(), CROSSWALK_PATH.resolve().parent):
+        if output == protected or protected in output.parents:
+            raise ValueError("Coverage report must be outside source and processed dataset directories")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    report.to_csv(output, index=False)
+    output.with_suffix(".json").write_text(json.dumps({
+        "expected_months": int(report.expected_months.iloc[0]), "districts": len(report),
+        "sources": report.attrs["source_diagnostics"]}, indent=2), encoding="utf-8")
+    print(f"{len(report)} canonical districts; {len(study_months())} configured months; report: {output}")
 
 
 if __name__ == "__main__":

@@ -69,6 +69,10 @@ Run the complete pipeline after the source inputs are available:
 python scripts/run_pipeline.py --step all
 ```
 
+Ingestion includes state-qualified district/map matching and zone enrichment
+before weather is loaded. Zone labels are the project's documented state-level
+proxies; they are not independently verified district aquifer classifications.
+
 For a database that already contains the ingested source data, run the derived stages individually:
 
 ```bash
@@ -173,6 +177,44 @@ Run the deterministic regression suite without a database:
 python -m pytest -v -m "not requires_db"
 python -m pip check
 ```
+
+If the host restricts its default temporary directory, use
+`python -m pytest -m "not requires_db" --basetemp=scratch/pytest-local` with a new
+scratch path. The October 2026 audit, measured model comparisons and remaining
+limitations are recorded in `reports/AquaIQ_Audit_2026-10-17.md`.
+
+The data-quality commands inspect local inputs and write separate reports:
+
+```bash
+python -m scripts.audit_data_quality --help
+python -m scripts.audit_postgres_export
+python -m data_ingestion.data_completeness
+python -m models.audit_evaluation --output-dir reports/audit-2026-10-17 --include-monthly
+```
+
+The comparison fits Ridge and Random Forest using training-only preprocessing,
+selects against persistence/seasonal-naive/XGBoost on validation errors, and
+reports final test errors separately. These experiments do not replace the
+active model. Small sample sizes and previously inspected holdouts limit what
+the results establish; do not infer an accuracy percentage from aggregate R².
+
+For a complete replay that preserves the active release, use a PostgreSQL role
+allowed to create a temporary schema and a new scratch output directory:
+
+```bash
+python -m scripts.verify_pipeline
+python -m scripts.verify_pipeline --run --output-dir scratch/pipeline-verification --as-of 2026-10-17
+```
+
+The default prints an offline plan. `--run` copies the existing real raw-record
+snapshot into a fresh isolated schema, ingests the local archives, and runs all
+six stages with derived artifacts/checkpoints directed into scratch. This
+retains verified incremental observations that are not in the original CGWB
+CSV. It exports non-empty prediction/score CSVs, removes its temporary schema,
+and records hashes confirming that production tables and artifacts stayed
+unchanged. It refuses an existing output directory. Restore the original
+source/refresh artifacts and database snapshot before expecting the same
+2026 coverage on another machine. No download is performed by this replay.
 
 Tests marked `requires_db` are opt-in with `--integration` and assume a populated test dataset. Use an isolated PostgreSQL database for those tests; an empty CI database is used only for schema smoke checks.
 

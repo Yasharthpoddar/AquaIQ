@@ -34,6 +34,8 @@ from dotenv import load_dotenv
 warnings.filterwarnings("ignore", category=FutureWarning)
 
 ROOT = Path(__file__).parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 load_dotenv(ROOT / ".env")
 
 with open(ROOT / "config.yaml") as f:
@@ -223,14 +225,8 @@ class TrainFitMinMaxScaler:
 
 def load_raw_data() -> pd.DataFrame:
     """Load raw_data from PostgreSQL."""
-    import psycopg2
-    conn = psycopg2.connect(
-        host=os.getenv("POSTGRES_HOST", "localhost"),
-        port=int(os.getenv("POSTGRES_PORT", 5432)),
-        dbname=os.getenv("POSTGRES_DB", "aquaiq"),
-        user=os.getenv("POSTGRES_USER", "aquaiq_user"),
-        password=os.getenv("POSTGRES_PASSWORD", ""), connect_timeout=10,
-    )
+    from db.connection import get_connection
+    conn = get_connection()
     try:
         with conn.cursor() as cur:
             cur.execute("SELECT district_id, date, source, metric, value FROM raw_data ORDER BY district_id, date")

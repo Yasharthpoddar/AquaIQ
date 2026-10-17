@@ -43,8 +43,9 @@ export async function fetchDistrict(id) {
   return getJson(`/api/district/${encodeURIComponent(id)}`, 'District');
 }
 
-export async function fetchHistory(id, start = '2020-01', end = '2024-12') {
-  const params = new URLSearchParams({ start, end });
+export async function fetchHistory(id, start = '2002-01', end = null) {
+  const params = new URLSearchParams({ start });
+  if (end) params.set('end', end);
   return getJson(`/api/history/${encodeURIComponent(id)}?${params}`, 'History');
 }
 
