@@ -1,0 +1,498 @@
+{
+  "created_at_utc": "2026-10-17T10:18:52.861802+00:00",
+  "protocol_sha256": "02f46f753ca9b97356c0c0b2bdc90755929acb76f7a59da395447914e9faa8f9",
+  "selected_ml": {
+    "candidate_id": "hist_gradient_boosting-2-delta",
+    "family": "hist_gradient_boosting",
+    "parameters": {
+      "max_iter": 250,
+      "learning_rate": 0.05,
+      "max_leaf_nodes": 31,
+      "min_samples_leaf": 50,
+      "l2_regularization": 20.0
+    },
+    "target_form": "delta"
+  },
+  "selected_by_family": {
+    "ridge": {
+      "candidate_id": "ridge-3-absolute",
+      "family": "ridge",
+      "parameters": {
+        "alpha": 100.0
+      },
+      "target_form": "absolute"
+    },
+    "random_forest": {
+      "candidate_id": "random_forest-1-absolute",
+      "family": "random_forest",
+      "parameters": {
+        "n_estimators": 150,
+        "max_depth": 12,
+        "min_samples_leaf": 5,
+        "max_features": 0.85
+      },
+      "target_form": "absolute"
+    },
+    "xgboost": {
+      "candidate_id": "xgboost-1-delta",
+      "family": "xgboost",
+      "parameters": {
+        "n_estimators": 500,
+        "max_depth": 6,
+        "learning_rate": 0.01,
+        "subsample": 0.8,
+        "min_child_weight": 1,
+        "reg_lambda": 1.0
+      },
+      "target_form": "delta"
+    },
+    "hist_gradient_boosting": {
+      "candidate_id": "hist_gradient_boosting-2-delta",
+      "family": "hist_gradient_boosting",
+      "parameters": {
+        "max_iter": 250,
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 50,
+        "l2_regularization": 20.0
+      },
+      "target_form": "delta"
+    }
+  },
+  "validation_best_including_baselines": "prediction",
+  "ranking": [
+    {
+      "candidate_id": "hist_gradient_boosting-2-delta",
+      "family": "hist_gradient_boosting",
+      "parameters": {
+        "max_iter": 250,
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 50,
+        "l2_regularization": 20.0
+      },
+      "target_form": "delta",
+      "metrics": {
+        "n": 3522,
+        "rmse_m": 2.1476559186689124,
+        "mae_m": 1.3619778349716183,
+        "r2": 0.9195744683641653,
+        "nse": 0.9195744683641653
+      }
+    },
+    {
+      "candidate_id": "hist_gradient_boosting-1-delta",
+      "family": "hist_gradient_boosting",
+      "parameters": {
+        "max_iter": 250,
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 15,
+        "min_samples_leaf": 30,
+        "l2_regularization": 10.0
+      },
+      "target_form": "delta",
+      "metrics": {
+        "n": 3522,
+        "rmse_m": 2.1749405138148563,
+        "mae_m": 1.373307707489906,
+        "r2": 0.9175179777168632,
+        "nse": 0.9175179777168632
+      }
+    },
+    {
+      "candidate_id": "xgboost-1-delta",
+      "family": "xgboost",
+      "parameters": {
+        "n_estimators": 500,
+        "max_depth": 6,
+        "learning_rate": 0.01,
+        "subsample": 0.8,
+        "min_child_weight": 1,
+        "reg_lambda": 1.0
+      },
+      "target_form": "delta",
+      "metrics": {
+        "n": 3522,
+        "rmse_m": 2.1749675559978976,
+        "mae_m": 1.3705954230880424,
+        "r2": 0.9175159266191008,
+        "nse": 0.9175159266191008
+      }
+    },
+    {
+      "candidate_id": "xgboost-2-delta",
+      "family": "xgboost",
+      "parameters": {
+        "n_estimators": 240,
+        "max_depth": 3,
+        "learning_rate": 0.04,
+        "subsample": 0.85,
+        "min_child_weight": 30,
+        "reg_lambda": 20.0
+      },
+      "target_form": "delta",
+      "metrics": {
+        "n": 3522,
+        "rmse_m": 2.195640000176643,
+        "mae_m": 1.403905801566879,
+        "r2": 0.9159405000184461,
+        "nse": 0.9159405000184461
+      }
+    },
+    {
+      "candidate_id": "random_forest-1-absolute",
+      "family": "random_forest",
+      "parameters": {
+        "n_estimators": 150,
+        "max_depth": 12,
+        "min_samples_leaf": 5,
+        "max_features": 0.85
+      },
+      "target_form": "absolute",
+      "metrics": {
+        "n": 3522,
+        "rmse_m": 2.1965036337054484,
+        "mae_m": 1.364057898311359,
+        "r2": 0.9158743590480003,
+        "nse": 0.9158743590480003
+      }
+    },
+    {
+      "candidate_id": "hist_gradient_boosting-3-delta",
+      "family": "hist_gradient_boosting",
+      "parameters": {
+        "max_iter": 150,
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 7,
+        "min_samples_leaf": 100,
+        "l2_regularization": 50.0
+      },
+      "target_form": "delta",
+      "metrics": {
+        "n": 3522,
+        "rmse_m": 2.2013046536647343,
+        "mae_m": 1.3943977416700348,
+        "r2": 0.9155062009659728,
+        "nse": 0.9155062009659728
+      }
+    },
+    {
+      "candidate_id": "ridge-3-absolute",
+      "family": "ridge",
+      "parameters": {
+        "alpha": 100.0
+      },
+      "target_form": "absolute",
+      "metrics": {
+        "n": 3522,
+        "rmse_m": 2.2477798573069157,
+        "mae_m": 1.473835134598855,
+        "r2": 0.9119007757590507,
+        "nse": 0.9119007757590507
+      }
+    },
+    {
+      "candidate_id": "ridge-2-absolute",
+      "family": "ridge",
+      "parameters": {
+        "alpha": 10.0
+      },
+      "target_form": "absolute",
+      "metrics": {
+        "n": 3522,
+        "rmse_m": 2.251098254948921,
+        "mae_m": 1.4763404159909508,
+        "r2": 0.9116404619619368,
+        "nse": 0.9116404619619368
+      }
+    },
+    {
+      "candidate_id": "ridge-1-absolute",
+      "family": "ridge",
+      "parameters": {
+        "alpha": 0.1
+      },
+      "target_form": "absolute",
+      "metrics": {
+        "n": 3522,
+        "rmse_m": 2.251622911641452,
+        "mae_m": 1.4767102535662835,
+        "r2": 0.9115992697792431,
+        "nse": 0.9115992697792431
+      }
+    },
+    {
+      "candidate_id": "ridge-1-delta",
+      "family": "ridge",
+      "parameters": {
+        "alpha": 0.1
+      },
+      "target_form": "delta",
+      "metrics": {
+        "n": 3522,
+        "rmse_m": 2.251638329390674,
+        "mae_m": 1.476725984983137,
+        "r2": 0.9115980591458384,
+        "nse": 0.9115980591458384
+      }
+    },
+    {
+      "candidate_id": "ridge-2-delta",
+      "family": "ridge",
+      "parameters": {
+        "alpha": 10.0
+      },
+      "target_form": "delta",
+      "metrics": {
+        "n": 3522,
+        "rmse_m": 2.252656073927856,
+        "mae_m": 1.4779252370593712,
+        "r2": 0.9115181254152388,
+        "nse": 0.9115181254152388
+      }
+    },
+    {
+      "candidate_id": "random_forest-2-delta",
+      "family": "random_forest",
+      "parameters": {
+        "n_estimators": 150,
+        "max_depth": null,
+        "min_samples_leaf": 15,
+        "max_features": 1.0
+      },
+      "target_form": "delta",
+      "metrics": {
+        "n": 3522,
+        "rmse_m": 2.257303755667667,
+        "mae_m": 1.398950072115386,
+        "r2": 0.9111526370227836,
+        "nse": 0.9111526370227836
+      }
+    },
+    {
+      "candidate_id": "random_forest-1-delta",
+      "family": "random_forest",
+      "parameters": {
+        "n_estimators": 150,
+        "max_depth": 12,
+        "min_samples_leaf": 5,
+        "max_features": 0.85
+      },
+      "target_form": "delta",
+      "metrics": {
+        "n": 3522,
+        "rmse_m": 2.258905259966488,
+        "mae_m": 1.3984625466426188,
+        "r2": 0.9110265220425514,
+        "nse": 0.9110265220425514
+      }
+    },
+    {
+      "candidate_id": "ridge-3-delta",
+      "family": "ridge",
+      "parameters": {
+        "alpha": 100.0
+      },
+      "target_form": "delta",
+      "metrics": {
+        "n": 3522,
+        "rmse_m": 2.2645429458515496,
+        "mae_m": 1.4901947837428733,
+        "r2": 0.9105818549092894,
+        "nse": 0.9105818549092894
+      }
+    },
+    {
+      "candidate_id": "xgboost-3-delta",
+      "family": "xgboost",
+      "parameters": {
+        "n_estimators": 240,
+        "max_depth": 2,
+        "learning_rate": 0.03,
+        "subsample": 0.9,
+        "min_child_weight": 50,
+        "reg_lambda": 50.0
+      },
+      "target_form": "delta",
+      "metrics": {
+        "n": 3522,
+        "rmse_m": 2.266269697024347,
+        "mae_m": 1.4504796009133964,
+        "r2": 0.9104454373115966,
+        "nse": 0.9104454373115966
+      }
+    },
+    {
+      "candidate_id": "random_forest-3-delta",
+      "family": "random_forest",
+      "parameters": {
+        "n_estimators": 150,
+        "max_depth": 8,
+        "min_samples_leaf": 30,
+        "max_features": 1.0
+      },
+      "target_form": "delta",
+      "metrics": {
+        "n": 3522,
+        "rmse_m": 2.2885095947348155,
+        "mae_m": 1.4279019005134541,
+        "r2": 0.9086791365471037,
+        "nse": 0.9086791365471037
+      }
+    },
+    {
+      "candidate_id": "random_forest-2-absolute",
+      "family": "random_forest",
+      "parameters": {
+        "n_estimators": 150,
+        "max_depth": null,
+        "min_samples_leaf": 15,
+        "max_features": 1.0
+      },
+      "target_form": "absolute",
+      "metrics": {
+        "n": 3522,
+        "rmse_m": 2.3074856899125313,
+        "mae_m": 1.3827535914847742,
+        "r2": 0.9071584105918111,
+        "nse": 0.9071584105918111
+      }
+    },
+    {
+      "candidate_id": "hist_gradient_boosting-1-absolute",
+      "family": "hist_gradient_boosting",
+      "parameters": {
+        "max_iter": 250,
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 15,
+        "min_samples_leaf": 30,
+        "l2_regularization": 10.0
+      },
+      "target_form": "absolute",
+      "metrics": {
+        "n": 3522,
+        "rmse_m": 2.3580339206011782,
+        "mae_m": 1.402778323608688,
+        "r2": 0.9030462457837671,
+        "nse": 0.9030462457837671
+      }
+    },
+    {
+      "candidate_id": "xgboost-1-absolute",
+      "family": "xgboost",
+      "parameters": {
+        "n_estimators": 500,
+        "max_depth": 6,
+        "learning_rate": 0.01,
+        "subsample": 0.8,
+        "min_child_weight": 1,
+        "reg_lambda": 1.0
+      },
+      "target_form": "absolute",
+      "metrics": {
+        "n": 3522,
+        "rmse_m": 2.3678612398972625,
+        "mae_m": 1.4086177489140481,
+        "r2": 0.9022364347611717,
+        "nse": 0.9022364347611717
+      }
+    },
+    {
+      "candidate_id": "xgboost-2-absolute",
+      "family": "xgboost",
+      "parameters": {
+        "n_estimators": 240,
+        "max_depth": 3,
+        "learning_rate": 0.04,
+        "subsample": 0.85,
+        "min_child_weight": 30,
+        "reg_lambda": 20.0
+      },
+      "target_form": "absolute",
+      "metrics": {
+        "n": 3522,
+        "rmse_m": 2.3917761060707727,
+        "mae_m": 1.4104654219412833,
+        "r2": 0.9002516822850164,
+        "nse": 0.9002516822850164
+      }
+    },
+    {
+      "candidate_id": "hist_gradient_boosting-2-absolute",
+      "family": "hist_gradient_boosting",
+      "parameters": {
+        "max_iter": 250,
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 50,
+        "l2_regularization": 20.0
+      },
+      "target_form": "absolute",
+      "metrics": {
+        "n": 3522,
+        "rmse_m": 2.4315954134874396,
+        "mae_m": 1.4281339752040663,
+        "r2": 0.8969027300707407,
+        "nse": 0.8969027300707407
+      }
+    },
+    {
+      "candidate_id": "random_forest-3-absolute",
+      "family": "random_forest",
+      "parameters": {
+        "n_estimators": 150,
+        "max_depth": 8,
+        "min_samples_leaf": 30,
+        "max_features": 1.0
+      },
+      "target_form": "absolute",
+      "metrics": {
+        "n": 3522,
+        "rmse_m": 2.529509068463874,
+        "mae_m": 1.448097422743964,
+        "r2": 0.8884326762502738,
+        "nse": 0.8884326762502738
+      }
+    },
+    {
+      "candidate_id": "xgboost-3-absolute",
+      "family": "xgboost",
+      "parameters": {
+        "n_estimators": 240,
+        "max_depth": 2,
+        "learning_rate": 0.03,
+        "subsample": 0.9,
+        "min_child_weight": 50,
+        "reg_lambda": 50.0
+      },
+      "target_form": "absolute",
+      "metrics": {
+        "n": 3522,
+        "rmse_m": 2.560923244361579,
+        "mae_m": 1.4798626084242397,
+        "r2": 0.8856443417508906,
+        "nse": 0.8856443417508906
+      }
+    },
+    {
+      "candidate_id": "hist_gradient_boosting-3-absolute",
+      "family": "hist_gradient_boosting",
+      "parameters": {
+        "max_iter": 150,
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 7,
+        "min_samples_leaf": 100,
+        "l2_regularization": 50.0
+      },
+      "target_form": "absolute",
+      "metrics": {
+        "n": 3522,
+        "rmse_m": 2.612200261938198,
+        "mae_m": 1.4451893362440122,
+        "r2": 0.8810190392808497,
+        "nse": 0.8810190392808497
+      }
+    }
+  ],
+  "test_predictions_created": false
+}

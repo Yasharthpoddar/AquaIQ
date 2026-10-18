@@ -1,0 +1,53 @@
+{
+  "campaign_id": "SYNTHETIC-demo",
+  "configuration_sha256": "2284fe73c5a30fb03045bd96317ea922e40c6dcfa0aba7108c72f6a8a9d5b656",
+  "contract": {
+    "candidate": {
+      "candidate_id": "hist_gradient_boosting-2-delta",
+      "family": "hist_gradient_boosting",
+      "parameters": {
+        "l2_regularization": 20.0,
+        "learning_rate": 0.05,
+        "max_iter": 250,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 50
+      },
+      "target_form": "delta"
+    },
+    "early_stopping": false,
+    "features": [
+      "gwl_current",
+      "gwl_lag_3mo",
+      "gwl_lag_6mo",
+      "rainfall_current",
+      "rainfall_3mo_avg",
+      "monsoon_deficit_pct",
+      "temperature",
+      "evapotranspiration",
+      "water_balance_proxy",
+      "season_Kharif",
+      "season_Rabi",
+      "season_Zaid",
+      "origin_month_sin",
+      "origin_month_cos"
+    ],
+    "model_artifact_status": "not_approved_not_created",
+    "model_sha256": null,
+    "native_missing_handling": true,
+    "prediction_policy": "max(0, origin_depth + predicted_delta)",
+    "protocol_sha256": "02f46f753ca9b97356c0c0b2bdc90755929acb76f7a59da395447914e9faa8f9",
+    "random_state": 42,
+    "selection_lock_sha256": "f660ee928909f5e0325a70f7f894803b7d111a1cdb37eaebe1bacb4b5d2af4c1",
+    "train_target_cutoff": "2018-12-31",
+    "training_pairs": 14817
+  },
+  "created_at_utc": "2030-10-18T12:00:00+00:00",
+  "feature_pipeline_sha256": "b38de4a427c4fce56c2206b245c87c3e2c94c3685cc1dfa53a5af1b7c16c32ae",
+  "implementation_sha256": "7a97cc3ca9ad99110ae65e27c263883ac8536758b5736097c1c7ee7982366018",
+  "kind": "ledger_header",
+  "lane": "synthetic",
+  "real_hgb_enabled": false,
+  "record_sha256": "6e29e1d7fb220c5c89fd9aa9a4a27730ef7c2ab58126887037277a4ea13f2367",
+  "schema_version": "aquaiq-direct-shadow-v1",
+  "synthetic": true
+}

@@ -56,6 +56,9 @@ def district_series(frame, mapping):
 def date_series(frame):
     for column in ["date", "observation_date", "reported_date", "Data Acquisition Time"]:
         if column in frame:
+            if column == "Data Acquisition Time":
+                # The native manual-station export explicitly uses DD-MM-YYYY.
+                return pd.to_datetime(frame[column], errors="coerce", format="%d-%m-%Y %H:%M"), column
             return pd.to_datetime(frame[column], errors="coerce", format="mixed"), column
     if {"year", "month"}.issubset(frame):
         return pd.to_datetime(dict(year=pd.to_numeric(frame.year, errors="coerce"),

@@ -3,7 +3,7 @@ from pathlib import Path
 import pandas as pd
 import pytest
 from data_ingestion import data_completeness as coverage
-from scripts.audit_data_quality import audit_csv, district_series
+from scripts.audit_data_quality import audit_csv, district_series, date_series
 
 
 @pytest.fixture
@@ -77,3 +77,8 @@ def test_station_export_identity_schemas_retain_state(name, state, mapping):
     frame = pd.DataFrame({name: ['Aurangabad','Aurangabad'], state: ['Bihar','Maharashtra']})
     ids, _ = district_series(frame, mapping)
     assert ids.tolist() == ['BR-Aurangabad','MH-Aurangabad']
+
+
+def test_manual_source_dates_are_explicitly_day_first():
+    values,_=date_series(pd.DataFrame({'Data Acquisition Time':['05-08-2023 18:00','10-01-2021 00:00']}))
+    assert values.tolist()==[pd.Timestamp('2023-08-05 18:00'),pd.Timestamp('2021-01-10')]

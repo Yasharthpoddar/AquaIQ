@@ -1,0 +1,23 @@
+{
+  "district_id": "SYNTHETIC-D1",
+  "month": "2031-03",
+  "depth_m_bgl": 8.5,
+  "units": "m_bgl",
+  "datum_verified": true,
+  "panel_sha256": "3ef0b5903653111cdf417003768cf7f2ddb9413da1e3bac8dad32c86844602ae",
+  "observed_start_at": "2031-03-25T10:00:00+05:30",
+  "observed_end_at": "2031-03-25T11:00:00+05:30",
+  "available_at": "2031-04-03T12:00:00Z",
+  "source": {
+    "source_id": "SYNTHETIC-label-source",
+    "version_id": "synthetic-label-v1",
+    "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "published_at": "2031-04-01T12:00:00Z",
+    "received_at": "2031-04-02T12:00:00Z"
+  },
+  "label_id": "SYNTHETIC-label-SYNTHETIC-D1-2031-03",
+  "revision_id": "v1",
+  "is_observed": true,
+  "is_imputed": false,
+  "evidence_kind": "synthetic_fixture"
+}

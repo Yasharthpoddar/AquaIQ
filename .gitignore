@@ -61,3 +61,7 @@ reports/candidates/forecast_replay/*.csv
 # Reproducible audit row exports; retain compact aggregate reports in Git.
 reports/audit-*/**/*.csv
 reports/candidates/correlation/
+
+# Paired six-month experiments retain compact summaries/protocols in Git.
+reports/candidates/six_month_selection_*/**/*.csv
+reports/candidates/six_month_selection_*/experiment*/validation/

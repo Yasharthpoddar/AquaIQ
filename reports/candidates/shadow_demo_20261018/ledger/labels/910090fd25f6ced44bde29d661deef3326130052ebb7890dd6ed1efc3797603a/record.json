@@ -1,0 +1,36 @@
+{
+  "available_at": "2031-04-03T12:00:00+00:00",
+  "datum_verified": true,
+  "depth_m_bgl": 8.5,
+  "district_id": "SYNTHETIC-D1",
+  "entry_id": "910090fd25f6ced44bde29d661deef3326130052ebb7890dd6ed1efc3797603a",
+  "evidence_kind": "synthetic_fixture",
+  "identity": {
+    "district_id": "SYNTHETIC-D1",
+    "label_id": "SYNTHETIC-label-SYNTHETIC-D1-2031-03",
+    "month": "2031-03",
+    "revision_id": "v1"
+  },
+  "is_imputed": false,
+  "is_observed": true,
+  "kind": "labels",
+  "label_id": "SYNTHETIC-label-SYNTHETIC-D1-2031-03",
+  "lane": "synthetic",
+  "ledger_sha256": "6e29e1d7fb220c5c89fd9aa9a4a27730ef7c2ab58126887037277a4ea13f2367",
+  "month": "2031-03",
+  "observed_end_at": "2031-03-25T05:30:00+00:00",
+  "observed_start_at": "2031-03-25T04:30:00+00:00",
+  "panel_sha256": "3ef0b5903653111cdf417003768cf7f2ddb9413da1e3bac8dad32c86844602ae",
+  "record_sha256": "79ba26587545b24e8ec3097e561101a7f92db503dd6b9c8a9a09044b0984e53f",
+  "recorded_at_utc": "2031-04-05T12:00:00+00:00",
+  "revision_id": "v1",
+  "schema_version": "aquaiq-direct-shadow-v1",
+  "source": {
+    "published_at": "2031-04-01T12:00:00+00:00",
+    "received_at": "2031-04-02T12:00:00+00:00",
+    "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "source_id": "SYNTHETIC-label-source",
+    "version_id": "synthetic-label-v1"
+  },
+  "units": "m_bgl"
+}

@@ -1,0 +1,189 @@
+{
+  "mode": "saved predictions only; no fitting, tuning or reselection",
+  "reconciled_metric_rows": {
+    "calendar_metrics.csv": 228,
+    "district_metrics.csv": 6522,
+    "period_metrics.csv": 84
+  },
+  "provenance_checks": {
+    "validation": {
+      "n": 3522,
+      "observed_targets": 3522,
+      "observed_seasonal_references": 3522,
+      "observed_origins": 3522,
+      "origins_missing_any_weather_feature": 5,
+      "origins_missing_any_gwl_lag": 0,
+      "actual_issue_timestamp_in_prediction_csv": false,
+      "observation_date_resolution": "monthly bucket, not actual measurement timestamp"
+    },
+    "primary_observed_origin": {
+      "n": 209,
+      "observed_targets": 209,
+      "observed_seasonal_references": 209,
+      "observed_origins": 209,
+      "origins_missing_any_weather_feature": 0,
+      "origins_missing_any_gwl_lag": 0,
+      "actual_issue_timestamp_in_prediction_csv": false,
+      "observation_date_resolution": "monthly bucket, not actual measurement timestamp"
+    },
+    "secondary_causal_origin": {
+      "n": 962,
+      "observed_targets": 962,
+      "observed_seasonal_references": 962,
+      "observed_origins": 209,
+      "origins_missing_any_weather_feature": 1,
+      "origins_missing_any_gwl_lag": 0,
+      "actual_issue_timestamp_in_prediction_csv": false,
+      "observation_date_resolution": "monthly bucket, not actual measurement timestamp"
+    },
+    "external_source_conditional": {
+      "n": 74,
+      "observed_targets": 74,
+      "observed_seasonal_references": 74,
+      "observed_origins": 74,
+      "origins_missing_any_weather_feature": 0,
+      "origins_missing_any_gwl_lag": 0,
+      "actual_issue_timestamp_in_prediction_csv": false,
+      "observation_date_resolution": "monthly bucket, not actual measurement timestamp"
+    }
+  },
+  "cohorts": {
+    "validation": {
+      "n": 3522,
+      "districts": 514,
+      "calendar_counts": {
+        "1": 29,
+        "2": 21,
+        "3": 21,
+        "4": 21,
+        "5": 1750,
+        "6": 20,
+        "7": 20,
+        "8": 22,
+        "9": 18,
+        "10": 18,
+        "11": 1562,
+        "12": 20
+      },
+      "pattern_counts": {
+        "neither_exact": 3506,
+        "persistence_only_exact": 8,
+        "seasonal_only_exact": 4,
+        "both_exact": 4
+      },
+      "both_exact_by_year": {
+        "2010": 0,
+        "2013": 0,
+        "2016": 0,
+        "2018": 4
+      },
+      "seasonal_better_cases": {
+        "ridge": 1816,
+        "random_forest": 1502,
+        "xgboost": 1627,
+        "hist_gradient_boosting": 1601
+      },
+      "constant_source_target_pairs_are_not_proof_of_same_wells": true
+    },
+    "primary_observed_origin": {
+      "n": 209,
+      "districts": 32,
+      "calendar_counts": {
+        "1": 45,
+        "2": 19,
+        "3": 18,
+        "4": 15,
+        "5": 18,
+        "6": 13,
+        "7": 14,
+        "8": 16,
+        "9": 11,
+        "10": 12,
+        "11": 16,
+        "12": 12
+      },
+      "pattern_counts": {
+        "neither_exact": 115,
+        "both_exact": 64,
+        "persistence_only_exact": 26,
+        "seasonal_only_exact": 4
+      },
+      "both_exact_by_year": {
+        "2020": 10,
+        "2021": 2,
+        "2022": 43,
+        "2023": 9
+      },
+      "seasonal_better_cases": {
+        "ridge": 149,
+        "random_forest": 137,
+        "xgboost": 147,
+        "hist_gradient_boosting": 141
+      },
+      "constant_source_target_pairs_are_not_proof_of_same_wells": true
+    },
+    "secondary_causal_origin": {
+      "n": 962,
+      "districts": 507,
+      "calendar_counts": {
+        "1": 471,
+        "2": 19,
+        "3": 19,
+        "4": 16,
+        "5": 18,
+        "6": 14,
+        "7": 14,
+        "8": 338,
+        "9": 11,
+        "10": 12,
+        "11": 18,
+        "12": 12
+      },
+      "pattern_counts": {
+        "neither_exact": 868,
+        "both_exact": 64,
+        "persistence_only_exact": 26,
+        "seasonal_only_exact": 4
+      },
+      "both_exact_by_year": {
+        "2020": 10,
+        "2021": 2,
+        "2022": 43,
+        "2023": 9
+      },
+      "seasonal_better_cases": {
+        "ridge": 621,
+        "random_forest": 651,
+        "xgboost": 674,
+        "hist_gradient_boosting": 646
+      },
+      "constant_source_target_pairs_are_not_proof_of_same_wells": true
+    },
+    "external_source_conditional": {
+      "n": 74,
+      "districts": 34,
+      "calendar_counts": {
+        "5": 40,
+        "11": 34
+      },
+      "pattern_counts": {
+        "neither_exact": 74
+      },
+      "both_exact_by_year": {
+        "2022": 0,
+        "2023": 0
+      },
+      "seasonal_better_cases": {
+        "ridge": 34,
+        "random_forest": 30,
+        "xgboost": 30,
+        "hist_gradient_boosting": 28
+      },
+      "constant_source_target_pairs_are_not_proof_of_same_wells": true
+    }
+  },
+  "macro_definition": "Unweighted arithmetic mean of group MAEs and group RMSEs; not sqrt(mean(group MSE)); no average group R2.",
+  "calendar_evaluation": "Target calendar month; paired six-calendar-month predictions. Calendar macro equally weights present months; absent months never filled.",
+  "exact_equality_tolerance_m": 1e-09,
+  "descriptive_only": true
+}

@@ -1,0 +1,207 @@
+{
+  "candidate_configuration_sha256": "08b789503d10e0fd7100ca11da8aab0ba0b3838520deb735a0f52b7e97da7c9d",
+  "causal_preprocessing_sha256": "9672fcb91aa11e45ea3a733f0c4ad9f5fd7b61a007f68dddaba337ea09851c6d",
+  "configuration_sha256": "2284fe73c5a30fb03045bd96317ea922e40c6dcfa0aba7108c72f6a8a9d5b656",
+  "district_id": "SYNTHETIC-D1",
+  "entry_id": "3115d8486328e2b4a96d46459cbf11cb5a34062e0a64e47c6e8ac8e77874be1d",
+  "evidence_kind": "synthetic_fixture",
+  "feature_pipeline_sha256": "b38de4a427c4fce56c2206b245c87c3e2c94c3685cc1dfa53a5af1b7c16c32ae",
+  "feature_values": {
+    "evapotranspiration": 80.0,
+    "gwl_current": 12.0,
+    "gwl_lag_3mo": 11.0,
+    "gwl_lag_6mo": 9.0,
+    "monsoon_deficit_pct": -5.0,
+    "origin_month_cos": 0.5000000000000001,
+    "origin_month_sin": -0.8660254037844386,
+    "rainfall_3mo_avg": 100.0,
+    "rainfall_current": 120.0,
+    "season_Kharif": 1,
+    "season_Rabi": 0,
+    "season_Zaid": 0,
+    "temperature": 27.0,
+    "water_balance_proxy": 40.0
+  },
+  "horizon_months": 6,
+  "identity": {
+    "campaign_id": "SYNTHETIC-demo",
+    "district_id": "SYNTHETIC-D1",
+    "origin_month": "2030-10",
+    "target_month": "2031-04"
+  },
+  "inputs": {
+    "evapotranspiration": {
+      "available_at": "2030-11-03T12:00:00+00:00",
+      "is_observed": true,
+      "month": "2030-10",
+      "observed_at": "2030-10-15T02:30:00+00:00",
+      "period_end": "2030-10-31T18:29:59+00:00",
+      "source_id": "SYNTHETIC-source",
+      "units": "mm/month",
+      "value": 80.0,
+      "version_id": "synthetic-v2"
+    },
+    "gwl_current": {
+      "available_at": "2030-11-03T12:00:00+00:00",
+      "is_observed": true,
+      "month": "2030-10",
+      "observed_at": "2030-10-15T02:30:00+00:00",
+      "period_end": "2030-10-31T18:29:59+00:00",
+      "source_id": "SYNTHETIC-source",
+      "units": "m_bgl",
+      "value": 12.0,
+      "version_id": "synthetic-v2"
+    },
+    "gwl_lag_3mo": {
+      "available_at": "2030-11-03T12:00:00+00:00",
+      "is_observed": true,
+      "month": "2030-07",
+      "observed_at": "2030-07-15T02:30:00+00:00",
+      "period_end": "2030-07-31T18:29:59+00:00",
+      "source_id": "SYNTHETIC-source",
+      "units": "m_bgl",
+      "value": 11.0,
+      "version_id": "synthetic-v2"
+    },
+    "gwl_lag_6mo": {
+      "available_at": "2030-11-03T12:00:00+00:00",
+      "is_observed": true,
+      "month": "2030-04",
+      "observed_at": "2030-04-15T02:30:00+00:00",
+      "period_end": "2030-04-30T18:29:59+00:00",
+      "source_id": "SYNTHETIC-source",
+      "units": "m_bgl",
+      "value": 9.0,
+      "version_id": "synthetic-v2"
+    },
+    "monsoon_deficit_pct": {
+      "available_at": "2030-11-03T12:00:00+00:00",
+      "is_observed": true,
+      "month": "2030-10",
+      "observed_at": "2030-10-15T02:30:00+00:00",
+      "period_end": "2030-10-31T18:29:59+00:00",
+      "source_id": "SYNTHETIC-source",
+      "units": "percent",
+      "value": -5.0,
+      "version_id": "synthetic-v2"
+    },
+    "rainfall_3mo_avg": {
+      "available_at": "2030-11-03T12:00:00+00:00",
+      "is_observed": true,
+      "month": "2030-10",
+      "observed_at": "2030-10-15T02:30:00+00:00",
+      "period_end": "2030-10-31T18:29:59+00:00",
+      "source_id": "SYNTHETIC-source",
+      "units": "mm/month",
+      "value": 100.0,
+      "version_id": "synthetic-v2"
+    },
+    "rainfall_current": {
+      "available_at": "2030-11-03T12:00:00+00:00",
+      "is_observed": true,
+      "month": "2030-10",
+      "observed_at": "2030-10-15T02:30:00+00:00",
+      "period_end": "2030-10-31T18:29:59+00:00",
+      "source_id": "SYNTHETIC-source",
+      "units": "mm/month",
+      "value": 120.0,
+      "version_id": "synthetic-v2"
+    },
+    "seasonal_reference": {
+      "available_at": "2030-11-03T12:00:00+00:00",
+      "is_observed": true,
+      "month": "2030-04",
+      "observed_at": "2030-04-15T02:30:00+00:00",
+      "period_end": "2030-04-30T18:29:59+00:00",
+      "source_id": "SYNTHETIC-source",
+      "units": "m_bgl",
+      "value": 9.0,
+      "version_id": "synthetic-v2"
+    },
+    "temperature": {
+      "available_at": "2030-11-03T12:00:00+00:00",
+      "is_observed": true,
+      "month": "2030-10",
+      "observed_at": "2030-10-15T02:30:00+00:00",
+      "period_end": "2030-10-31T18:29:59+00:00",
+      "source_id": "SYNTHETIC-source",
+      "units": "degC",
+      "value": 27.0,
+      "version_id": "synthetic-v2"
+    },
+    "water_balance_proxy": {
+      "available_at": "2030-11-03T12:00:00+00:00",
+      "is_observed": true,
+      "month": "2030-10",
+      "observed_at": "2030-10-15T02:30:00+00:00",
+      "period_end": "2030-10-31T18:29:59+00:00",
+      "source_id": "SYNTHETIC-source",
+      "units": "mm/month",
+      "value": 40.0,
+      "version_id": "synthetic-v2"
+    }
+  },
+  "issued_at_utc": "2030-11-18T12:00:00+00:00",
+  "kind": "forecasts",
+  "lane": "synthetic",
+  "ledger_sha256": "96aefbc846de5d7482d558df3916a159e1d5eb24a6a17005eb37ee6922cb081c",
+  "origin_month": "2030-10",
+  "paired_prediction_eligible": true,
+  "panel": {
+    "datum": "below_ground_level",
+    "geography_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "panel_id": "SYNTHETIC-fixed-panel",
+    "registered_at": "2030-01-01T00:00:00+00:00",
+    "units": "m_bgl",
+    "version_id": "synthetic-panel-v1",
+    "wells": [
+      {
+        "weight": 0.5,
+        "well_id": "SYNTHETIC-W1"
+      },
+      {
+        "weight": 0.5,
+        "well_id": "SYNTHETIC-W2"
+      }
+    ]
+  },
+  "panel_sha256": "3ef0b5903653111cdf417003768cf7f2ddb9413da1e3bac8dad32c86844602ae",
+  "predictions": {
+    "hist_gradient_boosting": {
+      "candidate_id": "hist_gradient_boosting-2-delta",
+      "model_sha256": "56a1c5ecfadc6d428280169f477aab9fce4d388a38c2a332ebd931bcea7e96a6",
+      "prediction_m_bgl": 9.5,
+      "prediction_origin": "synthetic_fixture_stub_not_trained_hgb",
+      "reason_codes": [],
+      "status": "predicted"
+    },
+    "persistence": {
+      "model_sha256": "08024b754e1fc2d6eead475d4e94394f4088a7b319c2fab0967dd3ded7f63178",
+      "prediction_m_bgl": 12.0,
+      "reason_codes": [],
+      "status": "predicted"
+    },
+    "seasonal_naive": {
+      "model_sha256": "0700dc1adcd10550a16a5dff5e70f978100d19ca60c884c258e4b068603f8cdf",
+      "prediction_m_bgl": 9.0,
+      "reason_codes": [],
+      "status": "predicted"
+    }
+  },
+  "prospective_forecast_archive": false,
+  "prospective_skill_established": false,
+  "record_sha256": "d48c1b9543f9d483981f3e8b6bf499eeb8b7ae796706f35ccb48f655ce74f13d",
+  "recorded_at_utc": "2030-11-18T12:00:00+00:00",
+  "schema_version": "aquaiq-direct-shadow-v1",
+  "sources": [
+    {
+      "published_at": "2030-11-02T12:00:00+00:00",
+      "received_at": "2030-11-03T12:00:00+00:00",
+      "sha256": "4e4662d49fec1b49429e8f46be8526ec06a4fd7fc35be9311ffd8a5be3bafe5b",
+      "source_id": "SYNTHETIC-source",
+      "version_id": "synthetic-v2"
+    }
+  ],
+  "target_month": "2031-04",
+  "units": "m_bgl"
+}

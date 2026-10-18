@@ -1,0 +1,22 @@
+{
+  "completed_local_date": "2026-10-18",
+  "mode": "read-only analysis of frozen predictions",
+  "old_artifact_and_input_files_hash_verified": 194,
+  "reconciled_rows": {
+    "calendar_metrics.csv": 228,
+    "district_metrics.csv": 6522,
+    "period_metrics.csv": 84
+  },
+  "raw_lineage_inputs_hash_verified": 10,
+  "raw_primary_values_rejoined": 627,
+  "raw_lineage_reproduction": "passed",
+  "diagnostics_reproduction": "passed",
+  "python_syntax": "passed",
+  "git_diff_check": "passed",
+  "hyperparameter_tuning_rerun": false,
+  "models_fitted": false,
+  "selection_changed": false,
+  "production_or_completed_experiment_modified": false,
+  "database_written": false,
+  "release_status": "design only; no model declared production-ready"
+}

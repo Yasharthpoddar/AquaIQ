@@ -1,0 +1,145 @@
+{
+  "district_id": "SYNTHETIC-D1",
+  "origin_month": "2030-09",
+  "evidence_kind": "synthetic_fixture",
+  "panel": {
+    "panel_id": "SYNTHETIC-fixed-panel",
+    "version_id": "synthetic-panel-v1",
+    "geography_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "registered_at": "2030-01-01T00:00:00Z",
+    "units": "m_bgl",
+    "datum": "below_ground_level",
+    "wells": [
+      {
+        "well_id": "SYNTHETIC-W1",
+        "weight": 0.5
+      },
+      {
+        "well_id": "SYNTHETIC-W2",
+        "weight": 0.5
+      }
+    ]
+  },
+  "sources": [
+    {
+      "source_id": "SYNTHETIC-source",
+      "version_id": "synthetic-v1",
+      "sha256": "971febc239d9466f21f9c2b309808afb95e9a4a496a4680b9029a4608b8dfc99",
+      "published_at": "2030-10-02T12:00:00Z",
+      "received_at": "2030-10-03T12:00:00Z"
+    }
+  ],
+  "inputs": {
+    "gwl_current": {
+      "value": 10.0,
+      "units": "m_bgl",
+      "month": "2030-09",
+      "source_id": "SYNTHETIC-source",
+      "version_id": "synthetic-v1",
+      "observed_at": "2030-09-15T08:00:00+05:30",
+      "period_end": "2030-09-30T23:59:59+05:30",
+      "available_at": "2030-10-03T12:00:00Z",
+      "is_observed": true
+    },
+    "gwl_lag_3mo": {
+      "value": 11.0,
+      "units": "m_bgl",
+      "month": "2030-06",
+      "source_id": "SYNTHETIC-source",
+      "version_id": "synthetic-v1",
+      "observed_at": "2030-06-15T08:00:00+05:30",
+      "period_end": "2030-06-30T23:59:59+05:30",
+      "available_at": "2030-10-03T12:00:00Z",
+      "is_observed": true
+    },
+    "gwl_lag_6mo": {
+      "value": 9.0,
+      "units": "m_bgl",
+      "month": "2030-03",
+      "source_id": "SYNTHETIC-source",
+      "version_id": "synthetic-v1",
+      "observed_at": "2030-03-15T08:00:00+05:30",
+      "period_end": "2030-03-31T23:59:59+05:30",
+      "available_at": "2030-10-03T12:00:00Z",
+      "is_observed": true
+    },
+    "rainfall_current": {
+      "value": 120.0,
+      "units": "mm/month",
+      "month": "2030-09",
+      "source_id": "SYNTHETIC-source",
+      "version_id": "synthetic-v1",
+      "observed_at": "2030-09-15T08:00:00+05:30",
+      "period_end": "2030-09-30T23:59:59+05:30",
+      "available_at": "2030-10-03T12:00:00Z",
+      "is_observed": true
+    },
+    "rainfall_3mo_avg": {
+      "value": 100.0,
+      "units": "mm/month",
+      "month": "2030-09",
+      "source_id": "SYNTHETIC-source",
+      "version_id": "synthetic-v1",
+      "observed_at": "2030-09-15T08:00:00+05:30",
+      "period_end": "2030-09-30T23:59:59+05:30",
+      "available_at": "2030-10-03T12:00:00Z",
+      "is_observed": true
+    },
+    "monsoon_deficit_pct": {
+      "value": -5.0,
+      "units": "percent",
+      "month": "2030-09",
+      "source_id": "SYNTHETIC-source",
+      "version_id": "synthetic-v1",
+      "observed_at": "2030-09-15T08:00:00+05:30",
+      "period_end": "2030-09-30T23:59:59+05:30",
+      "available_at": "2030-10-03T12:00:00Z",
+      "is_observed": true
+    },
+    "temperature": {
+      "value": 27.0,
+      "units": "degC",
+      "month": "2030-09",
+      "source_id": "SYNTHETIC-source",
+      "version_id": "synthetic-v1",
+      "observed_at": "2030-09-15T08:00:00+05:30",
+      "period_end": "2030-09-30T23:59:59+05:30",
+      "available_at": "2030-10-03T12:00:00Z",
+      "is_observed": true
+    },
+    "evapotranspiration": {
+      "value": 80.0,
+      "units": "mm/month",
+      "month": "2030-09",
+      "source_id": "SYNTHETIC-source",
+      "version_id": "synthetic-v1",
+      "observed_at": "2030-09-15T08:00:00+05:30",
+      "period_end": "2030-09-30T23:59:59+05:30",
+      "available_at": "2030-10-03T12:00:00Z",
+      "is_observed": true
+    },
+    "water_balance_proxy": {
+      "value": 40.0,
+      "units": "mm/month",
+      "month": "2030-09",
+      "source_id": "SYNTHETIC-source",
+      "version_id": "synthetic-v1",
+      "observed_at": "2030-09-15T08:00:00+05:30",
+      "period_end": "2030-09-30T23:59:59+05:30",
+      "available_at": "2030-10-03T12:00:00Z",
+      "is_observed": true
+    },
+    "seasonal_reference": {
+      "value": 9.0,
+      "units": "m_bgl",
+      "month": "2030-03",
+      "source_id": "SYNTHETIC-source",
+      "version_id": "synthetic-v1",
+      "observed_at": "2030-03-15T08:00:00+05:30",
+      "period_end": "2030-03-31T23:59:59+05:30",
+      "available_at": "2030-10-03T12:00:00Z",
+      "is_observed": true
+    }
+  },
+  "synthetic_hgb_prediction": 9.5
+}

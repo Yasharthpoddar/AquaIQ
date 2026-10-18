@@ -1,0 +1,159 @@
+{
+  "source": "data/processed/features_matrix.csv",
+  "feature_generation": "physical-v3-causal-monthly-a3f9468a2569",
+  "feature_sha256": "3958737b033a16e722f633a15ad77d80bc5b2a8fb3bea888697f0410362c24ae",
+  "whole_timeline": {
+    "observed_targets": 36890,
+    "origin_month_exists": 36103,
+    "finite_causal_origin": 33350,
+    "observed_origin": 15793,
+    "finite_causal_origin_and_exact_observed_seasonal": 30583,
+    "observed_origin_and_exact_observed_seasonal": 14686,
+    "districts_with_finite_origin": 559
+  },
+  "recent_target_2023_onward": {
+    "observed_targets": 650,
+    "origin_month_exists": 650,
+    "finite_causal_origin": 10,
+    "observed_origin": 10,
+    "finite_causal_origin_and_exact_observed_seasonal": 10,
+    "observed_origin_and_exact_observed_seasonal": 10,
+    "districts_with_finite_origin": 4
+  },
+  "recent_supported": {
+    "n": 10,
+    "districts": 4,
+    "start": "2023-01-01",
+    "end": "2023-03-01"
+  },
+  "periods": {
+    "development_2002_2019": {
+      "observed_targets": 34137,
+      "origin_month_exists": 33350,
+      "finite_causal_origin": 32318,
+      "observed_origin": 15565,
+      "finite_causal_origin_and_exact_observed_seasonal": 29621,
+      "observed_origin_and_exact_observed_seasonal": 14477,
+      "districts_with_finite_origin": 559
+    },
+    "validation_2020_2022": {
+      "observed_targets": 2103,
+      "origin_month_exists": 2103,
+      "finite_causal_origin": 1022,
+      "observed_origin": 218,
+      "finite_causal_origin_and_exact_observed_seasonal": 952,
+      "observed_origin_and_exact_observed_seasonal": 199,
+      "districts_with_finite_origin": 511
+    },
+    "final_2023_2026": {
+      "observed_targets": 650,
+      "origin_month_exists": 650,
+      "finite_causal_origin": 10,
+      "observed_origin": 10,
+      "finite_causal_origin_and_exact_observed_seasonal": 10,
+      "observed_origin_and_exact_observed_seasonal": 10,
+      "districts_with_finite_origin": 4
+    }
+  },
+  "candidate_updates": {
+    "january_2025": {
+      "source": "reports/candidates/station_history_20261015/january_2025_audited/canonical_district_month_candidates.csv",
+      "sha256": "a3acb7f5f8d522b067db52761350ffd5512f60c118212f69d3b305d9a48a5b7f",
+      "observed_targets": 573,
+      "origin_month_exists": 573,
+      "finite_causal_origin": 0,
+      "observed_origin": 0,
+      "finite_causal_origin_and_exact_observed_seasonal": 0,
+      "observed_origin_and_exact_observed_seasonal": 0,
+      "districts_with_finite_origin": 0
+    },
+    "january_2026": {
+      "source": "reports/candidates/groundwater_updates/20261013/canonical_district_month_candidates.csv",
+      "sha256": "c2f7b98b3f382cd50e72d7f3b0fc2d00c6accf973e8a839b58c8af9376a8500c",
+      "observed_targets": 639,
+      "origin_month_exists": 639,
+      "finite_causal_origin": 0,
+      "observed_origin": 0,
+      "finite_causal_origin_and_exact_observed_seasonal": 0,
+      "observed_origin_and_exact_observed_seasonal": 0,
+      "districts_with_finite_origin": 0
+    }
+  },
+  "unadopted_manual_source": {
+    "source": "data\\raw\\updates\\20261013\\gwl_manual_quarterly_cgwb_gj_2021_2025.csv",
+    "sha256": "0d008db9bde5ccc9d40db7ea2e7bc0837441b82b13b66879efb6023ad8426c60",
+    "raw_rows": 6704,
+    "invalid_dates": 0,
+    "exact_date_start": "2021-01-10 00:00:00",
+    "exact_date_end": "2023-08-30 18:00:00",
+    "mapping_counts": {
+      "state_qualified_exact_name": 5405,
+      "unmapped_state_district": 1299
+    },
+    "conflicting_station_date_rows": 0,
+    "candidate_only_not_verified_depth_datum_or_well_panel": true,
+    "all": {
+      "observed_targets": 184,
+      "origin_month_exists": 184,
+      "finite_causal_origin": 25,
+      "observed_origin": 4,
+      "finite_causal_origin_and_exact_observed_seasonal": 21,
+      "observed_origin_and_exact_observed_seasonal": 0,
+      "districts_with_finite_origin": 21
+    },
+    "new_observed_target_keys": {
+      "observed_targets": 163,
+      "origin_month_exists": 163,
+      "finite_causal_origin": 25,
+      "observed_origin": 4,
+      "finite_causal_origin_and_exact_observed_seasonal": 21,
+      "observed_origin_and_exact_observed_seasonal": 0,
+      "districts_with_finite_origin": 21
+    },
+    "post2023_new_keys": {
+      "observed_targets": 33,
+      "origin_month_exists": 33,
+      "finite_causal_origin": 0,
+      "observed_origin": 0,
+      "finite_causal_origin_and_exact_observed_seasonal": 0,
+      "observed_origin_and_exact_observed_seasonal": 0,
+      "districts_with_finite_origin": 0
+    },
+    "spatial_audit": {
+      "accepted_station_rows": 6244,
+      "rejected_station_rows": 460,
+      "district_months": 298,
+      "new_district_months": 272,
+      "new_district_months_post2023": 54,
+      "hypothetical_coverage_only_not_used_for_fitting": true,
+      "augmented_all": {
+        "observed_targets": 37162,
+        "origin_month_exists": 36375,
+        "finite_causal_origin": 33558,
+        "observed_origin": 15907,
+        "finite_causal_origin_and_exact_observed_seasonal": 30749,
+        "observed_origin_and_exact_observed_seasonal": 14766,
+        "districts_with_finite_origin": 567
+      },
+      "augmented_final2020_onward": {
+        "observed_targets": 3025,
+        "origin_month_exists": 3025,
+        "finite_causal_origin": 1240,
+        "observed_origin": 342,
+        "finite_causal_origin_and_exact_observed_seasonal": 1128,
+        "observed_origin_and_exact_observed_seasonal": 289,
+        "districts_with_finite_origin": 519
+      },
+      "augmented_post2023": {
+        "observed_targets": 704,
+        "origin_month_exists": 704,
+        "finite_causal_origin": 64,
+        "observed_origin": 44,
+        "finite_causal_origin_and_exact_observed_seasonal": 64,
+        "observed_origin_and_exact_observed_seasonal": 44,
+        "districts_with_finite_origin": 38
+      },
+      "caveat": "Unit header says meter; no independent signed depth datum/publication manifest or longitudinal stable well panel was established. Existing observed active keys take precedence; this is not an adopted target release."
+    }
+  }
+}

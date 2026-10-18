@@ -1,0 +1,3 @@
+# Derived diagnostics can be recreated from the preserved experiment artifacts.
+*.csv
+__pycache__/

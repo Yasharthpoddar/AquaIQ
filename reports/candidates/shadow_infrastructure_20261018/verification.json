@@ -1,0 +1,23 @@
+{
+  "completed_local_date": "2026-10-18",
+  "tests_passed": 138,
+  "tests_failed": 0,
+  "synthetic_demo_counts": {
+    "forecasts": 3,
+    "labels": 1,
+    "evaluations": 1
+  },
+  "demo_integrity": "passed",
+  "final_demo_matches_current_implementation": true,
+  "protected_unique_files_unchanged": 198,
+  "pip_check": "passed",
+  "syntax": "passed",
+  "git_diff_check": "passed",
+  "model_fitted_or_loaded": false,
+  "real_forecasts_issued": false,
+  "production_changes_made": false,
+  "database_access_or_migration": false,
+  "commit_or_push": false,
+  "prospective_skill_established": false,
+  "real_hgb_status": "abstained until separate frozen-artifact workflow explicitly approved"
+}

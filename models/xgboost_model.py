@@ -226,8 +226,25 @@ def new_model(params=None):
                                "n_jobs": min(4, os.cpu_count() or 1)})
 
 
+def _resolved_target_variation(y_true):
+    """Distinguish target variation from a few float64 rounding units.
+
+    Even repeated decimal values can have nonzero variance after subtracting a
+    rounded mean. Range avoids that artifact; the small scale-aware tolerance
+    also covers adjacent representable floats. This is a numerical guard, not
+    an estimate of instrument precision or a statistical variance threshold.
+    """
+    if len(y_true) < 2:
+        return False
+    scale = max(1., float(np.max(np.abs(y_true))))
+    tolerance = 8 * np.finfo(float).eps * scale
+    return bool(np.ptp(y_true) > tolerance)
+
+
 def nash_sutcliffe_efficiency(y_true, y_pred):
     y_true, y_pred = np.asarray(y_true, dtype=float), np.asarray(y_pred, dtype=float)
+    if not _resolved_target_variation(y_true):
+        return None
     denominator = np.sum((y_true - np.mean(y_true)) ** 2)
     return None if denominator == 0 else float(1 - np.sum((y_true - y_pred) ** 2) / denominator)
 
@@ -238,7 +255,7 @@ def metrics(y_true, y_pred):
         raise ValueError("Metrics require finite predictions and observed targets.")
     return {"n": len(y_true), "rmse_m": float(np.sqrt(mean_squared_error(y_true, y_pred))),
             "mae_m": float(mean_absolute_error(y_true, y_pred)),
-            "r2": float(r2_score(y_true, y_pred)) if len(y_true) > 1 and np.var(y_true) > 0 else None,
+            "r2": float(r2_score(y_true, y_pred)) if _resolved_target_variation(y_true) else None,
             "nse": nash_sutcliffe_efficiency(y_true, y_pred)}
 
 
