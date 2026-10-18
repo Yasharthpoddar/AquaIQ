@@ -1,0 +1,24 @@
+{
+  "january_2025_candidate": {
+    "rows": 573,
+    "districts": 573,
+    "not_in_active_observed_history": [
+      "AR-Kamle",
+      "AR-Longding",
+      "SK-East_Sikkim",
+      "UK-Pithoragarh",
+      "UK-Rudraprayag"
+    ],
+    "older_active_history_it_would_update": [
+      "DD-Dadra_and_Nagar_Haveli",
+      "DD-Daman",
+      "DD-Diu",
+      "UP-Rampur"
+    ]
+  },
+  "quarterly_optional_candidate": {
+    "observed_districts": 34,
+    "not_in_active_observed_history": []
+  },
+  "interpretation": "Unadopted local source-backed candidates, not active release observations; no merging or forecast/evaluation executed."
+}

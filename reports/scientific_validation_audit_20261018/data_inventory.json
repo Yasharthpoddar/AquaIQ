@@ -1,0 +1,126 @@
+{
+  "feature": {
+    "rows": 215325,
+    "districts": 725,
+    "grid_start": "2002-01-01",
+    "grid_end": "2026-09-01",
+    "source_backed_groundwater_months": 36890,
+    "imputed_flag_rows": 72110,
+    "finite_unobserved_groundwater_months": 72110,
+    "missing_groundwater_months": 106325,
+    "duplicate_district_months": 0,
+    "missing_per_column": {
+      "district_id": 0,
+      "date": 0,
+      "GWL_current": 106325,
+      "GWL_lag_3mo": 106325,
+      "GWL_lag_6mo": 106964,
+      "rainfall_current": 5365,
+      "rainfall_3mo_avg": 3917,
+      "monsoon_deficit_pct": 5744,
+      "temperature": 14053,
+      "evapotranspiration": 14053,
+      "water_balance_proxy": 14053,
+      "crop_season_flag": 0,
+      "feature_generation": 0,
+      "is_imputed": 0,
+      "is_observed": 0,
+      "months_since_observation": 64978,
+      "gwl_current": 106325,
+      "gwl_lag_3mo": 106325,
+      "gwl_lag_6mo": 106964,
+      "data_readiness_score": 0
+    },
+    "latest_observation_month_counts": {
+      "2026-01-01 00:00:00": 639,
+      "NONE": 73,
+      "2021-01-01 00:00:00": 9,
+      "2019-11-01 00:00:00": 2,
+      "2018-11-01 00:00:00": 1,
+      "2013-05-01 00:00:00": 1
+    },
+    "latest_reported_date_status": "See per-district CSV; not certified fresh acquisition.",
+    "observations_by_year": {
+      "2002": 1637,
+      "2003": 1642,
+      "2004": 1557,
+      "2005": 1669,
+      "2006": 1711,
+      "2007": 1707,
+      "2008": 1693,
+      "2009": 1709,
+      "2010": 1699,
+      "2011": 1696,
+      "2012": 1286,
+      "2013": 2334,
+      "2014": 2302,
+      "2015": 2391,
+      "2016": 2291,
+      "2017": 2319,
+      "2018": 2229,
+      "2019": 2265,
+      "2020": 1463,
+      "2021": 590,
+      "2022": 50,
+      "2023": 11,
+      "2026": 639
+    }
+  },
+  "wide": {
+    "rows": 215325,
+    "missing_per_column": {
+      "date": 0,
+      "district_id": 0,
+      "gwl": 106325,
+      "evapotranspiration": 14053,
+      "temperature": 14053,
+      "rainfall": 5365,
+      "is_imputed": 0,
+      "is_observed": 0,
+      "months_since_observation": 64978,
+      "feature_generation": 0
+    }
+  },
+  "legacy_cgwb": {
+    "rows": 1514984,
+    "mapped_finite_dated_rows": 1366656,
+    "start_reported_date": "1996-05-01 00:00:00",
+    "last_reported_date": "2023-03-31 00:00:00",
+    "districts": 559,
+    "invalid_or_unmapped_rows": 148328,
+    "duplicate_district_date_value_rows_not_proven_duplicate_wells": 63342
+  },
+  "weather": {
+    "imd_rainfall_district_monthly": {
+      "rows": 295392,
+      "district_state_pairs": 724,
+      "start_month": "1992-01-01",
+      "last_month": "2025-12-01",
+      "duplicate_district_months": 0,
+      "missing_values": {
+        "rainfall_mm": 0
+      },
+      "first_publication_at": null,
+      "historical_revision_vintages": null
+    },
+    "era5_district_monthly": {
+      "rows": 199824,
+      "district_state_pairs": 724,
+      "start_month": "2002-01-01",
+      "last_month": "2024-12-01",
+      "duplicate_district_months": 0,
+      "missing_values": {
+        "temperature": 0,
+        "evapotranspiration": 0
+      },
+      "first_publication_at": null,
+      "historical_revision_vintages": null
+    }
+  },
+  "units": {
+    "gwl": "m_bgl",
+    "rainfall": "mm/month",
+    "temperature": "degC",
+    "evapotranspiration": "mm/month"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-19",
+  "scope": "F6/F10 safe reporting/documentation fixes; prospective shadow plan only",
+  "initial_branch": "main",
+  "initial_commit": "fc7fdcf20d9f8eb8991dc509b7d581168058de3e",
+  "initial_tracked_changes": [],
+  "initial_untracked_evidence": "14 files under reports/scientific_validation_audit_20261018; retained unchanged",
+  "tests": {
+    "command": ".\\venv\\Scripts\\python.exe -B -m pytest -q -p no:cacheprovider tests/test_post_audit_reporting.py tests/test_post_audit_metadata.py tests/test_forecast_metric_precision.py --basetemp=scratch/pytest-post-audit-safe-fixes-20261019 --junitxml=reports/post_audit_safe_fixes_20261019/targeted-tests.xml",
+    "exit_code": 0,
+    "passed": 33,
+    "failed": 0,
+    "seconds_reported_by_pytest": 12.31,
+    "new_reporting_cases": 19,
+    "new_metadata_cases": 3,
+    "existing_metric_precision_cases": 11,
+    "fixtures": "Fixed arrays, metadata JSON and synthetic report rows in pytest temporary paths only",
+    "guards": "New tests fail on estimator fit/predict, training factory, production feature-load and DB entry-point use"
+  },
+  "additional_executed_checks": [
+    "git diff --check: passed",
+    "Active pointer/model/card SHA-256 comparison: matched before snapshot and after source changes",
+    "629 existing-file comparison: 626 unchanged, exactly README.md and the two scoped model source files changed",
+    "ANN AST comparison with docstrings removed: executable code unchanged",
+    "OLS train_per_district loop AST through y_pred assignment: filtering, split, estimator and fit/predict prefix unchanged",
+    "Independent read-only F6 and F10 source/test reviews: no actionable defects"
+  ],
+  "models_fitted": false,
+  "models_tuned_selected_or_promoted": false,
+  "new_forecasts_or_forecast_records_created": false,
+  "production_database_accessed": false,
+  "datasets_ingested_or_modified": false,
+  "checkpoints_or_model_cards_modified": false,
+  "previous_reports_modified": false,
+  "shadow_infrastructure_modified_or_implemented": false,
+  "hgb_status": "Real predictions remain abstained: shadow_artifact_not_approved",
+  "not_run": [
+    "Unrestricted test suite because it contains estimator fitting",
+    "Training, inference, model-selection, ingestion, scoring or forecast-ledger recording commands",
+    "Live database tests, migrations, Docker/fresh install or public deployment"
+  ],
+  "production_behavior_changed": false,
+  "authorized_behavior_change": "Standalone OLS metric/report summary semantics only; historical outputs not regenerated",
+  "recommendation": "Continue research-only shadow preparation; no real issuance or promotion until prerequisites and separate approvals are satisfied"
+}

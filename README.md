@@ -109,6 +109,8 @@ python -m scripts.validate_monthly_candidates --run --fold all --n-jobs 1
 
 Saved evaluation uses the bundle's recorded cutoff and never fits or republishes it. Candidate training writes a separate pointer, model-card sidecar and report. The development runner excludes all 2020 onward rows before label construction, uses fixed chronological panel folds with six-month embargoes, and writes only experimental candidate reports. Without `--run` it prints a plan. These development comparisons are for model selection, not independent interval calibration or current-period accuracy; later independent observations are still required.
 
+Climate reports are specific to their recorded feature generation. The preserved `reports/climate_forecast_review.json` reviews `physical-v3-causal-monthly-90a24f1f2574`; it is historical evidence and does not verify a later generation. For the release being inspected, compare `data/processed/feature_manifest.json`, the card resolved by `models/checkpoints/aquaiq_monthly_climate.json`, and `reports/climate_forecast_evaluation.json`. Check their generation and source/model identities before citing results; retain old reports with their original references.
+
 For batch scoring, an optional historical cutoff selects only evidence available through that date:
 
 ```bash

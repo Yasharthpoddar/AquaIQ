@@ -2,10 +2,11 @@
 AquaIQ — Perceptron ANN Classifier (Week 5, Yasharth)
 -------------------------------------------------------
 MLPClassifier that predicts crisis tier (Safe/Watch/Warning/Crisis)
-directly from the 10-feature vector.
+directly from the canonical 12-feature vector (nine numeric inputs and three
+encoded crop-season indicators). The feature order comes from xgboost_model.
 
-Architecture (from project plan):
-  Input layer:  10 features
+Architecture (current encoded schema):
+  Input layer:  12 features, derived from the canonical feature columns
   Hidden layer: 64 neurons, ReLU activation
   Output layer: 4 classes (Safe/Watch/Warning/Crisis), softmax
 
@@ -98,7 +99,8 @@ def generate_fuzzy_labels(df: pd.DataFrame) -> pd.Series:
 def train_ann(df: pd.DataFrame, max_iter: int = 300):
     """
     Train the Perceptron ANN classifier.
-    Architecture: [10, 64, 4] — Input(10) → Hidden(64, ReLU) → Output(4)
+    Architecture: [12, 64, 4] — canonical inputs → Hidden(64, ReLU) → Output(4).
+    The input schema is derived at runtime, not from the legacy input_size field.
     """
     print("  Generating crisis tier labels from Fuzzy Logic FIS...")
     df = forecast.encode_crop_season(df)

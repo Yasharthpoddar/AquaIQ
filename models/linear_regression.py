@@ -1,13 +1,16 @@
 """
 AquaIQ — Linear Regression Baseline (Week 5, Yash)
 -----------------------------------------------------
-Trains a per-district Linear Regression model (2002-2019) and evaluates
-on the 2023-2024 test set. This provides the baseline trend component
-for the Crisis Score ensemble.
+Trains per-district Linear Regression using the configured training-label cutoff.
+Held-out origins run from heldout_origin_start(cutoff) through date_range.end;
+the shared splitter enforces the six-month embargo and observed targets.
+This reporting script is separate from the serving ensemble's trend calculation.
 
 Course mapping: AS202 (Python for Data Science), CS205 (Statistical Methods).
 
-Metrics: R², RMSE, MAE per district + aggregate.
+Metrics: R², RMSE, MAE per district + descriptive district summaries.
+R² is unavailable for singleton, constant or numerically unresolved targets;
+MAE/RMSE remain defined for finite nonempty prediction arrays.
 
 Run:
     python models/linear_regression.py
@@ -24,7 +27,6 @@ import pandas as pd
 import yaml
 from dotenv import load_dotenv
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 ROOT = Path(__file__).parent.parent
 if str(ROOT) not in sys.path:
@@ -54,6 +56,36 @@ def get_connection():
 def load_features() -> pd.DataFrame:
     """Use the same verified physical-unit generation as the forecaster."""
     return forecast.load_feature_matrix()
+
+
+def report_metrics(y_true, y_pred) -> dict:
+    """Map shared evaluation semantics onto the existing four-decimal columns.
+
+    Undefined R² stays None; no zero is substituted. The shared float64 guard
+    measures numerical resolution, not instrument precision or physical variance.
+    """
+    measured = forecast.metrics(y_true, y_pred)
+    return {"r2": None if measured["r2"] is None else round(measured["r2"], 4),
+            "rmse": round(measured["rmse_m"], 4),
+            "mae": round(measured["mae_m"], 4)}
+
+
+def summarize_metrics(results_df: pd.DataFrame) -> dict:
+    """Descriptive summaries over available district metrics, not pooled skill."""
+    summary = {}
+    for column in ("r2", "rmse", "mae"):
+        values = pd.to_numeric(results_df[column], errors="raise")
+        available = values.loc[values.notna() & np.isfinite(values)]
+        summary[column] = {
+            "available": len(available), "unavailable": len(values) - len(available),
+            "mean": float(available.mean()) if len(available) else None,
+            "median": float(available.median()) if len(available) else None,
+        }
+    return summary
+
+
+def _display_metric(value):
+    return "unavailable" if value is None else f"{value:.4f}"
 
 
 def train_per_district(df: pd.DataFrame, top_n: int = None) -> pd.DataFrame:
@@ -101,17 +133,11 @@ def train_per_district(df: pd.DataFrame, top_n: int = None) -> pd.DataFrame:
         model.fit(X_train, y_train)
         y_pred = model.predict(X_test)
 
-        r2 = r2_score(y_test, y_pred)
-        rmse = np.sqrt(mean_squared_error(y_test, y_pred))
-        mae = mean_absolute_error(y_test, y_pred)
-
         results.append({
             "district_id": district_id,
             "n_train": len(train),
             "n_test": len(test),
-            "r2": round(r2, 4),
-            "rmse": round(rmse, 4),
-            "mae": round(mae, 4),
+            **report_metrics(y_test, y_pred),
             "units": "m_bgl", "horizon_months": forecast.FORECAST_HORIZON,
         })
         models[district_id] = model
@@ -130,32 +156,43 @@ def save_results(results_df: pd.DataFrame):
         print("No districts have sufficient observed training/held-out samples.")
         return
 
-    # Aggregate stats
-    print(f"\n  Aggregate Metrics ({len(results_df)} districts):")
-    print(f"    Mean R2   = {results_df['r2'].mean():.4f}")
-    print(f"    Median R2 = {results_df['r2'].median():.4f}")
-    print(f"    Mean RMSE = {results_df['rmse'].mean():.4f}")
-    print(f"    Mean MAE  = {results_df['mae'].mean():.4f}")
+    summary = summarize_metrics(results_df)
+    print(f"\n  District summaries ({len(results_df)} districts; available values only):")
+    print(f"    Mean R2   = {_display_metric(summary['r2']['mean'])}")
+    print(f"    Median R2 = {_display_metric(summary['r2']['median'])}")
+    print(f"    R2 available = {summary['r2']['available']}; unavailable = {summary['r2']['unavailable']}")
+    print(f"    Mean RMSE = {_display_metric(summary['rmse']['mean'])}")
+    print(f"    Mean MAE  = {_display_metric(summary['mae']['mean'])}")
+
+    # Unavailable R² values are neither ranked nor counted as meaningful zeros.
+    r2_values = pd.to_numeric(results_df["r2"], errors="raise")
+    defined = results_df.loc[r2_values.notna() & np.isfinite(r2_values)].copy()
+    defined["r2"] = r2_values.loc[defined.index].astype(float)
 
     # Distribution
     r2_bins = [
-        ("R2 > 0.75 (good)", (results_df["r2"] > 0.75).sum()),
-        ("R2 0.50-0.75 (moderate)", ((results_df["r2"] >= 0.50) & (results_df["r2"] <= 0.75)).sum()),
-        ("R2 < 0.50 (poor)", (results_df["r2"] < 0.50).sum()),
+        ("R2 > 0.75 (good)", (defined["r2"] > 0.75).sum()),
+        ("R2 0.50-0.75 (moderate)", ((defined["r2"] >= 0.50) & (defined["r2"] <= 0.75)).sum()),
+        ("R2 < 0.50 (poor)", (defined["r2"] < 0.50).sum()),
+        ("R2 unavailable", summary["r2"]["unavailable"]),
     ]
     print(f"\n  R2 Distribution:")
     for label, count in r2_bins:
         pct = count / len(results_df) * 100
         print(f"    {label}: {count} ({pct:.0f}%)")
 
+    if defined.empty:
+        print("\n  No districts have a defined R2; ranking unavailable.")
+        return
+
     # Top 5
     print(f"\n  Top 5 districts by R2:")
-    for _, row in results_df.nlargest(5, "r2").iterrows():
+    for _, row in defined.nlargest(5, "r2").iterrows():
         print(f"    {row['district_id']:>15s}: R2={row['r2']:.4f}  RMSE={row['rmse']:.4f}")
 
     # Bottom 5
     print(f"\n  Bottom 5 districts by R2:")
-    for _, row in results_df.nsmallest(5, "r2").iterrows():
+    for _, row in defined.nsmallest(5, "r2").iterrows():
         print(f"    {row['district_id']:>15s}: R2={row['r2']:.4f}  RMSE={row['rmse']:.4f}")
 
 

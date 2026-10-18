@@ -1,0 +1,477 @@
+{
+  "cohorts": {
+    "validation": {
+      "cases": 3522,
+      "districts": 514,
+      "distinct_origins": 28,
+      "distinct_target_months": 28,
+      "origin_start": "2009-11-01",
+      "origin_end": "2018-06-01",
+      "target_start": "2010-05-01",
+      "target_end": "2018-12-01",
+      "target_year_counts": {
+        "2010": 826,
+        "2013": 816,
+        "2016": 1110,
+        "2018": 770
+      },
+      "target_calendar_month_counts": {
+        "1": 29,
+        "2": 21,
+        "3": 21,
+        "4": 21,
+        "5": 1750,
+        "6": 20,
+        "7": 20,
+        "8": 22,
+        "9": 18,
+        "10": 18,
+        "11": 1562,
+        "12": 20
+      }
+    },
+    "primary_observed_origin": {
+      "cases": 209,
+      "districts": 32,
+      "distinct_origins": 39,
+      "distinct_target_months": 39,
+      "origin_start": "2019-07-01",
+      "origin_end": "2022-09-01",
+      "target_start": "2020-01-01",
+      "target_end": "2023-03-01",
+      "target_year_counts": {
+        "2020": 107,
+        "2021": 44,
+        "2022": 48,
+        "2023": 10
+      },
+      "target_calendar_month_counts": {
+        "1": 45,
+        "2": 19,
+        "3": 18,
+        "4": 15,
+        "5": 18,
+        "6": 13,
+        "7": 14,
+        "8": 16,
+        "9": 11,
+        "10": 12,
+        "11": 16,
+        "12": 12
+      }
+    },
+    "secondary_causal_origin": {
+      "cases": 962,
+      "districts": 507,
+      "distinct_origins": 39,
+      "distinct_target_months": 39,
+      "origin_start": "2019-07-01",
+      "origin_end": "2022-09-01",
+      "target_start": "2020-01-01",
+      "target_end": "2023-03-01",
+      "target_year_counts": {
+        "2020": 855,
+        "2021": 49,
+        "2022": 48,
+        "2023": 10
+      },
+      "target_calendar_month_counts": {
+        "1": 471,
+        "2": 19,
+        "3": 19,
+        "4": 16,
+        "5": 18,
+        "6": 14,
+        "7": 14,
+        "8": 338,
+        "9": 11,
+        "10": 12,
+        "11": 18,
+        "12": 12
+      }
+    },
+    "external_source_conditional": {
+      "cases": 74,
+      "districts": 34,
+      "distinct_origins": 3,
+      "distinct_target_months": 3,
+      "origin_start": "2021-11-01",
+      "origin_end": "2022-11-01",
+      "target_start": "2022-05-01",
+      "target_end": "2023-05-01",
+      "target_year_counts": {
+        "2022": 40,
+        "2023": 34
+      },
+      "target_calendar_month_counts": {
+        "5": 40,
+        "11": 34
+      }
+    }
+  },
+  "bootstrap_intervals": {
+    "validation": {
+      "ridge": {
+        "persistence": {
+          "mae_difference_m": [
+            -1.3794787507681132,
+            -1.1388378739106573
+          ],
+          "rmse_difference_m": [
+            -1.4126033009813705,
+            -1.099851651285184
+          ]
+        },
+        "seasonal_naive": {
+          "mae_difference_m": [
+            -0.06555739902185215,
+            0.039530043337205514
+          ],
+          "rmse_difference_m": [
+            -0.33630296417535155,
+            -0.054454711309521286
+          ]
+        }
+      },
+      "random_forest": {
+        "persistence": {
+          "mae_difference_m": [
+            -1.4941848391496888,
+            -1.2443136924452112
+          ],
+          "rmse_difference_m": [
+            -1.485420798913294,
+            -1.12724299580985
+          ]
+        },
+        "seasonal_naive": {
+          "mae_difference_m": [
+            -0.17486082003075468,
+            -0.071597219353416
+          ],
+          "rmse_difference_m": [
+            -0.4125967968788262,
+            -0.07749901340651948
+          ]
+        }
+      },
+      "xgboost": {
+        "persistence": {
+          "mae_difference_m": [
+            -1.4859318043852892,
+            -1.2352219920194765
+          ],
+          "rmse_difference_m": [
+            -1.4858453668204097,
+            -1.1790504827318231
+          ]
+        },
+        "seasonal_naive": {
+          "mae_difference_m": [
+            -0.17487411476057724,
+            -0.05992440779350889
+          ],
+          "rmse_difference_m": [
+            -0.4580452106927179,
+            -0.09674494689076918
+          ]
+        }
+      },
+      "hist_gradient_boosting": {
+        "persistence": {
+          "mae_difference_m": [
+            -1.4957728868003881,
+            -1.245138557654511
+          ],
+          "rmse_difference_m": [
+            -1.5165101620653403,
+            -1.2029521480628391
+          ]
+        },
+        "seasonal_naive": {
+          "mae_difference_m": [
+            -0.1816120274832547,
+            -0.06957030306447053
+          ],
+          "rmse_difference_m": [
+            -0.47751103122869165,
+            -0.12436293162329355
+          ]
+        }
+      }
+    },
+    "primary_observed_origin": {
+      "ridge": {
+        "persistence": {
+          "mae_difference_m": [
+            -0.4379670986145688,
+            0.39234126189764007
+          ],
+          "rmse_difference_m": [
+            -2.647163570698784,
+            -0.04278668958310415
+          ]
+        },
+        "seasonal_naive": {
+          "mae_difference_m": [
+            0.1093862593894981,
+            0.5673014506349686
+          ],
+          "rmse_difference_m": [
+            -0.2943878717300518,
+            1.4807217253917002
+          ]
+        }
+      },
+      "random_forest": {
+        "persistence": {
+          "mae_difference_m": [
+            -0.5528602328549925,
+            0.4360520025854068
+          ],
+          "rmse_difference_m": [
+            -2.398126641870207,
+            -0.03224172707254774
+          ]
+        },
+        "seasonal_naive": {
+          "mae_difference_m": [
+            -0.13697429275146084,
+            0.6522646165895466
+          ],
+          "rmse_difference_m": [
+            -0.6519237430906369,
+            1.7480380547053322
+          ]
+        }
+      },
+      "xgboost": {
+        "persistence": {
+          "mae_difference_m": [
+            -0.24463956507926984,
+            0.4548211052171778
+          ],
+          "rmse_difference_m": [
+            -0.9634782293917868,
+            0.0251050361253642
+          ]
+        },
+        "seasonal_naive": {
+          "mae_difference_m": [
+            0.060518592733182296,
+            0.8394170169121214
+          ],
+          "rmse_difference_m": [
+            -0.394344495959355,
+            3.1613956120774858
+          ]
+        }
+      },
+      "hist_gradient_boosting": {
+        "persistence": {
+          "mae_difference_m": [
+            -0.4009560163844376,
+            0.3992731496357751
+          ],
+          "rmse_difference_m": [
+            -1.2342858275419737,
+            0.037733439207101815
+          ]
+        },
+        "seasonal_naive": {
+          "mae_difference_m": [
+            -0.07325032416160583,
+            0.7394840192873893
+          ],
+          "rmse_difference_m": [
+            -0.6239778404372722,
+            2.928226522071243
+          ]
+        }
+      }
+    },
+    "secondary_causal_origin": {
+      "ridge": {
+        "persistence": {
+          "mae_difference_m": [
+            -0.6837424539016989,
+            -0.35493612778661415
+          ],
+          "rmse_difference_m": [
+            -1.1709133629168458,
+            -0.4917420469286356
+          ]
+        },
+        "seasonal_naive": {
+          "mae_difference_m": [
+            0.11561567420096293,
+            0.27175660028062204
+          ],
+          "rmse_difference_m": [
+            -0.19574252792317973,
+            0.2761380868409045
+          ]
+        }
+      },
+      "random_forest": {
+        "persistence": {
+          "mae_difference_m": [
+            -0.6096431309779226,
+            -0.2730300105695429
+          ],
+          "rmse_difference_m": [
+            -1.0370587954392712,
+            -0.3500550547166314
+          ]
+        },
+        "seasonal_naive": {
+          "mae_difference_m": [
+            0.16738100695045358,
+            0.37499991390260573
+          ],
+          "rmse_difference_m": [
+            -0.09636565083489151,
+            0.42715753540449514
+          ]
+        }
+      },
+      "xgboost": {
+        "persistence": {
+          "mae_difference_m": [
+            -0.5239309732627796,
+            -0.24379408191955512
+          ],
+          "rmse_difference_m": [
+            -0.6887457181466636,
+            -0.3680464107712116
+          ]
+        },
+        "seasonal_naive": {
+          "mae_difference_m": [
+            0.22532428807486923,
+            0.4412635513720788
+          ],
+          "rmse_difference_m": [
+            -0.10844635803398048,
+            0.8007728834708233
+          ]
+        }
+      },
+      "hist_gradient_boosting": {
+        "persistence": {
+          "mae_difference_m": [
+            -0.6022471584326211,
+            -0.3149212002974693
+          ],
+          "rmse_difference_m": [
+            -0.7780304134710544,
+            -0.43567580459841804
+          ]
+        },
+        "seasonal_naive": {
+          "mae_difference_m": [
+            0.14785298806148658,
+            0.36078081604326845
+          ],
+          "rmse_difference_m": [
+            -0.18148224820686587,
+            0.696533320511517
+          ]
+        }
+      }
+    },
+    "external_source_conditional": {
+      "ridge": {
+        "persistence": {
+          "mae_difference_m": [
+            -1.9291291063983227,
+            0.1383140357890593
+          ],
+          "rmse_difference_m": [
+            -1.3411665703661715,
+            1.8370627335195344
+          ]
+        },
+        "seasonal_naive": {
+          "mae_difference_m": [
+            -2.9642933823033415,
+            -0.15226377111792433
+          ],
+          "rmse_difference_m": [
+            -7.124161474285423,
+            -0.9642191625676977
+          ]
+        }
+      },
+      "random_forest": {
+        "persistence": {
+          "mae_difference_m": [
+            -2.423114250363853,
+            -0.8095628355220486
+          ],
+          "rmse_difference_m": [
+            -1.5362216848375043,
+            0.3697262562855248
+          ]
+        },
+        "seasonal_naive": {
+          "mae_difference_m": [
+            -4.075762475160875,
+            -0.47579361430895606
+          ],
+          "rmse_difference_m": [
+            -8.622818464962478,
+            -1.2629538140232215
+          ]
+        }
+      },
+      "xgboost": {
+        "persistence": {
+          "mae_difference_m": [
+            -2.4089354537472882,
+            -0.7594067919231615
+          ],
+          "rmse_difference_m": [
+            -1.6882258498454275,
+            0.32548980850518217
+          ]
+        },
+        "seasonal_naive": {
+          "mae_difference_m": [
+            -4.236761646919913,
+            -0.3670148979948892
+          ],
+          "rmse_difference_m": [
+            -8.912433532427476,
+            -1.24059518137057
+          ]
+        }
+      },
+      "hist_gradient_boosting": {
+        "persistence": {
+          "mae_difference_m": [
+            -2.582710136706407,
+            -1.0437700684780156
+          ],
+          "rmse_difference_m": [
+            -1.9810383939430403,
+            -0.20228110617811362
+          ]
+        },
+        "seasonal_naive": {
+          "mae_difference_m": [
+            -4.465155928501155,
+            -0.546119243611535
+          ],
+          "rmse_difference_m": [
+            -9.275798577749942,
+            -1.547805937443285
+          ]
+        }
+      }
+    }
+  },
+  "saved_pooled_metrics_and_bootstrap_intervals_reproduced": true,
+  "training_executed": false,
+  "model_selection_changed": false
+}

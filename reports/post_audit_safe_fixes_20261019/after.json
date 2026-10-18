@@ -1,0 +1,38 @@
+{
+  "audit_date": "2026-10-19",
+  "existing_files_checked": 629,
+  "unchanged_existing_files": 626,
+  "allowed_source_changes": {
+    "models/ann_classifier.py": {
+      "before_sha256": "4c9c73bd1ef7f4120e75205dd5ba9cd525796c9c285899ed7bce06abe0405f34",
+      "after_sha256": "9e3fcb5baa803c17982a2309e91d13c0014641d73ddfe179dce58335b4cac596"
+    },
+    "models/linear_regression.py": {
+      "before_sha256": "01632aa0af726a70b9632decdd543b8fe0b7ec209fc0e4835135dad97d7e0056",
+      "after_sha256": "b6625f9b5ebd3c9233f0c8ab7d9ea544e7a176cd98a87334d1c2c3b8ff8b2b7f"
+    },
+    "README.md": {
+      "before_sha256": "0a3a1140b06ec5bb176e50ad243b840e7e26ee23f942a7e3242f94a2a657ef97",
+      "after_sha256": "c8d177fd6f1f0236ced6a498acc73ac0e0ee8c0852e09e1445c9679ee3ebff4a"
+    }
+  },
+  "protected_datasets_checkpoints_and_previous_reports_unchanged": true,
+  "active_artifacts_before": {
+    "models/checkpoints/aquaiq_xgb.json": "e6722ef6cb77242ba982a5763a0ff28499a05d93147df30828ab822bbf26ff92",
+    "models/checkpoints/bundles/20261013T170456589578Z-ca138883556b/model.json": "ef58264b9c1fa43f727fef9d4d180e59f091c9778eb48f128f2ab81d40a97789",
+    "models/checkpoints/bundles/20261013T170456589578Z-ca138883556b/model_card.json": "aee8c2862268af07300f563a7582ea7cb218d1b74bb729b7bbb2d1341a1e01ee",
+    "models/checkpoints/aquaiq_monthly_climate.json": "59827055a401dee258e8ab9d2c1d7e81bfaab3bf8240f10bd5798f882f52ec43",
+    "models/checkpoints/climate_bundles/20261013T170824590468Z-16aefd7cb4/model.json": "54f535f57bcd62f0bea38cf5c545eb253b37d5bdd6bae1794ec27a3e73a43d97",
+    "models/checkpoints/climate_bundles/20261013T170824590468Z-16aefd7cb4/model_card.json": "e9885a71e00c0a1eabaddf3ed850257740293ddbec8ddba2a58a41cdc820a813"
+  },
+  "active_artifacts_after": {
+    "models/checkpoints/aquaiq_xgb.json": "e6722ef6cb77242ba982a5763a0ff28499a05d93147df30828ab822bbf26ff92",
+    "models/checkpoints/bundles/20261013T170456589578Z-ca138883556b/model.json": "ef58264b9c1fa43f727fef9d4d180e59f091c9778eb48f128f2ab81d40a97789",
+    "models/checkpoints/bundles/20261013T170456589578Z-ca138883556b/model_card.json": "aee8c2862268af07300f563a7582ea7cb218d1b74bb729b7bbb2d1341a1e01ee",
+    "models/checkpoints/aquaiq_monthly_climate.json": "59827055a401dee258e8ab9d2c1d7e81bfaab3bf8240f10bd5798f882f52ec43",
+    "models/checkpoints/climate_bundles/20261013T170824590468Z-16aefd7cb4/model.json": "54f535f57bcd62f0bea38cf5c545eb253b37d5bdd6bae1794ec27a3e73a43d97",
+    "models/checkpoints/climate_bundles/20261013T170824590468Z-16aefd7cb4/model_card.json": "e9885a71e00c0a1eabaddf3ed850257740293ddbec8ddba2a58a41cdc820a813"
+  },
+  "git_status": "M README.md\n M models/ann_classifier.py\n M models/linear_regression.py\n?? reports/post_audit_safe_fixes_20261019/REPORT.md\n?? reports/post_audit_safe_fixes_20261019/before.json\n?? reports/post_audit_safe_fixes_20261019/checks.json\n?? reports/post_audit_safe_fixes_20261019/targeted-tests.xml\n?? reports/post_audit_safe_fixes_20261019/verify_preservation.py\n?? reports/scientific_validation_audit_20261018/REPORT.md\n?? reports/scientific_validation_audit_20261018/artifact_inventory.json\n?? reports/scientific_validation_audit_20261018/audit_saved.py\n?? reports/scientific_validation_audit_20261018/baseline_inventory.json\n?? reports/scientific_validation_audit_20261018/data_inventory.json\n?? reports/scientific_validation_audit_20261018/district_observation_freshness.csv\n?? reports/scientific_validation_audit_20261018/error_distributions.csv\n?? reports/scientific_validation_audit_20261018/execution_evidence.json\n?? reports/scientific_validation_audit_20261018/group_metrics.csv\n?? reports/scientific_validation_audit_20261018/pooled_metrics.csv\n?? reports/scientific_validation_audit_20261018/preservation_verified.json\n?? reports/scientific_validation_audit_20261018/primary_leave_one_district_out.csv\n?? reports/scientific_validation_audit_20261018/shadow-tests.xml\n?? reports/scientific_validation_audit_20261018/validation_reproduction.json\n?? tests/test_post_audit_metadata.py\n?? tests/test_post_audit_reporting.py",
+  "scope": "Byte integrity only. No fitting/forecasting/DB operations are invoked by this helper."
+}
