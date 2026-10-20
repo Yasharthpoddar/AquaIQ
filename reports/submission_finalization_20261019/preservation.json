@@ -1,0 +1,139 @@
+{
+  "verified_at_utc": "2026-10-19T04:05:17.715119+00:00",
+  "commit": "905f3c32304fa196015b8cd3113ec77f6b0a7d84",
+  "branch": "main",
+  "initial_git_status": "",
+  "pre_existing_files_checked": 652,
+  "allowed_presentation_files_changed": 11,
+  "unchanged_pre_existing_files": 641,
+  "missing_files": [],
+  "unexpected_existing_file_changes": [],
+  "changed_files": [
+    {
+      "path": "api_spec.md",
+      "before_sha256": "29c7321f04c28d380929e4bdcfa8ce4ced9e5dccfcfacfc4486034ebbd227ab4",
+      "after_sha256": "13ae9d9ff9dc8c311b624d7eac77140c4b32f34ca342e4ce0b9e31e299027cd1",
+      "before_bytes": 13433,
+      "after_bytes": 14134
+    },
+    {
+      "path": "dashboard/index.html",
+      "before_sha256": "93a6fca97c29ce9fb3682575e316b3df9341e380e10a303cf7fc1d18b98b50ec",
+      "after_sha256": "fe11d4718bc9fd4171db494b50ee4cd58642e03537260b79ce4af0520cdd45a1",
+      "before_bytes": 361,
+      "after_bytes": 381
+    },
+    {
+      "path": "dashboard/src/App.jsx",
+      "before_sha256": "f50dc4ce4d0a7823e2e796fcb5d3c2ed91ebbdfa9eef8a6b74c238df1641bf79",
+      "after_sha256": "fba2b376f2e0b2cef4d27cdd18071b4e2682950647b5873c2e7fef92cba0c566",
+      "before_bytes": 1151,
+      "after_bytes": 1561
+    },
+    {
+      "path": "dashboard/src/components/MapComponent.jsx",
+      "before_sha256": "0f33fc395a1e2f9ebdf9d098951df4f9ffb7cfe19901e8b6de63a76eefe3a5cf",
+      "after_sha256": "ba72bfb3c56d783263e13f68bfc65059f55bc696cdb0b3c97c1c7ee7b2b9c9ea",
+      "before_bytes": 8478,
+      "after_bytes": 8499
+    },
+    {
+      "path": "dashboard/src/pages/Alerts.jsx",
+      "before_sha256": "9a261ef6bb86d1b6644e36059c3c4a28334c1fd9a3c2e7ec7bc20afd04fd38da",
+      "after_sha256": "1f61e1eb921e5fb1b3e717f44745f71bf07cbbe3497cab6f84f88d1ed4c374f2",
+      "before_bytes": 5907,
+      "after_bytes": 5965
+    },
+    {
+      "path": "dashboard/src/pages/DistrictDetail.jsx",
+      "before_sha256": "92afe35fd74dcaf15ac07cd933824e650d16bd61129ba00f1edbecbcb83660f3",
+      "after_sha256": "c717749ea9cf3ea0d57b587893d2640781571288ddbf2dc9e3e501124d24d4dc",
+      "before_bytes": 14006,
+      "after_bytes": 14212
+    },
+    {
+      "path": "dashboard/src/pages/Home.jsx",
+      "before_sha256": "7f727c33a74d9e4638324dd35c69c6371ce346f90a976f8d382a99236b387516",
+      "after_sha256": "1eee0cd661de7ad5e89495af0a018efe2774b234bf1d7d3fdfc1fb70434d74cd",
+      "before_bytes": 8924,
+      "after_bytes": 9293
+    },
+    {
+      "path": "dashboard/src/pages/Simulate.jsx",
+      "before_sha256": "019dc249163b047c9db6a4cbaa55c667df4810f1752d8dbfe2ae99be374538d0",
+      "after_sha256": "e9513ab4f50a8c0127cb89b2bed5c850974a43be3be1c981e2e070c0cc40b184",
+      "before_bytes": 9956,
+      "after_bytes": 10036
+    },
+    {
+      "path": "docs/phase2_eval/README.md",
+      "before_sha256": "a8d3409a26c8e9b1e7938316a4d5fea56671390bd1b18fd1a868cc1857aadd02",
+      "after_sha256": "63e3d9aabd1a144dc80a130144af34d37262bb457289bd498d83b2ab637d9bd6",
+      "before_bytes": 4361,
+      "after_bytes": 5002
+    },
+    {
+      "path": "docs/prospective_shadow.md",
+      "before_sha256": "418dc7c21c1e07011e54126e7918b064351300521090d9516be34233b0504d90",
+      "after_sha256": "8a13f38d55104f61a287a42edd5a57814ca659177e33538246e6e6b1416a3bb4",
+      "before_bytes": 16905,
+      "after_bytes": 17415
+    },
+    {
+      "path": "README.md",
+      "before_sha256": "c8d177fd6f1f0236ced6a498acc73ac0e0ee8c0852e09e1445c9679ee3ebff4a",
+      "after_sha256": "8f9c4a2bd1252b548da0a4f132bef662883c3b65d23814dcbbdde7b409837fbc",
+      "before_bytes": 17792,
+      "after_bytes": 22143
+    }
+  ],
+  "protected_groups": {
+    "data/": {
+      "pre_existing_files": 110,
+      "unchanged": 110,
+      "new_files_outside_this_report": 0
+    },
+    "models/checkpoints/": {
+      "pre_existing_files": 18,
+      "unchanged": 18,
+      "new_files_outside_this_report": 0
+    },
+    "reports/": {
+      "pre_existing_files": 324,
+      "unchanged": 324,
+      "new_files_outside_this_report": 0
+    },
+    "dashboard/dist/": {
+      "pre_existing_files": 6,
+      "unchanged": 6,
+      "new_files_outside_this_report": 0
+    }
+  },
+  "active_bundle_hashes": [
+    {
+      "pointer": "models/checkpoints/aquaiq_xgb.json",
+      "pointer_sha256": "e6722ef6cb77242ba982a5763a0ff28499a05d93147df30828ab822bbf26ff92",
+      "unchanged": true,
+      "model_path": "models/checkpoints/bundles/20261013T170456589578Z-ca138883556b/model.json",
+      "model_sha256": "ef58264b9c1fa43f727fef9d4d180e59f091c9778eb48f128f2ab81d40a97789",
+      "card_path": "models/checkpoints/bundles/20261013T170456589578Z-ca138883556b/model_card.json",
+      "card_sha256": "aee8c2862268af07300f563a7582ea7cb218d1b74bb729b7bbb2d1341a1e01ee"
+    },
+    {
+      "pointer": "models/checkpoints/aquaiq_monthly_climate.json",
+      "pointer_sha256": "59827055a401dee258e8ab9d2c1d7e81bfaab3bf8240f10bd5798f882f52ec43",
+      "unchanged": true,
+      "model_path": "models/checkpoints/climate_bundles/20261013T170824590468Z-16aefd7cb4/model.json",
+      "model_sha256": "54f535f57bcd62f0bea38cf5c545eb253b37d5bdd6bae1794ec27a3e73a43d97",
+      "card_path": "models/checkpoints/climate_bundles/20261013T170824590468Z-16aefd7cb4/model_card.json",
+      "card_sha256": "e9885a71e00c0a1eabaddf3ed850257740293ddbec8ddba2a58a41cdc820a813"
+    }
+  ],
+  "tracked_diff_within_allowlist": true,
+  "staged_changes": false,
+  "new_tracked_scope_files": "Only this new report directory is untracked; ignored build output is under scratch/submission-build-20261019.",
+  "database_scope": "No database connection or operation performed; filesystem SHA evidence does not inspect database contents.",
+  "hgb_scope": "No shadow artifact built or approved, no predictions issued; existing abstention preserved.",
+  "head_unchanged": true,
+  "limits": "Checks cover inventoried repository files, not external files, database bytes, ignored caches or virtual-environment contents."
+}

@@ -1,0 +1,20 @@
+{
+  "source_sha256": "f8222245721c421bc2f82b6afbd387ee5cd0e263790515ac7d3ffcce0c521302",
+  "normalized_v2_sha256": "158ee78df5254bfeeb6f4760751dc79e995cdfab38c2fe7df1f854633dabb494",
+  "protocol_sha256": "4f6798af12eb7276fd8944607a6db5f5b0343dfa4bc4a1261cd1aebafd783ced",
+  "output_sha256": {
+    "cohort_counts.csv": "2c61bf0890ca20a6bf6c9a965643c787346879c43cdc645064272047352e8f42",
+    "data_quality_notes.json": "362d94ec7690b0d606e64bfb231db8e6fa44b4693c4cfb05a09e272e57774dea",
+    "eligibility_all_accepted_targets.csv": "dbdfc2ae07f3070d66d05b718f6149cb626f7ff55bdbddbdd9c69fbda67d2b6d",
+    "exclusion_counts.csv": "b7a80e08163e4f2d273567656ca6c8d14e36388008086b32fefcc83205b20c9e",
+    "large_errors.csv": "0e70df5e95b0edd51114fa17f4f0a2a83fbbe7446663d36a625d3df5631b0285",
+    "metrics.csv": "1d1b76cff7b495a8f8bb443617d22f9e14ac0cd7172fd53551c001aabf01747f",
+    "monthly_panel_coverage.csv": "2890d6e284140270c0c8e2c1b40e7f2e122c7278f092ba8101121c6569d9dfd0",
+    "protocol.json": "7c03c51b13fa0edfc27416be965b14bc18654f7dbee4a6f64751399a1181a95f",
+    "well_predictions.csv": "d9525a79ce4fe9b37975e49c68b49ddd000b63b40535d05a20f59bbb5caa24bd",
+    "whole_period_common_panels.csv": "a4a4187229569c60832434936c307e7979024567ee36a988fb3222abf7575ea3"
+  },
+  "no_training_or_model_invocation": true,
+  "no_forecast_issuance": true,
+  "prospective_accuracy_measured": false
+}

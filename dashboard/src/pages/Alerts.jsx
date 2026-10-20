@@ -63,8 +63,8 @@ function Alerts() {
 
   return (
     <div className="page">
-      <h1>Groundwater Alerts & Advisory</h1>
-      <p className="subtitle">Districts prioritized by the AquaIQ project risk scale using available historical evidence. Review observation and forecast dates before planning action.</p>
+      <h1>Research risk indicators</h1>
+      <p className="subtitle">Districts ranked by the uncalibrated project index using available historical evidence. These are research indicators, not official advisories. Review source months and model target dates when interpreting them.</p>
       {!loading && !error && status === 'success' && <p role="status">Showing {alerts.length} of {total} districts in this category, including unavailable evidence.{total > alerts.length && ' The API result limit has been reached.'}</p>}
 
       {/* Tier filter tabs */}
@@ -126,7 +126,7 @@ function Alerts() {
                 </span>
               </div>
               {alert.last_observed_date && <p className="alert-recommendation">
-                Last observation: {alert.last_observed_date}{alert.forecast_target && ` · Forecast target: ${alert.forecast_target}`}{alert.as_of && ` · Scored as of: ${alert.as_of}`}
+                Source-backed month: {alert.last_observed_date}{alert.forecast_target && ` · Forecast target: ${alert.forecast_target}`}{alert.as_of && ` · Scored as of: ${alert.as_of}`}
                 {alert.estimate_type === 'zone_fallback' && ' · Agro-climatic zone estimate'}
               </p>}
               {alert.recommendation && (
@@ -136,7 +136,7 @@ function Alerts() {
               )}
               {alert.top_factors && alert.top_factors.length > 0 && (
                 <div style={{ marginTop: '0.5rem', fontSize: '0.78rem', color: '#64748b' }}>
-                  <strong>Key Drivers:</strong> {alert.top_factors.slice(0, 2).join(' · ')}
+                  <strong>Model factors:</strong> {alert.top_factors.slice(0, 2).join(' · ')}
                 </div>
               )}
             </div>

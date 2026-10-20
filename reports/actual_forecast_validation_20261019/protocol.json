@@ -1,0 +1,111 @@
+{
+  "frozen_at_utc": "2026-10-19T09:04:51.210187+00:00",
+  "stage": "Frozen before fitting or evaluation metrics; source/schema/coverage inspection only has occurred.",
+  "claim": "Exploratory calendar-causal regional historical backtest, not historical source-vintage verified, prospective, nationwide or six-full-month issuance validation.",
+  "primary_target": "Provider-reported manual monthly groundwater in explicit mbgl, aggregated to canonical district-month arithmetic mean of accepted well-month records. All reported aquifer types retained and disclosed; no target-value outlier exclusion.",
+  "source": {
+    "file": "acquired/telangana_monthly_2007_2026.csv",
+    "sha256": "f8222245721c421bc2f82b6afbd387ee5cd0e263790515ac7d3ffcce0c521302",
+    "provider": "SGWD-Telangana via official NWIC",
+    "well_id": "Provider Well ID retained verbatim; identity continuity/replacements not independently certified",
+    "version": "Current acquired 2026 export; historical releases/revisions unknown"
+  },
+  "primary_target_range": [
+    "2024-01-01",
+    "2025-06-01"
+  ],
+  "primary_range_reason": "New target period beyond old primary ending2023-03, with all origin months within existing ERA5 coverage through2024-12. Chosen before metrics.",
+  "secondary_target_range": [
+    "2025-07-01",
+    "2026-05-01"
+  ],
+  "secondary_range_reason": "Later source observations; available production weather history ends2024, so preserve native missingness and report separately.",
+  "target_join": "Exact same canonical district at origin+6 calendar months, source-observed target only; no generated or LOCF target labels.",
+  "baseline_contract": {
+    "persistence": "Observed origin month M",
+    "seasonal_naive": "Observed exact M-6 == target-12; no nearest season replacement"
+  },
+  "feature_contract": "Existing direct12 encoded features; causal groundwater LOCF<=3months and exact calendar lags; existing verified weather columns and their missingness unchanged, no new climate substitution or normalization.",
+  "weather_source": {
+    "path": "data/processed/features_matrix.csv",
+    "sha256": "3958737b033a16e722f633a15ad77d80bc5b2a8fb3bea888697f0410362c24ae",
+    "manifest_sha256": "afc96a9e13655ffa2ccb2bf18a027b9bb1ed34c21260b901301cef6fd35c8b91"
+  },
+  "spatial_contract": "Unique containment in existing fixed canonical polygons, Telangana state validation, no nearest-point guesses; retain source district and report spatial/name mismatches.",
+  "qc": "Reject unparseable/negative/nonfinite depths, invalid IDs/dates/coordinates and ambiguous spatial mappings; reject all records in conflicting WellID-month. Do not remove past rows because of later metadata changes. Retain and report repeats/zeros/extremes without outcome-based removal.",
+  "training": {
+    "expanding_years": [
+      2024,
+      2025,
+      2026
+    ],
+    "cutoff_rule": "For target yearY train observed labels<=December31(Y-2); allowed evaluated origins startJuly1(Y-1), six complete embargo months. Never use evaluationyear labels for fitting. Fit new research estimators only.",
+    "origin_policy": "Training origin finite (observed or causal LOCF<=3); evaluation origin must be source-observed.",
+    "xgb_expanding": {
+      "features": 12,
+      "target_form": "absolute",
+      "parameters": {
+        "n_estimators": 500,
+        "max_depth": 6,
+        "learning_rate": 0.01,
+        "subsample": 0.8,
+        "random_state": 42
+      },
+      "implementation": "models.xgboost_model.new_model; no hyperparameter search/selection/early stopping"
+    },
+    "ols_expanding": {
+      "features": 12,
+      "target_form": "absolute",
+      "implementation": "Existing per-district LinearRegression complete-case approach, minimum12eligible training rows. Do not require outcome-count threshold or rank districts using test data."
+    }
+  },
+  "frozen_transfer_comparators": {
+    "xgb_active_frozen": "Read existing JSON model only; 2019-12-31 label cutoff, unchanged12-feature direct approach. Never promote or overwrite.",
+    "hgb_locked_reconstructed": {
+      "specification": {
+        "candidate_id": "hist_gradient_boosting-2-delta",
+        "family": "hist_gradient_boosting",
+        "parameters": {
+          "max_iter": 250,
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 31,
+          "min_samples_leaf": 50,
+          "l2_regularization": 20.0
+        },
+        "target_form": "delta"
+      },
+      "train_target_cutoff": "2018-12-31",
+      "training_source": "Original verified legacy feature generation, strict observed origins and targets, expected14817pairs",
+      "implementation": "Existing fit_candidate/predict_candidate APIs; historical-only estimator saved inside this research report, never approved as shadow artifact; actual shadow abstention unchanged"
+    }
+  },
+  "evaluation_cohorts": {
+    "primary_common": "Primary range; observed origin+target+exactseasonal, all12features finite, all methods have predictions, OLS training eligibility independent of evaluation outcomes.",
+    "primary_native": "Same primary date range and observed references, preserve native missingness; compare baselines and XGB/HGB on identical rows, report OLS abstentions separately.",
+    "secondary_native": "Secondary range, preserve native missingness, all baselines and XGB/HGB identical rows; OLS cannot fill missing inputs and abstains."
+  },
+  "metric_protocol": {
+    "primary": "Pooled RMSE, descriptive; also MAE,bias,R2 where nonconstant",
+    "additional": "AE percentiles50/75/90/95/99/max; largeerrors; district and targetYYYY-MM/year/calendar-month; macro sensitivity; leave-one-district-out, no exclusions"
+  },
+  "uncertainty": {
+    "paired": true,
+    "bootstrap_repeats": 2000,
+    "seed": 42,
+    "methods": [
+      "Whole-district cluster bootstrap",
+      "District resampling crossed with6-consecutive-target-month circular moving blocks"
+    ],
+    "limitations": "Regional district dependence and only18primarytargetmonths make intervals descriptive; no confirmatory selection or favorable stopping."
+  },
+  "archive": "Historical computed_at=currentUTC; forecast_issued_at=null. No forecast backdating, ledger/shadow records or prospective labels.",
+  "no_tuning_or_selection": true,
+  "production_writes_permitted": false,
+  "environment": {
+    "python": "3.13.15",
+    "pandas": "3.0.6",
+    "numpy": "2.5.4",
+    "sklearn": "1.9.1",
+    "xgboost": "3.4.1"
+  }
+}

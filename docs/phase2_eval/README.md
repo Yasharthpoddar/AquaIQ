@@ -1,5 +1,7 @@
 # Phase II Mini Project Evaluation — AquaIQ
 
+> **Historical planning/demo material (September 2026).** This directory's SRS, design, UML, target metrics, test counts and demo descriptions record the earlier project plan, not current validation evidence. For the submission's implemented scope and measured limitations, use the [current README](../../README.md), [scientific audit](../../reports/scientific_validation_audit_20261018/REPORT.md), [safe fixes](../../reports/post_audit_safe_fixes_20261019/REPORT.md) and [issuance investigation](../../reports/provenance_issuance_20261019/REPORT.md). Historical plans do not establish nationwide accuracy or validated real-time forecasts.
+
 **Date:** 10 September 2026  
 **Marks:** 25  
 **Team:** Yasharth (2024800092), Yash, Ayush

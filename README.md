@@ -1,8 +1,33 @@
-# AquaIQ
+# AquaIQ — Groundwater Research Prototype
 
-AquaIQ uses CGWB groundwater observations, IMD rainfall, and ERA5 weather to estimate groundwater depth six calendar months after an observed origin date. A Flask API and React dashboard expose that endpoint and a project-defined 0–100 crisis score for 725 canonical districts. The district prediction graph separately projects the next six full calendar months from today with one shared monthly XGBoost model that uses the forecast horizon, rainfall, temperature, and evapotranspiration assumptions alongside estimated groundwater depth.
+AquaIQ is an academic research prototype using CGWB groundwater records, IMD rainfall, and ERA5 weather to estimate groundwater depth six calendar months after a source-backed origin month. A Flask API and React dashboard expose that endpoint and a project-defined 0–100 risk index over a registry of 725 canonical districts. Registry coverage does not establish observed coverage or nationwide accuracy. The district graph separately shows monthly projections using assumed weather and estimated groundwater depth. Neither verified real-time forecasting skill nor production readiness has been established.
 
 The repaired pipeline keeps groundwater in metres below ground level, rainfall and evapotranspiration in millimetres per month, and temperature in degrees Celsius. Features and model bundles carry generation identifiers, units, dates, and checksums. Missing evidence produces an unavailable result; districts with sparse evidence may use an explicitly labelled aggregate of their agro-climatic zone.
+
+## Academic submission scope and existing evidence
+
+The submission preserves the existing XGBoost, ANN/MLP, Linear Regression and Fuzzy Logic components. ANN learns fuzzy-generated labels; its agreement is not independent crisis-outcome accuracy. HGB remains a locked research candidate, with real predictions abstained (`shadow_artifact_not_approved`). Real shadow issuance is currently **no-go** because source availability, stable well panels, current observations and effective issuance lead remain unresolved.
+
+The saved primary historical benchmark uses the **same 209 observed-flag cases in 32 districts**, with origins July 2019–September 2022 and targets January 2020–March 2023. Values below are existing candidate experiment results, not a new evaluation of the dashboard's current monthly serving path. No model was retrained or reselected for submission.
+
+| Method | MAE (m) | RMSE (m) | R² |
+|---|---:|---:|---:|
+| Persistence | 1.234 | 3.698 | .809 |
+| Seasonal naive | **1.049** | **2.132** | .937 |
+| Ridge, existing benchmark | 1.381 | 2.573 | .908 |
+| Random Forest, existing benchmark | 1.290 | 2.558 | .909 |
+| XGBoost candidate | 1.432 | 3.225 | .855 |
+| Locked HGB research candidate | 1.327 | 3.060 | .869 |
+
+**Seasonal naive outperformed HGB and the other tested ML candidates on primary MAE and RMSE.** HGB was selected on validation. Its RMSE advantage over persistence has a district-bootstrap 95% difference interval crossing zero (−1.234 to +.038 m); its primary MAE is worse than persistence. No reliable prospective ML winner has been demonstrated. R² is not an accuracy percentage. The historical period was previously inspected, sampling is uneven, and well composition/freshness are uncertain; this is not a pristine blind or prospective test.
+
+Submission evidence: [finalization checklist](reports/submission_finalization_20261019/FINALIZATION.md), [scientific validation](reports/scientific_validation_audit_20261018/REPORT.md), [safe reporting fixes](reports/post_audit_safe_fixes_20261019/REPORT.md), [provenance and issuance feasibility](reports/provenance_issuance_20261019/REPORT.md), and [saved selection experiment](reports/candidates/six_month_selection_20261017/REPORT.md). The issuance report distinguishes the nominal origin+6 target from six full months after actual issuance; no horizon or feature definition was changed to resolve that constraint.
+
+A later **conditional Telangana historical comparison** contains 594 paired cases across 33 districts: seasonal-naive RMSE **1.440 m**, expanding XGBoost **1.472 m**, and locked historical HGB **1.790 m**. Seasonal naive again outperformed the tested ML methods. Serious source-name/coordinate conflicts and unverified historical input availability prevent operational or trustworthy location-specific accuracy claims. See the [publication guide and evidence index](reports/github_release_20261020/PUBLICATION.md) for the preserved reports, corrected district predictions, local-only evidence exclusions and public provenance summary. These are historical results; HGB remains abstained and real shadow issuance remains NO-GO.
+
+For presentation, distinguish **source-marked monthly observations**, **bounded forward-filled values**, **estimated current depth**, and **future projections under weather assumptions**. Source flags do not independently certify fresh acquisition, datum continuity or a fixed well panel. The index is uncalibrated and extraction is heuristic sensitivity, not a causal policy estimate. Keep unavailable results visible rather than fabricating a demonstration value.
+
+The repository tracks code and reports, but raw/processed data and trained checkpoints are Git-ignored; a GitHub clone alone does not contain the populated database or those runtime assets. Use the existing configured local environment for any separately authorized runtime demonstration, or present the committed historical reports offline. Fresh installation, hosted deployment and runtime demonstration were not verified by submission finalization. The setup, refresh, training, scoring and replay commands below are maintainer references, **not steps to rerun for this frozen submission**; they can change state or compute new outputs.
 
 ## Setup
 
@@ -96,7 +121,7 @@ python -m preprocessing.features --csv-only
 
 The first two commands build a sample timeline and its features under `reports/samples`. The third samples the production preprocessing input into the same isolated directory. `--csv-only` writes a full candidate feature matrix under `reports/candidates`. Production model loading and training reject sample-only manifests.
 
-The production model defaults to the label cutoff in `config.yaml` (`2019-12-31`). A six-month embargo separates training from evaluation origins, and the final holdout remains independent of model fitting. Training publishes an immutable model/card bundle through one atomic manifest. The training stage builds both the historical endpoint model and the separate monthly climate model. To rebuild only the monthly model, run `python -m models.climate_forecast`; it writes its independent verified bundle and `reports/climate_forecast_evaluation.json`. Backtests and synthetic tests write separate reports and cannot replace the historical checkpoint or automatically promote candidate weights.
+The configured serving model uses the label cutoff in `config.yaml` (`2019-12-31`). A six-month embargo separates training from evaluation origins; historical holdout periods have been inspected during development and are not pristine blind tests. Training publishes an immutable model/card bundle through one atomic manifest. The training stage builds both the historical endpoint model and the separate monthly climate model. To rebuild only the monthly model, run `python -m models.climate_forecast`; it writes its independent verified bundle and `reports/climate_forecast_evaluation.json`. These are maintenance operations, not submission checks. Backtests and synthetic tests write separate reports and cannot replace the historical checkpoint or automatically promote candidate weights.
 
 Use the evaluation-only or candidate modes for model experiments:
 
@@ -111,7 +136,7 @@ Saved evaluation uses the bundle's recorded cutoff and never fits or republishes
 
 Climate reports are specific to their recorded feature generation. The preserved `reports/climate_forecast_review.json` reviews `physical-v3-causal-monthly-90a24f1f2574`; it is historical evidence and does not verify a later generation. For the release being inspected, compare `data/processed/feature_manifest.json`, the card resolved by `models/checkpoints/aquaiq_monthly_climate.json`, and `reports/climate_forecast_evaluation.json`. Check their generation and source/model identities before citing results; retain old reports with their original references.
 
-For batch scoring, an optional historical cutoff selects only evidence available through that date:
+For batch scoring, an optional historical cutoff filters observation-month labels through that date; it does not establish provider publication or actual input availability at that time:
 
 ```bash
 python scripts/run_pipeline.py --step score_all --as-of 2023-03-31
@@ -150,7 +175,7 @@ Open `http://localhost:5173`. Vite proxies `/api` to `http://localhost:5000`. Th
 | `GET /api/scores` | Read one complete scoring run for the current model and feature generation |
 | `GET /api/district/<district_id>` | District score, components, readiness, and evidence metadata |
 | `GET /api/history/<district_id>` | Monthly features with observed/imputed flags and strict JSON nulls |
-| `GET /api/predict/<district_id>?months=6` | One validated six-calendar-month endpoint |
+| `GET /api/predict/<district_id>?months=6` | One six-calendar-month research endpoint from the last observed month |
 | `GET /api/predict/<district_id>?window=next_six_months` | Six future monthly XGBoost projections using rainfall and weather assumptions |
 | `GET /api/alerts` | Scores and unavailable districts from the same complete run |
 | `POST /api/simulate` | Labelled sensitivity analysis using the same baseline evidence |
@@ -161,11 +186,11 @@ District identifiers resolve through the canonical master or recorded legacy cro
 
 The six-month forecast starts at the **last observed groundwater month**, which may precede today's date substantially. If its target is already in the past, the response and dashboard label it as a historical forecast. Forward-filled months do not advance the reported observation date. The October 2026 refresh added January 2026 groundwater for 639 districts and complete rainfall through December 2025; other districts can still have older groundwater observations. ERA5 temperature and potential evaporation remain through December 2024. Inspect each district's observation date and source coverage rather than assuming nationwide current observations. These updates do not independently validate 2026 or 2027 projections. See `reports/AquaIQ_Data_Refresh_Update.md` for the refreshed data snapshot.
 
-The **prediction graph** starts with the next full calendar month after today's month and shows six monthly depth estimates. For example, on 13 October 2026 it covers November 2026 through April 2027. A seasonal regression with a damped trend estimates the current groundwater depth across the unobserved gap. A separate monthly XGBoost model predicts groundwater changes for horizons of one through six months, using the horizon, rainfall, temperature, and evapotranspiration as inputs. An estimated current depth is shown explicitly as an estimate; it is not a newly recorded reading. The history fit needs 24 actual observations spanning 36 months, and sparse districts may use the labelled zone evidence selected by the pipeline. Missing usable groundwater or weather evidence returns an empty graph with a reason.
+The **prediction graph** starts with the next full calendar month after today's month and shows six monthly depth estimates. For example, on 13 October 2026 it covers November 2026 through April 2027. A seasonal regression with a damped trend estimates the current groundwater depth across the unobserved gap. A separate monthly XGBoost model predicts groundwater changes for horizons of one through six months, using the horizon, rainfall, temperature, and evapotranspiration as inputs. An estimated current depth is shown explicitly as an estimate; it is not a newly recorded reading. The history fit needs 24 source-marked monthly observations spanning 36 months, and sparse districts may use the labelled zone evidence selected by the pipeline. Missing usable groundwater or weather evidence returns an empty graph with a reason.
 
 Future rainfall, temperature, and evapotranspiration are **assumed historical same-month averages**, calculated only from past weather records using up to ten recent usable same-calendar-month reference years per weather field, with at least three years required. They are model inputs, not observed 2026 weather or live weather forecasts. The dashboard shows each month's assumptions beside the graph and reports the last available weather record. Pumping/extraction remains excluded because measured future pumping data is unavailable. This climate-conditioned projection does not replace the historical XGBoost endpoint, crisis score, or simulation baseline. Its present-period accuracy is unvalidated. Inspect source age and the weather assumptions before interpreting the estimates. Historical evaluation does not establish accuracy after the current multi-year observation gap.
 
-The crisis tiers and depth-to-score transformation are project definitions, not official groundwater classifications. Initial ensemble weights are explicitly uncalibrated; candidate backtest weights require independent validation before promotion. A zone fallback is a real zone aggregate and is labelled accordingly. When district and zone evidence are insufficient, the score and tier remain null.
+The 0–100 crisis score is a **project-defined, uncalibrated risk index**, not a probability or percentage likelihood of crisis. Safe, Watch, Warning and Crisis are project tiers, not official groundwater classifications. Initial ensemble weights are uncalibrated; candidate backtest weights require independent validation before promotion. A zone fallback is a real zone aggregate and is labelled accordingly. When district and zone evidence are insufficient, the score and tier remain null.
 
 Simulation shows model and heuristic sensitivity to changed inputs. Its extraction adjustment is explicitly heuristic and does not establish a causal policy effect. Zero-change simulation preserves the available baseline, including a null baseline.
 
@@ -173,17 +198,15 @@ Read held-out metrics, their metre units, observed sample counts, and temporal b
 
 ## Verification
 
-Run the deterministic regression suite without a database:
+For frozen-submission checks, use fixed-array/metadata tests and the offline frontend tests with existing dependencies:
 
 ```bash
-python -m pytest -v -m "not requires_db"
-python -m pip check
+python -m pytest -q tests/test_post_audit_reporting.py tests/test_post_audit_metadata.py tests/test_forecast_metric_precision.py
+npm --prefix dashboard test
+npm --prefix dashboard run lint
 ```
 
-If the host restricts its default temporary directory, use
-`python -m pytest -m "not requires_db" --basetemp=scratch/pytest-local` with a new
-scratch path. The October 2026 audit, measured model comparisons and remaining
-limitations are recorded in `reports/AquaIQ_Audit_2026-10-17.md`.
+These selected tests do not fit models or contact the database. The broader non-database suite can fit test estimators and is not required for this submission. If temporary paths are restricted, give the targeted pytest command a fresh `--basetemp=scratch/<new-name>`. Build the frontend to a fresh scratch `--outDir` when preserving an existing `dashboard/dist`. Latest scientific limits are in the submission evidence linked above; older reports retain their original scope.
 
 The data-quality commands inspect local inputs and write separate reports:
 
@@ -191,7 +214,7 @@ The data-quality commands inspect local inputs and write separate reports:
 python -m scripts.audit_data_quality --help
 python -m scripts.audit_postgres_export
 python -m data_ingestion.data_completeness
-python -m models.audit_evaluation --output-dir reports/audit-2026-10-17 --include-monthly
+python -m models.audit_evaluation --output-dir reports/candidates/<new-audit-run> --include-monthly
 ```
 
 The comparison fits Ridge and Random Forest using training-only preprocessing,

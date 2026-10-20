@@ -1,0 +1,23 @@
+{
+  "client_date": "2026-10-20",
+  "initial_remote_main_sha": "905f3c32304fa196015b8cd3113ec77f6b0a7d84",
+  "default_remote_check": {
+    "exit_code": 1,
+    "error": "getaddrinfo() thread failed to start"
+  },
+  "elevated_remote_check": {
+    "exit_code": 0,
+    "main_matches_local": true
+  },
+  "default_task_query": {
+    "exit_code": 1,
+    "error": "Access to a CIM resource was not available to the client."
+  },
+  "human_elevation_approval_received": true,
+  "task_inspection_exit_code": 0,
+  "disable_command_exit_code": 1,
+  "disable_actual_state": "Disabled",
+  "disable_command_exit_explanation": "State verified disabled; subsequent overly strict literal XML comparison returned1; corrected semantic verification saved separately without overwriting original evidence.",
+  "xml_first_parser_error": "Initial UTF-8 export copies declared UTF-16; corrected encoding in new files only.",
+  "publication_decision": "Human explicitly requested publication stop after session-cookie discovery; no sanitization, staging, commit or push."
+}

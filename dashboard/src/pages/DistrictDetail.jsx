@@ -93,9 +93,9 @@ export default function DistrictDetail() {
     <p className="subtitle">{isZone ? `Estimate from the ${prediction.source_zone} zone` : 'District groundwater evidence'}</p>
     <div className={`score-badge ${prediction.tier === 'Crisis' ? 'crisis' : ''}`}>
       <div className="score-value" style={{color}}>{available ? score : 'Unavailable'}</div>
-      <div className="score-label">{historical ? 'Historical crisis score (0–100)' : 'AquaIQ Crisis Score (0–100)'}</div>
+      <div className="score-label">{historical ? 'Historical project risk index (0–100)' : 'Project risk index (0–100)'}</div>
       <div className="score-tier" style={{color}}>{available ? `${prediction.tier} Tier` : 'Insufficient evidence for this model'}</div>
-      <p><strong>Observation used:</strong> {prediction.last_observed_date || 'Unavailable'}{prediction.data_age_months != null ? ` (${prediction.data_age_months} months old)` : ''}{isZone ? ' (zone evidence)' : ''}{scoreTargetMonth && <> · <strong>Score model target:</strong> {scoreTargetMonth}</>}</p>
+      <p><strong>Source-backed month label:</strong> {prediction.last_observed_date || 'Unavailable'}{prediction.data_age_months != null ? ` (${prediction.data_age_months} months old)` : ''}{isZone ? ' (zone evidence)' : ''}{scoreTargetMonth && <> · <strong>Score model target:</strong> {scoreTargetMonth}</>}</p>
     </div>
     <p>The crisis score combines groundwater depth, changes in depth, and rainfall and drought conditions. The direction of the plotted line alone does not determine the score.</p>
     {prediction.weights_status === 'initial_uncalibrated' && <p role="status">This project score uses initial component weights that have not been calibrated against independent crisis outcomes. It is not an accuracy or confidence percentage.</p>}
@@ -103,8 +103,8 @@ export default function DistrictDetail() {
     {prediction.zone_fallback_reason && <p>{prediction.zone_fallback_reason}</p>}
     {prediction.message && <p role="status">{prediction.message}</p>}
     <div className="card" style={{padding:'1.25rem',margin:'1.5rem 0'}}>
-      <h2>Prediction for the next six months</h2>
-      {projectionLoading && <p role="status">Calculating monthly predictions from today…</p>}
+      <h2>Monthly research projections</h2>
+      {projectionLoading && <p role="status">Preparing projections under historical weather assumptions…</p>}
       {projectionError && <div role="alert"><p>{projectionError}</p><button type="button" onClick={() => setProjectionRetry(value => value + 1)}>Retry prediction</button></div>}
       {projection && <>
         <p><strong>As of:</strong> {projection.as_of || projection.forecast_origin}. The graph starts with the next full calendar month.</p>
@@ -147,7 +147,7 @@ export default function DistrictDetail() {
         </>}
         {!projectionAvailable && <p role="status">{projection.message || 'There is insufficient observed history to estimate the next six months.'}</p>}
         {Number.isFinite(projection.estimated_current_gwl) && <p><strong>Estimated current depth:</strong> {projection.estimated_current_gwl.toFixed(2)} m below ground.</p>}
-        {projection.last_observed_date && <p><strong>Based on actual observations through:</strong> {projection.last_observed_date}{projection.data_age_months != null ? ` (${projection.data_age_months} months old)` : ''}.</p>}
+        {projection.last_observed_date && <p><strong>Source-marked history through month:</strong> {projection.last_observed_date}{projection.data_age_months != null ? ` (${projection.data_age_months} months old)` : ''}.</p>}
         {projection.estimate_type === 'zone_fallback' && <p>Monthly projection uses the {projection.source_zone} zone. {projection.zone_fallback_reason}</p>}
         {projectionAvailable && <p style={{color:'#b45309'}}>The current depth bridges the observation gap using historical seasonality and trend. Future depths depend on the assumed rainfall and weather above. Current-period accuracy has not been validated.</p>}
         {projection.limitations?.map(message => <p key={message} role="status">{message}</p>)}
@@ -165,11 +165,11 @@ export default function DistrictDetail() {
           <XAxis dataKey="month" minTickGap={45} />
           <YAxis label={{value:'Depth (m below ground)',angle:-90,position:'insideLeft'}} />
           <Tooltip /><Legend />
-          <Line dataKey="observed" name="Actual observation" stroke="#2563eb" dot={{r:3}} connectNulls isAnimationActive={false} />
+          <Line dataKey="observed" name="Source-marked monthly mean" stroke="#2563eb" dot={{r:3}} connectNulls isAnimationActive={false} />
           <Line dataKey="filled" name="Forward-filled history" stroke="#94a3b8" dot={{r:2}} strokeDasharray="3 3" isAnimationActive={false} />
         </LineChart>
       </ResponsiveContainer>
-      <p>Filled values are identified separately from measurements.</p>
+      <p>Source-marked monthly means and bounded forward fills are shown separately; fills are not new measurements. Dates are month labels, not certified acquisition days. Freshness, stable well panels and datum continuity remain unverified.</p>
       </>}
       {!historyLoading && !historyError && !historyChart.length && <p className="empty-state">No groundwater observations are available for this district.</p>}
     </div>

@@ -1,0 +1,18 @@
+--- reports/candidates/rainfall_refresh/2026-01_2026-09/progress.json (recorded before)
++++ reports/candidates/rainfall_refresh/2026-01_2026-09/progress.json (recorded after)
+@@ -45,7 +45,7 @@
+       "start": "2025-01-01",
+       "end": "2025-09-30",
+       "selection": "explicit_days",
+-      "updated_at_utc": "2026-10-18T08:12:08.010686+00:00",
++      "updated_at_utc": "2026-10-19T09:04:25.737486+00:00",
+       "planned_days": 3,
+       "days_complete": 3,
+       "status": "complete",
+@@ -274,5 +274,5 @@
+     }
+   },
+   "production_changes_made": false,
+-  "updated_at_utc": "2026-10-18T08:12:08.167414+00:00"
++  "updated_at_utc": "2026-10-19T09:04:25.981147+00:00"
+ }

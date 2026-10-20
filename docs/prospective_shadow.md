@@ -1,5 +1,7 @@
 # Prospective shadow-evaluation infrastructure
 
+**Submission status: real shadow issuance remains NO-GO.** The [latest issuance investigation](../reports/provenance_issuance_20261019/REPORT.md) identifies unresolved source timing, well-panel, observation and effective-lead requirements. Commands below describe an interface, not authorization to start a campaign or build an artifact. Numerical release proposals in earlier design notes are not approved sufficiency criteria. HGB remains abstained; no prospective skill or production readiness is claimed.
+
 This is an isolated file ledger for direct six-month forecasts. It does not fit or load a model, connect to the database, publish production predictions, or establish forecasting skill. The existing production checkpoint and completed experiments remain unchanged.
 
 The research candidate remains **`hist_gradient_boosting-2-delta`** from `reports/candidates/six_month_selection_20261017/experiment_v2/selection_lock.json`. Its training-label cutoff remains **2018-12-31**, with the same 14,817 eligible training pairs specified by the completed experiment. The locked settings are `max_iter=250`, `learning_rate=0.05`, `max_leaf_nodes=31`, `min_samples_leaf=50`, `l2_regularization=20.0`, `early_stopping=False`, `random_state=42`; the response is change from the observed origin depth, added back to that depth and clipped at zero. No setting is selected again here.

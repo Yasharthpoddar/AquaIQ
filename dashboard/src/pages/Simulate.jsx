@@ -84,8 +84,8 @@ function Simulate() {
 
   return (
     <div className="page">
-      <h1>Hydrological Policy Simulator</h1>
-      <p className="subtitle">Explore sensitivity using the available historical evidence. Extraction effects are a project heuristic, not a measured causal forecast.</p>
+      <h1>Rainfall and extraction sensitivity</h1>
+      <p className="subtitle">Explore changes in the project risk index under stated inputs. Extraction effects are a project heuristic, not a proven causal estimate or policy recommendation.</p>
       {error && <p role="alert">{error}</p>}
       {result && result.baseline == null && <p role="status">This scenario is unavailable because the baseline has insufficient model evidence.</p>}
 
@@ -118,14 +118,14 @@ function Simulate() {
               onChange={e => { setRainfallChange(Number(e.target.value)); setResult(null); }}
             />
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: '#64748b', marginTop: '4px' }}>
-              <span>−50% (Severe Drought)</span>
-              <span>+50% (Excess Monsoon)</span>
+              <span>−50% rainfall scenario</span>
+              <span>+50% rainfall scenario</span>
             </div>
           </div>
 
           <div className="form-group">
             <label>
-              ⛏️ Groundwater Extraction Policy:
+              ⛏️ Extraction Change (heuristic):
               <span className="slider-value" style={{
                 color: extractionChange > 0 ? '#dc2626' : extractionChange < 0 ? '#16a34a' : '#94a3b8'
               }}>
@@ -138,8 +138,8 @@ function Simulate() {
               onChange={e => { setExtractionChange(Number(e.target.value)); setResult(null); }}
             />
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: '#64748b', marginTop: '4px' }}>
-              <span>−50% (Aggressive Moratorium)</span>
-              <span>+50% (Unregulated Pumping)</span>
+              <span>−50% extraction scenario</span>
+              <span>+50% extraction scenario</span>
             </div>
           </div>
 
@@ -150,7 +150,7 @@ function Simulate() {
                 Simulating...
               </>
             ) : (
-              <>🔬 Run Simulation</>
+              <>🔬 Run Sensitivity Analysis</>
             )}
           </button>
         </div>
@@ -160,14 +160,14 @@ function Simulate() {
           {!result ? (
             <div className="empty-state" style={{ padding: '3rem 2rem' }}>
               <p style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>🧪</p>
-              <p style={{ fontWeight: 600, marginBottom: '0.5rem' }}>No policy scenario simulated yet</p>
-              <p style={{ fontSize: '0.85rem' }}>Adjust rainfall and extraction parameters, then execute the simulation to evaluate projected changes.</p>
+              <p style={{ fontWeight: 600, marginBottom: '0.5rem' }}>No sensitivity scenario evaluated yet</p>
+              <p style={{ fontSize: '0.85rem' }}>Adjust the inputs to inspect a change in the uncalibrated project index. This does not estimate an observed policy outcome.</p>
             </div>
           ) : (
             <>
               {/* Baseline */}
               <div className="result-card baseline">
-                <div className="result-label">Baseline Status</div>
+                <div className="result-label">Baseline project index</div>
                 <div className="result-value" style={{ color: TIER_COLORS[result.baselineTier] || '#64748b' }}>
                   {result.baseline ?? 'Unavailable'}
                 </div>
@@ -188,7 +188,7 @@ function Simulate() {
 
               {/* Simulated */}
               <div className={`result-card ${result.delta < 0 ? 'improved' : result.delta > 0 ? 'worsened' : 'simulated'}`}>
-                <div className="result-label">Simulated Status</div>
+                <div className="result-label">Scenario project index</div>
                 <div className="result-value" style={{ color: TIER_COLORS[result.simulatedTier] || '#64748b' }}>
                   {result.simulated ?? 'Unavailable'}
                 </div>
@@ -204,7 +204,7 @@ function Simulate() {
 
               {/* Methodology details */}
               <div style={{ marginTop: '1rem', padding: '0.75rem', borderRadius: '8px', background: 'rgba(0,0,0,0.03)', fontSize: '0.78rem', color: '#64748b' }}>
-                <div><strong>Last observation:</strong> {result.observationDate || 'Unavailable'}{result.estimateType === 'zone_fallback' ? ' (zone evidence)' : ''}</div>
+                <div><strong>Source-backed month:</strong> {result.observationDate || 'Unavailable'}{result.estimateType === 'zone_fallback' ? ' (zone evidence)' : ''}</div>
                 {result.status === 'historical_forecast' && <div>This scenario uses historical groundwater evidence.</div>}
                 <div><strong>Inference Mode:</strong> {result.details.xgb_inference_used ? 'Model sensitivity on observed evidence' : 'Unchanged baseline or unavailable evidence'}</div>
                 {result.extractionHeuristicApplied && (

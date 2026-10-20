@@ -35,10 +35,10 @@ const TIER_ICONS = {
 };
 
 const TIER_DESC = {
-  Safe: "Lower stress in available evidence",
-  Watch: "Evidence warrants closer monitoring",
-  Warning: "Elevated stress in available evidence",
-  Crisis: "High stress; review source history",
+  Safe: "Lower project index; review source history",
+  Watch: "Watch band on the project index",
+  Warning: "Warning band on the project index",
+  Crisis: "Higher project index; review source history",
 };
 
 function Home() {
@@ -99,8 +99,9 @@ function Home() {
 
   return (
     <div className="page">
-      <h1>Groundwater Crisis Dashboard</h1>
-      <p className="subtitle">Groundwater evidence and six-month estimates across 725 districts. Forecast dates reflect the available historical observations.</p>
+      <h1>Groundwater Research Dashboard</h1>
+      <p className="subtitle">A registry of 725 districts with available historical evidence and model estimates. Registry coverage does not establish observation coverage or nationwide accuracy.</p>
+      <p className="subtitle">Saved primary historical benchmark: seasonal-naive RMSE 2.132 m versus research HGB 3.060 m on the same 209 cases in 32 districts. These previously inspected historical results do not establish current forecasting skill; HGB remains research-only and abstained.</p>
       {error && <div className="empty-state" role="alert">
         <p>{error}</p>
         <button className="alert-tab" onClick={() => setRetry(value => value + 1)}>Retry scores</button>
@@ -111,7 +112,7 @@ function Home() {
       </div>}
       {scoresReady && <p className="subtitle" role="status">
         Project risk scale based on {validScores.length} scored districts; {totalDistricts - validScores.length} districts have unavailable evidence.
-        {observations.length > 0 && ` Last groundwater observations range from ${observations[0]} to ${observations.at(-1)}. Review these historical dates before planning action.`}
+        {observations.length > 0 && ` Source-backed month labels range from ${observations[0]} to ${observations.at(-1)}. These are monthly labels, not verified acquisition days.`}
       </p>}
       {scoresReady && uncalibrated && <p role="status">These project scores use initial component weights that have not been calibrated against independent crisis outcomes. A score is not an accuracy or confidence percentage.</p>}
 
@@ -145,7 +146,7 @@ function Home() {
           </div>
           <div className="stat-item">
             <span>🔬</span>
-            <span>Model coverage:</span>
+            <span>Available estimates:</span>
             <span className="stat-value">{estimateCounts.district_level} district · {estimateCounts.zone_fallback} zone fallback</span>
           </div>
           <div className="stat-item">
@@ -155,7 +156,7 @@ function Home() {
           </div>
           <div className="stat-item">
             <span>⚡</span>
-            <span>Highest risk:</span>
+            <span>Highest project index:</span>
             <span className="stat-value">
               {topRisk ? `${topRisk.name} (${topRisk.score})` : '—'}
             </span>
@@ -180,7 +181,7 @@ function Home() {
       ) : null}
 
       {/* District list (top risk) */}
-      <h2>High Stress & Monitored Districts</h2>
+      <h2>Districts ranked by project index</h2>
       <div className="district-list">
         {loading ? (
           <>
@@ -201,7 +202,7 @@ function Home() {
               <div>
                 <span className="district-name">{d.name}, {d.state}</span>
                 <div className="district-meta">
-                  {TIER_DESC[d.tier] || "Review available evidence"} · {d.estimate_type === "zone_fallback" ? "Agro-climatic zone estimate" : "District observations"}
+                  {TIER_DESC[d.tier] || "Review available evidence"} · {d.estimate_type === "zone_fallback" ? "Agro-climatic zone estimate" : "Estimate using district history"}
                 </div>
               </div>
               <span className="district-score" style={{ background: TIER_COLORS[d.tier] || '#64748b' }}>

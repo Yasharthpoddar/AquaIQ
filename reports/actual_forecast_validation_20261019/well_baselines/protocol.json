@@ -1,0 +1,45 @@
+{
+  "protocol": {
+    "analysis": "Calendar-causal same-provider-well persistence and exact-seasonal arithmetic only.",
+    "cohorts": {
+      "primary_2024_01_to_2025_06": [
+        "2024-01-01",
+        "2025-06-01"
+      ],
+      "secondary_2025_07_to_2026_05": [
+        "2025-07-01",
+        "2026-05-01"
+      ]
+    },
+    "strata": [
+      "all_stable_identity",
+      "exact_name_spatial_agreement_all3"
+    ],
+    "target": "Source-reported finite accepted mbgl reading in exact origin+6 calendar month; never filled.",
+    "keys": [
+      "agency",
+      "provider_well_id"
+    ],
+    "identity_required_equal_all_three_dates": [
+      "latitude",
+      "longitude",
+      "well_depth_m",
+      "aquifer",
+      "well_type"
+    ],
+    "reference": "Persistence exact target-6; seasonal naive exact target-12; same agency and provider Well ID.",
+    "unknown_identity_policy": "Exclude unknown or mismatching identity metadata; no fabricated identities.",
+    "missing_policy": "No reference/target imputation or nearest-month substitution.",
+    "quality_stratum": "Exact resolvable named district equals fixed-polygon district at all three dates; quality-defined before errors.",
+    "metrics": "MAE/RMSE/bias/error percentiles in metres; R2 only for n>=2 and nonconstant observed values.",
+    "sign": "Prediction minus observation; positive bias means greater predicted depth below ground.",
+    "geography": "Conditional fixed-polygon labels; substantial source coordinate/name disagreements remain.",
+    "continuity": "Matching provider ID and retained metadata are not certified replacement/measuring-point continuity.",
+    "timing": "Provider-reported date/month labels; actual acquisition/publication/availability unknown. No issuance or prospective evidence.",
+    "source_sha256": "f8222245721c421bc2f82b6afbd387ee5cd0e263790515ac7d3ffcce0c521302",
+    "normalized_v2_sha256": "158ee78df5254bfeeb6f4760751dc79e995cdfab38c2fe7df1f854633dabb494",
+    "excluded_source_records_sha256": "81589f95ea761fd35d80d453977d227ed47a4194861eca98118a7fd66d1f5ae9",
+    "code_sha256": "f0225846f6e2eea4e5c17d4508e7b302543ade037966efd2688af43f12cdc413"
+  },
+  "protocol_sha256": "4f6798af12eb7276fd8944607a6db5f5b0343dfa4bc4a1261cd1aebafd783ced"
+}

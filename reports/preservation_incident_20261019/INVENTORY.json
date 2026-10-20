@@ -1,0 +1,57 @@
+{
+  "files": {
+    "candidate_progress.diff": {
+      "sha256": "6c1e837058783ae6f2a6ad2c92017b395c0d549b8a31b0d958cb137a44c0e7f0",
+      "bytes": 691
+    },
+    "checks.json": {
+      "sha256": "6d32afae4976db829a24d6bed865720eb9ec5665c041c3af13354124d3c6df41",
+      "bytes": 1173
+    },
+    "collect_file_evidence.py": {
+      "sha256": "662c7072a6a0fdd8ccbd88d8494f4b05dfe70ecb18fd7901f501958de9521478",
+      "bytes": 9369
+    },
+    "critical_hashes.json": {
+      "sha256": "da939a204c0fea10f0027d81a277e70209f9548c3a6ee1dd1c04191b4548059f",
+      "bytes": 3448
+    },
+    "download_progress.diff": {
+      "sha256": "b965422cbd4b735164a2a8786b57fe3449a61601ba848edbac62e64d823abc4d",
+      "bytes": 474
+    },
+    "exact_diffs.json": {
+      "sha256": "e5fa1af5a17aef7946c6997b33f344e05fa36e6b5293c68441df8b28ddccd726",
+      "bytes": 2507
+    },
+    "file_timestamps.json": {
+      "sha256": "84d66aa9c6ea8a026c567ba66c0c570cfa44f28886a46c2a59abe1098f787e44",
+      "bytes": 1605
+    },
+    "historical_registration_record.json": {
+      "sha256": "74878f7748de468adf02c07bbe6697d269805a76c177834b738de4715f489c2a",
+      "bytes": 3890
+    },
+    "REPORT.md": {
+      "sha256": "0e09f76c3fe8565689ff5e96d96c74b3edc812be467482924171efdbf9ad6782",
+      "bytes": 8527
+    },
+    "snapshot_after.json": {
+      "sha256": "92525307cc8b7f65cf8f7f1776f5febdcfd95150cd385fcfbd37fec8a55b5f3b",
+      "bytes": 826
+    },
+    "snapshot_before.json": {
+      "sha256": "9eadfc3cf8b9ed515373a262a207477eb3f979cbfc6921754271a2a9a9ff35b7",
+      "bytes": 154807
+    },
+    "verification.json": {
+      "sha256": "9ee82e7ade28e5d7be153ab756def36489938826b935bf299cad5d038373573e",
+      "bytes": 45243
+    },
+    "windows_evidence.json": {
+      "sha256": "63617cd9c32848ade6d04bf3cc0e59b096ef220623e712d539832c3c6f4d1566",
+      "bytes": 5899
+    }
+  },
+  "scope": "Only this new incident evidence directory; excludes self."
+}

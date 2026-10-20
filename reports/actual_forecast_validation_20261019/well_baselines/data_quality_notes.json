@@ -1,0 +1,134 @@
+{
+  "scope": "Independent descriptive source QC; no accuracy-driven exclusions.",
+  "raw_rows": 188877,
+  "raw_provider_well_ids": 1769,
+  "raw_source_district_strings": 37,
+  "case_normalized_district_names": 33,
+  "reported_date_min": "2007-05-01",
+  "reported_date_max": "2026-05-01",
+  "invalid_reported_dates": 0,
+  "reported_day_of_month_counts": {
+    "1": 173189,
+    "18": 11867,
+    "19": 3821
+  },
+  "nonnumeric_depth_rows": 27,
+  "nonnumeric_tokens": {
+    "": 22,
+    "Dry": 2,
+    "-": 1,
+    "?": 1,
+    " ": 1
+  },
+  "negative_depth_rows": 5,
+  "zero_depth_rows": 218,
+  "depth_range_m_bgl": [
+    -0.73,
+    102.5
+  ],
+  "depth_greater_than_reported_well_depth_rows": 1077,
+  "well_ids_with_depth_greater_than_reported_well_depth": 62,
+  "duplicate_well_reported_date_rows": 42,
+  "exact_duplicate_rows": 0,
+  "well_ids_with_metadata_variation_by_field": {
+    "State Name (as per LGD)": 0,
+    "District Name (as per LGD)": 0,
+    "Block Name (as per LGD)": 0,
+    "Village (as per LGD, if available)": 0,
+    "Site Name": 0,
+    "Latitude": 1,
+    "Longitude": 1,
+    "Well Type": 0,
+    "Well Depth, m": 1,
+    "Aquifer Tapped (Unconfined, Semi-Confined, Confined)": 0,
+    "Agency": 0
+  },
+  "coordinate_pairs_with_multiple_well_ids": 17,
+  "ids_in_shared_coordinate_pairs": 34,
+  "equal_adjacent_monthly_numeric_readings": 1310,
+  "adjacent_well_month_reading_pairs": 185139,
+  "longest_repeated_reading_runs": [
+    {
+      "Well ID": "1257",
+      "n": 44,
+      "value": 0.02,
+      "start": "2022-04-01",
+      "end": "2025-11-01"
+    },
+    {
+      "Well ID": "1121",
+      "n": 27,
+      "value": 13.53,
+      "start": "2018-10-18",
+      "end": "2020-12-01"
+    },
+    {
+      "Well ID": "1338",
+      "n": 12,
+      "value": 0.01,
+      "start": "2024-08-01",
+      "end": "2025-07-01"
+    },
+    {
+      "Well ID": "1338",
+      "n": 9,
+      "value": 0.01,
+      "start": "2025-09-01",
+      "end": "2026-05-01"
+    },
+    {
+      "Well ID": "1115",
+      "n": 8,
+      "value": 13.75,
+      "start": "2017-12-01",
+      "end": "2018-07-18"
+    },
+    {
+      "Well ID": "1115",
+      "n": 8,
+      "value": 12.23,
+      "start": "2019-01-18",
+      "end": "2019-08-01"
+    },
+    {
+      "Well ID": "1338",
+      "n": 8,
+      "value": 0.01,
+      "start": "2023-07-01",
+      "end": "2024-02-01"
+    },
+    {
+      "Well ID": "1477",
+      "n": 8,
+      "value": 4.89,
+      "start": "2018-09-18",
+      "end": "2019-04-01"
+    },
+    {
+      "Well ID": "1121",
+      "n": 7,
+      "value": 13.58,
+      "start": "2017-10-01",
+      "end": "2018-04-18"
+    },
+    {
+      "Well ID": "1501",
+      "n": 7,
+      "value": 3.34,
+      "start": "2017-09-01",
+      "end": "2018-03-18"
+    }
+  ],
+  "repeat_interpretation": "Repeated values alone do not prove imputation or fresh acquisition.",
+  "accepted_normalized_rows": 188458,
+  "excluded_source_rows": 419,
+  "accepted_rows_with_resolvable_source_name": 130424,
+  "accepted_rows_exact_name_spatial_agreement": 5024,
+  "accepted_rows_resolvable_name_spatial_disagreement": 125400,
+  "accepted_rows_unknown_source_name_mapping": 58034,
+  "geography_caveat": "Coordinates substantially disagree with named districts. Geographic breakdowns are conditional on the retained fixed-polygon mapping.",
+  "well_continuity_caveat": "Provider IDs and matching metadata are not certified physical continuity or replacement/datum records.",
+  "date_caveat": "Provider-reported date or month label; actual acquisition and first availability unknown.",
+  "source_sha256": "f8222245721c421bc2f82b6afbd387ee5cd0e263790515ac7d3ffcce0c521302",
+  "protocol_sha256": "4f6798af12eb7276fd8944607a6db5f5b0343dfa4bc4a1261cd1aebafd783ced"
+}

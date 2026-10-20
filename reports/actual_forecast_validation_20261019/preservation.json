@@ -1,0 +1,91 @@
+{
+  "verified_at_utc": "2026-10-19T15:53:34.445897+00:00",
+  "status": "FAILED: two pre-existing progress records changed and two new rainfall task logs appeared outside the research run",
+  "pre_existing_files": 658,
+  "unchanged": 656,
+  "changes": [
+    {
+      "path": "data/raw/updates/rainfall_refresh/overlap/2025/download_progress.json",
+      "before_sha256": "5139576f3da5471bfaa58c28bdbea2881767b07fe07084f20688879cfb07ff89",
+      "after_sha256": "1e100216ead8c847ebb8f7a75452d7f8a07b38c1aa3ecfe8937900a605c712e4",
+      "before_bytes": 1883,
+      "after_bytes": 1883
+    },
+    {
+      "path": "reports/candidates/rainfall_refresh/2026-01_2026-09/progress.json",
+      "before_sha256": "58b8d98f31eff8f892ec7a93d1787a537f4396b943f20504ac1580b5085b0a76",
+      "after_sha256": "810261dfa6eefff19bf1bbfe755701d5b23c92f252234dc2d2519b9eaddced77",
+      "before_bytes": 12224,
+      "after_bytes": 12224
+    }
+  ],
+  "groups": {
+    "data/": {
+      "pre_existing": 110,
+      "unchanged": 109,
+      "changed": [
+        "data/raw/updates/rainfall_refresh/overlap/2025/download_progress.json"
+      ],
+      "new_outside_this_research_run": [],
+      "missing": []
+    },
+    "models/checkpoints/": {
+      "pre_existing": 18,
+      "unchanged": 18,
+      "changed": [],
+      "new_outside_this_research_run": [],
+      "missing": []
+    },
+    "reports/": {
+      "pre_existing": 330,
+      "unchanged": 329,
+      "changed": [
+        "reports/candidates/rainfall_refresh/2026-01_2026-09/progress.json"
+      ],
+      "new_outside_this_research_run": [
+        {
+          "path": "reports/candidates/rainfall_refresh/task_logs/refresh-20261019T143421-15428.stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "path": "reports/candidates/rainfall_refresh/task_logs/refresh-20261019T143421-15428.stdout.log",
+          "sha256": "810261dfa6eefff19bf1bbfe755701d5b23c92f252234dc2d2519b9eaddced77",
+          "bytes": 12224
+        }
+      ],
+      "missing": []
+    },
+    "dashboard/dist/": {
+      "pre_existing": 6,
+      "unchanged": 6,
+      "changed": [],
+      "new_outside_this_research_run": [],
+      "missing": []
+    }
+  },
+  "active_bundles": [
+    {
+      "pointer": "models/checkpoints/aquaiq_xgb.json",
+      "pointer_sha256": "e6722ef6cb77242ba982a5763a0ff28499a05d93147df30828ab822bbf26ff92",
+      "model_sha256": "ef58264b9c1fa43f727fef9d4d180e59f091c9778eb48f128f2ab81d40a97789",
+      "model_path": "models/checkpoints/bundles/20261013T170456589578Z-ca138883556b/model.json",
+      "card_sha256": "aee8c2862268af07300f563a7582ea7cb218d1b74bb729b7bbb2d1341a1e01ee",
+      "card_path": "models/checkpoints/bundles/20261013T170456589578Z-ca138883556b/model_card.json"
+    },
+    {
+      "pointer": "models/checkpoints/aquaiq_monthly_climate.json",
+      "pointer_sha256": "59827055a401dee258e8ab9d2c1d7e81bfaab3bf8240f10bd5798f882f52ec43",
+      "model_sha256": "54f535f57bcd62f0bea38cf5c545eb253b37d5bdd6bae1794ec27a3e73a43d97",
+      "model_path": "models/checkpoints/climate_bundles/20261013T170824590468Z-16aefd7cb4/model.json",
+      "card_sha256": "e9885a71e00c0a1eabaddf3ed850257740293ddbec8ddba2a58a41cdc820a813",
+      "card_path": "models/checkpoints/climate_bundles/20261013T170824590468Z-16aefd7cb4/model_card.json"
+    }
+  ],
+  "original_user_Git_changes_preserved": true,
+  "head_unchanged": true,
+  "intentional_existing_file_edits_in_this_mission": [],
+  "writer_attribution": "Unknown launcher. Task stdout records a rainfall staging comparison with0networkrequests,source_data_modified=false,production_changes_made=false. Allthree task agents reported no refresh/staging/planning invocation. User was unaware of another refresh. No rollback attempted.",
+  "database": "Not accessed; filesystem evidence is not database-byte verification.",
+  "HGB": "Real abstention unchanged; HISTORICAL_ONLY research artifacts are not approved for shadow or production."
+}

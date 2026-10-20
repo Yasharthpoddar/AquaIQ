@@ -1,0 +1,106 @@
+{
+  "created_at_utc": "2026-10-19T15:50:08.927584+00:00",
+  "raw_download_checksums_verified": true,
+  "protocol_frozen_before_fitting": true,
+  "protocol_sha256": "06af4e6aab2e7d71ab573ecc6196fad7c5cbc9b825243c9d1aa624ce4193ce45",
+  "executed": [
+    {
+      "operation": "Official acquisitions",
+      "result": "8 bounded official HTTPS responses retained",
+      "source_manifest": "source_manifest.json"
+    },
+    {
+      "command": "python -B prepare_research.py --source acquired/telangana_monthly_2007_2026.csv --output-dir normalized",
+      "exit_code": 0,
+      "log": "prepare.log",
+      "status": "Superseded by nullable-depth QC correction; outputs retained"
+    },
+    {
+      "command": "python -B evaluate_research.py --normalized normalized --output-dir evaluation",
+      "exit_code": 0,
+      "log": "evaluation.log",
+      "status": "Preserved first historical run"
+    },
+    {
+      "command": "python -B prepare_research.py --source acquired/telangana_monthly_2007_2026.csv --output-dir normalized_v2",
+      "exit_code": 0,
+      "log": "prepare-v2.log"
+    },
+    {
+      "command": "python -B evaluate_research.py --normalized normalized_v2 --output-dir evaluation_v2",
+      "exit_code": 0,
+      "log": "evaluation-v2.log",
+      "fit_counts": [
+        {
+          "year": 2024,
+          "train_n": 6004,
+          "max_train_target": "2022-12-01",
+          "evaluation_n": 396
+        },
+        {
+          "year": 2025,
+          "train_n": 6400,
+          "max_train_target": "2023-12-01",
+          "evaluation_n": 396
+        },
+        {
+          "year": 2026,
+          "train_n": 6796,
+          "max_train_target": "2024-12-01",
+          "evaluation_n": 165
+        }
+      ]
+    },
+    {
+      "command": "python -B verify_and_diagnose.py --normalized normalized_v2 --evaluation evaluation_v2 --output-dir diagnostics",
+      "exit_code": 1,
+      "log": "diagnostics.log",
+      "status": "Preservation assertion failed"
+    },
+    {
+      "command": "python -B verify_and_diagnose.py --normalized normalized_v2 --evaluation evaluation_v2 --output-dir diagnostics_v2",
+      "expected_exit_code": 2,
+      "log": "diagnostics-v2.log",
+      "status": "Scientific arithmetic passed; preservation FAILED with two exceptions. Final process session expired after continuation; result and log retained."
+    },
+    {
+      "command": "python -B well_baselines.py",
+      "exit_code": 0,
+      "evidence": "well_baselines/integrity.json"
+    },
+    {
+      "command": "python -B -m pytest -q -p no:cacheprovider test_prepare_research.py test_evaluate_research.py --junitxml=final-tests.xml",
+      "exit_code": 0,
+      "tests_passed": 24,
+      "seconds": 7.054,
+      "evidence": "final-tests.xml"
+    }
+  ],
+  "failures_and_limitations": [
+    "Initial sample review applied the prior task restriction; current explicit user authorization was checked and the same bounded action approved on retry.",
+    "First pytest invocation without XML: 7 passed, 1 setup error from sandbox AppData temporary fixture permissions. Removed an unnecessary fixture; no failure XML had been generated.",
+    "First adapter did not reject 27 nullable missing depths. Corrected float64 coercion and regression tests; original code and both runs retained, with no parameter changes.",
+    "Two pre-existing rainfall progress JSON files changed. Writer remains unknown; user was unaware of another refresh. Files were left intact; scientific input and checkpoint hashes remain unchanged.",
+    "CIM process inspection was unavailable. A process session expired after continuation; polling it was not counted as verification.",
+    "Two guessed exploratory paths were absent; actual existing modules were located instead.",
+    "Historical availability, source vintages, fresh acquisition, physical well continuity, nationwide generalization and prospective skill remain unverified."
+  ],
+  "tests_unique_pytest_cases": 24,
+  "well_baseline_additional_checks": "8 in-memory assertion groups plus output-hash, identity and metric verification; not additional pytest cases.",
+  "environment": "Existing pinned venv, separate research processes, create-only outputs; no new container, venv or dependency installed.",
+  "source_code_or_active_configuration_changed": false,
+  "production_model_promoted": false,
+  "real_shadow_started": false,
+  "database_accessed": false,
+  "commit_or_push": false,
+  "final_static_checks": {
+    "python_AST": "pass",
+    "PowerShell_replay_syntax": "pass; replay not executed",
+    "JSON_parse": "pass",
+    "report_local_links": "pass",
+    "well_output_immutability": "Existing output refused with expected exit1 before writes",
+    "git_diff_check": "pass; existing LF/CRLF notices only"
+  },
+  "final_preservation": "FAILED:656/658 pre-existing files unchanged;two changed progress JSON andtwo new rainfall task logs,launcherunknown;no restoration.",
+  "failed_inventory_attempt": "Final directory assertion initially caught the two new rainfall logs; complete recorded inventory replaces no prior evidence and makes no preservation-pass claim."
+}

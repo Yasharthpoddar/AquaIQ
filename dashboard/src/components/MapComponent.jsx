@@ -131,8 +131,8 @@ function MapComponent({ scores = [], geojsonUrl, onDistrictClick }) {
 
             const tooltipContent = match
               ? `<strong>${tooltipText(match.name || dName)}</strong> (${tooltipText(match.state || sName)})<br/>
-                 ${Number.isFinite(match.score) ? `Score: <strong>${match.score}</strong> · <span style="font-weight:600">${tooltipText(match.tier || 'Unclassified')}</span>` : 'Groundwater evidence unavailable'}<br/>
-                 <small style="color:#64748b">${match.estimate_type === 'zone_fallback' ? 'Agro-climatic zone estimate' : 'District observations'}${match.last_observed_date ? ` · Last observation: ${tooltipText(match.last_observed_date)}` : ''}</small>`
+                 ${Number.isFinite(match.score) ? `Project index: <strong>${match.score}</strong> · <span style="font-weight:600">${tooltipText(match.tier || 'Unclassified')}</span>` : 'Groundwater evidence unavailable'}<br/>
+                 <small style="color:#64748b">${match.estimate_type === 'zone_fallback' ? 'Agro-climatic zone estimate' : 'Estimate using district history'}${match.last_observed_date ? ` · Source-backed month: ${tooltipText(match.last_observed_date)}` : ''}</small>`
               : `<strong>${tooltipText(dName)}</strong> (${tooltipText(sName)})<br/><small style="color:#94a3b8">District evidence unavailable</small>`;
 
             layer.bindTooltip(tooltipContent, { sticky: true });

@@ -1,0 +1,86 @@
+{
+  "collected_at_utc": "2026-10-19T16:13:47.517875+00:00",
+  "files": [
+    {
+      "path": "reports/candidates/rainfall_refresh/2026-01_2026-09/progress.json",
+      "before_sha256": "58b8d98f31eff8f892ec7a93d1787a537f4396b943f20504ac1580b5085b0a76",
+      "after_sha256": "810261dfa6eefff19bf1bbfe755701d5b23c92f252234dc2d2519b9eaddced77",
+      "before_evidence": "Authentic prior stdout exactly matches recorded before SHA-256.",
+      "before_bytes": 12224,
+      "after_bytes": 12224,
+      "json_differences": [
+        {
+          "field": "/phases/overlap_download/updated_at_utc",
+          "before": "2026-10-18T08:12:08.010686+00:00",
+          "after": "2026-10-19T09:04:25.737486+00:00"
+        },
+        {
+          "field": "/updated_at_utc",
+          "before": "2026-10-18T08:12:08.167414+00:00",
+          "after": "2026-10-19T09:04:25.981147+00:00"
+        }
+      ],
+      "different_byte_positions": [
+        2186,
+        2189,
+        2191,
+        2192,
+        2194,
+        2195,
+        2197,
+        2198,
+        2199,
+        2200,
+        12195,
+        12198,
+        12200,
+        12201,
+        12203,
+        12204,
+        12206,
+        12207,
+        12208,
+        12209,
+        12210,
+        12211
+      ],
+      "CRLF_count_before": 278,
+      "CRLF_count_after": 278,
+      "all_other_JSON_fields_equal": true
+    },
+    {
+      "path": "data/raw/updates/rainfall_refresh/overlap/2025/download_progress.json",
+      "before_sha256": "5139576f3da5471bfaa58c28bdbea2881767b07fe07084f20688879cfb07ff89",
+      "after_sha256": "1e100216ead8c847ebb8f7a75452d7f8a07b38c1aa3ecfe8937900a605c712e4",
+      "before_evidence": "No standalone prior bytes found; one timestamp inverse performed only in memory and exactly matches recorded before SHA-256.",
+      "before_bytes": 1883,
+      "after_bytes": 1883,
+      "json_differences": [
+        {
+          "field": "/updated_at_utc",
+          "before": "2026-10-18T08:12:08.010686+00:00",
+          "after": "2026-10-19T09:04:25.737486+00:00"
+        }
+      ],
+      "different_byte_positions": [
+        158,
+        161,
+        163,
+        164,
+        166,
+        167,
+        169,
+        170,
+        171,
+        172
+      ],
+      "CRLF_count_before": 58,
+      "CRLF_count_after": 58,
+      "all_other_JSON_fields_equal": true
+    }
+  ],
+  "current_candidate_equals_current_stdout": true,
+  "stderr_empty": true,
+  "download_before_written_to_disk": false,
+  "originals_or_after_files_modified": false
+}

@@ -1,0 +1,26 @@
+{
+  "date_client": "2026-10-19",
+  "file_evidence_command": ".\\venv\\Scripts\\python.exe -B reports/preservation_incident_20261019/collect_file_evidence.py",
+  "file_evidence_exit_code": 0,
+  "checks": {
+    "before_after_exact_diff": "pass; only3updated_at_utcfieldoccurrences",
+    "research_inventory": "154/154match",
+    "active_checkpoints": "18/18match",
+    "incident_readonly_preservation": "815/815unchanged",
+    "original_baseline": "656/658match;the2historicaltimestampchangesremain",
+    "report_local_links": "pass"
+  },
+  "OS_reads": {
+    "default_sandbox": "Get-ScheduledTask CIM unavailable; Get-WinEvent denied",
+    "elevated_readonly_task_query": "success; existing enabled daily task returned",
+    "TaskScheduler_history": "No matching events; log confirmed disabled; not enabled here",
+    "PowerShell_events": "events400/403withPID15428andwrappercommand captured"
+  },
+  "pipelines_or_tests_executed": false,
+  "models_deserialized": false,
+  "network_downloads": false,
+  "database_accessed": false,
+  "task_changes_or_invocation": false,
+  "affected_file_regeneration_or_restoration": false,
+  "commit_or_push": false
+}
