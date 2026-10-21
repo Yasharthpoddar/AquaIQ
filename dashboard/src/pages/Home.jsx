@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MapComponent from '../components/MapComponent';
+import ResearchForecast from '../components/ResearchForecast';
 import { fetchScores } from '../api';
 import '../App.css';
 
@@ -99,9 +100,12 @@ function Home() {
 
   return (
     <div className="page">
-      <h1>Groundwater Research Dashboard</h1>
+      <h1>12-Month Groundwater Research</h1>
+      <p className="subtitle">Primary question: can a groundwater-depth estimate for calendar month M+12 improve on the observed origin depth used as an annual baseline?</p>
+      <ResearchForecast />
+      <h2>Secondary: legacy six-month risk dashboard</h2>
       <p className="subtitle">A registry of 725 districts with available historical evidence and model estimates. Registry coverage does not establish observation coverage or nationwide accuracy.</p>
-      <p className="subtitle">Saved primary historical benchmark: seasonal-naive RMSE 2.132 m versus research HGB 3.060 m on the same 209 cases in 32 districts. These previously inspected historical results do not establish current forecasting skill; HGB remains research-only and abstained.</p>
+      <p className="subtitle">Saved six-month historical benchmark: seasonal-naive RMSE 2.132 m versus research HGB 3.060 m on the same 209 cases in 32 districts. These previously inspected historical results do not establish current forecasting skill; HGB remains research-only and abstained.</p>
       {error && <div className="empty-state" role="alert">
         <p>{error}</p>
         <button className="alert-tab" onClick={() => setRetry(value => value + 1)}>Retry scores</button>

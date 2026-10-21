@@ -1,0 +1,197 @@
+[
+  {
+    "model": "persistence_12",
+    "baseline": "persistence_6",
+    "districts": 33,
+    "target_months": 18,
+    "resamples": 2000,
+    "seed": 42,
+    "negative_mae_rmse_difference_favors_model": true,
+    "bias_difference_interpretation": "Signed bias differences have no universally favorable direction.",
+    "interval_95_percentile": {
+      "district": {
+        "model_mae_m": [
+          1.0311082224664667,
+          1.2856607876453825
+        ],
+        "model_rmse_m": [
+          1.2913791446931229,
+          1.5793143357484116
+        ],
+        "model_bias_m": [
+          -0.8370696662773799,
+          -0.5052635363517832
+        ],
+        "mae_difference_m": [
+          -2.376648823600098,
+          -2.0147350644848467
+        ],
+        "rmse_difference_m": [
+          -2.4697391270154636,
+          -2.113957263965761
+        ],
+        "bias_difference_m": [
+          0.385962672648551,
+          0.5723980298713287
+        ]
+      },
+      "district_x_12month_blocks": {
+        "model_mae_m": [
+          0.8031806803037005,
+          1.5159966187771747
+        ],
+        "model_rmse_m": [
+          1.046431728958064,
+          1.774747448306462
+        ],
+        "model_bias_m": [
+          -1.26814742769603,
+          -0.03227769694509837
+        ],
+        "mae_difference_m": [
+          -2.588014862160615,
+          -1.8220333534149797
+        ],
+        "rmse_difference_m": [
+          -2.72158872760539,
+          -1.9268014192862049
+        ],
+        "bias_difference_m": [
+          -1.5431996871170637,
+          2.5148252914428033
+        ]
+      }
+    },
+    "limitations": "Descriptive dependent regional current-vintage sample; few annual blocks. Not prospective or confirmatory."
+  },
+  {
+    "model": "xgb_expanding_12",
+    "baseline": "xgb_expanding_6",
+    "districts": 33,
+    "target_months": 18,
+    "resamples": 2000,
+    "seed": 42,
+    "negative_mae_rmse_difference_favors_model": true,
+    "bias_difference_interpretation": "Signed bias differences have no universally favorable direction.",
+    "interval_95_percentile": {
+      "district": {
+        "model_mae_m": [
+          0.9291663670494761,
+          1.1571644400051155
+        ],
+        "model_rmse_m": [
+          1.1768409281839027,
+          1.4701876069454496
+        ],
+        "model_bias_m": [
+          -0.052117098765659585,
+          0.5248588563232163
+        ],
+        "mae_difference_m": [
+          -0.2548400185907801,
+          -0.07791169831980824
+        ],
+        "rmse_difference_m": [
+          -0.2533907775966934,
+          -0.06281933528570192
+        ],
+        "bias_difference_m": [
+          0.5551800003657839,
+          0.8100222690538929
+        ]
+      },
+      "district_x_12month_blocks": {
+        "model_mae_m": [
+          0.8988458954080809,
+          1.1942997443782208
+        ],
+        "model_rmse_m": [
+          1.13792742051992,
+          1.5318451847285504
+        ],
+        "model_bias_m": [
+          -0.1556386288401203,
+          0.6116595320226761
+        ],
+        "mae_difference_m": [
+          -0.33805715072052095,
+          0.01782584778629477
+        ],
+        "rmse_difference_m": [
+          -0.34321534221274147,
+          0.059924875666183035
+        ],
+        "bias_difference_m": [
+          0.014533735224694823,
+          1.3486169058465796
+        ]
+      }
+    },
+    "limitations": "Descriptive dependent regional current-vintage sample; few annual blocks. Not prospective or confirmatory."
+  },
+  {
+    "model": "linear_expanding_12",
+    "baseline": "linear_expanding_6",
+    "districts": 33,
+    "target_months": 18,
+    "resamples": 2000,
+    "seed": 42,
+    "negative_mae_rmse_difference_favors_model": true,
+    "bias_difference_interpretation": "Signed bias differences have no universally favorable direction.",
+    "interval_95_percentile": {
+      "district": {
+        "model_mae_m": [
+          1.5597978189173634,
+          2.380866261431933
+        ],
+        "model_rmse_m": [
+          2.020542739014167,
+          3.0167405978657706
+        ],
+        "model_bias_m": [
+          0.9469332982801232,
+          2.048065869061731
+        ],
+        "mae_difference_m": [
+          0.177055127718106,
+          0.9567142942206807
+        ],
+        "rmse_difference_m": [
+          0.30039747772426434,
+          1.2365646626809506
+        ],
+        "bias_difference_m": [
+          1.4376836953459549,
+          2.3254420959454816
+        ]
+      },
+      "district_x_12month_blocks": {
+        "model_mae_m": [
+          1.4648245134748301,
+          2.4973811563845785
+        ],
+        "model_rmse_m": [
+          1.897045445451047,
+          3.11880814648351
+        ],
+        "model_bias_m": [
+          0.8218055691741857,
+          2.1783667197843415
+        ],
+        "mae_difference_m": [
+          -0.0030108813068368367,
+          1.1129887235515272
+        ],
+        "rmse_difference_m": [
+          0.08339329024064318,
+          1.4184787765872333
+        ],
+        "bias_difference_m": [
+          1.2019993110942369,
+          2.5633063417304287
+        ]
+      }
+    },
+    "limitations": "Descriptive dependent regional current-vintage sample; few annual blocks. Not prospective or confirmatory."
+  }
+]

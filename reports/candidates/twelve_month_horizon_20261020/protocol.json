@@ -1,0 +1,143 @@
+{
+  "protocol_version": 1,
+  "frozen_at_utc": "2026-10-20T10:51:44.094496+00:00",
+  "baseline_commit": "98c7056057b2a0370d377afa831f528f6d408481",
+  "branch": "experiment/12-month-horizon",
+  "purpose": "Retrospective nominal twelve-calendar-month research; no prospective issuance or model selection.",
+  "horizon_months": 12,
+  "embargo_months": 12,
+  "target": "Exact calendar month M+12; explicit observed finite values only. Missing/unknown/imputed targets remain missing.",
+  "source_units": "m_bgl",
+  "inputs_sha256": {
+    "reports/actual_forecast_validation_20261019/acquired/telangana_monthly_2007_2026.csv": "f8222245721c421bc2f82b6afbd387ee5cd0e263790515ac7d3ffcce0c521302",
+    "reports/actual_forecast_validation_20261019/normalized_v2/research_features.csv": "bce7b8718574e78fd35ff53c95c6478d6d1f0c1c84112306111a26bd10295b8d",
+    "reports/actual_forecast_validation_20261019/normalized_v2/normalized_well_observations.csv": "158ee78df5254bfeeb6f4760751dc79e995cdfab38c2fe7df1f854633dabb494",
+    "reports/actual_forecast_validation_20261019/normalized_v2/panel_membership.csv": "9e7320ac039012314a0e30f09c171ef408218b2c4723735bd85dc4f4f68d7717",
+    "data/processed/features_matrix.csv": "3958737b033a16e722f633a15ad77d80bc5b2a8fb3bea888697f0410362c24ae",
+    "reports/actual_forecast_validation_20261019/evaluation_v2/historical_predictions_vs_observations.csv": "263bab03647de785bf9f3cd3c9ee25bbb08c2338947592957dc7a6bec6bf0503",
+    "config.yaml": "2284fe73c5a30fb03045bd96317ea922e40c6dcfa0aba7108c72f6a8a9d5b656"
+  },
+  "primary_target_range": [
+    "2024-01-01",
+    "2025-12-01"
+  ],
+  "secondary_target_range": [
+    "2026-01-01",
+    "2026-05-01"
+  ],
+  "annual_folds": [
+    {
+      "target_year": 2024,
+      "train_target_cutoff": "2021-12-31",
+      "first_permitted_origin": "2023-01-01"
+    },
+    {
+      "target_year": 2025,
+      "train_target_cutoff": "2022-12-31",
+      "first_permitted_origin": "2024-01-01"
+    },
+    {
+      "target_year": 2026,
+      "train_target_cutoff": "2023-12-31",
+      "first_permitted_origin": "2025-01-01"
+    }
+  ],
+  "models": {
+    "persistence": "Observed origin groundwater; identical to standard annual seasonal naive at twelve months.",
+    "seasonal_naive": "Exact observed target-12 = origin; verify equality and count as ONE effective baseline.",
+    "xgb_expanding": {
+      "family": "xgboost",
+      "features": "Existing12canonicaldirectfeatures",
+      "target_form": "absolute",
+      "parameters": {
+        "n_estimators": 500,
+        "max_depth": 6,
+        "learning_rate": 0.01,
+        "subsample": 0.8,
+        "random_state": 42,
+        "objective": "reg:squarederror",
+        "n_jobs": 4,
+        "verbosity": 0
+      }
+    },
+    "linear_expanding": {
+      "family": "per_district_OLS",
+      "features": "Same12canonicalfeatures",
+      "min_complete_training_pairs": 12,
+      "fit_intercept": true,
+      "target_form": "absolute"
+    },
+    "hgb_12month_fixed": {
+      "family": "HistGradientBoostingRegressor",
+      "justification": "Installed sklearn and existing prior fixed HGB settings permit an isolated12month comparator; no new family or tuning. This is a separately fitted regional research model, not the sixmonth lock or approved shadow artifact.",
+      "features": "Existing12canonicalfeatures plus known-origin month sine/cosine",
+      "target_form": "delta_from_origin_clipped_at_zero",
+      "parameters": {
+        "max_iter": 250,
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 50,
+        "l2_regularization": 20.0,
+        "early_stopping": false,
+        "random_state": 42
+      }
+    }
+  },
+  "preprocessing": "Reuse verified causal origin features, exact3/6monthlags and LOCF<=3 only for training origins. No learned scaling or imputation. XGB/HGB native training missingness; OLS complete training rows. No future weather inputs.",
+  "evaluation_common_cases": "Before fitting: finite14inputs, observed exact origin/target/seasonal reference, >=12complete same-district OLS trainingpairs before foldcutoff. Every named model uses these exact cases; fail on nonfinite predictions rather than drop cases. Record all excluded slots and reasons.",
+  "geographic_sensitivity": {
+    "full_coordinate_conditional": "Retain original fixed-polygon district aggregates without correcting locations or removing errors; names/coordinates conflict so district climate assignment remains uncertain.",
+    "exact_name_coordinate_agreement": "Filter each accepted well-month on nonmissing source_name_district_id equal district_id, reaggregate separately, rebuild causal GWLfeatures, copy unchanged existingweather. Apply same prefit common eligibility; not location verification.",
+    "identical_origin_target_panel": "Subset full predictions where existing observed panel_sha256 identities match. Panel equality does not certify datum/replacement continuity.",
+    "same_provider_well_baseline": "Join target and exact target-12 by agency/providerID; require finite identical latitude/longitude/depth/aquifer/type at BOTH dates. Secondary stratum exact name/coordinate agreement at BOTH dates. Do not fit a well-level MLmodel or use future metadata to rewrite earlier observations."
+  },
+  "no_extra_climatology_baseline": true,
+  "no_tuning_or_model_selection": true,
+  "preprocessing_fit_on_training_only": true,
+  "metrics": [
+    "MAE_m",
+    "RMSE_m",
+    "bias_m",
+    "R2_if_resolved",
+    "absolute_error_quantiles_50_75_90_95_99",
+    "error_over5_and10m",
+    "district/calendar_month/target_year/period",
+    "pooled/districtmacro/calendarmacro"
+  ],
+  "uncertainty": {
+    "resamples": 2000,
+    "seed": 42,
+    "methods": [
+      "paired_district_bootstrap",
+      "paired_district_x_circular12month_blocks"
+    ],
+    "comparisons": "EveryML vs sole persistence/annualseasonalbaseline; matched-target6vs12 for expandingXGB/OLS/baseline, descriptive only. Report absolute and difference intervals.",
+    "limitations": "Short24month primary and33regionaldistricts are dependent; strict geography only1supported district. No confirmatory/predictive intervals or test-driven selection."
+  },
+  "six_month_comparison": "Read archived6month outputs only; separately match district+target (sameoutcomes,differentorigins/cutoffs) and district+origin (differentoutcomes). Never label crosshorizon results a controlled treatment effect; no6monthartifact loaded as12.",
+  "pre_outcome_inventory_from_metadata": {
+    "full_primary_observed": 792,
+    "full_primary_districts": 33,
+    "full_primary_identical_origin_target_panels": 380,
+    "secondary_observed": 165,
+    "secondary_complete_features": 66,
+    "strict_primary_observed_pairs": 116,
+    "strict_primary_supported_common": 24,
+    "strict_supported_districts": 1,
+    "strict_secondary_supported_common": 2,
+    "well_primary_metadata_matched_pairs": 38496,
+    "well_primary_metadata_matched_ids": 1683
+  },
+  "provenance_limits": "All acquisition/publication/receipt/available_at per-value fields unknown; all primary target panels include source name-coordinate conflict; no certified datum/replacement continuity. Standard12calendar target is not proof of12fullmonths from issuance.",
+  "allowed_outputs": "Only this new report directory and new research module/tests; research artifacts cannot be production/shadow models.",
+  "production_writes_permitted": false,
+  "shadow_artifact_approved": false,
+  "forecast_issued_at": null,
+  "environment": {
+    "python": "3.13.15",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "sklearn": "1.9.1",
+    "xgboost": "3.4.1"
+  }
+}

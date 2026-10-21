@@ -1,0 +1,9 @@
+{
+  "frozen_at_utc": "2026-10-20T16:32:21.295262+00:00",
+  "original_protocol_sha256": "1a93abf0a52eb44263d05090137df2c7000f83c3d0cf2c3e2843c56ac1ec57c2",
+  "clarification": "The new research-module permission includes the CLI runner scripts/backtest_twelve_month.py as well as models/research_horizon.py and their tests. No old source file is modified.",
+  "scientific_protocol_changed": false,
+  "model_settings_or_cohorts_changed": false,
+  "model_fitting_started": false,
+  "bias_interval_interpretation": "Signed bias differences are directional, not a model-superiority test."
+}

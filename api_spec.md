@@ -1,5 +1,25 @@
 # AquaIQ API contract
 
+## Primary: direct twelve-calendar-month research
+
+`GET /api/research/forecast` describes the primary product, supported canonical district IDs, source-backed origin months, artifact scope and limitations. `GET /api/research/forecast/<district_id>` defaults to the **latest observed source month**; `origin_month=YYYY-MM` selects an explicit origin. The optional `months` parameter must equal `12`. Unknown, repeated or incompatible query parameters are rejected. This route is separate from the preserved legacy endpoint below and does not connect to the database.
+
+The target is exactly **origin M + 12 calendar months**. The response includes `product: direct_12month_research`, `horizon_months: 12`, `units: m_bgl`, `origin_month`, `target_month`, nullable `ml_estimate_m`, one nullable `annual_baseline_m`, `status`, `output_kind`, `source`, `model`, `scope`, `unavailable_reasons` and `limitations`. `computed_at` is timezone-aware UTC and `forecast_issued_at` stays null: these are retrospective/current-vintage research calculations, not an archive of issued prospective forecasts. A source month is not a certified acquisition day.
+
+The **annual baseline is persistence = standard annual seasonal naive** because target−12 is the observed origin. It is eligible only for a finite, explicitly observed origin; imputed/estimated origins cannot become measurements. Baseline eligibility is independent of ML availability and is not a second independent method. When historical labels are available, `observed_target_m` is shown separately; it is not a model input.
+
+The new fixed-cutoff XGBoost artifact is restricted to the **TS-Adilabad metadata-agreement population**. All other districts return unsupported-scope unavailability; neither national registry coverage nor zone fallback expands this research scope. Before model loading, the adapter checks the research-only twelve-month contract, feature order/hash, physical units, source generation, geographic scope, configuration, manifest/card/model bytes and frozen input/provenance snapshots. A six-month checkpoint is never substituted.
+
+ML calculation additionally requires an observed origin and historical observed target, the full embargo after the training cutoff, finite inputs with compatible provenance and permitted carry ages. The artifact is **historical-only**. Current/future targets, missing/stale inputs, imputed origins, absent/incompatible artifacts and unsupported scope return a null ML estimate with reasons. A historical request can use old source months as historical evidence; their age today is disclosed without relabelling them current. No silent backoff to an older complete origin is allowed.
+
+For the retained source, a default Adilabad request has origin `2026-05`, target `2027-05`, and unavailable ML; an explicit `origin_month=2024-01` targets `2025-01` for historical research. `source` distinguishes latest observed month from selected origin, reported dates from unknown acquisition/availability times, observed versus imputed values and per-input carry/derived/missing status. Scope agreement does not certify geographic truth, a stable physical well panel or datum continuity. No twelve-full-month operational lead or prospective skill is claimed.
+
+The preserved 792-case expanding historical study has XGBoost RMSE 1.420 m versus annual baseline 1.458 m, with paired difference interval −0.317 to +0.264 m and reversed sensitivities. Those scores are not validation of the new fixed-cutoff application artifact. The baseline outperformed XGBoost in the strict Adilabad sensitivity. No risk-index calculation or extraction simulation was recalibrated by this integration.
+
+The new fixed artifact's separate 24-case historical check has ML MAE 2.145 m / RMSE 2.664 m versus annual baseline MAE .645 m / RMSE .877 m. The baseline performs better on these previously inspected cases. No model superiority or prospective skill follows from the application integration. Artifact failures return a research-shaped unavailable response (HTTP 503, null estimates, public-safe reasons); invalid query errors use HTTP 400 and the shared error schema below.
+
+## Secondary and legacy products
+
 This API serves an academic research prototype. HTTP success or model loading does not establish predictive skill, nationwide accuracy or validated real-time forecasting. The 0–100 score is a project-defined, uncalibrated risk index, not a probability; its tiers are not official groundwater classifications. Simulation is sensitivity analysis, including a heuristic extraction adjustment, not a proven causal estimate.
 
 All routes below use the `/api` prefix. Values are physical: groundwater depth is metres below ground level, rainfall and evapotranspiration are millimetres per month, and temperature is degrees Celsius. Responses use strict JSON: missing and non-finite numeric values are `null`, never `NaN` or an invented fallback score.
@@ -21,7 +41,7 @@ Forecast and district responses distinguish `success`, `historical_forecast`, `p
 
 `estimate_type` is `district_level`, `zone_fallback`, or `insufficient_data`. Zone estimates name `source_zone` and carry `zone_fallback_reason`. The fallback aggregates source-marked district observations from that zone; the resulting estimate is not a district measurement.
 
-## `GET /api/predict/<district_id>`
+## Legacy `GET /api/predict/<district_id>`
 
 Selects one of two distinct prediction windows. The default preserves the **six-calendar-month XGBoost endpoint** and score based on the last source-marked groundwater month admitted by the calendar cutoff. `window=next_six_months` returns **monthly XGBoost projections for six consecutive month buckets beginning next month**, using rainfall and weather assumptions. This window is not a guarantee of six full months of acquisition lead from issuance.
 

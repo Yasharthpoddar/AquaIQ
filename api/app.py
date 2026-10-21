@@ -2,7 +2,7 @@
 AquaIQ — Flask Application Factory (Week 6, Yasharth)
 -------------------------------------------------------
 App factory pattern with blueprint registration for each API route group.
-Matches the 5 endpoints defined in api_spec.md.
+Registers primary twelve-month research and separate legacy API products.
 
 Course mapping: CS301 — Web Development.
 
@@ -64,6 +64,7 @@ def create_app(config_override=None):
         POSTGRES_USER=os.getenv("POSTGRES_USER", "aquaiq_user"),
         POSTGRES_PASSWORD=os.getenv("POSTGRES_PASSWORD", ""),
         AQUAIQ_CORS_ORIGINS=os.getenv("AQUAIQ_CORS_ORIGINS"),
+        RESEARCH_FORECAST_CONFIG_PATH=os.getenv("AQUAIQ_RESEARCH_CONFIG"),
     )
 
     if config_override:
@@ -82,6 +83,7 @@ def create_app(config_override=None):
     from api.routes.simulate import simulate_bp
     from api.routes.health import health_bp
     from api.routes.scores import scores_bp
+    from api.routes.research import research_bp
 
     app.register_blueprint(predict_bp, url_prefix="/api")
     app.register_blueprint(district_bp, url_prefix="/api")
@@ -90,6 +92,7 @@ def create_app(config_override=None):
     app.register_blueprint(simulate_bp, url_prefix="/api")
     app.register_blueprint(health_bp, url_prefix="/api")
     app.register_blueprint(scores_bp, url_prefix="/api")
+    app.register_blueprint(research_bp, url_prefix="/api")
 
     # Root route
     @app.route("/")
@@ -97,10 +100,15 @@ def create_app(config_override=None):
         return {
             "name": "AquaIQ API",
             "version": "1.0.0",
+            "primary_research_horizon_months": 12,
+            "primary_research_product": "direct_12month_research",
+            "prospective_skill_verified": False,
             "endpoints": [
                 "/api/config",
                 "/api/scores",
                 "/api/predict/<district_id>",
+                "/api/research/forecast",
+                "/api/research/forecast/<district_id>",
                 "/api/district/<district_id>",
                 "/api/history/<district_id>",
                 "/api/alerts",

@@ -1,5 +1,11 @@
 # AquaIQ release and update operations
 
+## Twelve-month research application scope
+
+The primary research panel uses `/api/research/forecast/<district_id>` and the separate local descriptor `research/twelve_month_app.json` (override: `AQUAIQ_RESEARCH_CONFIG`). Its compatible XGBoost artifact and frozen feature/provenance snapshots support historical Adilabad research only. Missing assets and current/future requests produce unavailable ML. Preserve the active six-month checkpoints and database.
+
+The deployment instructions below are maintainer references. No deployment was verified or authorized by twelve-month finalization. A successful legacy readiness check does not validate this research artifact, its scientific skill, or production release. A clean clone lacks ignored runtime assets and a populated legacy database. The [finalization report](../reports/candidates/twelve_month_horizon_finalization_20261020/REPORT.md) gives precise assets and safe local commands; no refresh, migration or scoring run is needed for its file-only route.
+
 This is a concrete local production-style topology: Nginx serves the compiled
 SPA and forwards same-origin `/api/` requests to Waitress. The API connects to an
 existing PostgreSQL database. No database container, schema initialization or

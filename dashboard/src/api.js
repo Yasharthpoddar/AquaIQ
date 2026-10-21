@@ -9,12 +9,23 @@ export const API_BASE = import.meta.env?.VITE_API_URL || '';
 // Remove settled requests so retries and later visits always read fresh data.
 const pendingReads = new Map();
 
-function getJson(path, label) {
+function getJson(path, label, researchErrors = false) {
   const url = `${API_BASE}${path}`;
   if (pendingReads.has(url)) return pendingReads.get(url);
   const request = (async () => {
     const res = await fetch(url);
-    if (!res.ok) throw new Error(`${label} fetch failed: ${res.status}`);
+    if (!res.ok) {
+      let detail = '';
+      if (researchErrors) {
+        const failure = await res.json().catch(() => null);
+        if (failure?.product === 'direct_12month_research'
+          && Array.isArray(failure.unavailable_reasons)
+          && failure.unavailable_reasons.every(reason => typeof reason === 'string')) {
+          detail = ` ${failure.unavailable_reasons.join(' ')}`;
+        }
+      }
+      throw new Error(`${label} fetch failed: ${res.status}${detail}`);
+    }
     return res.json();
   })().finally(() => {
     if (pendingReads.get(url) === request) pendingReads.delete(url);
@@ -58,6 +69,18 @@ export async function fetchPredict(id, params = {}) {
   if (params.window) q.set('window', params.window);
   const qs = q.toString() ? `?${q.toString()}` : '';
   return getJson(`/api/predict/${encodeURIComponent(id)}${qs}`, 'Predict');
+}
+
+// This independent research product never redirects to the legacy six-month model.
+export async function fetchResearchCatalog() {
+  return getJson('/api/research/forecast', 'Twelve-month research catalog', true);
+}
+
+export async function fetchResearchForecast(id, originMonth = null) {
+  const params = new URLSearchParams();
+  if (originMonth) params.set('origin_month', originMonth);
+  const query = params.toString() ? `?${params}` : '';
+  return getJson(`/api/research/forecast/${encodeURIComponent(id)}${query}`, 'Twelve-month research forecast', true);
 }
 
 export async function postSimulate(payload) {

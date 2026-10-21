@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ResponsiveContainer, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 import { fetchDistrict, fetchHistory, fetchPredict } from '../api';
+import ResearchForecast from '../components/ResearchForecast';
 
 const COLORS = { Safe:'#22c55e', Watch:'#eab308', Warning:'#f97316', Crisis:'#ef4444' };
 
@@ -65,8 +66,8 @@ export default function DistrictDetail() {
       .catch(err => { if (!cancelled) { setProjectionError(err.message || 'The monthly prediction is unavailable.'); setProjectionLoading(false); } });
     return () => { cancelled = true; };
   }, [id, projectionRetry]);
-  if (loading) return <div className="page"><Link to="/" className="back-link">← Back to dashboard</Link><div className="loading-container"><div className="loading-spinner" />Loading groundwater evidence…</div></div>;
-  if (error) return <div className="page"><Link to="/" className="back-link">← Back to dashboard</Link><div className="empty-state" role="alert"><p>{error}</p><button type="button" onClick={() => setDistrictRetry(value => value + 1)}>Retry district</button></div></div>;
+  if (loading) return <div className="page"><Link to="/" className="back-link">← Back to dashboard</Link><h1>District {id}</h1><ResearchForecast key={id} districtId={id} /><div className="loading-container"><div className="loading-spinner" />Loading legacy groundwater evidence…</div></div>;
+  if (error) return <div className="page"><Link to="/" className="back-link">← Back to dashboard</Link><h1>District {id}</h1><ResearchForecast key={id} districtId={id} /><div className="empty-state" role="alert"><p>Legacy district evidence unavailable: {error}</p><button type="button" onClick={() => setDistrictRetry(value => value + 1)}>Retry district</button></div></div>;
   const district = data;
   const prediction = district;
   const score = prediction.crisis_score;
@@ -90,6 +91,8 @@ export default function DistrictDetail() {
   return <div className="page">
     <Link to="/" className="back-link">← Back to dashboard</Link>
     <h1>{district.metadata?.name || id}, {district.metadata?.state || ''}</h1>
+    <ResearchForecast key={id} districtId={id} />
+    <h2>Secondary: legacy six-month risk component</h2>
     <p className="subtitle">{isZone ? `Estimate from the ${prediction.source_zone} zone` : 'District groundwater evidence'}</p>
     <div className={`score-badge ${prediction.tier === 'Crisis' ? 'crisis' : ''}`}>
       <div className="score-value" style={{color}}>{available ? score : 'Unavailable'}</div>
@@ -97,13 +100,14 @@ export default function DistrictDetail() {
       <div className="score-tier" style={{color}}>{available ? `${prediction.tier} Tier` : 'Insufficient evidence for this model'}</div>
       <p><strong>Source-backed month label:</strong> {prediction.last_observed_date || 'Unavailable'}{prediction.data_age_months != null ? ` (${prediction.data_age_months} months old)` : ''}{isZone ? ' (zone evidence)' : ''}{scoreTargetMonth && <> · <strong>Score model target:</strong> {scoreTargetMonth}</>}</p>
     </div>
-    <p>The crisis score combines groundwater depth, changes in depth, and rainfall and drought conditions. The direction of the plotted line alone does not determine the score.</p>
+    <p>The legacy crisis score combines groundwater depth, changes in depth, and rainfall and drought conditions. It is not a twelve-month validated risk forecast or an official groundwater-risk classification. The direction of the plotted line alone does not determine the score.</p>
     {prediction.weights_status === 'initial_uncalibrated' && <p role="status">This project score uses initial component weights that have not been calibrated against independent crisis outcomes. It is not an accuracy or confidence percentage.</p>}
     {historical && <p style={{color:'#b45309'}}>This score describes the historical observation period. The next-six-month projection below does not update this historical score.</p>}
     {prediction.zone_fallback_reason && <p>{prediction.zone_fallback_reason}</p>}
     {prediction.message && <p role="status">{prediction.message}</p>}
     <div className="card" style={{padding:'1.25rem',margin:'1.5rem 0'}}>
-      <h2>Monthly research projections</h2>
+      <h2>Secondary: six-month climate-conditioned projections</h2>
+      <p>This separate legacy product projects months 1–6 under historical weather assumptions. It is not the direct twelve-month target above.</p>
       {projectionLoading && <p role="status">Preparing projections under historical weather assumptions…</p>}
       {projectionError && <div role="alert"><p>{projectionError}</p><button type="button" onClick={() => setProjectionRetry(value => value + 1)}>Retry prediction</button></div>}
       {projection && <>

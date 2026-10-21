@@ -1,0 +1,45 @@
+{
+  "checked_at_utc": "2026-10-20T16:43:02.555489+00:00",
+  "stages": {
+    "repository_and_remote_baseline_verification": 0,
+    "branch_creation": 0,
+    "cohort_preparation": 0,
+    "actual_research_training_and_backtest": 0,
+    "saved_model_replay_and_independent_metrics": 0,
+    "protected_preservation": 0,
+    "git_diff_check": 0
+  },
+  "final_test_suites": {
+    "final_tests.xml": {
+      "testcases": 74,
+      "passed": 74,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "six_month_regressions.xml": {
+      "testcases": 77,
+      "passed": 76,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1
+    }
+  },
+  "unique_passes": 150,
+  "existing_fitting_tests_deselected": 3,
+  "initial_test_environment_errors": "Initial38passed/11TEMPsetup errors retained; fixed by fresh workspace basetemp, not by changing scientific settings.",
+  "syntax_whitespace_link_checks": "passed",
+  "model_cards_verified": 18,
+  "protected_files_unchanged": 853,
+  "protocol_and_implementation_lock_unchanged": true,
+  "new_source_files": [
+    "models/research_horizon.py",
+    "scripts/backtest_twelve_month.py",
+    "tests/test_research_horizon.py",
+    "tests/test_twelve_month_backtest.py"
+  ],
+  "commit_or_push_performed": false,
+  "database_accessed": false,
+  "production_artifacts_changed": false,
+  "shadow_forecasts_issued": 0
+}

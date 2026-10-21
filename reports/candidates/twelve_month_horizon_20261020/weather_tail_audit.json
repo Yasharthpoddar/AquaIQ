@@ -1,0 +1,7 @@
+{
+  "later_origins": 66,
+  "temperature_equal_dec2024": 66,
+  "evapotranspiration_equal_dec2024": 66,
+  "source_code": "preprocessing/pipeline.py interpolate_gaps(max_gap=2) for climate values",
+  "interpretation": "Existing carried weather values, not newly observed2025ERA5. No new fill introduced."
+}

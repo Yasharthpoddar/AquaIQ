@@ -1,14 +1,37 @@
-# AquaIQ — Groundwater Research Prototype
+# AquaIQ — Twelve-Month Groundwater Research Prototype
 
-AquaIQ is an academic research prototype using CGWB groundwater records, IMD rainfall, and ERA5 weather to estimate groundwater depth six calendar months after a source-backed origin month. A Flask API and React dashboard expose that endpoint and a project-defined 0–100 risk index over a registry of 725 canonical districts. Registry coverage does not establish observed coverage or nationwide accuracy. The district graph separately shows monthly projections using assumed weather and estimated groundwater depth. Neither verified real-time forecasting skill nor production readiness has been established.
+AquaIQ's primary research question is whether groundwater depth **12 calendar months after an observed origin month M** can be usefully estimated against an annual baseline. The primary dashboard panel and `/api/research/forecast/<district_id>` implement that exact **M+12** research contract. A separate, fixed-settings XGBoost artifact supports historical research only in **TS-Adilabad**, using a source-name/polygon-agreement subset of retained Telangana data. This is metadata agreement, not verified well location or datum continuity. It is not a validated national or real-time forecasting model.
 
-The repaired pipeline keeps groundwater in metres below ground level, rainfall and evapotranspiration in millimetres per month, and temperature in degrees Celsius. Features and model bundles carry generation identifiers, units, dates, and checksums. Missing evidence produces an unavailable result; districts with sparse evidence may use an explicitly labelled aggregate of their agro-climatic zone.
+The default request uses the latest source-marked observed month without silently substituting older complete inputs. With the retained source this is May 2026, targeting May 2027; required weather is missing and the artifact is historical-only, so ML is unavailable. The single annual baseline may still be shown from the observed origin. Explicit historical origins, such as January 2024 targeting January 2025, demonstrate the separate research path. Acquisition/publication/receipt times remain unknown, so M+12 does not establish twelve full months of operational issuance lead.
 
-## Academic submission scope and existing evidence
+The existing six-month endpoint, monthly climate projection (horizons 1–6), map and project-defined 0–100 risk index remain secondary capabilities over a registry of 725 canonical districts. The index still uses its legacy components; it has not been recalibrated for the twelve-month objective. Registry coverage establishes neither observed coverage nor nationwide predictive accuracy. The monthly chart remains a distinct weather-conditioned projection, not a twelve-month curve. Neither prospective skill nor production readiness has been established.
+
+The repaired pipeline keeps groundwater in metres below ground level, rainfall and evapotranspiration in millimetres per month, and temperature in degrees Celsius. Features and model bundles carry generation identifiers, units, dates, and checksums. Missing evidence produces an unavailable result. Zone fallback remains confined to legacy products; the twelve-month research path never borrows another district's model.
+
+## Primary twelve-month research experience
+
+The user adopted twelve months as the primary **research objective**, not because the experiment proved superiority. On 792 paired conditional historical cases in 33 Telangana districts:
+
+| Method | MAE (m) | RMSE (m) |
+|---|---:|---:|
+| Persistence = annual seasonal naive | 1.191 | 1.458 |
+| Expanding XGBoost | 1.159 | 1.420 |
+| Per-district Linear Regression | 1.928 | 2.456 |
+| Separate twelve-month HGB | 1.222 | 1.505 |
+
+The paired XGBoost RMSE-difference interval is **−0.317 to +0.264 m**, crossing zero. Its advantage reverses in 2025 and on unchanged-panel cases. The exact-agreement Adilabad sensitivity favored the baseline (RMSE .877 m versus XGBoost 2.518 m on 24 cases). These are preserved expanding-window study results, **not accuracy scores for the new fixed-cutoff application artifact**. The latter uses the same fixed XGBoost settings with a 2021-12-31 training-label cutoff and a twelve-month embargo, and remains an unselected historical comparator. HGB has not been refitted for the application or approved for real shadow prediction.
+
+Use the [original twelve-month study](reports/candidates/twelve_month_horizon_20261020/REPORT.md), its frozen protocol and saved predictions for evaluation. The [application finalization report](reports/candidates/twelve_month_horizon_finalization_20261020/REPORT.md) records the separate artifact, scope, contracts, checks and limitations. Earlier reports retain their original decisions and dates; the later change of primary research objective does not rewrite their evidence.
+
+The new fixed-cutoff artifact's own **24-case Adilabad historical check** is worse than the annual baseline: XGBoost MAE **2.145 m**, RMSE **2.664 m**, R² **−.101**; baseline MAE **.645 m**, RMSE **.877 m**, R² **.881**. These are previously inspected historical cases, not a new blind test. Its predictions reload consistently but differ from the old 2024 fit despite matching training rows and settings; the exact cause remains unresolved. No refitting or tuning was used to chase the old outputs.
+
+For a restored local demonstration, use the existing environment and run `python -B -m api.app` and `npm.cmd --prefix dashboard run dev -- --host 127.0.0.1 --port 5173 --strictPort` in separate terminals, with `FLASK_HOST=127.0.0.1` and `FLASK_DEBUG=false`. Open `/research` for the file-only panel without database-backed legacy requests; Home also presents the panel above the legacy map. The primary research API does not need the database; legacy scores/history/monthly projections do. `AQUAIQ_RESEARCH_CONFIG` optionally selects a local research descriptor; its default is `research/twelve_month_app.json`. Required local model/snapshot/manifests are hashed separately from active six-month checkpoints. Missing or incompatible assets produce explicit unavailable results. See the finalization report for the complete local commands and required assets. Do not run setup, refresh, scoring, migrations or training merely to display a demonstration.
+
+## Legacy six-month scope and historical evidence
 
 The submission preserves the existing XGBoost, ANN/MLP, Linear Regression and Fuzzy Logic components. ANN learns fuzzy-generated labels; its agreement is not independent crisis-outcome accuracy. HGB remains a locked research candidate, with real predictions abstained (`shadow_artifact_not_approved`). Real shadow issuance is currently **no-go** because source availability, stable well panels, current observations and effective issuance lead remain unresolved.
 
-The saved primary historical benchmark uses the **same 209 observed-flag cases in 32 districts**, with origins July 2019–September 2022 and targets January 2020–March 2023. Values below are existing candidate experiment results, not a new evaluation of the dashboard's current monthly serving path. No model was retrained or reselected for submission.
+The saved primary historical benchmark uses the **same 209 observed-flag cases in 32 districts**, with origins July 2019–September 2022 and targets January 2020–March 2023. Values below are existing candidate experiment results, not a new evaluation of the dashboard's current monthly serving path. No six-month model was retrained or reselected for this finalization.
 
 | Method | MAE (m) | RMSE (m) | R² |
 |---|---:|---:|---:|

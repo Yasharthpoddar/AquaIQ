@@ -1,0 +1,44 @@
+[
+  {
+    "dimension": "district",
+    "model": "xgb_expanding",
+    "groups": 33,
+    "rmse_wins": 20,
+    "mae_wins": 22
+  },
+  {
+    "dimension": "district",
+    "model": "linear_expanding",
+    "groups": 33,
+    "rmse_wins": 7,
+    "mae_wins": 9
+  },
+  {
+    "dimension": "district",
+    "model": "hgb_12month_fixed",
+    "groups": 33,
+    "rmse_wins": 16,
+    "mae_wins": 16
+  },
+  {
+    "dimension": "calendar_month",
+    "model": "xgb_expanding",
+    "groups": 12,
+    "rmse_wins": 8,
+    "mae_wins": 8
+  },
+  {
+    "dimension": "calendar_month",
+    "model": "linear_expanding",
+    "groups": 12,
+    "rmse_wins": 0,
+    "mae_wins": 0
+  },
+  {
+    "dimension": "calendar_month",
+    "model": "hgb_12month_fixed",
+    "groups": 12,
+    "rmse_wins": 7,
+    "mae_wins": 7
+  }
+]

@@ -18,7 +18,15 @@ def get_config():
         'max':config['crisis_score']['tiers'][name.lower()][1],'color':color} for name,color in colors.items()}
     return response({'project':config['project']['name'],'version':config['project']['version'],'tiers':tiers,
         'ensemble_weights':_load_ensemble_weights(),'features':config['features'],
-        'weights_status':'validated' if config['model_hyperparameters']['ensemble'].get('validated_weights') else 'initial_uncalibrated'})
+        'weights_status':'validated' if config['model_hyperparameters']['ensemble'].get('validated_weights') else 'initial_uncalibrated',
+        'primary_forecast':{'horizon_months':12,'product':'direct_12month_research',
+            'endpoint':'/api/research/forecast/<district_id>',
+            'scope_endpoint':'/api/research/forecast','prospective_skill_verified':False},
+        'secondary_forecasts':[
+            {'product':'legacy_observed_endpoint','horizon_months':6,'endpoint':'/api/predict/<district_id>'},
+            {'product':'monthly_climate_projection','horizons_months':[1,2,3,4,5,6],
+             'endpoint':'/api/predict/<district_id>?window=next_six_months'}],
+        'risk_index_forecast_basis':'legacy_six_month_components_not_recalibrated_for_twelve_months'})
 
 def latest_scores(connection):
     _,card=_load_bundle()
