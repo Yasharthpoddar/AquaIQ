@@ -1,0 +1,33 @@
+{
+  "checked_at_utc": "2026-10-21T15:53:30.981940+00:00",
+  "scenario_as_of": "2026-10-21",
+  "first_month": "2026-11",
+  "last_month": "2027-10",
+  "districts": 725,
+  "statuses": {
+    "unavailable": 177,
+    "scenario": 548
+  },
+  "available_latest_month_counts": {
+    "2026-01": 538,
+    "2021-01": 9,
+    "2026-05": 1
+  },
+  "available_phase_counts": {
+    "6": 41,
+    "7": 53,
+    "8": 13,
+    "5": 115,
+    "4": 297,
+    "12": 19,
+    "9": 3,
+    "10": 7
+  },
+  "no_observed_history": 73,
+  "insufficient_observed_history": 104,
+  "accuracy_evaluated": false,
+  "active_ml_fitted_or_loaded": false,
+  "database_accessed": false,
+  "prospective_records_created": false,
+  "output_kind": "experimental_scenario_functional_verification_only"
+}

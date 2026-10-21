@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "product": "experimental_12month_scenario_sources",
+  "scope": "canonical_district_own_observed_history",
+  "feature_generation_id": "physical-v3-causal-monthly-a3f9468a2569",
+  "units": "m_bgl",
+  "units_qualification": "Repository m_bgl convention; per-well datum and continuity are unverified.",
+  "feature_csv_path": "data/processed/features_matrix.csv",
+  "feature_csv_sha256": "3958737b033a16e722f633a15ad77d80bc5b2a8fb3bea888697f0410362c24ae",
+  "feature_manifest_path": "data/processed/feature_manifest.json",
+  "feature_manifest_sha256": "afc96a9e13655ffa2ccb2bf18a027b9bb1ed34c21260b901301cef6fd35c8b91",
+  "district_crosswalk_path": "data_ingestion/district_crosswalk.csv",
+  "district_crosswalk_sha256": "5765965f7cf0fbbaecfb93983e72d248baaeca07e1b9b43e47ad80921dda7835",
+  "district_count": 725,
+  "source_name": "Canonical district source-marked groundwater monthly feature export",
+  "source_vintage_policy": "pinned_local_bytes_no_automatic_refresh",
+  "metadata_limitations": [
+    "Observed flags are repository source marks, not certified fresh acquisition.",
+    "Well identities, panel membership, source publication, acquisition and availability times are absent."
+  ]
+}

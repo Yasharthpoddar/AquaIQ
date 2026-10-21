@@ -1,5 +1,7 @@
 # AquaIQ API contract
 
+The district UI defaults to the separate experimental twelve-month monthly scenario at `/api/research/scenario/<district_id>?months=12`, documented below. The direct research APIs in the next section retain their historical Adilabad-only scope and are selected explicitly in the UI. Preserved legacy endpoints retain their six-month contracts; they are not relabelled as twelve-month models.
+
 ## Primary: direct twelve-calendar-month research
 
 `GET /api/research/forecast` describes the primary product, supported canonical district IDs, source-backed origin months, artifact scope and limitations. `GET /api/research/forecast/<district_id>` defaults to the **latest observed source month**; `origin_month=YYYY-MM` selects an explicit origin. The optional `months` parameter must equal `12`. Unknown, repeated or incompatible query parameters are rejected. This route is separate from the preserved legacy endpoint below and does not connect to the database.
@@ -17,6 +19,10 @@ For the retained source, a default Adilabad request has origin `2026-05`, target
 The preserved 792-case expanding historical study has XGBoost RMSE 1.420 m versus annual baseline 1.458 m, with paired difference interval −0.317 to +0.264 m and reversed sensitivities. Those scores are not validation of the new fixed-cutoff application artifact. The baseline outperformed XGBoost in the strict Adilabad sensitivity. No risk-index calculation or extraction simulation was recalibrated by this integration.
 
 The new fixed artifact's separate 24-case historical check has ML MAE 2.145 m / RMSE 2.664 m versus annual baseline MAE .645 m / RMSE .877 m. The baseline performs better on these previously inspected cases. No model superiority or prospective skill follows from the application integration. Artifact failures return a research-shaped unavailable response (HTTP 503, null estimates, public-safe reasons); invalid query errors use HTTP 400 and the shared error schema below.
+
+### Historical graph mode: twelve calendar positions
+
+`GET /api/research/graph/<district_id>?months=12[&origin_month=YYYY-MM]` adapts the validated direct research endpoint for the existing chart. Its twelve rows use exact calendar months M+1 through M+12, with `horizon_months` 1–12. The retained artifact supports only M+12: rows 1–11 have explicit null `predicted_gwl` and `annual_baseline_m` values and unavailable reasons. Row 12 retains the direct endpoint's ML and annual reference where eligible. No interpolation, six-month fallback or repeated annual baseline supplies a monthly trajectory. Unknown origins have null month labels rather than invented dates. The response retains origin/target, units, model/source identity, scope, limitations and `forecast_issued_at=null`. Existing `/api/predict` six-month behavior and monthly horizons 1–6 are unchanged.
 
 ## Secondary and legacy products
 
@@ -184,3 +190,11 @@ Checks a real PostgreSQL query and validates both the historical endpoint and mo
 - HTTP 503: `status: degraded`; the other fields identify failed readiness.
 
 File existence alone does not establish model health. Health does not claim that the historical dataset supports a present-day forecast.
+
+## `GET /api/research/scenario/<district_id>?months=12[&as_of=YYYY-MM-DD]`
+
+Separate experimental scenario approved for local demonstration; defaults to today's **Asia/Kolkata** calendar date. All 725 canonical district IDs are accepted. `TS-Adilabad` retains its frozen research source; other districts use their own observed-marked history from the pinned national feature export and canonical crosswalk in `research/experimental_scenario_sources.json`. The `experimental_12month_scenario` product returns `status: scenario` with twelve next full calendar months and `projected_gwl` in metres below ground, or `status: unavailable` with no values and explicit reasons. Current history requirements support 548 districts; 177 abstain. Invalid/future dates, duplicate parameters and horizons other than 12 return 400; incompatible/revised source bytes return 503 until separately reviewed and versioned. Unknown IDs and insufficient/no-history districts abstain with HTTP 200 and never use another district's or zone's evidence. No aliases are guessed or resolved through the DB.
+
+The calculation reuses the existing robust damped seasonal/trend fit in memory from explicitly source-marked observed history strictly before the scenario month. It loads no estimator, trains no active ML, accesses no DB and saves no parameters or prediction ledger. It estimates the observation gap, omits weather and extraction effects, and is unvalidated. Responses separate `as_of`, timezone-aware `computed_at`, null `forecast_issued_at`, last observed depth/date, estimated scenario-month depth, age, fit history/phase coverage, source/method/configuration hashes, assumptions and limitations. Availability remains unverified. Past `as_of` requests use the retained current source vintage and are not causal historical backtests. Existing `/research/forecast`, `/research/graph` and six-month endpoints retain their contracts.
+
+National source units follow the repository's `m_bgl` convention; certified per-well datum/continuity are unknown. National well counts, panels, acquisition and availability timestamps are absent and remain null. `source.scope` is `district_own_observed_history`, with source-specific `name`, `units_qualification`, district metadata, generation and byte hashes. Observation age and sparse phase coverage do not establish current forecasting skill. Cached parsing never skips verifying the pinned bytes on a subsequent request.

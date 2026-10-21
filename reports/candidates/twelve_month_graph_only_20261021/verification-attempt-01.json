@@ -1,0 +1,13 @@
+{
+  "recorded_at_utc": "2026-10-21T09:15:31.388933+00:00",
+  "command": [
+    ".\\venv\\Scripts\\python.exe",
+    "-B",
+    "reports/candidates/twelve_month_graph_only_20261021/verify_phase.py"
+  ],
+  "exit_code": 1,
+  "failed_assertion": "Original App layout differs beyond the preserved optional route",
+  "confirmed_cause": "Verifier used Windows default cp1252 decoding on the UTF-8 App source, while git bytes were decoded UTF-8.",
+  "correction": "Specify UTF-8 on the verifier source read; no application source or data was changed for this check.",
+  "receipts_written_by_failed_attempt": false
+}

@@ -1,0 +1,356 @@
+
+> dashboard@0.0.0 test
+> node --test tests/*.test.js
+
+TAP version 13
+# Subtest: concurrent district reads share the network request, including JSON parsing
+ok 1 - concurrent district reads share the network request, including JSON parsing
+  ---
+  duration_ms: 6.9871
+  type: 'test'
+  ...
+# Subtest: completed GETs do not cache subsequent visits or refreshed scores
+ok 2 - completed GETs do not cache subsequent visits or refreshed scores
+  ---
+  duration_ms: 0.8176
+  type: 'test'
+  ...
+# Subtest: different districts and prediction windows remain independent
+ok 3 - different districts and prediction windows remain independent
+  ---
+  duration_ms: 1.7035
+  type: 'test'
+  ...
+# Subtest: failed shared HTTP reads reject all callers and a retry makes a new request
+ok 4 - failed shared HTTP reads reject all callers and a retry makes a new request
+  ---
+  duration_ms: 2.5953
+  type: 'test'
+  ...
+# Subtest: network and invalid JSON failures clear pending reads for retries
+ok 5 - network and invalid JSON failures clear pending reads for retries
+  ---
+  duration_ms: 1.8763
+  type: 'test'
+  ...
+# Subtest: simulation writes are never shared or cached
+ok 6 - simulation writes are never shared or cached
+  ---
+  duration_ms: 0.7553
+  type: 'test'
+  ...
+# Subtest: default history includes the source start and lets the API select the current end
+ok 7 - default history includes the source start and lets the API select the current end
+  ---
+  duration_ms: 2.2497
+  type: 'test'
+  ...
+# Subtest: state polygons in the actual source cannot obscure the district map
+ok 8 - state polygons in the actual source cannot obscure the district map
+  ---
+  duration_ms: 49.2842
+  type: 'test'
+  ...
+# Subtest: district name matches stay within the same state and preserve zero scores
+ok 9 - district name matches stay within the same state and preserve zero scores
+  ---
+  duration_ms: 0.7898
+  type: 'test'
+  ...
+# Subtest: coverage reports a missing Mumbai Suburban boundary without borrowing Mumbai geometry
+ok 10 - coverage reports a missing Mumbai Suburban boundary without borrowing Mumbai geometry
+  ---
+  duration_ms: 46.4886
+  type: 'test'
+  ...
+# Subtest: malformed boundary responses fail visibly and empty coverage is explicit
+ok 11 - malformed boundary responses fail visibly and empty coverage is explicit
+  ---
+  duration_ms: 0.9915
+  type: 'test'
+  ...
+# Subtest: today-based scenario contains exactly twelve next full months across a year boundary
+ok 12 - today-based scenario contains exactly twelve next full months across a year boundary
+  ---
+  duration_ms: 5.1939
+  type: 'test'
+  ...
+# Subtest: partial, duplicated, redated, nonfinite and incompatible-model paths are rejected
+ok 13 - partial, duplicated, redated, nonfinite and incompatible-model paths are rejected
+  ---
+  duration_ms: 2.1505
+  type: 'test'
+  ...
+# Subtest: unavailable scope remains empty with no replacement points
+ok 14 - unavailable scope remains empty with no replacement points
+  ---
+  duration_ms: 1.5329
+  type: 'test'
+  ...
+# Subtest: mode defaults to today while explicitly requested historical origins remain historical
+ok 15 - mode defaults to today while explicitly requested historical origins remain historical
+  ---
+  duration_ms: 0.307
+  type: 'test'
+  ...
+# Subtest: scenario reads use a separate route and leave the historical request unchanged
+ok 16 - scenario reads use a separate route and leave the historical request unchanged
+  ---
+  duration_ms: 0.7106
+  type: 'test'
+  ...
+# Subtest: rendered disclosure and table distinguish current estimate, stale observation and all twelve values
+ok 17 - rendered disclosure and table distinguish current estimate, stale observation and all twelve values
+  ---
+  duration_ms: 28.6436
+  type: 'test'
+  ...
+# Subtest: read failure exposes retry without silently displaying historical estimates
+ok 18 - read failure exposes retry without silently displaying historical estimates
+  ---
+  duration_ms: 1.4192
+  type: 'test'
+  ...
+# Subtest: arbitrary registered district owns all twelve chart rows and cannot receive a different district response
+ok 19 - arbitrary registered district owns all twelve chart rows and cannot receive a different district response
+  ---
+  duration_ms: 6.895
+  type: 'test'
+  ...
+# Subtest: valid zero depth estimates remain numbers instead of becoming unavailable
+ok 20 - valid zero depth estimates remain numbers instead of becoming unavailable
+  ---
+  duration_ms: 7.5489
+  type: 'test'
+  ...
+# Subtest: insufficient, missing and unreadable source reasons stay exact without substituting an Adilabad graph
+ok 21 - insufficient, missing and unreadable source reasons stay exact without substituting an Adilabad graph
+  ---
+  duration_ms: 6.602
+  type: 'test'
+  ...
+# Subtest: unknown provenance is disclosed and no well count, publication time or certified datum is invented
+ok 22 - unknown provenance is disclosed and no well count, publication time or certified datum is invented
+  ---
+  duration_ms: 7.2487
+  type: 'test'
+  ...
+# Subtest: source metadata and unavailable reasons render as escaped text
+ok 23 - source metadata and unavailable reasons render as escaped text
+  ---
+  duration_ms: 7.7982
+  type: 'test'
+  ...
+# Subtest: Home explains district-specific scenario eligibility without claiming nationwide accuracy
+ok 24 - Home explains district-specific scenario eligibility without claiming nationwide accuracy
+  ---
+  duration_ms: 1.152
+  type: 'test'
+  ...
+# Subtest: sparse calendar phases disclose inferred seasonal values rather than monthly measurements
+ok 25 - sparse calendar phases disclose inferred seasonal values rather than monthly measurements
+  ---
+  duration_ms: 8.2892
+  type: 'test'
+  ...
+# Subtest: twelve calendar slots cross December to January and retain exact M+12 target
+ok 26 - twelve calendar slots cross December to January and retain exact M+12 target
+  ---
+  duration_ms: 7.1245
+  type: 'test'
+  ...
+# Subtest: graph data contains exactly twelve ordered target slots with only the compatible M+12 ML value
+ok 27 - graph data contains exactly twelve ordered target slots with only the compatible M+12 ML value
+  ---
+  duration_ms: 4.4076
+  type: 'test'
+  ...
+# Subtest: missing ML preserves the twelve-month domain without zero-filling or plotting baseline as ML
+ok 28 - missing ML preserves the twelve-month domain without zero-filling or plotting baseline as ML
+  ---
+  duration_ms: 0.664
+  type: 'test'
+  ...
+# Subtest: SYNTHETIC render-data fixture retains twelve existing numeric points without approving unsupported artifacts
+ok 29 - SYNTHETIC render-data fixture retains twelve existing numeric points without approving unsupported artifacts
+  ---
+  duration_ms: 7.6963
+  type: 'test'
+  ...
+# Subtest: six-month contracts and truncated or reordered monthly arrays cannot satisfy the graph
+ok 30 - six-month contracts and truncated or reordered monthly arrays cannot satisfy the graph
+  ---
+  duration_ms: 4.7628
+  type: 'test'
+  ...
+# Subtest: direct M+12 artifact cannot be stretched into intermediate ML points or baseline curves
+ok 31 - direct M+12 artifact cannot be stretched into intermediate ML points or baseline curves
+  ---
+  duration_ms: 1.9736
+  type: 'test'
+  ...
+# Subtest: imputed origins and nonfinite numeric values remain ineligible
+ok 32 - imputed origins and nonfinite numeric values remain ineligible
+  ---
+  duration_ms: 0.7224
+  type: 'test'
+  ...
+# Subtest: unavailable ML cannot carry a plotted number and available ML cannot be null
+ok 33 - unavailable ML cannot carry a plotted number and available ML cannot be null
+  ---
+  duration_ms: 0.6813
+  type: 'test'
+  ...
+# Subtest: graph artifact failures preserve the public-safe reason without changing legacy requests
+ok 34 - graph artifact failures preserve the public-safe reason without changing legacy requests
+  ---
+  duration_ms: 1.6531
+  type: 'test'
+  ...
+# Subtest: unknown origin stays unavailable without inventing twelve calendar months
+ok 35 - unknown origin stays unavailable without inventing twelve calendar months
+  ---
+  duration_ms: 2.4015
+  type: 'test'
+  ...
+# Subtest: graph explicitly requests twelve months and the separately requested legacy endpoint is unchanged
+ok 36 - graph explicitly requests twelve months and the separately requested legacy endpoint is unchanged
+  ---
+  duration_ms: 1.0997
+  type: 'test'
+  ...
+# Subtest: original graph card, responsive styles, axes, line color and retry control remain in place
+ok 37 - original graph card, responsive styles, axes, line color and retry control remain in place
+  ---
+  duration_ms: 2.0734
+  type: 'test'
+  ...
+# Subtest: explicit historical month is sent unchanged and latest origin remains the default
+ok 38 - explicit historical month is sent unchanged and latest origin remains the default
+  ---
+  duration_ms: 4.1012
+  type: 'test'
+  ...
+# Subtest: mismatched responses cannot silently replace a user-selected historical origin
+ok 39 - mismatched responses cannot silently replace a user-selected historical origin
+  ---
+  duration_ms: 1.4701
+  type: 'test'
+  ...
+# Subtest: annual baseline is a single observed-origin reference, including a legitimate zero
+ok 40 - annual baseline is a single observed-origin reference, including a legitimate zero
+  ---
+  duration_ms: 0.4086
+  type: 'test'
+  ...
+# Subtest: unknown origins and read failures retain an explicit graph-sized unavailable frame
+ok 41 - unknown origins and read failures retain an explicit graph-sized unavailable frame
+  ---
+  duration_ms: 16.127
+  type: 'test'
+  ...
+# Subtest: panel renders origin controls and loading frame before legacy scoring is available
+ok 42 - panel renders origin controls and loading frame before legacy scoring is available
+  ---
+  duration_ms: 5.6934
+  type: 'test'
+  ...
+# Subtest: Home exposes one explicitly historical graph link without replacing the map or risk cards
+ok 43 - Home exposes one explicitly historical graph link without replacing the map or risk cards
+  ---
+  duration_ms: 1.1212
+  type: 'test'
+  ...
+# Subtest: baseline-only view clearly distinguishes its marker from unavailable ML
+ok 44 - baseline-only view clearly distinguishes its marker from unavailable ML
+  ---
+  duration_ms: 4.5231
+  type: 'test'
+  ...
+# Subtest: actual chart element preserves twelve slots with one separate baseline reference and no fabricated ML
+ok 45 - actual chart element preserves twelve slots with one separate baseline reference and no fabricated ML
+  ---
+  duration_ms: 16.4862
+  type: 'test'
+  ...
+# Subtest: exact M+12 target preserves calendar month across year boundaries and leap years
+ok 46 - exact M+12 target preserves calendar month across year boundaries and leap years
+  ---
+  duration_ms: 2.3044
+  type: 'test'
+  ...
+# Subtest: research responses reject a legacy horizon, units, product, or shifted target
+ok 47 - research responses reject a legacy horizon, units, product, or shifted target
+  ---
+  duration_ms: 1.4333
+  type: 'test'
+  ...
+# Subtest: a baseline may be available while ML abstains, without inventing a zero prediction
+ok 48 - a baseline may be available while ML abstains, without inventing a zero prediction
+  ---
+  duration_ms: 64.9045
+  type: 'test'
+  ...
+# Subtest: no observed-baseline or ML number is accepted from an imputed or missing origin
+ok 49 - no observed-baseline or ML number is accepted from an imputed or missing origin
+  ---
+  duration_ms: 1.1066
+  type: 'test'
+  ...
+# Subtest: unsupported districts can remain unavailable without borrowing another origin or district
+ok 50 - unsupported districts can remain unavailable without borrowing another origin or district
+  ---
+  duration_ms: 3.5338
+  type: 'test'
+  ...
+# Subtest: historical target measurements stay separate from estimates and prospective claims are rejected
+ok 51 - historical target measurements stay separate from estimates and prospective claims are rejected
+  ---
+  duration_ms: 3.7686
+  type: 'test'
+  ...
+# Subtest: source text renders as text rather than executable HTML
+ok 52 - source text renders as text rather than executable HTML
+  ---
+  duration_ms: 4.7811
+  type: 'test'
+  ...
+# Subtest: carried inputs retain their source month and age instead of appearing as fresh measurements
+ok 53 - carried inputs retain their source month and age instead of appearing as fresh measurements
+  ---
+  duration_ms: 3.9263
+  type: 'test'
+  ...
+# Subtest: optional research page preserves direct-horizon disclosures without replacing the original dashboard
+ok 54 - optional research page preserves direct-horizon disclosures without replacing the original dashboard
+  ---
+  duration_ms: 5.4124
+  type: 'test'
+  ...
+# Subtest: catalog rejects incompatible horizons and invalid origin months
+ok 55 - catalog rejects incompatible horizons and invalid origin months
+  ---
+  duration_ms: 1.1324
+  type: 'test'
+  ...
+# Subtest: independent research routes preserve the legacy six-month route and default latest origin
+ok 56 - independent research routes preserve the legacy six-month route and default latest origin
+  ---
+  duration_ms: 2.8953
+  type: 'test'
+  ...
+# Subtest: missing research assets disclose the public-safe reason and remain retryable
+ok 57 - missing research assets disclose the public-safe reason and remain retryable
+  ---
+  duration_ms: 0.9609
+  type: 'test'
+  ...
+1..57
+# tests 57
+# suites 0
+# pass 57
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3473.2877

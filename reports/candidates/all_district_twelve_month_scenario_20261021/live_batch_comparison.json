@@ -1,0 +1,19 @@
+{
+  "first_comparison": "Failed JSON string equality because Flask sorts object keys; all six payloads passed the frontend validator.",
+  "live_row_keys": [
+    "date",
+    "horizon_months",
+    "month",
+    "projected_gwl"
+  ],
+  "batch_row_keys": [
+    "month",
+    "date",
+    "horizon_months",
+    "projected_gwl"
+  ],
+  "semantic_forecast_equal": true,
+  "max_abs_prediction_difference_m": 0.0,
+  "history_sha_equal": true,
+  "source_sha_equal": true
+}

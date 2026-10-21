@@ -1,0 +1,36 @@
+{
+  "frontend_tests": {
+    "command": "npm.cmd --prefix dashboard test",
+    "passed": 43,
+    "failed": 0,
+    "skipped": 0,
+    "log": "frontend-tests-01.txt"
+  },
+  "lint": {
+    "command": "npm.cmd --prefix dashboard run lint",
+    "exit_code": 0,
+    "log": "frontend-lint-01.txt"
+  },
+  "build": {
+    "captured_at_utc": "2026-10-21T10:14:55.9544328+00:00",
+    "exit_code": 0,
+    "output": "scratch/prediction-graph-visibility-build-20261021-01",
+    "command": "npm.cmd --prefix dashboard run build -- --outDir ../scratch/prediction-graph-visibility-build-20261021-01"
+  },
+  "whitespace": {
+    "command": "git diff --check -- dashboard",
+    "exit_code": 0
+  },
+  "runtime_http": "runtime_http-v2.json",
+  "browser": {
+    "pixels_verified": false,
+    "error": "failed to write kernel assets: The system cannot find the path specified. (os error 3)",
+    "open_in_codex": "queued"
+  },
+  "backend_tests": "Not repeated: this phase changes frontend presentation only.",
+  "training": false,
+  "forecast_issuance": false,
+  "database_writes": false,
+  "commit": false,
+  "push": false
+}

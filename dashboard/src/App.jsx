@@ -16,7 +16,6 @@ function App() {
             <span className="nav-title">AquaIQ</span>
           </div>
           <div className="nav-links">
-            <NavLink to="/research">Research</NavLink>
             <NavLink to="/" end>Home</NavLink>
             <NavLink to="/alerts">Alerts</NavLink>
             <NavLink to="/simulate">Simulate</NavLink>
@@ -24,7 +23,7 @@ function App() {
         </nav>
         <main className="main-content">
           <aside className="card" aria-label="Research prototype limitations" style={{padding:'1rem',marginBottom:'1rem'}}>
-            <strong>Academic research prototype · primary horizon: 12 calendar months.</strong> Direct M+12 research estimates and an annual baseline are separate from the legacy six-month products. Nationwide accuracy and real-time forecasting skill have not been verified. The 0–100 score is a project-defined, uncalibrated risk index, not a crisis probability or an official groundwater classification.
+            <strong>Academic research prototype.</strong> Nationwide accuracy and real-time forecasting skill have not been verified. The 0–100 score is a project-defined, uncalibrated risk index, not a crisis probability or an official groundwater classification.
           </aside>
           <Routes>
             <Route path="/research" element={<div className="page"><h1>Twelve-month groundwater research</h1><ResearchForecast /></div>} />

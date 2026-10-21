@@ -1,0 +1,80 @@
+{
+  "excludes_itself": true,
+  "files": [
+    {
+      "path": "reports/candidates/current_twelve_month_scenario_20261021/backend-tests-01.txt",
+      "bytes": 452689,
+      "sha256": "53efd88035cfc14932963612760955d4ff756d812ffd9b823bec00e46effac03"
+    },
+    {
+      "path": "reports/candidates/current_twelve_month_scenario_20261021/backend-tests-01.xml",
+      "bytes": 481376,
+      "sha256": "b054d4e80b6709446489627a898382f020743fde0be85cd963f64438c20488ae"
+    },
+    {
+      "path": "reports/candidates/current_twelve_month_scenario_20261021/backend-tests-02.txt",
+      "bytes": 265,
+      "sha256": "4886f51bd21533f785ba57cd43a22ec2690b75d642b7a338766ec5a758491ee4"
+    },
+    {
+      "path": "reports/candidates/current_twelve_month_scenario_20261021/backend-tests-02.xml",
+      "bytes": 22085,
+      "sha256": "055a58c313739c279b0572a0fef4dec4c334ab48b3b2f77631c8f7582b653c08"
+    },
+    {
+      "path": "reports/candidates/current_twelve_month_scenario_20261021/before.json",
+      "bytes": 203834,
+      "sha256": "d77d548c77a11e1c7f1be3a2a779c9d120a925ff43ad634c46350563b5ebe63c"
+    },
+    {
+      "path": "reports/candidates/current_twelve_month_scenario_20261021/checks.json",
+      "bytes": 2066,
+      "sha256": "1481f9b58b259d72115925e4a94e2c2b0d9951d1b6ad3c0d4391f767564f9600"
+    },
+    {
+      "path": "reports/candidates/current_twelve_month_scenario_20261021/frontend-build-01.txt",
+      "bytes": 1146,
+      "sha256": "f5847421c8d0467f6902298381fa0fff1fab8a7a2c96cf152d959cb33079c8e8"
+    },
+    {
+      "path": "reports/candidates/current_twelve_month_scenario_20261021/frontend-lint-01.txt",
+      "bytes": 38,
+      "sha256": "48e8c3e5443d5c045a6e4695da36339ef7bd69a996df0fbe5e8bf75af92e3860"
+    },
+    {
+      "path": "reports/candidates/current_twelve_month_scenario_20261021/frontend-lint-02.txt",
+      "bytes": 38,
+      "sha256": "48e8c3e5443d5c045a6e4695da36339ef7bd69a996df0fbe5e8bf75af92e3860"
+    },
+    {
+      "path": "reports/candidates/current_twelve_month_scenario_20261021/frontend-tests-01.txt",
+      "bytes": 12852,
+      "sha256": "6f11362ec1325e9f873659b55112ceb94f995d03400bd4b8e53ea0ae6f96c79b"
+    },
+    {
+      "path": "reports/candidates/current_twelve_month_scenario_20261021/frontend-tests-02.txt",
+      "bytes": 11967,
+      "sha256": "756b982f29cbe5a80ad1ea021eaf498b1b33a253f4b320e971ab06374ac5bce2"
+    },
+    {
+      "path": "reports/candidates/current_twelve_month_scenario_20261021/local_scenario_example.json",
+      "bytes": 4502,
+      "sha256": "3fba212f99f9fe4fb9450d9b7b40c04b39d94e36826452babcc24a6c2db6d382"
+    },
+    {
+      "path": "reports/candidates/current_twelve_month_scenario_20261021/preservation.json",
+      "bytes": 2996,
+      "sha256": "a3d8da6cff20f71d536236071dd2ad9436c927b3747c33fd93421d58fbb2796e"
+    },
+    {
+      "path": "reports/candidates/current_twelve_month_scenario_20261021/REPORT.md",
+      "bytes": 8648,
+      "sha256": "bbafc1e80ff53f238c12a1af33b57c07e10802743fab335665444e421bc8ec5a"
+    },
+    {
+      "path": "reports/candidates/current_twelve_month_scenario_20261021/runtime_http.json",
+      "bytes": 648,
+      "sha256": "7fbc274bc0fb869f907b2767a20b28b74c533a5caf259d35dbcbad8c1cd2781a"
+    }
+  ]
+}

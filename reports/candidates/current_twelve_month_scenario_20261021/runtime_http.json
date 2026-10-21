@@ -1,0 +1,22 @@
+{
+  "active_models_trained": false,
+  "page_status": 200,
+  "age_months": 5,
+  "real_shadow_record_created": false,
+  "unsupported_status": "unavailable",
+  "as_of": "2026-10-21",
+  "months": 12,
+  "api_status": 200,
+  "browser_pixels_verified": false,
+  "first_month": "2026-11",
+  "fit_end": "2026-05-01",
+  "checked_at_utc": "2026-10-21T15:26:48.4801800+00:00",
+  "estimated_current_depth_m": 1.6426286438768325,
+  "database_writes": false,
+  "unsupported_rows": 0,
+  "fit_start": "2016-05-01",
+  "observed_fit_count": 121,
+  "transformed_component_status": 200,
+  "latest_observed": "2026-05",
+  "last_month": "2027-10"
+}

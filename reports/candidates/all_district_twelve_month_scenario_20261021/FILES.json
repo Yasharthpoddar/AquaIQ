@@ -1,0 +1,120 @@
+{
+  "excludes_itself": true,
+  "files": [
+    {
+      "path": "reports/candidates/all_district_twelve_month_scenario_20261021/backend-tests-01.txt",
+      "bytes": 265,
+      "sha256": "d3cbc2f0ab41f68f3dfaa5c3a04dbb351a180f7cf299a12cdc5dc67b031fb342"
+    },
+    {
+      "path": "reports/candidates/all_district_twelve_month_scenario_20261021/backend-tests-01.xml",
+      "bytes": 25100,
+      "sha256": "506dcd75ddcb3a1a399a13e17054afb489a28f184f669af95c90ac16b6fa2f21"
+    },
+    {
+      "path": "reports/candidates/all_district_twelve_month_scenario_20261021/before.json",
+      "bytes": 208158,
+      "sha256": "4c4e297ff08073b6986c1d78d03e0fcb2679db732626c8992988d22fc22952ca"
+    },
+    {
+      "path": "reports/candidates/all_district_twelve_month_scenario_20261021/checks.json",
+      "bytes": 2602,
+      "sha256": "a9c00267c05c203c2c30744c5ebf9ac70ae799bf37438db3d038e3954bfd450a"
+    },
+    {
+      "path": "reports/candidates/all_district_twelve_month_scenario_20261021/frontend-build-01.txt",
+      "bytes": 1126,
+      "sha256": "b5783ce99186f83c81a767d8e390ef8427b9bea17fccdbd87a12816383748b8e"
+    },
+    {
+      "path": "reports/candidates/all_district_twelve_month_scenario_20261021/frontend-lint-02.txt",
+      "bytes": 38,
+      "sha256": "48e8c3e5443d5c045a6e4695da36339ef7bd69a996df0fbe5e8bf75af92e3860"
+    },
+    {
+      "path": "reports/candidates/all_district_twelve_month_scenario_20261021/frontend-live-contract-02.txt",
+      "bytes": 775,
+      "sha256": "f7fb3cbd0e6491deea71f0c7504f6ec9aed49fa1a988f951396165e3bf90cbc7"
+    },
+    {
+      "path": "reports/candidates/all_district_twelve_month_scenario_20261021/frontend-tests-02.txt",
+      "bytes": 13737,
+      "sha256": "cb142da9f62cac1de43f4f9cde49438d22e3d9c84a860e925760eb0509d9db9f"
+    },
+    {
+      "path": "reports/candidates/all_district_twelve_month_scenario_20261021/frontend_checks.json",
+      "bytes": 710,
+      "sha256": "39af6be21c1af95156f227e027a943499a815762a430572a6a9fe62b6e8f02cd"
+    },
+    {
+      "path": "reports/candidates/all_district_twelve_month_scenario_20261021/live_batch_comparison.json",
+      "bytes": 477,
+      "sha256": "315dad148fca20faf0db80306dbacb5e2babed318311a7ea48fbe282d44efcc7"
+    },
+    {
+      "path": "reports/candidates/all_district_twelve_month_scenario_20261021/live_kaithal_scenario.json",
+      "bytes": 4994,
+      "sha256": "0f667a4bd1874dc736571aa01b94cc64a72f6651e6a0c64cf8f0be18cd1fb8b4"
+    },
+    {
+      "path": "reports/candidates/all_district_twelve_month_scenario_20261021/preservation.json",
+      "bytes": 3510,
+      "sha256": "6f3a27493656531a3dd708173873d585ad40dd910ac38c5a0c18b1b62d8f760e"
+    },
+    {
+      "path": "reports/candidates/all_district_twelve_month_scenario_20261021/REPORT.md",
+      "bytes": 9900,
+      "sha256": "f0fc0d5eab7af561289152e4a2698ab92216de347742037d3813f000e32a66c9"
+    },
+    {
+      "path": "reports/candidates/all_district_twelve_month_scenario_20261021/runtime_http.json",
+      "bytes": 2235,
+      "sha256": "b9d59f99326081b52a4877aad850d89538d1186ed45acf6dab50a0d3a115b57e"
+    },
+    {
+      "path": "reports/candidates/all_district_twelve_month_scenario_20261021/scope-verification-01.txt",
+      "bytes": 1418,
+      "sha256": "610b2334b95c6c42f29ec337a37dc80704a89f9b5be5bce9b7830ce3d0029256"
+    },
+    {
+      "path": "reports/candidates/all_district_twelve_month_scenario_20261021/scope_verification/AN-Nicobars_scenario_example.json",
+      "bytes": 3343,
+      "sha256": "be1727a047a97cd24a74dcb5cb87f62f4831da2ea173f880b7ff95628d4defa5"
+    },
+    {
+      "path": "reports/candidates/all_district_twelve_month_scenario_20261021/scope_verification/AR-Lohit_scenario_example.json",
+      "bytes": 6216,
+      "sha256": "11c423566449cbb4bba0d0564f6e440f4f70488c6acb1ca8604fb179017200c3"
+    },
+    {
+      "path": "reports/candidates/all_district_twelve_month_scenario_20261021/scope_verification/district_coverage.csv",
+      "bytes": 102015,
+      "sha256": "98496100d1ea8e58744b1f2a34c14b93ad6c80b1270c3b21265396c13c3558aa"
+    },
+    {
+      "path": "reports/candidates/all_district_twelve_month_scenario_20261021/scope_verification/GJ-Gandhinagar_scenario_example.json",
+      "bytes": 6217,
+      "sha256": "fb396a2919bff994838bed5b4684c1e889d21cd2d5c6de3f210bb8ba0334d8e1"
+    },
+    {
+      "path": "reports/candidates/all_district_twelve_month_scenario_20261021/scope_verification/HR-Kaithal_scenario_example.json",
+      "bytes": 6216,
+      "sha256": "0d27db5b0d20eaee3ce5fe05e08c260c219bb56a4a800ef03da17bc1477d03d5"
+    },
+    {
+      "path": "reports/candidates/all_district_twelve_month_scenario_20261021/scope_verification/summary.json",
+      "bytes": 783,
+      "sha256": "ace675a49141977fa6221d170ba3f93527bb4d738832d79edbc5b293fe9bad29"
+    },
+    {
+      "path": "reports/candidates/all_district_twelve_month_scenario_20261021/scope_verification/TS-Adilabad_scenario_example.json",
+      "bytes": 6017,
+      "sha256": "84d42dd73e4f3a793b93ffbbb692b9cd584894580a432f43c28fda310adbd15a"
+    },
+    {
+      "path": "reports/candidates/all_district_twelve_month_scenario_20261021/verify_scope.py",
+      "bytes": 5442,
+      "sha256": "d4f983949168ad905df09daa9453d4f0205679e6194b9603268d90b2f2265472"
+    }
+  ]
+}

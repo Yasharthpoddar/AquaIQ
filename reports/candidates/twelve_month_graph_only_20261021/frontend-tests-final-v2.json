@@ -1,0 +1,11 @@
+{
+  "exit_code": 0,
+  "started_at_utc": "2026-10-21T09:11:20.0030739+00:00",
+  "completed_at_utc": "2026-10-21T09:11:32.0540863+00:00",
+  "command": [
+    "npm.cmd",
+    "--prefix",
+    "dashboard",
+    "test"
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "checked_at_utc": "2026-10-21T10:15:59.748214+00:00",
+  "baseline_files": 1043,
+  "unchanged_files": 1039,
+  "changed_existing_files": [
+    {
+      "path": "dashboard/src/pages/DistrictDetail.jsx",
+      "before_sha256": "25266d83b032df28fcb9bdc479e0e9d0626c780b3317ee9dd1b366a7d8b0206d",
+      "after_sha256": "777508ba8c99659ab33b0a438de02e684c6a604051347070d60433ebf979fda0",
+      "bytes": 6911
+    },
+    {
+      "path": "dashboard/src/pages/Home.jsx",
+      "before_sha256": "1eee0cd661de7ad5e89495af0a018efe2774b234bf1d7d3fdfc1fb70434d74cd",
+      "after_sha256": "6f918b392dd0edd61a4c4c6c4c1f34d54b4cb3d48979f47a3c166c839e674da8",
+      "bytes": 9477
+    },
+    {
+      "path": "dashboard/tests/forecastGraph.test.js",
+      "before_sha256": "a6320db484e0b509dcd0755b3a40f10b7507da1a17f62bd849bc19461e873cb1",
+      "after_sha256": "34a0c1290e68f6b626c3aebd2e7d4b869ac200822abec9f77641ca58f3c5af11",
+      "bytes": 8903
+    },
+    {
+      "path": "dashboard/tests/researchForecast.test.js",
+      "before_sha256": "e1321c6c64409218d393d166373ebc191508f25fe39e89fe78bcd070a1f41cd0",
+      "after_sha256": "af8c7e8a6df11f0a1e217361f797f5fc9c0b2c38653cea3363dac7197f423fb8",
+      "bytes": 10176
+    }
+  ],
+  "missing_existing_files": [],
+  "unexpected_changed_files": [],
+  "new_frontend_files": [
+    "dashboard/src/components/ForecastGraphPanel.jsx",
+    "dashboard/src/components/forecastGraphPresentation.js",
+    "dashboard/tests/forecastGraphPresentation.test.js"
+  ],
+  "categories": {
+    "data": {
+      "files_checked": 110,
+      "all_byte_identical": true
+    },
+    "models": {
+      "files_checked": 44,
+      "all_byte_identical": true
+    },
+    "api": {
+      "files_checked": 13,
+      "all_byte_identical": true
+    },
+    "previous_reports": {
+      "files_checked": 705,
+      "all_byte_identical": true
+    },
+    "dashboard_dist": {
+      "files_checked": 0,
+      "all_byte_identical": true
+    }
+  },
+  "head": "3a4936b6950b76dc7413ccfbabace30b67e5891e",
+  "head_unchanged": true,
+  "index_empty": true,
+  "whitespace_exit_code": 0,
+  "database": "No writes performed; no database-content verification attempted."
+}

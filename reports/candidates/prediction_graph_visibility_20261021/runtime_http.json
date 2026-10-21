@@ -1,0 +1,20 @@
+{
+  "historical_slots": 12,
+  "training": false,
+  "new_component_served": true,
+  "checked_at_utc": "2026-10-21T10:12:53.3420326+00:00",
+  "transformed_graph_component_http_status": 200,
+  "district_page_http_status": 200,
+  "historical_origin": "2024-01",
+  "historical_ml_m": 7.57110071182251,
+  "default_ml_m": null,
+  "default_baseline_m": 6.553333333333334,
+  "historical_target": "2025-01",
+  "database_writes": false,
+  "graph_url": "http://127.0.0.1:5182/district/TS-Adilabad?origin_month=2024-01#forecast-graph",
+  "default_origin": "2026-05",
+  "browser_pixels_verified": false,
+  "historical_baseline_m": 6.836666666666668,
+  "historical_finite_ml_points": 1,
+  "home_http_status": null
+}

@@ -1,0 +1,15 @@
+{
+  "exit_code": 0,
+  "started_at_utc": "2026-10-21T09:11:32.8189877+00:00",
+  "completed_at_utc": "2026-10-21T09:11:39.3094363+00:00",
+  "command": [
+    "npm.cmd",
+    "--prefix",
+    "dashboard",
+    "run",
+    "build",
+    "--",
+    "--outDir",
+    "../scratch/twelve-month-graph-build-20261021-v2"
+  ]
+}

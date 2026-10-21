@@ -18,7 +18,7 @@ function getJson(path, label, researchErrors = false) {
       let detail = '';
       if (researchErrors) {
         const failure = await res.json().catch(() => null);
-        if (failure?.product === 'direct_12month_research'
+        if (['direct_12month_research', 'direct_12month_research_graph', 'experimental_12month_scenario'].includes(failure?.product)
           && Array.isArray(failure.unavailable_reasons)
           && failure.unavailable_reasons.every(reason => typeof reason === 'string')) {
           detail = ` ${failure.unavailable_reasons.join(' ')}`;
@@ -81,6 +81,19 @@ export async function fetchResearchForecast(id, originMonth = null) {
   if (originMonth) params.set('origin_month', originMonth);
   const query = params.toString() ? `?${params}` : '';
   return getJson(`/api/research/forecast/${encodeURIComponent(id)}${query}`, 'Twelve-month research forecast', true);
+}
+
+export async function fetchResearchGraph(id, originMonth = null) {
+  const params = new URLSearchParams({ months: '12' });
+  if (originMonth) params.set('origin_month', originMonth);
+  return getJson(`/api/research/graph/${encodeURIComponent(id)}?${params}`, 'Twelve-month forecast graph', true);
+}
+
+// Separate user-approved scenario; no historical/direct-ML fallback.
+export async function fetchExperimentalScenario(id, asOf = null) {
+  const params = new URLSearchParams({ months: '12' });
+  if (asOf) params.set('as_of', asOf);
+  return getJson(`/api/research/scenario/${encodeURIComponent(id)}?${params}`, 'Experimental monthly scenario', true);
 }
 
 export async function postSimulate(payload) {

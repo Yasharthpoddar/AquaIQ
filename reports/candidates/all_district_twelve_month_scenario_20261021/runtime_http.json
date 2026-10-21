@@ -1,0 +1,75 @@
+{
+  "prospective_shadow_records_created": false,
+  "browser_pixels_verified": false,
+  "database_writes": false,
+  "active_models_trained": false,
+  "transformed_component_status": 200,
+  "districts": [
+    {
+      "as_of": "2026-10-21",
+      "unavailable_reasons": [],
+      "latest_observed": "2026-01",
+      "source_kind": "canonical_feature_export",
+      "district_id": "HR-Kaithal",
+      "status": "scenario",
+      "points": 12,
+      "http_status": 200,
+      "age_months": 9,
+      "fit_count": 77
+    },
+    {
+      "as_of": "2026-10-21",
+      "unavailable_reasons": [],
+      "latest_observed": "2026-01",
+      "source_kind": "canonical_feature_export",
+      "district_id": "GJ-Gandhinagar",
+      "status": "scenario",
+      "points": 12,
+      "http_status": 200,
+      "age_months": 9,
+      "fit_count": 75
+    },
+    {
+      "as_of": "2026-10-21",
+      "unavailable_reasons": [
+        "No source-marked observed groundwater history is available for this district before the scenario month; filled values cannot replace observations."
+      ],
+      "latest_observed": null,
+      "source_kind": "canonical_feature_export",
+      "district_id": "AN-Nicobars",
+      "status": "unavailable",
+      "points": 0,
+      "http_status": 200,
+      "age_months": null,
+      "fit_count": null
+    },
+    {
+      "as_of": "2026-10-21",
+      "unavailable_reasons": [
+        "Unknown canonical district ID in the pinned local registry. No district or zone has been substituted."
+      ],
+      "latest_observed": null,
+      "source_kind": "canonical_feature_export",
+      "district_id": "XX-Unknown",
+      "status": "unavailable",
+      "points": 0,
+      "http_status": 200,
+      "age_months": null,
+      "fit_count": null
+    },
+    {
+      "as_of": "2026-10-21",
+      "unavailable_reasons": [],
+      "latest_observed": "2026-05",
+      "source_kind": "frozen_adilabad_research_snapshot",
+      "district_id": "TS-Adilabad",
+      "status": "scenario",
+      "points": 12,
+      "http_status": 200,
+      "age_months": 5,
+      "fit_count": 121
+    }
+  ],
+  "checked_at_utc": "2026-10-21T15:53:43.7425648+00:00",
+  "page_status": 200
+}

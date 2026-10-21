@@ -1,0 +1,127 @@
+{
+  "checked_at_utc": "2026-10-21T10:07:46.007524+00:00",
+  "base_url": "http://127.0.0.1:5052",
+  "method": "GET only; running API enforces read-only database transactions and blocks estimator fitting",
+  "results": [
+    {
+      "path": "/api/district/TS-Adilabad",
+      "http_status": 200,
+      "status": "historical_forecast",
+      "error": null,
+      "district_id": "TS-Adilabad",
+      "metadata": {
+        "agro_climatic_zone": "Southern Plateau and Hills",
+        "name": "Adilabad",
+        "state": "Telangana"
+      },
+      "last_observed_date": "2026-01-01",
+      "estimate_type": "district_level",
+      "crisis_score": 46
+    },
+    {
+      "path": "/api/history/TS-Adilabad?start=2002-01",
+      "http_status": 200,
+      "status": null,
+      "error": null,
+      "district_id": "TS-Adilabad",
+      "history_rows": 297
+    },
+    {
+      "path": "/api/research/graph/TS-Adilabad?months=12",
+      "http_status": 200,
+      "status": "unavailable",
+      "error": null,
+      "district_id": "TS-Adilabad",
+      "origin_month": "2026-05",
+      "target_month": "2027-05",
+      "forecast_rows": 12,
+      "dated_rows": 12,
+      "finite_ml_rows": 0,
+      "annual_baseline_m": 6.553333333333334,
+      "ml_estimate_m": null,
+      "unavailable_reasons": [
+        "Required input is missing: rainfall_current.",
+        "Required input is missing: rainfall_3mo_avg.",
+        "Required input is missing: monsoon_deficit_pct.",
+        "Required input is missing: temperature.",
+        "Required input is missing: evapotranspiration.",
+        "Required input is missing: water_balance_proxy.",
+        "This artifact permits historical research only; no observed exact M+12 target is archived for this origin."
+      ],
+      "months": [
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09",
+        "2026-10",
+        "2026-11",
+        "2026-12",
+        "2027-01",
+        "2027-02",
+        "2027-03",
+        "2027-04",
+        "2027-05"
+      ]
+    },
+    {
+      "path": "/api/research/graph/TS-Adilabad?months=12&origin_month=2024-01",
+      "http_status": 200,
+      "status": "available",
+      "error": null,
+      "district_id": "TS-Adilabad",
+      "origin_month": "2024-01",
+      "target_month": "2025-01",
+      "forecast_rows": 12,
+      "dated_rows": 12,
+      "finite_ml_rows": 1,
+      "annual_baseline_m": 6.836666666666668,
+      "ml_estimate_m": 7.57110071182251,
+      "unavailable_reasons": [],
+      "months": [
+        "2024-02",
+        "2024-03",
+        "2024-04",
+        "2024-05",
+        "2024-06",
+        "2024-07",
+        "2024-08",
+        "2024-09",
+        "2024-10",
+        "2024-11",
+        "2024-12",
+        "2025-01"
+      ]
+    },
+    {
+      "path": "/api/research/graph/GJ-Gandhinagar?months=12",
+      "http_status": 200,
+      "status": "unavailable",
+      "error": null,
+      "district_id": "GJ-Gandhinagar",
+      "origin_month": null,
+      "target_month": null,
+      "forecast_rows": 12,
+      "dated_rows": 0,
+      "finite_ml_rows": 0,
+      "annual_baseline_m": null,
+      "ml_estimate_m": null,
+      "unavailable_reasons": [
+        "District is outside the isolated research artifact's supported Adilabad scope."
+      ],
+      "months": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

@@ -113,7 +113,7 @@ test('carried inputs retain their source month and age instead of appearing as f
   assert.match(html, /do not certify acquisition or model-availability times/);
 });
 
-test('primary panel labels the distinct direct horizon and discloses uncertain historical comparison', () => {
+test('optional research page preserves direct-horizon disclosures without replacing the original dashboard', () => {
   const html = renderToStaticMarkup(createElement(ResearchForecast, { districtId: 'TS-Adilabad' }));
   assert.match(html, /12 calendar months ahead/);
   assert.match(html, /direct M\+12 target/);
@@ -121,13 +121,16 @@ test('primary panel labels the distinct direct horizon and discloses uncertain h
   assert.match(html, /does not validate|do not validate/);
   assert.match(html, /HGB remains blocked/);
   const home = readFileSync(new URL('../src/pages/Home.jsx', import.meta.url), 'utf8');
-  assert.ok(home.indexOf('<ResearchForecast />') < home.indexOf('Secondary: legacy'));
+  assert.match(home, /<h1>Groundwater Research Dashboard<\/h1>/);
+  assert.doesNotMatch(home, /<ResearchForecast/);
   const detail = readFileSync(new URL('../src/pages/DistrictDetail.jsx', import.meta.url), 'utf8');
-  assert.equal((detail.match(/<ResearchForecast key=\{id\} districtId=\{id\} \/>/g) || []).length, 3);
-  assert.match(detail, /window:'next_six_months'/);
-  assert.match(detail, /Secondary: six-month climate-conditioned projections/);
+  assert.doesNotMatch(detail, /<ResearchForecast/);
+  assert.match(detail, /<ForecastGraphPanel key=\{id\} districtId=\{id\} \/>/);
+  const graphPanel = readFileSync(new URL('../src/components/ForecastGraphPanel.jsx', import.meta.url), 'utf8');
+  assert.match(graphPanel, /<h2>Monthly research projections<\/h2>/);
   const app = readFileSync(new URL('../src/App.jsx', import.meta.url), 'utf8');
   assert.match(app, /<Route path="\/research" element=\{<div className="page"><h1>Twelve-month groundwater research<\/h1><ResearchForecast \/>/);
+  assert.doesNotMatch(app, /<NavLink to="\/research"/);
 });
 
 test('catalog rejects incompatible horizons and invalid origin months', () => {

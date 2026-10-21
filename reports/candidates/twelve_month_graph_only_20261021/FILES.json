@@ -1,0 +1,170 @@
+{
+  "modified": [
+    "README.md",
+    "api/app.py",
+    "api/routes/research.py",
+    "api_spec.md",
+    "dashboard/src/App.jsx",
+    "dashboard/src/api.js",
+    "dashboard/src/pages/DistrictDetail.jsx",
+    "dashboard/src/pages/Home.jsx",
+    "dashboard/tests/researchForecast.test.js"
+  ],
+  "new_source": [
+    "models/research_graph.py",
+    "tests/test_research_graph_api.py",
+    "tests/test_research_graph_demo.py",
+    "dashboard/src/components/forecastGraph.js",
+    "dashboard/tests/forecastGraph.test.js"
+  ],
+  "new_report_evidence": [
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/403_diagnostic.json",
+      "sha256": "91db7ac3449ccbdb78200666acff38c34af1b6344ecc2fb4ec83253789872a40",
+      "bytes": 3757
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/backend-tests-01.xml",
+      "sha256": "50f7bf0d192114b2e80ce51ff10b29b9d7b2cdb5dc7133e992bd15e1e994fe20",
+      "bytes": 15578
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/before.json",
+      "sha256": "8ab3c8a28eb919ab78e3f76991aca5826defa6e2dfdf3c4c003a887b47bfaedc",
+      "bytes": 193933
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/checks.json",
+      "sha256": "543e52ddedf6f9ebd538867817810168bd9f0fe9dee3e119eda53936067d5f01",
+      "bytes": 1591
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/demo_server.py",
+      "sha256": "4575a94525be73e9a9039c7e6f744e3818096082622bc3db98cb1ff052ff0fd8",
+      "bytes": 1806
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/frontend-build-final-v2.json",
+      "sha256": "2bfea724af0c53378cc4f404453bbd1efc76708bc9155a774b25fe49a4c876d4",
+      "bytes": 324
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/frontend-build-final-v2.txt",
+      "sha256": "3aa7b240e8821117691a8b85e834a3df2f231d492a8c27b0b3127fb2c3a0d2b2",
+      "bytes": 1516
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/frontend-build-final.json",
+      "sha256": "26f07129dfa4407db57ef6a691c2f2e6a69053e2881ab5351e002759e639a7ea",
+      "bytes": 321
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/frontend-build-final.txt",
+      "sha256": "b2f0a919d3370117b323e043780198c099c846969f92675f10bc314d45975075",
+      "bytes": 1121
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/frontend-graph-tests-02.txt",
+      "sha256": "ad24a3e001edd11b98390630c6d1d44abb0d2f9d498e81ed5e752fb921d9dcfa",
+      "bytes": 2610
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/frontend-lint-01.txt",
+      "sha256": "48e8c3e5443d5c045a6e4695da36339ef7bd69a996df0fbe5e8bf75af92e3860",
+      "bytes": 38
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/frontend-lint-final-v2.json",
+      "sha256": "7683d8f44d0fc50f18da79aa4ce3495c43582bc9aac50356df31cd8d30cce368",
+      "bytes": 239
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/frontend-lint-final-v2.txt",
+      "sha256": "48e8c3e5443d5c045a6e4695da36339ef7bd69a996df0fbe5e8bf75af92e3860",
+      "bytes": 38
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/frontend-lint-final.json",
+      "sha256": "8342676d9e2f7b7fe46072626caf685d72a387907a94738b047de15838ee63a8",
+      "bytes": 239
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/frontend-lint-final.txt",
+      "sha256": "48e8c3e5443d5c045a6e4695da36339ef7bd69a996df0fbe5e8bf75af92e3860",
+      "bytes": 38
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/frontend-tests-01.txt",
+      "sha256": "2918949728b39aacf3a631b83543bc624054944e510d00d90a4f0729e2c5e024",
+      "bytes": 7604
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/frontend-tests-final-v2.json",
+      "sha256": "7ae7f5886dd324a846c1c97c1c1b5cad7e03c04f4d660ff64ed17066c79be3bf",
+      "bytes": 227
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/frontend-tests-final-v2.txt",
+      "sha256": "590dd72503591884297b70a58f1a8cc81ef99c3a12af73a4eecc1af87cd892f0",
+      "bytes": 8378
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/frontend-tests-final.json",
+      "sha256": "27bb7894dcc9f9739e8c14df4e5a31e819efbc5970c41dec2e07bf7de55fdfeb",
+      "bytes": 227
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/frontend-tests-final.txt",
+      "sha256": "ec37735bc2b089750439cc230fcaf291a0a0d1d0107ca4a28b69d2db560b78c5",
+      "bytes": 7895
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/preservation.json",
+      "sha256": "c5285db4a19d970cdfb864b21123329a968ad92bb5ac3c384e0ab2ecf0a64610",
+      "bytes": 3418
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/python-tests-final.json",
+      "sha256": "91f0ce9736aaa689692c687c5107d581507f62451b485e4f03756072f4cc14cf",
+      "bytes": 1094
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/python-tests-final.txt",
+      "sha256": "996a961c856cea32849285c0710126baa554f2204dab9dd1a43df52084964fc1",
+      "bytes": 371
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/python-tests-final.xml",
+      "sha256": "4f3ed101dd42d3b72c974a9d2f9fd886d21a721462c146295f6cb6927daea01e",
+      "bytes": 38058
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/REPORT.md",
+      "sha256": "0dc54fc7122ff241df7f5fdb0a8aaf6a3b2d93d5304f7902e5bd9c54e00cb252",
+      "bytes": 10760
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/runtime_http.json",
+      "sha256": "ab7330f224fe83e930502416a7626690f8294c6d8f42336513311773235ae93b",
+      "bytes": 20743
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/verification-attempt-01.json",
+      "sha256": "8128e793e42e08899e388ccba4ede4c2efb67e629888fb6dd911609ade361a92",
+      "bytes": 616
+    },
+    {
+      "path": "reports/candidates/twelve_month_graph_only_20261021/verify_phase.py",
+      "sha256": "08942a1b21535fd7bdceda9c05f5da54c5d0c10948fd94088906ebdc1a59c34a",
+      "bytes": 7717
+    }
+  ],
+  "self": "FILES.json self checksum omitted to avoid a circular identity",
+  "isolated_outputs": [
+    "scratch/twelve-month-graph-build-20261021",
+    "scratch/twelve-month-graph-build-20261021-v2",
+    "scratch/twelve-month-graph-final-tests-20261021",
+    "scratch/twelve-month-graph-backend-tests-20261021-a",
+    "scratch/graph-demo-run-20261021-090935-770"
+  ]
+}

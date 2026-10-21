@@ -1,0 +1,6 @@
+{
+  "captured_at_utc": "2026-10-21T10:14:55.9544328+00:00",
+  "exit_code": 0,
+  "output": "scratch/prediction-graph-visibility-build-20261021-01",
+  "command": "npm.cmd --prefix dashboard run build -- --outDir ../scratch/prediction-graph-visibility-build-20261021-01"
+}

@@ -109,6 +109,8 @@ def create_app(config_override=None):
                 "/api/predict/<district_id>",
                 "/api/research/forecast",
                 "/api/research/forecast/<district_id>",
+                "/api/research/graph/<district_id>",
+                "/api/research/scenario/<district_id>",
                 "/api/district/<district_id>",
                 "/api/history/<district_id>",
                 "/api/alerts",

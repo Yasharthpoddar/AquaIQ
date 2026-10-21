@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-10-21T05:03:34.717907+00:00",
+  "request_executed_at_utc": null,
+  "execution_time_caveat": "Exact request wall-clock time was not retained; recording time is not invented as request time.",
+  "request": {
+    "url": "http://127.0.0.1:5051/api/scores",
+    "method": "GET",
+    "explicit_headers": {
+      "Origin": "http://127.0.0.1:5181",
+      "Accept": "application/json"
+    },
+    "credentials_supplied": false
+  },
+  "exact_powershell_command": "@'\nimport json,urllib.request,urllib.error\nurl='http://127.0.0.1:5051/api/scores'\nrequest=urllib.request.Request(url,headers={'Origin':'http://127.0.0.1:5181','Accept':'application/json'},method='GET')\ntry:\n response=urllib.request.urlopen(request,timeout=5)\nexcept urllib.error.HTTPError as error:\n response=error\nbody=response.read(4096).decode('utf-8','replace')\nprint(json.dumps({'url':url,'method':'GET','request_header_names':['Origin','Accept'],'status':response.status,'allow_origin':response.headers.get('Access-Control-Allow-Origin'),'body':json.loads(body)},indent=2))\n'@ | .\\venv\\Scripts\\python.exe -B -",
+  "execution": {
+    "exit_code": 0,
+    "host_access": "Approved require_escalated read-only localhost request",
+    "timeout_seconds": 5,
+    "response_body_limit_bytes": 4096
+  },
+  "response": {
+    "status": 403,
+    "Access-Control-Allow-Origin": "http://127.0.0.1:5181",
+    "json": {
+      "error": "Legacy routes are excluded from this read-only demonstration.",
+      "status": "unavailable"
+    }
+  },
+  "confirmed_cause": "The inspected read-only demo server intentionally rejects /api/scores in before_request, before the scores route or database connection executes.",
+  "code_evidence": [
+    {
+      "path": "reports/candidates/twelve_month_horizon_finalization_20261020/readonly_demo_server.py",
+      "symbol": "allow_research_only",
+      "evidence": "GET/OPTIONS allowlist admits only root/config/direct research forecast paths; other paths return this exact 403 JSON."
+    },
+    {
+      "path": "api/routes/scores.py",
+      "symbol": "get_scores",
+      "evidence": "@scores_bp.route(/scores) has no authentication or authorization decorator; its normal body would read saved scores from the database, but was not reached."
+    },
+    {
+      "path": "api/app.py",
+      "symbol": "create_app",
+      "evidence": "Registers scores blueprint under /api and explicit CORS origins. SECRET_KEY configuration by itself is not route authentication."
+    },
+    {
+      "path": "dashboard/src/api.js",
+      "symbol": "fetchScores/getJson",
+      "evidence": "GET API_BASE+/api/scores; inspected runtime uses VITE_API_URL=http://127.0.0.1:5051. No authorization header or explicit credentials required by this local helper."
+    }
+  ],
+  "interpretation": {
+    "authentication_error": false,
+    "cors_mismatch": false,
+    "intentional_demo_allowlist": true,
+    "production_authentication_assessed": false,
+    "exact_request_url_basis": "Inspected frontend configuration plus directly reproduced request to the guarded helper."
+  },
+  "containment": "Preserve demo guard and existing error/retry UI. Do not fabricate scores, remove security, start a full database-connected API, or silently switch API origins.",
+  "operations": {
+    "database_accessed": false,
+    "database_writes": false,
+    "production_api_called": false,
+    "other_local_api_ports_called": false,
+    "secrets_printed": false,
+    "headers_containing_credentials_recorded": false,
+    "training": false,
+    "downloads": false,
+    "server_changed": false,
+    "security_changed": false,
+    "task_changed": false,
+    "prior_builders_run": false
+  }
+}

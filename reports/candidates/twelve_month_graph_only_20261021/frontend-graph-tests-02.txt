@@ -1,0 +1,70 @@
+TAP version 13
+# Subtest: twelve calendar slots cross December to January and retain exact M+12 target
+ok 1 - twelve calendar slots cross December to January and retain exact M+12 target
+  ---
+  duration_ms: 1.8159
+  type: 'test'
+  ...
+# Subtest: graph data contains exactly twelve ordered target slots with only the compatible M+12 ML value
+ok 2 - graph data contains exactly twelve ordered target slots with only the compatible M+12 ML value
+  ---
+  duration_ms: 0.8782
+  type: 'test'
+  ...
+# Subtest: missing ML preserves the twelve-month domain without zero-filling or plotting baseline as ML
+ok 3 - missing ML preserves the twelve-month domain without zero-filling or plotting baseline as ML
+  ---
+  duration_ms: 0.2758
+  type: 'test'
+  ...
+# Subtest: SYNTHETIC render-data fixture retains twelve existing numeric points without approving unsupported artifacts
+ok 4 - SYNTHETIC render-data fixture retains twelve existing numeric points without approving unsupported artifacts
+  ---
+  duration_ms: 0.9102
+  type: 'test'
+  ...
+# Subtest: six-month contracts and truncated or reordered monthly arrays cannot satisfy the graph
+ok 5 - six-month contracts and truncated or reordered monthly arrays cannot satisfy the graph
+  ---
+  duration_ms: 0.423
+  type: 'test'
+  ...
+# Subtest: direct M+12 artifact cannot be stretched into intermediate ML points or baseline curves
+ok 6 - direct M+12 artifact cannot be stretched into intermediate ML points or baseline curves
+  ---
+  duration_ms: 0.2559
+  type: 'test'
+  ...
+# Subtest: imputed origins and nonfinite numeric values remain ineligible
+ok 7 - imputed origins and nonfinite numeric values remain ineligible
+  ---
+  duration_ms: 0.4664
+  type: 'test'
+  ...
+# Subtest: unknown origin stays unavailable without inventing twelve calendar months
+ok 8 - unknown origin stays unavailable without inventing twelve calendar months
+  ---
+  duration_ms: 0.1521
+  type: 'test'
+  ...
+# Subtest: graph explicitly requests twelve months and the separately requested legacy endpoint is unchanged
+ok 9 - graph explicitly requests twelve months and the separately requested legacy endpoint is unchanged
+  ---
+  duration_ms: 1.1465
+  type: 'test'
+  ...
+# Subtest: original graph card, responsive styles, axes, line color and retry control remain in place
+ok 10 - original graph card, responsive styles, axes, line color and retry control remain in place
+  ---
+  duration_ms: 2.7246
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 132.1204

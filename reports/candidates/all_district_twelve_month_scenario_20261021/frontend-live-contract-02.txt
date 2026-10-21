@@ -1,0 +1,7 @@
+{"file":"live_kaithal_scenario.json","district":"HR-Kaithal","status":"scenario","rows":12}
+{"file":"scope_verification/AN-Nicobars_scenario_example.json","district":"AN-Nicobars","status":"unavailable","rows":0}
+{"file":"scope_verification/AR-Lohit_scenario_example.json","district":"AR-Lohit","status":"scenario","rows":12}
+{"file":"scope_verification/GJ-Gandhinagar_scenario_example.json","district":"GJ-Gandhinagar","status":"scenario","rows":12}
+{"file":"scope_verification/HR-Kaithal_scenario_example.json","district":"HR-Kaithal","status":"scenario","rows":12}
+{"file":"scope_verification/TS-Adilabad_scenario_example.json","district":"TS-Adilabad","status":"scenario","rows":12}
+Six contracts accepted; live and batch Kaithal forecasts semantically identical.

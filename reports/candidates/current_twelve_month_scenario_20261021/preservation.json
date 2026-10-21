@@ -1,0 +1,76 @@
+{
+  "checked_at_utc": "2026-10-21T15:28:58.407028+00:00",
+  "baseline_files": 1058,
+  "unchanged_files": 1051,
+  "changed_existing_files": [
+    {
+      "path": "README.md",
+      "before_sha256": "4b48f133df8f8319344112d1444ace552a1db96bd77f86597bec0c6e340ae46a",
+      "after_sha256": "ef4e7e6b0419bba2d3ef6211e90d5ceda085990854c099f5890b1da56fc40eab"
+    },
+    {
+      "path": "api/app.py",
+      "before_sha256": "4a295a7f04265b7c9d1db894b8d7efd27952430134e986947a1cbf680f89bacc",
+      "after_sha256": "9edc78567c6b45013d93cdce502b7d934b5f08d44a4d4d8c0858f60113fd526f"
+    },
+    {
+      "path": "api/routes/research.py",
+      "before_sha256": "0e746fa844b56d29fe9e6e409003924087195520303dc8d3f5456cff7a627a2d",
+      "after_sha256": "05426e3965f1a318b7e619732e065cd7064ca2b20d5473fd87b26c992e9a2a29"
+    },
+    {
+      "path": "api_spec.md",
+      "before_sha256": "7802e8c729f148ab181e4d08ea8291fe5f4c77923606537da0b0c792b1b6f321",
+      "after_sha256": "38a56b3706dd05d50643deda2cc4ff5111364f3e9150b160291cd65e5c84ee25"
+    },
+    {
+      "path": "dashboard/src/api.js",
+      "before_sha256": "ac956e0ce90ec16fb49784f93ba75e1db546efe9fab0c9ccf6997a9e960b3ed8",
+      "after_sha256": "4b5663400775cd4a7ebf8353c1cf229e6bd3bbf4170a5cdf2d049edc2b99737d"
+    },
+    {
+      "path": "dashboard/src/pages/DistrictDetail.jsx",
+      "before_sha256": "777508ba8c99659ab33b0a438de02e684c6a604051347070d60433ebf979fda0",
+      "after_sha256": "7c3510f42a86dc8fb406e50edb6d2a0da3d24f0ecfefd1ccc46d023f2b707963"
+    },
+    {
+      "path": "dashboard/src/pages/Home.jsx",
+      "before_sha256": "6f918b392dd0edd61a4c4c6c4c1f34d54b4cb3d48979f47a3c166c839e674da8",
+      "after_sha256": "c5c0fa34af519a399682b16f790d28415f8f19a0cda0f452ecd1cf22d2d2eecc"
+    }
+  ],
+  "unexpected_changed_files": [],
+  "missing_existing_files": [],
+  "categories": {
+    "data": {
+      "files_checked": 110,
+      "byte_identical": true
+    },
+    "existing_models_and_checkpoints": {
+      "files_checked": 44,
+      "byte_identical": true
+    },
+    "prior_reports": {
+      "files_checked": 717,
+      "byte_identical": true
+    },
+    "research_configuration": {
+      "files_checked": 1,
+      "byte_identical": true
+    }
+  },
+  "new_source_files": [
+    "models/experimental_scenario.py",
+    "tests/test_experimental_scenario.py",
+    "dashboard/src/components/ExperimentalScenario.jsx",
+    "dashboard/src/components/experimentalScenarioContract.js",
+    "dashboard/src/components/DistrictForecastGraph.jsx",
+    "dashboard/tests/experimentalScenario.test.js",
+    "docs/EXPERIMENTAL_SCENARIO.md"
+  ],
+  "head": "3a4936b6950b76dc7413ccfbabace30b67e5891e",
+  "head_unchanged": true,
+  "index_empty": true,
+  "database": "No writes performed. Database contents were not independently checksummed.",
+  "runtime": "Only verified local API5052 processes29724/32000 were restarted; existing guarded5051/5181 demo and Vite5182 retained."
+}
