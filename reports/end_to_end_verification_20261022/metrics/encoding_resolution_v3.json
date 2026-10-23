@@ -1,0 +1,235 @@
+{
+  "original_failures_preserved": true,
+  "six_month_case_id_format": "telangana|district_id|origin YYYY-MM-DD|target YYYY-MM-DD; horizon=6 stored separately",
+  "fixed_training_case_id_encoding": "Ordered list sorted district/date; json.dumps(sort_keys=True,separators=(comma,colon),allow_nan=False), UTF-8",
+  "fixed_training_n": 164,
+  "fixed_training_membership_json_sha256": "15ad0e1401be81f4b9f3bd68cc09e98efd0e25732dabbda985aa341274e4eed0",
+  "original_newline_sorted_hash_retained_in": "fixed_training_membership_v2.json",
+  "checks": [
+    {
+      "check": "six_month_id_encoding_is_documented",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "six_month_ids_match_documented_encoding",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "fixed_training_id_json_encoding_documented",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "fixed_training_ids_match_documented_json_encoding",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "fixed_training_n_164",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "first_run_only_raw_newline_failures",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "both_raw_differences_are_exclusively_crlf",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "second_run_only_audit_encoding_assumptions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "paired_horizons_594_and_identical_targets",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:persistence:district:model_mae_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:persistence:district:model_rmse_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:persistence:district:model_bias_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:persistence:district:mae_difference_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:persistence:district:rmse_difference_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:persistence:district:bias_difference_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:persistence:district_x_12month_blocks:model_mae_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:persistence:district_x_12month_blocks:model_rmse_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:persistence:district_x_12month_blocks:model_bias_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:persistence:district_x_12month_blocks:mae_difference_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:persistence:district_x_12month_blocks:rmse_difference_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:persistence:district_x_12month_blocks:bias_difference_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:xgb_expanding:district:model_mae_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:xgb_expanding:district:model_rmse_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:xgb_expanding:district:model_bias_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:xgb_expanding:district:mae_difference_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:xgb_expanding:district:rmse_difference_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:xgb_expanding:district:bias_difference_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:xgb_expanding:district_x_12month_blocks:model_mae_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:xgb_expanding:district_x_12month_blocks:model_rmse_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:xgb_expanding:district_x_12month_blocks:model_bias_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:xgb_expanding:district_x_12month_blocks:mae_difference_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:xgb_expanding:district_x_12month_blocks:rmse_difference_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:xgb_expanding:district_x_12month_blocks:bias_difference_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:linear_expanding:district:model_mae_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:linear_expanding:district:model_rmse_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:linear_expanding:district:model_bias_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:linear_expanding:district:mae_difference_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:linear_expanding:district:rmse_difference_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:linear_expanding:district:bias_difference_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:linear_expanding:district_x_12month_blocks:model_mae_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:linear_expanding:district_x_12month_blocks:model_rmse_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:linear_expanding:district_x_12month_blocks:model_bias_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:linear_expanding:district_x_12month_blocks:mae_difference_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:linear_expanding:district_x_12month_blocks:rmse_difference_m",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "horizon_direct_rows:linear_expanding:district_x_12month_blocks:bias_difference_m",
+      "passed": true,
+      "detail": null
+    }
+  ]
+}

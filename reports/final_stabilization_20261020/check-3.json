@@ -1,0 +1,14 @@
+{
+  "command": [
+    "npm.cmd",
+    "--prefix",
+    "dashboard",
+    "run",
+    "lint"
+  ],
+  "started_at_utc": "2026-10-20T03:19:43.211227+00:00",
+  "ended_at_utc": "2026-10-20T03:19:43.996720+00:00",
+  "exit_code": 0,
+  "stdout": "\n> dashboard@0.0.0 lint\n> oxlint\n\n",
+  "stderr": ""
+}

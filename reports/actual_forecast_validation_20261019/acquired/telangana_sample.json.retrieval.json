@@ -1,0 +1,29 @@
+{
+  "requested_url": "https://nwdp.nwic.gov.in/api/3/action/datastore_search?resource_id=b5706a43-1319-44b4-9739-afd9115e1312&limit=10",
+  "final_url": "https://nwdp.nwic.gov.in/api/3/action/datastore_search?resource_id=b5706a43-1319-44b4-9739-afd9115e1312&limit=10",
+  "started_at_utc": "2026-10-19T08:57:45.722680+00:00",
+  "retrieved_at_utc": "2026-10-19T08:57:46.053322+00:00",
+  "http_status": 200,
+  "headers": {
+    "Server": "nginx/1.24.0 (Ubuntu)",
+    "Date": "Mon, 19 Oct 2026 09:01:43 GMT",
+    "Content-Type": "application/json;charset=utf-8",
+    "Content-Length": "5738",
+    "Connection": "close",
+    "Cache-Control": "public, max-age=0, must-revalidate",
+    "Vary": "Cookie",
+    "X-Frame-Options": "SAMEORIGIN",
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "X-XSS-Protection": "1; mode=block",
+    "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+    "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https: blob:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' https: data:; connect-src 'self' https:; frame-src 'self' https://www.google.com https://maps.google.com https://www.google.co.in; frame-ancestors 'self'; worker-src blob:;",
+    "Access-Control-Allow-Methods": "GET, POST",
+    "Access-Control-Allow-Headers": "Origin, Content-Type, Accept, Authorization"
+  },
+  "bytes": 5738,
+  "sha256": "c4ec7eb949a2e5ee17c7bae326353dbc9de2f6ba54d3316ab39f73e75c50f71e",
+  "sample_only": false,
+  "sample_byte_limit": null,
+  "availability_caveat": "Retrieval now is not evidence of publication or availability at historical origins."
+}

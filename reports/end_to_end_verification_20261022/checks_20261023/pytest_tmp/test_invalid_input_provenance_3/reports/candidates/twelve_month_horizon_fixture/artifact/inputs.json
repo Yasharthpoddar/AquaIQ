@@ -1,0 +1,546 @@
+{
+  "schema_version": 1,
+  "feature_generation_id": "research-telangana-exact-name-coordinate-h12-app-v1",
+  "rows": [
+    {
+      "district_id": "TS-Adilabad",
+      "date": "2022-01-01",
+      "inputs": [
+        {
+          "feature": "gwl_current",
+          "status": "observed",
+          "required_month": "2022-01",
+          "source_month": "2022-01",
+          "age_months": 0
+        },
+        {
+          "feature": "gwl_lag_3mo",
+          "status": "observed",
+          "required_month": "2021-10",
+          "source_month": "2021-10",
+          "age_months": 0
+        },
+        {
+          "feature": "gwl_lag_6mo",
+          "status": "observed",
+          "required_month": "2021-07",
+          "source_month": "2021-07",
+          "age_months": 0
+        },
+        {
+          "feature": "rainfall_current",
+          "status": "observed",
+          "required_month": "2022-01",
+          "source_month": "2022-01",
+          "age_months": 0
+        },
+        {
+          "feature": "rainfall_3mo_avg",
+          "status": "observed",
+          "required_month": "2022-01",
+          "source_month": "2022-01",
+          "age_months": 0
+        },
+        {
+          "feature": "monsoon_deficit_pct",
+          "status": "observed",
+          "required_month": "2022-01",
+          "source_month": "2022-01",
+          "age_months": 0
+        },
+        {
+          "feature": "temperature",
+          "status": "observed",
+          "required_month": "2022-01",
+          "source_month": "2022-01",
+          "age_months": 0
+        },
+        {
+          "feature": "evapotranspiration",
+          "status": "observed",
+          "required_month": "2022-01",
+          "source_month": "2022-01",
+          "age_months": 0
+        },
+        {
+          "feature": "water_balance_proxy",
+          "status": "observed",
+          "required_month": "2022-01",
+          "source_month": "2022-01",
+          "age_months": 0
+        },
+        {
+          "feature": "season_Kharif",
+          "status": "calendar",
+          "required_month": "2022-01",
+          "source_month": "2022-01",
+          "age_months": 0
+        },
+        {
+          "feature": "season_Rabi",
+          "status": "calendar",
+          "required_month": "2022-01",
+          "source_month": "2022-01",
+          "age_months": 0
+        },
+        {
+          "feature": "season_Zaid",
+          "status": "calendar",
+          "required_month": "2022-01",
+          "source_month": "2022-01",
+          "age_months": 0
+        }
+      ]
+    },
+    {
+      "district_id": "TS-Adilabad",
+      "date": "2023-01-01",
+      "inputs": [
+        {
+          "feature": "gwl_current",
+          "status": "observed",
+          "required_month": "2023-01",
+          "source_month": "2023-01",
+          "age_months": 0
+        },
+        {
+          "feature": "gwl_lag_3mo",
+          "status": "observed",
+          "required_month": "2022-10",
+          "source_month": "2022-10",
+          "age_months": 0
+        },
+        {
+          "feature": "gwl_lag_6mo",
+          "status": "observed",
+          "required_month": "2022-07",
+          "source_month": "2022-08",
+          "age_months": 0
+        },
+        {
+          "feature": "rainfall_current",
+          "status": "observed",
+          "required_month": "2023-01",
+          "source_month": "2023-01",
+          "age_months": 0
+        },
+        {
+          "feature": "rainfall_3mo_avg",
+          "status": "observed",
+          "required_month": "2023-01",
+          "source_month": "2023-01",
+          "age_months": 0
+        },
+        {
+          "feature": "monsoon_deficit_pct",
+          "status": "observed",
+          "required_month": "2023-01",
+          "source_month": "2023-01",
+          "age_months": 0
+        },
+        {
+          "feature": "temperature",
+          "status": "observed",
+          "required_month": "2023-01",
+          "source_month": "2023-01",
+          "age_months": 0
+        },
+        {
+          "feature": "evapotranspiration",
+          "status": "observed",
+          "required_month": "2023-01",
+          "source_month": "2023-01",
+          "age_months": 0
+        },
+        {
+          "feature": "water_balance_proxy",
+          "status": "observed",
+          "required_month": "2023-01",
+          "source_month": "2023-01",
+          "age_months": 0
+        },
+        {
+          "feature": "season_Kharif",
+          "status": "calendar",
+          "required_month": "2023-01",
+          "source_month": "2023-01",
+          "age_months": 0
+        },
+        {
+          "feature": "season_Rabi",
+          "status": "calendar",
+          "required_month": "2023-01",
+          "source_month": "2023-01",
+          "age_months": 0
+        },
+        {
+          "feature": "season_Zaid",
+          "status": "calendar",
+          "required_month": "2023-01",
+          "source_month": "2023-01",
+          "age_months": 0
+        }
+      ]
+    },
+    {
+      "district_id": "TS-Adilabad",
+      "date": "2023-02-01",
+      "inputs": [
+        {
+          "feature": "gwl_current",
+          "status": "observed",
+          "required_month": "2023-02",
+          "source_month": "2023-02",
+          "age_months": 0
+        },
+        {
+          "feature": "gwl_lag_3mo",
+          "status": "observed",
+          "required_month": "2022-11",
+          "source_month": "2022-11",
+          "age_months": 0
+        },
+        {
+          "feature": "gwl_lag_6mo",
+          "status": "observed",
+          "required_month": "2022-08",
+          "source_month": "2022-08",
+          "age_months": 0
+        },
+        {
+          "feature": "rainfall_current",
+          "status": "observed",
+          "required_month": "2023-02",
+          "source_month": "2023-02",
+          "age_months": 0
+        },
+        {
+          "feature": "rainfall_3mo_avg",
+          "status": "observed",
+          "required_month": "2023-02",
+          "source_month": "2023-02",
+          "age_months": 0
+        },
+        {
+          "feature": "monsoon_deficit_pct",
+          "status": "observed",
+          "required_month": "2023-02",
+          "source_month": "2023-02",
+          "age_months": 0
+        },
+        {
+          "feature": "temperature",
+          "status": "observed",
+          "required_month": "2023-02",
+          "source_month": "2023-02",
+          "age_months": 0
+        },
+        {
+          "feature": "evapotranspiration",
+          "status": "observed",
+          "required_month": "2023-02",
+          "source_month": "2023-02",
+          "age_months": 0
+        },
+        {
+          "feature": "water_balance_proxy",
+          "status": "observed",
+          "required_month": "2023-02",
+          "source_month": "2023-02",
+          "age_months": 0
+        },
+        {
+          "feature": "season_Kharif",
+          "status": "calendar",
+          "required_month": "2023-02",
+          "source_month": "2023-02",
+          "age_months": 0
+        },
+        {
+          "feature": "season_Rabi",
+          "status": "calendar",
+          "required_month": "2023-02",
+          "source_month": "2023-02",
+          "age_months": 0
+        },
+        {
+          "feature": "season_Zaid",
+          "status": "calendar",
+          "required_month": "2023-02",
+          "source_month": "2023-02",
+          "age_months": 0
+        }
+      ]
+    },
+    {
+      "district_id": "TS-Adilabad",
+      "date": "2024-01-01",
+      "inputs": [
+        {
+          "feature": "gwl_current",
+          "status": "observed",
+          "required_month": "2024-01",
+          "source_month": "2024-01",
+          "age_months": 0
+        },
+        {
+          "feature": "gwl_lag_3mo",
+          "status": "observed",
+          "required_month": "2023-10",
+          "source_month": "2023-10",
+          "age_months": 0
+        },
+        {
+          "feature": "gwl_lag_6mo",
+          "status": "observed",
+          "required_month": "2023-07",
+          "source_month": "2023-07",
+          "age_months": 0
+        },
+        {
+          "feature": "rainfall_current",
+          "status": "observed",
+          "required_month": "2024-01",
+          "source_month": "2024-01",
+          "age_months": 0
+        },
+        {
+          "feature": "rainfall_3mo_avg",
+          "status": "observed",
+          "required_month": "2024-01",
+          "source_month": "2024-01",
+          "age_months": 0
+        },
+        {
+          "feature": "monsoon_deficit_pct",
+          "status": "observed",
+          "required_month": "2024-01",
+          "source_month": "2024-01",
+          "age_months": 0
+        },
+        {
+          "feature": "temperature",
+          "status": "observed",
+          "required_month": "2024-01",
+          "source_month": "2024-01",
+          "age_months": 0
+        },
+        {
+          "feature": "evapotranspiration",
+          "status": "observed",
+          "required_month": "2024-01",
+          "source_month": "2024-01",
+          "age_months": 0
+        },
+        {
+          "feature": "water_balance_proxy",
+          "status": "observed",
+          "required_month": "2024-01",
+          "source_month": "2024-01",
+          "age_months": 0
+        },
+        {
+          "feature": "season_Kharif",
+          "status": "calendar",
+          "required_month": "2024-01",
+          "source_month": "2024-01",
+          "age_months": 0
+        },
+        {
+          "feature": "season_Rabi",
+          "status": "calendar",
+          "required_month": "2024-01",
+          "source_month": "2024-01",
+          "age_months": 0
+        },
+        {
+          "feature": "season_Zaid",
+          "status": "calendar",
+          "required_month": "2024-01",
+          "source_month": "2024-01",
+          "age_months": 0
+        }
+      ]
+    },
+    {
+      "district_id": "TS-Adilabad",
+      "date": "2024-02-01",
+      "inputs": [
+        {
+          "feature": "gwl_current",
+          "status": "observed",
+          "required_month": "2024-02",
+          "source_month": "2024-02",
+          "age_months": 0
+        },
+        {
+          "feature": "gwl_lag_3mo",
+          "status": "observed",
+          "required_month": "2023-11",
+          "source_month": "2023-11",
+          "age_months": 0
+        },
+        {
+          "feature": "gwl_lag_6mo",
+          "status": "observed",
+          "required_month": "2023-08",
+          "source_month": "2023-08",
+          "age_months": 0
+        },
+        {
+          "feature": "rainfall_current",
+          "status": "observed",
+          "required_month": "2024-02",
+          "source_month": "2024-02",
+          "age_months": 0
+        },
+        {
+          "feature": "rainfall_3mo_avg",
+          "status": "observed",
+          "required_month": "2024-02",
+          "source_month": "2024-02",
+          "age_months": 0
+        },
+        {
+          "feature": "monsoon_deficit_pct",
+          "status": "observed",
+          "required_month": "2024-02",
+          "source_month": "2024-02",
+          "age_months": 0
+        },
+        {
+          "feature": "temperature",
+          "status": "observed",
+          "required_month": "2024-02",
+          "source_month": "2024-02",
+          "age_months": 0
+        },
+        {
+          "feature": "evapotranspiration",
+          "status": "observed",
+          "required_month": "2024-02",
+          "source_month": "2024-02",
+          "age_months": 0
+        },
+        {
+          "feature": "water_balance_proxy",
+          "status": "observed",
+          "required_month": "2024-02",
+          "source_month": "2024-02",
+          "age_months": 0
+        },
+        {
+          "feature": "season_Kharif",
+          "status": "calendar",
+          "required_month": "2024-02",
+          "source_month": "2024-02",
+          "age_months": 0
+        },
+        {
+          "feature": "season_Rabi",
+          "status": "calendar",
+          "required_month": "2024-02",
+          "source_month": "2024-02",
+          "age_months": 0
+        },
+        {
+          "feature": "season_Zaid",
+          "status": "calendar",
+          "required_month": "2024-02",
+          "source_month": "2024-02",
+          "age_months": 0
+        }
+      ]
+    },
+    {
+      "district_id": "TS-Adilabad",
+      "date": "2026-05-01",
+      "inputs": [
+        {
+          "feature": "gwl_current",
+          "status": "observed",
+          "required_month": "2026-05",
+          "source_month": "2026-05",
+          "age_months": 0
+        },
+        {
+          "feature": "gwl_lag_3mo",
+          "status": "observed",
+          "required_month": "2026-02",
+          "source_month": "2026-02",
+          "age_months": 0
+        },
+        {
+          "feature": "gwl_lag_6mo",
+          "status": "observed",
+          "required_month": "2025-11",
+          "source_month": "2025-11",
+          "age_months": 0
+        },
+        {
+          "feature": "rainfall_current",
+          "status": "observed",
+          "required_month": "2026-05",
+          "source_month": "2026-05",
+          "age_months": 0
+        },
+        {
+          "feature": "rainfall_3mo_avg",
+          "status": "observed",
+          "required_month": "2026-05",
+          "source_month": "2026-05",
+          "age_months": 0
+        },
+        {
+          "feature": "monsoon_deficit_pct",
+          "status": "observed",
+          "required_month": "2026-05",
+          "source_month": "2026-05",
+          "age_months": 0
+        },
+        {
+          "feature": "temperature",
+          "status": "observed",
+          "required_month": "2026-05",
+          "source_month": "2026-05",
+          "age_months": 0
+        },
+        {
+          "feature": "evapotranspiration",
+          "status": "observed",
+          "required_month": "2026-05",
+          "source_month": "2026-05",
+          "age_months": 0
+        },
+        {
+          "feature": "water_balance_proxy",
+          "status": "observed",
+          "required_month": "2026-05",
+          "source_month": "2026-05",
+          "age_months": 0
+        },
+        {
+          "feature": "season_Kharif",
+          "status": "calendar",
+          "required_month": "2026-05",
+          "source_month": "2026-05",
+          "age_months": 0
+        },
+        {
+          "feature": "season_Rabi",
+          "status": "calendar",
+          "required_month": "2026-05",
+          "source_month": "2026-05",
+          "age_months": 0
+        },
+        {
+          "feature": "season_Zaid",
+          "status": "calendar",
+          "required_month": "2026-05",
+          "source_month": "2026-05",
+          "age_months": 0
+        }
+      ]
+    }
+  ]
+}

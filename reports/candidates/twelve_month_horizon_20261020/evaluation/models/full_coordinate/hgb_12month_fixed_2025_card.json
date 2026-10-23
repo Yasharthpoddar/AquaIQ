@@ -1,0 +1,75 @@
+{
+  "research_schema_version": 1,
+  "research_only": true,
+  "allowed_use": "historical_research_only",
+  "horizon_months": 12,
+  "embargo_months": 12,
+  "family": "hist_gradient_boosting",
+  "features": [
+    "gwl_current",
+    "gwl_lag_3mo",
+    "gwl_lag_6mo",
+    "rainfall_current",
+    "rainfall_3mo_avg",
+    "monsoon_deficit_pct",
+    "temperature",
+    "evapotranspiration",
+    "water_balance_proxy",
+    "season_Kharif",
+    "season_Rabi",
+    "season_Zaid",
+    "origin_month_sin",
+    "origin_month_cos"
+  ],
+  "feature_schema_sha256": "ad594d21061e6cdd0d1ca973552497109062aedca6365e0bf84d0ae1c275a113",
+  "units": "m_bgl",
+  "protocol_sha256": "1a93abf0a52eb44263d05090137df2c7000f83c3d0cf2c3e2843c56ac1ec57c2",
+  "train_target_cutoff": "2022-12-31",
+  "max_train_target_date": "2022-12-01",
+  "max_train_origin": "2021-12-01",
+  "train_n": 5806,
+  "created_at_utc": "2026-10-20T16:34:36.874960+00:00",
+  "model_name": "hgb_12month_fixed",
+  "settings": {
+    "family": "HistGradientBoostingRegressor",
+    "justification": "Installed sklearn and existing prior fixed HGB settings permit an isolated12month comparator; no new family or tuning. This is a separately fitted regional research model, not the sixmonth lock or approved shadow artifact.",
+    "features": "Existing12canonicalfeatures plus known-origin month sine/cosine",
+    "target_form": "delta_from_origin_clipped_at_zero",
+    "parameters": {
+      "max_iter": 250,
+      "learning_rate": 0.05,
+      "max_leaf_nodes": 31,
+      "min_samples_leaf": 50,
+      "l2_regularization": 20.0,
+      "early_stopping": false,
+      "random_state": 42
+    }
+  },
+  "input_sha256": {
+    "reports/actual_forecast_validation_20261019/acquired/telangana_monthly_2007_2026.csv": "f8222245721c421bc2f82b6afbd387ee5cd0e263790515ac7d3ffcce0c521302",
+    "reports/actual_forecast_validation_20261019/normalized_v2/research_features.csv": "bce7b8718574e78fd35ff53c95c6478d6d1f0c1c84112306111a26bd10295b8d",
+    "reports/actual_forecast_validation_20261019/normalized_v2/normalized_well_observations.csv": "158ee78df5254bfeeb6f4760751dc79e995cdfab38c2fe7df1f854633dabb494",
+    "reports/actual_forecast_validation_20261019/normalized_v2/panel_membership.csv": "9e7320ac039012314a0e30f09c171ef408218b2c4723735bd85dc4f4f68d7717",
+    "data/processed/features_matrix.csv": "3958737b033a16e722f633a15ad77d80bc5b2a8fb3bea888697f0410362c24ae",
+    "reports/actual_forecast_validation_20261019/evaluation_v2/historical_predictions_vs_observations.csv": "263bab03647de785bf9f3cd3c9ee25bbb08c2338947592957dc7a6bec6bf0503",
+    "config.yaml": "2284fe73c5a30fb03045bd96317ea922e40c6dcfa0aba7108c72f6a8a9d5b656"
+  },
+  "training_case_ids_sha256": "82297fa71663d9df709de2ae24210224a47dd7f56de820d6537712040bdeb89b",
+  "configuration_sha256": "2284fe73c5a30fb03045bd96317ea922e40c6dcfa0aba7108c72f6a8a9d5b656",
+  "feature_units": {
+    "gwl": "m_bgl",
+    "rainfall": "mm/month",
+    "evapotranspiration": "mm/month",
+    "temperature": "degC"
+  },
+  "implementation_sha256": {
+    "models/research_horizon.py": "cf40c08d352bf09f6e86e48868615fa1918190853004c85dd542c17638864c76",
+    "scripts/backtest_twelve_month.py": "ff9ecc1a8b7e42cbcc4bd2ce57d2967c2709dce2b8cf2c1edbf221d5f805f7d2"
+  },
+  "shadow_artifact_approved": false,
+  "forecast_issued_at": null,
+  "historical_availability_verified": false,
+  "no_model_selection_or_tuning": true,
+  "model_path": "hgb_12month_fixed_2025.joblib",
+  "model_sha256": "9fb5dc753d1a75f18af702029e0c8db2e9f17541f1c5c46982dbc406b80ef59e"
+}

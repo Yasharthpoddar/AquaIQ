@@ -1,0 +1,11 @@
+{
+  "recorded_at_utc": "2026-10-20T22:35:00.084649+00:00",
+  "command": [
+    ".\\venv\\Scripts\\python.exe",
+    "-B",
+    "reports/candidates/twelve_month_horizon_finalization_20261020/verify_local_demo.py"
+  ],
+  "exit_code": 1,
+  "failure": "Catalog returned 503: strict all-row unit guard rejected four unobserved padded calendar months with absent measurement units.",
+  "correction": "Adapter permits absent units only on unobserved padding; all observed measurements still require explicit m_bgl. Frozen artifact bytes unchanged. Added both acceptance/rejection regression cases."
+}

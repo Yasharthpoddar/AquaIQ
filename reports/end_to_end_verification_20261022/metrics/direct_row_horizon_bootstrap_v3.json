@@ -1,0 +1,236 @@
+[
+  {
+    "model": "persistence_12",
+    "baseline": "persistence_6",
+    "resamples": 2000,
+    "seed": 42,
+    "block_months": 12,
+    "districts": 33,
+    "target_months": 18,
+    "nonempty_replicates": {
+      "district": 2000,
+      "district_x_12month_blocks": 2000
+    },
+    "sampled_row_count_range": {
+      "district": [
+        594,
+        594
+      ],
+      "district_x_12month_blocks": [
+        594,
+        594
+      ]
+    },
+    "interval_95_percentile": {
+      "district": {
+        "model_mae_m": [
+          1.0311082224664667,
+          1.285660787645382
+        ],
+        "model_rmse_m": [
+          1.291379144693123,
+          1.579314335748412
+        ],
+        "model_bias_m": [
+          -0.8370696662773799,
+          -0.505263536351783
+        ],
+        "mae_difference_m": [
+          -2.3766488236000973,
+          -2.0147350644848454
+        ],
+        "rmse_difference_m": [
+          -2.4697391270154623,
+          -2.1139572639657613
+        ],
+        "bias_difference_m": [
+          0.38596267264855094,
+          0.572398029871329
+        ]
+      },
+      "district_x_12month_blocks": {
+        "model_mae_m": [
+          0.8031806803037003,
+          1.5159966187771756
+        ],
+        "model_rmse_m": [
+          1.046431728958064,
+          1.774747448306462
+        ],
+        "model_bias_m": [
+          -1.26814742769603,
+          -0.03227769694509838
+        ],
+        "mae_difference_m": [
+          -2.588014862160614,
+          -1.82203335341498
+        ],
+        "rmse_difference_m": [
+          -2.7215887276053894,
+          -1.9268014192862049
+        ],
+        "bias_difference_m": [
+          -1.5431996871170641,
+          2.5148252914428024
+        ]
+      }
+    },
+    "cohort": "six_vs_twelve_same_target"
+  },
+  {
+    "model": "xgb_expanding_12",
+    "baseline": "xgb_expanding_6",
+    "resamples": 2000,
+    "seed": 42,
+    "block_months": 12,
+    "districts": 33,
+    "target_months": 18,
+    "nonempty_replicates": {
+      "district": 2000,
+      "district_x_12month_blocks": 2000
+    },
+    "sampled_row_count_range": {
+      "district": [
+        594,
+        594
+      ],
+      "district_x_12month_blocks": [
+        594,
+        594
+      ]
+    },
+    "interval_95_percentile": {
+      "district": {
+        "model_mae_m": [
+          0.9291663670494762,
+          1.1571644400051158
+        ],
+        "model_rmse_m": [
+          1.176840928183902,
+          1.4701876069454496
+        ],
+        "model_bias_m": [
+          -0.052117098765659516,
+          0.5248588563232163
+        ],
+        "mae_difference_m": [
+          -0.2548400185907813,
+          -0.07791169831980924
+        ],
+        "rmse_difference_m": [
+          -0.2533907775966938,
+          -0.06281933528570192
+        ],
+        "bias_difference_m": [
+          0.555180000365784,
+          0.8100222690538926
+        ]
+      },
+      "district_x_12month_blocks": {
+        "model_mae_m": [
+          0.8988458954080814,
+          1.1942997443782206
+        ],
+        "model_rmse_m": [
+          1.1379274205199197,
+          1.5318451847285497
+        ],
+        "model_bias_m": [
+          -0.15563862884012036,
+          0.6116595320226762
+        ],
+        "mae_difference_m": [
+          -0.3380571507205198,
+          0.01782584778629491
+        ],
+        "rmse_difference_m": [
+          -0.3432153422127419,
+          0.059924875666183035
+        ],
+        "bias_difference_m": [
+          0.014533735224694953,
+          1.3486169058465793
+        ]
+      }
+    },
+    "cohort": "six_vs_twelve_same_target"
+  },
+  {
+    "model": "linear_expanding_12",
+    "baseline": "linear_expanding_6",
+    "resamples": 2000,
+    "seed": 42,
+    "block_months": 12,
+    "districts": 33,
+    "target_months": 18,
+    "nonempty_replicates": {
+      "district": 2000,
+      "district_x_12month_blocks": 2000
+    },
+    "sampled_row_count_range": {
+      "district": [
+        594,
+        594
+      ],
+      "district_x_12month_blocks": [
+        594,
+        594
+      ]
+    },
+    "interval_95_percentile": {
+      "district": {
+        "model_mae_m": [
+          1.5597978189173631,
+          2.3808662614319327
+        ],
+        "model_rmse_m": [
+          2.020542739014168,
+          3.0167405978657706
+        ],
+        "model_bias_m": [
+          0.9469332982801232,
+          2.048065869061731
+        ],
+        "mae_difference_m": [
+          0.17705512771810622,
+          0.9567142942206788
+        ],
+        "rmse_difference_m": [
+          0.3003974777242656,
+          1.2365646626809499
+        ],
+        "bias_difference_m": [
+          1.4376836953459546,
+          2.325442095945482
+        ]
+      },
+      "district_x_12month_blocks": {
+        "model_mae_m": [
+          1.4648245134748297,
+          2.4973811563845763
+        ],
+        "model_rmse_m": [
+          1.8970454454510464,
+          3.1188081464835093
+        ],
+        "model_bias_m": [
+          0.8218055691741853,
+          2.17836671978434
+        ],
+        "mae_difference_m": [
+          -0.0030108813068370475,
+          1.1129887235515252
+        ],
+        "rmse_difference_m": [
+          0.08339329024064272,
+          1.4184787765872344
+        ],
+        "bias_difference_m": [
+          1.2019993110942364,
+          2.5633063417304283
+        ]
+      }
+    },
+    "cohort": "six_vs_twelve_same_target"
+  }
+]

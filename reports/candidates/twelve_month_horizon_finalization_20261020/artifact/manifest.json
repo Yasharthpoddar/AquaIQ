@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "contract_sha256": "1a539e3647ae4e0a343e23d3252ca41f7994f09301be8c773cfc94b31e55bac2",
+  "card_path": "xgb_fixed_2021_card.json",
+  "card_sha256": "c399ed9cfa5c1746c874659d89bd1d69d92ea841dc262b7d0dfab89bac9e0bd7",
+  "snapshot_path": "features.csv",
+  "snapshot_sha256": "728677ebfbe103f0d38b53fd0bd02deb8a4d647f15f5bb199d392a29be33569e",
+  "input_provenance_path": "input_provenance.json",
+  "input_provenance_sha256": "d069f1c623dead6c8678a2e8be6d90bc0f51135682973b75f6bbdd3f948ac3e3",
+  "provenance_path": "provenance.json",
+  "provenance_sha256": "2e6b5e5d43db8df0b681b82ac4ec6fbf4d84ff359c1c006acd6b93da4f0322f1"
+}

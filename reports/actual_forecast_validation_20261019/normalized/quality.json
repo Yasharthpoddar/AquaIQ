@@ -1,0 +1,110 @@
+{
+  "provider_ids_with_cross_time_metadata_variation": 1,
+  "cross_time_variation_by_field": {
+    "state_name": 0,
+    "district_name": 0,
+    "block": 0,
+    "village": 0,
+    "site_name": 0,
+    "latitude": 1,
+    "longitude": 1,
+    "well_type": 0,
+    "well_depth_m": 1,
+    "aquifer": 0,
+    "agency": 0
+  },
+  "cross_time_metadata_variations": [
+    {
+      "agency": "SGWD-Telangana",
+      "provider_well_id": "20220673",
+      "varying_fields": [
+        "latitude",
+        "longitude",
+        "well_depth_m"
+      ]
+    }
+  ],
+  "metadata_variation_policy": "Descriptive current-vintage QC only; never excludes earlier observations.",
+  "aquifer_counts_before_exclusions": {
+    "Unconfined": 146495,
+    "Semi-Confined/Confined": 42382
+  },
+  "all_aquifers_retained_if_otherwise_eligible": true,
+  "source": "reports\\actual_forecast_validation_20261019\\acquired\\telangana_monthly_2007_2026.csv",
+  "source_sha256": "f8222245721c421bc2f82b6afbd387ee5cd0e263790515ac7d3ffcce0c521302",
+  "source_bytes": 25564190,
+  "encoding": "cp1252",
+  "encoding_policy": "Strict decoding, no replacement; source bytes remain immutable.",
+  "weather_features_source": "data\\processed\\features_matrix.csv",
+  "weather_sha256": "3958737b033a16e722f633a15ad77d80bc5b2a8fb3bea888697f0410362c24ae",
+  "weather_generation": "physical-v3-causal-monthly-a3f9468a2569",
+  "weather_columns_copied_without_changes": [
+    "rainfall_current",
+    "rainfall_3mo_avg",
+    "monsoon_deficit_pct",
+    "temperature",
+    "evapotranspiration",
+    "water_balance_proxy",
+    "season_Kharif",
+    "season_Rabi",
+    "season_Zaid"
+  ],
+  "crosswalk_sha256": "5765965f7cf0fbbaecfb93983e72d248baaeca07e1b9b43e47ad80921dda7835",
+  "boundaries_sha256": "e724c14bc5ee68bcdd6cee8c89222b80cb61e180e55c1dab3d067f09b3b9dc8f",
+  "input_rows": 188877,
+  "accepted_rows": 188485,
+  "excluded_rows": 392,
+  "exclusion_reason_counts": {
+    "source_state_disagrees_with_boundary": 345,
+    "conflicting_well_month_metadata": 42,
+    "negative_depth_outside_existing_model_contract": 5
+  },
+  "provider_wells_accepted": 1764,
+  "canonical_districts": 33,
+  "district_months": 7555,
+  "reported_date_min": "2007-05-01 00:00:00",
+  "reported_date_max": "2026-05-01 00:00:00",
+  "reported_dates_all_first_day": false,
+  "measurement_dates_or_month_labels": "Not independently distinguished; no actual acquisition time inferred.",
+  "mapping_basis_counts": {
+    "station_within_fixed_canonical_boundary": 188877
+  },
+  "name_mapping_status_counts": {
+    "state_qualified_exact_name": 130602,
+    "unmapped_state_district": 58275
+  },
+  "source_name_boundary_disagreement_rows": 125557,
+  "aggregation": "Equal weights over one clean reported observation per agency/provider-well/calendar month; no conflicting month averaged.",
+  "panel_contract": "Observed monthly membership and weights, not a preregistered fixed panel or certified replacement continuity.",
+  "datum": "Source header explicitly says mbgl; measuring-point changes and well replacement history unknown.",
+  "availability": "Acquisition/publication/receipt/availability times unknown per value; current-vintage historical research only.",
+  "missing_policy": "Groundwater LOCF up to3months, exact calendar lags3/6; targets use observed rows only; existing weather copied with its missingness.",
+  "end_month": "2026-09-01",
+  "feature_rows": 7689,
+  "observed_feature_rows": 7555,
+  "weather_missing_key_rows": 0,
+  "weather_nonfinite_counts_on_observed_origins": {
+    "rainfall_current": 99,
+    "rainfall_3mo_avg": 33,
+    "monsoon_deficit_pct": 99,
+    "temperature": 495,
+    "evapotranspiration": 495,
+    "water_balance_proxy": 495,
+    "season_Kharif": 0,
+    "season_Rabi": 0,
+    "season_Zaid": 0
+  },
+  "aquifer_counts_accepted": {
+    "Unconfined": 146261,
+    "Semi-Confined/Confined": 42224
+  },
+  "code_sha256": "fad4695cdcf8c331a21ba1d5aa5158eb70d8f65fb4d754498e5c51e839b1313d",
+  "outputs_sha256": {
+    "normalized_well_observations.csv": "d9affe90d1940d48a57f44ada3e8db74db2b406257e1c0198f97520d044fb167",
+    "excluded_source_records.csv": "efaaee324c59041a4da62d25320ca357666f02dde4dfc24c2416a4daa5d22ee3",
+    "district_monthly_observed.csv": "8f39b1c7a936aa44a4fe736ef51dcc8c0a782578e1641f6da95d8262c94acb89",
+    "panel_membership.csv": "d84b43a3efe3ae83d6970e8bd727ea1d5723e486f02ee05ead308874fcedb2c2",
+    "research_features.csv": "8f63bc8154f9028f228513bf979722195a279115c244d1216827b4303e87342d",
+    "district_mapping_inventory.csv": "629ba02521ed9865b18776ae1812d47d1f3e3ebe4d11f1352d94d46ab6d0daa0"
+  }
+}

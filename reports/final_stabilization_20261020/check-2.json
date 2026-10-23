@@ -1,0 +1,18 @@
+{
+  "command": [
+    "C:\\Users\\Yasharth\\Downloads\\AquaIQ\\venv\\Scripts\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_post_audit_metadata.py",
+    "--junitxml=C:\\Users\\Yasharth\\Downloads\\AquaIQ\\reports\\final_stabilization_20261020\\metadata-tests.xml"
+  ],
+  "started_at_utc": "2026-10-20T03:19:26.618176+00:00",
+  "ended_at_utc": "2026-10-20T03:19:43.210696+00:00",
+  "exit_code": 0,
+  "stdout": "...                                                                      [100%]\n3 passed in 14.88s\n",
+  "stderr": ""
+}

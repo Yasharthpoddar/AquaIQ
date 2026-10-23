@@ -1,0 +1,168 @@
+{
+  "acquisitions_allowlisted_fields_only": [
+    {
+      "retrieved_at_utc": "2026-10-19T04:16:06.452041+00:00",
+      "sha256": "3e4c9399e2ac49c5d732e7c1b68986a491968683995dcceff39a4d520ded781e",
+      "bytes": 120914,
+      "http_status": 200,
+      "requested_url": {
+        "url_without_query": "https://nwdp.nwic.gov.in/api/3/action/package_show",
+        "query_parameter_names": [
+          "id"
+        ]
+      },
+      "final_url": {
+        "url_without_query": "https://nwdp.nwic.gov.in/api/3/action/package_show",
+        "query_parameter_names": [
+          "id"
+        ]
+      },
+      "headers_not_emitted": true
+    },
+    {
+      "retrieved_at_utc": "2026-10-19T04:16:05.164979+00:00",
+      "sha256": "103e36a391e7309fe98ab246a2cc258c5b264d08646da5625f22f1b004261437",
+      "bytes": 73919,
+      "http_status": 200,
+      "requested_url": {
+        "url_without_query": "https://nwdp.nwic.gov.in/api/3/action/package_show",
+        "query_parameter_names": [
+          "id"
+        ]
+      },
+      "final_url": {
+        "url_without_query": "https://nwdp.nwic.gov.in/api/3/action/package_show",
+        "query_parameter_names": [
+          "id"
+        ]
+      },
+      "headers_not_emitted": true
+    },
+    {
+      "retrieved_at_utc": "2026-10-19T08:56:57.462483+00:00",
+      "sha256": "6c1e330158f9b7a6a4a7ca4a8cb58f61ce9c2453435bbd329cb3cdaede611726",
+      "bytes": 48441,
+      "http_status": 200,
+      "requested_url": {
+        "url_without_query": "https://nwdp.nwic.gov.in/footer/copyrightPolicy",
+        "query_parameter_names": []
+      },
+      "final_url": {
+        "url_without_query": "https://nwdp.nwic.gov.in/footer/copyrightPolicy",
+        "query_parameter_names": []
+      },
+      "headers_not_emitted": true
+    },
+    {
+      "retrieved_at_utc": "2026-10-19T08:58:44.486970+00:00",
+      "sha256": "f8222245721c421bc2f82b6afbd387ee5cd0e263790515ac7d3ffcce0c521302",
+      "bytes": 25564190,
+      "http_status": 200,
+      "requested_url": {
+        "url_without_query": "https://nwdp.nwic.gov.in/dataset/0000396f-0381-4154-923e-86c8e23c5f5f/resource/b5706a43-1319-44b4-9739-afd9115e1312/download/ground_water_level_manual_monthly_telangna_2007_2026.csv",
+        "query_parameter_names": []
+      },
+      "final_url": {
+        "url_without_query": "https://nwdp.nwic.gov.in/dataset/0000396f-0381-4154-923e-86c8e23c5f5f/resource/b5706a43-1319-44b4-9739-afd9115e1312/download/ground_water_level_manual_monthly_telangna_2007_2026.csv",
+        "query_parameter_names": []
+      },
+      "headers_not_emitted": true
+    },
+    {
+      "retrieved_at_utc": "2026-10-19T08:56:57.739293+00:00",
+      "sha256": "78561bc129df41897fe05928a7b3081323283d65584da85045dce21133a48539",
+      "bytes": 3238,
+      "http_status": 200,
+      "requested_url": {
+        "url_without_query": "https://nwdp.nwic.gov.in/api/3/action/package_show",
+        "query_parameter_names": [
+          "id"
+        ]
+      },
+      "final_url": {
+        "url_without_query": "https://nwdp.nwic.gov.in/api/3/action/package_show",
+        "query_parameter_names": [
+          "id"
+        ]
+      },
+      "headers_not_emitted": true
+    },
+    {
+      "retrieved_at_utc": "2026-10-19T08:57:46.053322+00:00",
+      "sha256": "c4ec7eb949a2e5ee17c7bae326353dbc9de2f6ba54d3316ab39f73e75c50f71e",
+      "bytes": 5738,
+      "http_status": 200,
+      "requested_url": {
+        "url_without_query": "https://nwdp.nwic.gov.in/api/3/action/datastore_search",
+        "query_parameter_names": [
+          "limit",
+          "resource_id"
+        ]
+      },
+      "final_url": {
+        "url_without_query": "https://nwdp.nwic.gov.in/api/3/action/datastore_search",
+        "query_parameter_names": [
+          "limit",
+          "resource_id"
+        ]
+      },
+      "headers_not_emitted": true
+    },
+    {
+      "retrieved_at_utc": "2026-10-19T04:15:37.438711+00:00",
+      "sha256": "cfb6eab7abfa001bbad5d130ba8ac3d5701748f44533c8c918498ae3ee216f52",
+      "bytes": 16803,
+      "http_status": 200,
+      "requested_url": {
+        "url_without_query": "https://nwdp.nwic.gov.in/api/3/action/package_show",
+        "query_parameter_names": [
+          "id"
+        ]
+      },
+      "final_url": {
+        "url_without_query": "https://nwdp.nwic.gov.in/api/3/action/package_show",
+        "query_parameter_names": [
+          "id"
+        ]
+      },
+      "headers_not_emitted": true
+    },
+    {
+      "retrieved_at_utc": "2026-10-19T04:16:07.986517+00:00",
+      "sha256": "b80817c3467b729384f90abe8a6e65292d620e2fbff21631affc2fc8e04d769f",
+      "bytes": 3776,
+      "http_status": 200,
+      "requested_url": {
+        "url_without_query": "https://nwdp.nwic.gov.in/api/3/action/datastore_search",
+        "query_parameter_names": [
+          "limit",
+          "resource_id"
+        ]
+      },
+      "final_url": {
+        "url_without_query": "https://nwdp.nwic.gov.in/api/3/action/datastore_search",
+        "query_parameter_names": [
+          "limit",
+          "resource_id"
+        ]
+      },
+      "headers_not_emitted": true
+    }
+  ],
+  "telangana_receipt_allowlisted_fields_only": {
+    "retrieved_at_utc": "2026-10-19T08:58:44.486970+00:00",
+    "sha256": "f8222245721c421bc2f82b6afbd387ee5cd0e263790515ac7d3ffcce0c521302",
+    "bytes": 25564190,
+    "http_status": 200,
+    "requested_url": {
+      "url_without_query": "https://nwdp.nwic.gov.in/dataset/0000396f-0381-4154-923e-86c8e23c5f5f/resource/b5706a43-1319-44b4-9739-afd9115e1312/download/ground_water_level_manual_monthly_telangna_2007_2026.csv",
+      "query_parameter_names": []
+    },
+    "final_url": {
+      "url_without_query": "https://nwdp.nwic.gov.in/dataset/0000396f-0381-4154-923e-86c8e23c5f5f/resource/b5706a43-1319-44b4-9739-afd9115e1312/download/ground_water_level_manual_monthly_telangna_2007_2026.csv",
+      "query_parameter_names": []
+    },
+    "headers_not_emitted": true
+  },
+  "interpretation": "Transport retrieval time identifies local receipt of current export, not historical per-reading acquisition/publication/availability."
+}

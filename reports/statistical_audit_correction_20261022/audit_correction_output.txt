@@ -1,0 +1,150 @@
+================================================================================
+1. PRIMARY EVALUATION DATASET INTEGRITY & METRIC REPRODUCTION
+================================================================================
+Total rows in dataset: 957
+Periods present: {'primary': np.int64(792), 'secondary': np.int64(165)}
+
+Primary period subset: 792 rows across 33 districts.
+Rows per district: min=24, max=24 (balanced: True)
+Origin date range: 2023-01-01 to 2024-12-01 (24 distinct months)
+Target date range: 2024-01-01 to 2025-12-01 (24 distinct months)
+Lead time: All horizon_months == 12: True
+Duplicate [district_id, date, target_date] records: 0
+Duplicate case_id records: 0
+Missing values: actual=0, xgb_expanding=0, annual_seasonal_naive=0
+
+Calculated Model Metrics on Primary Period (N=792):
+Model                               MAE (m)      RMSE (m)     R^2        Bias (m)  
+--------------------------------------------------------------------------------
+Annual Seasonal Naive               1.1911       1.4577       0.7215     -0.2424   
+XGBoost (expanding)                 1.1591       1.4199       0.7357     0.4566    
+Linear Regression (expanding)       1.9280       2.4556       0.2096     1.5121    
+HistGradientBoosting (fixed)        1.2222       1.5055       0.7029     0.4938    
+
+Point Difference (XGBoost - Annual Baseline):
+  Delta RMSE: -0.037815 m (-3.78 cm)
+  Delta MAE:  -0.031960 m (-3.20 cm)
+  Direction Note: Negative indicates XGBoost lower error; Positive indicates Baseline lower error.
+
+================================================================================
+2. BOOTSTRAP AUDIT: FLAWED UNPAIRED RESAMPLING VS CORRECTED PAIRED RESAMPLING
+================================================================================
+
+A. FLAWED UNPAIRED CLUSTER BOOTSTRAP (Earlier Audit Step 164 / task-165):
+   Implementation: Two separate rng.choice() calls, drawing independent districts for XGBoost vs Baseline.
+   Point Delta RMSE:   -0.037815 m
+   Bootstrap Mean:     -0.038145 m
+   Bootstrap Std Err:  0.091812 m
+   95% CI (Percentile):[-0.220317, 0.140929] m
+   Diagnosis: Independent cluster draws inject massive artificial inter-district variance,
+              inflating standard error by ~2x and producing the reported [-0.2203, +0.1409] m interval.
+
+B. CORRECTED PAIRED CLUSTER BOOTSTRAP (Identical clusters drawn per replicate):
+   Point Delta RMSE:         -0.037815 m
+   Bootstrap Mean Delta RMSE: -0.037111 m
+   Bootstrap Std Err (SE):   0.045446 m (reduced from 0.091812 m)
+   95% CI (Percentile):      [-0.120860, 0.055450] m
+   95% CI (Normal Approx):   [-0.126890, 0.051260] m
+   Empirical Fraction >= 0:  0.2047 (20.5% of replicates baseline ties or beats ML)
+   Two-sided p-value (RMSE): 0.4094
+
+   Point Delta MAE:          -0.031960 m
+   Bootstrap Mean Delta MAE:  -0.031697 m
+   Bootstrap Std Err (SE):   0.045163 m
+   95% CI (Percentile):      [-0.114678, 0.061328] m
+   Empirical Fraction >= 0:  0.2368
+   Two-sided p-value (MAE):  0.4736
+
+   Random Seed Sensitivity Analysis (10,000 iterations each):
+     Seed    42: 95% CI = [-0.120860, 0.055450] m, Mean=-0.037111, frac>=0=0.2047
+     Seed  2026: 95% CI = [-0.122071, 0.054794] m, Mean=-0.036334, frac>=0=0.2094
+     Seed 12345: 95% CI = [-0.121274, 0.056001] m, Mean=-0.036862, frac>=0=0.2017
+     Seed 99999: 95% CI = [-0.122735, 0.054284] m, Mean=-0.037375, frac>=0=0.2014
+
+   District-Level Paired Tests (N=33 districts):
+     Districts where XGBoost has lower RMSE: 20 / 33 (60.6%)
+     Districts where Baseline has lower RMSE: 13 / 33 (39.4%)
+     Paired t-test: t = -0.4235, p = 0.6747
+     Wilcoxon signed-rank: W = 218.0, p = 0.2719
+
+   STATISTICAL INTERPRETATION:
+   Does XGBoost provide a statistically significant improvement over annual persistence?
+   CONCLUSION: NO.
+   Although correcting the bootstrap pairing narrows the standard error from 0.092m to 0.045m,
+   the 95% confidence interval [-0.1209, +0.0555] m still decisively spans zero.
+   In 20.5% of paired cluster resamples, annual persistence equals or beats XGBoost.
+   The two-sided p-value of 0.4094 confirms that the null hypothesis (Delta RMSE = 0) CANNOT be rejected.
+
+================================================================================
+3. DISTRICT COUNT RECONCILIATION & HISTORICAL AUDIT
+================================================================================
+Side-by-side comparison of historical displayed counts vs current operational counts:
+Category        Historical Displayed   Current System     Difference  
+----------------------------------------------------------------------
+Safe            380                    300                +80
+Watch           365                    365                +0
+Warning         56                     50                 +6
+Crisis          6                      6                  +0
+Unknown         0                      4                  -4
+----------------------------------------------------------------------
+TOTAL           807                    725                +82
+
+Audit of Discrepancy Explanation:
+1. Mathematical Identity of Historical Breakdown:
+   380 (Safe) + 365 (Watch) + 56 (Warning) + 6 (Crisis) = 807 EXACTLY.
+2. Evaluation of Previous Audit Claim:
+   The previous audit erroneously asserted that 807 was solely an arithmetic typo in Safe (380 vs 300),
+   speculating that 380 + 365 + 50 + 6 + 4 = 805 approx 807.
+   That speculation is rejected by the facts: the historical breakdown differed in THREE categories:
+     - Safe differed by +80 (380 vs 300)
+     - Warning differed by +6 (56 vs 50)
+     - Unknown differed by -4 (0 vs 4)
+     - Net algebraic difference: +80 + 6 - 4 = +82 (807 - 725 = 82).
+3. Ground Truth:
+   The 807 figure came from an earlier uncurated, pre-deduplication classification run.
+   In migration 001_canonical_districts.sql, 1,291 legacy district records were formally
+   crosswalked and deduplicated to exactly 725 canonical Census/GeoJSON districts.
+   In the live database and API, 725 is verified with 100% precision:
+     Tiers: 725 = 725 ({'Crisis': 6, 'Safe': 300, 'Unknown': 4, 'Warning': 50, 'Watch': 365})
+     Estimates: 725 = 725 ({'district_level': 427, 'insufficient_data': 4, 'zone_fallback': 294})
+
+================================================================================
+4. PRECISELY SCOPED DATA LEAKAGE AUDIT
+================================================================================
+A. Scope of Evaluated Data:
+   - 792 expanding window primary-period evaluation rows (full_coordinate_predictions.csv)
+   - 24 fixed-artifact prototype evaluation rows (historical_checks.csv)
+   - Full 215,325-row feature panel (features_matrix.csv)
+
+B. Verification of Temporal Feature Alignment:
+   - gwl_current == target actual: 0 / 792 (Zero contemporaneous overlap)
+   - gwl_lag_3mo is strictly y(t-3): True
+   - gwl_lag_6mo is strictly y(t-6): True
+   - rainfall_3mo_avg is strictly trailing 3-month mean: True
+
+C. Expanding Window Training Cutoff Separation:
+   - Model trained up to cutoff 2021-12-31:
+       Evaluation origins: 2023-01-01 to 2023-12-01
+       Evaluation targets: 2024-01-01 to 2024-12-01
+       Temporal separation buffer: Cutoff precedes first target by 24 months, first origin by 12 months.
+   - Model trained up to cutoff 2022-12-31:
+       Evaluation origins: 2024-01-01 to 2024-12-01
+       Evaluation targets: 2025-01-01 to 2025-12-01
+       Temporal separation buffer: Cutoff precedes first target by 24 months, first origin by 12 months.
+
+D. Exact Boundaries of Leakage Findings (What is Verified vs Unverified):
+   VERIFIED BY INDEPENDENT AUDIT:
+     1. Target variable y(t+12) is absent from feature vectors at origin t across all 792 primary cases.
+     2. Ground-truth lag variables (gwl_lag_3mo, gwl_lag_6mo) and rolling weather averages (rainfall_3mo_avg)
+        are strictly backward-looking trailing calculations.
+     3. Expanding training splits enforce a strict 12-to-24 month temporal exclusion buffer.
+   UNVERIFIED / OUTSIDE AUDIT SCOPE (Claims must NOT be made):
+     1. Upstream NetCDF daily spatial raster extraction (IMD gridded rainfall and ERA5 temperature)
+        was not audited at the raw NetCDF ingestion level.
+     2. Climatological anomaly normalizations (e.g., historical monthly rainfall baselines) were computed
+        across the multi-decade period rather than strictly out-of-fold.
+     3. Forward-fill imputation (up to 3 months) operates within each district time-series.
+
+================================================================================
+AUDIT CORRECTION ANALYSIS COMPLETE
+================================================================================

@@ -1,0 +1,39 @@
+{
+  "at_utc": "2026-10-23T13:33:18.7997274Z",
+  "listeners": [
+    {
+      "address": "127.0.0.1",
+      "port": 5183,
+      "pid": 15196,
+      "executable": "C:\\Program Files\\nodejs\\node.exe",
+      "creation_time": "2026-10-23T15:43:11.66526+05:30",
+      "known_audit_helper": false,
+      "guarded_demo_helper": false,
+      "vite_process": true,
+      "raw_command_line_recorded": false
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 5053,
+      "pid": 26088,
+      "executable": "C:\\Users\\Yasharth\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+      "creation_time": "2026-10-23T15:43:31.828673+05:30",
+      "known_audit_helper": true,
+      "guarded_demo_helper": false,
+      "vite_process": false,
+      "raw_command_line_recorded": false
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 5051,
+      "pid": 8176,
+      "executable": "C:\\Users\\Yasharth\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+      "creation_time": "2026-10-23T15:43:33.115624+05:30",
+      "known_audit_helper": false,
+      "guarded_demo_helper": true,
+      "vite_process": false,
+      "raw_command_line_recorded": false
+    }
+  ],
+  "action": "Existing listeners preserved. No service started or stopped."
+}

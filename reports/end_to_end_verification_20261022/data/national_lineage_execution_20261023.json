@@ -1,0 +1,17 @@
+{
+  "started_utc": "2026-10-23T04:07:17.259122+00:00",
+  "completed_utc": "2026-10-23T04:07:24.527278+00:00",
+  "command": [
+    "C:\\Users\\Yasharth\\Downloads\\AquaIQ\\venv\\Scripts\\python.exe",
+    "-B",
+    "C:\\Users\\Yasharth\\Downloads\\AquaIQ\\reports\\candidates\\six_month_diagnostics_20261017\\verify_raw_lineage.py",
+    "--verify-only"
+  ],
+  "cwd": "C:\\Users\\Yasharth\\Downloads\\AquaIQ",
+  "script_sha256": "da62c6f8f68dfd34dd0914f9b4fd440cd2cdcf03c8ebeab13709185364c9e13b",
+  "exit_status": 0,
+  "stdout_file": "national_lineage_stdout_20261023.log",
+  "stderr_file": "national_lineage_stderr_20261023.log",
+  "stdout_sha256": "9213f7050a7a2a6b1b63ed1ff67f54ab862c16dbf2a88724fdfdd762157b57c7",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

@@ -1,0 +1,17 @@
+{
+  "completed_at_utc": "2026-10-20T22:36:06.5574914+00:00",
+  "exit_code": 0,
+  "started_at_utc": "2026-10-20T22:35:59.4226969+00:00",
+  "command": [
+    ".\\venv\\Scripts\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_research_forecast_api.py",
+    "--basetemp=scratch/twelve-month-app-backend-final-02",
+    "--junitxml=reports/candidates/twelve_month_horizon_finalization_20261020/backend-tests-final-02.xml"
+  ]
+}

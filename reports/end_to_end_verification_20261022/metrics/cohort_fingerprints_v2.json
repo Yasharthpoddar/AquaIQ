@@ -1,0 +1,218 @@
+{
+  "full_coordinate_primary": {
+    "n": 792,
+    "districts": 33,
+    "states": [
+      "TS"
+    ],
+    "horizon_months": 12,
+    "exact_horizon": true,
+    "unique_case_ids": true,
+    "canonical_case_ids_match": true,
+    "case_key_encoding": "Sorted district|origin ISO date|target ISO date|horizon; newline joined, UTF-8, no final newline",
+    "value_encoding": "case key|binary64 value formatted .17g; newline joined, UTF-8, no final newline",
+    "case_ids_sorted_sha256": "a61c535a57da0d68a67a2e38c1981095e5c850d328343453bf43b02e2877ee88",
+    "observed_target_rows_sha256": "0ac7813af3031aaa5ef20a4f944f2f56c4094d7fe6ca7fae7e9d3e9f9ebe5350",
+    "persistence_rows_sha256": "305e3ebc87936a107a3e2aed815cdc702ffb42a0092d555351b44cf43fba44ba",
+    "all_methods_finite_identical_rows": true,
+    "model_prediction_rows_sha256": {
+      "persistence": "305e3ebc87936a107a3e2aed815cdc702ffb42a0092d555351b44cf43fba44ba",
+      "xgb_expanding": "423f44e6d2ea905d23ecb1a0277021f48564bf21068940f1ce5c7d8d5f1964a9",
+      "linear_expanding": "36279cf9e1f5da75426d19a47e9e6a5960d64a054210ea39569a53e7795aab78",
+      "hgb_12month_fixed": "61d47e6f61b58332d271fb6164fa7fd40e8c62b7601ed6e7c94aa5bd51d62b72"
+    }
+  },
+  "full_coordinate_secondary": {
+    "n": 66,
+    "districts": 33,
+    "states": [
+      "TS"
+    ],
+    "horizon_months": 12,
+    "exact_horizon": true,
+    "unique_case_ids": true,
+    "canonical_case_ids_match": true,
+    "case_key_encoding": "Sorted district|origin ISO date|target ISO date|horizon; newline joined, UTF-8, no final newline",
+    "value_encoding": "case key|binary64 value formatted .17g; newline joined, UTF-8, no final newline",
+    "case_ids_sorted_sha256": "ca5bf57f78e8a3c263cf3a7d4aa0f5ea8f5ccc009eb9f5153aedeecfd6d6f626",
+    "observed_target_rows_sha256": "89f3e765f656bbbd49081ada2749010a549cc2114378b27a1e3eabdb979dffa0",
+    "persistence_rows_sha256": "8a9193c12b4b5f0cf2cd5ba5811403e2cff96ee91ffa712551bcda8a69165058",
+    "all_methods_finite_identical_rows": true,
+    "model_prediction_rows_sha256": {
+      "persistence": "8a9193c12b4b5f0cf2cd5ba5811403e2cff96ee91ffa712551bcda8a69165058",
+      "xgb_expanding": "1162ebdedb1354a0b98867f8ee3e818981a32979d2ce01c067361efbdfaa4422",
+      "linear_expanding": "918fca51628d13d738f9df46bae4187fe2132bca13f304d0e0470281c76c14b7",
+      "hgb_12month_fixed": "c2dd15c4f0cd8a33fe7a6acb6ee8183c70a69efb445f391e4b4da2322fae4105"
+    }
+  },
+  "full_coordinate_primary_identical_panel": {
+    "n": 380,
+    "districts": 32,
+    "states": [
+      "TS"
+    ],
+    "horizon_months": 12,
+    "exact_horizon": true,
+    "unique_case_ids": true,
+    "canonical_case_ids_match": true,
+    "case_key_encoding": "Sorted district|origin ISO date|target ISO date|horizon; newline joined, UTF-8, no final newline",
+    "value_encoding": "case key|binary64 value formatted .17g; newline joined, UTF-8, no final newline",
+    "case_ids_sorted_sha256": "2fc931625941ccdab611e7829cdd4182f090b75573324b3f5f3c3b726a962b26",
+    "observed_target_rows_sha256": "450e2e1ef4b0ddd19416627474cc753ed2c8ddcbefa1b64407787a1778c01406",
+    "persistence_rows_sha256": "6fc3c8145c9acf6cb1a61705968a47ad7a6a0469ded6bebf75aec785d3d6a83c",
+    "all_methods_finite_identical_rows": true,
+    "model_prediction_rows_sha256": {
+      "persistence": "6fc3c8145c9acf6cb1a61705968a47ad7a6a0469ded6bebf75aec785d3d6a83c",
+      "xgb_expanding": "12cd5076fdd42648eac4c31022ae3c4438581f3567624ba45fdc20d15db0d728",
+      "linear_expanding": "efb89d3144cd31eb6ee9a65b04aa95b401d26ff4a2c66ac07bb48ff412d4fab2",
+      "hgb_12month_fixed": "0d237aab8e67ce8b155e40f1f3dd8e94f9d2e11173ebe8e02aacfbb700c82e2e"
+    }
+  },
+  "exact_name_coordinate_primary": {
+    "n": 24,
+    "districts": 1,
+    "states": [
+      "TS"
+    ],
+    "horizon_months": 12,
+    "exact_horizon": true,
+    "unique_case_ids": true,
+    "canonical_case_ids_match": true,
+    "case_key_encoding": "Sorted district|origin ISO date|target ISO date|horizon; newline joined, UTF-8, no final newline",
+    "value_encoding": "case key|binary64 value formatted .17g; newline joined, UTF-8, no final newline",
+    "case_ids_sorted_sha256": "55e750ca5d76036a74f0d188f1985159965d98affea78ae066615301e261a70a",
+    "observed_target_rows_sha256": "f71da35d24c0c1035748fbc854c71fe0f8d65809cf90ccbbc1d74700fb4f7b19",
+    "persistence_rows_sha256": "40339dfe56dab3c607db0db19acf1384c7cb3a35470f179ed3fae5b5d3f33554",
+    "all_methods_finite_identical_rows": true,
+    "model_prediction_rows_sha256": {
+      "persistence": "40339dfe56dab3c607db0db19acf1384c7cb3a35470f179ed3fae5b5d3f33554",
+      "xgb_expanding": "128708a1af193ecb266bbed5c2e5915c2cf613d4048f35d070f2ebdc3a60717f",
+      "linear_expanding": "d1185b7d9ce0448218ac15570428eed3cb7e4fdbe6a9110b9da068758c1797f8",
+      "hgb_12month_fixed": "5c13fed02286fad818cbb6e27b7132914f10be2c3c00d4ed651e2944da79b4f4"
+    }
+  },
+  "exact_name_coordinate_secondary": {
+    "n": 2,
+    "districts": 1,
+    "states": [
+      "TS"
+    ],
+    "horizon_months": 12,
+    "exact_horizon": true,
+    "unique_case_ids": true,
+    "canonical_case_ids_match": true,
+    "case_key_encoding": "Sorted district|origin ISO date|target ISO date|horizon; newline joined, UTF-8, no final newline",
+    "value_encoding": "case key|binary64 value formatted .17g; newline joined, UTF-8, no final newline",
+    "case_ids_sorted_sha256": "81a4e8ec792f6c96bbd94426cdc431277c7392456b1314c605017b9521c39ffa",
+    "observed_target_rows_sha256": "a562c6688b1b7081bfca98107eb8ff11f461cbac19a764721e1a9bc433aae504",
+    "persistence_rows_sha256": "22ed8ab3d3c8c46aa9f13ff5c65d642e20273b03ae7c7d0a289c1046e4cf9931",
+    "all_methods_finite_identical_rows": true,
+    "model_prediction_rows_sha256": {
+      "persistence": "22ed8ab3d3c8c46aa9f13ff5c65d642e20273b03ae7c7d0a289c1046e4cf9931",
+      "xgb_expanding": "8aee2ea0a22e437db4d45c64ecf519a4fc61ab053930b67283ae10e0f7637e3b",
+      "linear_expanding": "71224e28a4c656da13afef388f51b1cb33c2c40cd9f35b9ed79c19ed449e80f0",
+      "hgb_12month_fixed": "ada0577fd943a3fb405d0988433f1ba799c939eee30e0fdd0162b6e144df6c92"
+    }
+  },
+  "exact_name_coordinate_primary_identical_panel": {
+    "n": 19,
+    "districts": 1,
+    "states": [
+      "TS"
+    ],
+    "horizon_months": 12,
+    "exact_horizon": true,
+    "unique_case_ids": true,
+    "canonical_case_ids_match": true,
+    "case_key_encoding": "Sorted district|origin ISO date|target ISO date|horizon; newline joined, UTF-8, no final newline",
+    "value_encoding": "case key|binary64 value formatted .17g; newline joined, UTF-8, no final newline",
+    "case_ids_sorted_sha256": "71e055571b94f2297478c5a39716ae4a581248fdcf4ce3df2a5aa8f97757cc4d",
+    "observed_target_rows_sha256": "26c61494ad3bb3e61db2626af40f05f9291e53af7d5fb4edcaef131015d7eaec",
+    "persistence_rows_sha256": "378e1a690f9d0aa1fa7293842c174c6db201cb2197e7013667c3b900d8a263c2",
+    "all_methods_finite_identical_rows": true,
+    "model_prediction_rows_sha256": {
+      "persistence": "378e1a690f9d0aa1fa7293842c174c6db201cb2197e7013667c3b900d8a263c2",
+      "xgb_expanding": "fc72c75aee2d6cd71682a00a94ed6fd83366525de4efd6863a9a369df94674a8",
+      "linear_expanding": "eb57a4e9adb4a20acbee11c056e34b691f7ce429870d59a16fd063cc79a6a0c1",
+      "hgb_12month_fixed": "440d8dcb14cb5d2e2fae4699338e4dc9e606c5e1ee50bedf08e10d1b4fc9ee47"
+    }
+  },
+  "fixed_application_24": {
+    "n": 24,
+    "districts": 1,
+    "states": [
+      "TS"
+    ],
+    "horizon_months": 12,
+    "exact_horizon": true,
+    "unique_case_ids": true,
+    "canonical_case_ids_match": true,
+    "case_key_encoding": "Sorted district|origin ISO date|target ISO date|horizon; newline joined, UTF-8, no final newline",
+    "value_encoding": "case key|binary64 value formatted .17g; newline joined, UTF-8, no final newline",
+    "case_ids_sorted_sha256": "55e750ca5d76036a74f0d188f1985159965d98affea78ae066615301e261a70a",
+    "observed_target_rows_sha256": "f71da35d24c0c1035748fbc854c71fe0f8d65809cf90ccbbc1d74700fb4f7b19",
+    "persistence_rows_sha256": "40339dfe56dab3c607db0db19acf1384c7cb3a35470f179ed3fae5b5d3f33554",
+    "all_methods_finite_identical_rows": true,
+    "model_prediction_rows_sha256": {
+      "persistence": "40339dfe56dab3c607db0db19acf1384c7cb3a35470f179ed3fae5b5d3f33554",
+      "fixed_xgb_2021": "22c2504df877bd336b99eb74719b9b69cc9442f9940c4db1d5cf46882a177491"
+    }
+  },
+  "six_month_original_209": {
+    "n": 209,
+    "districts": 32,
+    "states": [
+      "AS",
+      "CG",
+      "HR",
+      "MP",
+      "RJ",
+      "TN",
+      "UP",
+      "WB"
+    ],
+    "horizon_months": 6,
+    "exact_horizon": true,
+    "unique_case_ids": true,
+    "canonical_case_ids_match": true,
+    "case_key_encoding": "Sorted district|origin ISO date|target ISO date|horizon; newline joined, UTF-8, no final newline",
+    "value_encoding": "case key|binary64 value formatted .17g; newline joined, UTF-8, no final newline",
+    "case_ids_sorted_sha256": "582f62ad41834c1bad42eca2b7131b361831c763b41301ccb491bfef6bce3326",
+    "observed_target_rows_sha256": "2acd453b734a86818a07e5273b99d57227bd9ebad1cf55b97cc91e89d012dec3",
+    "persistence_rows_sha256": "a9c5cd92b8413b59e4754510510c2efd72026d2b0a563cb88db56185d9ea819b",
+    "all_methods_finite_identical_rows": true,
+    "model_prediction_rows_sha256": {
+      "persistence": "a9c5cd92b8413b59e4754510510c2efd72026d2b0a563cb88db56185d9ea819b",
+      "seasonal_naive": "376fd96919ef2725e68bcc999d43e69bb8e74f6bb7020d463191410810c22448",
+      "ridge": "9bcc86baed51d20b4d0fdd850e4363bbd6d8508557e64139070a316d47fb8853",
+      "random_forest": "4ca7a55040c6fee0b6ff96d5c7abb419995417dba9a75a22c936e77b1ee4f33b",
+      "xgboost": "b817050bea9f8723962974e52a57020602e2464292bfb5d070c2bb3ecfa64592",
+      "hist_gradient_boosting": "9b4da7d3ae3766b5bd098dfe10157d3376760c18dd9c1fd51efa20790b644b50"
+    }
+  },
+  "six_month_telangana_594": {
+    "n": 594,
+    "districts": 33,
+    "states": [
+      "TS"
+    ],
+    "horizon_months": 6,
+    "exact_horizon": true,
+    "unique_case_ids": true,
+    "canonical_case_ids_match": false,
+    "case_key_encoding": "Sorted district|origin ISO date|target ISO date|horizon; newline joined, UTF-8, no final newline",
+    "value_encoding": "case key|binary64 value formatted .17g; newline joined, UTF-8, no final newline",
+    "case_ids_sorted_sha256": "c16030f004f7764d8ab105a93f010219a114ea0042958ae99e840efbcaf8fdb5",
+    "observed_target_rows_sha256": "526aa6febb1dab6dc98443ee79fb83c9ec1c67d8ca08df67f9156747aaaa307a",
+    "persistence_rows_sha256": "0858f758aa60b3ff96c0a642b9303b497c6f98e1c848dfc07b65d75234fb928e",
+    "all_methods_finite_identical_rows": true,
+    "model_prediction_rows_sha256": {
+      "persistence": "0858f758aa60b3ff96c0a642b9303b497c6f98e1c848dfc07b65d75234fb928e",
+      "seasonal_naive": "faf7bc98299600fbfdf6c1fb48bc32d69109a3de4faf9f9f133078c01c40ead6",
+      "xgb_expanding": "135842f77aa0aa57efc9862aaf3ca3a4ca813681e3cf7039c56d266904a0bbd9",
+      "xgb_active_frozen": "cb12f62fb633042f0c8c684a3643bc4079b2a6c1a4107cccb9b9bb56bbd562d3",
+      "hgb_locked_historical": "789ca16ce748c42d3aed25789dc8c0eb42a7d5b6eea76c2a5af9c1cf95c35386",
+      "linear_expanding": "9a2a8b942820d5b02a4811e4f14ae6e124c08794636b2d9b4a8be5583449f236"
+    }
+  }
+}

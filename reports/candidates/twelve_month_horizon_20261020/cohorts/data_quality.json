@@ -1,0 +1,40 @@
+{
+  "accepted_rows": 188458,
+  "provider_ids": 1764,
+  "exact_name_coordinate_rows": 5024,
+  "name_coordinate_conflict_rows": 125400,
+  "unknown_name_rows": 58034,
+  "availability_populated": {
+    "actual_acquisition_at": 0,
+    "first_publication_at": 0,
+    "first_received_at": 0,
+    "available_at": 0
+  },
+  "mapping_policy": "No guessed correction. Full coordinate aggregation conditional; exact-agreement reaggregation separate.",
+  "well_pairs_by_period": {
+    "primary": 38496,
+    "secondary": 8234
+  },
+  "well_pairs_strict_by_period": {
+    "primary": 1554,
+    "secondary": 358
+  },
+  "no_forecast_errors_examined": true,
+  "no_model_fitting_in_preparation": true,
+  "causal_prefix_checks": {
+    "full_coordinate": {
+      "prefix_end": "2022-12-01",
+      "compared_rows": 6204,
+      "features_unchanged": true,
+      "observation_flags_unchanged": true,
+      "comparison_atol": 1e-10
+    },
+    "exact_name_coordinate": {
+      "prefix_end": "2022-12-01",
+      "compared_rows": 188,
+      "features_unchanged": true,
+      "observation_flags_unchanged": true,
+      "comparison_atol": 1e-10
+    }
+  }
+}

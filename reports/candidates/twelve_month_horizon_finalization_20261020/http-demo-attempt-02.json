@@ -1,0 +1,28 @@
+{
+  "recorded_at_utc": "2026-10-20T22:40:53.494180+00:00",
+  "commands": [
+    ".\\venv\\Scripts\\python.exe -B reports/candidates/twelve_month_horizon_finalization_20261020/verify_http_demo.py",
+    "Two urllib direct local probes with ProxyHandler({}), timeout=3 seconds"
+  ],
+  "host_access_used": true,
+  "helper_exit_code": 1,
+  "result": "HTTP verifier timed out before obtaining a response; direct probes to both ports also timed out. Cause not established.",
+  "servers_reported_startup": {
+    "api": "http://127.0.0.1:5051",
+    "vite": "http://127.0.0.1:5181/"
+  },
+  "browser_actions": [
+    {
+      "call": "cua.createBrowserTab(iab, http://127.0.0.1:5181/research, visible=true)",
+      "result": "failed to write kernel assets: system cannot find the path specified (os error 3)"
+    },
+    {
+      "call": "kernel reset, then identical createBrowserTab retry",
+      "result": "same failure before opening a tab"
+    }
+  ],
+  "browser_visual_verified": false,
+  "http_demo_verified": false,
+  "in_process_demo_verified": true,
+  "database_accessed": false
+}

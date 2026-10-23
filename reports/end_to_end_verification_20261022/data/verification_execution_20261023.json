@@ -1,0 +1,16 @@
+{
+  "started_utc": "2026-10-23T04:02:48.583467+00:00",
+  "completed_utc": "2026-10-23T04:03:18.364448+00:00",
+  "cwd": "C:\\Users\\Yasharth\\Downloads\\AquaIQ",
+  "command": [
+    "C:\\Users\\Yasharth\\Downloads\\AquaIQ\\venv\\Scripts\\python.exe",
+    "-B",
+    "C:\\Users\\Yasharth\\Downloads\\AquaIQ\\reports\\end_to_end_verification_20261022\\data\\verify_data.py"
+  ],
+  "script_sha256": "b8a4be68f1a076b5865b86a29fa47d49466674fa26edbb30f357e9a1ff7113b8",
+  "exit_status": 0,
+  "stdout_file": "verification_stdout_20261023.log",
+  "stderr_file": "verification_stderr_20261023.log",
+  "stdout_sha256": "d3766ad893c9a95688696f2d5746007cf3563550e4fcac01c7401c2355821ae8",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

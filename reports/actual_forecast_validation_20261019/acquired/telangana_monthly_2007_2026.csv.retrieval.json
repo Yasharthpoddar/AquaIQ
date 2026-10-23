@@ -1,0 +1,32 @@
+{
+  "requested_url": "https://nwdp.nwic.gov.in/dataset/0000396f-0381-4154-923e-86c8e23c5f5f/resource/b5706a43-1319-44b4-9739-afd9115e1312/download/ground_water_level_manual_monthly_telangna_2007_2026.csv",
+  "final_url": "https://nwdp.nwic.gov.in/dataset/0000396f-0381-4154-923e-86c8e23c5f5f/resource/b5706a43-1319-44b4-9739-afd9115e1312/download/ground_water_level_manual_monthly_telangna_2007_2026.csv",
+  "started_at_utc": "2026-10-19T08:58:11.371838+00:00",
+  "retrieved_at_utc": "2026-10-19T08:58:44.486970+00:00",
+  "http_status": 200,
+  "headers": {
+    "Server": "nginx/1.24.0 (Ubuntu)",
+    "Date": "Mon, 19 Oct 2026 09:02:08 GMT",
+    "Content-Type": "text/csv",
+    "Content-Length": "25564190",
+    "Connection": "close",
+    "Content-Disposition": "inline; filename=ground_water_level_manual_monthly_telangna_2007_2026.csv",
+    "Last-Modified": "Mon, 24 Aug 2026 08:57:19 GMT",
+    "Cache-Control": "no-cache, public, max-age=0, must-revalidate",
+    "ETag": "\"1787561839.7640882-25564190-3020232350\"",
+    "Vary": "Cookie",
+    "X-Frame-Options": "SAMEORIGIN",
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "X-XSS-Protection": "1; mode=block",
+    "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+    "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https: blob:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' https: data:; connect-src 'self' https:; frame-src 'self' https://www.google.com https://maps.google.com https://www.google.co.in; frame-ancestors 'self'; worker-src blob:;",
+    "Access-Control-Allow-Methods": "GET, POST",
+    "Access-Control-Allow-Headers": "Origin, Content-Type, Accept, Authorization"
+  },
+  "bytes": 25564190,
+  "sha256": "f8222245721c421bc2f82b6afbd387ee5cd0e263790515ac7d3ffcce0c521302",
+  "sample_only": false,
+  "sample_byte_limit": null,
+  "availability_caveat": "Retrieval now is not evidence of publication or availability at historical origins."
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "source_role": "retrospective_current_vintage_not_issuance_verified",
+  "input_sha256": {
+    "reports/actual_forecast_validation_20261019/acquired/telangana_monthly_2007_2026.csv": "f8222245721c421bc2f82b6afbd387ee5cd0e263790515ac7d3ffcce0c521302",
+    "reports/actual_forecast_validation_20261019/normalized_v2/research_features.csv": "bce7b8718574e78fd35ff53c95c6478d6d1f0c1c84112306111a26bd10295b8d",
+    "reports/actual_forecast_validation_20261019/normalized_v2/normalized_well_observations.csv": "158ee78df5254bfeeb6f4760751dc79e995cdfab38c2fe7df1f854633dabb494",
+    "reports/actual_forecast_validation_20261019/normalized_v2/panel_membership.csv": "9e7320ac039012314a0e30f09c171ef408218b2c4723735bd85dc4f4f68d7717",
+    "data/processed/features_matrix.csv": "3958737b033a16e722f633a15ad77d80bc5b2a8fb3bea888697f0410362c24ae",
+    "reports/actual_forecast_validation_20261019/evaluation_v2/historical_predictions_vs_observations.csv": "263bab03647de785bf9f3cd3c9ee25bbb08c2338947592957dc7a6bec6bf0503",
+    "config.yaml": "2284fe73c5a30fb03045bd96317ea922e40c6dcfa0aba7108c72f6a8a9d5b656",
+    "reports/candidates/twelve_month_horizon_20261020/cohorts/strict_features.csv": "b9fea5f5d8455f8c4e6a55ce0932be4f5fce49468048fe08b58b67320b016cb2",
+    "data/processed/era5_district_monthly.csv": "a93d7d938ec9b6cec20363c41786a9aa7863c7093ed324a2fee683b50d35da65",
+    "data/processed/era5_district_monthly.manifest.json": "25ce5376cc4153a1cfded22e72acfa64ae0429891d91562546c324ab10af833c",
+    "data/processed/imd_rainfall_district_monthly.csv": "0bc3ec52da3648b5f2166c490e604d0fd781fc95c07fc5ab66ab89d73c57ff21",
+    "data/processed/imd_rainfall_district_monthly.manifest.json": "659301240e18cd4b01de31a5a1829770e1cf204fb10b5472cf71217c0922d930",
+    "reports/github_release_20261020/PUBLIC_SOURCE_PROVENANCE.json": "377c1c9bff1caa292dc32ed7ec60bb8544e2e82759268443d16bf83b794c1065"
+  },
+  "feature_generation_id": "research-telangana-exact-name-coordinate-h12-app-v1",
+  "units": {
+    "gwl": "m_bgl",
+    "rainfall": "mm/month",
+    "evapotranspiration": "mm/month",
+    "temperature": "degC"
+  },
+  "supported_district_ids": [
+    "TS-Adilabad"
+  ],
+  "accepted_well_months": 2817,
+  "provider_well_id_count": 15,
+  "agencies": [
+    "SGWD-Telangana"
+  ],
+  "aquifer_counts": {
+    "Unconfined": 2817
+  },
+  "panel_hash_semantics": "Agency/provider ID/equal weight membership identity, not verified physical continuity",
+  "source_location_policy": "Exact source-name/fixed-polygon agreement; no coordinate correction; metadata agreement is not verified location",
+  "datum": "Source explicitly mbgl; measuring-point changes and replacement history unknown",
+  "actual_acquisition_at": null,
+  "first_publication_at": null,
+  "available_at": null,
+  "forecast_issued_at": null,
+  "historical_availability_verified": false,
+  "public_source_companion": "reports/github_release_20261020/PUBLIC_SOURCE_PROVENANCE.json",
+  "security_policy": "Only explicit hashes/units/counts/source-role metadata; original HTTP headers and cookie-bearing manifests are never read"
+}

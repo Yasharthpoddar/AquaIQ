@@ -1,0 +1,25 @@
+{
+  "started_at_utc": "2026-10-23T04:02:30.398545+00:00",
+  "completed_at_utc": "2026-10-23T04:02:36.891296+00:00",
+  "check_count": 688,
+  "failed_count": 2,
+  "failures": [
+    {
+      "check": "locked_implementation_hash:models/research_horizon.py",
+      "pass": false,
+      "detail": null
+    },
+    {
+      "check": "locked_implementation_hash:scripts/backtest_twelve_month.py",
+      "pass": false,
+      "detail": null
+    }
+  ],
+  "input_files": 72,
+  "no_estimator_loading": true,
+  "no_fitting": true,
+  "no_prediction_calls": true,
+  "no_database": true,
+  "no_downloads": true,
+  "preservation_pass": true
+}

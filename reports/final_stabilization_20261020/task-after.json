@@ -1,0 +1,15 @@
+{
+  "CapturedAtUtc": "2026-10-20T03:19:41.7071493Z",
+  "TaskName": "AquaIQ-Rainfall-Staging",
+  "TaskPath": "\\",
+  "State": "Disabled",
+  "Enabled": false,
+  "IncidentIdentityVerified": true,
+  "ConfigurationOnlyEnabledChanged": false,
+  "BeforeXmlSha256": "5194953e00555f380d8ca00c551b6f60a6ceb84ad8d6827f5814864a77444e5f",
+  "AfterXmlSha256": "9c017924aa9dfb807aa10ca2d9f26121fc9ad40cd7a914a510eab231b4fbf6cf",
+  "Command": "Disable-ScheduledTask -TaskName 'AquaIQ-Rainfall-Staging' -TaskPath '\\'",
+  "OtherTasksChanged": false,
+  "HistoryDeleted": false,
+  "WrapperInvoked": false
+}

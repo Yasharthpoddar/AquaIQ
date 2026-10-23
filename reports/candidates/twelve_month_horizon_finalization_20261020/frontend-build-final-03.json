@@ -1,0 +1,15 @@
+{
+  "command": [
+    "npm.cmd",
+    "--prefix",
+    "dashboard",
+    "run",
+    "build",
+    "--",
+    "--outDir",
+    "../scratch/twelve-month-app-build-final-03"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-20T22:39:32.1235703+00:00",
+  "completed_at_utc": "2026-10-20T22:39:33.3351522+00:00"
+}

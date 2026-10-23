@@ -1,0 +1,23 @@
+
+> dashboard@0.0.0 build
+> vite build --outDir ../scratch/twelve-month-app-build-final-03
+
+vite v8.3.0 building client environment for production...
+transforming...
+✓ 609 modules transformed.
+
+(!) outDir C:\Users\Yasharth\Downloads\AquaIQ\scratch\twelve-month-app-build-final-03 is not inside project root and will not be emptied.
+Use --emptyOutDir to override.
+
+rendering chunks...
+computing gzip size...
+../scratch/twelve-month-app-build-final-03/index.html                   0.68 kB │ gzip:   0.42 kB
+../scratch/twelve-month-app-build-final-03/assets/index-Dx5UfjdW.css   32.08 kB │ gzip:  10.18 kB
+../scratch/twelve-month-app-build-final-03/assets/index-BTfPRGel.js   821.51 kB │ gzip: 244.90 kB
+
+✓ built in 354ms
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.

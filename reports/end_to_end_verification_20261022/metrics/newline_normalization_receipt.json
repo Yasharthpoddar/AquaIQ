@@ -1,0 +1,20 @@
+[
+  {
+    "path": "models/research_horizon.py",
+    "expected_sha256": "cf40c08d352bf09f6e86e48868615fa1918190853004c85dd542c17638864c76",
+    "raw_sha256": "be602eb7d8452017ed1c4facf7fba1de9c63cff4c624d259dd2661bc68820dd6",
+    "lf_normalized_sha256": "cf40c08d352bf09f6e86e48868615fa1918190853004c85dd542c17638864c76",
+    "crlf_count": 259,
+    "raw_match": false,
+    "lf_normalized_match": true
+  },
+  {
+    "path": "scripts/backtest_twelve_month.py",
+    "expected_sha256": "ff9ecc1a8b7e42cbcc4bd2ce57d2967c2709dce2b8cf2c1edbf221d5f805f7d2",
+    "raw_sha256": "8d11a2c394970e2645fe7ee4877ec625f6bf78f11e1b59d8661f4e634f05faaf",
+    "lf_normalized_sha256": "ff9ecc1a8b7e42cbcc4bd2ce57d2967c2709dce2b8cf2c1edbf221d5f805f7d2",
+    "crlf_count": 447,
+    "raw_match": false,
+    "lf_normalized_match": true
+  }
+]

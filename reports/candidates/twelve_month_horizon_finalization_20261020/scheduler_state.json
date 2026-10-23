@@ -1,0 +1,8 @@
+{
+  "VerifiedAtUtc": "2026-10-20T17:27:11.7351417Z",
+  "TaskName": "AquaIQ-Rainfall-Staging",
+  "TaskPath": "\\",
+  "State": "Disabled",
+  "Enabled": false,
+  "ActionTaken": "Read-only verification; no task modification"
+}

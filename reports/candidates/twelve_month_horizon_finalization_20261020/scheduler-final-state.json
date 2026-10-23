@@ -1,0 +1,8 @@
+{
+  "task_name": "AquaIQ-Rainfall-Staging",
+  "enabled": false,
+  "verified_at_utc": "2026-10-20T22:36:27.2481956+00:00",
+  "task_path": "\\",
+  "state": "Disabled",
+  "operation": "read_only"
+}

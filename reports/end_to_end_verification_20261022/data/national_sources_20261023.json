@@ -1,0 +1,67 @@
+{
+  "started_utc": "2026-10-23T04:07:14.762404+00:00",
+  "completed_utc": "2026-10-23T04:07:24.530972+00:00",
+  "legacy_cgwb": {
+    "rows": 1514984,
+    "mapped_finite_dated_rows": 1366656,
+    "invalid_or_unmapped_rows": 148328,
+    "districts": 559,
+    "reported_date_min": "1996-05-01 00:00:00",
+    "reported_date_max": "2023-03-31 00:00:00",
+    "duplicate_district_date_value_rows_not_proven_duplicate_wells": 63342,
+    "sha256": "8d26aad32c4c11a909a27d2d5bc9f624b2225b7338f0f3eaa66acba62db071c7",
+    "expected_prior_lineage_sha256": "8d26aad32c4c11a909a27d2d5bc9f624b2225b7338f0f3eaa66acba62db071c7",
+    "hash_matches_prior_lineage": true
+  },
+  "january2026_pdf": {
+    "source_url_without_query": "https://cgwb.gov.in/wl_data/January_2026.pdf",
+    "source_sha256": "b4a23c8073b3b0b61c242a865930eff2c13c3e8ff1433a7a6a7990e27c037beb",
+    "expected_source_sha256": "b4a23c8073b3b0b61c242a865930eff2c13c3e8ff1433a7a6a7990e27c037beb",
+    "source_hash_matches": true,
+    "output_hash_checks": [
+      {
+        "file": "station_records.csv",
+        "expected_sha256": "ee4a4878c854448282bc12a8ac2ef560e17d51f1696f163a6e95a6d86c3b3c57",
+        "actual_sha256": "ee4a4878c854448282bc12a8ac2ef560e17d51f1696f163a6e95a6d86c3b3c57",
+        "matches": true
+      },
+      {
+        "file": "station_audit.csv",
+        "expected_sha256": "b0a04b5a13a0c7c50b48d48aff570154c0c9ab2495f3d848c9b2f96501eaa30d",
+        "actual_sha256": "b0a04b5a13a0c7c50b48d48aff570154c0c9ab2495f3d848c9b2f96501eaa30d",
+        "matches": true
+      },
+      {
+        "file": "rejected_station_records.csv",
+        "expected_sha256": "3824752c2f6be99f0645d4c44e3eff9c697c0eceb8eedac84a2b7d5bfe041d4c",
+        "actual_sha256": "3824752c2f6be99f0645d4c44e3eff9c697c0eceb8eedac84a2b7d5bfe041d4c",
+        "matches": true
+      },
+      {
+        "file": "canonical_district_month_candidates.csv",
+        "expected_sha256": "c2f7b98b3f382cd50e72d7f3b0fc2d00c6accf973e8a839b58c8af9376a8500c",
+        "actual_sha256": "c2f7b98b3f382cd50e72d7f3b0fc2d00c6accf973e8a839b58c8af9376a8500c",
+        "matches": true
+      }
+    ],
+    "source_rows": 16952,
+    "accepted_rows": 16605,
+    "rejected_rows": 347,
+    "district_months": 639,
+    "accepted_reported_date_counts": {
+      "2026-01-10 00:00:00": 16605
+    },
+    "aggregation_recomputed_equal_unique_station_month_means": true,
+    "max_aggregation_absolute_difference_m": 3.552713678800501e-15,
+    "source_backed_january2026_means_match_active_export": true,
+    "active_export_comparison_rows": 639,
+    "manifest_units": {
+      "gwl": "m_bgl"
+    },
+    "transport_receipt_or_provider_first_availability": "Not established by this retained extraction manifest; as_of is process context.",
+    "identity_limit": "station_key is a location/name proxy; stable physical well/datum/replacement continuity unknown."
+  },
+  "legacy_lineage_verification_exit_status": 0,
+  "passed": true,
+  "scope": "Read retained source and extracted CSV bytes only; no PDF extraction, DB reconciliation, ingestion, model loads or forecasts."
+}

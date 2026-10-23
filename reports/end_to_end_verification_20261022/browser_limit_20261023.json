@@ -1,0 +1,20 @@
+{
+  "recorded_at_utc": "2026-10-23T10:18:10.282372+00:00",
+  "live_visual_verdict": "NOT VERIFIED",
+  "earlier_in_app_url": "http://127.0.0.1:5182/district/HR-Kurukshetra",
+  "earlier_observation": "Cached rendered content was readable on 22 October; reload returned ERR_CONNECTION_REFUSED. This is not a fresh successful live page check.",
+  "new_audit_url": "http://127.0.0.1:5183/",
+  "in_app_attempt": "Temporary browser tab was requested; its initial state output was truncated. No fresh chart screenshot retained.",
+  "windows_browser_attempt": "Existing Edge selected, separate New tab window opened, local URL entered in address bar. Return/navigation produced the error below.",
+  "exact_stop_message": "Computer Use has been stopped for this turn because it could not determine the current browser URL on Windows with enough confidence to enforce policy. Stop your work and send a final message noting why Computer Use ended.",
+  "subsequent_ui_interaction": false,
+  "not_verified": [
+    "Fresh rendered charts",
+    "Map interactions",
+    "Four-card layout",
+    "Responsive/mobile layout",
+    "Page navigation by clicks",
+    "Live loading/error/retry states"
+  ],
+  "independent_evidence": "HTTP receipts and mocked contract tests do not substitute for visual verification."
+}

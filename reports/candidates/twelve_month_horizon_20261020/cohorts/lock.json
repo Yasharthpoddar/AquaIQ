@@ -1,0 +1,16 @@
+{
+  "frozen_at_utc": "2026-10-20T16:34:04.564725+00:00",
+  "protocol_sha256": "1a93abf0a52eb44263d05090137df2c7000f83c3d0cf2c3e2843c56ac1ec57c2",
+  "implementation_sha256": {
+    "models/research_horizon.py": "cf40c08d352bf09f6e86e48868615fa1918190853004c85dd542c17638864c76",
+    "scripts/backtest_twelve_month.py": "ff9ecc1a8b7e42cbcc4bd2ce57d2967c2709dce2b8cf2c1edbf221d5f805f7d2"
+  },
+  "files": {
+    "cohort_counts.csv": "1ee0659302afd6dfb470ba243751865e66c85e27c54293a3ecd058a358494734",
+    "data_quality.json": "9c75f82033720e9c2a260bda4bf34d0ccbc276aafce264efbd3df8da4be6f075",
+    "exact_name_coordinate_inventory.csv": "125689e5405f1290f13b8d056b3bf8c4e9bd306c9bc979fb157a0a2468ff62a2",
+    "full_coordinate_inventory.csv": "3023addad54eaac33a7e84e26d90f4903241bc0a6d4149e1e0fd9c2b64e93ce2",
+    "strict_features.csv": "b9fea5f5d8455f8c4e6a55ce0932be4f5fce49468048fe08b58b67320b016cb2",
+    "well_pairs.csv": "627e362c196f2f3aa9d0cfb8cd8a1cb4be6b9e7af530bf7c5be4f888f4879e98"
+  }
+}

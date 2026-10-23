@@ -1,0 +1,3674 @@
+{
+  "cards_without_deserialization": [
+    {
+      "card": "reports/candidates/twelve_month_horizon_20261020/evaluation/models/exact_name_coordinate/hgb_12month_fixed_2024_card.json",
+      "family": "hist_gradient_boosting",
+      "train_n": 164,
+      "cutoff": "2021-12-31",
+      "earliest_eval_origin": "2023-01-01",
+      "max_train_target": "2021-12-01",
+      "model_sha256": "ba6d27020b0018ebdd611cf362fbf4ee94e1943d5e117feefd5bc1e9ad55ba99"
+    },
+    {
+      "card": "reports/candidates/twelve_month_horizon_20261020/evaluation/models/exact_name_coordinate/hgb_12month_fixed_2025_card.json",
+      "family": "hist_gradient_boosting",
+      "train_n": 176,
+      "cutoff": "2022-12-31",
+      "earliest_eval_origin": "2024-01-01",
+      "max_train_target": "2022-12-01",
+      "model_sha256": "d8cb7994a731f43387d27556715d9fe7d59ed720f508275c63f311bc307a61ed"
+    },
+    {
+      "card": "reports/candidates/twelve_month_horizon_20261020/evaluation/models/exact_name_coordinate/hgb_12month_fixed_2026_card.json",
+      "family": "hist_gradient_boosting",
+      "train_n": 188,
+      "cutoff": "2023-12-31",
+      "earliest_eval_origin": "2025-01-01",
+      "max_train_target": "2023-12-01",
+      "model_sha256": "0a2203d2d31ded9b2873c33c32edcec245e5c6e5d57245c050df24d37102f320"
+    },
+    {
+      "card": "reports/candidates/twelve_month_horizon_20261020/evaluation/models/exact_name_coordinate/linear_expanding_2024_card.json",
+      "family": "linear_regression",
+      "train_n": 158,
+      "cutoff": "2021-12-31",
+      "earliest_eval_origin": "2023-01-01",
+      "max_train_target": "2021-12-01",
+      "model_sha256": "9dc991b2af8d8510c63b5cf879e38850afbb20fa75dce2f7c4b5a9035cc5908c"
+    },
+    {
+      "card": "reports/candidates/twelve_month_horizon_20261020/evaluation/models/exact_name_coordinate/linear_expanding_2025_card.json",
+      "family": "linear_regression",
+      "train_n": 170,
+      "cutoff": "2022-12-31",
+      "earliest_eval_origin": "2024-01-01",
+      "max_train_target": "2022-12-01",
+      "model_sha256": "febc71d23b2e9146f6a97d1f35e26afa8af4f5c3722c025ba8553c4f3d5662c5"
+    },
+    {
+      "card": "reports/candidates/twelve_month_horizon_20261020/evaluation/models/exact_name_coordinate/linear_expanding_2026_card.json",
+      "family": "linear_regression",
+      "train_n": 182,
+      "cutoff": "2023-12-31",
+      "earliest_eval_origin": "2025-01-01",
+      "max_train_target": "2023-12-01",
+      "model_sha256": "d0e05c9a16a5152de3f3ea2e75842ca70eaebed9ae3a38a354044eb84687a56f"
+    },
+    {
+      "card": "reports/candidates/twelve_month_horizon_20261020/evaluation/models/exact_name_coordinate/xgb_expanding_2024_card.json",
+      "family": "xgboost",
+      "train_n": 164,
+      "cutoff": "2021-12-31",
+      "earliest_eval_origin": "2023-01-01",
+      "max_train_target": "2021-12-01",
+      "model_sha256": "6255ec0002ed6ad226193e22f9d364a0b1988c7d4a7b363af50372345e9fa4e7"
+    },
+    {
+      "card": "reports/candidates/twelve_month_horizon_20261020/evaluation/models/exact_name_coordinate/xgb_expanding_2025_card.json",
+      "family": "xgboost",
+      "train_n": 176,
+      "cutoff": "2022-12-31",
+      "earliest_eval_origin": "2024-01-01",
+      "max_train_target": "2022-12-01",
+      "model_sha256": "8c6dda7233522d4da9bbb3cd2e15d131320b0341805de334481afeec1acdd45f"
+    },
+    {
+      "card": "reports/candidates/twelve_month_horizon_20261020/evaluation/models/exact_name_coordinate/xgb_expanding_2026_card.json",
+      "family": "xgboost",
+      "train_n": 188,
+      "cutoff": "2023-12-31",
+      "earliest_eval_origin": "2025-01-01",
+      "max_train_target": "2023-12-01",
+      "model_sha256": "ec5493d9e62af6c3858c0ec826e67a0c5161a50f1b4fd65701c18099fc659e74"
+    },
+    {
+      "card": "reports/candidates/twelve_month_horizon_20261020/evaluation/models/full_coordinate/hgb_12month_fixed_2024_card.json",
+      "family": "hist_gradient_boosting",
+      "train_n": 5410,
+      "cutoff": "2021-12-31",
+      "earliest_eval_origin": "2023-01-01",
+      "max_train_target": "2021-12-01",
+      "model_sha256": "3fbe3a9bba0530341c5f77de960b15da62d95e405a38e93868f3e17dfbe6d92f"
+    },
+    {
+      "card": "reports/candidates/twelve_month_horizon_20261020/evaluation/models/full_coordinate/hgb_12month_fixed_2025_card.json",
+      "family": "hist_gradient_boosting",
+      "train_n": 5806,
+      "cutoff": "2022-12-31",
+      "earliest_eval_origin": "2024-01-01",
+      "max_train_target": "2022-12-01",
+      "model_sha256": "9fb5dc753d1a75f18af702029e0c8db2e9f17541f1c5c46982dbc406b80ef59e"
+    },
+    {
+      "card": "reports/candidates/twelve_month_horizon_20261020/evaluation/models/full_coordinate/hgb_12month_fixed_2026_card.json",
+      "family": "hist_gradient_boosting",
+      "train_n": 6202,
+      "cutoff": "2023-12-31",
+      "earliest_eval_origin": "2025-01-01",
+      "max_train_target": "2023-12-01",
+      "model_sha256": "93b230530508db1e6f7b848fd878a25fbbeb439053ed43f0e0ba0303ea0914e7"
+    },
+    {
+      "card": "reports/candidates/twelve_month_horizon_20261020/evaluation/models/full_coordinate/linear_expanding_2024_card.json",
+      "family": "linear_regression",
+      "train_n": 5212,
+      "cutoff": "2021-12-31",
+      "earliest_eval_origin": "2023-01-01",
+      "max_train_target": "2021-12-01",
+      "model_sha256": "aaaa674744e04ce2e926c35fd189582415967a4cddfcbc347dc8f0b253af4784"
+    },
+    {
+      "card": "reports/candidates/twelve_month_horizon_20261020/evaluation/models/full_coordinate/linear_expanding_2025_card.json",
+      "family": "linear_regression",
+      "train_n": 5608,
+      "cutoff": "2022-12-31",
+      "earliest_eval_origin": "2024-01-01",
+      "max_train_target": "2022-12-01",
+      "model_sha256": "b34207ced8cf7fa7d89676c0c3c410920c554aefedce389c8f7f5b338c65a9a9"
+    },
+    {
+      "card": "reports/candidates/twelve_month_horizon_20261020/evaluation/models/full_coordinate/linear_expanding_2026_card.json",
+      "family": "linear_regression",
+      "train_n": 6004,
+      "cutoff": "2023-12-31",
+      "earliest_eval_origin": "2025-01-01",
+      "max_train_target": "2023-12-01",
+      "model_sha256": "27065466319e3a863c815648e695e0d72f515f1fa3f9a3ac1298a412dca95c7b"
+    },
+    {
+      "card": "reports/candidates/twelve_month_horizon_20261020/evaluation/models/full_coordinate/xgb_expanding_2024_card.json",
+      "family": "xgboost",
+      "train_n": 5410,
+      "cutoff": "2021-12-31",
+      "earliest_eval_origin": "2023-01-01",
+      "max_train_target": "2021-12-01",
+      "model_sha256": "faee0ff0c2b6baa59acb1c0b68618b605b1b68d66f23ccd49bdc53f0cd71175c"
+    },
+    {
+      "card": "reports/candidates/twelve_month_horizon_20261020/evaluation/models/full_coordinate/xgb_expanding_2025_card.json",
+      "family": "xgboost",
+      "train_n": 5806,
+      "cutoff": "2022-12-31",
+      "earliest_eval_origin": "2024-01-01",
+      "max_train_target": "2022-12-01",
+      "model_sha256": "5b5a4ee629262450fe9eea483ce988d18b743937864ee6bc0c24b422976a6afc"
+    },
+    {
+      "card": "reports/candidates/twelve_month_horizon_20261020/evaluation/models/full_coordinate/xgb_expanding_2026_card.json",
+      "family": "xgboost",
+      "train_n": 6202,
+      "cutoff": "2023-12-31",
+      "earliest_eval_origin": "2025-01-01",
+      "max_train_target": "2023-12-01",
+      "model_sha256": "e9636c1b3155368d4315025448f5238cf75b96e933033c3f4b0af3d5a9ae2b7b"
+    }
+  ],
+  "checks": [
+    {
+      "check": "h12:protocol_frozen_hash",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "protocol_input_hash:reports/actual_forecast_validation_20261019/acquired/telangana_monthly_2007_2026.csv",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "protocol_input_hash:reports/actual_forecast_validation_20261019/normalized_v2/research_features.csv",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "protocol_input_hash:reports/actual_forecast_validation_20261019/normalized_v2/normalized_well_observations.csv",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "protocol_input_hash:reports/actual_forecast_validation_20261019/normalized_v2/panel_membership.csv",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "protocol_input_hash:data/processed/features_matrix.csv",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "protocol_input_hash:reports/actual_forecast_validation_20261019/evaluation_v2/historical_predictions_vs_observations.csv",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "protocol_input_hash:config.yaml",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "locked_implementation_hash:models/research_horizon.py",
+      "pass": false,
+      "detail": null
+    },
+    {
+      "check": "locked_implementation_hash:scripts/backtest_twelve_month.py",
+      "pass": false,
+      "detail": null
+    },
+    {
+      "check": "locked_cohort_hash:cohort_counts.csv",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "locked_cohort_hash:data_quality.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "locked_cohort_hash:exact_name_coordinate_inventory.csv",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "locked_cohort_hash:full_coordinate_inventory.csv",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "locked_cohort_hash:strict_features.csv",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "locked_cohort_hash:well_pairs.csv",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate:frozen_case_order",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate:frozen_common_membership",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate:unique_case_ids",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate:exact_calendar_horizon",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate:source_origin_explicitly_observed_not_imputed",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate:source_target_explicitly_observed_not_imputed",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate:source_target_values_equal",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate:source_origin_baseline_values_equal",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate:all_four_models_finite_on_identical_cases",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate:annual_baseline_exactly_origin",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate:no_issuance_timestamp",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate:availability_unverified",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate:saved_protocol_identity",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:n:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:mae_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:rmse_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:bias_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:r2:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:ae_p50_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:ae_p75_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:ae_p90_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:ae_p95_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:ae_p99_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:ae_max_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:ae_over_5m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:ae_over_10m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:negative_predictions:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:n:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:mae_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:rmse_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:bias_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:r2:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:ae_p50_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:ae_p75_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:ae_p90_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:ae_p95_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:ae_p99_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:ae_max_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:ae_over_5m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:ae_over_10m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:negative_predictions:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:n:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:mae_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:rmse_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:bias_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:r2:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:ae_p50_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:ae_p75_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:ae_p90_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:ae_p95_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:ae_p99_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:ae_max_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:ae_over_5m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:ae_over_10m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:negative_predictions:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:n:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:mae_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:rmse_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:bias_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:r2:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:ae_p50_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:ae_p75_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:ae_p90_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:ae_p95_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:ae_p99_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:ae_max_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:ae_over_5m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:ae_over_10m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:negative_predictions:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:district:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:district:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:district:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:district:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:district:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:district:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:district_x_12month_blocks:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:district_x_12month_blocks:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:district_x_12month_blocks:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:district_x_12month_blocks:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:district_x_12month_blocks:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:persistence:district_x_12month_blocks:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:district:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:district:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:district:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:district:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:district:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:district:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:district_x_12month_blocks:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:district_x_12month_blocks:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:district_x_12month_blocks:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:district_x_12month_blocks:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:district_x_12month_blocks:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:xgb_expanding:district_x_12month_blocks:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:district:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:district:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:district:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:district:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:district:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:district:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:district_x_12month_blocks:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:district_x_12month_blocks:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:district_x_12month_blocks:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:district_x_12month_blocks:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:district_x_12month_blocks:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:linear_expanding:district_x_12month_blocks:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:district:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:district:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:district:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:district:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:district:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:district:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:district_x_12month_blocks:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:district_x_12month_blocks:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:district_x_12month_blocks:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:district_x_12month_blocks:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:district_x_12month_blocks:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_primary:hgb_12month_fixed:district_x_12month_blocks:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:n:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:mae_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:rmse_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:bias_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:r2:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:ae_p50_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:ae_p75_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:ae_p90_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:ae_p95_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:ae_p99_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:ae_max_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:ae_over_5m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:ae_over_10m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:negative_predictions:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:n:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:mae_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:rmse_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:bias_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:r2:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:ae_p50_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:ae_p75_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:ae_p90_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:ae_p95_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:ae_p99_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:ae_max_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:ae_over_5m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:ae_over_10m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:negative_predictions:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:n:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:mae_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:rmse_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:bias_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:r2:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:ae_p50_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:ae_p75_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:ae_p90_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:ae_p95_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:ae_p99_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:ae_max_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:ae_over_5m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:ae_over_10m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:negative_predictions:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:n:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:mae_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:rmse_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:bias_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:r2:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:ae_p50_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:ae_p75_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:ae_p90_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:ae_p95_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:ae_p99_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:ae_max_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:ae_over_5m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:ae_over_10m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:negative_predictions:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:district:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:district:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:district:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:district:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:district:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:district:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:district_x_12month_blocks:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:district_x_12month_blocks:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:district_x_12month_blocks:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:district_x_12month_blocks:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:district_x_12month_blocks:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:persistence:district_x_12month_blocks:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:district:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:district:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:district:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:district:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:district:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:district:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:district_x_12month_blocks:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:district_x_12month_blocks:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:district_x_12month_blocks:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:district_x_12month_blocks:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:district_x_12month_blocks:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:xgb_expanding:district_x_12month_blocks:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:district:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:district:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:district:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:district:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:district:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:district:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:district_x_12month_blocks:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:district_x_12month_blocks:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:district_x_12month_blocks:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:district_x_12month_blocks:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:district_x_12month_blocks:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:linear_expanding:district_x_12month_blocks:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:district:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:district:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:district:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:district:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:district:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:district:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:district_x_12month_blocks:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:district_x_12month_blocks:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:district_x_12month_blocks:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:district_x_12month_blocks:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:district_x_12month_blocks:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "full_coordinate_secondary:hgb_12month_fixed:district_x_12month_blocks:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate:frozen_case_order",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate:frozen_common_membership",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate:unique_case_ids",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate:exact_calendar_horizon",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate:source_origin_explicitly_observed_not_imputed",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate:source_target_explicitly_observed_not_imputed",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate:source_target_values_equal",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate:source_origin_baseline_values_equal",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate:all_four_models_finite_on_identical_cases",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate:annual_baseline_exactly_origin",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate:no_issuance_timestamp",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate:availability_unverified",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate:saved_protocol_identity",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:n:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:mae_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:rmse_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:bias_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:r2:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:ae_p50_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:ae_p75_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:ae_p90_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:ae_p95_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:ae_p99_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:ae_max_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:ae_over_5m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:ae_over_10m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:negative_predictions:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:n:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:mae_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:rmse_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:bias_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:r2:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:ae_p50_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:ae_p75_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:ae_p90_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:ae_p95_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:ae_p99_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:ae_max_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:ae_over_5m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:ae_over_10m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:negative_predictions:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:n:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:mae_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:rmse_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:bias_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:r2:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:ae_p50_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:ae_p75_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:ae_p90_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:ae_p95_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:ae_p99_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:ae_max_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:ae_over_5m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:ae_over_10m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:negative_predictions:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:n:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:mae_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:rmse_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:bias_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:r2:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:ae_p50_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:ae_p75_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:ae_p90_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:ae_p95_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:ae_p99_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:ae_max_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:ae_over_5m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:ae_over_10m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:negative_predictions:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:district:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:district:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:district:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:district:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:district:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:district:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:district_x_12month_blocks:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:district_x_12month_blocks:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:district_x_12month_blocks:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:district_x_12month_blocks:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:district_x_12month_blocks:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:persistence:district_x_12month_blocks:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:district:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:district:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:district:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:district:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:district:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:district:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:district_x_12month_blocks:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:district_x_12month_blocks:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:district_x_12month_blocks:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:district_x_12month_blocks:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:district_x_12month_blocks:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:xgb_expanding:district_x_12month_blocks:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:district:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:district:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:district:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:district:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:district:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:district:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:district_x_12month_blocks:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:district_x_12month_blocks:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:district_x_12month_blocks:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:district_x_12month_blocks:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:district_x_12month_blocks:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:linear_expanding:district_x_12month_blocks:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:district:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:district:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:district:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:district:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:district:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:district:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:district_x_12month_blocks:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:district_x_12month_blocks:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:district_x_12month_blocks:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:district_x_12month_blocks:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:district_x_12month_blocks:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_primary:hgb_12month_fixed:district_x_12month_blocks:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:n:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:mae_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:rmse_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:bias_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:r2:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:ae_p50_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:ae_p75_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:ae_p90_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:ae_p95_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:ae_p99_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:ae_max_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:ae_over_5m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:ae_over_10m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:negative_predictions:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:n:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:mae_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:rmse_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:bias_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:r2:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:ae_p50_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:ae_p75_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:ae_p90_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:ae_p95_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:ae_p99_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:ae_max_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:ae_over_5m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:ae_over_10m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:negative_predictions:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:n:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:mae_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:rmse_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:bias_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:r2:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:ae_p50_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:ae_p75_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:ae_p90_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:ae_p95_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:ae_p99_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:ae_max_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:ae_over_5m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:ae_over_10m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:negative_predictions:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:n:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:mae_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:rmse_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:bias_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:r2:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:ae_p50_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:ae_p75_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:ae_p90_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:ae_p95_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:ae_p99_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:ae_max_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:ae_over_5m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:ae_over_10m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:negative_predictions:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:district:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:district:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:district:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:district:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:district:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:district:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:district_x_12month_blocks:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:district_x_12month_blocks:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:district_x_12month_blocks:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:district_x_12month_blocks:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:district_x_12month_blocks:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:persistence:district_x_12month_blocks:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:district:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:district:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:district:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:district:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:district:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:district:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:district_x_12month_blocks:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:district_x_12month_blocks:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:district_x_12month_blocks:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:district_x_12month_blocks:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:district_x_12month_blocks:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:xgb_expanding:district_x_12month_blocks:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:district:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:district:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:district:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:district:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:district:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:district:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:district_x_12month_blocks:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:district_x_12month_blocks:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:district_x_12month_blocks:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:district_x_12month_blocks:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:district_x_12month_blocks:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:linear_expanding:district_x_12month_blocks:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:district:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:district:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:district:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:district:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:district:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:district:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:district_x_12month_blocks:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:district_x_12month_blocks:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:district_x_12month_blocks:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:district_x_12month_blocks:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:district_x_12month_blocks:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "exact_name_coordinate_secondary:hgb_12month_fixed:district_x_12month_blocks:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "primary_792_and_33",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "primary_balanced_24_per_district",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "primary_balanced_66_per_calendar_month",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "target_quality_same_primary_cases",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_model_hash:hgb_12month_fixed_2024_card.json:exact_name_coordinate",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_schema:evaluation\\models\\exact_name_coordinate\\hgb_12month_fixed_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_contract:evaluation\\models\\exact_name_coordinate\\hgb_12month_fixed_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_cutoff:evaluation\\models\\exact_name_coordinate\\hgb_12month_fixed_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "row_model_hash:evaluation\\models\\exact_name_coordinate\\hgb_12month_fixed_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "training_membership_count:evaluation\\models\\exact_name_coordinate\\hgb_12month_fixed_2024_card.json",
+      "pass": true,
+      "detail": {
+        "recomputed": 164,
+        "card": 164
+      }
+    },
+    {
+      "check": "training_membership_hash:evaluation\\models\\exact_name_coordinate\\hgb_12month_fixed_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_model_hash:hgb_12month_fixed_2025_card.json:exact_name_coordinate",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_schema:evaluation\\models\\exact_name_coordinate\\hgb_12month_fixed_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_contract:evaluation\\models\\exact_name_coordinate\\hgb_12month_fixed_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_cutoff:evaluation\\models\\exact_name_coordinate\\hgb_12month_fixed_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "row_model_hash:evaluation\\models\\exact_name_coordinate\\hgb_12month_fixed_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "training_membership_count:evaluation\\models\\exact_name_coordinate\\hgb_12month_fixed_2025_card.json",
+      "pass": true,
+      "detail": {
+        "recomputed": 176,
+        "card": 176
+      }
+    },
+    {
+      "check": "training_membership_hash:evaluation\\models\\exact_name_coordinate\\hgb_12month_fixed_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_model_hash:hgb_12month_fixed_2026_card.json:exact_name_coordinate",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_schema:evaluation\\models\\exact_name_coordinate\\hgb_12month_fixed_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_contract:evaluation\\models\\exact_name_coordinate\\hgb_12month_fixed_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_cutoff:evaluation\\models\\exact_name_coordinate\\hgb_12month_fixed_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "row_model_hash:evaluation\\models\\exact_name_coordinate\\hgb_12month_fixed_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "training_membership_count:evaluation\\models\\exact_name_coordinate\\hgb_12month_fixed_2026_card.json",
+      "pass": true,
+      "detail": {
+        "recomputed": 188,
+        "card": 188
+      }
+    },
+    {
+      "check": "training_membership_hash:evaluation\\models\\exact_name_coordinate\\hgb_12month_fixed_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_model_hash:linear_expanding_2024_card.json:exact_name_coordinate",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_schema:evaluation\\models\\exact_name_coordinate\\linear_expanding_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_contract:evaluation\\models\\exact_name_coordinate\\linear_expanding_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_cutoff:evaluation\\models\\exact_name_coordinate\\linear_expanding_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "row_model_hash:evaluation\\models\\exact_name_coordinate\\linear_expanding_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "training_membership_count:evaluation\\models\\exact_name_coordinate\\linear_expanding_2024_card.json",
+      "pass": true,
+      "detail": {
+        "recomputed": 158,
+        "card": 158
+      }
+    },
+    {
+      "check": "training_membership_hash:evaluation\\models\\exact_name_coordinate\\linear_expanding_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_model_hash:linear_expanding_2025_card.json:exact_name_coordinate",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_schema:evaluation\\models\\exact_name_coordinate\\linear_expanding_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_contract:evaluation\\models\\exact_name_coordinate\\linear_expanding_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_cutoff:evaluation\\models\\exact_name_coordinate\\linear_expanding_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "row_model_hash:evaluation\\models\\exact_name_coordinate\\linear_expanding_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "training_membership_count:evaluation\\models\\exact_name_coordinate\\linear_expanding_2025_card.json",
+      "pass": true,
+      "detail": {
+        "recomputed": 170,
+        "card": 170
+      }
+    },
+    {
+      "check": "training_membership_hash:evaluation\\models\\exact_name_coordinate\\linear_expanding_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_model_hash:linear_expanding_2026_card.json:exact_name_coordinate",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_schema:evaluation\\models\\exact_name_coordinate\\linear_expanding_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_contract:evaluation\\models\\exact_name_coordinate\\linear_expanding_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_cutoff:evaluation\\models\\exact_name_coordinate\\linear_expanding_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "row_model_hash:evaluation\\models\\exact_name_coordinate\\linear_expanding_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "training_membership_count:evaluation\\models\\exact_name_coordinate\\linear_expanding_2026_card.json",
+      "pass": true,
+      "detail": {
+        "recomputed": 182,
+        "card": 182
+      }
+    },
+    {
+      "check": "training_membership_hash:evaluation\\models\\exact_name_coordinate\\linear_expanding_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_model_hash:xgb_expanding_2024_card.json:exact_name_coordinate",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_schema:evaluation\\models\\exact_name_coordinate\\xgb_expanding_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_contract:evaluation\\models\\exact_name_coordinate\\xgb_expanding_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_cutoff:evaluation\\models\\exact_name_coordinate\\xgb_expanding_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "row_model_hash:evaluation\\models\\exact_name_coordinate\\xgb_expanding_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "training_membership_count:evaluation\\models\\exact_name_coordinate\\xgb_expanding_2024_card.json",
+      "pass": true,
+      "detail": {
+        "recomputed": 164,
+        "card": 164
+      }
+    },
+    {
+      "check": "training_membership_hash:evaluation\\models\\exact_name_coordinate\\xgb_expanding_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_model_hash:xgb_expanding_2025_card.json:exact_name_coordinate",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_schema:evaluation\\models\\exact_name_coordinate\\xgb_expanding_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_contract:evaluation\\models\\exact_name_coordinate\\xgb_expanding_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_cutoff:evaluation\\models\\exact_name_coordinate\\xgb_expanding_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "row_model_hash:evaluation\\models\\exact_name_coordinate\\xgb_expanding_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "training_membership_count:evaluation\\models\\exact_name_coordinate\\xgb_expanding_2025_card.json",
+      "pass": true,
+      "detail": {
+        "recomputed": 176,
+        "card": 176
+      }
+    },
+    {
+      "check": "training_membership_hash:evaluation\\models\\exact_name_coordinate\\xgb_expanding_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_model_hash:xgb_expanding_2026_card.json:exact_name_coordinate",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_schema:evaluation\\models\\exact_name_coordinate\\xgb_expanding_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_contract:evaluation\\models\\exact_name_coordinate\\xgb_expanding_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_cutoff:evaluation\\models\\exact_name_coordinate\\xgb_expanding_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "row_model_hash:evaluation\\models\\exact_name_coordinate\\xgb_expanding_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "training_membership_count:evaluation\\models\\exact_name_coordinate\\xgb_expanding_2026_card.json",
+      "pass": true,
+      "detail": {
+        "recomputed": 188,
+        "card": 188
+      }
+    },
+    {
+      "check": "training_membership_hash:evaluation\\models\\exact_name_coordinate\\xgb_expanding_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_model_hash:hgb_12month_fixed_2024_card.json:full_coordinate",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_schema:evaluation\\models\\full_coordinate\\hgb_12month_fixed_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_contract:evaluation\\models\\full_coordinate\\hgb_12month_fixed_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_cutoff:evaluation\\models\\full_coordinate\\hgb_12month_fixed_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "row_model_hash:evaluation\\models\\full_coordinate\\hgb_12month_fixed_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "training_membership_count:evaluation\\models\\full_coordinate\\hgb_12month_fixed_2024_card.json",
+      "pass": true,
+      "detail": {
+        "recomputed": 5410,
+        "card": 5410
+      }
+    },
+    {
+      "check": "training_membership_hash:evaluation\\models\\full_coordinate\\hgb_12month_fixed_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_model_hash:hgb_12month_fixed_2025_card.json:full_coordinate",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_schema:evaluation\\models\\full_coordinate\\hgb_12month_fixed_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_contract:evaluation\\models\\full_coordinate\\hgb_12month_fixed_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_cutoff:evaluation\\models\\full_coordinate\\hgb_12month_fixed_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "row_model_hash:evaluation\\models\\full_coordinate\\hgb_12month_fixed_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "training_membership_count:evaluation\\models\\full_coordinate\\hgb_12month_fixed_2025_card.json",
+      "pass": true,
+      "detail": {
+        "recomputed": 5806,
+        "card": 5806
+      }
+    },
+    {
+      "check": "training_membership_hash:evaluation\\models\\full_coordinate\\hgb_12month_fixed_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_model_hash:hgb_12month_fixed_2026_card.json:full_coordinate",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_schema:evaluation\\models\\full_coordinate\\hgb_12month_fixed_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_contract:evaluation\\models\\full_coordinate\\hgb_12month_fixed_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_cutoff:evaluation\\models\\full_coordinate\\hgb_12month_fixed_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "row_model_hash:evaluation\\models\\full_coordinate\\hgb_12month_fixed_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "training_membership_count:evaluation\\models\\full_coordinate\\hgb_12month_fixed_2026_card.json",
+      "pass": true,
+      "detail": {
+        "recomputed": 6202,
+        "card": 6202
+      }
+    },
+    {
+      "check": "training_membership_hash:evaluation\\models\\full_coordinate\\hgb_12month_fixed_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_model_hash:linear_expanding_2024_card.json:full_coordinate",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_schema:evaluation\\models\\full_coordinate\\linear_expanding_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_contract:evaluation\\models\\full_coordinate\\linear_expanding_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_cutoff:evaluation\\models\\full_coordinate\\linear_expanding_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "row_model_hash:evaluation\\models\\full_coordinate\\linear_expanding_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "training_membership_count:evaluation\\models\\full_coordinate\\linear_expanding_2024_card.json",
+      "pass": true,
+      "detail": {
+        "recomputed": 5212,
+        "card": 5212
+      }
+    },
+    {
+      "check": "training_membership_hash:evaluation\\models\\full_coordinate\\linear_expanding_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_model_hash:linear_expanding_2025_card.json:full_coordinate",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_schema:evaluation\\models\\full_coordinate\\linear_expanding_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_contract:evaluation\\models\\full_coordinate\\linear_expanding_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_cutoff:evaluation\\models\\full_coordinate\\linear_expanding_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "row_model_hash:evaluation\\models\\full_coordinate\\linear_expanding_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "training_membership_count:evaluation\\models\\full_coordinate\\linear_expanding_2025_card.json",
+      "pass": true,
+      "detail": {
+        "recomputed": 5608,
+        "card": 5608
+      }
+    },
+    {
+      "check": "training_membership_hash:evaluation\\models\\full_coordinate\\linear_expanding_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_model_hash:linear_expanding_2026_card.json:full_coordinate",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_schema:evaluation\\models\\full_coordinate\\linear_expanding_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_contract:evaluation\\models\\full_coordinate\\linear_expanding_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_cutoff:evaluation\\models\\full_coordinate\\linear_expanding_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "row_model_hash:evaluation\\models\\full_coordinate\\linear_expanding_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "training_membership_count:evaluation\\models\\full_coordinate\\linear_expanding_2026_card.json",
+      "pass": true,
+      "detail": {
+        "recomputed": 6004,
+        "card": 6004
+      }
+    },
+    {
+      "check": "training_membership_hash:evaluation\\models\\full_coordinate\\linear_expanding_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_model_hash:xgb_expanding_2024_card.json:full_coordinate",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_schema:evaluation\\models\\full_coordinate\\xgb_expanding_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_contract:evaluation\\models\\full_coordinate\\xgb_expanding_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_cutoff:evaluation\\models\\full_coordinate\\xgb_expanding_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "row_model_hash:evaluation\\models\\full_coordinate\\xgb_expanding_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "training_membership_count:evaluation\\models\\full_coordinate\\xgb_expanding_2024_card.json",
+      "pass": true,
+      "detail": {
+        "recomputed": 5410,
+        "card": 5410
+      }
+    },
+    {
+      "check": "training_membership_hash:evaluation\\models\\full_coordinate\\xgb_expanding_2024_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_model_hash:xgb_expanding_2025_card.json:full_coordinate",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_schema:evaluation\\models\\full_coordinate\\xgb_expanding_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_contract:evaluation\\models\\full_coordinate\\xgb_expanding_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_cutoff:evaluation\\models\\full_coordinate\\xgb_expanding_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "row_model_hash:evaluation\\models\\full_coordinate\\xgb_expanding_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "training_membership_count:evaluation\\models\\full_coordinate\\xgb_expanding_2025_card.json",
+      "pass": true,
+      "detail": {
+        "recomputed": 5806,
+        "card": 5806
+      }
+    },
+    {
+      "check": "training_membership_hash:evaluation\\models\\full_coordinate\\xgb_expanding_2025_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_model_hash:xgb_expanding_2026_card.json:full_coordinate",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_schema:evaluation\\models\\full_coordinate\\xgb_expanding_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_contract:evaluation\\models\\full_coordinate\\xgb_expanding_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "card_cutoff:evaluation\\models\\full_coordinate\\xgb_expanding_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "row_model_hash:evaluation\\models\\full_coordinate\\xgb_expanding_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "training_membership_count:evaluation\\models\\full_coordinate\\xgb_expanding_2026_card.json",
+      "pass": true,
+      "detail": {
+        "recomputed": 6202,
+        "card": 6202
+      }
+    },
+    {
+      "check": "training_membership_hash:evaluation\\models\\full_coordinate\\xgb_expanding_2026_card.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app:canonical_contract_hash",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app:manifest_hash",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app:card:manifest_hash",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app:snapshot:manifest_hash",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app:input_provenance:manifest_hash",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app:provenance:manifest_hash",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app:model_hash",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app:card_contract",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app:ordered_feature_schema",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app24:unique_case_ids",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app24:exact_calendar_horizon",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app24:source_origin_explicitly_observed_not_imputed",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app24:source_target_explicitly_observed_not_imputed",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app24:source_target_values_equal",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app24:source_origin_baseline_values_equal",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app24:fixed_model_identity",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app24:no_issuance",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app24:build_metrics:persistence:n",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app24:build_metrics:persistence:mae_m",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app24:build_metrics:persistence:rmse_m",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app24:build_metrics:persistence:bias_m",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app24:build_metrics:persistence:r2",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app24:build_metrics:fixed_xgb_2021:n",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app24:build_metrics:fixed_xgb_2021:mae_m",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app24:build_metrics:fixed_xgb_2021:rmse_m",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app24:build_metrics:fixed_xgb_2021:bias_m",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app24:build_metrics:fixed_xgb_2021:r2",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "app:provenance_contains_no_future_source_month",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "six_month_original_209:persistence:n:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_month_original_209:persistence:mae_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_month_original_209:persistence:rmse_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_month_original_209:persistence:r2:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_month_original_209:seasonal_naive:n:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_month_original_209:seasonal_naive:mae_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_month_original_209:seasonal_naive:rmse_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_month_original_209:seasonal_naive:r2:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_month_original_209:ridge:n:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_month_original_209:ridge:mae_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_month_original_209:ridge:rmse_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_month_original_209:ridge:r2:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_month_original_209:random_forest:n:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_month_original_209:random_forest:mae_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_month_original_209:random_forest:rmse_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_month_original_209:random_forest:r2:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_month_original_209:xgboost:n:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_month_original_209:xgboost:mae_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_month_original_209:xgboost:rmse_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_month_original_209:xgboost:r2:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_month_original_209:hist_gradient_boosting:n:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_month_original_209:hist_gradient_boosting:mae_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_month_original_209:hist_gradient_boosting:rmse_m:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_month_original_209:hist_gradient_boosting:r2:saved_arithmetic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "old6:exact_calendar_horizon",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "old6:unique_paired_cases",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "telangana6:unique_case_ids",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "telangana6:exact_calendar_horizon",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "telangana6:source_origin_explicitly_observed_not_imputed",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "telangana6:source_target_explicitly_observed_not_imputed",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "telangana6:source_target_values_equal",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "telangana6:source_origin_baseline_values_equal",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:target:saved_join_keys",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:matched_targets_equal",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:h12_persistence_equals_h6_seasonal",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:persistence_12:district:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:persistence_12:district:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:persistence_12:district:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:persistence_12:district:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:persistence_12:district:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:persistence_12:district:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:persistence_12:district_x_12month_blocks:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:persistence_12:district_x_12month_blocks:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:persistence_12:district_x_12month_blocks:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:persistence_12:district_x_12month_blocks:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:persistence_12:district_x_12month_blocks:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:persistence_12:district_x_12month_blocks:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:xgb_expanding_12:district:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:xgb_expanding_12:district:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:xgb_expanding_12:district:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:xgb_expanding_12:district:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:xgb_expanding_12:district:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:xgb_expanding_12:district:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:xgb_expanding_12:district_x_12month_blocks:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:xgb_expanding_12:district_x_12month_blocks:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:xgb_expanding_12:district_x_12month_blocks:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:xgb_expanding_12:district_x_12month_blocks:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:xgb_expanding_12:district_x_12month_blocks:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:xgb_expanding_12:district_x_12month_blocks:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:linear_expanding_12:district:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:linear_expanding_12:district:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:linear_expanding_12:district:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:linear_expanding_12:district:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:linear_expanding_12:district:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:linear_expanding_12:district:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:linear_expanding_12:district_x_12month_blocks:model_mae_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:linear_expanding_12:district_x_12month_blocks:model_rmse_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:linear_expanding_12:district_x_12month_blocks:model_bias_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:linear_expanding_12:district_x_12month_blocks:mae_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:linear_expanding_12:district_x_12month_blocks:rmse_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:linear_expanding_12:district_x_12month_blocks:bias_difference_m:saved_interval",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "six_vs_twelve:origin:saved_join_keys",
+      "pass": true,
+      "detail": null
+    }
+  ],
+  "failures": [
+    {
+      "check": "locked_implementation_hash:models/research_horizon.py",
+      "pass": false,
+      "detail": null
+    },
+    {
+      "check": "locked_implementation_hash:scripts/backtest_twelve_month.py",
+      "pass": false,
+      "detail": null
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "at_utc": "2026-10-23T10:15:26.038264+00:00",
+  "frontend_requests": [
+    {
+      "path": "/",
+      "status": 200,
+      "bytes": 853,
+      "sha256": "090a493a1b865957e9228b8c10254e5a4f0fd4894214ed8bdf7c3d72c45a16c1",
+      "spa_entry_present": true
+    },
+    {
+      "path": "/district/HR-Kurukshetra",
+      "status": 200,
+      "bytes": 853,
+      "sha256": "090a493a1b865957e9228b8c10254e5a4f0fd4894214ed8bdf7c3d72c45a16c1",
+      "spa_entry_present": true
+    },
+    {
+      "path": "/alerts",
+      "status": 200,
+      "bytes": 853,
+      "sha256": "090a493a1b865957e9228b8c10254e5a4f0fd4894214ed8bdf7c3d72c45a16c1",
+      "spa_entry_present": true
+    },
+    {
+      "path": "/simulate",
+      "status": 200,
+      "bytes": 853,
+      "sha256": "090a493a1b865957e9228b8c10254e5a4f0fd4894214ed8bdf7c3d72c45a16c1",
+      "spa_entry_present": true
+    },
+    {
+      "path": "/src/api.js",
+      "status": 200,
+      "bytes": 13951,
+      "sha256": "d0712a8f7c92e18ba2b80a9bdc18d723ecba3b2406146f987a0640f074a36040",
+      "explicit_audit_api_url_present": true
+    },
+    {
+      "path": "/india_districts.geojson",
+      "status": 200,
+      "bytes": 4204044,
+      "sha256": "d2b04d330776e8695499ca2be497bef39b72c548591ff75d46f86250b2baa057",
+      "geojson_type": "FeatureCollection",
+      "features": 760
+    }
+  ],
+  "source_http_receipt_sha256": "d15286dd4b105f331acb7d3cfa5ea395361a27468f2258533e1e10dcc2d9acbd",
+  "checks": [
+    {
+      "name": "frontend_get_/",
+      "pass": true,
+      "detail": 200
+    },
+    {
+      "name": "frontend_get_/district/HR-Kurukshetra",
+      "pass": true,
+      "detail": 200
+    },
+    {
+      "name": "frontend_get_/alerts",
+      "pass": true,
+      "detail": 200
+    },
+    {
+      "name": "frontend_get_/simulate",
+      "pass": true,
+      "detail": 200
+    },
+    {
+      "name": "frontend_get_/src/api.js",
+      "pass": true,
+      "detail": 200
+    },
+    {
+      "name": "frontend_get_/india_districts.geojson",
+      "pass": true,
+      "detail": 200
+    },
+    {
+      "name": "frontend_module_uses_explicit_api_5053",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "routes_serve_spa_shell_not_render_verification",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "historical_saved_rows_count",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "historical_row_unique",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "exact_historical_calendar",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "api_prediction_matches_saved_row",
+      "pass": true,
+      "detail": {
+        "numeric_columns": {
+          "fixed_xgb_2021": 7.57110071182251,
+          "annual_baseline": 6.836666666666668,
+          "target_value": 6.831333333333332
+        }
+      }
+    },
+    {
+      "name": "api_baseline_matches_saved_row",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "api_target_matches_saved_row",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "historical_prediction_exact_reference",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "historical_baseline_exact_reference",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "historical_target_separate",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "no_prospective_issuance_direct",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "scenario_HR-Kaithal_finite_monthly_points",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "scenario_HR-Kaithal_november_october",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "scenario_HR-Kurukshetra_finite_monthly_points",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "scenario_HR-Kurukshetra_november_october",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "scenario_TS-Adilabad_finite_monthly_points",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "scenario_TS-Adilabad_november_october",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "score_tiers_sum_to_725",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "history_kaithal_separate_flags",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "history_kaithal_equal_aliases",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "history_adilabad_separate_flags",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "history_adilabad_equal_aliases",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "403_is_old_helper_guard",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "same_api_scores_works",
+      "pass": true,
+      "detail": null
+    }
+  ],
+  "passed": 31,
+  "total": 31,
+  "scope": "No browser automation. GETs only for frontend assets; other checks use saved API responses and archived CSV. No estimator fitting, pipelines or database connections in this helper."
+}

@@ -1,0 +1,9 @@
+{
+  "recorded_utc": "2026-10-23T04:07:12.869196+00:00",
+  "command": ".\\venv\\Scripts\\python.exe -B reports/end_to_end_verification_20261022/data/national_sources_20261023.py",
+  "observed_unified_exec_chunk_id": "1e4a16",
+  "exit_status": 1,
+  "script_sha256": "fb88ac40e0a91938e4966787793d8f4fb2ce3a33a4f194df96c134276ec33fe9",
+  "error": "AttributeError: DataFrame has no attribute is_observed; January candidate/active join produced is_observed_x and is_observed_y.",
+  "effect": "No output result/receipt files had been created and no retained source file was written. Original audit helper is preserved; v2 explicitly selects the active-export flag."
+}

@@ -1,0 +1,71 @@
+{
+  "dataset": {
+    "source_file": "reports\\candidates\\twelve_month_horizon_20261020\\evaluation\\full_coordinate_predictions.csv",
+    "period_filter": "primary",
+    "n_rows": 792,
+    "n_districts": 33,
+    "rows_per_district": 24,
+    "duplicates": 0,
+    "missing_values": 0
+  },
+  "point_estimates": {
+    "rmse_xgboost": 1.4199075311094895,
+    "rmse_baseline": 1.4577225785823287,
+    "delta_rmse": -0.03781504747283915,
+    "mae_xgboost": 1.15911899140222,
+    "mae_baseline": 1.191078910755619,
+    "delta_mae": -0.031959919353399036
+  },
+  "paired_cluster_bootstrap": {
+    "B": 10000,
+    "seed": 42,
+    "n_clusters": 33,
+    "ci_95_percentile_rmse": [
+      -0.12086000491587838,
+      0.05545004765279468
+    ],
+    "se_rmse": 0.04544639464259987,
+    "bootstrap_mean_rmse": -0.0371107501147187,
+    "fraction_ge_zero_rmse": 0.2047,
+    "ci_95_percentile_mae": [
+      -0.1146780012781391,
+      0.06132842599649301
+    ],
+    "se_mae": 0.0451627162026571,
+    "bootstrap_mean_mae": -0.03169719577427761,
+    "fraction_ge_zero_mae": 0.2368
+  },
+  "valid_p_values": {
+    "bootstrap_pivot_two_sided": 0.4061,
+    "wald_type_two_sided": 0.4053636481934263,
+    "wald_z_statistic": -0.8320802512547967,
+    "bootstrap_normality_shapiro_p": 1.621499400706538e-06,
+    "bootstrap_skewness": 0.2024936944577819,
+    "bootstrap_excess_kurtosis": 0.046772785093522895
+  },
+  "district_level_tests": {
+    "estimand": "mean_of_district_RMSE_differences",
+    "note": "Different estimand from pooled delta_RMSE",
+    "mean_delta": -0.02063353476391617,
+    "median_delta": -0.028248531528094922,
+    "n_xgb_wins": 20,
+    "n_baseline_wins": 13,
+    "paired_t_test": {
+      "t_statistic": -0.4235437573263269,
+      "p_value": 0.6747319425818139,
+      "df": 32
+    },
+    "wilcoxon_signed_rank": {
+      "W_statistic": 218.0,
+      "p_value": 0.27186842705123127
+    }
+  },
+  "invalid_quantities": {
+    "reported_p_0_4094": {
+      "formula": "2 * min(frac_boot >= 0, frac_boot <= 0)",
+      "status": "INVALID as frequentist p-value",
+      "reason": "Bootstrap distribution centered at observed delta, not at null hypothesis value"
+    }
+  },
+  "conclusion": "XGBoost does not demonstrate statistically significant RMSE improvement over annual persistence at alpha=0.05"
+}

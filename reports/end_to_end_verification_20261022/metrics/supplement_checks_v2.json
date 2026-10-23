@@ -1,0 +1,2152 @@
+[
+  {
+    "check": "newline_normalized_implementation:models/research_horizon.py",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "newline_normalized_implementation:scripts/backtest_twelve_month.py",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:exact_horizon",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:unique_case_ids",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:canonical_case_ids_match",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:all_methods_finite_identical_rows",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:fsum:persistence:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:fsum:persistence:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:fsum:persistence:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:fsum:persistence:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:fsum:persistence:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:fsum:xgb_expanding:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:fsum:xgb_expanding:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:fsum:xgb_expanding:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:fsum:xgb_expanding:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:fsum:xgb_expanding:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:fsum:linear_expanding:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:fsum:linear_expanding:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:fsum:linear_expanding:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:fsum:linear_expanding:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:fsum:linear_expanding:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:fsum:hgb_12month_fixed:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:fsum:hgb_12month_fixed:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:fsum:hgb_12month_fixed:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:fsum:hgb_12month_fixed:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:fsum:hgb_12month_fixed:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:persistence:district:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:persistence:district:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:persistence:district:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:persistence:district:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:persistence:district:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:persistence:district:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:persistence:district_x_12month_blocks:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:persistence:district_x_12month_blocks:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:persistence:district_x_12month_blocks:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:persistence:district_x_12month_blocks:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:persistence:district_x_12month_blocks:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:persistence:district_x_12month_blocks:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:xgb_expanding:district:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:xgb_expanding:district:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:xgb_expanding:district:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:xgb_expanding:district:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:xgb_expanding:district:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:xgb_expanding:district:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:xgb_expanding:district_x_12month_blocks:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:xgb_expanding:district_x_12month_blocks:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:xgb_expanding:district_x_12month_blocks:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:xgb_expanding:district_x_12month_blocks:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:xgb_expanding:district_x_12month_blocks:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:xgb_expanding:district_x_12month_blocks:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:linear_expanding:district:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:linear_expanding:district:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:linear_expanding:district:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:linear_expanding:district:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:linear_expanding:district:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:linear_expanding:district:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:linear_expanding:district_x_12month_blocks:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:linear_expanding:district_x_12month_blocks:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:linear_expanding:district_x_12month_blocks:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:linear_expanding:district_x_12month_blocks:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:linear_expanding:district_x_12month_blocks:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:linear_expanding:district_x_12month_blocks:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:hgb_12month_fixed:district:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:hgb_12month_fixed:district:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:hgb_12month_fixed:district:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:hgb_12month_fixed:district:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:hgb_12month_fixed:district:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:hgb_12month_fixed:district:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:hgb_12month_fixed:district_x_12month_blocks:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:hgb_12month_fixed:district_x_12month_blocks:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:hgb_12month_fixed:district_x_12month_blocks:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:hgb_12month_fixed:district_x_12month_blocks:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:hgb_12month_fixed:district_x_12month_blocks:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary:direct_rows_ci:hgb_12month_fixed:district_x_12month_blocks:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:exact_horizon",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:unique_case_ids",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:canonical_case_ids_match",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:all_methods_finite_identical_rows",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:fsum:persistence:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:fsum:persistence:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:fsum:persistence:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:fsum:persistence:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:fsum:persistence:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:fsum:xgb_expanding:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:fsum:xgb_expanding:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:fsum:xgb_expanding:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:fsum:xgb_expanding:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:fsum:xgb_expanding:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:fsum:linear_expanding:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:fsum:linear_expanding:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:fsum:linear_expanding:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:fsum:linear_expanding:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:fsum:linear_expanding:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:fsum:hgb_12month_fixed:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:fsum:hgb_12month_fixed:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:fsum:hgb_12month_fixed:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:fsum:hgb_12month_fixed:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:fsum:hgb_12month_fixed:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:persistence:district:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:persistence:district:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:persistence:district:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:persistence:district:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:persistence:district:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:persistence:district:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:persistence:district_x_12month_blocks:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:persistence:district_x_12month_blocks:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:persistence:district_x_12month_blocks:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:persistence:district_x_12month_blocks:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:persistence:district_x_12month_blocks:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:persistence:district_x_12month_blocks:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:xgb_expanding:district:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:xgb_expanding:district:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:xgb_expanding:district:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:xgb_expanding:district:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:xgb_expanding:district:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:xgb_expanding:district:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:xgb_expanding:district_x_12month_blocks:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:xgb_expanding:district_x_12month_blocks:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:xgb_expanding:district_x_12month_blocks:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:xgb_expanding:district_x_12month_blocks:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:xgb_expanding:district_x_12month_blocks:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:xgb_expanding:district_x_12month_blocks:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:linear_expanding:district:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:linear_expanding:district:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:linear_expanding:district:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:linear_expanding:district:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:linear_expanding:district:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:linear_expanding:district:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:linear_expanding:district_x_12month_blocks:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:linear_expanding:district_x_12month_blocks:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:linear_expanding:district_x_12month_blocks:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:linear_expanding:district_x_12month_blocks:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:linear_expanding:district_x_12month_blocks:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:linear_expanding:district_x_12month_blocks:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:hgb_12month_fixed:district:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:hgb_12month_fixed:district:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:hgb_12month_fixed:district:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:hgb_12month_fixed:district:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:hgb_12month_fixed:district:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:hgb_12month_fixed:district:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:hgb_12month_fixed:district_x_12month_blocks:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:hgb_12month_fixed:district_x_12month_blocks:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:hgb_12month_fixed:district_x_12month_blocks:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:hgb_12month_fixed:district_x_12month_blocks:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:hgb_12month_fixed:district_x_12month_blocks:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_secondary:direct_rows_ci:hgb_12month_fixed:district_x_12month_blocks:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary_identical_panel:exact_horizon",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary_identical_panel:unique_case_ids",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary_identical_panel:canonical_case_ids_match",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary_identical_panel:all_methods_finite_identical_rows",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary_identical_panel:fsum:persistence:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary_identical_panel:fsum:persistence:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary_identical_panel:fsum:persistence:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary_identical_panel:fsum:persistence:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary_identical_panel:fsum:persistence:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary_identical_panel:fsum:xgb_expanding:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary_identical_panel:fsum:xgb_expanding:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary_identical_panel:fsum:xgb_expanding:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary_identical_panel:fsum:xgb_expanding:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary_identical_panel:fsum:xgb_expanding:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary_identical_panel:fsum:linear_expanding:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary_identical_panel:fsum:linear_expanding:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary_identical_panel:fsum:linear_expanding:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary_identical_panel:fsum:linear_expanding:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary_identical_panel:fsum:linear_expanding:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary_identical_panel:fsum:hgb_12month_fixed:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary_identical_panel:fsum:hgb_12month_fixed:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary_identical_panel:fsum:hgb_12month_fixed:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary_identical_panel:fsum:hgb_12month_fixed:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "full_coordinate_primary_identical_panel:fsum:hgb_12month_fixed:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:exact_horizon",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:unique_case_ids",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:canonical_case_ids_match",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:all_methods_finite_identical_rows",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:fsum:persistence:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:fsum:persistence:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:fsum:persistence:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:fsum:persistence:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:fsum:persistence:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:fsum:xgb_expanding:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:fsum:xgb_expanding:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:fsum:xgb_expanding:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:fsum:xgb_expanding:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:fsum:xgb_expanding:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:fsum:linear_expanding:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:fsum:linear_expanding:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:fsum:linear_expanding:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:fsum:linear_expanding:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:fsum:linear_expanding:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:fsum:hgb_12month_fixed:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:fsum:hgb_12month_fixed:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:fsum:hgb_12month_fixed:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:fsum:hgb_12month_fixed:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:fsum:hgb_12month_fixed:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:persistence:district:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:persistence:district:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:persistence:district:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:persistence:district:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:persistence:district:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:persistence:district:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:persistence:district_x_12month_blocks:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:persistence:district_x_12month_blocks:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:persistence:district_x_12month_blocks:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:persistence:district_x_12month_blocks:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:persistence:district_x_12month_blocks:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:persistence:district_x_12month_blocks:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:xgb_expanding:district:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:xgb_expanding:district:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:xgb_expanding:district:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:xgb_expanding:district:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:xgb_expanding:district:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:xgb_expanding:district:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:xgb_expanding:district_x_12month_blocks:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:xgb_expanding:district_x_12month_blocks:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:xgb_expanding:district_x_12month_blocks:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:xgb_expanding:district_x_12month_blocks:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:xgb_expanding:district_x_12month_blocks:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:xgb_expanding:district_x_12month_blocks:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:linear_expanding:district:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:linear_expanding:district:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:linear_expanding:district:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:linear_expanding:district:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:linear_expanding:district:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:linear_expanding:district:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:linear_expanding:district_x_12month_blocks:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:linear_expanding:district_x_12month_blocks:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:linear_expanding:district_x_12month_blocks:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:linear_expanding:district_x_12month_blocks:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:linear_expanding:district_x_12month_blocks:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:linear_expanding:district_x_12month_blocks:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:hgb_12month_fixed:district:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:hgb_12month_fixed:district:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:hgb_12month_fixed:district:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:hgb_12month_fixed:district:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:hgb_12month_fixed:district:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:hgb_12month_fixed:district:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:hgb_12month_fixed:district_x_12month_blocks:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:hgb_12month_fixed:district_x_12month_blocks:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:hgb_12month_fixed:district_x_12month_blocks:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:hgb_12month_fixed:district_x_12month_blocks:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:hgb_12month_fixed:district_x_12month_blocks:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary:direct_rows_ci:hgb_12month_fixed:district_x_12month_blocks:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:exact_horizon",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:unique_case_ids",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:canonical_case_ids_match",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:all_methods_finite_identical_rows",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:fsum:persistence:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:fsum:persistence:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:fsum:persistence:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:fsum:persistence:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:fsum:persistence:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:fsum:xgb_expanding:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:fsum:xgb_expanding:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:fsum:xgb_expanding:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:fsum:xgb_expanding:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:fsum:xgb_expanding:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:fsum:linear_expanding:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:fsum:linear_expanding:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:fsum:linear_expanding:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:fsum:linear_expanding:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:fsum:linear_expanding:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:fsum:hgb_12month_fixed:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:fsum:hgb_12month_fixed:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:fsum:hgb_12month_fixed:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:fsum:hgb_12month_fixed:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:fsum:hgb_12month_fixed:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:persistence:district:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:persistence:district:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:persistence:district:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:persistence:district:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:persistence:district:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:persistence:district:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:persistence:district_x_12month_blocks:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:persistence:district_x_12month_blocks:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:persistence:district_x_12month_blocks:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:persistence:district_x_12month_blocks:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:persistence:district_x_12month_blocks:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:persistence:district_x_12month_blocks:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:xgb_expanding:district:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:xgb_expanding:district:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:xgb_expanding:district:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:xgb_expanding:district:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:xgb_expanding:district:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:xgb_expanding:district:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:xgb_expanding:district_x_12month_blocks:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:xgb_expanding:district_x_12month_blocks:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:xgb_expanding:district_x_12month_blocks:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:xgb_expanding:district_x_12month_blocks:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:xgb_expanding:district_x_12month_blocks:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:xgb_expanding:district_x_12month_blocks:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:linear_expanding:district:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:linear_expanding:district:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:linear_expanding:district:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:linear_expanding:district:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:linear_expanding:district:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:linear_expanding:district:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:linear_expanding:district_x_12month_blocks:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:linear_expanding:district_x_12month_blocks:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:linear_expanding:district_x_12month_blocks:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:linear_expanding:district_x_12month_blocks:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:linear_expanding:district_x_12month_blocks:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:linear_expanding:district_x_12month_blocks:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:hgb_12month_fixed:district:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:hgb_12month_fixed:district:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:hgb_12month_fixed:district:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:hgb_12month_fixed:district:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:hgb_12month_fixed:district:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:hgb_12month_fixed:district:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:hgb_12month_fixed:district_x_12month_blocks:model_mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:hgb_12month_fixed:district_x_12month_blocks:model_rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:hgb_12month_fixed:district_x_12month_blocks:model_bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:hgb_12month_fixed:district_x_12month_blocks:mae_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:hgb_12month_fixed:district_x_12month_blocks:rmse_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_secondary:direct_rows_ci:hgb_12month_fixed:district_x_12month_blocks:bias_difference_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary_identical_panel:exact_horizon",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary_identical_panel:unique_case_ids",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary_identical_panel:canonical_case_ids_match",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary_identical_panel:all_methods_finite_identical_rows",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary_identical_panel:fsum:persistence:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary_identical_panel:fsum:persistence:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary_identical_panel:fsum:persistence:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary_identical_panel:fsum:persistence:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary_identical_panel:fsum:persistence:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary_identical_panel:fsum:xgb_expanding:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary_identical_panel:fsum:xgb_expanding:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary_identical_panel:fsum:xgb_expanding:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary_identical_panel:fsum:xgb_expanding:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary_identical_panel:fsum:xgb_expanding:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary_identical_panel:fsum:linear_expanding:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary_identical_panel:fsum:linear_expanding:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary_identical_panel:fsum:linear_expanding:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary_identical_panel:fsum:linear_expanding:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary_identical_panel:fsum:linear_expanding:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary_identical_panel:fsum:hgb_12month_fixed:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary_identical_panel:fsum:hgb_12month_fixed:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary_identical_panel:fsum:hgb_12month_fixed:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary_identical_panel:fsum:hgb_12month_fixed:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "exact_name_coordinate_primary_identical_panel:fsum:hgb_12month_fixed:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "fixed_application_24:exact_horizon",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "fixed_application_24:unique_case_ids",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "fixed_application_24:canonical_case_ids_match",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "fixed_application_24:all_methods_finite_identical_rows",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "fixed_application_24:fsum:persistence:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "fixed_application_24:fsum:persistence:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "fixed_application_24:fsum:persistence:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "fixed_application_24:fsum:persistence:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "fixed_application_24:fsum:persistence:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "fixed_application_24:fsum:fixed_xgb_2021:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "fixed_application_24:fsum:fixed_xgb_2021:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "fixed_application_24:fsum:fixed_xgb_2021:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "fixed_application_24:fsum:fixed_xgb_2021:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "fixed_application_24:fsum:fixed_xgb_2021:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:exact_horizon",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:unique_case_ids",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:canonical_case_ids_match",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:all_methods_finite_identical_rows",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:persistence:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:persistence:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:persistence:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:persistence:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:persistence:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:seasonal_naive:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:seasonal_naive:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:seasonal_naive:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:seasonal_naive:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:seasonal_naive:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:ridge:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:ridge:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:ridge:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:ridge:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:ridge:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:random_forest:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:random_forest:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:random_forest:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:random_forest:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:random_forest:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:xgboost:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:xgboost:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:xgboost:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:xgboost:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:xgboost:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:hist_gradient_boosting:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:hist_gradient_boosting:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:hist_gradient_boosting:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:hist_gradient_boosting:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_original_209:fsum:hist_gradient_boosting:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:exact_horizon",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:unique_case_ids",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:canonical_case_ids_match",
+    "passed": false,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:all_methods_finite_identical_rows",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:persistence:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:persistence:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:persistence:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:persistence:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:persistence:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:seasonal_naive:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:seasonal_naive:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:seasonal_naive:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:seasonal_naive:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:seasonal_naive:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:xgb_expanding:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:xgb_expanding:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:xgb_expanding:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:xgb_expanding:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:xgb_expanding:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:xgb_active_frozen:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:xgb_active_frozen:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:xgb_active_frozen:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:xgb_active_frozen:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:xgb_active_frozen:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:hgb_locked_historical:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:hgb_locked_historical:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:hgb_locked_historical:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:hgb_locked_historical:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:hgb_locked_historical:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:linear_expanding:n",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:linear_expanding:mae_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:linear_expanding:rmse_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:linear_expanding:bias_m",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "six_month_telangana_594:fsum:linear_expanding:r2",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "original209:origin:explicitly_observed_not_imputed",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "original209:target:explicitly_observed_not_imputed",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "original209:seasonal:explicitly_observed_not_imputed",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "original209:origin:retained_values_equal",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "original209:target:retained_values_equal",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "original209:seasonal:retained_values_equal",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "fixed24:training_count",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "fixed24:training_complete_count",
+    "passed": true,
+    "detail": null
+  },
+  {
+    "check": "fixed24:training_membership_hash",
+    "passed": false,
+    "detail": null
+  },
+  {
+    "check": "fixed24:strict_cutoff_before_first_origin_minus12m",
+    "passed": true,
+    "detail": null
+  }
+]

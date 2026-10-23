@@ -1,0 +1,323 @@
+{
+  "commands": [
+    {
+      "command": "git ls-files -z",
+      "exit_status": 0
+    },
+    {
+      "command": "git check-ignore --stdin -z",
+      "exit_status": 0
+    }
+  ],
+  "asset_counts": {
+    "tracked": 4,
+    "ignored_untracked": 43
+  },
+  "assets": [
+    {
+      "path": "config.yaml",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "data/processed/era5_district_monthly.csv",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/processed/era5_district_monthly.manifest.json",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/processed/era5_india_2002_2024_clean.nc",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/processed/feature_manifest.json",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/processed/features_matrix.csv",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/processed/imd_rainfall_district_monthly.csv",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/processed/imd_rainfall_district_monthly.manifest.json",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/processed/preprocessed_wide.csv",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind1992_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind1993_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind1994_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind1995_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind1996_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind1997_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind1998_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind1999_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2000_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2001_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2002_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2003_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2004_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2005_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2006_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2007_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2008_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2009_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2010_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2011_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2012_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2013_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2014_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2015_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2016_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2017_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2018_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2019_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2020_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2021_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2022_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2023_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/imd/Rainfall_ind2024_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/india_districts.geojson",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data/raw/updates/20261013/imd/Rainfall_ind2025_rfp25.grd",
+      "tracked": false,
+      "ignored": true
+    },
+    {
+      "path": "data_ingestion/district_crosswalk.csv",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "reports/actual_forecast_validation_20261019/acquired/telangana_monthly_2007_2026.csv",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "reports/actual_forecast_validation_20261019/evaluation_v2/historical_predictions_vs_observations.csv",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "reports/actual_forecast_validation_20261019/normalized_v2/district_mapping_inventory.csv",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "reports/actual_forecast_validation_20261019/normalized_v2/district_monthly_observed.csv",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "reports/actual_forecast_validation_20261019/normalized_v2/excluded_source_records.csv",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "reports/actual_forecast_validation_20261019/normalized_v2/normalized_well_observations.csv",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "reports/actual_forecast_validation_20261019/normalized_v2/panel_membership.csv",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "reports/actual_forecast_validation_20261019/normalized_v2/research_features.csv",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "reports/candidates/twelve_month_horizon_20261020/cohorts/strict_features.csv",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "reports/candidates/twelve_month_horizon_finalization_20261020/artifact/features.csv",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "reports/candidates/twelve_month_horizon_finalization_20261020/artifact/input_provenance.json",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "reports/candidates/twelve_month_horizon_finalization_20261020/artifact/manifest.json",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "reports/candidates/twelve_month_horizon_finalization_20261020/artifact/provenance.json",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "reports/candidates/twelve_month_horizon_finalization_20261020/artifact/xgb_fixed_2021.json",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "reports/candidates/twelve_month_horizon_finalization_20261020/artifact/xgb_fixed_2021_card.json",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "reports/github_release_20261020/PUBLIC_SOURCE_PROVENANCE.json",
+      "tracked": true,
+      "ignored": false
+    }
+  ]
+}

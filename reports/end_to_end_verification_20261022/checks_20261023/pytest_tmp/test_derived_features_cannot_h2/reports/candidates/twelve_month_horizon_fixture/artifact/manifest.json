@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "contract_sha256": "1a539e3647ae4e0a343e23d3252ca41f7994f09301be8c773cfc94b31e55bac2",
+  "card_path": "card.json",
+  "snapshot_path": "features.csv",
+  "input_provenance_path": "inputs.json",
+  "provenance_path": "provenance.json",
+  "card_sha256": "4a5e88c94106d6f59b423c404e89c56b4bd59432d9b807b6a0289bad4a66a3c8",
+  "snapshot_sha256": "2b1ba241c42c9c3a31a4c29407ac72a079b8b75b0122334b1db6ee9bfeb4895a",
+  "input_provenance_sha256": "e27bd6fefd42cfcfe340f680459187e230e82e472e87c33d507ec5cc8492af30",
+  "provenance_sha256": "f99267656f57e38aed8886fdd1d3c00dfa5791e74358ab1f82eaeec759ee08df"
+}

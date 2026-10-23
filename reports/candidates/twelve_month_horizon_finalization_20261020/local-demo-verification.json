@@ -1,0 +1,486 @@
+{
+  "verified_at_utc": "2026-10-20T22:35:09.632349+00:00",
+  "mode": "in_process_file_only_historical_research_not_forecast_issuance",
+  "database_and_fit_guards": true,
+  "database_accessed": false,
+  "network_requests": 0,
+  "prospective_records_created": 0,
+  "catalog": {
+    "computed_at": "2026-10-20T22:35:02.841852+00:00",
+    "districts": [
+      {
+        "district_id": "TS-Adilabad",
+        "latest_observed_month": "2026-05",
+        "name": "Adilabad",
+        "origin_months": [
+          "2023-01",
+          "2023-02",
+          "2023-03",
+          "2023-04",
+          "2023-05",
+          "2023-06",
+          "2023-07",
+          "2023-08",
+          "2023-09",
+          "2023-10",
+          "2023-11",
+          "2023-12",
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09",
+          "2024-10",
+          "2024-11",
+          "2024-12",
+          "2025-01",
+          "2025-02",
+          "2025-03",
+          "2025-04",
+          "2025-05",
+          "2025-06",
+          "2025-07",
+          "2025-08",
+          "2025-09",
+          "2025-10",
+          "2025-11",
+          "2025-12",
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05"
+        ],
+        "state": "Telangana"
+      }
+    ],
+    "forecast_issued_at": null,
+    "horizon_months": 12,
+    "limitations": [
+      "Research prototype: no prospective forecasting skill or nationwide generalization is established.",
+      "Name/coordinate agreement is metadata agreement, not certified geography or stable well/datum continuity.",
+      "Publication, acquisition and model-availability times are unknown; M+12 does not establish twelve full months of operational lead.",
+      "The annual baseline is persistence and annual seasonal naive as one effective method; ML superiority is unverified.",
+      "This fixed-cutoff artifact differs from the expanding historical comparison and cannot inherit its pooled accuracy."
+    ],
+    "model": {
+      "card_sha256": "c399ed9cfa5c1746c874659d89bd1d69d92ea841dc262b7d0dfab89bac9e0bd7",
+      "configuration_sha256": "1a539e3647ae4e0a343e23d3252ca41f7994f09301be8c773cfc94b31e55bac2",
+      "family": "xgboost",
+      "feature_generation_id": "research-telangana-exact-name-coordinate-h12-app-v1",
+      "model_sha256": "f94911f5e1a6c3e8b4bbbb82d6a4c6ec87b5d601abbfd774801afc046aa5455f",
+      "protocol_sha256": "1a93abf0a52eb44263d05090137df2c7000f83c3d0cf2c3e2843c56ac1ec57c2",
+      "supported_district_ids": [
+        "TS-Adilabad"
+      ],
+      "train_target_cutoff": "2021-12-31"
+    },
+    "product": "direct_12month_research",
+    "scope": {
+      "description": "Adilabad strict source-name/coordinate-agreement reaggregation only; geographic verification and generalization remain unestablished.",
+      "metadata_agreement_only": true,
+      "supported_district_ids": [
+        "TS-Adilabad"
+      ]
+    },
+    "status": "available",
+    "units": "m_bgl"
+  },
+  "default_result": {
+    "annual_baseline_m": 6.553333333333334,
+    "computed_at": "2026-10-20T22:35:02.844008+00:00",
+    "district_id": "TS-Adilabad",
+    "forecast_issued_at": null,
+    "horizon_months": 12,
+    "limitations": [
+      "Research prototype: no prospective forecasting skill or nationwide generalization is established.",
+      "Name/coordinate agreement is metadata agreement, not certified geography or stable well/datum continuity.",
+      "Publication, acquisition and model-availability times are unknown; M+12 does not establish twelve full months of operational lead.",
+      "The annual baseline is persistence and annual seasonal naive as one effective method; ML superiority is unverified.",
+      "This fixed-cutoff artifact differs from the expanding historical comparison and cannot inherit its pooled accuracy."
+    ],
+    "ml_estimate_m": null,
+    "model": {
+      "card_sha256": "c399ed9cfa5c1746c874659d89bd1d69d92ea841dc262b7d0dfab89bac9e0bd7",
+      "configuration_sha256": "1a539e3647ae4e0a343e23d3252ca41f7994f09301be8c773cfc94b31e55bac2",
+      "family": "xgboost",
+      "feature_generation_id": "research-telangana-exact-name-coordinate-h12-app-v1",
+      "model_sha256": "f94911f5e1a6c3e8b4bbbb82d6a4c6ec87b5d601abbfd774801afc046aa5455f",
+      "protocol_sha256": "1a93abf0a52eb44263d05090137df2c7000f83c3d0cf2c3e2843c56ac1ec57c2",
+      "supported_district_ids": [
+        "TS-Adilabad"
+      ],
+      "train_target_cutoff": "2021-12-31"
+    },
+    "origin_month": "2026-05",
+    "output_kind": "current_vintage_research",
+    "product": "direct_12month_research",
+    "scope": {
+      "description": "Adilabad strict source-name/coordinate-agreement reaggregation only; geographic verification and generalization remain unestablished.",
+      "metadata_agreement_only": true,
+      "supported_district_ids": [
+        "TS-Adilabad"
+      ]
+    },
+    "source": {
+      "actual_acquisition_at": null,
+      "availability_verified": false,
+      "datum_continuity_verified": false,
+      "input_flags": [
+        {
+          "age_months": 0,
+          "feature": "gwl_current",
+          "required_month": "2026-05",
+          "source_month": "2026-05",
+          "status": "observed"
+        },
+        {
+          "age_months": 0,
+          "feature": "gwl_lag_3mo",
+          "required_month": "2026-02",
+          "source_month": "2026-02",
+          "status": "observed"
+        },
+        {
+          "age_months": 0,
+          "feature": "gwl_lag_6mo",
+          "required_month": "2025-11",
+          "source_month": "2025-11",
+          "status": "observed"
+        },
+        {
+          "age_months": null,
+          "feature": "rainfall_current",
+          "required_month": "2026-05",
+          "source_month": null,
+          "status": "missing"
+        },
+        {
+          "age_months": null,
+          "feature": "rainfall_3mo_avg",
+          "required_month": "2026-05",
+          "source_month": null,
+          "status": "missing"
+        },
+        {
+          "age_months": null,
+          "feature": "monsoon_deficit_pct",
+          "required_month": "2026-05",
+          "source_month": null,
+          "status": "missing"
+        },
+        {
+          "age_months": null,
+          "feature": "temperature",
+          "required_month": "2026-05",
+          "source_month": null,
+          "status": "missing"
+        },
+        {
+          "age_months": null,
+          "feature": "evapotranspiration",
+          "required_month": "2026-05",
+          "source_month": null,
+          "status": "missing"
+        },
+        {
+          "age_months": null,
+          "feature": "water_balance_proxy",
+          "required_month": "2026-05",
+          "source_month": null,
+          "status": "missing"
+        },
+        {
+          "age_months": 0,
+          "feature": "season_Kharif",
+          "required_month": "2026-05",
+          "source_month": "2026-05",
+          "status": "calendar"
+        },
+        {
+          "age_months": 0,
+          "feature": "season_Rabi",
+          "required_month": "2026-05",
+          "source_month": "2026-05",
+          "status": "calendar"
+        },
+        {
+          "age_months": 0,
+          "feature": "season_Zaid",
+          "required_month": "2026-05",
+          "source_month": "2026-05",
+          "status": "calendar"
+        }
+      ],
+      "latest_observed_month": "2026-05",
+      "name": "Retained SGWD-Telangana monthly research data with existing IMD/ERA5 weather",
+      "origin_is_imputed": false,
+      "origin_is_observed": true,
+      "panel_sha256": "8a628138453a08731292b6c3e425b7b63696955e8086588c1ea43c94a75bb9a2",
+      "reported_date_end": "2026-05-01",
+      "reported_date_start": "2026-05-01",
+      "well_count": 15.0
+    },
+    "status": "unavailable",
+    "target_month": "2027-05",
+    "unavailable_reasons": [
+      "Required input is missing: rainfall_current.",
+      "Required input is missing: rainfall_3mo_avg.",
+      "Required input is missing: monsoon_deficit_pct.",
+      "Required input is missing: temperature.",
+      "Required input is missing: evapotranspiration.",
+      "Required input is missing: water_balance_proxy.",
+      "This artifact permits historical research only; no observed exact M+12 target is archived for this origin."
+    ],
+    "units": "m_bgl"
+  },
+  "historical_january_2024": {
+    "annual_baseline_m": 6.836666666666668,
+    "computed_at": "2026-10-20T22:35:02.950408+00:00",
+    "district_id": "TS-Adilabad",
+    "forecast_issued_at": null,
+    "horizon_months": 12,
+    "limitations": [
+      "Research prototype: no prospective forecasting skill or nationwide generalization is established.",
+      "Name/coordinate agreement is metadata agreement, not certified geography or stable well/datum continuity.",
+      "Publication, acquisition and model-availability times are unknown; M+12 does not establish twelve full months of operational lead.",
+      "The annual baseline is persistence and annual seasonal naive as one effective method; ML superiority is unverified.",
+      "This fixed-cutoff artifact differs from the expanding historical comparison and cannot inherit its pooled accuracy."
+    ],
+    "ml_estimate_m": 7.57110071182251,
+    "model": {
+      "card_sha256": "c399ed9cfa5c1746c874659d89bd1d69d92ea841dc262b7d0dfab89bac9e0bd7",
+      "configuration_sha256": "1a539e3647ae4e0a343e23d3252ca41f7994f09301be8c773cfc94b31e55bac2",
+      "family": "xgboost",
+      "feature_generation_id": "research-telangana-exact-name-coordinate-h12-app-v1",
+      "model_sha256": "f94911f5e1a6c3e8b4bbbb82d6a4c6ec87b5d601abbfd774801afc046aa5455f",
+      "protocol_sha256": "1a93abf0a52eb44263d05090137df2c7000f83c3d0cf2c3e2843c56ac1ec57c2",
+      "supported_district_ids": [
+        "TS-Adilabad"
+      ],
+      "train_target_cutoff": "2021-12-31"
+    },
+    "observed_target_m": 6.831333333333332,
+    "origin_month": "2024-01",
+    "output_kind": "historical_research",
+    "product": "direct_12month_research",
+    "scope": {
+      "description": "Adilabad strict source-name/coordinate-agreement reaggregation only; geographic verification and generalization remain unestablished.",
+      "metadata_agreement_only": true,
+      "supported_district_ids": [
+        "TS-Adilabad"
+      ]
+    },
+    "source": {
+      "actual_acquisition_at": null,
+      "availability_verified": false,
+      "datum_continuity_verified": false,
+      "input_flags": [
+        {
+          "age_months": 0,
+          "feature": "gwl_current",
+          "required_month": "2024-01",
+          "source_month": "2024-01",
+          "status": "observed"
+        },
+        {
+          "age_months": 0,
+          "feature": "gwl_lag_3mo",
+          "required_month": "2023-10",
+          "source_month": "2023-10",
+          "status": "observed"
+        },
+        {
+          "age_months": 0,
+          "feature": "gwl_lag_6mo",
+          "required_month": "2023-07",
+          "source_month": "2023-07",
+          "status": "observed"
+        },
+        {
+          "age_months": 0,
+          "feature": "rainfall_current",
+          "required_month": "2024-01",
+          "source_month": "2024-01",
+          "status": "observed"
+        },
+        {
+          "age_months": 0,
+          "feature": "rainfall_3mo_avg",
+          "required_month": "2024-01",
+          "source_month": "2024-01",
+          "status": "derived_from_observed"
+        },
+        {
+          "age_months": 0,
+          "feature": "monsoon_deficit_pct",
+          "required_month": "2024-01",
+          "source_month": "2024-01",
+          "status": "derived_from_observed"
+        },
+        {
+          "age_months": 0,
+          "feature": "temperature",
+          "required_month": "2024-01",
+          "source_month": "2024-01",
+          "status": "observed"
+        },
+        {
+          "age_months": 0,
+          "feature": "evapotranspiration",
+          "required_month": "2024-01",
+          "source_month": "2024-01",
+          "status": "observed"
+        },
+        {
+          "age_months": 0,
+          "feature": "water_balance_proxy",
+          "required_month": "2024-01",
+          "source_month": "2024-01",
+          "status": "derived_from_observed"
+        },
+        {
+          "age_months": 0,
+          "feature": "season_Kharif",
+          "required_month": "2024-01",
+          "source_month": "2024-01",
+          "status": "calendar"
+        },
+        {
+          "age_months": 0,
+          "feature": "season_Rabi",
+          "required_month": "2024-01",
+          "source_month": "2024-01",
+          "status": "calendar"
+        },
+        {
+          "age_months": 0,
+          "feature": "season_Zaid",
+          "required_month": "2024-01",
+          "source_month": "2024-01",
+          "status": "calendar"
+        }
+      ],
+      "latest_observed_month": "2026-05",
+      "name": "Retained SGWD-Telangana monthly research data with existing IMD/ERA5 weather",
+      "origin_is_imputed": false,
+      "origin_is_observed": true,
+      "panel_sha256": "8a628138453a08731292b6c3e425b7b63696955e8086588c1ea43c94a75bb9a2",
+      "reported_date_end": "2024-01-01",
+      "reported_date_start": "2024-01-01",
+      "well_count": 15.0
+    },
+    "status": "available",
+    "target_month": "2025-01",
+    "unavailable_reasons": [],
+    "units": "m_bgl"
+  },
+  "unsupported_district": {
+    "annual_baseline_m": null,
+    "computed_at": "2026-10-20T22:35:09.379470+00:00",
+    "district_id": "GJ-Gandhinagar",
+    "forecast_issued_at": null,
+    "horizon_months": 12,
+    "limitations": [
+      "Research prototype: no prospective forecasting skill or nationwide generalization is established.",
+      "Name/coordinate agreement is metadata agreement, not certified geography or stable well/datum continuity.",
+      "Publication, acquisition and model-availability times are unknown; M+12 does not establish twelve full months of operational lead.",
+      "The annual baseline is persistence and annual seasonal naive as one effective method; ML superiority is unverified.",
+      "This fixed-cutoff artifact differs from the expanding historical comparison and cannot inherit its pooled accuracy."
+    ],
+    "ml_estimate_m": null,
+    "model": {
+      "card_sha256": "c399ed9cfa5c1746c874659d89bd1d69d92ea841dc262b7d0dfab89bac9e0bd7",
+      "configuration_sha256": "1a539e3647ae4e0a343e23d3252ca41f7994f09301be8c773cfc94b31e55bac2",
+      "family": "xgboost",
+      "feature_generation_id": "research-telangana-exact-name-coordinate-h12-app-v1",
+      "model_sha256": "f94911f5e1a6c3e8b4bbbb82d6a4c6ec87b5d601abbfd774801afc046aa5455f",
+      "protocol_sha256": "1a93abf0a52eb44263d05090137df2c7000f83c3d0cf2c3e2843c56ac1ec57c2",
+      "supported_district_ids": [
+        "TS-Adilabad"
+      ],
+      "train_target_cutoff": "2021-12-31"
+    },
+    "origin_month": null,
+    "output_kind": "current_vintage_research",
+    "product": "direct_12month_research",
+    "scope": {
+      "description": "Adilabad strict source-name/coordinate-agreement reaggregation only; geographic verification and generalization remain unestablished.",
+      "metadata_agreement_only": true,
+      "supported_district_ids": [
+        "TS-Adilabad"
+      ]
+    },
+    "source": {
+      "actual_acquisition_at": null,
+      "availability_verified": false,
+      "datum_continuity_verified": false,
+      "input_flags": [],
+      "latest_observed_month": null,
+      "name": "Retained SGWD-Telangana monthly research data with existing IMD/ERA5 weather",
+      "origin_is_imputed": false,
+      "origin_is_observed": false,
+      "panel_sha256": null,
+      "reported_date_end": null,
+      "reported_date_start": null,
+      "well_count": null
+    },
+    "status": "unavailable",
+    "target_month": null,
+    "unavailable_reasons": [
+      "District is outside the isolated research artifact's supported Adilabad scope."
+    ],
+    "units": "m_bgl"
+  },
+  "archived_fixed_case_count": 24,
+  "maximum_api_vs_archived_prediction_difference_m": 1.7763568394002505e-15,
+  "explicit_weather_carry": {
+    "2025-01": [
+      {
+        "age_months": 1,
+        "feature": "temperature",
+        "required_month": "2025-01",
+        "source_month": "2024-12",
+        "status": "carried_forward"
+      },
+      {
+        "age_months": 1,
+        "feature": "evapotranspiration",
+        "required_month": "2025-01",
+        "source_month": "2024-12",
+        "status": "carried_forward"
+      }
+    ],
+    "2025-02": [
+      {
+        "age_months": 2,
+        "feature": "temperature",
+        "required_month": "2025-02",
+        "source_month": "2024-12",
+        "status": "carried_forward"
+      },
+      {
+        "age_months": 2,
+        "feature": "evapotranspiration",
+        "required_month": "2025-02",
+        "source_month": "2024-12",
+        "status": "carried_forward"
+      }
+    ]
+  },
+  "contract_sha256": "1a539e3647ae4e0a343e23d3252ca41f7994f09301be8c773cfc94b31e55bac2",
+  "artifact_sha256": {
+    "reports/candidates/twelve_month_horizon_finalization_20261020/artifact/complete_existing_build.py": "a8074663c3d0ec0bef81c9ad3994eb79b6494ce5a160569d537b149fcc840689",
+    "reports/candidates/twelve_month_horizon_finalization_20261020/artifact/features.csv": "728677ebfbe103f0d38b53fd0bd02deb8a4d647f15f5bb199d392a29be33569e",
+    "reports/candidates/twelve_month_horizon_finalization_20261020/artifact/historical_checks.csv": "f3b548e94ea6a1140875944701c1b95e644eb0dfa1f2c3faa4786ecad491cc0b",
+    "reports/candidates/twelve_month_horizon_finalization_20261020/artifact/input_provenance.json": "d069f1c623dead6c8678a2e8be6d90bc0f51135682973b75f6bbdd3f948ac3e3",
+    "reports/candidates/twelve_month_horizon_finalization_20261020/artifact/manifest.json": "e390b0e78221560e66b50610d4ef37cb37225d34232589c4d52064713ef27165",
+    "reports/candidates/twelve_month_horizon_finalization_20261020/artifact/provenance.json": "2e6b5e5d43db8df0b681b82ac4ec6fbf4d84ff359c1c006acd6b93da4f0322f1",
+    "reports/candidates/twelve_month_horizon_finalization_20261020/artifact/xgb_fixed_2021.json": "f94911f5e1a6c3e8b4bbbb82d6a4c6ec87b5d601abbfd774801afc046aa5455f",
+    "reports/candidates/twelve_month_horizon_finalization_20261020/artifact/xgb_fixed_2021_card.json": "c399ed9cfa5c1746c874659d89bd1d69d92ea841dc262b7d0dfab89bac9e0bd7"
+  }
+}

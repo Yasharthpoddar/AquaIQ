@@ -1,0 +1,701 @@
+{
+  "started_utc": "2026-10-23T04:05:13.240970+00:00",
+  "acquisition_evidence": {
+    "private_original_manifest_sha256": "75bb705eacaa45ad3e7c022f586a53f8fe49aa8ba078f82f4c8e063ea6953a5d",
+    "private_original_manifest_not_copied": true,
+    "headers_never_emitted": true,
+    "manifest_allowlisted_dataset_metadata": {
+      "created_at_utc": "2026-10-19T15:50:08.886363+00:00",
+      "provider_reported_units": "Water Level in mbgl",
+      "actual_reported_date_range": [
+        "2007-05-01",
+        "2026-05-01"
+      ],
+      "provider_ids": 1769,
+      "rows": 188877,
+      "catalog_metadata_created": "2026-08-24T08:55:44.668522",
+      "catalog_metadata_modified": "2026-08-24T08:58:17.771272",
+      "production_data_merged": false
+    },
+    "acquisitions": [
+      {
+        "file": "reports/actual_forecast_validation_20261019/acquired/cgwb_manual_package.json",
+        "bytes": 120914,
+        "expected_sha256": "3e4c9399e2ac49c5d732e7c1b68986a491968683995dcceff39a4d520ded781e",
+        "actual_sha256": "3e4c9399e2ac49c5d732e7c1b68986a491968683995dcceff39a4d520ded781e",
+        "hash_matches_manifest_and_receipt": true,
+        "size_matches_manifest_and_receipt": true,
+        "receipt_file": "reports/actual_forecast_validation_20261019/acquired/cgwb_manual_package.json.retrieval.json",
+        "receipt_sha256": "8c88aff924e4eeb1a2867edb5f5f96803f17a15d9f126fb54cb112eefb7b71e1",
+        "retrieved_at_utc": "2026-10-19T04:16:06.452041+00:00",
+        "manifest_retrieval_time_equals_receipt": true,
+        "http_status": 200,
+        "requested_url": {
+          "url_without_query": "https://nwdp.nwic.gov.in/api/3/action/package_show",
+          "query_parameter_names": [
+            "id"
+          ]
+        },
+        "final_url": {
+          "url_without_query": "https://nwdp.nwic.gov.in/api/3/action/package_show",
+          "query_parameter_names": [
+            "id"
+          ]
+        },
+        "sample_only": false,
+        "headers_omitted": true
+      },
+      {
+        "file": "reports/actual_forecast_validation_20261019/acquired/cgwb_telemetry_package.json",
+        "bytes": 73919,
+        "expected_sha256": "103e36a391e7309fe98ab246a2cc258c5b264d08646da5625f22f1b004261437",
+        "actual_sha256": "103e36a391e7309fe98ab246a2cc258c5b264d08646da5625f22f1b004261437",
+        "hash_matches_manifest_and_receipt": true,
+        "size_matches_manifest_and_receipt": true,
+        "receipt_file": "reports/actual_forecast_validation_20261019/acquired/cgwb_telemetry_package.json.retrieval.json",
+        "receipt_sha256": "6a536c3ffeabd7c9f96598629128333f44aa0efb49d7a14c4e57f416ef327560",
+        "retrieved_at_utc": "2026-10-19T04:16:05.164979+00:00",
+        "manifest_retrieval_time_equals_receipt": true,
+        "http_status": 200,
+        "requested_url": {
+          "url_without_query": "https://nwdp.nwic.gov.in/api/3/action/package_show",
+          "query_parameter_names": [
+            "id"
+          ]
+        },
+        "final_url": {
+          "url_without_query": "https://nwdp.nwic.gov.in/api/3/action/package_show",
+          "query_parameter_names": [
+            "id"
+          ]
+        },
+        "sample_only": false,
+        "headers_omitted": true
+      },
+      {
+        "file": "reports/actual_forecast_validation_20261019/acquired/nwic_copyright.html",
+        "bytes": 48441,
+        "expected_sha256": "6c1e330158f9b7a6a4a7ca4a8cb58f61ce9c2453435bbd329cb3cdaede611726",
+        "actual_sha256": "6c1e330158f9b7a6a4a7ca4a8cb58f61ce9c2453435bbd329cb3cdaede611726",
+        "hash_matches_manifest_and_receipt": true,
+        "size_matches_manifest_and_receipt": true,
+        "receipt_file": "reports/actual_forecast_validation_20261019/acquired/nwic_copyright.html.retrieval.json",
+        "receipt_sha256": "92734cee76f5cb72bdb6afd462efc36cea25003a88459225819aabe41002b996",
+        "retrieved_at_utc": "2026-10-19T08:56:57.462483+00:00",
+        "manifest_retrieval_time_equals_receipt": true,
+        "http_status": 200,
+        "requested_url": {
+          "url_without_query": "https://nwdp.nwic.gov.in/footer/copyrightPolicy",
+          "query_parameter_names": []
+        },
+        "final_url": {
+          "url_without_query": "https://nwdp.nwic.gov.in/footer/copyrightPolicy",
+          "query_parameter_names": []
+        },
+        "sample_only": false,
+        "headers_omitted": true
+      },
+      {
+        "file": "reports/actual_forecast_validation_20261019/acquired/telangana_monthly_2007_2026.csv",
+        "bytes": 25564190,
+        "expected_sha256": "f8222245721c421bc2f82b6afbd387ee5cd0e263790515ac7d3ffcce0c521302",
+        "actual_sha256": "f8222245721c421bc2f82b6afbd387ee5cd0e263790515ac7d3ffcce0c521302",
+        "hash_matches_manifest_and_receipt": true,
+        "size_matches_manifest_and_receipt": true,
+        "receipt_file": "reports/actual_forecast_validation_20261019/acquired/telangana_monthly_2007_2026.csv.retrieval.json",
+        "receipt_sha256": "58127a47b0deb5c2b9b6a1c324122d93aeff9c6f3eeb6b9472bf579db8817b31",
+        "retrieved_at_utc": "2026-10-19T08:58:44.486970+00:00",
+        "manifest_retrieval_time_equals_receipt": true,
+        "http_status": 200,
+        "requested_url": {
+          "url_without_query": "https://nwdp.nwic.gov.in/dataset/0000396f-0381-4154-923e-86c8e23c5f5f/resource/b5706a43-1319-44b4-9739-afd9115e1312/download/ground_water_level_manual_monthly_telangna_2007_2026.csv",
+          "query_parameter_names": []
+        },
+        "final_url": {
+          "url_without_query": "https://nwdp.nwic.gov.in/dataset/0000396f-0381-4154-923e-86c8e23c5f5f/resource/b5706a43-1319-44b4-9739-afd9115e1312/download/ground_water_level_manual_monthly_telangna_2007_2026.csv",
+          "query_parameter_names": []
+        },
+        "sample_only": false,
+        "headers_omitted": true
+      },
+      {
+        "file": "reports/actual_forecast_validation_20261019/acquired/telangana_package.json",
+        "bytes": 3238,
+        "expected_sha256": "78561bc129df41897fe05928a7b3081323283d65584da85045dce21133a48539",
+        "actual_sha256": "78561bc129df41897fe05928a7b3081323283d65584da85045dce21133a48539",
+        "hash_matches_manifest_and_receipt": true,
+        "size_matches_manifest_and_receipt": true,
+        "receipt_file": "reports/actual_forecast_validation_20261019/acquired/telangana_package.json.retrieval.json",
+        "receipt_sha256": "d8573d3546f768095138ce68455f7e64b9dbafddd98ba1b79835117499a0c8b5",
+        "retrieved_at_utc": "2026-10-19T08:56:57.739293+00:00",
+        "manifest_retrieval_time_equals_receipt": true,
+        "http_status": 200,
+        "requested_url": {
+          "url_without_query": "https://nwdp.nwic.gov.in/api/3/action/package_show",
+          "query_parameter_names": [
+            "id"
+          ]
+        },
+        "final_url": {
+          "url_without_query": "https://nwdp.nwic.gov.in/api/3/action/package_show",
+          "query_parameter_names": [
+            "id"
+          ]
+        },
+        "sample_only": false,
+        "headers_omitted": true
+      },
+      {
+        "file": "reports/actual_forecast_validation_20261019/acquired/telangana_sample.json",
+        "bytes": 5738,
+        "expected_sha256": "c4ec7eb949a2e5ee17c7bae326353dbc9de2f6ba54d3316ab39f73e75c50f71e",
+        "actual_sha256": "c4ec7eb949a2e5ee17c7bae326353dbc9de2f6ba54d3316ab39f73e75c50f71e",
+        "hash_matches_manifest_and_receipt": true,
+        "size_matches_manifest_and_receipt": true,
+        "receipt_file": "reports/actual_forecast_validation_20261019/acquired/telangana_sample.json.retrieval.json",
+        "receipt_sha256": "3006c72deea03a58112836ec64d0afb54538eabefbb0c760c29d2d3782f5b956",
+        "retrieved_at_utc": "2026-10-19T08:57:46.053322+00:00",
+        "manifest_retrieval_time_equals_receipt": true,
+        "http_status": 200,
+        "requested_url": {
+          "url_without_query": "https://nwdp.nwic.gov.in/api/3/action/datastore_search",
+          "query_parameter_names": [
+            "limit",
+            "resource_id"
+          ]
+        },
+        "final_url": {
+          "url_without_query": "https://nwdp.nwic.gov.in/api/3/action/datastore_search",
+          "query_parameter_names": [
+            "limit",
+            "resource_id"
+          ]
+        },
+        "sample_only": false,
+        "headers_omitted": true
+      },
+      {
+        "file": "reports/actual_forecast_validation_20261019/acquired/upgw_package.json",
+        "bytes": 16803,
+        "expected_sha256": "cfb6eab7abfa001bbad5d130ba8ac3d5701748f44533c8c918498ae3ee216f52",
+        "actual_sha256": "cfb6eab7abfa001bbad5d130ba8ac3d5701748f44533c8c918498ae3ee216f52",
+        "hash_matches_manifest_and_receipt": true,
+        "size_matches_manifest_and_receipt": true,
+        "receipt_file": "reports/actual_forecast_validation_20261019/acquired/upgw_package.json.retrieval.json",
+        "receipt_sha256": "60982fe6a69ede88ebbf8fe9f34e16136ea67e0d8c6cd8ec345ff8b9c9317a83",
+        "retrieved_at_utc": "2026-10-19T04:15:37.438711+00:00",
+        "manifest_retrieval_time_equals_receipt": true,
+        "http_status": 200,
+        "requested_url": {
+          "url_without_query": "https://nwdp.nwic.gov.in/api/3/action/package_show",
+          "query_parameter_names": [
+            "id"
+          ]
+        },
+        "final_url": {
+          "url_without_query": "https://nwdp.nwic.gov.in/api/3/action/package_show",
+          "query_parameter_names": [
+            "id"
+          ]
+        },
+        "sample_only": false,
+        "headers_omitted": true
+      },
+      {
+        "file": "reports/actual_forecast_validation_20261019/acquired/upgw_sample.json",
+        "bytes": 3776,
+        "expected_sha256": "b80817c3467b729384f90abe8a6e65292d620e2fbff21631affc2fc8e04d769f",
+        "actual_sha256": "b80817c3467b729384f90abe8a6e65292d620e2fbff21631affc2fc8e04d769f",
+        "hash_matches_manifest_and_receipt": true,
+        "size_matches_manifest_and_receipt": true,
+        "receipt_file": "reports/actual_forecast_validation_20261019/acquired/upgw_sample.json.retrieval.json",
+        "receipt_sha256": "b19d6edd03ef5248d1ed927f70943475635def2279f5dfe8575a76fefb868cd0",
+        "retrieved_at_utc": "2026-10-19T04:16:07.986517+00:00",
+        "manifest_retrieval_time_equals_receipt": true,
+        "http_status": 200,
+        "requested_url": {
+          "url_without_query": "https://nwdp.nwic.gov.in/api/3/action/datastore_search",
+          "query_parameter_names": [
+            "limit",
+            "resource_id"
+          ]
+        },
+        "final_url": {
+          "url_without_query": "https://nwdp.nwic.gov.in/api/3/action/datastore_search",
+          "query_parameter_names": [
+            "limit",
+            "resource_id"
+          ]
+        },
+        "sample_only": false,
+        "headers_omitted": true
+      }
+    ],
+    "interpretation": "Recorded current-export receipt; not independently authenticated provider publication or historical value availability."
+  },
+  "raw_telangana_qc": {
+    "missing_or_blank_by_raw_column": {
+      "Well ID": 0,
+      "State Name (as per LGD)": 0,
+      "District Name (as per LGD)": 0,
+      "Block Name (as per LGD)": 0,
+      "Village (as per LGD, if available)": 0,
+      "Site Name": 0,
+      "Latitude": 0,
+      "Longitude": 0,
+      "Well Type": 0,
+      "Well Depth, m": 0,
+      "Aquifer Tapped (Unconfined, Semi-Confined, Confined)": 0,
+      "Agency": 0,
+      "Date": 0,
+      "Water Level in mbgl": 23
+    },
+    "Latitude": {
+      "missing_or_nonnumeric": 0,
+      "infinite": 0,
+      "outside_global_coordinate_range": 0,
+      "min": 15.896441,
+      "max": 19.83196
+    },
+    "Longitude": {
+      "missing_or_nonnumeric": 0,
+      "infinite": 0,
+      "outside_global_coordinate_range": 0,
+      "min": 77.004063,
+      "max": 81.18
+    },
+    "rows_in_duplicate_agency_id_month_groups": 42,
+    "duplicate_agency_id_month_groups": 21,
+    "raw_provider_ids_with_metadata_variation": 1,
+    "raw_ids_with_metadata_variation_by_field": {
+      "Latitude": 1,
+      "Longitude": 1,
+      "Well Depth, m": 1,
+      "Aquifer Tapped (Unconfined, Semi-Confined, Confined)": 0,
+      "Well Type": 0,
+      "District Name (as per LGD)": 0,
+      "Site Name": 0
+    },
+    "consecutive_month_comparable_pairs": 185111,
+    "exact_repeat_values_in_consecutive_month_pairs": 1310,
+    "repeat_interpretation": "Descriptive repeated values; these bytes alone cannot distinguish persistent levels, rounding, republication or fresh acquisition."
+  },
+  "app_and_cohort": {
+    "fixed_app_feature_snapshot": {
+      "rows": 233,
+      "districts": [
+        "TS-Adilabad"
+      ],
+      "date_min": "2007-05-01 00:00:00",
+      "date_max": "2026-09-01 00:00:00",
+      "duplicate_district_month_rows": 0,
+      "observed_rows": 229,
+      "imputed_rows": 3,
+      "missing_gwl_rows": 1,
+      "units": {
+        "m_bgl": 229,
+        "nan": 4
+      },
+      "generation": {
+        "research-telangana-exact-name-coordinate-h12-app-v1": 233
+      },
+      "actual_acquisition_at_populated": 0,
+      "available_at_populated": 0,
+      "numeric_missing": {
+        "gwl_current": 1,
+        "gwl_lag_3mo": 3,
+        "gwl_lag_6mo": 6,
+        "rainfall_current": 7,
+        "rainfall_3mo_avg": 5,
+        "monsoon_deficit_pct": 7,
+        "temperature": 19,
+        "evapotranspiration": 19,
+        "water_balance_proxy": 19,
+        "season_Kharif": 0,
+        "season_Rabi": 0,
+        "season_Zaid": 0
+      },
+      "strict_accepted_source_rows_for_supported_district": 2817,
+      "source_provider_ids_for_supported_district": 15
+    },
+    "full_coordinate_h12_primary_target_panels": {
+      "cases": 792,
+      "districts": 33,
+      "cases_with_any_source_name_coordinate_conflict": 792,
+      "mean_unweighted_target_panel_conflict_share": 0.6580310752822394,
+      "mean_unweighted_target_panel_unresolved_name_share": 0.29674320783668817,
+      "cases_with_any_conflict_in_origin_or_target": 792,
+      "target_panels_with_readings_exceeding_listed_depth": 106
+    }
+  },
+  "weather_metadata": {
+    "IMD_manifest": {
+      "artifact_version": "weather-v3",
+      "units": {
+        "rainfall_mm": "mm/month"
+      },
+      "daily_aggregation": "sum_all_calendar_days_required",
+      "spatial_fallback": "district_to_nearest_usable_land_cell",
+      "baseline_start": 1992,
+      "baseline_end": 2025,
+      "n_years": 34,
+      "climatology_purpose": "descriptive_only"
+    },
+    "ERA5_manifest": {
+      "artifact_version": "weather-v3",
+      "units": {
+        "temperature": "degC",
+        "evapotranspiration": "mm/month"
+      },
+      "source_evaporation_variable": "pev",
+      "source_evaporation_units": "m",
+      "source_evaporation_step_type": "avgad",
+      "et_conversion": "source_metadata_to_monthly_total_once",
+      "spatial_fallback": "district_to_nearest_usable_land_cell",
+      "nearest_district_count": 18,
+      "date_start": "2002-01-01",
+      "date_end": "2024-12-01"
+    },
+    "ERA5_retained_nc_metadata": {
+      "dimensions": {
+        "valid_time": 276,
+        "latitude": 129,
+        "longitude": 121
+      },
+      "time_min": "2002-01-01 00:00:00",
+      "time_max": "2024-12-01 00:00:00",
+      "variables_allowlisted_metadata": {
+        "t2m": {
+          "units": "K",
+          "GRIB_units": "K",
+          "GRIB_stepType": "avgua",
+          "long_name": "2 metre temperature"
+        },
+        "pev": {
+          "units": "m",
+          "GRIB_units": "m",
+          "GRIB_stepType": "avgad",
+          "long_name": "Potential evaporation"
+        }
+      }
+    },
+    "IMD_fallback_top10_district_state_distances": [
+      {
+        "st_nm": "Andaman and Nicobar Islands",
+        "district": "Nicobars",
+        "rows": 408,
+        "max_distance_m": 1604210.7464364928
+      },
+      {
+        "st_nm": "Andaman and Nicobar Islands",
+        "district": "South Andaman",
+        "rows": 408,
+        "max_distance_m": 1224974.6942306033
+      },
+      {
+        "st_nm": "Andaman and Nicobar Islands",
+        "district": "North and Middle Andaman",
+        "rows": 408,
+        "max_distance_m": 1088325.173250757
+      },
+      {
+        "st_nm": "Lakshadweep",
+        "district": "Lakshadweep",
+        "rows": 408,
+        "max_distance_m": 371995.2328146661
+      },
+      {
+        "st_nm": "Gujarat",
+        "district": "Devbhumi Dwarka",
+        "rows": 1,
+        "max_distance_m": 112920.14004253728
+      },
+      {
+        "st_nm": "Gujarat",
+        "district": "Porbandar",
+        "rows": 1,
+        "max_distance_m": 71046.41624916968
+      },
+      {
+        "st_nm": "Tamil Nadu",
+        "district": "Chennai",
+        "rows": 408,
+        "max_distance_m": 24034.50116984777
+      },
+      {
+        "st_nm": "West Bengal",
+        "district": "Kolkata",
+        "rows": 408,
+        "max_distance_m": 15681.475053490793
+      },
+      {
+        "st_nm": "Manipur",
+        "district": "Jiribam",
+        "rows": 408,
+        "max_distance_m": 15321.003535550186
+      },
+      {
+        "st_nm": "Maharashtra",
+        "district": "Mumbai",
+        "rows": 408,
+        "max_distance_m": 15106.139806377096
+      }
+    ],
+    "IMD_fallback_district_state_pairs": 24,
+    "active_month_status_2025_2026": [
+      {
+        "month": "2025-01",
+        "source_marked_gwl": 0,
+        "finite_imputed_gwl": 0,
+        "missing_gwl": 725,
+        "finite_rainfall_current": 724,
+        "finite_temperature": 724,
+        "finite_evapotranspiration": 724
+      },
+      {
+        "month": "2025-02",
+        "source_marked_gwl": 0,
+        "finite_imputed_gwl": 0,
+        "missing_gwl": 725,
+        "finite_rainfall_current": 724,
+        "finite_temperature": 724,
+        "finite_evapotranspiration": 724
+      },
+      {
+        "month": "2025-03",
+        "source_marked_gwl": 0,
+        "finite_imputed_gwl": 0,
+        "missing_gwl": 725,
+        "finite_rainfall_current": 724,
+        "finite_temperature": 0,
+        "finite_evapotranspiration": 0
+      },
+      {
+        "month": "2025-04",
+        "source_marked_gwl": 0,
+        "finite_imputed_gwl": 0,
+        "missing_gwl": 725,
+        "finite_rainfall_current": 724,
+        "finite_temperature": 0,
+        "finite_evapotranspiration": 0
+      },
+      {
+        "month": "2025-05",
+        "source_marked_gwl": 0,
+        "finite_imputed_gwl": 0,
+        "missing_gwl": 725,
+        "finite_rainfall_current": 724,
+        "finite_temperature": 0,
+        "finite_evapotranspiration": 0
+      },
+      {
+        "month": "2025-06",
+        "source_marked_gwl": 0,
+        "finite_imputed_gwl": 0,
+        "missing_gwl": 725,
+        "finite_rainfall_current": 724,
+        "finite_temperature": 0,
+        "finite_evapotranspiration": 0
+      },
+      {
+        "month": "2025-07",
+        "source_marked_gwl": 0,
+        "finite_imputed_gwl": 0,
+        "missing_gwl": 725,
+        "finite_rainfall_current": 724,
+        "finite_temperature": 0,
+        "finite_evapotranspiration": 0
+      },
+      {
+        "month": "2025-08",
+        "source_marked_gwl": 0,
+        "finite_imputed_gwl": 0,
+        "missing_gwl": 725,
+        "finite_rainfall_current": 724,
+        "finite_temperature": 0,
+        "finite_evapotranspiration": 0
+      },
+      {
+        "month": "2025-09",
+        "source_marked_gwl": 0,
+        "finite_imputed_gwl": 0,
+        "missing_gwl": 725,
+        "finite_rainfall_current": 724,
+        "finite_temperature": 0,
+        "finite_evapotranspiration": 0
+      },
+      {
+        "month": "2025-10",
+        "source_marked_gwl": 0,
+        "finite_imputed_gwl": 0,
+        "missing_gwl": 725,
+        "finite_rainfall_current": 724,
+        "finite_temperature": 0,
+        "finite_evapotranspiration": 0
+      },
+      {
+        "month": "2025-11",
+        "source_marked_gwl": 0,
+        "finite_imputed_gwl": 0,
+        "missing_gwl": 725,
+        "finite_rainfall_current": 724,
+        "finite_temperature": 0,
+        "finite_evapotranspiration": 0
+      },
+      {
+        "month": "2025-12",
+        "source_marked_gwl": 0,
+        "finite_imputed_gwl": 0,
+        "missing_gwl": 725,
+        "finite_rainfall_current": 724,
+        "finite_temperature": 0,
+        "finite_evapotranspiration": 0
+      },
+      {
+        "month": "2026-01",
+        "source_marked_gwl": 639,
+        "finite_imputed_gwl": 0,
+        "missing_gwl": 86,
+        "finite_rainfall_current": 724,
+        "finite_temperature": 0,
+        "finite_evapotranspiration": 0
+      },
+      {
+        "month": "2026-02",
+        "source_marked_gwl": 0,
+        "finite_imputed_gwl": 639,
+        "missing_gwl": 86,
+        "finite_rainfall_current": 724,
+        "finite_temperature": 0,
+        "finite_evapotranspiration": 0
+      },
+      {
+        "month": "2026-03",
+        "source_marked_gwl": 0,
+        "finite_imputed_gwl": 639,
+        "missing_gwl": 86,
+        "finite_rainfall_current": 0,
+        "finite_temperature": 0,
+        "finite_evapotranspiration": 0
+      },
+      {
+        "month": "2026-04",
+        "source_marked_gwl": 0,
+        "finite_imputed_gwl": 639,
+        "missing_gwl": 86,
+        "finite_rainfall_current": 0,
+        "finite_temperature": 0,
+        "finite_evapotranspiration": 0
+      },
+      {
+        "month": "2026-05",
+        "source_marked_gwl": 0,
+        "finite_imputed_gwl": 0,
+        "missing_gwl": 725,
+        "finite_rainfall_current": 0,
+        "finite_temperature": 0,
+        "finite_evapotranspiration": 0
+      },
+      {
+        "month": "2026-06",
+        "source_marked_gwl": 0,
+        "finite_imputed_gwl": 0,
+        "missing_gwl": 725,
+        "finite_rainfall_current": 0,
+        "finite_temperature": 0,
+        "finite_evapotranspiration": 0
+      },
+      {
+        "month": "2026-07",
+        "source_marked_gwl": 0,
+        "finite_imputed_gwl": 0,
+        "missing_gwl": 725,
+        "finite_rainfall_current": 0,
+        "finite_temperature": 0,
+        "finite_evapotranspiration": 0
+      },
+      {
+        "month": "2026-08",
+        "source_marked_gwl": 0,
+        "finite_imputed_gwl": 0,
+        "missing_gwl": 725,
+        "finite_rainfall_current": 0,
+        "finite_temperature": 0,
+        "finite_evapotranspiration": 0
+      },
+      {
+        "month": "2026-09",
+        "source_marked_gwl": 0,
+        "finite_imputed_gwl": 0,
+        "missing_gwl": 725,
+        "finite_rainfall_current": 0,
+        "finite_temperature": 0,
+        "finite_evapotranspiration": 0
+      }
+    ],
+    "source_release_receipt_revision_availability": "Not established per contributing value or historical issue time; weather-specific fill flags absent from the feature CSV.",
+    "verification_limit": "Source metadata and conversion/spatial code inspected only. Original annual-grid/monthly spatial aggregation was not regenerated."
+  },
+  "checks": [
+    {
+      "name": "acquired_bytes_and_receipt_cgwb_manual_package.json",
+      "passed": true
+    },
+    {
+      "name": "acquired_bytes_and_receipt_cgwb_telemetry_package.json",
+      "passed": true
+    },
+    {
+      "name": "acquired_bytes_and_receipt_nwic_copyright.html",
+      "passed": true
+    },
+    {
+      "name": "acquired_bytes_and_receipt_telangana_monthly_2007_2026.csv",
+      "passed": true
+    },
+    {
+      "name": "acquired_bytes_and_receipt_telangana_package.json",
+      "passed": true
+    },
+    {
+      "name": "acquired_bytes_and_receipt_telangana_sample.json",
+      "passed": true
+    },
+    {
+      "name": "acquired_bytes_and_receipt_upgw_package.json",
+      "passed": true
+    },
+    {
+      "name": "acquired_bytes_and_receipt_upgw_sample.json",
+      "passed": true
+    },
+    {
+      "name": "private_original_manifest_hash_matches_public_fingerprint",
+      "passed": true
+    },
+    {
+      "name": "app_observed_means_reproduce_exact_name_coordinate_subset",
+      "passed": true
+    },
+    {
+      "name": "app_observed_well_counts_match_exact_name_coordinate_subset",
+      "passed": true
+    },
+    {
+      "name": "national_jan_feb2026_rainfall_is_dec2025_carry_including_missingness",
+      "passed": true
+    },
+    {
+      "name": "national_saved_calendar_gwl_lag_3",
+      "passed": true,
+      "mismatch_rows": 0
+    },
+    {
+      "name": "national_saved_calendar_gwl_lag_6",
+      "passed": true,
+      "mismatch_rows": 0
+    }
+  ],
+  "completed_utc": "2026-10-23T04:05:18.404929+00:00",
+  "no_model_pipeline_database_or_network_imports": true
+}
