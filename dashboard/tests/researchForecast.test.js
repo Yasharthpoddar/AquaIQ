@@ -121,11 +121,11 @@ test('optional research page preserves direct-horizon disclosures without replac
   assert.match(html, /does not validate|do not validate/);
   assert.match(html, /HGB remains blocked/);
   const home = readFileSync(new URL('../src/pages/Home.jsx', import.meta.url), 'utf8');
-  assert.match(home, /<h1>Groundwater Research Dashboard<\/h1>/);
+  assert.match(home, /<h1>Groundwater overview<\/h1>/);
   assert.doesNotMatch(home, /<ResearchForecast/);
   const detail = readFileSync(new URL('../src/pages/DistrictDetail.jsx', import.meta.url), 'utf8');
   assert.doesNotMatch(detail, /<ResearchForecast/);
-  assert.match(detail, /<ForecastGraphPanel key=\{id\} districtId=\{id\} \/>/);
+  assert.match(detail, /<DistrictForecastGraph key=\{id\} districtId=\{id\} \/>/);
   const graphPanel = readFileSync(new URL('../src/components/ForecastGraphPanel.jsx', import.meta.url), 'utf8');
   assert.match(graphPanel, /<h2>Monthly research projections<\/h2>/);
   const app = readFileSync(new URL('../src/App.jsx', import.meta.url), 'utf8');

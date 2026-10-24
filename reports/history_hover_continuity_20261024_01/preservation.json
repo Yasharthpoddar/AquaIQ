@@ -1,0 +1,13 @@
+{
+  "at_utc": "2026-10-24T04:50:53.133126+00:00",
+  "unchanged_protected_files": 1467,
+  "changed": [],
+  "missing": [],
+  "frontend_changes_since_original_ux_completion": [
+    "dashboard/src/components/recordedHistory.js",
+    "dashboard/src/pages/DistrictDetail.jsx",
+    "dashboard/tests/recordedHistory.test.js"
+  ],
+  "diff_check_exit_code": 0,
+  "scope": "Existing models, datasets, backend/configuration, original built dashboard and older audit files. Previous completed report text/results were not overwritten; existing preview logs append normal serving requests."
+}

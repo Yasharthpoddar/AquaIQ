@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import MapComponent from '../components/MapComponent';
 import { fetchScores } from '../api';
+import { districtForecastPath } from '../components/districtNavigation.js';
 import '../App.css';
 
 /**
@@ -83,7 +84,7 @@ function Home() {
   }, [retry]);
 
   const handleDistrictClick = (districtId) => {
-    navigate(`/district/${districtId}`);
+    navigate(districtForecastPath(districtId));
   };
 
   const validScores = scores.filter(s => Number.isFinite(s.score));
@@ -99,9 +100,7 @@ function Home() {
 
   return (
     <div className="page">
-      <h1>Groundwater Research Dashboard</h1>
-      <p className="subtitle">A registry of 725 districts with available historical evidence and model estimates. Registry coverage does not establish observation coverage or nationwide accuracy. Select a district for its next 12 months from today where sufficient own observed history exists (experimental, unvalidated), <Link to="/district/TS-Adilabad?view=scenario#forecast-graph">view a twelve-month scenario example</Link>, or <Link to="/district/TS-Adilabad?origin_month=2024-01#forecast-graph">open the Adilabad historical graph example (January 2024 origin)</Link>.</p>
-      <p className="subtitle">Saved primary historical benchmark: seasonal-naive RMSE 2.132 m versus research HGB 3.060 m on the same 209 cases in 32 districts. These previously inspected historical results do not establish current forecasting skill; HGB remains research-only and abstained.</p>
+      <header className="page-heading"><p className="eyebrow">AquaIQ analytics</p><h1>Groundwater overview</h1><p className="subtitle">Explore district evidence and experimental estimates for the next 12 months.</p></header>
       {error && <div className="empty-state" role="alert">
         <p>{error}</p>
         <button className="alert-tab" onClick={() => setRetry(value => value + 1)}>Retry scores</button>
@@ -111,10 +110,10 @@ function Home() {
         <button className="alert-tab" onClick={() => setRetry(value => value + 1)}>Check again</button>
       </div>}
       {scoresReady && <p className="subtitle" role="status">
-        Project risk scale based on {validScores.length} scored districts; {totalDistricts - validScores.length} districts have unavailable evidence.
-        {observations.length > 0 && ` Source-backed month labels range from ${observations[0]} to ${observations.at(-1)}. These are monthly labels, not verified acquisition days.`}
+        {validScores.length} scored · {totalDistricts - validScores.length} unavailable · {totalDistricts} districts
+        {observations.length > 0 && ` · Source months ${observations[0].slice(0,7)}–${observations.at(-1).slice(0,7)}`}
       </p>}
-      {scoresReady && uncalibrated && <p role="status">These project scores use initial component weights that have not been calibrated against independent crisis outcomes. A score is not an accuracy or confidence percentage.</p>}
+      {scoresReady && uncalibrated && <p className="compact-note">Uncalibrated project index · not a crisis probability. Monthly estimates are experimental.</p>}
 
       {/* Summary cards */}
       <div className="summary-cards">
@@ -165,20 +164,14 @@ function Home() {
       )}
 
       {/* Leaflet choropleth map */}
-      {loading ? (
-        <div className="loading-container">
-          <div className="loading-spinner" />
-          <div className="loading-text">Loading nationwide district map...</div>
-        </div>
-      ) : scoresReady ? (
-        <div className="fade-in">
-          <MapComponent
-            scores={scores}
-            geojsonUrl={GEOJSON_URL}
-            onDistrictClick={handleDistrictClick}
-          />
-        </div>
-      ) : null}
+      <MapComponent
+        scores={scores}
+        geojsonUrl={GEOJSON_URL}
+        onDistrictClick={handleDistrictClick}
+        catalogLoading={loading}
+        catalogError={error || (status === 'awaiting_complete_scoring_run' ? 'District catalog is awaiting a complete scoring run.' : null)}
+        onCatalogRetry={() => setRetry(value => value + 1)}
+      />
 
       {/* District list (top risk) */}
       <h2>Districts ranked by project index</h2>
@@ -197,7 +190,7 @@ function Home() {
               key={d.district_id}
               className="district-row fade-in"
               style={{ animationDelay: `${Math.min(i * 0.03, 0.5)}s` }}
-              onClick={() => navigate(`/district/${d.district_id}`)}
+              onClick={() => handleDistrictClick(d.district_id)}
             >
               <div>
                 <span className="district-name">{d.name}, {d.state}</span>

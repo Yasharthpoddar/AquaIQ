@@ -1,222 +1,217 @@
-import { useState, useEffect } from 'react';
-import { fetchScores, postSimulate } from '../api';
+import { useEffect, useReducer, useRef, useState } from 'react';
+import { fetchScores, postSimulate } from '../api.js';
+import DistrictSearch from '../components/DistrictSearch.jsx';
+import {
+  SIMULATION_PRESETS, INITIAL_SIMULATION_INPUTS, TIER_COLORS, availableSimulationEvidence, canExportComparison, comparisonCsv,
+  createScenarioRunner, formatSimulationNumber, selectedSimulationPreset, simulationInputReducer,
+  simulationTier, validSimulationInputs, validSimulationScore,
+} from '../components/simulationComparison.js';
 
-/**
- * Policy Simulator page — what-if analysis.
- * Route: /simulate
- * Uses Option A: perturbs rainfall features, executes physical XGBoost model
- * inference, applies a labelled extraction sensitivity heuristic.
- */
+const TIER_TEXT_COLORS = { Safe: '#166534', Watch: '#854d0e', Warning: '#9a3412', Crisis: '#991b1b' };
+const sourceMonth = value => typeof value === 'string' ? value.slice(0, 7) : null;
 
-const TIER_COLORS = {
-  Safe: "#22c55e",
-  Watch: "#eab308",
-  Warning: "#f97316",
-  Crisis: "#ef4444",
-};
+function RiskTier({ value }) {
+  const tier = simulationTier(value);
+  return <span className="sim-tier" style={{ color: TIER_TEXT_COLORS[tier] || 'var(--text-muted)' }}>{tier || 'Unavailable'}</span>;
+}
 
-function Simulate() {
+export function SimulationControls({ districtControl, selectedDistrict = null, inputs = INITIAL_SIMULATION_INPUTS,
+  busy = false, onInputChange = () => {}, onPreset = () => {}, onReset = () => {}, onRun = () => {}, onCompare = () => {} }) {
+  const preset = selectedSimulationPreset(inputs);
+  const canRun = Boolean(selectedDistrict?.district_id) && validSimulationInputs(inputs) && !busy;
+  const baselineScore = validSimulationScore(selectedDistrict?.score) && availableSimulationEvidence(selectedDistrict?.status)
+    ? selectedDistrict.score : null;
+  return <form className="card sim-controls" aria-label="Scenario inputs" onSubmit={event => { event.preventDefault(); if (canRun) onRun(); }}>
+    <h2>Scenario inputs</h2>
+    {districtControl}
+    <div className="sim-baseline" aria-live="polite">
+      <span>Current baseline index</span>
+      <strong>{formatSimulationNumber(baselineScore)} <small>/ 100</small></strong>
+      <RiskTier value={baselineScore === null ? null : selectedDistrict?.tier} />
+      {selectedDistrict && <small>Source month: {sourceMonth(selectedDistrict.last_observed_date) || 'Unavailable'}
+        {selectedDistrict.status === 'historical_forecast' ? ' · Historical evidence' : ''}
+        {selectedDistrict.estimate_type === 'zone_fallback' ? ' · Zone evidence' : ''}</small>}
+    </div>
+    <fieldset className="sim-fieldset" disabled={busy || !selectedDistrict}>
+      <legend>Choose a starting point</legend>
+      <div className="sim-presets">
+        {SIMULATION_PRESETS.map(item => <button key={item.id} type="button" className="sim-preset"
+          aria-pressed={preset?.id === item.id} onClick={() => onPreset(item.id)}>{item.label}</button>)}
+      </div>
+      <p className="sim-note">Presets are illustrative inputs. Adjust them before running.</p>
+      <div className="form-group sim-input-row">
+        <div className="sim-input-header">
+          <label htmlFor="sim-rainfall">Rainfall variation</label>
+          <output htmlFor="sim-rainfall" id="sim-rainfall-value">{formatSimulationNumber(inputs.rainfallChange, true)}%</output>
+        </div>
+        <input id="sim-rainfall" type="range" min={-50} max={50} step={1} value={inputs.rainfallChange}
+          aria-describedby="sim-rainfall-value" aria-valuetext={`${formatSimulationNumber(inputs.rainfallChange, true)} percent rainfall change`}
+          onChange={event => onInputChange('rainfallChange', Number(event.target.value))} />
+        <div className="sim-range-labels" aria-hidden="true"><span>−50%</span><span>+50%</span></div>
+      </div>
+      <div className="form-group sim-input-row">
+        <div className="sim-input-header">
+          <label htmlFor="sim-extraction">Extraction sensitivity <small>(heuristic)</small></label>
+          <output htmlFor="sim-extraction" id="sim-extraction-value">{formatSimulationNumber(inputs.extractionChange, true)}%</output>
+        </div>
+        <input id="sim-extraction" type="range" min={-50} max={50} step={1} value={inputs.extractionChange}
+          aria-describedby="sim-extraction-value" aria-valuetext={`${formatSimulationNumber(inputs.extractionChange, true)} percent extraction change`}
+          onChange={event => onInputChange('extractionChange', Number(event.target.value))} />
+        <div className="sim-range-labels" aria-hidden="true"><span>−50%</span><span>+50%</span></div>
+      </div>
+      <button type="button" className="button button-secondary" disabled={busy || (inputs.rainfallChange === 0 && inputs.extractionChange === 0)} onClick={onReset}>Reset to zero</button>
+    </fieldset>
+    <div className="sim-actions">
+      <button className="button button-primary" type="submit" disabled={!canRun}>Run scenario</button>
+      <button className="button button-secondary" type="button" disabled={!canRun} onClick={() => { if (canRun) onCompare(); }}>Compare scenarios</button>
+    </div>
+    {busy && <p role="status">Evaluating scenarios…</p>}
+  </form>;
+}
+
+export function ComparisonResults({ comparison = null, busy = false, selectedDistrictId = '', onExport = () => {} }) {
+  const rows = comparison?.rows || [];
+  const district = comparison?.district;
+  const available = rows.filter(row => row.status === 'available').length;
+  const observedMonths = [...new Set(rows.map(row => sourceMonth(row.observedDate)).filter(Boolean))];
+  return <section className="card sim-results" aria-labelledby="sim-results-title" aria-busy={busy}>
+    <div className="sim-result-heading">
+      <div><h2 id="sim-results-title">Scenario comparison</h2>
+        {district && <p>{district.name || district.district_id}{district.state ? `, ${district.state}` : ''} <small>({district.district_id})</small></p>}
+      </div>
+      <button type="button" className="button button-secondary" disabled={busy || !canExportComparison(comparison)} onClick={onExport}>Export CSV</button>
+    </div>
+    {district && district.district_id !== selectedDistrictId && <p className="sim-note" role="status">These results belong to {district.name || district.district_id}. Run again to compare the newly selected district.</p>}
+    {!rows.length ? <div className="sim-empty" role="status">
+      <h3>{busy ? 'Preparing your comparison' : 'Explore a scenario'}</h3>
+      <p>{busy ? 'Results appear as each scenario completes.' : 'Choose a district, then run custom inputs or compare all six presets.'}</p>
+      {!busy && <p className="sim-note">Run a scenario or comparison to enable CSV export.</p>}
+    </div> : <>
+      <p className="sim-note" role="status">{busy ? `${rows.length} scenarios evaluated so far` : `${rows.length} scenarios evaluated`} · {available} available</p>
+      <ul className="sim-bars" aria-label="Scenario project indices on a scale of 0 to 100">
+        {rows.map(row => <li key={row.id} className="sim-bar-row">
+          <div className="sim-bar-label"><strong>{row.label}</strong><span>{formatSimulationNumber(row.rainfallChange, true)}% rain · {formatSimulationNumber(row.extractionChange, true)}% extraction</span></div>
+          {row.status === 'available' ? <>
+            <div className="sim-bar-track" aria-hidden="true"><span className="sim-bar-fill" style={{ width: `${row.scenarioScore}%`, backgroundColor: TIER_COLORS[row.scenarioTier] || '#64748b' }} /></div>
+            <div className="sim-bar-value"><strong>{formatSimulationNumber(row.scenarioScore)}</strong><RiskTier value={row.scenarioTier} /><span>{formatSimulationNumber(row.delta, true)} points vs baseline</span></div>
+          </> : <div className="sim-bar-unavailable">Unavailable</div>}
+        </li>)}
+      </ul>
+      <div className="sim-table-scroll" role="region" aria-label="Scenario comparison table" tabIndex={0}>
+        <table className="sim-table">
+          <caption>Inputs and project indices for {district?.name || district?.district_id}</caption>
+          <thead><tr><th scope="col">Scenario</th><th scope="col">Rainfall</th><th scope="col">Extraction</th>
+            <th scope="col">Baseline</th><th scope="col">Baseline tier</th><th scope="col">Scenario index</th>
+            <th scope="col">Scenario tier</th><th scope="col">Change</th><th scope="col">Status</th></tr></thead>
+          <tbody>{rows.map(row => <tr key={row.id}>
+            <th scope="row">{row.label}</th><td>{formatSimulationNumber(row.rainfallChange, true)}%</td><td>{formatSimulationNumber(row.extractionChange, true)}%</td>
+            <td>{formatSimulationNumber(row.baselineScore)}</td><td><RiskTier value={row.baselineTier} /></td>
+            <td>{formatSimulationNumber(row.scenarioScore)}</td><td><RiskTier value={row.scenarioTier} /></td>
+            <td>{formatSimulationNumber(row.delta, true)}</td><td>{row.status === 'available' ? 'Available' : <><strong>{row.status === 'error' ? 'Request failed' : 'Unavailable'}</strong><span className="sim-status-detail">{row.message}</span></>}</td>
+          </tr>)}</tbody>
+        </table>
+      </div>
+      <p className="sim-note">Source month: {observedMonths.length ? observedMonths.join(', ') : 'Unavailable'}{rows.some(row => row.sourceStatus === 'historical_forecast') ? ' · Uses historical source evidence.' : ''}</p>
+    </>}
+  </section>;
+}
+
+export default function Simulate() {
   const [districts, setDistricts] = useState([]);
   const [districtId, setDistrictId] = useState('');
-  const [rainfallChange, setRainfallChange] = useState(0);
-  const [extractionChange, setExtractionChange] = useState(0);
-  const [result, setResult] = useState(null);
-  const [simulating, setSimulating] = useState(false);
-  const [error, setError] = useState(null);
+  const [districtLoading, setDistrictLoading] = useState(true);
+  const [districtError, setDistrictError] = useState(null);
+  const [districtRetry, setDistrictRetry] = useState(0);
+  const [inputs, dispatch] = useReducer(simulationInputReducer, INITIAL_SIMULATION_INPUTS);
+  const [comparison, setComparison] = useState(null);
+  const [busy, setBusy] = useState(false);
+  const [runError, setRunError] = useState(null);
+  const alive = useRef(true);
+  const running = useRef(false);
+  const sequence = useRef(0);
+  const runner = useRef(null);
+  if (!runner.current) runner.current = createScenarioRunner(postSimulate);
+  const selectedDistrict = districts.find(district => district.district_id === districtId) || null;
 
-  // Load districts from batch scores API
   useEffect(() => {
-    let cancelled = false;
-    fetchScores()
-      .then(data => {
-        if (cancelled) return;
-        if (data.status === 'awaiting_complete_scoring_run') {
-          setError('District estimates are being rebuilt. Reload after the scoring run completes.');
-          return;
-        }
-        const allDistricts = (data.districts || []).map(d => ({
-          id: d.district_id,
-          name: d.name,
-          state: d.state,
-          score: d.score,
-          tier: d.tier,
-        }));
-        setDistricts(allDistricts);
-        if (allDistricts.length > 0) {
-          // Default to Jaipur or first district
-          const jaipur = allDistricts.find(d => d.id === 'RJ-Jaipur');
-          setDistrictId(jaipur ? jaipur.id : allDistricts[0].id);
-        }
-      })
-      .catch(err => { if (!cancelled) setError(err.message || 'District evidence is unavailable.'); });
-    return () => { cancelled = true; };
+    alive.current = true;
+    return () => { alive.current = false; };
   }, []);
 
-  const handleSimulate = async () => {
-    setSimulating(true);
-    setError(null);
-    setResult(null);
-    try {
-      const data = await postSimulate({
-        district_id: districtId,
-        rainfall_change_pct: rainfallChange,
-        extraction_change_pct: extractionChange,
-      });
+  useEffect(() => {
+    let cancelled = false;
+    setDistrictLoading(true); setDistrictError(null);
+    fetchScores().then(data => {
+      if (cancelled) return;
+      if (data.status === 'awaiting_complete_scoring_run') throw new Error('District indices are being rebuilt. Retry after scoring completes.');
+      const records = Array.isArray(data.districts)
+        ? data.districts.filter(district => typeof district?.district_id === 'string' && district.district_id) : [];
+      if (!records.length) throw new Error('No districts are available. Retry the district list.');
+      setDistricts(records);
+      setDistrictId(previous => records.some(district => district.district_id === previous) ? previous
+        : (records.find(district => district.district_id === 'RJ-Jaipur') || records[0]).district_id);
+    }).catch(error => {
+      if (!cancelled) { setDistricts([]); setDistrictId(''); setDistrictError(error.message || 'Districts could not be loaded.'); }
+    }).finally(() => { if (!cancelled) setDistrictLoading(false); });
+    return () => { cancelled = true; };
+  }, [districtRetry]);
 
-      setResult({
-        baseline: data.baseline_score,
-        simulated: data.simulated_score,
-        delta: data.delta,
-        baselineTier: data.baseline_tier,
-        simulatedTier: data.simulated_tier,
-        extractionHeuristicApplied: data.extraction_heuristic_applied,
-        details: data.simulation_details || {},
-        observationDate: data.last_observed_date,
-        estimateType: data.estimate_type,
-        status: data.status,
+  const runScenarios = async scenarios => {
+    if (running.current || districtLoading || !selectedDistrict || !validSimulationInputs(inputs)) return;
+    running.current = true;
+    const runId = ++sequence.current;
+    // Keep the district label and input values from the moment this run was submitted.
+    const district = { district_id: selectedDistrict.district_id, name: selectedDistrict.name, state: selectedDistrict.state };
+    setBusy(true); setRunError(null);
+    setComparison({ runId, district, rows: [], completed: false });
+    try {
+      const rows = await runner.current({ districtId: district.district_id, scenarios,
+        shouldContinue: () => alive.current && runId === sequence.current,
+        onResult: completedRows => setComparison(current => current?.runId === runId ? { ...current, rows: completedRows } : current),
       });
-    } catch (err) {
-      setError(err.message || 'This scenario is unavailable.');
+      if (alive.current && rows !== null) setComparison(current => current?.runId === runId ? { ...current, rows, completed: true } : current);
+    } catch (error) {
+      if (alive.current) setRunError(error.message || 'This comparison could not be started.');
     } finally {
-      setSimulating(false);
+      running.current = false;
+      if (alive.current) setBusy(false);
     }
   };
 
-  return (
-    <div className="page">
-      <h1>Rainfall and extraction sensitivity</h1>
-      <p className="subtitle">Explore changes in the project risk index under stated inputs. Extraction effects are a project heuristic, not a proven causal estimate or policy recommendation.</p>
-      {error && <p role="alert">{error}</p>}
-      {result && result.baseline == null && <p role="status">This scenario is unavailable because the baseline has insufficient model evidence.</p>}
+  const exportComparison = () => {
+    const csv = comparisonCsv(comparison);
+    if (busy || !csv) return;
+    const url = URL.createObjectURL(new Blob(['\uFEFF', csv], { type: 'text/csv;charset=utf-8' }));
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `aquaiq-scenarios-${comparison.district.district_id.replace(/[^a-z0-9_-]/gi, '_')}.csv`;
+    document.body.appendChild(link); link.click(); link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 0);
+  };
 
-      <div className="simulator-layout">
-        {/* Left: Form */}
-        <div className="simulator-form fade-in">
-          <div className="form-group">
-            <label>Select Target District</label>
-            <select value={districtId} disabled={simulating} onChange={e => { setDistrictId(e.target.value); setResult(null); setError(null); }}>
-              {districts.map(d => (
-                <option key={d.id} value={d.id}>
-                  {d.name}, {d.state} — Score: {d.score ?? 'N/A'} ({d.tier ?? 'Unrated'})
-                </option>
-              ))}
-            </select>
-          </div>
+  const districtControl = <DistrictSearch districts={districts} selectedId={districtId} label="Simulation district"
+    loading={districtLoading} error={districtError} disabled={busy} onRetry={() => setDistrictRetry(value => value + 1)}
+    onQueryChange={() => { setDistrictId(''); setRunError(null); }}
+    onSelect={district => { setDistrictId(district.district_id); setRunError(null); }} />;
+  const preset = selectedSimulationPreset(inputs);
 
-          <div className="form-group">
-            <label>
-              🌧️ Monsoon Rainfall Variation:
-              <span className="slider-value" style={{
-                color: rainfallChange > 0 ? '#16a34a' : rainfallChange < 0 ? '#dc2626' : '#94a3b8'
-              }}>
-                {rainfallChange > 0 ? '+' : ''}{rainfallChange}%
-              </span>
-            </label>
-            <input
-              type="range" min={-50} max={50} value={rainfallChange}
-              disabled={simulating}
-              onChange={e => { setRainfallChange(Number(e.target.value)); setResult(null); }}
-            />
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: '#64748b', marginTop: '4px' }}>
-              <span>−50% rainfall scenario</span>
-              <span>+50% rainfall scenario</span>
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label>
-              ⛏️ Extraction Change (heuristic):
-              <span className="slider-value" style={{
-                color: extractionChange > 0 ? '#dc2626' : extractionChange < 0 ? '#16a34a' : '#94a3b8'
-              }}>
-                {extractionChange > 0 ? '+' : ''}{extractionChange}%
-              </span>
-            </label>
-            <input
-              type="range" min={-50} max={50} value={extractionChange}
-              disabled={simulating}
-              onChange={e => { setExtractionChange(Number(e.target.value)); setResult(null); }}
-            />
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: '#64748b', marginTop: '4px' }}>
-              <span>−50% extraction scenario</span>
-              <span>+50% extraction scenario</span>
-            </div>
-          </div>
-
-          <button className="simulate-btn" onClick={handleSimulate} disabled={simulating || !districtId}>
-            {simulating ? (
-              <>
-                <div className="loading-spinner" style={{ width: '18px', height: '18px', borderWidth: '2px' }} />
-                Simulating...
-              </>
-            ) : (
-              <>🔬 Run Sensitivity Analysis</>
-            )}
-          </button>
-        </div>
-
-        {/* Right: Results */}
-        <div className="simulation-result fade-in fade-in-delay-2">
-          {!result ? (
-            <div className="empty-state" style={{ padding: '3rem 2rem' }}>
-              <p style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>🧪</p>
-              <p style={{ fontWeight: 600, marginBottom: '0.5rem' }}>No sensitivity scenario evaluated yet</p>
-              <p style={{ fontSize: '0.85rem' }}>Adjust the inputs to inspect a change in the uncalibrated project index. This does not estimate an observed policy outcome.</p>
-            </div>
-          ) : (
-            <>
-              {/* Baseline */}
-              <div className="result-card baseline">
-                <div className="result-label">Baseline project index</div>
-                <div className="result-value" style={{ color: TIER_COLORS[result.baselineTier] || '#64748b' }}>
-                  {result.baseline ?? 'Unavailable'}
-                </div>
-                <div className="result-tier" style={{ color: TIER_COLORS[result.baselineTier] || '#64748b' }}>
-                  {result.baselineTier ? `${result.baselineTier} Tier` : 'No risk tier'}
-                </div>
-              </div>
-
-              {/* Delta */}
-              <div className={`result-delta ${result.delta < 0 ? 'improved' : result.delta > 0 ? 'worsened' : 'neutral'}`}>
-                {result.delta == null ? 'Unavailable' : result.delta < 0 ? '↓' : result.delta > 0 ? '↑' : '→'}
-                {' '}
-                {result.delta == null ? 'No valid baseline estimate' : result.delta === 0
-                  ? 'No change under baseline inputs'
-                  : `${Math.abs(result.delta)} point ${result.delta < 0 ? 'decrease in estimated score' : 'increase in estimated score'}`
-                }
-              </div>
-
-              {/* Simulated */}
-              <div className={`result-card ${result.delta < 0 ? 'improved' : result.delta > 0 ? 'worsened' : 'simulated'}`}>
-                <div className="result-label">Scenario project index</div>
-                <div className="result-value" style={{ color: TIER_COLORS[result.simulatedTier] || '#64748b' }}>
-                  {result.simulated ?? 'Unavailable'}
-                </div>
-                <div className="result-tier" style={{ color: TIER_COLORS[result.simulatedTier] || '#64748b' }}>
-                  {result.simulatedTier ? `${result.simulatedTier} Tier` : 'No risk tier'}
-                  {result.baselineTier !== result.simulatedTier && (
-                    <span style={{ fontSize: '0.8rem', marginLeft: '8px', opacity: 0.8 }}>
-                      (shifted from {result.baselineTier})
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              {/* Methodology details */}
-              <div style={{ marginTop: '1rem', padding: '0.75rem', borderRadius: '8px', background: 'rgba(0,0,0,0.03)', fontSize: '0.78rem', color: '#64748b' }}>
-                <div><strong>Source-backed month:</strong> {result.observationDate || 'Unavailable'}{result.estimateType === 'zone_fallback' ? ' (zone evidence)' : ''}</div>
-                {result.status === 'historical_forecast' && <div>This scenario uses historical groundwater evidence.</div>}
-                <div><strong>Inference Mode:</strong> {result.details.xgb_inference_used ? 'Model sensitivity on observed evidence' : 'Unchanged baseline or unavailable evidence'}</div>
-                {result.extractionHeuristicApplied && (
-                  <div><strong>Extraction sensitivity:</strong> Project heuristic; the causal effect has not been calibrated.</div>
-                )}
-              </div>
-            </>
-          )}
-        </div>
-      </div>
+  return <div className="page">
+    <h1>Scenario simulator</h1>
+    <p className="subtitle">Compare rainfall and extraction inputs for a district’s project risk index.</p>
+    <p className="sim-note">Illustrative sensitivity only. Extraction effects are heuristic and uncalibrated.</p>
+    {runError && <p role="alert">{runError}</p>}
+    <div className="sim-layout">
+      <SimulationControls districtControl={districtControl} selectedDistrict={districtLoading ? null : selectedDistrict} inputs={inputs} busy={busy}
+        onInputChange={(field, value) => dispatch({ type: 'change', field, value })}
+        onPreset={id => dispatch({ type: 'preset', id })} onReset={() => dispatch({ type: 'reset' })}
+        onRun={() => runScenarios([{ ...inputs, id: preset?.id || 'custom', label: preset?.label || 'Custom scenario' }])}
+        onCompare={() => runScenarios(SIMULATION_PRESETS)} />
+      <ComparisonResults comparison={comparison} busy={busy} selectedDistrictId={districtId} onExport={exportComparison} />
     </div>
-  );
+    <details className="card sim-method"><summary>How it works</summary>
+      <p>Rainfall inputs adjust rainfall-related features before the existing scoring pipeline runs. Extraction adds a project sensitivity adjustment. Baseline inputs (0%, 0%) return the unchanged baseline.</p>
+      <p>These parameter scenarios do not predict groundwater depth or establish policy outcomes. A lower index alone does not demonstrate better groundwater outcomes. Historical or zone evidence may be used when identified by the service; missing evidence stays unavailable.</p>
+      <p>Compare scenarios evaluates each preset sequentially through the existing simulation endpoint. Results remain on this page until the next run or page reload.</p>
+    </details>
+  </div>;
 }
-
-export default Simulate;

@@ -22,9 +22,6 @@ function App() {
           </div>
         </nav>
         <main className="main-content">
-          <aside className="card" aria-label="Research prototype limitations" style={{padding:'1rem',marginBottom:'1rem'}}>
-            <strong>Academic research prototype.</strong> Nationwide accuracy and real-time forecasting skill have not been verified. The 0–100 score is a project-defined, uncalibrated risk index, not a crisis probability or an official groundwater classification.
-          </aside>
           <Routes>
             <Route path="/research" element={<div className="page"><h1>Twelve-month groundwater research</h1><ResearchForecast /></div>} />
             <Route path="/" element={<Home />} />

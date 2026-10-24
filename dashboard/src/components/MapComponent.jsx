@@ -3,6 +3,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { fetchConfig } from '../api';
 import { boundaryCoverage, buildScoreLookup, districtBoundaries, districtName, matchDistrict } from '../districtMap';
+import { MapDistrictSearch } from './DistrictSearch.jsx';
 
 /**
  * MapComponent — Leaflet.js India choropleth map
@@ -28,11 +29,11 @@ function tooltipText(value) {
   })[character]);
 }
 
-function MapComponent({ scores = [], geojsonUrl, onDistrictClick }) {
+function MapComponent({ scores = [], geojsonUrl, onDistrictClick, catalogLoading = false,
+  catalogError = null, onCatalogRetry }) {
   const mapRef = useRef(null);
   const mapInstance = useRef(null);
   const geojsonLayer = useRef(null);
-  const [searchQuery, setSearchQuery] = useState('');
   const [tierConfig, setTierConfig] = useState(null);
   const [mapError, setMapError] = useState(null);
   const [coverage, setCoverage] = useState(null);
@@ -159,22 +160,6 @@ function MapComponent({ scores = [], geojsonUrl, onDistrictClick }) {
     return () => { cancelled = true; controller.abort(); };
   }, [geojsonUrl, scores, tierConfig, retry]);
 
-  // Search: zoom to matching district
-  const handleSearch = (query) => {
-    setSearchQuery(query);
-    if (!geojsonLayer.current || !query) return;
-
-    const q = query.toLowerCase().trim();
-    geojsonLayer.current.eachLayer((layer) => {
-      const dName = districtName(layer.feature?.properties).toLowerCase();
-      if (dName.includes(q)) {
-        mapInstance.current.fitBounds(layer.getBounds(), { maxZoom: 8 });
-        layer.openTooltip();
-        layer.setStyle({ weight: 3, color: '#2563eb', fillOpacity: 0.9 });
-      }
-    });
-  };
-
   const legendColors = tierConfig
     ? Object.fromEntries(Object.entries(tierConfig).map(([k, v]) => [k, v.color]))
     : DEFAULT_TIER_COLORS;
@@ -185,20 +170,17 @@ function MapComponent({ scores = [], geojsonUrl, onDistrictClick }) {
         <p>{mapError}</p>
         <button className="alert-tab" onClick={() => setRetry(value => value + 1)}>Retry map</button>
       </div>}
-      {coverage && <div className="map-coverage" role="status">
+      <div className="map-controls">
+      {coverage && !catalogLoading && !catalogError && <div className="map-coverage" role="status">
         <p>District boundaries match {coverage.mapped} of {scores.length} scored district records.</p>
         {coverage.missing.length > 0 && <p>Available without a separate matching boundary: {coverage.missing.map((district, index) => <span key={district.district_id}>
           {index > 0 && ' · '}<button type="button" className="alert-tab" onClick={() => onDistrictClick?.(district.district_id)}>{district.name}, {district.state}</button>
         </span>)}. Open a district to review its evidence.</p>}
       </div>}
       <div className="map-search">
-        <input
-          type="text"
-          placeholder="Search district..."
-          value={searchQuery}
-          onChange={(e) => handleSearch(e.target.value)}
-          className="search-input"
-        />
+        <MapDistrictSearch scores={scores} catalogLoading={catalogLoading} catalogError={catalogError}
+          onCatalogRetry={onCatalogRetry} onDistrictClick={onDistrictClick} />
+      </div>
       </div>
       <div ref={mapRef} className="map-container" />
 

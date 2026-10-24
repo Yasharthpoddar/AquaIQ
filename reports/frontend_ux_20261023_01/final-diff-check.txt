@@ -1,0 +1,3 @@
+exit_code=0
+warning: in the working copy of 'dashboard/src/App.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'dashboard/src/pages/Simulate.jsx', LF will be replaced by CRLF the next time Git touches it

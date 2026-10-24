@@ -140,7 +140,7 @@ test('graph explicitly requests twelve months and the separately requested legac
   } finally { globalThis.fetch = originalFetch; }
 });
 
-test('original graph card, responsive styles, axes, line color and retry control remain in place', () => {
+test('historical research graph remains available without replacing the district scenario workflow', () => {
   const detail = readFileSync(new URL('../src/pages/DistrictDetail.jsx', import.meta.url), 'utf8');
   const panel = readFileSync(new URL('../src/components/ForecastGraphPanel.jsx', import.meta.url), 'utf8');
   for (const markup of [
@@ -154,8 +154,8 @@ test('original graph card, responsive styles, axes, line color and retry control
     'stroke="#ef4444" strokeWidth={2} dot={{r:5}} isAnimationActive={false}',
     'onClick={onRetry}>Retry prediction</button>',
   ]) assert.ok(panel.includes(markup), `Preserve original markup: ${markup}`);
-  assert.ok(detail.indexOf('<div className={`score-badge') < detail.lastIndexOf('<ForecastGraphPanel key={id} districtId={id} />'));
-  assert.ok(detail.lastIndexOf('<ForecastGraphPanel key={id} districtId={id} />') < detail.indexOf('<h2>Recorded groundwater history</h2>'));
+  assert.match(detail, /<DistrictForecastGraph key=\{id\} districtId=\{id\} \/>/);
+  assert.ok(detail.indexOf('<DistrictForecastGraph') < detail.indexOf('<h2>Recorded history</h2>'));
   assert.match(panel, /Annual baseline at/);
   assert.match(panel, /Months 1–11 remain gaps/);
   assert.doesNotMatch(panel, /name="Annual baseline"|<ResearchForecast|connectNulls=\{true\}/);

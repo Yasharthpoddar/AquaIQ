@@ -79,7 +79,7 @@ test('unknown origins and read failures retain an explicit graph-sized unavailab
   assert.match(failed, /height:380px/);
 });
 
-test('panel renders origin controls and loading frame before legacy scoring is available', () => {
+test('standalone historical research panel retains its controls while district routes use the scenario', () => {
   const html = renderToStaticMarkup(createElement(MemoryRouter, { initialEntries: ['/district/TS-Adilabad?origin_month=2024-01#forecast-graph'] },
     createElement(ForecastGraphPanel, { districtId: 'TS-Adilabad' })));
   assert.match(html, /type="month"[^>]*value="2024-01"/);
@@ -88,14 +88,15 @@ test('panel renders origin controls and loading frame before legacy scoring is a
   assert.match(html, /Defaults to the latest observed origin/);
   assert.match(html, /id="forecast-graph"/);
   const detail = readFileSync(new URL('../src/pages/DistrictDetail.jsx', import.meta.url), 'utf8');
-  assert.equal((detail.match(/<ForecastGraphPanel key=\{id\} districtId=\{id\} \/>/g) || []).length, 3);
-  assert.match(detail, /if \(error\).*Retry district<\/button>.*<ForecastGraphPanel/);
+  assert.equal((detail.match(/<DistrictForecastGraph key=\{id\} districtId=\{id\} \/>/g) || []).length, 1);
+  assert.match(detail, /Retry district/);
+  assert.doesNotMatch(detail, /if \(loading\) return|if \(error\) return|<ForecastGraphPanel/);
 });
 
-test('Home exposes one explicitly historical graph link without replacing the map or risk cards', () => {
+test('Home keeps the map and risk cards but removes historical graph promotion', () => {
   const home = readFileSync(new URL('../src/pages/Home.jsx', import.meta.url), 'utf8');
-  assert.match(home, /to="\/district\/TS-Adilabad\?origin_month=2024-01#forecast-graph"/);
-  assert.match(home, /historical graph example \(January 2024 origin\)/);
+  assert.doesNotMatch(home, /origin_month|historical graph example/);
+  assert.match(home, /next 12 months/);
   assert.match(home, /<MapComponent/);
   assert.match(home, /className="summary-cards"/);
   assert.doesNotMatch(home, /<ForecastGraphPanel|<ResearchForecast/);

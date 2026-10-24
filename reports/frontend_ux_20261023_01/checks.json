@@ -1,0 +1,54 @@
+{
+  "recorded_at_utc": "2026-10-23T19:25:25.475995+00:00",
+  "frontend_tests": {
+    "passed": 99,
+    "failed": 0,
+    "exit_code": 0,
+    "log": "frontend-tests-03.txt"
+  },
+  "lint": {
+    "exit_code": 0,
+    "log": "frontend-lint-02.txt"
+  },
+  "build": {
+    "exit_code": 0,
+    "log": "frontend-build-01.txt",
+    "out_dir": "build_20261024"
+  },
+  "guarded_backend_tests": {
+    "passed": 47,
+    "failed": 0,
+    "exit_code": 0,
+    "log": "backend-tests-01.txt"
+  },
+  "diff_check_exit_code": 0,
+  "protected_files_unchanged": 1467,
+  "csv_export": {
+    "rows": 6,
+    "scenario_scores": [
+      70.0,
+      70.0,
+      70.0,
+      74.0,
+      66.0,
+      74.0
+    ]
+  },
+  "browser": {
+    "kind": "manual smoke checks via documented CUA API; see REPORT.md",
+    "original_map_search_click": "HR-Kaithal; Nov 2026 through Oct 2027; 12 table rows",
+    "ambiguous_enter": "Bilaspur remained on Home with CG and HP choices",
+    "no_match": "explicit message",
+    "no_boundary_enter": "MH-Mumbai_Suburban route and own scenario",
+    "unavailable": "PY-Mahe explicit no-observed-history reason",
+    "legacy_query": "HR-Kaithal monthly graph; zero historical-toggle buttons",
+    "simulator": "six Jaipur presets; actual CSV; query invalidation; Kaithal zero-input rerun",
+    "mobile": {
+      "requested_width": 390,
+      "height": 844,
+      "document_client_width": 382,
+      "document_scroll_width": 382,
+      "viewport_restored": true
+    }
+  }
+}

@@ -1,14 +1,12 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { createRequire } from 'node:module';
 import { test } from 'node:test';
-import { pathToFileURL } from 'node:url';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { transformWithOxc } from 'vite';
 import { fetchExperimentalScenario, fetchResearchGraph } from '../src/api.js';
 import { followingCalendarMonths } from '../src/components/forecastGraph.js';
 import { forecastView, scenarioChartRows, validateExperimentalScenario } from '../src/components/experimentalScenarioContract.js';
+import { loadJsx } from './helpers/loadJsx.js';
 
 function fixture(asOf = '2026-10-21', districtId = 'TS-Adilabad') {
   const months = followingCalendarMonths(asOf.slice(0, 7));
@@ -31,14 +29,7 @@ function fixture(asOf = '2026-10-21', districtId = 'TS-Adilabad') {
   };
 }
 
-const componentUrl = new URL('../src/components/ExperimentalScenario.jsx', import.meta.url);
-const require = createRequire(import.meta.url);
-const transformed = await transformWithOxc(readFileSync(componentUrl, 'utf8'), componentUrl.pathname, { jsx: { runtime: 'automatic' } });
-const compiled = transformed.code.replace(/from (["'])([^"']+)\1/g, (_match, _quote, specifier) => {
-  const resolved = specifier.startsWith('.') ? new URL(specifier, componentUrl).href : pathToFileURL(require.resolve(specifier)).href;
-  return `from ${JSON.stringify(resolved)}`;
-});
-const { ScenarioView, scenarioPlot } = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`);
+const { ScenarioView, scenarioPlot } = await loadJsx(new URL('../src/components/ExperimentalScenario.jsx', import.meta.url));
 
 test('today-based scenario contains exactly twelve next full months across a year boundary', () => {
   const value = fixture();
@@ -95,15 +86,20 @@ test('scenario reads use a separate route and leave the historical request uncha
 
 test('rendered disclosure and table distinguish current estimate, stale observation and all twelve values', () => {
   const html = renderToStaticMarkup(createElement(ScenarioView, { value: fixture() }));
-  assert.match(html, /Unvalidated projection/);
-  assert.match(html, /Scenario date/);
+  assert.match(html, /Experimental estimate/);
+  assert.match(html, /Unvalidated seasonal\/trend scenario/);
+  assert.match(html, /As of 2026-10-21/);
   assert.match(html, /77.*calendar months/);
-  assert.match(html, /Estimated depth for the scenario month/);
+  assert.match(html, /Estimated current depth/);
   assert.match(html, /not current measurements or a validated real-time forecast/);
   assert.match(html, /acquisition times remain unknown/);
   assert.equal((html.match(/<th scope="row">/g) || []).length, 12);
   assert.match(html, /Nov 2026/);
   assert.match(html, /Oct 2027/);
+  assert.match(html, /<details class="technical-details"><summary>Details<\/summary>/);
+  const mainCard = html.split('<details class="technical-details">')[0];
+  assert.doesNotMatch(mainCard, /SHA-256|Assumptions|Latest contributing well count/);
+  assert.match(mainCard, /77 calendar months/);
 });
 
 test('read failure exposes retry without silently displaying historical estimates', () => {
@@ -176,11 +172,11 @@ test('source metadata and unavailable reasons render as escaped text', () => {
   assert.doesNotMatch(html, /<script>|<img/);
 });
 
-test('Home explains district-specific scenario eligibility without claiming nationwide accuracy', () => {
+test('Home promotes district exploration without historical examples or hard-coded registry claims', () => {
   const home = readFileSync(new URL('../src/pages/Home.jsx', import.meta.url), 'utf8');
-  assert.match(home, /Select a district for its next 12 months from today where sufficient own observed history exists/);
-  assert.match(home, /view a twelve-month scenario example/);
-  assert.doesNotMatch(home, /View Adilabad’s next 12 months|supported Adilabad scenario/);
+  assert.match(home, /experimental estimates for the next 12 months/);
+  assert.match(home, /totalDistricts/);
+  assert.doesNotMatch(home, /origin_month|historical graph example|A registry of 725|nationwide accuracy is verified/);
 });
 
 test('sparse calendar phases disclose inferred seasonal values rather than monthly measurements', () => {

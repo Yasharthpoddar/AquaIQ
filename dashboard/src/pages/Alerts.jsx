@@ -63,8 +63,7 @@ function Alerts() {
 
   return (
     <div className="page">
-      <h1>Research risk indicators</h1>
-      <p className="subtitle">Districts ranked by the uncalibrated project index using available historical evidence. These are research indicators, not official advisories. Review source months and model target dates when interpreting them.</p>
+      <header className="page-heading"><p className="eyebrow">District monitoring</p><h1>Risk indicators</h1><p className="subtitle">Historical project index · uncalibrated, not an official advisory.</p></header>
       {!loading && !error && status === 'success' && <p role="status">Showing {alerts.length} of {total} districts in this category, including unavailable evidence.{total > alerts.length && ' The API result limit has been reached.'}</p>}
 
       {/* Tier filter tabs */}
