@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
 import Home from './pages/Home';
+import States from './pages/States';
 import DistrictDetail from './pages/DistrictDetail';
 import Alerts from './pages/Alerts';
 import Simulate from './pages/Simulate';
@@ -17,6 +18,7 @@ function App() {
           </div>
           <div className="nav-links">
             <NavLink to="/" end>Home</NavLink>
+            <NavLink to="/states">States</NavLink>
             <NavLink to="/alerts">Alerts</NavLink>
             <NavLink to="/simulate">Simulate</NavLink>
           </div>
@@ -25,6 +27,8 @@ function App() {
           <Routes>
             <Route path="/research" element={<div className="page"><h1>Twelve-month groundwater research</h1><ResearchForecast /></div>} />
             <Route path="/" element={<Home />} />
+            <Route path="/states" element={<States />} />
+            <Route path="/states/:id" element={<States />} />
             <Route path="/district/:id" element={<DistrictDetail />} />
             <Route path="/alerts" element={<Alerts />} />
             <Route path="/simulate" element={<Simulate />} />

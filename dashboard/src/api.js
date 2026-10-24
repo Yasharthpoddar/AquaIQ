@@ -107,6 +107,22 @@ export async function fetchClimate12mForecast(id, asOf = null) {
   return getJson(`/api/predict/climate-12m/${encodeURIComponent(id)}?${params}`, 'Twelve-month climate forecast', true, true);
 }
 
+// State-wise groundwater forecasting endpoints
+export async function fetchStates() {
+  return getJson('/api/states', 'States');
+}
+
+export async function fetchStatesSummary(horizon = 12) {
+  const params = new URLSearchParams({ horizon: String(horizon) });
+  return getJson(`/api/states/summary?${params}`, 'States summary');
+}
+
+export async function fetchStatePredict(stateId, horizon = 12, asOf = null) {
+  const params = new URLSearchParams({ horizon: String(horizon) });
+  if (asOf) params.set('as_of', asOf);
+  return getJson(`/api/predict/state/${encodeURIComponent(stateId)}?${params}`, 'State prediction');
+}
+
 export async function postSimulate(payload) {
   const res = await fetch(`${API_BASE}/api/simulate`, {
     method: 'POST',

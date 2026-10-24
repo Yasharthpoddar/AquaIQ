@@ -22,8 +22,8 @@ from flask_cors import CORS
 ROOT = Path(__file__).parent.parent
 
 DEFAULT_CORS_ORIGINS = (
-    "http://localhost:3000", "http://localhost:5173",
-    "http://127.0.0.1:3000", "http://127.0.0.1:5173",
+    "http://localhost:3000", "http://localhost:5173", "http://localhost:5183",
+    "http://127.0.0.1:3000", "http://127.0.0.1:5173", "http://127.0.0.1:5183",
 )
 
 
@@ -84,6 +84,7 @@ def create_app(config_override=None):
     from api.routes.health import health_bp
     from api.routes.scores import scores_bp
     from api.routes.research import research_bp
+    from api.routes.state import state_bp
 
     app.register_blueprint(predict_bp, url_prefix="/api")
     app.register_blueprint(district_bp, url_prefix="/api")
@@ -93,6 +94,7 @@ def create_app(config_override=None):
     app.register_blueprint(health_bp, url_prefix="/api")
     app.register_blueprint(scores_bp, url_prefix="/api")
     app.register_blueprint(research_bp, url_prefix="/api")
+    app.register_blueprint(state_bp, url_prefix="/api")
 
     # Root route
     @app.route("/")
@@ -108,6 +110,9 @@ def create_app(config_override=None):
                 "/api/scores",
                 "/api/predict/<district_id>",
                 "/api/predict/climate-12m/<district_id>",
+                "/api/states",
+                "/api/states/summary",
+                "/api/predict/state/<state_id>",
                 "/api/research/forecast",
                 "/api/research/forecast/<district_id>",
                 "/api/research/graph/<district_id>",
