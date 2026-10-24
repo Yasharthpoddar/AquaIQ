@@ -19,6 +19,7 @@ models/checkpoints/*.pt
 models/checkpoints/*.json
 models/checkpoints/bundles/
 models/checkpoints/climate_bundles/
+models/checkpoints/climate_12m_bundles/
 !models/checkpoints/.gitkeep
 
 # Node (dashboard, added Week 4)
@@ -46,6 +47,7 @@ reports/collapsed_rows_log.json
 reports/candidates/groundwater_updates/**/*.csv
 reports/candidates/groundwater_updates/**/*.png
 reports/candidates/**/climate_bundles/
+reports/candidates/**/climate_12m_bundles/
 reports/candidates/pytest-*/
 
 

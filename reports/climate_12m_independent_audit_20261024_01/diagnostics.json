@@ -1,0 +1,210 @@
+{
+  "all_eligible_feature_labels_match_preprocessed": true,
+  "exact_calendar_lags_match_preprocessed": true,
+  "unique_origin_and_target_district_months": 118,
+  "train_pairs": 135182,
+  "train_districts": 558,
+  "max_metric_abs_discrepancy": 0.0,
+  "all_reported_sample_counts_match": true,
+  "errors": {
+    "predicted": {
+      "n": 981,
+      "exact": 0,
+      "within_1cm": 2,
+      "over_1m": 381,
+      "over_2m": 87,
+      "over_5m": 1,
+      "max_absolute_m": 5.339811191558837,
+      "absolute_error_quantiles_m": {
+        "0": 0.0006355285644517039,
+        "0.25": 0.4277790069580085,
+        "0.5": 0.7999492168426516,
+        "0.75": 1.3100092086791992,
+        "0.9": 1.8879892730712893,
+        "0.95": 2.256250190734863,
+        "0.99": 2.982209710693358,
+        "1": 5.339811191558837
+      }
+    },
+    "persistence": {
+      "n": 981,
+      "exact": 894,
+      "within_1cm": 894,
+      "over_1m": 5,
+      "over_2m": 1,
+      "over_5m": 1,
+      "max_absolute_m": 5.9576925,
+      "absolute_error_quantiles_m": {
+        "0": 0.0,
+        "0.25": 0.0,
+        "0.5": 0.0,
+        "0.75": 0.0,
+        "0.9": 0.0,
+        "0.95": 0.22684650000000062,
+        "0.99": 0.9221589999999997,
+        "1": 5.9576925
+      }
+    },
+    "seasonal": {
+      "n": 935,
+      "exact": 630,
+      "within_1cm": 630,
+      "over_1m": 142,
+      "over_2m": 83,
+      "over_5m": 34,
+      "max_absolute_m": 8.125088,
+      "absolute_error_quantiles_m": {
+        "0": 0.0,
+        "0.25": 0.0,
+        "0.5": 0.0,
+        "0.75": 0.16999999999999993,
+        "0.9": 1.7949999999999997,
+        "0.95": 3.5359999999999996,
+        "0.99": 7.799999999999999,
+        "1": 8.125088
+      }
+    }
+  },
+  "seasonal_reference_lag_months": {
+    "12": 896,
+    "24": 39
+  },
+  "between_district_fraction_of_target_sum_squares": 0.9999969320875707,
+  "matched_district_macro": {
+    "predicted": {
+      "district_macro_mae_m": 0.8419993361017458,
+      "sqrt_district_macro_mse_m": 1.0613626981275268
+    },
+    "persistence": {
+      "district_macro_mae_m": 0.17860172416660403,
+      "sqrt_district_macro_mse_m": 0.5137694440232312
+    },
+    "seasonal": {
+      "district_macro_mae_m": 0.4629803020568712,
+      "sqrt_district_macro_mse_m": 1.3090612487744677
+    }
+  },
+  "districts": [
+    {
+      "district_id": "HR-Kurukshetra",
+      "n": 10,
+      "unique_targets": 4,
+      "target_depths_m": [
+        34.85,
+        34.87541
+      ],
+      "origin_depths_m": [
+        34.85,
+        35.25453
+      ],
+      "persistence_exact": 3,
+      "xgb_mae_m": 0.49544200280761574,
+      "persistence_mae_m": 0.16689400000000063,
+      "xgb_bias_m": 0.49259593347167796
+    },
+    {
+      "district_id": "MP-Dewas",
+      "n": 1,
+      "unique_targets": 1,
+      "target_depths_m": [
+        2.64
+      ],
+      "origin_depths_m": [
+        8.5976925
+      ],
+      "persistence_exact": 0,
+      "xgb_mae_m": 5.339811191558837,
+      "persistence_mae_m": 5.9576925,
+      "xgb_bias_m": 5.339811191558837
+    },
+    {
+      "district_id": "RJ-Alwar",
+      "n": 10,
+      "unique_targets": 4,
+      "target_depths_m": [
+        23.77,
+        23.893684
+      ],
+      "origin_depths_m": [
+        23.77,
+        25.697105
+      ],
+      "persistence_exact": 3,
+      "xgb_mae_m": 0.8194258293212897,
+      "persistence_mae_m": 0.7955788000000006,
+      "xgb_bias_m": 0.7136135582031258
+    },
+    {
+      "district_id": "TN-Cuddalore",
+      "n": 246,
+      "unique_targets": 26,
+      "target_depths_m": [
+        13.766,
+        13.9928465
+      ],
+      "origin_depths_m": [
+        13.766,
+        13.9928465,
+        14.550362
+      ],
+      "persistence_exact": 222,
+      "xgb_mae_m": 1.2102448150371765,
+      "persistence_mae_m": 0.048405103658536605,
+      "xgb_bias_m": -0.6649626015902885
+    },
+    {
+      "district_id": "TN-Sivaganga",
+      "n": 222,
+      "unique_targets": 24,
+      "target_depths_m": [
+        9.270588,
+        9.3
+      ],
+      "origin_depths_m": [
+        9.0526,
+        9.3
+      ],
+      "persistence_exact": 198,
+      "xgb_mae_m": 0.8288448587027886,
+      "persistence_mae_m": 0.014962810810810885,
+      "xgb_bias_m": -0.20303800081242807
+    },
+    {
+      "district_id": "TN-Tiruppur",
+      "n": 246,
+      "unique_targets": 26,
+      "target_depths_m": [
+        2.325
+      ],
+      "origin_depths_m": [
+        2.325,
+        3.247159
+      ],
+      "persistence_exact": 234,
+      "xgb_mae_m": 0.9603514335988984,
+      "persistence_mae_m": 0.04498336585365852,
+      "xgb_bias_m": 0.9396242457676709
+    },
+    {
+      "district_id": "UP-Deoria",
+      "n": 246,
+      "unique_targets": 26,
+      "target_depths_m": [
+        2.885
+      ],
+      "origin_depths_m": [
+        2.885,
+        2.9245098
+      ],
+      "persistence_exact": 234,
+      "xgb_mae_m": 0.7419212690795339,
+      "persistence_mae_m": 0.0019273073170731835,
+      "xgb_bias_m": 0.335897865004656
+    }
+  ],
+  "test_targets_per_year": {
+    "2021": 285,
+    "2022": 576,
+    "2023": 120
+  }
+}

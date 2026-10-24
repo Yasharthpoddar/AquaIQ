@@ -1,0 +1,818 @@
+
+> dashboard@0.0.0 test
+> node --test tests/*.test.js
+
+TAP version 13
+# Subtest: concurrent district reads share the network request, including JSON parsing
+ok 1 - concurrent district reads share the network request, including JSON parsing
+  ---
+  duration_ms: 4.4876
+  type: 'test'
+  ...
+# Subtest: completed GETs do not cache subsequent visits or refreshed scores
+ok 2 - completed GETs do not cache subsequent visits or refreshed scores
+  ---
+  duration_ms: 0.6376
+  type: 'test'
+  ...
+# Subtest: different districts and prediction windows remain independent
+ok 3 - different districts and prediction windows remain independent
+  ---
+  duration_ms: 1.1241
+  type: 'test'
+  ...
+# Subtest: failed shared HTTP reads reject all callers and a retry makes a new request
+ok 4 - failed shared HTTP reads reject all callers and a retry makes a new request
+  ---
+  duration_ms: 1.33
+  type: 'test'
+  ...
+# Subtest: network and invalid JSON failures clear pending reads for retries
+ok 5 - network and invalid JSON failures clear pending reads for retries
+  ---
+  duration_ms: 0.856
+  type: 'test'
+  ...
+# Subtest: simulation writes are never shared or cached
+ok 6 - simulation writes are never shared or cached
+  ---
+  duration_ms: 0.4206
+  type: 'test'
+  ...
+# Subtest: default history includes the source start and lets the API select the current end
+ok 7 - default history includes the source start and lets the API select the current end
+  ---
+  duration_ms: 1.5696
+  type: 'test'
+  ...
+# Subtest: validateClimate12mForecast accepts a valid 12-month response and matches district
+ok 8 - validateClimate12mForecast accepts a valid 12-month response and matches district
+  ---
+  duration_ms: 1.2817
+  type: 'test'
+  ...
+# Subtest: validateClimate12mForecast rejects invalid horizons, lengths, units or negative depth
+ok 9 - validateClimate12mForecast rejects invalid horizons, lengths, units or negative depth
+  ---
+  duration_ms: 0.6402
+  type: 'test'
+  ...
+# Subtest: climate12mChartRows maps all 12 months with predicted depths and weather values
+ok 10 - climate12mChartRows maps all 12 months with predicted depths and weather values
+  ---
+  duration_ms: 0.2736
+  type: 'test'
+  ...
+# Subtest: ClimateForecast12mView renders loading, error, and insufficient data states cleanly
+ok 11 - ClimateForecast12mView renders loading, error, and insufficient data states cleanly
+  ---
+  duration_ms: 9.6887
+  type: 'test'
+  ...
+# Subtest: ClimateForecast12mView renders complete 12-month forecast table and details
+ok 12 - ClimateForecast12mView renders complete 12-month forecast table and details
+  ---
+  duration_ms: 13.0499
+  type: 'test'
+  ...
+# Subtest: Forecast12mTooltip formats depth and weather inputs correctly
+ok 13 - Forecast12mTooltip formats depth and weather inputs correctly
+  ---
+  duration_ms: 0.9167
+  type: 'test'
+  ...
+# Subtest: weather table fields distinguish monthly water fluxes from temperature and evaporation alone
+ok 14 - weather table fields distinguish monthly water fluxes from temperature and evaporation alone
+  ---
+  duration_ms: 3.3263
+  type: 'test'
+  ...
+# Subtest: the loader reuses the canonical six-month predict API with the exact captured scenario date
+ok 15 - the loader reuses the canonical six-month predict API with the exact captured scenario date
+  ---
+  duration_ms: 5.062
+  type: 'test'
+  ...
+# Subtest: the loader preserves API failure for the parent retry state and retries with a fresh request
+ok 16 - the loader preserves API failure for the parent retry state and retries with a fresh request
+  ---
+  duration_ms: 1.7729
+  type: 'test'
+  ...
+# Subtest: request identity and dates are validated before starting a network request
+ok 17 - request identity and dates are validated before starting a network request
+  ---
+  duration_ms: 0.9492
+  type: 'test'
+  ...
+# Subtest: a normalized result retains actual weather cells, field-specific source dates and optional origin inputs
+ok 18 - a normalized result retains actual weather cells, field-specific source dates and optional origin inputs
+  ---
+  duration_ms: 1.0087
+  type: 'test'
+  ...
+# Subtest: cross-year and leap-day requests preserve exactly the six next full calendar months
+ok 19 - cross-year and leap-day requests preserve exactly the six next full calendar months
+  ---
+  duration_ms: 0.5762
+  type: 'test'
+  ...
+# Subtest: identity, date, horizon, model, status and metadata mismatches never display a different product
+ok 20 - identity, date, horizon, model, status and metadata mismatches never display a different product
+  ---
+  duration_ms: 1.3516
+  type: 'test'
+  ...
+# Subtest: incomplete, repeated, shifted and misdated month rows are incompatible rather than reordered or padded
+ok 21 - incomplete, repeated, shifted and misdated month rows are incompatible rather than reordered or padded
+  ---
+  duration_ms: 0.8661
+  type: 'test'
+  ...
+# Subtest: missing, nonnumeric, nonfinite and nonphysical weather cells remain null in otherwise usable rows
+ok 22 - missing, nonnumeric, nonfinite and nonphysical weather cells remain null in otherwise usable rows
+  ---
+  duration_ms: 1.5546
+  type: 'test'
+  ...
+# Subtest: zero rainfall and ET and physical negative Celsius values never become unavailable
+ok 23 - zero rainfall and ET and physical negative Celsius values never become unavailable
+  ---
+  duration_ms: 0.5579
+  type: 'test'
+  ...
+# Subtest: unrelated depth estimates are not required or validated as weather inputs
+ok 24 - unrelated depth estimates are not required or validated as weather inputs
+  ---
+  duration_ms: 0.328
+  type: 'test'
+  ...
+# Subtest: zone fallback and field-specific historical freshness remain explicit without invented combined dates
+ok 25 - zone fallback and field-specific historical freshness remain explicit without invented combined dates
+  ---
+  duration_ms: 0.381
+  type: 'test'
+  ...
+# Subtest: optional origin inputs require an exposed known basis and keep unavailable cells distinct
+ok 26 - optional origin inputs require an exposed known basis and keep unavailable cells distinct
+  ---
+  duration_ms: 0.3746
+  type: 'test'
+  ...
+# Subtest: insufficient-data abstentions preserve the exact plain-text reason and never manufacture rows
+ok 27 - insufficient-data abstentions preserve the exact plain-text reason and never manufacture rows
+  ---
+  duration_ms: 0.3929
+  type: 'test'
+  ...
+# Subtest: server-provided reasons and zone names remain plain text for React escaping
+ok 28 - server-provided reasons and zone names remain plain text for React escaping
+  ---
+  duration_ms: 20.5202
+  type: 'test'
+  ...
+# Subtest: weather table presents only the six exact input months, units and assumption status
+ok 29 - weather table presents only the six exact input months, units and assumption status
+  ---
+  duration_ms: 44.5707
+  type: 'test'
+  ...
+# Subtest: source dates remain per-field, unknown metadata stays unknown and origin values remain separate
+ok 30 - source dates remain per-field, unknown metadata stays unknown and origin values remain separate
+  ---
+  duration_ms: 9.3672
+  type: 'test'
+  ...
+# Subtest: partial values, zone history and unreported origin inputs stay explicit
+ok 31 - partial values, zone history and unreported origin inputs stay explicit
+  ---
+  duration_ms: 4.5822
+  type: 'test'
+  ...
+# Subtest: loading, service failure and unavailable evidence do not show invented table values
+ok 32 - loading, service failure and unavailable evidence do not show invented table values
+  ---
+  duration_ms: 2.0115
+  type: 'test'
+  ...
+# Subtest: the actual retry control invokes its parent callback
+ok 33 - the actual retry control invokes its parent callback
+  ---
+  duration_ms: 0.5803
+  type: 'test'
+  ...
+# Subtest: district, zone and service-provided strings render as text rather than HTML
+ok 34 - district, zone and service-provided strings render as text rather than HTML
+  ---
+  duration_ms: 4.7885
+  type: 'test'
+  ...
+# Subtest: the component is mounted under the actual scenario with its district and exact as-of context
+ok 35 - the component is mounted under the actual scenario with its district and exact as-of context
+  ---
+  duration_ms: 13.4009
+  type: 'test'
+  ...
+# Subtest: the actual district graph entry mounts only its own 12-month climate forecast
+ok 36 - the actual district graph entry mounts only its own 12-month climate forecast
+  ---
+  duration_ms: 1.2944
+  type: 'test'
+  ...
+# Subtest: actual district routes keep the 12-month monthly card mounted during loading
+ok 37 - actual district routes keep the 12-month monthly card mounted during loading
+  ---
+  duration_ms: 23.8503
+  type: 'test'
+  ...
+# Subtest: state polygons in the actual source cannot obscure the district map
+ok 38 - state polygons in the actual source cannot obscure the district map
+  ---
+  duration_ms: 37.0106
+  type: 'test'
+  ...
+# Subtest: district name matches stay within the same state and preserve zero scores
+ok 39 - district name matches stay within the same state and preserve zero scores
+  ---
+  duration_ms: 1.1851
+  type: 'test'
+  ...
+# Subtest: coverage reports a missing Mumbai Suburban boundary without borrowing Mumbai geometry
+ok 40 - coverage reports a missing Mumbai Suburban boundary without borrowing Mumbai geometry
+  ---
+  duration_ms: 40.1663
+  type: 'test'
+  ...
+# Subtest: malformed boundary responses fail visibly and empty coverage is explicit
+ok 41 - malformed boundary responses fail visibly and empty coverage is explicit
+  ---
+  duration_ms: 0.7544
+  type: 'test'
+  ...
+# Subtest: partial names and single-character queries provide live canonical suggestions
+ok 42 - partial names and single-character queries provide live canonical suggestions
+  ---
+  duration_ms: 4.151
+  type: 'test'
+  ...
+# Subtest: state and canonical ID searches normalize case, spaces, hyphens and underscores
+ok 43 - state and canonical ID searches normalize case, spaces, hyphens and underscores
+  ---
+  duration_ms: 1.0494
+  type: 'test'
+  ...
+# Subtest: duplicate names require a state or canonical ID and never pick the first district
+ok 44 - duplicate names require a state or canonical ID and never pick the first district
+  ---
+  duration_ms: 0.5839
+  type: 'test'
+  ...
+# Subtest: exact canonical identity and exact name take priority over additional partial matches
+ok 45 - exact canonical identity and exact name take priority over additional partial matches
+  ---
+  duration_ms: 0.6109
+  type: 'test'
+  ...
+# Subtest: empty, unknown and malformed records stay explicit without requiring a map boundary
+ok 46 - empty, unknown and malformed records stay explicit without requiring a map boundary
+  ---
+  duration_ms: 0.4926
+  type: 'test'
+  ...
+# Subtest: Enter resolves a unique exact search while ambiguous and unknown submissions remain unresolved
+ok 47 - Enter resolves a unique exact search while ambiguous and unknown submissions remain unresolved
+  ---
+  duration_ms: 0.7426
+  type: 'test'
+  ...
+# Subtest: arrow keys choose a labelled suggestion, Enter selects it, and Escape closes the list
+ok 48 - arrow keys choose a labelled suggestion, Enter selects it, and Escape closes the list
+  ---
+  duration_ms: 0.926
+  type: 'test'
+  ...
+# Subtest: actual suggestion callback supplies the original canonical ID to the consuming route handler
+ok 49 - actual suggestion callback supplies the original canonical ID to the consuming route handler
+  ---
+  duration_ms: 4.0915
+  type: 'test'
+  ...
+# Subtest: actual input and select button forward edits and explicit submissions independently
+ok 50 - actual input and select button forward edits and explicit submissions independently
+  ---
+  duration_ms: 0.7387
+  type: 'test'
+  ...
+# Subtest: suggestions expose accessible keyboard focus, state and canonical identity
+ok 51 - suggestions expose accessible keyboard focus, state and canonical identity
+  ---
+  duration_ms: 33.0271
+  type: 'test'
+  ...
+# Subtest: loading, errors, retry, empty suggestions and a disabled control have clear states
+ok 52 - loading, errors, retry, empty suggestions and a disabled control have clear states
+  ---
+  duration_ms: 2.7687
+  type: 'test'
+  ...
+# Subtest: component instances have unique identifiers and render API text as escaped content
+ok 53 - component instances have unique identifiers and render API text as escaped content
+  ---
+  duration_ms: 3.6969
+  type: 'test'
+  ...
+# Subtest: today-based scenario contains exactly twelve next full months across a year boundary
+ok 54 - today-based scenario contains exactly twelve next full months across a year boundary
+  ---
+  duration_ms: 2.9863
+  type: 'test'
+  ...
+# Subtest: partial, duplicated, redated, nonfinite and incompatible-model paths are rejected
+ok 55 - partial, duplicated, redated, nonfinite and incompatible-model paths are rejected
+  ---
+  duration_ms: 1.9031
+  type: 'test'
+  ...
+# Subtest: unavailable scope remains empty with no replacement points
+ok 56 - unavailable scope remains empty with no replacement points
+  ---
+  duration_ms: 1.0773
+  type: 'test'
+  ...
+# Subtest: mode defaults to today while explicitly requested historical origins remain historical
+ok 57 - mode defaults to today while explicitly requested historical origins remain historical
+  ---
+  duration_ms: 0.2905
+  type: 'test'
+  ...
+# Subtest: scenario reads use a separate route and leave the historical request unchanged
+ok 58 - scenario reads use a separate route and leave the historical request unchanged
+  ---
+  duration_ms: 0.8002
+  type: 'test'
+  ...
+# Subtest: rendered disclosure and table distinguish current estimate, stale observation and all twelve values
+ok 59 - rendered disclosure and table distinguish current estimate, stale observation and all twelve values
+  ---
+  duration_ms: 17.1405
+  type: 'test'
+  ...
+# Subtest: read failure exposes retry without silently displaying historical estimates
+ok 60 - read failure exposes retry without silently displaying historical estimates
+  ---
+  duration_ms: 0.692
+  type: 'test'
+  ...
+# Subtest: arbitrary registered district owns all twelve chart rows and cannot receive a different district response
+ok 61 - arbitrary registered district owns all twelve chart rows and cannot receive a different district response
+  ---
+  duration_ms: 3.1799
+  type: 'test'
+  ...
+# Subtest: valid zero depth estimates remain numbers instead of becoming unavailable
+ok 62 - valid zero depth estimates remain numbers instead of becoming unavailable
+  ---
+  duration_ms: 3.4771
+  type: 'test'
+  ...
+# Subtest: insufficient, missing and unreadable source reasons stay exact without substituting an Adilabad graph
+ok 63 - insufficient, missing and unreadable source reasons stay exact without substituting an Adilabad graph
+  ---
+  duration_ms: 2.9303
+  type: 'test'
+  ...
+# Subtest: unknown provenance is disclosed and no well count, publication time or certified datum is invented
+ok 64 - unknown provenance is disclosed and no well count, publication time or certified datum is invented
+  ---
+  duration_ms: 3.8956
+  type: 'test'
+  ...
+# Subtest: source metadata and unavailable reasons render as escaped text
+ok 65 - source metadata and unavailable reasons render as escaped text
+  ---
+  duration_ms: 3.5964
+  type: 'test'
+  ...
+# Subtest: Home promotes district exploration without historical examples or hard-coded registry claims
+ok 66 - Home promotes district exploration without historical examples or hard-coded registry claims
+  ---
+  duration_ms: 0.5291
+  type: 'test'
+  ...
+# Subtest: sparse calendar phases disclose inferred seasonal values rather than monthly measurements
+ok 67 - sparse calendar phases disclose inferred seasonal values rather than monthly measurements
+  ---
+  duration_ms: 3.8563
+  type: 'test'
+  ...
+# Subtest: twelve calendar slots cross December to January and retain exact M+12 target
+ok 68 - twelve calendar slots cross December to January and retain exact M+12 target
+  ---
+  duration_ms: 2.3654
+  type: 'test'
+  ...
+# Subtest: graph data contains exactly twelve ordered target slots with only the compatible M+12 ML value
+ok 69 - graph data contains exactly twelve ordered target slots with only the compatible M+12 ML value
+  ---
+  duration_ms: 1.2257
+  type: 'test'
+  ...
+# Subtest: missing ML preserves the twelve-month domain without zero-filling or plotting baseline as ML
+ok 70 - missing ML preserves the twelve-month domain without zero-filling or plotting baseline as ML
+  ---
+  duration_ms: 0.3706
+  type: 'test'
+  ...
+# Subtest: SYNTHETIC render-data fixture retains twelve existing numeric points without approving unsupported artifacts
+ok 71 - SYNTHETIC render-data fixture retains twelve existing numeric points without approving unsupported artifacts
+  ---
+  duration_ms: 0.9322
+  type: 'test'
+  ...
+# Subtest: six-month contracts and truncated or reordered monthly arrays cannot satisfy the graph
+ok 72 - six-month contracts and truncated or reordered monthly arrays cannot satisfy the graph
+  ---
+  duration_ms: 0.6159
+  type: 'test'
+  ...
+# Subtest: direct M+12 artifact cannot be stretched into intermediate ML points or baseline curves
+ok 73 - direct M+12 artifact cannot be stretched into intermediate ML points or baseline curves
+  ---
+  duration_ms: 0.39
+  type: 'test'
+  ...
+# Subtest: imputed origins and nonfinite numeric values remain ineligible
+ok 74 - imputed origins and nonfinite numeric values remain ineligible
+  ---
+  duration_ms: 0.48
+  type: 'test'
+  ...
+# Subtest: unavailable ML cannot carry a plotted number and available ML cannot be null
+ok 75 - unavailable ML cannot carry a plotted number and available ML cannot be null
+  ---
+  duration_ms: 0.2912
+  type: 'test'
+  ...
+# Subtest: graph artifact failures preserve the public-safe reason without changing legacy requests
+ok 76 - graph artifact failures preserve the public-safe reason without changing legacy requests
+  ---
+  duration_ms: 2.476
+  type: 'test'
+  ...
+# Subtest: unknown origin stays unavailable without inventing twelve calendar months
+ok 77 - unknown origin stays unavailable without inventing twelve calendar months
+  ---
+  duration_ms: 0.5754
+  type: 'test'
+  ...
+# Subtest: graph explicitly requests twelve months and the separately requested legacy endpoint is unchanged
+ok 78 - graph explicitly requests twelve months and the separately requested legacy endpoint is unchanged
+  ---
+  duration_ms: 0.569
+  type: 'test'
+  ...
+# Subtest: historical research graph remains available without replacing the district scenario workflow
+ok 79 - historical research graph remains available without replacing the district scenario workflow
+  ---
+  duration_ms: 1.2589
+  type: 'test'
+  ...
+# Subtest: explicit historical month is sent unchanged and latest origin remains the default
+ok 80 - explicit historical month is sent unchanged and latest origin remains the default
+  ---
+  duration_ms: 1.8428
+  type: 'test'
+  ...
+# Subtest: mismatched responses cannot silently replace a user-selected historical origin
+ok 81 - mismatched responses cannot silently replace a user-selected historical origin
+  ---
+  duration_ms: 0.927
+  type: 'test'
+  ...
+# Subtest: annual baseline is a single observed-origin reference, including a legitimate zero
+ok 82 - annual baseline is a single observed-origin reference, including a legitimate zero
+  ---
+  duration_ms: 0.4183
+  type: 'test'
+  ...
+# Subtest: unknown origins and read failures retain an explicit graph-sized unavailable frame
+ok 83 - unknown origins and read failures retain an explicit graph-sized unavailable frame
+  ---
+  duration_ms: 9.5424
+  type: 'test'
+  ...
+# Subtest: standalone historical research panel retains its controls while district routes use the scenario
+ok 84 - standalone historical research panel retains its controls while district routes use the scenario
+  ---
+  duration_ms: 2.7982
+  type: 'test'
+  ...
+# Subtest: Home keeps the map and risk cards but removes historical graph promotion
+ok 85 - Home keeps the map and risk cards but removes historical graph promotion
+  ---
+  duration_ms: 0.4609
+  type: 'test'
+  ...
+# Subtest: baseline-only view clearly distinguishes its marker from unavailable ML
+ok 86 - baseline-only view clearly distinguishes its marker from unavailable ML
+  ---
+  duration_ms: 3.0056
+  type: 'test'
+  ...
+# Subtest: actual chart element preserves twelve slots with one separate baseline reference and no fabricated ML
+ok 87 - actual chart element preserves twelve slots with one separate baseline reference and no fabricated ML
+  ---
+  duration_ms: 8.6068
+  type: 'test'
+  ...
+# Subtest: the production map search retains its exact field and canonical catalog without any geometry
+ok 88 - the production map search retains its exact field and canonical catalog without any geometry
+  ---
+  duration_ms: 15.0409
+  type: 'test'
+  ...
+# Subtest: clicking the actual map suggestion opens its canonical district graph and scenario API
+ok 89 - clicking the actual map suggestion opens its canonical district graph and scenario API
+  ---
+  duration_ms: 4.1469
+  type: 'test'
+  ...
+# Subtest: exact Enter selects the map catalog ID and requests that district even without a polygon
+ok 90 - exact Enter selects the map catalog ID and requests that district even without a polygon
+  ---
+  duration_ms: 1.3347
+  type: 'test'
+  ...
+# Subtest: ambiguous map Enter keeps district identity unresolved until a labelled option is chosen
+ok 91 - ambiguous map Enter keeps district identity unresolved until a labelled option is chosen
+  ---
+  duration_ms: 0.8408
+  type: 'test'
+  ...
+# Subtest: the map catalog exposes loading and an actual API failure with a working parent retry
+ok 92 - the map catalog exposes loading and an actual API failure with a working parent retry
+  ---
+  duration_ms: 4.4753
+  type: 'test'
+  ...
+# Subtest: the Home route helper safely preserves a canonical identifier in one route segment
+ok 93 - the Home route helper safely preserves a canonical identifier in one route segment
+  ---
+  duration_ms: 0.3174
+  type: 'test'
+  ...
+# Subtest: recorded history preserves explicit missing months between observations
+ok 94 - recorded history preserves explicit missing months between observations
+  ---
+  duration_ms: 1.9805
+  type: 'test'
+  ...
+# Subtest: absent calendar buckets are null gaps and input is sorted without fabricating depths
+ok 95 - absent calendar buckets are null gaps and input is sorted without fabricating depths
+  ---
+  duration_ms: 0.5425
+  type: 'test'
+  ...
+# Subtest: observed and forward-filled depths remain separate, including finite zero
+ok 96 - observed and forward-filled depths remain separate, including finite zero
+  ---
+  duration_ms: 0.3306
+  type: 'test'
+  ...
+# Subtest: nonfinite, nonnumeric, unflagged and conflicting evidence stays unavailable
+ok 97 - nonfinite, nonnumeric, unflagged and conflicting evidence stays unavailable
+  ---
+  duration_ms: 0.3544
+  type: 'test'
+  ...
+# Subtest: calendar gaps cross a year boundary and date labels retain their source month
+ok 98 - calendar gaps cross a year boundary and date labels retain their source month
+  ---
+  duration_ms: 0.2156
+  type: 'test'
+  ...
+# Subtest: empty or invalid month labels do not create chart buckets
+ok 99 - empty or invalid month labels do not create chart buckets
+  ---
+  duration_ms: 0.1745
+  type: 'test'
+  ...
+# Subtest: the actual recorded-history chart uses the complete calendar and leaves both line gaps disconnected
+ok 100 - the actual recorded-history chart uses the complete calendar and leaves both line gaps disconnected
+  ---
+  duration_ms: 1.5751
+  type: 'test'
+  ...
+# Subtest: solid observation guides use full-calendar selectors and keep real gaps out of their endpoints
+ok 101 - solid observation guides use full-calendar selectors and keep real gaps out of their endpoints
+  ---
+  duration_ms: 0.9252
+  type: 'test'
+  ...
+# Subtest: filled-only runs and isolated observations never create an invented observed trend
+ok 102 - filled-only runs and isolated observations never create an invented observed trend
+  ---
+  duration_ms: 0.2929
+  type: 'test'
+  ...
+# Subtest: a dashed visual bridge makes the trend continuous without creating values in missing months
+ok 103 - a dashed visual bridge makes the trend continuous without creating values in missing months
+  ---
+  duration_ms: 0.5473
+  type: 'test'
+  ...
+# Subtest: history hover shows the original month and zero depth with observed versus filled status
+ok 104 - history hover shows the original month and zero depth with observed versus filled status
+  ---
+  duration_ms: 14.5272
+  type: 'test'
+  ...
+# Subtest: hover on a missing month reports unavailable rather than an interpolated number or zero
+ok 105 - hover on a missing month reports unavailable rather than an interpolated number or zero
+  ---
+  duration_ms: 1.1535
+  type: 'test'
+  ...
+# Subtest: late-year hover resolves by the full original calendar label, independent of short guide payloads
+ok 106 - late-year hover resolves by the full original calendar label, independent of short guide payloads
+  ---
+  duration_ms: 0.7413
+  type: 'test'
+  ...
+# Subtest: missing-period bridges use the adjacent original observations and never extrapolate either end
+ok 107 - missing-period bridges use the adjacent original observations and never extrapolate either end
+  ---
+  duration_ms: 0.2486
+  type: 'test'
+  ...
+# Subtest: exact M+12 target preserves calendar month across year boundaries and leap years
+ok 108 - exact M+12 target preserves calendar month across year boundaries and leap years
+  ---
+  duration_ms: 1.424
+  type: 'test'
+  ...
+# Subtest: research responses reject a legacy horizon, units, product, or shifted target
+ok 109 - research responses reject a legacy horizon, units, product, or shifted target
+  ---
+  duration_ms: 0.9525
+  type: 'test'
+  ...
+# Subtest: a baseline may be available while ML abstains, without inventing a zero prediction
+ok 110 - a baseline may be available while ML abstains, without inventing a zero prediction
+  ---
+  duration_ms: 12.7382
+  type: 'test'
+  ...
+# Subtest: no observed-baseline or ML number is accepted from an imputed or missing origin
+ok 111 - no observed-baseline or ML number is accepted from an imputed or missing origin
+  ---
+  duration_ms: 0.6154
+  type: 'test'
+  ...
+# Subtest: unsupported districts can remain unavailable without borrowing another origin or district
+ok 112 - unsupported districts can remain unavailable without borrowing another origin or district
+  ---
+  duration_ms: 1.4945
+  type: 'test'
+  ...
+# Subtest: historical target measurements stay separate from estimates and prospective claims are rejected
+ok 113 - historical target measurements stay separate from estimates and prospective claims are rejected
+  ---
+  duration_ms: 2.1027
+  type: 'test'
+  ...
+# Subtest: source text renders as text rather than executable HTML
+ok 114 - source text renders as text rather than executable HTML
+  ---
+  duration_ms: 6.5147
+  type: 'test'
+  ...
+# Subtest: carried inputs retain their source month and age instead of appearing as fresh measurements
+ok 115 - carried inputs retain their source month and age instead of appearing as fresh measurements
+  ---
+  duration_ms: 1.8834
+  type: 'test'
+  ...
+# Subtest: optional research page preserves direct-horizon disclosures without replacing the original dashboard
+ok 116 - optional research page preserves direct-horizon disclosures without replacing the original dashboard
+  ---
+  duration_ms: 3.7375
+  type: 'test'
+  ...
+# Subtest: catalog rejects incompatible horizons and invalid origin months
+ok 117 - catalog rejects incompatible horizons and invalid origin months
+  ---
+  duration_ms: 0.9533
+  type: 'test'
+  ...
+# Subtest: independent research routes preserve the legacy six-month route and default latest origin
+ok 118 - independent research routes preserve the legacy six-month route and default latest origin
+  ---
+  duration_ms: 1.5568
+  type: 'test'
+  ...
+# Subtest: missing research assets disclose the public-safe reason and remain retryable
+ok 119 - missing research assets disclose the public-safe reason and remain retryable
+  ---
+  duration_ms: 0.6682
+  type: 'test'
+  ...
+# Subtest: all six presets carry exactly the requested rainfall and extraction percentages
+ok 120 - all six presets carry exactly the requested rainfall and extraction percentages
+  ---
+  duration_ms: 2.0644
+  type: 'test'
+  ...
+# Subtest: actual preset buttons populate both controlled sliders and reset returns both to zero
+ok 121 - actual preset buttons populate both controlled sliders and reset returns both to zero
+  ---
+  duration_ms: 31.9299
+  type: 'test'
+  ...
+# Subtest: actual form submission sends selected slider values through the existing simulation API
+ok 122 - actual form submission sends selected slider values through the existing simulation API
+  ---
+  duration_ms: 3.5752
+  type: 'test'
+  ...
+# Subtest: comparison requests are sequential, include all six combinations and preserve successes around failures
+ok 123 - comparison requests are sequential, include all six combinations and preserve successes around failures
+  ---
+  duration_ms: 0.7956
+  type: 'test'
+  ...
+# Subtest: an active run rejects duplicate submission before another request and unlocks after completion
+ok 124 - an active run rejects duplicate submission before another request and unlocks after completion
+  ---
+  duration_ms: 1.4673
+  type: 'test'
+  ...
+# Subtest: leaving the page stops additional comparison requests after the in-flight request
+ok 125 - leaving the page stops additional comparison requests after the in-flight request
+  ---
+  duration_ms: 0.4928
+  type: 'test'
+  ...
+# Subtest: deltas derive from actual scores, including zero, negative changes and legitimate zero indices
+ok 126 - deltas derive from actual scores, including zero, negative changes and legitimate zero indices
+  ---
+  duration_ms: 0.3605
+  type: 'test'
+  ...
+# Subtest: missing, non-numeric, nonfinite and out-of-range indices never become zero
+ok 127 - missing, non-numeric, nonfinite and out-of-range indices never become zero
+  ---
+  duration_ms: 0.5675
+  type: 'test'
+  ...
+# Subtest: invalid input cannot trigger API actions and busy controls remain disabled
+ok 128 - invalid input cannot trigger API actions and busy controls remain disabled
+  ---
+  duration_ms: 7.0608
+  type: 'test'
+  ...
+# Subtest: bars and table render the same API indices and original inputs, including unavailable rows
+ok 129 - bars and table render the same API indices and original inputs, including unavailable rows
+  ---
+  duration_ms: 4.7996
+  type: 'test'
+  ...
+# Subtest: the saved district snapshot labels retained results after the selected district changes
+ok 130 - the saved district snapshot labels retained results after the selected district changes
+  ---
+  duration_ms: 2.8449
+  type: 'test'
+  ...
+# Subtest: CSV escapes commas, quotes and line breaks and neutralizes text formula prefixes only
+ok 131 - CSV escapes commas, quotes and line breaks and neutralizes text formula prefixes only
+  ---
+  duration_ms: 0.4768
+  type: 'test'
+  ...
+# Subtest: CSV stays disabled until a run has completed and reports a useful no-results state
+ok 132 - CSV stays disabled until a run has completed and reports a useful no-results state
+  ---
+  duration_ms: 2.5651
+  type: 'test'
+  ...
+# Subtest: controls expose labels, percentages and baseline availability without requiring chart hover
+ok 133 - controls expose labels, percentages and baseline availability without requiring chart hover
+  ---
+  duration_ms: 9.0087
+  type: 'test'
+  ...
+# Subtest: district labels, scenario labels and service errors render as escaped text
+ok 134 - district labels, scenario labels and service errors render as escaped text
+  ---
+  duration_ms: 2.0968
+  type: 'test'
+  ...
+1..134
+# tests 134
+# suites 0
+# pass 134
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2419.0029

@@ -18,7 +18,7 @@ function getJson(path, label, researchErrors = false) {
       let detail = '';
       if (researchErrors) {
         const failure = await res.json().catch(() => null);
-        if (['direct_12month_research', 'direct_12month_research_graph', 'experimental_12month_scenario'].includes(failure?.product)
+        if (['direct_12month_research', 'direct_12month_research_graph', 'experimental_12month_scenario', 'climate_informed_12m_forecast'].includes(failure?.product)
           && Array.isArray(failure.unavailable_reasons)
           && failure.unavailable_reasons.every(reason => typeof reason === 'string')) {
           detail = ` ${failure.unavailable_reasons.join(' ')}`;
@@ -94,6 +94,13 @@ export async function fetchExperimentalScenario(id, asOf = null) {
   const params = new URLSearchParams({ months: '12' });
   if (asOf) params.set('as_of', asOf);
   return getJson(`/api/research/scenario/${encodeURIComponent(id)}?${params}`, 'Experimental monthly scenario', true);
+}
+
+// Dedicated 12-month climate-conditioned XGBoost forecast endpoint
+export async function fetchClimate12mForecast(id, asOf = null) {
+  const params = new URLSearchParams({ months: '12' });
+  if (asOf) params.set('as_of', asOf);
+  return getJson(`/api/predict/climate-12m/${encodeURIComponent(id)}?${params}`, 'Twelve-month climate forecast', true);
 }
 
 export async function postSimulate(payload) {
