@@ -29,7 +29,7 @@ def test_complete_matching_release(monkeypatch):
 
 def test_missing_models_reject_startup(monkeypatch):
     app, _ = setup_release(monkeypatch, health_status=503)
-    with pytest.raises(RuntimeError, match="both matching model"):
+    with pytest.raises(RuntimeError, match="all three matching model"):
         validate_release(app)
 
 

@@ -1,0 +1,1210 @@
+{
+  "version": "1.0-climate-conditioned-12m-xgb",
+  "features": [
+    "origin_gwl",
+    "origin_gwl_lag_3mo",
+    "origin_gwl_lag_6mo",
+    "origin_rainfall",
+    "origin_temperature",
+    "origin_evapotranspiration",
+    "horizon_months",
+    "origin_month_sin",
+    "origin_month_cos",
+    "target_month_sin",
+    "target_month_cos",
+    "target_rainfall",
+    "target_temperature",
+    "target_evapotranspiration",
+    "cumulative_rainfall",
+    "cumulative_evapotranspiration",
+    "mean_temperature"
+  ],
+  "feature_schema_sha256": "89ec17cedc0751550639232ead3b952b34c28c0bdc23c31275325628d8071113",
+  "units": {
+    "gwl": "m_bgl",
+    "rainfall": "mm/month",
+    "temperature": "degC",
+    "evapotranspiration": "mm/month"
+  },
+  "target": "gwl_change_from_origin",
+  "horizons_months": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "created_at": "2026-10-24T15:29:50.476366+00:00",
+  "parameters": {
+    "n_estimators": 240,
+    "max_depth": 3,
+    "learning_rate": 0.04,
+    "min_child_weight": 30,
+    "reg_lambda": 20.0,
+    "reg_alpha": 0.1,
+    "subsample": 0.85,
+    "colsample_bytree": 0.9,
+    "random_state": 42,
+    "n_jobs": 4,
+    "tree_method": "hist",
+    "objective": "reg:squarederror"
+  },
+  "feature_generation_id": "physical-v3-causal-monthly-a3f9468a2569",
+  "data_source": "verified features_matrix.csv",
+  "data_sha256": "85d3c2b33c24f26c31380f2878b159a99f6f8cc382fbe363cc50c79a9aa4f3fa",
+  "train_target_cutoff": "2019-12-31",
+  "max_train_target_date": "2019-12-01",
+  "max_train_origin": "2019-11-01",
+  "n_train_observed_pairs": 116601,
+  "training_districts": 558,
+  "training_counts_by_horizon": {
+    "1": 1608,
+    "2": 7758,
+    "3": 13867,
+    "4": 8417,
+    "5": 7918,
+    "6": 13169,
+    "7": 8232,
+    "8": 7917,
+    "9": 12709,
+    "10": 8011,
+    "11": 1584,
+    "12": 25411
+  },
+  "feature_importance": {
+    "origin_gwl": 0.03390493616461754,
+    "origin_gwl_lag_3mo": 0.023352866992354393,
+    "origin_gwl_lag_6mo": 0.020744122564792633,
+    "origin_rainfall": 0.021492144092917442,
+    "origin_temperature": 0.014940166845917702,
+    "origin_evapotranspiration": 0.035131264477968216,
+    "horizon_months": 0.1786283701658249,
+    "origin_month_sin": 0.06504542380571365,
+    "origin_month_cos": 0.10225445032119751,
+    "target_month_sin": 0.08214028924703598,
+    "target_month_cos": 0.113754503428936,
+    "target_rainfall": 0.026125216856598854,
+    "target_temperature": 0.024585099890828133,
+    "target_evapotranspiration": 0.043366797268390656,
+    "cumulative_rainfall": 0.1813460886478424,
+    "cumulative_evapotranspiration": 0.026085829362273216,
+    "mean_temperature": 0.007102459203451872
+  },
+  "evaluation": {
+    "status": "evaluated_assumed_weather",
+    "skipped_labels": 0,
+    "n": 981,
+    "districts": 7,
+    "xgboost": {
+      "n": 981,
+      "rmse_m": 1.1120119121433376,
+      "mae_m": 0.8957216630225926,
+      "r2": 0.9625343709355203,
+      "nse": 0.9625343709355203
+    },
+    "persistence": {
+      "n": 981,
+      "rmse_m": 0.26565949255076177,
+      "mae_m": 0.04317211580020391,
+      "r2": 0.9978617187517917,
+      "nse": 0.9978617187517917
+    },
+    "change_prediction_skill": {
+      "mae_change_m": 0.8957,
+      "rmse_change_m": 1.112,
+      "r2_change": -16.853
+    },
+    "diff_vs_persistence": {
+      "mae_diff_m": 0.8525,
+      "rmse_diff_m": 0.8464,
+      "xgb_beats_persistence": false
+    },
+    "seasonal_paired": {
+      "n": 935,
+      "xgboost": {
+        "n": 935,
+        "rmse_m": 1.1094988155673557,
+        "mae_m": 0.8952728714903071,
+        "r2": 0.9633028187219561,
+        "nse": 0.9633028187219561
+      },
+      "baseline": {
+        "n": 935,
+        "rmse_m": 1.616616222079702,
+        "mae_m": 0.5786490856684491,
+        "r2": 0.9220900570640491,
+        "nse": 0.9220900570640491
+      },
+      "diff_vs_seasonal": {
+        "mae_diff_m": 0.3166,
+        "rmse_diff_m": -0.5071,
+        "xgb_beats_seasonal": false
+      }
+    },
+    "origin_start": "2021-01-01",
+    "origin_end": "2023-02-01",
+    "target_start": "2021-02-01",
+    "target_end": "2023-03-01",
+    "dominant_districts_summary": {
+      "n": 960,
+      "districts": 4,
+      "xgboost": {
+        "n": 960,
+        "rmse_m": 1.1085117182600697,
+        "mae_m": 0.8988069777430774,
+        "r2": 0.9463293473109875,
+        "nse": 0.9463293473109875
+      },
+      "persistence": {
+        "n": 960,
+        "rmse_m": 0.13943306944561148,
+        "mae_m": 0.02788481781250002,
+        "r2": 0.9991508432314368,
+        "nse": 0.9991508432314368
+      },
+      "change_prediction_skill": {
+        "mae_change_m": 0.8988,
+        "rmse_change_m": 1.1085,
+        "r2_change": -63.7735
+      },
+      "diff_vs_persistence": {
+        "mae_diff_m": 0.8709,
+        "rmse_diff_m": 0.9691,
+        "xgb_beats_persistence": false
+      },
+      "seasonal_paired": {
+        "n": 915,
+        "xgboost": {
+          "n": 915,
+          "rmse_m": 1.1167781543226325,
+          "mae_m": 0.9028347185418051,
+          "r2": 0.9461065686533325,
+          "nse": 0.9461065686533325
+        },
+        "baseline": {
+          "n": 915,
+          "rmse_m": 1.6331471451528052,
+          "mae_m": 0.5851262503825136,
+          "r2": 0.8847468914554585,
+          "nse": 0.8847468914554585
+        },
+        "diff_vs_seasonal": {
+          "mae_diff_m": 0.3177,
+          "rmse_diff_m": -0.5164,
+          "xgb_beats_seasonal": false
+        }
+      }
+    },
+    "remaining_districts_summary": {
+      "n": 21,
+      "districts": 3,
+      "xgboost": {
+        "n": 21,
+        "rmse_m": 1.2616948738249751,
+        "mae_m": 0.7546787043718607,
+        "r2": 0.9740547215335581,
+        "nse": 0.9740547215335581
+      },
+      "persistence": {
+        "n": 21,
+        "rmse_m": 1.551805768525974,
+        "mae_m": 0.7420200238095244,
+        "r2": 0.9607513807519076,
+        "nse": 0.9607513807519076
+      },
+      "change_prediction_skill": {
+        "mae_change_m": 0.7547,
+        "rmse_change_m": 1.2617,
+        "r2_change": 0.1704
+      },
+      "diff_vs_persistence": {
+        "mae_diff_m": 0.0127,
+        "rmse_diff_m": -0.2901,
+        "xgb_beats_persistence": false
+      },
+      "seasonal_paired": {
+        "n": 20,
+        "xgboost": {
+          "n": 20,
+          "rmse_m": 0.6996936210690164,
+          "mae_m": 0.549318368884277,
+          "r2": 0.983935911338966,
+          "nse": 0.983935911338966
+        },
+        "baseline": {
+          "n": 20,
+          "rmse_m": 0.39456982650881917,
+          "mae_m": 0.2823187999999998,
+          "r2": 0.9948915634324408,
+          "nse": 0.9948915634324408
+        },
+        "diff_vs_seasonal": {
+          "mae_diff_m": 0.267,
+          "rmse_diff_m": 0.3051,
+          "xgb_beats_seasonal": false
+        }
+      }
+    },
+    "by_district": {
+      "HR-Kurukshetra": {
+        "n": 10,
+        "districts": 1,
+        "xgboost": {
+          "n": 10,
+          "rmse_m": 0.6524687214638769,
+          "mae_m": 0.5167411361083978,
+          "r2": -2746.2540490015863,
+          "nse": -2746.2540490015863
+        },
+        "persistence": {
+          "n": 10,
+          "rmse_m": 0.2523098375807022,
+          "mae_m": 0.16689400000000063,
+          "r2": -409.81642242608996,
+          "nse": -409.81642242608996
+        },
+        "change_prediction_skill": {
+          "mae_change_m": 0.5167,
+          "rmse_change_m": 0.6525,
+          "r2_change": -9.4693
+        },
+        "diff_vs_persistence": {
+          "mae_diff_m": 0.3498,
+          "rmse_diff_m": 0.4002,
+          "xgb_beats_persistence": false
+        },
+        "seasonal_paired": {
+          "n": 10,
+          "xgboost": {
+            "n": 10,
+            "rmse_m": 0.6524687214638769,
+            "mae_m": 0.5167411361083978,
+            "r2": -2746.2540490015863,
+            "nse": -2746.2540490015863
+          },
+          "baseline": {
+            "n": 10,
+            "rmse_m": 0.016070695068976223,
+            "mae_m": 0.010164000000000329,
+            "r2": -0.666666666666667,
+            "nse": -0.666666666666667
+          },
+          "diff_vs_seasonal": {
+            "mae_diff_m": 0.5066,
+            "rmse_diff_m": 0.6364,
+            "xgb_beats_seasonal": false
+          }
+        }
+      },
+      "MP-Dewas": {
+        "n": 1,
+        "districts": 1,
+        "xgboost": {
+          "n": 1,
+          "rmse_m": 4.861885414123535,
+          "mae_m": 4.861885414123535,
+          "r2": null,
+          "nse": null
+        },
+        "persistence": {
+          "n": 1,
+          "rmse_m": 5.9576925,
+          "mae_m": 5.9576925,
+          "r2": null,
+          "nse": null
+        },
+        "change_prediction_skill": {
+          "mae_change_m": 4.8619,
+          "rmse_change_m": 4.8619,
+          "r2_change": 0.0
+        },
+        "diff_vs_persistence": {
+          "mae_diff_m": -1.0958,
+          "rmse_diff_m": -1.0958,
+          "xgb_beats_persistence": true
+        },
+        "seasonal_paired": null
+      },
+      "RJ-Alwar": {
+        "n": 10,
+        "districts": 1,
+        "xgboost": {
+          "n": 10,
+          "rmse_m": 0.7439266726234774,
+          "mae_m": 0.5818956016601561,
+          "r2": -149.7377312124131,
+          "nse": -149.7377312124131
+        },
+        "persistence": {
+          "n": 10,
+          "rmse_m": 1.2016414416074377,
+          "mae_m": 0.7955788000000006,
+          "r2": -392.2887371203243,
+          "nse": -392.2887371203243
+        },
+        "change_prediction_skill": {
+          "mae_change_m": 0.5819,
+          "rmse_change_m": 0.7439,
+          "r2_change": 0.4008
+        },
+        "diff_vs_persistence": {
+          "mae_diff_m": -0.2137,
+          "rmse_diff_m": -0.4577,
+          "xgb_beats_persistence": true
+        },
+        "seasonal_paired": {
+          "n": 10,
+          "xgboost": {
+            "n": 10,
+            "rmse_m": 0.7439266726234774,
+            "mae_m": 0.5818956016601561,
+            "r2": -149.7377312124131,
+            "nse": -149.7377312124131
+          },
+          "baseline": {
+            "n": 10,
+            "rmse_m": 0.5577745321744255,
+            "mae_m": 0.5544735999999993,
+            "r2": -83.73816894092165,
+            "nse": -83.73816894092165
+          },
+          "diff_vs_seasonal": {
+            "mae_diff_m": 0.0274,
+            "rmse_diff_m": 0.1862,
+            "xgb_beats_seasonal": false
+          }
+        }
+      },
+      "TN-Cuddalore": {
+        "n": 246,
+        "districts": 1,
+        "xgboost": {
+          "n": 246,
+          "rmse_m": 1.4020282276263325,
+          "mae_m": 1.135951575257588,
+          "r2": -9434.25145901884,
+          "nse": -9434.25145901884
+        },
+        "persistence": {
+          "n": 246,
+          "rmse_m": 0.17687206304805458,
+          "mae_m": 0.048405103658536605,
+          "r2": -149.16144779312847,
+          "nse": -149.16144779312847
+        },
+        "change_prediction_skill": {
+          "mae_change_m": 1.136,
+          "rmse_change_m": 1.402,
+          "r2_change": -66.9211
+        },
+        "diff_vs_persistence": {
+          "mae_diff_m": 1.0875,
+          "rmse_diff_m": 1.2252,
+          "xgb_beats_persistence": false
+        },
+        "seasonal_paired": {
+          "n": 246,
+          "xgboost": {
+            "n": 246,
+            "rmse_m": 1.4020282276263325,
+            "mae_m": 1.135951575257588,
+            "r2": -9434.25145901884,
+            "nse": -9434.25145901884
+          },
+          "baseline": {
+            "n": 246,
+            "rmse_m": 2.956923910077803,
+            "mae_m": 1.4864899898373984,
+            "r2": -41967.19218868537,
+            "nse": -41967.19218868537
+          },
+          "diff_vs_seasonal": {
+            "mae_diff_m": -0.3505,
+            "rmse_diff_m": -1.5549,
+            "xgb_beats_seasonal": true
+          }
+        }
+      },
+      "TN-Sivaganga": {
+        "n": 222,
+        "districts": 1,
+        "xgboost": {
+          "n": 222,
+          "rmse_m": 0.9517198075590981,
+          "mae_m": 0.7720907315724691,
+          "r2": -20476.385665041624,
+          "nse": -20476.385665041624
+        },
+        "persistence": {
+          "n": 222,
+          "rmse_m": 0.057924380221112605,
+          "mae_m": 0.014962810810810885,
+          "r2": -74.8541043501119,
+          "nse": -74.8541043501119
+        },
+        "change_prediction_skill": {
+          "mae_change_m": 0.7721,
+          "rmse_change_m": 0.9517,
+          "r2_change": -280.6108
+        },
+        "diff_vs_persistence": {
+          "mae_diff_m": 0.7571,
+          "rmse_diff_m": 0.8938,
+          "xgb_beats_persistence": false
+        },
+        "seasonal_paired": {
+          "n": 222,
+          "xgboost": {
+            "n": 222,
+            "rmse_m": 0.9517198075590981,
+            "mae_m": 0.7720907315724691,
+            "r2": -20476.385665041624,
+            "nse": -20476.385665041624
+          },
+          "baseline": {
+            "n": 222,
+            "rmse_m": 0.41348110140778965,
+            "mae_m": 0.1441057612612614,
+            "r2": -3864.161299266266,
+            "nse": -3864.161299266266
+          },
+          "diff_vs_seasonal": {
+            "mae_diff_m": 0.628,
+            "rmse_diff_m": 0.5382,
+            "xgb_beats_seasonal": false
+          }
+        }
+      },
+      "TN-Tiruppur": {
+        "n": 246,
+        "districts": 1,
+        "xgboost": {
+          "n": 246,
+          "rmse_m": 1.0760849534007597,
+          "mae_m": 0.9123137063127222,
+          "r2": null,
+          "nse": null
+        },
+        "persistence": {
+          "n": 246,
+          "rmse_m": 0.20367085130730875,
+          "mae_m": 0.04498336585365852,
+          "r2": null,
+          "nse": null
+        },
+        "change_prediction_skill": {
+          "mae_change_m": 0.9123,
+          "rmse_change_m": 1.0761,
+          "r2_change": -28.3464
+        },
+        "diff_vs_persistence": {
+          "mae_diff_m": 0.8673,
+          "rmse_diff_m": 0.8724,
+          "xgb_beats_persistence": false
+        },
+        "seasonal_paired": {
+          "n": 246,
+          "xgboost": {
+            "n": 246,
+            "rmse_m": 1.0760849534007597,
+            "mae_m": 0.9123137063127222,
+            "r2": null,
+            "nse": null
+          },
+          "baseline": {
+            "n": 246,
+            "rmse_m": 0.9351288151544201,
+            "mae_m": 0.4580035975609756,
+            "r2": null,
+            "nse": null
+          },
+          "diff_vs_seasonal": {
+            "mae_diff_m": 0.4543,
+            "rmse_diff_m": 0.141,
+            "xgb_beats_seasonal": false
+          }
+        }
+      },
+      "UP-Deoria": {
+        "n": 246,
+        "districts": 1,
+        "xgboost": {
+          "n": 246,
+          "rmse_m": 0.9242648194793117,
+          "mae_m": 0.7625093372275189,
+          "r2": null,
+          "nse": null
+        },
+        "persistence": {
+          "n": 246,
+          "rmse_m": 0.008726255017824001,
+          "mae_m": 0.0019273073170731835,
+          "r2": null,
+          "nse": null
+        },
+        "change_prediction_skill": {
+          "mae_change_m": 0.7625,
+          "rmse_change_m": 0.9243,
+          "r2_change": -11792.8688
+        },
+        "diff_vs_persistence": {
+          "mae_diff_m": 0.7606,
+          "rmse_diff_m": 0.9155,
+          "xgb_beats_persistence": false
+        },
+        "seasonal_paired": {
+          "n": 201,
+          "xgboost": {
+            "n": 201,
+            "rmse_m": 0.9242046601735802,
+            "mae_m": 0.7503301780615279,
+            "r2": null,
+            "nse": null
+          },
+          "baseline": {
+            "n": 201,
+            "rmse_m": 0.42619935491751026,
+            "mae_m": 0.12464486368159206,
+            "r2": null,
+            "nse": null
+          },
+          "diff_vs_seasonal": {
+            "mae_diff_m": 0.6257,
+            "rmse_diff_m": 0.498,
+            "xgb_beats_seasonal": false
+          }
+        }
+      }
+    },
+    "by_horizon": {
+      "1": {
+        "n": 111,
+        "districts": 7,
+        "xgboost": {
+          "n": 111,
+          "rmse_m": 0.9877452922474506,
+          "mae_m": 0.7764589383716751,
+          "r2": 0.9828055985975742,
+          "nse": 0.9828055985975742
+        },
+        "persistence": {
+          "n": 111,
+          "rmse_m": 0.6052600845549809,
+          "mae_m": 0.09424562432432437,
+          "r2": 0.9935437373085255,
+          "nse": 0.9935437373085255
+        },
+        "change_prediction_skill": {
+          "mae_change_m": 0.7765,
+          "rmse_change_m": 0.9877,
+          "r2_change": -1.7195
+        },
+        "diff_vs_persistence": {
+          "mae_diff_m": 0.6822,
+          "rmse_diff_m": 0.3825,
+          "xgb_beats_persistence": false
+        },
+        "seasonal_paired": {
+          "n": 102,
+          "xgboost": {
+            "n": 102,
+            "rmse_m": 0.8777338623000172,
+            "mae_m": 0.7330795272339461,
+            "r2": 0.9868501080862195,
+            "nse": 0.9868501080862195
+          },
+          "baseline": {
+            "n": 102,
+            "rmse_m": 1.8094376423506633,
+            "mae_m": 0.8029683362745097,
+            "r2": 0.9441164845979256,
+            "nse": 0.9441164845979256
+          },
+          "diff_vs_seasonal": {
+            "mae_diff_m": -0.0699,
+            "rmse_diff_m": -0.9317,
+            "xgb_beats_seasonal": true
+          }
+        }
+      },
+      "2": {
+        "n": 104,
+        "districts": 6,
+        "xgboost": {
+          "n": 104,
+          "rmse_m": 0.9724682903127431,
+          "mae_m": 0.7995597502925579,
+          "r2": 0.981206434936307,
+          "nse": 0.981206434936307
+        },
+        "persistence": {
+          "n": 104,
+          "rmse_m": 0.22942266073291903,
+          "mae_m": 0.0454847913461539,
+          "r2": 0.9989540018938553,
+          "nse": 0.9989540018938553
+        },
+        "change_prediction_skill": {
+          "mae_change_m": 0.7996,
+          "rmse_change_m": 0.9725,
+          "r2_change": -17.4701
+        },
+        "diff_vs_persistence": {
+          "mae_diff_m": 0.7541,
+          "rmse_diff_m": 0.743,
+          "xgb_beats_persistence": false
+        },
+        "seasonal_paired": {
+          "n": 97,
+          "xgboost": {
+            "n": 97,
+            "rmse_m": 0.9798161282239752,
+            "mae_m": 0.8026886200773887,
+            "r2": 0.9814212345689595,
+            "nse": 0.9814212345689595
+          },
+          "baseline": {
+            "n": 97,
+            "rmse_m": 1.818058513093562,
+            "mae_m": 0.7883362556701031,
+            "r2": 0.9360348537780261,
+            "nse": 0.9360348537780261
+          },
+          "diff_vs_seasonal": {
+            "mae_diff_m": 0.0144,
+            "rmse_diff_m": -0.8382,
+            "xgb_beats_seasonal": false
+          }
+        }
+      },
+      "3": {
+        "n": 98,
+        "districts": 6,
+        "xgboost": {
+          "n": 98,
+          "rmse_m": 1.1759653562162693,
+          "mae_m": 0.9795036295303811,
+          "r2": 0.9675776406060292,
+          "nse": 0.9675776406060292
+        },
+        "persistence": {
+          "n": 98,
+          "rmse_m": 0.23634147629311955,
+          "mae_m": 0.04826957448979598,
+          "r2": 0.9986904097044194,
+          "nse": 0.9986904097044194
+        },
+        "change_prediction_skill": {
+          "mae_change_m": 0.9795,
+          "rmse_change_m": 1.176,
+          "r2_change": -24.4944
+        },
+        "diff_vs_persistence": {
+          "mae_diff_m": 0.9312,
+          "rmse_diff_m": 0.9396,
+          "xgb_beats_persistence": false
+        },
+        "seasonal_paired": {
+          "n": 92,
+          "xgboost": {
+            "n": 92,
+            "rmse_m": 1.1785523880675635,
+            "mae_m": 0.9775859175367768,
+            "r2": 0.9681894175887644,
+            "nse": 0.9681894175887644
+          },
+          "baseline": {
+            "n": 92,
+            "rmse_m": 1.8229453724079918,
+            "mae_m": 0.7696480086956522,
+            "r2": 0.9238936059931099,
+            "nse": 0.9238936059931099
+          },
+          "diff_vs_seasonal": {
+            "mae_diff_m": 0.2079,
+            "rmse_diff_m": -0.6444,
+            "xgb_beats_seasonal": false
+          }
+        }
+      },
+      "4": {
+        "n": 92,
+        "districts": 6,
+        "xgboost": {
+          "n": 92,
+          "rmse_m": 1.3354125468958895,
+          "mae_m": 1.132996430782318,
+          "r2": 0.9469892005851007,
+          "nse": 0.9469892005851007
+        },
+        "persistence": {
+          "n": 92,
+          "rmse_m": 0.23258360886974114,
+          "mae_m": 0.04817641630434785,
+          "r2": 0.9983919792125119,
+          "nse": 0.9983919792125119
+        },
+        "change_prediction_skill": {
+          "mae_change_m": 1.133,
+          "rmse_change_m": 1.3354,
+          "r2_change": -33.1219
+        },
+        "diff_vs_persistence": {
+          "mae_diff_m": 1.0848,
+          "rmse_diff_m": 1.1028,
+          "xgb_beats_persistence": false
+        },
+        "seasonal_paired": {
+          "n": 87,
+          "xgboost": {
+            "n": 87,
+            "rmse_m": 1.3445433797229114,
+            "mae_m": 1.1326076710598822,
+            "r2": 0.9472589402217936,
+            "nse": 0.9472589402217936
+          },
+          "baseline": {
+            "n": 87,
+            "rmse_m": 1.8283785399709915,
+            "mae_m": 0.7488116873563219,
+            "r2": 0.9024715223074368,
+            "nse": 0.9024715223074368
+          },
+          "diff_vs_seasonal": {
+            "mae_diff_m": 0.3838,
+            "rmse_diff_m": -0.4838,
+            "xgb_beats_seasonal": false
+          }
+        }
+      },
+      "5": {
+        "n": 86,
+        "districts": 4,
+        "xgboost": {
+          "n": 86,
+          "rmse_m": 1.3913623416929373,
+          "mae_m": 1.2018381043222115,
+          "r2": 0.9153227009147008,
+          "nse": 0.9153227009147008
+        },
+        "persistence": {
+          "n": 86,
+          "rmse_m": 0.13557342269418074,
+          "mae_m": 0.026159177906976763,
+          "r2": 0.9991960378025508,
+          "nse": 0.9991960378025508
+        },
+        "change_prediction_skill": {
+          "mae_change_m": 1.2018,
+          "rmse_change_m": 1.3914,
+          "r2_change": -106.7664
+        },
+        "diff_vs_persistence": {
+          "mae_diff_m": 1.1757,
+          "rmse_diff_m": 1.2558,
+          "xgb_beats_persistence": false
+        },
+        "seasonal_paired": {
+          "n": 81,
+          "xgboost": {
+            "n": 81,
+            "rmse_m": 1.4056039901943023,
+            "mae_m": 1.2112811177299405,
+            "r2": 0.9146716258366192,
+            "nse": 0.9146716258366192
+          },
+          "baseline": {
+            "n": 81,
+            "rmse_m": 1.835998296053923,
+            "mae_m": 0.7120188000000001,
+            "r2": 0.8544165336895759,
+            "nse": 0.8544165336895759
+          },
+          "diff_vs_seasonal": {
+            "mae_diff_m": 0.4993,
+            "rmse_diff_m": -0.4304,
+            "xgb_beats_seasonal": false
+          }
+        }
+      },
+      "6": {
+        "n": 82,
+        "districts": 4,
+        "xgboost": {
+          "n": 82,
+          "rmse_m": 1.3827854548929255,
+          "mae_m": 1.1951401886903714,
+          "r2": 0.9164346744236647,
+          "nse": 0.9164346744236647
+        },
+        "persistence": {
+          "n": 82,
+          "rmse_m": 0.13884072085453164,
+          "mae_m": 0.02743523536585368,
+          "r2": 0.9991575381878975,
+          "nse": 0.9991575381878975
+        },
+        "change_prediction_skill": {
+          "mae_change_m": 1.1951,
+          "rmse_change_m": 1.3828,
+          "r2_change": -100.6059
+        },
+        "diff_vs_persistence": {
+          "mae_diff_m": 1.1677,
+          "rmse_diff_m": 1.2439,
+          "xgb_beats_persistence": false
+        },
+        "seasonal_paired": {
+          "n": 78,
+          "xgboost": {
+            "n": 78,
+            "rmse_m": 1.4016733625821238,
+            "mae_m": 1.2099012881876627,
+            "r2": 0.9150795438758742,
+            "nse": 0.9150795438758742
+          },
+          "baseline": {
+            "n": 78,
+            "rmse_m": 1.8126277952878973,
+            "mae_m": 0.6695935615384615,
+            "r2": 0.8579844341374052,
+            "nse": 0.8579844341374052
+          },
+          "diff_vs_seasonal": {
+            "mae_diff_m": 0.5403,
+            "rmse_diff_m": -0.411,
+            "xgb_beats_seasonal": false
+          }
+        }
+      },
+      "7": {
+        "n": 78,
+        "districts": 4,
+        "xgboost": {
+          "n": 78,
+          "rmse_m": 1.355831871481058,
+          "mae_m": 1.1589127706587379,
+          "r2": 0.9197359852220929,
+          "nse": 0.9197359852220929
+        },
+        "persistence": {
+          "n": 78,
+          "rmse_m": 0.14235623215160323,
+          "mae_m": 0.028842170512820536,
+          "r2": 0.9991151652479222,
+          "nse": 0.9991151652479222
+        },
+        "change_prediction_skill": {
+          "mae_change_m": 1.1589,
+          "rmse_change_m": 1.3558,
+          "r2_change": -92.0346
+        },
+        "diff_vs_persistence": {
+          "mae_diff_m": 1.1301,
+          "rmse_diff_m": 1.2135,
+          "xgb_beats_persistence": false
+        },
+        "seasonal_paired": {
+          "n": 75,
+          "xgboost": {
+            "n": 75,
+            "rmse_m": 1.3738913949585423,
+            "mae_m": 1.174874040319926,
+            "r2": 0.9183245070672733,
+            "nse": 0.9183245070672733
+          },
+          "baseline": {
+            "n": 75,
+            "rmse_m": 1.7949693660952193,
+            "mae_m": 0.6276306373333334,
+            "r2": 0.8605877169065902,
+            "nse": 0.8605877169065902
+          },
+          "diff_vs_seasonal": {
+            "mae_diff_m": 0.5472,
+            "rmse_diff_m": -0.4211,
+            "xgb_beats_seasonal": false
+          }
+        }
+      },
+      "8": {
+        "n": 74,
+        "districts": 4,
+        "xgboost": {
+          "n": 74,
+          "rmse_m": 1.1592340407211221,
+          "mae_m": 0.9702968221830419,
+          "r2": 0.9413860603131436,
+          "nse": 0.9413860603131436
+        },
+        "persistence": {
+          "n": 74,
+          "rmse_m": 0.14615306456862687,
+          "mae_m": 0.030401206756756782,
+          "r2": 0.9990683033924416,
+          "nse": 0.9990683033924416
+        },
+        "change_prediction_skill": {
+          "mae_change_m": 0.9703,
+          "rmse_change_m": 1.1592,
+          "r2_change": -63.6121
+        },
+        "diff_vs_persistence": {
+          "mae_diff_m": 0.9399,
+          "rmse_diff_m": 1.0131,
+          "xgb_beats_persistence": false
+        },
+        "seasonal_paired": {
+          "n": 71,
+          "xgboost": {
+            "n": 71,
+            "rmse_m": 1.179913343956496,
+            "mae_m": 0.9939852439945924,
+            "r2": 0.9398533624892789,
+            "nse": 0.9398533624892789
+          },
+          "baseline": {
+            "n": 71,
+            "rmse_m": 1.6871011502131943,
+            "mae_m": 0.5191030676056337,
+            "r2": 0.8770316428895906,
+            "nse": 0.8770316428895906
+          },
+          "diff_vs_seasonal": {
+            "mae_diff_m": 0.4749,
+            "rmse_diff_m": -0.5072,
+            "xgb_beats_seasonal": false
+          }
+        }
+      },
+      "9": {
+        "n": 70,
+        "districts": 4,
+        "xgboost": {
+          "n": 70,
+          "rmse_m": 0.8694005458031234,
+          "mae_m": 0.6626696001691544,
+          "r2": 0.9670695678355247,
+          "nse": 0.9670695678355247
+        },
+        "persistence": {
+          "n": 70,
+          "rmse_m": 0.15027085797354103,
+          "mae_m": 0.032138418571428594,
+          "r2": 0.9990161992591046,
+          "nse": 0.9990161992591046
+        },
+        "change_prediction_skill": {
+          "mae_change_m": 0.6627,
+          "rmse_change_m": 0.8694,
+          "r2_change": -33.431
+        },
+        "diff_vs_persistence": {
+          "mae_diff_m": 0.6305,
+          "rmse_diff_m": 0.7191,
+          "xgb_beats_persistence": false
+        },
+        "seasonal_paired": {
+          "n": 68,
+          "xgboost": {
+            "n": 68,
+            "rmse_m": 0.880995105383912,
+            "mae_m": 0.6762801575196209,
+            "r2": 0.96642120055128,
+            "nse": 0.96642120055128
+          },
+          "baseline": {
+            "n": 68,
+            "rmse_m": 1.403459882580392,
+            "mae_m": 0.398694555882353,
+            "r2": 0.9147845818383052,
+            "nse": 0.9147845818383052
+          },
+          "diff_vs_seasonal": {
+            "mae_diff_m": 0.2776,
+            "rmse_diff_m": -0.5225,
+            "xgb_beats_seasonal": false
+          }
+        }
+      },
+      "10": {
+        "n": 66,
+        "districts": 4,
+        "xgboost": {
+          "n": 66,
+          "rmse_m": 0.7649866178156219,
+          "mae_m": 0.5763868894676439,
+          "r2": 0.9745372835072599,
+          "nse": 0.9745372835072599
+        },
+        "persistence": {
+          "n": 66,
+          "rmse_m": 0.15475754022494054,
+          "mae_m": 0.03408620151515154,
+          "r2": 0.9989579208773997,
+          "nse": 0.9989579208773997
+        },
+        "change_prediction_skill": {
+          "mae_change_m": 0.5764,
+          "rmse_change_m": 0.765,
+          "r2_change": -24.1778
+        },
+        "diff_vs_persistence": {
+          "mae_diff_m": 0.5423,
+          "rmse_diff_m": 0.6102,
+          "xgb_beats_persistence": false
+        },
+        "seasonal_paired": {
+          "n": 65,
+          "xgboost": {
+            "n": 65,
+            "rmse_m": 0.7707513977683335,
+            "mae_m": 0.5837354998175988,
+            "r2": 0.9742517167313063,
+            "nse": 0.9742517167313063
+          },
+          "baseline": {
+            "n": 65,
+            "rmse_m": 1.0449009938881921,
+            "mae_m": 0.27217276615384617,
+            "r2": 0.9526772558110962,
+            "nse": 0.9526772558110962
+          },
+          "diff_vs_seasonal": {
+            "mae_diff_m": 0.3116,
+            "rmse_diff_m": -0.2741,
+            "xgb_beats_seasonal": false
+          }
+        }
+      },
+      "11": {
+        "n": 62,
+        "districts": 4,
+        "xgboost": {
+          "n": 62,
+          "rmse_m": 0.6575788186857574,
+          "mae_m": 0.5184722830355245,
+          "r2": 0.9812128302253242,
+          "nse": 0.9812128302253242
+        },
+        "persistence": {
+          "n": 62,
+          "rmse_m": 0.15967169709646717,
+          "mae_m": 0.03628531129032261,
+          "r2": 0.9988923013887568,
+          "nse": 0.9988923013887568
+        },
+        "change_prediction_skill": {
+          "mae_change_m": 0.5185,
+          "rmse_change_m": 0.6576,
+          "r2_change": -16.5108
+        },
+        "diff_vs_persistence": {
+          "mae_diff_m": 0.4822,
+          "rmse_diff_m": 0.4979,
+          "xgb_beats_persistence": false
+        },
+        "seasonal_paired": {
+          "n": 61,
+          "xgboost": {
+            "n": 61,
+            "rmse_m": 0.6619516711210742,
+            "mae_m": 0.522322529725372,
+            "r2": 0.9810409160629481,
+            "nse": 0.9810409160629481
+          },
+          "baseline": {
+            "n": 61,
+            "rmse_m": 0.4597749654999143,
+            "mae_m": 0.0955522836065574,
+            "r2": 0.9908534897695981,
+            "nse": 0.9908534897695981
+          },
+          "diff_vs_seasonal": {
+            "mae_diff_m": 0.4268,
+            "rmse_diff_m": 0.2022,
+            "xgb_beats_seasonal": false
+          }
+        }
+      },
+      "12": {
+        "n": 58,
+        "districts": 4,
+        "xgboost": {
+          "n": 58,
+          "rmse_m": 0.6212828071914879,
+          "mae_m": 0.5000749352995775,
+          "r2": 0.9832572039220441,
+          "nse": 0.9832572039220441
+        },
+        "persistence": {
+          "n": 58,
+          "rmse_m": 0.16508582683829737,
+          "mae_m": 0.03878774655172417,
+          "r2": 0.9988178600479171,
+          "nse": 0.9988178600479171
+        },
+        "change_prediction_skill": {
+          "mae_change_m": 0.5001,
+          "rmse_change_m": 0.6213,
+          "r2_change": -13.6554
+        },
+        "diff_vs_persistence": {
+          "mae_diff_m": 0.4613,
+          "rmse_diff_m": 0.4562,
+          "xgb_beats_persistence": false
+        },
+        "seasonal_paired": {
+          "n": 58,
+          "xgboost": {
+            "n": 58,
+            "rmse_m": 0.6212828071914879,
+            "mae_m": 0.5000749352995775,
+            "r2": 0.9832572039220441,
+            "nse": 0.9832572039220441
+          },
+          "baseline": {
+            "n": 58,
+            "rmse_m": 0.16508582683829737,
+            "mae_m": 0.03878774655172417,
+            "r2": 0.9988178600479171,
+            "nse": 0.9988178600479171
+          },
+          "diff_vs_seasonal": {
+            "mae_diff_m": 0.4613,
+            "rmse_diff_m": 0.4562,
+            "xgb_beats_seasonal": false
+          }
+        }
+      }
+    },
+    "weather_policy": "Historical same-month weather means available at each origin, not realized future weather.",
+    "groundwater_origin_policy": "Observed origins; this does not validate estimated current levels after multi-year gaps."
+  },
+  "evaluation_protocol": {
+    "embargo_months": 12,
+    "training_weather": "Realized historical weather conditions as conditional covariates.",
+    "evaluation_weather": "Climatology calculated only from origin-available historical weather; future weather observations excluded.",
+    "target_policy": "Both origin and target groundwater values explicitly observed; exact calendar-date joins."
+  },
+  "validation_assessment": {
+    "status": "experimental_climate_12m_outlook",
+    "sufficient_for_operational_use": false,
+    "limitations": [
+      "Current groundwater is estimated when observations are old; training and holdout use observed origins.",
+      "Future weather uses historical monthly averages available at origin, not live weather predictions.",
+      "Pumping and extraction are not included in the feature set.",
+      "Empirical evaluation shows persistence and seasonal-naive baselines match or outperform XGBoost at several horizons.",
+      "Experimental research pipeline; unvalidated for operational water allocation."
+    ]
+  },
+  "bundle_schema_version": 1,
+  "model_sha256": "4b22e2165664e1c1dd21c81ccf95d894655f0a0d589017a9ab87df0588a73a03"
+}

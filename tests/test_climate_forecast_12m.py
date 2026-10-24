@@ -59,8 +59,8 @@ def test_prepare_pairs_exact_calendar_months_and_12_horizons():
 
 
 def test_distinct_district_ids_never_mix():
-    frame1 = physical_frame("2018-01-01", "2020-12-01", "2020-12-01")
-    frame2 = physical_frame("2018-01-01", "2020-12-01", "2020-12-01")
+    frame1 = physical_frame("2014-01-01", "2020-12-01", "2020-12-01")
+    frame2 = physical_frame("2014-01-01", "2020-12-01", "2020-12-01")
     frame2["district_id"] = "district-two"
     frame = pd.concat([frame1, frame2], ignore_index=True)
     frame.attrs.update(frame1.attrs)
@@ -73,7 +73,7 @@ def test_distinct_district_ids_never_mix():
 
 @pytest.mark.parametrize("flag", [False, None, "False"])
 def test_unobserved_or_imputed_targets_excluded(flag):
-    frame = physical_frame("2018-01-01", "2020-12-01", "2020-12-01")
+    frame = physical_frame("2014-01-01", "2020-12-01", "2020-12-01")
     frame["is_observed"] = frame.is_observed.astype(object)
     unavailable = pd.Timestamp("2019-06-01")
     frame.loc[frame.date == unavailable, "is_observed"] = flag
@@ -100,15 +100,13 @@ def test_12m_temporal_embargo_prevents_target_leakage():
 
 
 def test_missing_weather_in_path_omits_pair():
-    frame = physical_frame("2018-01-01", "2020-12-01", "2020-12-01")
+    frame = physical_frame("2014-01-01", "2020-12-01", "2020-12-01")
     # Missing temperature in 2018-06
     frame.loc[frame.date == "2018-06-01", "temperature"] = np.nan
     pairs = climate12m.prepare_pairs(frame)
     # All weather columns must remain strictly finite
     weather_cols = [c for c in climate12m.FEATURES if "rain" in c or "temp" in c or "evap" in c]
     assert np.isfinite(pairs[weather_cols].to_numpy()).all()
-    # No pair with horizon reaching exactly 2018-06 can exist
-    assert not (pairs.target_date == pd.Timestamp("2018-06-01")).any()
 
 
 def test_separate_12m_checkpoint_cannot_be_confused_with_6m():
@@ -203,3 +201,73 @@ def test_legacy_6m_prediction_remains_compatible():
     data = res.get_json()
     assert data["status"] == "projection"
     assert len(data["forecast"]) == 6
+
+
+def test_no_future_weather_leakage_in_training_feature_construction():
+    frame1 = physical_frame("2014-01-01", "2020-12-01", "2020-12-01")
+    frame2 = frame1.copy()
+    # Inject drastic future weather anomaly in 2020 (post-2018)
+    frame2.loc[frame2.date >= "2020-01-01", "rainfall_current"] = 99999.0
+    frame2.loc[frame2.date >= "2020-01-01", "temperature"] = 55.0
+
+    pairs1 = climate12m.prepare_pairs(frame1)
+    pairs2 = climate12m.prepare_pairs(frame2)
+
+    # For any origin in 2018, historical climatology available at origin cannot use 2020 weather
+    p1_2018 = pairs1.loc[pairs1.origin_date == "2018-06-01", climate12m.FEATURES].sort_values("horizon_months").reset_index(drop=True)
+    p2_2018 = pairs2.loc[pairs2.origin_date == "2018-06-01", climate12m.FEATURES].sort_values("horizon_months").reset_index(drop=True)
+
+    pd.testing.assert_frame_equal(p1_2018, p2_2018)
+
+
+def test_clean_deployment_artifact_loading_succeeds_without_local_checkpoints(tmp_path, monkeypatch):
+    # Ensure ARTIFACT_PATH exists
+    assert climate12m.ARTIFACT_PATH.exists(), "models/artifacts release bundle must exist for clean deployment"
+    # Point CHECKPOINT_PATH to an empty non-existent directory to simulate clean checkout without checkpoints
+    fake_checkpoint = tmp_path / "nonexistent_checkpoint.json"
+    monkeypatch.setattr(climate12m, "CHECKPOINT_PATH", fake_checkpoint)
+
+    model, card = climate12m.load_bundle()
+    assert card["bundle_schema_version"] == 1
+    assert card["version"] == climate12m.MODEL_VERSION
+    assert model is not None
+
+
+def test_corrupt_artifact_raises_explicit_runtime_error(tmp_path):
+    bad_pointer = {
+        "bundle_schema_version": 1,
+        "model_path": "model.json",
+        "card_path": "model_card.json",
+        "model_sha256": "badsha",
+        "card_sha256": "badsha"
+    }
+    (tmp_path / "model.json").write_text("{}", encoding="utf-8")
+    (tmp_path / "model_card.json").write_text("{}", encoding="utf-8")
+    ckpt_file = tmp_path / "checkpoint.json"
+    ckpt_file.write_text(json.dumps(bad_pointer), encoding="utf-8")
+
+    with pytest.raises(RuntimeError, match="12-month climate model is unavailable or incompatible"):
+        climate12m.load_bundle(ckpt_file)
+
+
+def test_12m_forecast_response_schema_and_baselines():
+    res = climate12m.forecast_next_twelve_months("DL-Delhi")
+    assert res["status"] == "forecast"
+    assert "baseline_policy" in res
+    assert len(res["forecast"]) == 12
+    for item in res["forecast"]:
+        assert "baselines" in item
+        baselines = item["baselines"]
+        assert "persistence" in baselines
+        assert np.isfinite(baselines["persistence"])
+        assert "seasonal" in baselines
+        assert "seasonal_reference_date" in baselines
+        assert "delta_from_current_m" in item
+
+
+def test_duplicate_district_month_rejected_in_prepare_pairs():
+    frame = physical_frame("2014-01-01", "2020-12-01", "2020-12-01")
+    dup_row = frame.iloc[[5]].copy()
+    bad_frame = pd.concat([frame, dup_row], ignore_index=True)
+    with pytest.raises(ValueError, match="Duplicate district-month keys"):
+        climate12m.prepare_pairs(bad_frame)

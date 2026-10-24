@@ -8,23 +8,26 @@ and leakage-safe chronological evaluation with a 12-month embargo.
 from datetime import datetime, timezone
 from pathlib import Path
 import json
+import math
 import uuid
 
 import numpy as np
 import pandas as pd
 
 from db.connection import finite_json
-from models.climate_inputs import (forecast_weather, monthly_features,
-                                  MONTHLY_FEATURE_COLUMNS, WEATHER_UNITS)
+from models.climate_inputs import (_weather_history, climatology_path,
+                                   DistrictClimatology, forecast_weather,
+                                   MONTHLY_FEATURE_COLUMNS, WEATHER_UNITS)
 from models.ensemble import CONFIG, _as_of, _completed_feature_month, feature_generation, select_evidence
 from models.monthly_projection import (fit_projection, predict_depth, _design,
                                        _observed_history, _month_number,
                                        MIN_OBSERVATIONS, MIN_SPAN_MONTHS, TREND_DAMPING_MONTHS)
 from models.xgboost_model import (observed_mask, sha256_file, _json_hash,
-                                 _write_json, load_feature_matrix, metrics, DEFAULT_TRAIN_CUTOFF)
+                                  _write_json, load_feature_matrix, metrics, DEFAULT_TRAIN_CUTOFF)
 from models.climate_forecast import origin_inputs, feature_rows
 
 ROOT = Path(__file__).resolve().parents[1]
+ARTIFACT_PATH = ROOT / 'models/artifacts/aquaiq_climate_12m.json'
 CHECKPOINT_PATH = ROOT / 'models/checkpoints/aquaiq_climate_12m.json'
 MODEL_VERSION = '1.0-climate-conditioned-12m-xgb'
 PRODUCT_NAME = 'climate_informed_12m_forecast'
@@ -40,7 +43,17 @@ _CACHE = {}
 
 
 def prepare_pairs(frame):
-    """Join observed labels at t+h calendar months (h=1..12) with complete weather paths."""
+    """Building blocks for horizon-aware training with serving-identical features.
+
+    Every pair joins an explicitly observed groundwater origin to an explicitly
+    observed target at exactly t+h calendar months (h=1..12). The monthly
+    weather features are built with the exact serving encoding
+    (feature_rows/origin_inputs/monthly_features) from an origin-available
+    climatology: same-calendar-month historical weather means that only use
+    records at or before each forecast origin. Realized post-origin weather
+    never enters training features, so training, evaluation and inference see
+    the same feature distribution.
+    """
     required = {'district_id', 'date', 'gwl_current', 'rainfall_current',
                 'temperature', 'evapotranspiration'}
     if required - set(frame):
@@ -52,44 +65,77 @@ def prepare_pairs(frame):
     if frame.date.isna().any() or (frame.date.dt.day != 1).any():
         raise ValueError('Training requires calendar month starts.')
     observed = observed_mask(frame) & np.isfinite(frame.gwl_current) & (frame.gwl_current >= 0)
-    origins = frame.loc[observed].copy().rename(columns={'date': 'origin_date'})
-    target = frame.loc[observed, ['district_id', 'date', 'gwl_current']].rename(
-        columns={'date': 'target_date', 'gwl_current': 'actual_gwl'})
-    weather = frame[['district_id', 'date', 'rainfall_current', 'temperature', 'evapotranspiration']]
+    labels = {}
+    for row in frame.loc[observed, ['district_id', 'date', 'gwl_current']].itertuples(index=False):
+        labels[(row.district_id, pd.Timestamp(row.date))] = float(row.gwl_current)
+    frames = {district: values for district, values in frame.groupby('district_id', sort=True)}
     pairs = []
-    for horizon in HORIZONS_MONTHS:
-        rows = origins.copy()
-        rows['target_date'] = rows.origin_date + pd.DateOffset(months=horizon)
-        rows = rows.merge(target, on=['district_id', 'target_date'], how='inner', validate='one_to_one')
-        for step in range(1, horizon + 1):
-            lookup = weather.copy()
-            lookup['origin_date'] = lookup.date - pd.DateOffset(months=step)
-            lookup = lookup.drop(columns='date').rename(columns={
-                'rainfall_current': f'rain_{step}', 'temperature': f'temp_{step}',
-                'evapotranspiration': f'et_{step}'})
-            rows = rows.merge(lookup, on=['district_id', 'origin_date'], how='left', validate='one_to_one')
-        future_columns = [f'{field}_{step}' for step in range(1, horizon + 1) for field in ('rain', 'temp', 'et')]
-        valid = np.isfinite(rows[future_columns].to_numpy()).all(axis=1)
-        valid &= np.isfinite(rows[['rainfall_current', 'temperature', 'evapotranspiration']].to_numpy()).all(axis=1)
-        valid &= (rows[[f'{field}_{step}' for step in range(1, horizon + 1) for field in ('rain', 'et')]] >= 0).all(axis=1)
-        rows = rows.loc[valid].copy()
-        rows['origin_gwl'] = rows.gwl_current
-        for lag in (3, 6):
-            rows[f'origin_gwl_lag_{lag}mo'] = rows.get(f'gwl_lag_{lag}mo', np.nan)
-        for source, name in [('rainfall_current', 'rainfall'), ('temperature', 'temperature'), ('evapotranspiration', 'evapotranspiration')]:
-            rows['origin_' + name] = rows[source]
-        rows['horizon_months'] = float(horizon)
-        for prefix, dates in [('origin', rows.origin_date), ('target', rows.target_date)]:
-            phase = 2 * np.pi * dates.dt.month / 12
-            rows[prefix + '_month_sin'], rows[prefix + '_month_cos'] = np.sin(phase), np.cos(phase)
-        rows['target_rainfall'], rows['target_temperature'] = rows[f'rain_{horizon}'], rows[f'temp_{horizon}']
-        rows['target_evapotranspiration'] = rows[f'et_{horizon}']
-        rows['cumulative_rainfall'] = rows[[f'rain_{step}' for step in range(1, horizon + 1)]].sum(axis=1)
-        rows['cumulative_evapotranspiration'] = rows[[f'et_{step}' for step in range(1, horizon + 1)]].sum(axis=1)
-        rows['mean_temperature'] = rows[[f'temp_{step}' for step in range(1, horizon + 1)]].mean(axis=1)
-        rows['target_delta'] = rows.actual_gwl - rows.origin_gwl
-        pairs.append(rows[['district_id', 'origin_date', 'target_date', 'actual_gwl', 'target_delta'] + FEATURES])
-    result = pd.concat(pairs, ignore_index=True)
+    horizons = np.arange(1, 13, dtype=float)
+    for district_id, district_frame in frames.items():
+        history = _weather_history(district_frame, district_frame.date.max())
+        climatology = DistrictClimatology(history)
+        obs_rows = district_frame.loc[observed.reindex(district_frame.index).fillna(False)]
+        row_map = {pd.Timestamp(r.date): r for r in district_frame.itertuples()}
+        for row in obs_rows.itertuples():
+            origin = pd.Timestamp(row.date)
+            depth = float(row.gwl_current)
+            target_dates = [origin + pd.DateOffset(months=h) for h in range(1, 13)]
+            if not any((district_id, td) in labels for td in target_dates):
+                continue
+            r_curr = row_map.get(origin)
+            rf = getattr(r_curr, 'rainfall_current', np.nan) if r_curr is not None else np.nan
+            tmp = getattr(r_curr, 'temperature', np.nan) if r_curr is not None else np.nan
+            et = getattr(r_curr, 'evapotranspiration', np.nan) if r_curr is not None else np.nan
+            if np.isfinite(rf) and np.isfinite(tmp) and np.isfinite(et) and rf >= 0 and et >= 0 and -100 <= tmp <= 70:
+                inputs = {
+                    'origin_gwl': depth, 'origin_rainfall': float(rf),
+                    'origin_temperature': float(tmp), 'origin_evapotranspiration': float(et),
+                    'origin_gwl_lag_3mo': float(getattr(r_curr, 'gwl_lag_3mo', np.nan)),
+                    'origin_gwl_lag_6mo': float(getattr(r_curr, 'gwl_lag_6mo', np.nan)),
+                }
+            else:
+                cutoff = origin + pd.offsets.MonthEnd(0)
+                inputs, _ = origin_inputs(district_frame, origin, cutoff, depth)
+            if inputs is None:
+                continue
+            array_res = climatology.array_path(origin, 12)
+            if array_res is None:
+                continue
+            targets, t_rf, t_tmp, t_et = array_res
+            orig_sin = math.sin(2 * math.pi * origin.month / 12)
+            orig_cos = math.cos(2 * math.pi * origin.month / 12)
+            t_sin = np.sin(2 * math.pi * targets.month.to_numpy() / 12)
+            t_cos = np.cos(2 * math.pi * targets.month.to_numpy() / 12)
+            cum_rf = np.cumsum(t_rf)
+            cum_et = np.cumsum(t_et)
+            mean_tmp = np.cumsum(t_tmp) / horizons
+            for h in range(1, 13):
+                td = target_dates[h - 1]
+                actual = labels.get((district_id, td))
+                if actual is None or not np.isfinite(actual):
+                    continue
+                idx = h - 1
+                pairs.append({
+                    'district_id': district_id, 'origin_date': origin, 'target_date': td,
+                    'actual_gwl': actual, 'target_delta': actual - depth,
+                    'origin_gwl': inputs['origin_gwl'],
+                    'origin_gwl_lag_3mo': inputs['origin_gwl_lag_3mo'],
+                    'origin_gwl_lag_6mo': inputs['origin_gwl_lag_6mo'],
+                    'origin_rainfall': inputs['origin_rainfall'],
+                    'origin_temperature': inputs['origin_temperature'],
+                    'origin_evapotranspiration': inputs['origin_evapotranspiration'],
+                    'horizon_months': float(h),
+                    'origin_month_sin': orig_sin, 'origin_month_cos': orig_cos,
+                    'target_month_sin': t_sin[idx], 'target_month_cos': t_cos[idx],
+                    'target_rainfall': t_rf[idx], 'target_temperature': t_tmp[idx],
+                    'target_evapotranspiration': t_et[idx],
+                    'cumulative_rainfall': cum_rf[idx],
+                    'cumulative_evapotranspiration': cum_et[idx],
+                    'mean_temperature': mean_tmp[idx],
+                })
+    result = pd.DataFrame(pairs)
+    if result.empty:
+        raise ValueError('No observed origin-target pairs satisfy the origin-available weather policy.')
     result.attrs.update(frame.attrs)
     return result
 
@@ -134,11 +180,23 @@ def evaluate_assumed_weather(model, frame, pairs):
         paired_seasonal = part.loc[np.isfinite(part.seasonal)]
         m_xgb = metrics(part.actual, part.predicted)
         m_pers = metrics(part.actual, part.persistence)
+        actual_delta = part.actual.to_numpy() - part.persistence.to_numpy()
+        pred_delta = part.predicted.to_numpy() - part.persistence.to_numpy()
+        mae_delta = float(np.mean(np.abs(actual_delta - pred_delta)))
+        rmse_delta = float(np.sqrt(np.mean((actual_delta - pred_delta) ** 2)))
+        ss_tot_delta = float(np.sum((actual_delta - np.mean(actual_delta)) ** 2)) if len(actual_delta) > 1 else 0.0
+        ss_res_delta = float(np.sum((actual_delta - pred_delta) ** 2))
+        r2_delta = round(float(1.0 - (ss_res_delta / ss_tot_delta)), 4) if ss_tot_delta > 1e-9 else 0.0
         res = {
             'n': len(part),
             'districts': int(part.district_id.nunique()),
             'xgboost': m_xgb,
             'persistence': m_pers,
+            'change_prediction_skill': {
+                'mae_change_m': round(mae_delta, 4),
+                'rmse_change_m': round(rmse_delta, 4),
+                'r2_change': r2_delta,
+            },
             'diff_vs_persistence': {
                 'mae_diff_m': round(float(m_xgb['mae_m'] - m_pers['mae_m']), 4),
                 'rmse_diff_m': round(float(m_xgb['rmse_m'] - m_pers['rmse_m']), 4),
@@ -162,6 +220,10 @@ def evaluate_assumed_weather(model, frame, pairs):
             res['seasonal_paired'] = None
         return res
 
+    dominant_districts = {'TN-Cuddalore', 'TN-Sivaganga', 'TN-Tiruppur', 'UP-Deoria'}
+    dominant_table = table.loc[table.district_id.isin(dominant_districts)]
+    remaining_table = table.loc[~table.district_id.isin(dominant_districts)]
+
     return {
         'status': 'evaluated_assumed_weather',
         'skipped_labels': skipped,
@@ -170,6 +232,8 @@ def evaluate_assumed_weather(model, frame, pairs):
         'origin_end': table.origin_date.max().date().isoformat(),
         'target_start': table.target_date.min().date().isoformat(),
         'target_end': table.target_date.max().date().isoformat(),
+        'dominant_districts_summary': summarize(dominant_table) if len(dominant_table) else None,
+        'remaining_districts_summary': summarize(remaining_table) if len(remaining_table) else None,
         'by_district': {str(district): summarize(part) for district, part in table.groupby('district_id', sort=True)},
         'by_horizon': {str(h): summarize(table.loc[table.horizon == h]) if (table.horizon == h).any() else {'n': 0}
                        for h in HORIZONS_MONTHS},
@@ -210,7 +274,12 @@ def _load_files(pointer, checkpoint, generation=None):
 
 
 def load_bundle(checkpoint=None, expected_generation=None):
-    checkpoint = Path(checkpoint or CHECKPOINT_PATH)
+    if checkpoint is not None:
+        checkpoint = Path(checkpoint)
+    elif ARTIFACT_PATH.exists():
+        checkpoint = ARTIFACT_PATH
+    else:
+        checkpoint = CHECKPOINT_PATH
     generation = expected_generation or feature_generation()
     try:
         pointer = json.loads(checkpoint.read_text(encoding='utf-8'))
@@ -231,7 +300,7 @@ def load_bundle(checkpoint=None, expected_generation=None):
 
 
 def publish_bundle(model, card, checkpoint=None):
-    checkpoint = Path(checkpoint or CHECKPOINT_PATH)
+    checkpoint = Path(checkpoint or ARTIFACT_PATH)
     directory = checkpoint.parent / 'climate_12m_bundles' / (datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ') + '-' + uuid.uuid4().hex[:10])
     directory.mkdir(parents=True, exist_ok=False)
     model_path, card_path = directory / 'model.json', directory / 'model_card.json'
@@ -401,6 +470,36 @@ def forecast_from_evidence(evidence, weather_override=None):
     path = weather['path']
     age = int(_month_number([origin])[0] - _month_number([fit['origin']])[0])
 
+    known_obs = evidence['frame'].loc[(pd.to_datetime(evidence['frame'].date) <= origin) & observed_mask(evidence['frame'])].copy()
+    forecast_items = []
+    for horizon_num, (row, depth) in enumerate(zip(path.itertuples(), depths), start=1):
+        target_ts = pd.Timestamp(row.date)
+        prev_year = pd.Timestamp(year=target_ts.year - 1, month=target_ts.month, day=1)
+        matches = known_obs.loc[pd.to_datetime(known_obs.date) == prev_year]
+        if len(matches) > 0 and np.isfinite(matches.iloc[-1].gwl_current):
+            seasonal_val = round(float(matches.iloc[-1].gwl_current), 4)
+            seasonal_date = prev_year.date().isoformat()
+        else:
+            seasonal_val = None
+            seasonal_date = None
+        forecast_items.append({
+            'month': row.date.strftime('%Y-%m'),
+            'date': row.date.date().isoformat(),
+            'horizon': horizon_num,
+            'predicted_gwl': round(float(depth), 4),
+            'delta_from_current_m': round(float(depth - current), 4),
+            'weather': {
+                'rainfall_mm': round(float(row.rainfall), 4),
+                'temperature_c': round(float(row.temperature), 4),
+                'evapotranspiration_mm': round(float(row.evapotranspiration), 4)
+            },
+            'baselines': {
+                'persistence': round(float(current), 4),
+                'seasonal': seasonal_val,
+                'seasonal_reference_date': seasonal_date
+            }
+        })
+
     result.update(
         status='forecast',
         forecast_start=path.date.iloc[0].strftime('%Y-%m'),
@@ -411,24 +510,13 @@ def forecast_from_evidence(evidence, weather_override=None):
         feature_cutoff=fit['origin'].date().isoformat(),
         estimated_current_gwl=round(current, 4),
         current_depth_basis='estimated_from_historical_groundwater' if origin > fit['origin'] else 'observed_month',
+        baseline_policy={
+            'description': 'Persistence holds the estimated current anchor depth constant. Seasonal naive uses a source-marked observation from the same calendar month one year prior when available; unavailable references remain gaps.'
+        },
         model_sha256=card['model_sha256'],
         model_train_target_cutoff=card['train_target_cutoff'],
         model_validation=card.get('validation_assessment', {}),
-        forecast=[
-            {
-                'month': row.date.strftime('%Y-%m'),
-                'date': row.date.date().isoformat(),
-                'horizon': horizon_num,
-                'predicted_gwl': round(float(depth), 4),
-                'delta_from_current_m': round(float(depth - current), 4),
-                'weather': {
-                    'rainfall_mm': round(float(row.rainfall), 4),
-                    'temperature_c': round(float(row.temperature), 4),
-                    'evapotranspiration_mm': round(float(row.evapotranspiration), 4)
-                }
-            }
-            for horizon_num, (row, depth) in enumerate(zip(path.itertuples(), depths), start=1)
-        ]
+        forecast=forecast_items
     )
     return finite_json(result)
 
@@ -463,17 +551,20 @@ def _validate_cli_outputs(parser, checkpoint, report, candidate=False, evaluatio
     """Refuse report/candidate aliases that could replace active data or model assets."""
     active_6m = (ROOT / 'models/checkpoints/aquaiq_monthly_climate.json').resolve()
     active_12m = CHECKPOINT_PATH.resolve()
+    artifact_12m = ARTIFACT_PATH.resolve()
     historical = (ROOT / CONFIG['paths']['xgboost_checkpoint']).resolve()
-    source = Path(checkpoint or CHECKPOINT_PATH).resolve()
+    source = Path(checkpoint or (ARTIFACT_PATH if ARTIFACT_PATH.exists() else CHECKPOINT_PATH)).resolve()
     training_report = (ROOT / 'reports/climate_forecast_12m_evaluation.json').resolve()
     protected = {
         active_6m, active_6m.with_name(active_6m.stem + '_model_card.json'),
         active_12m, active_12m.with_name(active_12m.stem + '_model_card.json'),
+        artifact_12m, artifact_12m.with_name(artifact_12m.stem + '_model_card.json'),
         historical, historical.with_name(historical.stem + '_model_card.json'),
         (ROOT / 'data/processed/feature_manifest.json').resolve(),
         (ROOT / 'data/processed/features_matrix.csv').resolve()
     }
-    immutable = {active_6m.parent / 'climate_bundles', active_12m.parent / 'climate_12m_bundles', historical.parent / 'bundles'}
+    immutable = {active_6m.parent / 'climate_bundles', active_12m.parent / 'climate_12m_bundles',
+                 artifact_12m.parent / 'climate_12m_bundles', historical.parent / 'bundles'}
     if candidate:
         protected.add(training_report)
         writes = [source, source.with_name(source.stem + '_model_card.json'), report.resolve()]

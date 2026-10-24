@@ -14,7 +14,8 @@ data/processed/*
 # .env.example IS committed (it's a safe template with no real credentials)
 # .env is already git-ignored above
 
-# Model checkpoints — large binaries, track via releases or Drive instead
+# Legacy checkpoints stay external. The compact versioned twelve-month release
+# under models/artifacts/ is intentionally tracked with its pointer and card.
 models/checkpoints/*.pt
 models/checkpoints/*.json
 models/checkpoints/bundles/
@@ -67,3 +68,9 @@ reports/candidates/correlation/
 # Paired six-month experiments retain compact summaries/protocols in Git.
 reports/candidates/six_month_selection_*/**/*.csv
 reports/candidates/six_month_selection_*/experiment*/validation/
+
+# Reproducible independent-audit build output, temporary fixtures and run logs.
+# Keep reconstructed cases, metrics, diagnostics, verification and audit scripts.
+reports/climate_12m_independent_audit_20261024_01/build/
+reports/climate_12m_independent_audit_20261024_01/pytest_tmp/
+reports/climate_12m_independent_audit_20261024_01/*.txt

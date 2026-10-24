@@ -204,6 +204,116 @@ def forecast_weather(frame, as_of, months=6, overrides=None):
     return {"status": "available", "path": validate_weather_path(rows, as_of, months), "metadata": metadata}
 
 
+def climatology_path(history, origin, months=12):
+    """Assumed future monthly weather from prior same-month records only.
+
+    For every target month, each field is the mean of the most recent usable
+    same-calendar-month records available at or before the forecast origin's
+    completed month, using at most MAX_REFERENCE_YEARS distinct prior years and
+    requiring at least MIN_REFERENCE_YEARS of them. This is the numeric core of
+    forecast_weather without its serving metadata, so training and evaluation
+    share one definition of "weather information available at the origin".
+    Returns None when any needed feature lacks enough reference years; the
+    caller decides whether that makes an origin ineligible.
+    """
+    return DistrictClimatology(history).path(origin, months)
+
+
+class DistrictClimatology:
+    """Vectorized per-district engine behind climatology_path."""
+
+    def __init__(self, history):
+        history = pd.DataFrame(history)
+        if history.empty or "date" not in history or not set(WEATHER_COLUMNS) <= set(history.columns):
+            raise ValueError("District weather history requires date and weather fields.")
+        dindex = pd.DatetimeIndex(history["date"])
+        valid = dindex.notna()
+        if not valid.any():
+            self._months = {}
+            self._cache = {}
+            return
+        dates_arr = history["date"].loc[valid].to_numpy(dtype='datetime64[D]')
+        months_arr = dindex[valid].month.to_numpy()
+        years_arr = dindex[valid].year.to_numpy()
+        self._months = {}
+        for column in WEATHER_COLUMNS:
+            numeric = pd.to_numeric(history.loc[valid, column], errors="coerce").to_numpy(dtype=float)
+            if column == "temperature":
+                finite = np.isfinite(numeric) & (numeric >= -100) & (numeric <= 70)
+            else:
+                finite = np.isfinite(numeric) & (numeric >= 0)
+            for m in range(1, 13):
+                mask = finite & (months_arr == m)
+                if m not in self._months:
+                    self._months[m] = {}
+                self._months[m][column] = {
+                    "dates": dates_arr[mask],
+                    "values": numeric[mask],
+                    "years": years_arr[mask],
+                }
+        self._cache = {}
+
+    def path(self, origin, months=12):
+        origin = _timestamp(origin)
+        completed = _completed_month(origin)
+        completed_day = np.datetime64(completed, 'D')
+        cache_key = (completed_day, int(months))
+        if cache_key in self._cache:
+            cached = self._cache[cache_key]
+            return cached.copy() if cached is not None else None
+        targets = _next_months(origin, months)
+        data = {"date": targets}
+        for column in WEATHER_COLUMNS:
+            vals = np.empty(months, dtype=float)
+            for i, target in enumerate(targets):
+                fields = self._months.get(int(target.month), {}).get(column)
+                if fields is None:
+                    self._cache[cache_key] = None
+                    return None
+                cutoff = int(np.searchsorted(fields["dates"], completed_day, side='right'))
+                start = max(0, cutoff - MAX_REFERENCE_YEARS)
+                samples = fields["values"][start:cutoff]
+                sample_years = fields["years"][start:cutoff]
+                if len(sample_years) < MIN_REFERENCE_YEARS or len(np.unique(sample_years)) < MIN_REFERENCE_YEARS:
+                    self._cache[cache_key] = None
+                    return None
+                vals[i] = samples.mean()
+            data[column] = vals
+        result = pd.DataFrame(data)
+        validated = validate_weather_path(result, origin, months)
+        self._cache[cache_key] = validated
+        return validated.copy()
+
+    def array_path(self, origin, months=12):
+        origin = _timestamp(origin)
+        completed = _completed_month(origin)
+        completed_day = np.datetime64(completed, 'D')
+        cache_key = ("array", completed_day, int(months))
+        if cache_key in self._cache:
+            return self._cache[cache_key]
+        targets = _next_months(origin, months)
+        arrays = {}
+        for column in WEATHER_COLUMNS:
+            vals = np.empty(months, dtype=float)
+            for i, target in enumerate(targets):
+                fields = self._months.get(int(target.month), {}).get(column)
+                if fields is None:
+                    self._cache[cache_key] = None
+                    return None
+                cutoff = int(np.searchsorted(fields["dates"], completed_day, side='right'))
+                start = max(0, cutoff - MAX_REFERENCE_YEARS)
+                samples = fields["values"][start:cutoff]
+                sample_years = fields["years"][start:cutoff]
+                if len(sample_years) < MIN_REFERENCE_YEARS or len(np.unique(sample_years)) < MIN_REFERENCE_YEARS:
+                    self._cache[cache_key] = None
+                    return None
+                vals[i] = samples.mean()
+            arrays[column] = vals
+        res = (targets, arrays["rainfall"], arrays["temperature"], arrays["evapotranspiration"])
+        self._cache[cache_key] = res
+        return res
+
+
 def monthly_features(origin, target_weather_path):
     """Encode every monthly horizon and cumulative weather from an origin.
 

@@ -94,19 +94,7 @@ At inference time, real future weather is unknown. The pipeline implements an ex
 - **Target Join:** Exact calendar month and district ID matching. Imputed or missing groundwater values are strictly excluded from both origins and targets.
 - **Training Label Cutoff:** `2019-12-31`. All training pairs satisfy $\text{target\_date} \le 2019\text{-}12\text{-}31$.
 - **Temporal Embargo:** Strict 12-month embargo. The earliest eligible evaluation origin is $\text{first\_origin} = 2021\text{-}01\text{-}01$ ($13$ calendar months after the training cutoff).
-- **Training Samples:** 135,182 observed pairs across 557 districts.
-  - $H=1$: 1,608 pairs (209 districts)
-  - $H=2$: 8,935 pairs (555 districts)
-  - $H=3$: 16,220 pairs (555 districts)
-  - $H=4$: 9,585 pairs (554 districts)
-  - $H=5$: 9,090 pairs (556 districts)
-  - $H=6$: 15,536 pairs (523 districts)
-  - $H=7$: 9,337 pairs (554 districts)
-  - $H=8$: 9,151 pairs (553 districts)
-  - $H=9$: 14,997 pairs (555 districts)
-  - $H=10$: 9,123 pairs (554 districts)
-  - $H=11$: 1,584 pairs (226 districts)
-  - $H=12$: 30,016 pairs (557 districts)
+- **Training Samples:** 116,601 observed pairs across 558 districts satisfying the origin-available weather climatology requirement (zero future weather leakage).
 
 ---
 
@@ -117,32 +105,44 @@ Evaluation was executed on 981 observed holdout pairs spanning origins `2021-01-
 ### 5.1 Overall Metrics on Held-Out Test Set
 | Model / Baseline | $N$ | MAE ($m$) | RMSE ($m$) | $R^2$ / NSE |
 | :--- | :---: | :---: | :---: | :---: |
-| **XGBoost (12-month climate)** | 981 | 0.937 | 1.162 | 0.959 |
+| **XGBoost (12-month climate)** | 981 | 0.896 | 1.112 | 0.963 |
 | **Persistence Baseline** | 981 | 0.043 | 0.266 | 0.998 |
-| **XGBoost (Seasonal Paired)** | 935 | 0.941 | 1.162 | 0.960 |
+| **Change Prediction Skill ($\Delta$)** | 981 | 0.896 | 1.112 | -16.853 |
+| **XGBoost (Seasonal Paired)** | 935 | 0.895 | 1.109 | 0.963 |
 | **Seasonal-Naive Baseline** | 935 | 0.579 | 1.617 | 0.922 |
 
-### 5.2 Horizon-by-Horizon Comparison (MAE in Metres)
+### 5.2 Dominant vs. Remaining Districts Breakdown
+- **Dominant Flat Districts ($N=960$, 4 districts: TN-Cuddalore, TN-Sivaganga, TN-Tiruppur, UP-Deoria):**
+  - XGBoost MAE: **0.899 m** (RMSE: 1.109 m)
+  - Persistence MAE: **0.028 m** (RMSE: 0.139 m)
+  - During 2021–2023, groundwater depths in these four districts remained virtually flat in the source data (e.g. Tiruppur flat at 2.325 m for 26 targets), giving persistence a baseline MAE under 3 cm. These records are authentic source-marked observations (`is_observed=True`), not pipeline artifacts, and must not be discarded.
+- **Remaining Eligible Districts ($N=21$, 3 districts: HR-Kurukshetra, HR-Kaithal, HR-Jind):**
+  - XGBoost MAE: **0.755 m** (RMSE: 1.262 m)
+  - Persistence MAE: **0.742 m** (RMSE: 1.552 m)
+  - Even on the non-flat districts, persistence achieves a slightly lower MAE than XGBoost.
+
+### 5.3 Horizon-by-Horizon Comparison (MAE in Metres)
 | Horizon | $N$ | XGBoost MAE ($m$) | Persistence MAE ($m$) | Seasonal $N$ | XGBoost Paired ($m$) | Seasonal-Naive ($m$) | XGB Beats Seasonal? |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **M+1** | 111 | **0.704** | 0.094 | 102 | **0.656** | 0.803 | **Yes** ($\Delta -0.147m$) |
-| **M+2** | 104 | **0.779** | 0.045 | 97 | **0.780** | 0.788 | **Yes** ($\Delta -0.009m$) |
-| **M+3** | 98 | 1.000 | 0.048 | 92 | 1.005 | **0.770** | No ($\Delta +0.235m$) |
-| **M+4** | 92 | 1.127 | 0.048 | 87 | 1.133 | **0.749** | No ($\Delta +0.384m$) |
-| **M+5** | 86 | 1.233 | 0.026 | 81 | 1.248 | **0.712** | No ($\Delta +0.536m$) |
-| **M+6** | 82 | 1.297 | 0.027 | 78 | 1.322 | **0.670** | No ($\Delta +0.652m$) |
-| **M+7** | 78 | 1.233 | 0.029 | 75 | 1.252 | **0.628** | No ($\Delta +0.624m$) |
-| **M+8** | 74 | 1.056 | 0.030 | 71 | 1.083 | **0.519** | No ($\Delta +0.564m$) |
-| **M+9** | 70 | 0.789 | 0.032 | 68 | 0.807 | **0.399** | No ($\Delta +0.408m$) |
-| **M+10** | 66 | 0.707 | 0.034 | 65 | 0.717 | **0.272** | No ($\Delta +0.445m$) |
-| **M+11** | 62 | 0.595 | 0.036 | 61 | 0.599 | **0.096** | No ($\Delta +0.504m$) |
-| **M+12** | 58 | 0.566 | 0.039 | 58 | 0.566 | **0.039** | No ($\Delta +0.527m$) |
+| **M+1** | 111 | 0.776 | **0.094** | 102 | **0.743** | 0.803 | **Yes** ($\Delta -0.060m$) |
+| **M+2** | 104 | 0.800 | **0.045** | 97 | 0.805 | **0.788** | No ($\Delta +0.017m$) |
+| **M+3** | 98 | 0.980 | **0.048** | 92 | 0.987 | **0.770** | No ($\Delta +0.217m$) |
+| **M+4** | 92 | 1.133 | **0.048** | 87 | 1.140 | **0.749** | No ($\Delta +0.391m$) |
+| **M+5** | 86 | 1.202 | **0.026** | 81 | 1.215 | **0.712** | No ($\Delta +0.503m$) |
+| **M+6** | 82 | 1.195 | **0.027** | 78 | 1.216 | **0.670** | No ($\Delta +0.546m$) |
+| **M+7** | 78 | 1.159 | **0.029** | 75 | 1.176 | **0.628** | No ($\Delta +0.548m$) |
+| **M+8** | 74 | 0.970 | **0.030** | 71 | 0.993 | **0.519** | No ($\Delta +0.474m$) |
+| **M+9** | 70 | 0.663 | **0.032** | 68 | 0.678 | **0.399** | No ($\Delta +0.279m$) |
+| **M+10** | 66 | 0.576 | **0.034** | 65 | 0.584 | **0.272** | No ($\Delta +0.312m$) |
+| **M+11** | 62 | 0.518 | **0.036** | 61 | 0.521 | **0.096** | No ($\Delta +0.425m$) |
+| **M+12** | 58 | 0.500 | **0.039** | 58 | 0.500 | **0.039** | No ($\Delta +0.461m$) |
 
-### 5.3 Honest Findings & Scientific Discussion
-1. **Near-Term Horizons ($M+1, M+2$):** XGBoost outperforms the seasonal-naive baseline on matched pairs ($0.656m$ vs $0.803m$ at $M+1$; $0.780m$ vs $0.788m$ at $M+2$).
-2. **Intermediate & Longer Horizons ($M+3$ to $M+12$):** Seasonal-naive and persistence baselines outperform XGBoost. In particular, at $M+12$ (same calendar month 1 year later), annual groundwater levels in the test subset are remarkably stable, giving seasonal-naive an MAE of $0.039m$ vs XGBoost's $0.566m$.
-3. **RMSE vs MAE:** XGBoost achieves lower overall RMSE than seasonal-naive ($1.162m$ vs $1.617m$, $\Delta -0.455m$), indicating fewer large catastrophic forecast errors.
-4. **Transparency & Experimental Status:** Consistent with project guidelines, the model is honestly labeled as an **experimental research output** rather than an operationally validated forecast.
+### 5.4 Honest Findings & Scientific Discussion
+1. **Pooled $R^2$ is Deceptive:** While the reported pooled $R^2$ of 0.963 appears impressive, 99.9997% of the total target sum-of-squares in the holdout test set is driven by cross-sectional differences in mean district depth (e.g. 2.3 m in Tiruppur vs 35 m in Kurukshetra), NOT temporal forecasting skill.
+2. **Change Prediction Skill is Negative:** When evaluated on change prediction ($\Delta \text{GWL} = \text{target} - \text{origin}$), XGBoost achieves $R^2 = -16.853$, showing that predicting depth changes with the climate model is less accurate than assuming no change (persistence).
+3. **Persistence Dominates Overall:** At every single horizon from $M+1$ through $M+12$, Persistence achieves lower MAE than XGBoost (overall 0.043 m vs 0.896 m).
+4. **Seasonal Comparison:** At $M+1$, XGBoost slightly outperforms seasonal-naive (0.743 m vs 0.803 m), but from $M+2$ to $M+12$, seasonal-naive outperforms XGBoost.
+5. **Transparency & UI Presentation:** The model is honestly labeled as an **experimental research model** and is never presented as operational. The UI graph explicitly presents persistence as the primary reference and shows seasonal-naive where available, never fabricating predictions.
 
 ---
 
@@ -215,11 +215,11 @@ Evaluation was executed on 981 observed holdout pairs spanning origins `2021-01-
 ## 8. Verification & Test Outcomes
 
 ### 8.1 Backend Python Tests (`pytest`)
-- `pytest tests/test_climate_forecast_12m.py`: **14 / 14 passed**
-- `pytest tests/test_climate_forecast.py tests/test_climate_inputs.py tests/test_climate_forecast_12m.py`: **109 / 109 passed**
-- `pytest tests/test_api.py tests/test_monthly_prediction_api.py tests/test_research_forecast_api.py tests/test_climate_forecast_12m.py`: **113 / 113 passed**
+- `pytest tests/test_climate_forecast_12m.py`: **19 / 19 passed**
+- Combined backend suites (`test_climate_forecast.py`, `test_climate_inputs.py`, `test_climate_forecast_12m.py`, `test_deployment_readiness.py`, `test_api.py`): **148 / 148 passed**
+- Clean deployment loading test without local checkpoints: **Verified passed**
 
 ### 8.2 Frontend Dashboard Tests (`npm --prefix dashboard test`)
 - All unit, integration, and contract tests: **134 / 134 passed**
-- Oxlint check: **0 warnings, 0 errors** on 41 files
-- Vite production build: **Successfully built in 323ms**
+- Vite production build: **Successfully built in 359ms**
+- Artifact footprint: **Versioned release bundle in `models/artifacts/` is ~318 KB, tracked in Git and included in Docker builds.**

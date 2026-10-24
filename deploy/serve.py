@@ -27,7 +27,7 @@ def validate_release(app, expected_districts=725):
     client = app.test_client()
     health = client.get("/api/health")
     if health.status_code != 200 or health.json.get("status") != "healthy":
-        raise RuntimeError("Database and both matching model bundles must pass /api/health")
+        raise RuntimeError("Database and all three matching model bundles must pass /api/health")
     connection = get_connection()
     try:
         with connection.cursor() as cursor:

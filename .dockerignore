@@ -10,6 +10,8 @@ venv
 dashboard/dist
 data
 models/checkpoints
+# models/artifacts/ contains the versioned twelve-month release. Include it in
+# the image; the legacy checkpoint bind mount must not hide this directory.
 reports
 scratch
 *.dump
