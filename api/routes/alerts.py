@@ -1,5 +1,5 @@
 from flask import Blueprint,request
-from db.connection import get_connection
+from db.scoring_storage import get_scoring_connection as get_connection
 from api.routes.scores import latest_scores,score_records
 from api.contracts import response,failure
 
@@ -25,7 +25,7 @@ def get_alerts():
         for row in records:
             row['crisis_score']=row['score']
             row['risk_tier']=row['tier']
-            row['recommendation']='Review observed history and the historical forecast before planning action.' if row['score'] is not None else 'Groundwater evidence is unavailable.'
+            row['recommendation']='Review observed history and the historical forecast before planning action.' if row['score'] is not None else 'Risk-index evidence is insufficient. Open the district to review its separate twelve-month outlook.'
         return response({'alerts':records,'count':len(records),'total':total,'has_more':total>len(records),'status':status})
     except Exception as error:
         return failure(error)

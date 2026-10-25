@@ -1,0 +1,42 @@
+{
+  "schema": "aquaiq_test_nationwide_20261025",
+  "run": {
+    "run_id": "6c94defe-f5d4-5d2f-b6bb-a0d4e71365aa",
+    "as_of": "2026-10-26",
+    "feature_generation": "physical-v3-causal-monthly-a3f9468a2569",
+    "model_version": "3.0-calendar-observed",
+    "model_sha256": "ef58264b9c1fa43f727fef9d4d180e59f091c9778eb48f128f2ab81d40a97789",
+    "district_count": 725,
+    "scoring_signature": "393e3918e0dd430633504b32fea4cc0ce251e81e05d70607cb787c9d9db16fc0"
+  },
+  "districts_total": 725,
+  "available_scores": 721,
+  "unavailable_scores": 4,
+  "tier_counts": {
+    "Crisis": 6,
+    "Safe": 312,
+    "Unknown": 4,
+    "Warning": 46,
+    "Watch": 357
+  },
+  "historical_six_month_predictions": 721,
+  "all_district_ids_unique_and_complete": true,
+  "score_tier_consistency": true,
+  "alerts_count": 725,
+  "public_output_tables_preserved": true,
+  "public_output_fingerprints": {
+    "scoring_runs": {
+      "rows": 6,
+      "content_md5": "73f4769804e96da804857a01255aa1e0"
+    },
+    "crisis_scores": {
+      "rows": 2175,
+      "content_md5": "7301692da5a9ac571188622f1a5a4dc5"
+    },
+    "predictions": {
+      "rows": 4326,
+      "content_md5": "e1b20157f7a6cbaf55aba0c984b83c9b"
+    }
+  },
+  "unchanged_twelve_month_generation": "0ee860ab-c064-55e1-a462-bc897b9c9b95"
+}

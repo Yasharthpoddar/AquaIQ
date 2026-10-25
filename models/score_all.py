@@ -5,10 +5,13 @@ from pathlib import Path
 from uuid import uuid5, NAMESPACE_URL
 import json
 import sys
+import math
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
-from db.connection import get_connection, read_frame
+from db.connection import read_frame
+from db.scoring_storage import get_scoring_connection as get_connection, initialize_test_schema
 from models.ensemble import compute_crisis_score, _load_bundle, feature_generation, _as_of, scoring_signature
+from models.tiers import score_to_tier
 
 
 def _derive_top_factors(components):
@@ -19,7 +22,7 @@ def _derive_top_factors(components):
     return tuple((factors+[None]*3)[:3])
 
 
-def score_all_districts(forecast_date=None):
+def score_all_districts(forecast_date=None, *, connection=None):
     cutoff = forecast_date or date.today()
     if isinstance(cutoff,str):
         cutoff = date.fromisoformat(cutoff)
@@ -29,7 +32,8 @@ def score_all_districts(forecast_date=None):
     signature = scoring_signature()
     basis = json.dumps([cutoff.isoformat(),generation,card['model_sha256'],signature],sort_keys=True)
     run_id = str(uuid5(NAMESPACE_URL,'aquaiq:scoring:'+basis))
-    connection = get_connection()
+    own = connection is None
+    connection = connection or get_connection()
     try:
         districts = read_frame('SELECT district_id FROM districts ORDER BY district_id',connection).district_id.tolist()
         records = []
@@ -37,7 +41,18 @@ def score_all_districts(forecast_date=None):
         for index,district_id in enumerate(districts):
             records.append(compute_crisis_score(district_id,cutoff,connection,zone_cache))
             if (index+1)%100==0:
-                print(f'Scored {index+1}/{len(districts)} canonical districts.')
+                print(f'Scored {index+1}/{len(districts)} canonical districts.',flush=True)
+        if len(records)!=len(districts) or {r['district_id'] for r in records}!=set(districts):
+            raise ValueError('Incomplete district scoring run.')
+        for record in records:
+            value=record['crisis_score']
+            if value is not None and (isinstance(value,bool) or not math.isfinite(value) or not 0<=value<=100
+                    or value != int(value) or record['tier'] != score_to_tier(value)):
+                raise ValueError('Invalid risk score; publication refused.')
+            if value is None and record['tier'] is not None:
+                raise ValueError('An unavailable score cannot have a risk tier.')
+        if feature_generation()!=generation or scoring_signature()!=signature or _load_bundle()[1]['model_sha256']!=card['model_sha256']:
+            raise RuntimeError('Scoring inputs changed before publication.')
         # A model/DB exception aborts publication; missing evidence is an explicit null result.
         with connection:
             with connection.cursor() as cursor:
@@ -67,14 +82,19 @@ def score_all_districts(forecast_date=None):
         print(f'Published complete run {run_id}: {len(records)} districts, {sum(len(r["forecast"]) for r in records)} forecasts.')
         return len(records)
     finally:
-        connection.close()
+        if own: connection.close()
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser()
     parser.add_argument('--date', type=date.fromisoformat,default=date.today())
+    parser.add_argument('--test-schema',help='Publish only to an isolated aquaiq_test_* output schema; source tables remain unchanged')
     args = parser.parse_args(argv)
-    score_all_districts(args.date)
+    connection=initialize_test_schema(args.test_schema) if args.test_schema else None
+    try:
+        score_all_districts(args.date,connection=connection)
+    finally:
+        if connection is not None: connection.close()
 
 
 if __name__=='__main__':

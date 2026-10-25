@@ -64,7 +64,7 @@ function Alerts() {
   return (
     <div className="page">
       <header className="page-heading"><p className="eyebrow">District monitoring</p><h1>Risk indicators</h1><p className="subtitle">Historical project index · uncalibrated, not an official advisory.</p></header>
-      {!loading && !error && status === 'success' && <p role="status">Showing {alerts.length} of {total} districts in this category, including unavailable evidence.{total > alerts.length && ' The API result limit has been reached.'}</p>}
+      {!loading && !error && status === 'success' && <p role="status">Showing {alerts.length} of {total} districts in this category{activeTab === 'All' ? ', including unavailable indices.' : '.'}{total > alerts.length && ' The API result limit has been reached.'}</p>}
 
       {/* Tier filter tabs */}
       <div className="alert-tabs">
@@ -121,7 +121,7 @@ function Alerts() {
                   {TIER_ICONS[alert.tier] || '•'} {alert.name}, {alert.state}
                 </Link>
                 <span className="alert-badge" style={{ background: TIER_COLORS[alert.tier] || '#64748b' }}>
-                  {Number.isFinite(alert.score) ? `${alert.score} — ${alert.tier || 'Unclassified'}` : 'Evidence unavailable'}
+                  {Number.isFinite(alert.score) ? `${alert.score} — ${alert.tier || 'Unclassified'}` : 'Risk index unavailable'}
                 </span>
               </div>
               {alert.last_observed_date && <p className="alert-recommendation">

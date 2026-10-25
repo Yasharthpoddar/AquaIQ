@@ -3,7 +3,8 @@ from flask import Blueprint
 from pathlib import Path
 import yaml
 import pandas as pd
-from db.connection import get_connection,read_frame,finite_json
+from db.connection import read_frame,finite_json
+from db.scoring_storage import get_scoring_connection as get_connection
 from models.ensemble import _load_ensemble_weights,feature_generation,_load_bundle,scoring_signature
 from api.contracts import response,failure
 

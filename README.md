@@ -12,6 +12,8 @@ The dashboard shows supported forecasts and fallback estimates with distinct met
 
 Home displays published forecast coverage and evidence counts. District search, map links and the Simulate selector use `/api/districts`, so an unavailable risk-scoring run cannot hide registered districts or their twelve-month forecasts.
 
+The local Alerts/risk-index demonstration also has a complete 2026-10-26 scoring snapshot: 721 available indices and four explicit unavailable results across all 725 districts. Set `AQUAIQ_SCORING_SCHEMA=aquaiq_test_nationwide_20261025` alongside the forecast namespace to serve it. See the [risk snapshot and map verification](reports/nationwide_20261025/SCORING_AND_ALERTS_FIX.md). These remain historical, uncalibrated project indices.
+
 ## Preserved historical twelve-month research evidence
 
 This section concerns the earlier direct M+12 Adilabad/Telangana study, not the current climate-conditioned monthly or state XGBoost product. Its benchmark values are preserved unchanged.

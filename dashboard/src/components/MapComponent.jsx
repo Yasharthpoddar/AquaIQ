@@ -34,12 +34,13 @@ function MapComponent({ scores = [], geojsonUrl, onDistrictClick, catalogLoading
   const mapRef = useRef(null);
   const mapInstance = useRef(null);
   const geojsonLayer = useRef(null);
+  const hasFittedBounds = useRef(false);
   const [tierConfig, setTierConfig] = useState(null);
   const [mapError, setMapError] = useState(null);
   const [coverage, setCoverage] = useState(null);
   const [retry, setRetry] = useState(0);
 
-  // Fetch official tier configuration from backend
+  // Fetch the project-defined risk palette from the backend.
   useEffect(() => {
     let cancelled = false;
     fetchConfig()
@@ -82,11 +83,19 @@ function MapComponent({ scores = [], geojsonUrl, onDistrictClick, catalogLoading
     }).addTo(map);
 
     mapInstance.current = map;
+    const resizeObserver = typeof ResizeObserver === 'undefined' ? null
+      : new ResizeObserver(() => {
+        map.invalidateSize({ pan: false });
+        if (geojsonLayer.current) map.fitBounds(geojsonLayer.current.getBounds(), { padding: [12, 12], animate: false });
+      });
+    resizeObserver?.observe(mapRef.current);
 
     return () => {
+      resizeObserver?.disconnect();
       map.remove();
       mapInstance.current = null;
       geojsonLayer.current = null;
+      hasFittedBounds.current = false;
     };
   }, []);
 
@@ -166,6 +175,11 @@ function MapComponent({ scores = [], geojsonUrl, onDistrictClick, catalogLoading
         }).addTo(map);
 
         geojsonLayer.current = layer;
+        if (!hasFittedBounds.current) {
+          map.invalidateSize({ pan: false });
+          map.fitBounds(layer.getBounds(), { padding: [12, 12], animate: false });
+          hasFittedBounds.current = true;
+        }
       })
       .catch(err => { if (!cancelled) setMapError(`District boundaries are unavailable. ${err.message}`); });
     return () => { cancelled = true; controller.abort(); };
@@ -185,6 +199,9 @@ function MapComponent({ scores = [], geojsonUrl, onDistrictClick, catalogLoading
       {coverage && !catalogLoading && !catalogError && <div className="map-coverage" role="status">
         <p>District boundaries match {coverage.mapped} of {scores.length} registered districts.</p>
         <p>Colours show the separate risk index. Grey means no published risk score; registered districts remain searchable.</p>
+        <button type="button" className="alert-tab" onClick={() => {
+          if (geojsonLayer.current) mapInstance.current?.fitBounds(geojsonLayer.current.getBounds(), { padding: [12, 12] });
+        }}>Show all India</button>
         {coverage.missing.length > 0 && <p>Available without a separate matching boundary: {coverage.missing.map((district, index) => <span key={district.district_id}>
           {index > 0 && ' · '}<button type="button" className="alert-tab" onClick={() => onDistrictClick?.(district.district_id)}>{district.name}, {district.state}</button>
         </span>)}. Open a district to review its evidence.</p>}

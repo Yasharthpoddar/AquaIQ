@@ -48,6 +48,17 @@ API examples: `/api/states`, `/api/states/summary?horizon=12&as_of=2026-10-25`, 
 
 `GET /api/districts` returns every canonical district ID, name and state independently of the database, model artifacts and scoring runs. Home and Simulate use this registry for navigation; optional risk records enrich it without removing districts. Home's primary cards show published forecast evidence counts. The separate six-month risk index may be unavailable or awaiting a matching scoring run without blocking district search, map navigation or twelve-month forecasts. Map colours retain their explicit risk-index meaning; grey does not imply a missing district forecast.
 
+To populate the separate risk index and Alerts locally, reuse the existing scoring pipeline with output-only migration 005. This computes historical six-month index components, not new twelve-month forecasts or calibrated crisis probabilities:
+
+```powershell
+.\venv\Scripts\python.exe -m models.score_all --date 2026-10-26 --test-schema aquaiq_test_nationwide_20261025
+$env:AQUAIQ_FORECAST_SCHEMA='aquaiq_test_nationwide_20261025'
+$env:AQUAIQ_SCORING_SCHEMA='aquaiq_test_nationwide_20261025'
+.\venv\Scripts\python.exe -m api.app
+```
+
+The scoring namespace contains only `scoring_runs`, `crisis_scores` and legacy `predictions` output tables with their own sequences; source district/feature reads resolve to the existing public data. An uninitialized configured scoring namespace returns a service error instead of falling back to public score storage. Complete output is published in one transaction; computation or write failures preserve the previous complete run. `/scores` and `/alerts` select the configured namespace and a matching model/data/scoring signature. Neither route starts a scoring job. Missing risk evidence remains null. The Home map fits all supplied district bounds, updates on container resize and provides a **Show all India** reset control.
+
 ## Validation design and limitations
 
 The [saved validation](../reports/nationwide_20261025/validation.json) contains tier, district, horizon and experiment metrics on identical target observations. Fallback calibration origins are January/July 2017–2018. Evaluation starts July 2019, then rolls across January/July 2020–2023 plus January 2025. XGBoost calibration uses January/July 2021 after its frozen 2019 training-label cutoff and twelve-month embargo; its evaluation starts July 2022, after all calibration targets. Earlier evaluation origins are purged. Empty origins remain recorded. January 2025 tests include the January 2026 refresh at M+12. Tests condition on calendar observation months; provider publication timestamps remain unknown.
