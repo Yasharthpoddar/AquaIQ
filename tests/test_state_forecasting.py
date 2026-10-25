@@ -42,7 +42,7 @@ from api.app import create_app
 ROOT = Path(__file__).resolve().parents[1]
 
 
-# ── 1. Authoritative State Registry & Aliases ──────────────────────────────
+# â”€â”€ 1. Authoritative State Registry & Aliases â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def test_state_registry_contains_all_36_states_and_uts():
     states = list_states()
@@ -98,7 +98,7 @@ def test_resolve_state_id_handles_codes_names_aliases_and_district_ids():
         resolve_state_id(None)
 
 
-# ── 2. Canonical Crosswalk 100% State Coverage ─────────────────────────────
+# â”€â”€ 2. Canonical Crosswalk 100% State Coverage â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def test_all_725_canonical_districts_map_to_registered_states():
     cw_path = ROOT / "data_ingestion/district_crosswalk.csv"
@@ -116,243 +116,338 @@ def test_all_725_canonical_districts_map_to_registered_states():
         assert resolve_state_id(dist_id) == state_code
 
 
-# ── 3. State Observation Aggregation & Missing Data Safety ─────────────────
-
-def test_state_aggregation_excludes_imputed_and_missing_values():
-    # Test on Tamil Nadu (dense observations)
-    hist = aggregate_state_observations("TN")
-    assert not hist.empty
-    assert "date" in hist.columns
-    assert "gwl_m_bgl" in hist.columns
-    assert "contributing_districts_count" in hist.columns
-    assert "total_districts_in_state" in hist.columns
-    assert "district_coverage_pct" in hist.columns
-
-    # Verify no NaN or negative depths
-    assert hist["gwl_m_bgl"].notna().all()
-    assert (hist["gwl_m_bgl"] >= 0.0).all()
-    assert (hist["contributing_districts_count"] >= 1).all()
-    assert (hist["total_districts_in_state"] == 37).all()
-    assert (hist["district_coverage_pct"] > 0).all()
-
-
-def test_missing_districts_are_never_treated_as_zero():
-    # If a district did not report in month M, its value is not assumed to be 0 m bgl.
-    # The average is strictly over reporting districts.
-    hist = aggregate_state_observations("UP")
-    for row in hist.itertuples():
-        # Depth in UP averages 5-15m; if missing districts were treated as 0,
-        # months with few districts would collapse to near 0.
-        assert row.gwl_m_bgl > 1.0, f"Suspicious zero-collapsed average {row.gwl_m_bgl} on {row.date}"
-
-
-# ── 4. Zero-Observation and Insufficient-Coverage States ────────────────────
-
-@pytest.mark.parametrize("state_id", ["LA", "LD", "SK"])
-def test_zero_observation_states_return_insufficient_data(state_id):
-    fc = forecast_state_twelve_months(state_id)
-    assert fc["status"] == "insufficient_data"
-    assert fc["forecast"] == []
-    assert len(fc["forecast"]) == 0
-    assert "insufficient" in fc["message"].lower() or "unavailable" in fc["message"].lower()
-    assert fc["contributing_districts_count"] == 0
-
-
-def test_sparse_observation_state_mizoram():
-    # Mizoram has only 1 historical observation date
-    fc = forecast_state_twelve_months("MZ")
-    assert fc["status"] == "insufficient_data"
-    assert fc["forecast"] == []
-    assert "minimum 3 required" in fc["message"]
-
-
-# ── 5. Exact 12-Month Chronological Response Contract ──────────────────────
-
-def test_forecast_response_contract_for_reporting_state():
-    fc = forecast_state_twelve_months("RJ")
-    assert fc["status"] == "forecast"
-    assert fc["product"] == PRODUCT_NAME
-    assert fc["model_version"] == MODEL_VERSION
-    assert fc["state_id"] == "RJ"
-    assert fc["state_name"] == "Rajasthan"
-    assert fc["units"] == "m_bgl"
-    assert fc["horizon_months"] == 12
-    assert "forecast_origin" in fc
-    assert "as_of" in fc
-    assert "last_observed_date" in fc
-    assert "last_observed_gwl_m_bgl" in fc
-
-    forecast = fc["forecast"]
-    assert len(forecast) == 12
-
-    origin_dt = pd.Timestamp(fc["forecast_origin"])
-
-    for idx, pt in enumerate(forecast, start=1):
-        assert pt["horizon"] == idx
-        expected_target = (origin_dt + pd.DateOffset(months=idx)).strftime("%Y-%m-%d")
-        assert pt["target_date"] == expected_target
-        assert isinstance(pt["predicted_gwl"], (int, float))
-        assert math.isfinite(pt["predicted_gwl"])
-        assert pt["predicted_gwl"] >= 0.0
-        assert isinstance(pt["delta_from_current_m"], (int, float))
-        assert math.isfinite(pt["delta_from_current_m"])
-
-        # Baselines
-        baselines = pt["baselines"]
-        assert "persistence" in baselines
-        assert "seasonal_naive" in baselines
-        assert math.isfinite(baselines["persistence"])
-        assert math.isfinite(baselines["seasonal_naive"])
-
-
-# ── 6. Leakage-Free Chronological Evaluation Protocol ──────────────────────
-
-def test_as_of_cutoff_strictly_excludes_future_data():
-    cutoff = "2019-12-31"
-    hist_pre_2020 = aggregate_state_observations("TN", as_of=cutoff)
-    assert not hist_pre_2020.empty
-    assert (hist_pre_2020["date"] <= pd.Timestamp(cutoff)).all()
-
-    # Forecast with historical cutoff
-    fc_pre = forecast_state_twelve_months("TN", as_of=cutoff)
-    assert fc_pre["status"] == "forecast"
-    assert fc_pre["as_of"] == "2019-12-31"
-    # Target horizons must be in 2020
-    assert fc_pre["forecast"][0]["target_date"] == "2020-01-01"
-    assert fc_pre["forecast"][11]["target_date"] == "2020-12-01"
-
-
-def test_evaluation_metrics_disclose_positive_skill_over_baselines():
-    metrics = EVALUATION_METRICS["models"]
-    proj_mae = metrics["direct_state_projection"]["mae_m"]
-    persist_mae = metrics["persistence_baseline"]["mae_m"]
-    seasonal_mae = metrics["seasonal_naive_baseline"]["mae_m"]
-    district_agg_mae = metrics["district_aggregation_approach_b"]["mae_m"]
-
-    assert proj_mae < persist_mae, "Direct state projection must outperform persistence baseline"
-    assert proj_mae < seasonal_mae, "Direct state projection must outperform seasonal naive baseline"
-    assert proj_mae < district_agg_mae, "Direct state projection must outperform district aggregation"
-    assert metrics["direct_state_projection"]["skill_vs_persistence_r2_delta"] > 0.0
-
-
-# ── 7. Verified State GeoJSON Feature ID Mapping ───────────────────────────
-
-def test_india_states_geojson_has_36_features_and_matches_registry():
-    geojson_path = ROOT / "dashboard/public/india_states.geojson"
-    assert geojson_path.exists(), "dashboard/public/india_states.geojson must exist"
-
-    with open(geojson_path, "r", encoding="utf-8") as f:
-        gj = json.load(f)
-
-    assert gj["type"] == "FeatureCollection"
-    assert len(gj["features"]) == 36
-
-    found_states = set()
-    for feat in gj["features"]:
-        props = feat["properties"]
-        sid = props.get("state_id")
-        assert sid in STATES_REGISTRY, f"Unexpected state_id {sid} in GeoJSON"
-        found_states.add(sid)
-        assert props.get("state_name") == STATES_REGISTRY[sid]["name"]
-        assert props.get("st_code") == STATES_REGISTRY[sid]["st_code"]
-        assert feat.get("geometry") is not None
-
-    assert found_states == set(STATES_REGISTRY.keys())
-
-
-# ── 8. State API Route Validation & Error Handling ─────────────────────────
 
 @pytest.fixture
-def client():
+def state_inputs(monkeypatch):
+    from models import state_forecast as sf
+    ids = ['TN-A', 'TN-B', 'TN-C', 'TN-D']
+    frame = pd.DataFrame([dict(district_id=d, date=pd.Timestamp(m), gwl_current=v,
+        is_observed=True, is_imputed=False) for d,v in zip(ids,[2.,6.,10.,14.])
+        for m in ['2021-01-01','2021-02-01','2021-03-01']])
+    frame.attrs.update(feature_generation_id='test-generation', data_sha256='fixture-only')
+    sf.clear_caches()
+    monkeypatch.setattr(sf, 'get_feature_matrix', lambda: frame)
+    monkeypatch.setattr(sf, 'get_state_districts', lambda code: ids)
+    monkeypatch.setattr(sf, '_readiness', lambda district, cutoff: {'eligible': True})
+    monkeypatch.setattr(sf.climate, 'load_bundle', lambda **kwargs: (None, {
+        'model_sha256': 'a'*64, 'train_target_cutoff': '2019-12-31', 'feature_generation_id': 'test-generation'}))
+    seen = []
+    def predict(evidence, **kwargs):
+        seen.append(evidence)
+        assert evidence['zone'] is None and evidence['estimate_type'] == 'district_level'
+        assert evidence['frame'].date.max() <= pd.Timestamp('2021-02-01')
+        anchor = float(evidence['history'].gwl_current.iloc[-1])
+        return dict(district_id=evidence['district_id'], product=sf.climate.PRODUCT_NAME,
+            status='forecast', as_of='2021-02-28', feature_generation='test-generation', model_version=sf.climate.MODEL_VERSION,
+            model_sha256='a'*64, units='m_bgl', estimate_type='district_level',
+            horizon_months=12, estimated_current_gwl=anchor, forecast=[
+                dict(horizon=h, date=(pd.Timestamp('2021-02-01')+pd.DateOffset(months=h)).date().isoformat(),
+                     month=(pd.Timestamp('2021-02-01')+pd.DateOffset(months=h)).strftime('%Y-%m'),
+                     predicted_gwl=anchor+h) for h in range(1,13)])
+    monkeypatch.setattr(sf.climate, 'forecast_from_evidence', predict)
+    return sf, frame, seen
+
+
+def test_equal_fixed_panel_uses_real_xgboost_outputs_and_no_future_rows(state_inputs):
+    sf, frame, seen = state_inputs
+    result = sf.forecast_state_twelve_months('TN', '2021-02-28')
+    assert result['status'] == 'forecast'
+    assert result['estimated_current_gwl_m_bgl'] == 8
+    assert [r['predicted_gwl'] for r in result['forecast']] == list(range(9,21))
+    assert result['contributing_districts_count'] == 4
+    assert result['forecast'][0]['target_date'] == '2021-03-01'
+    assert result['forecast'][-1]['target_date'] == '2022-02-01'
+    assert len(seen) == 4
+    # Cached results are immutable to callers and keyed by state/date/data/model.
+    result['forecast'][0]['predicted_gwl'] = -10
+    assert sf.forecast_state_twelve_months('TN', '2021-02-28')['forecast'][0]['predicted_gwl'] == 9
+
+
+def test_observations_exclude_imputed_missing_and_future_without_zero_fill(state_inputs):
+    sf, frame, _ = state_inputs
+    frame.loc[frame.district_id.eq('TN-A'), 'is_imputed'] = True
+    frame.loc[frame.district_id.eq('TN-B'), 'is_observed'] = False
+    frame.loc[frame.district_id.eq('TN-C'), 'gwl_current'] = np.nan
+    hist = sf.aggregate_state_observations('TN', '2021-02-27')
+    assert hist.date.tolist() == [pd.Timestamp('2021-01-01')]
+    assert hist.gwl_m_bgl.tolist() == [14.]
+    assert hist.contributing_districts_count.tolist() == [1]
+    assert hist.district_coverage_pct.tolist() == [25.]
+
+
+def test_insufficient_panel_never_zero_fills_or_substitutes_a_zone(state_inputs, monkeypatch):
+    sf, _, seen = state_inputs
+    monkeypatch.setattr(sf, '_readiness', lambda district, cutoff: {'eligible': district.district_id.iloc[0] == 'TN-A'})
+    result = sf.forecast_state_twelve_months('TN', '2021-02-28')
+    assert result['status'] == 'insufficient_data'
+    assert result['forecast'] == []
+    assert result['district_coverage_pct'] == 25.
+    assert len(seen) == 1
+
+
+def test_single_district_state_can_pass_but_multi_district_needs_two(state_inputs, monkeypatch):
+    sf, _, _ = state_inputs
+    monkeypatch.setattr(sf, 'get_state_districts', lambda _: ['TN-A'])
+    assert sf.forecast_state_twelve_months('TN', '2021-02-28')['status'] == 'forecast'
+
+
+def test_corrupt_model_fails_closed(state_inputs, monkeypatch):
+    sf, _, seen = state_inputs
+    def unavailable(**kwargs):
+        raise ValueError('invalid hash')
+    monkeypatch.setattr(sf.climate, 'load_bundle', unavailable)
+    result = sf.forecast_state_twelve_months('TN', '2021-02-28')
+    assert result['status'] == 'model_unavailable'
+    assert result['forecast'] == [] and not seen
+
+
+@pytest.mark.parametrize('field,bad', [('district_id','TN-Wrong'), ('units','feet'),
+    ('model_version','trend'), ('model_sha256','wrong'), ('estimate_type','zone_fallback'),
+    ('as_of','2021-02-01'), ('feature_generation','wrong-generation')])
+def test_wrong_district_model_units_or_zone_rejected(state_inputs, monkeypatch, field, bad):
+    sf, _, _ = state_inputs
+    predict = sf.climate.forecast_from_evidence
+    def corrupt(evidence, **kwargs):
+        result = predict(evidence)
+        result[field] = bad
+        return result
+    monkeypatch.setattr(sf.climate, 'forecast_from_evidence', corrupt)
+    with pytest.raises(RuntimeError, match='Invalid district'):
+        sf.forecast_state_twelve_months('TN', '2021-02-28')
+
+
+def test_incomplete_or_wrong_calendar_xgboost_path_rejected(state_inputs, monkeypatch):
+    sf, _, _ = state_inputs
+    predict = sf.climate.forecast_from_evidence
+    def corrupt(evidence, **kwargs):
+        result = predict(evidence)
+        result['forecast'][2]['date'] = '2021-03-01'
+        return result
+    monkeypatch.setattr(sf.climate, 'forecast_from_evidence', corrupt)
+    with pytest.raises(RuntimeError, match='calendar'):
+        sf.forecast_state_twelve_months('TN', '2021-02-28')
+
+
+def test_duplicate_month_abstains_instead_of_double_weighting(state_inputs):
+    sf, frame, _ = state_inputs
+    frame.loc[len(frame)] = frame.iloc[0]
+    result = sf.forecast_state_twelve_months('TN', '2021-02-28')
+    assert result['status'] == 'model_unavailable' and result['forecast'] == []
+
+
+def test_unsupported_weighting_and_horizons_fail(state_inputs):
+    sf, _, _ = state_inputs
+    with pytest.raises(ValueError):
+        sf.forecast_state_twelve_months('TN', '2021-02-28', weighting='population')
+    with pytest.raises(ValueError):
+        sf.get_all_states_summary(horizon=6)
+
+
+def test_cache_invalidates_when_district_registry_or_card_changes(state_inputs, monkeypatch):
+    sf, _, seen = state_inputs
+    first = sf.forecast_state_twelve_months('TN', '2021-02-28')
+    monkeypatch.setattr(sf, 'get_state_districts', lambda _: ['TN-A','TN-B'])
+    second = sf.forecast_state_twelve_months('TN', '2021-02-28')
+    assert first['estimated_current_gwl_m_bgl'] == 8 and second['estimated_current_gwl_m_bgl'] == 4
+    monkeypatch.setattr(sf.climate, 'load_bundle', lambda **kwargs: (None, {
+        'model_sha256':'a'*64, 'train_target_cutoff':'2019-11-30', 'feature_generation_id':'test-generation'}))
+    third = sf.forecast_state_twelve_months('TN', '2021-02-28')
+    assert third['model_train_target_cutoff'] == '2019-11-30'
+    assert len(seen) == 8
+
+
+def test_geojson_matches_registry_and_all_district_prefixes():
+    value = json.loads((ROOT/'dashboard/public/india_states.geojson').read_text())
+    assert len(value['features']) == 36
+    assert {f['properties']['state_id'] for f in value['features']} == set(STATES_REGISTRY)
+    for row in value['features']:
+        assert row['properties']['state_name'] == STATES_REGISTRY[row['properties']['state_id']]['name']
+
+
+def test_historical_baseline_evidence_preserved_without_superiority_requirement():
+    legacy = json.loads((ROOT/'reports/state_forecast_evaluation.json').read_text())
+    assert legacy  # Legacy harmonic evidence remains separate from the new XGBoost product.
+    assert EVALUATION_METRICS['prospective_skill_verified'] is False
+    from scripts.evaluate_state_xgboost import comparisons, exact_panel_mean
+    cases = pd.DataFrame({'actual':[2.,4.], 'xgboost':[3.,5.],
+                          'persistence':[2.,4.], 'seasonal_naive':[np.nan,5.]})
+    result = comparisons(cases)
+    assert result['xgb_and_observed_persistence']['persistence']['mae_m'] == 0
+    assert result['all_three_matched']['xgboost']['n'] == 1
+    assert result['all_three_matched']['xgboost']['r2'] is None
+    labels = pd.Series([3.], index=pd.MultiIndex.from_tuples([('TN-A',pd.Timestamp('2021-01-01'))]))
+    assert exact_panel_mean(labels,['TN-A','TN-B'],'2021-01-01') is None
+
+
+@pytest.fixture
+def client(monkeypatch):
+    monkeypatch.setenv("AQUAIQ_ENABLE_SYNC_FORECAST_FALLBACK", "true")
     app = create_app()
-    app.config["TESTING"] = True
-    with app.test_client() as test_client:
-        yield test_client
+    app.config['TESTING'] = True
+    return app.test_client()
 
 
-def test_api_states_list(client):
-    res = client.get("/api/states")
-    assert res.status_code == 200
-    data = res.get_json()
-    assert data["total"] == 36
-    assert len(data["states"]) == 36
-    sample = data["states"][0]
-    assert "state_id" in sample
-    assert "state_name" in sample
-    assert "total_districts" in sample
-    assert "districts" in sample
+def test_api_horizon_dates_identity_and_structured_model_failure(client, monkeypatch):
+    import api.routes.state as routes
+    assert client.get('/api/states').get_json()['total'] == 36
+    for query in ['horizon=6','horizon=bad','as_of=bad','as_of=2099-01-01']:
+        assert client.get('/api/predict/state/TN?'+query).status_code == 400
+    assert client.get('/api/predict/state/Atlantis').status_code == 404
+    monkeypatch.setattr(routes, 'forecast_state_twelve_months',
+        lambda code, as_of: dict(status='model_unavailable', state_id=code, forecast=[]))
+    response = client.get('/api/predict/state/TN')
+    assert response.status_code == 503 and response.get_json()['forecast'] == []
+    assert client.get('/api/states/summary?horizon=6').status_code == 400
 
 
-def test_api_states_summary_and_validation(client):
-    # Valid call
-    res = client.get("/api/states/summary?horizon=12")
-    assert res.status_code == 200
-    data = res.get_json()
-    assert data["total_states"] == 36
-    assert data["available_states_count"] >= 25
-    assert len(data["states"]) == 36
-
-    # Invalid horizon
-    res_bad = client.get("/api/states/summary?horizon=6")
-    assert res_bad.status_code == 400
-    assert res_bad.get_json()["status"] == "invalid_request"
-
-    res_non_int = client.get("/api/states/summary?horizon=invalid")
-    assert res_non_int.status_code == 400
+def test_cache_eviction_and_uncached_state_calculation_are_equivalent(state_inputs):
+    from scripts.benchmark_state_forecasts import canonical
+    sf, _, seen = state_inputs
+    first = sf.forecast_state_twelve_months('TN', '2021-02-28')
+    sf._FORECAST_CACHE.clear()
+    # Reaggregation reuses district forecasts after a state entry is evicted.
+    assert canonical(sf.forecast_state_twelve_months('TN', '2021-02-28')) == canonical(first)
+    assert len(seen) == 4
+    sf.clear_caches()
+    assert canonical(sf.forecast_state_twelve_months('TN', '2021-02-28')) == canonical(first)
+    assert len(seen) == 8
 
 
-def test_api_predict_state_validation(client):
-    # Valid state
-    res = client.get("/api/predict/state/UP?horizon=12")
-    assert res.status_code == 200
-    data = res.get_json()
-    assert data["state_id"] == "UP"
-    assert len(data["forecast"]) == 12
-
-    # Case insensitivity & full name support
-    res_name = client.get("/api/predict/state/karnataka?horizon=12")
-    assert res_name.status_code == 200
-    assert res_name.get_json()["state_id"] == "KA"
-
-    # Sparse state returns 200 with structured insufficient_data status
-    res_sparse = client.get("/api/predict/state/LA?horizon=12")
-    assert res_sparse.status_code == 200
-    assert res_sparse.get_json()["status"] == "insufficient_data"
-
-    # Unknown state returns 404
-    res_unknown = client.get("/api/predict/state/INVALID_STATE?horizon=12")
-    assert res_unknown.status_code == 404
-
-    # Invalid horizon returns 400
-    res_bad_h = client.get("/api/predict/state/UP?horizon=24")
-    assert res_bad_h.status_code == 400
+def test_insufficient_coverage_is_cached_without_fabricated_forecasts(state_inputs, monkeypatch):
+    sf, _, seen = state_inputs
+    monkeypatch.setattr(sf, '_readiness', lambda district, cutoff: {'eligible': district.district_id.iloc[0] == 'TN-A'})
+    first = sf.forecast_state_twelve_months('TN', '2021-02-28')
+    first['excluded_districts'].clear()
+    again = sf.forecast_state_twelve_months('TN', '2021-02-28')
+    assert again['status'] == 'insufficient_data' and again['forecast'] == []
+    assert len(again['excluded_districts']) == 3 and len(seen) == 1
 
 
-# ── 9. Non-Regression: Existing District APIs & Models Intact ──────────────
+def test_model_failures_are_not_cached_and_warm_hits_verify_bundle(state_inputs, monkeypatch):
+    sf, _, seen = state_inputs
+    loader = sf.climate.load_bundle
+    sf.forecast_state_twelve_months('TN', '2021-02-28')
+    def unavailable(**kwargs):
+        raise RuntimeError('bundle missing')
+    monkeypatch.setattr(sf.climate, 'load_bundle', unavailable)
+    failed = sf.forecast_state_twelve_months('TN', '2021-02-28')
+    assert failed['status'] == 'model_unavailable' and failed['forecast'] == []
+    monkeypatch.setattr(sf.climate, 'load_bundle', loader)
+    assert sf.forecast_state_twelve_months('TN', '2021-02-28')['status'] == 'forecast'
+    assert len(seen) == 4
 
-def test_existing_district_endpoints_are_fully_preserved(client):
-    # District crisis score
-    res_dist = client.get("/api/district/TN-Cuddalore")
-    assert res_dist.status_code == 200
-    dist_data = res_dist.get_json()
-    assert "crisis_score" in dist_data
 
-    # Six-month prediction
-    res_6m = client.get("/api/predict/TN-Cuddalore")
-    assert res_6m.status_code == 200
+@pytest.mark.parametrize('field', ['data_sha256', 'feature_generation_id'])
+def test_feature_identity_changes_invalidate_predictions(state_inputs, monkeypatch, field):
+    sf, frame, seen = state_inputs
+    sf.forecast_state_twelve_months('TN', '2021-02-28')
+    predict = sf.climate.forecast_from_evidence
+    def updated(evidence, **kwargs):
+        value = predict(evidence, **kwargs)
+        value['feature_generation'] = evidence['generation']
+        return value
+    monkeypatch.setattr(sf.climate, 'forecast_from_evidence', updated)
+    frame.attrs[field] = 'new-source-identity'
+    sf.forecast_state_twelve_months('TN', '2021-02-28')
+    assert len(seen) == 8
 
-    # Next six months window
-    res_next6m = client.get("/api/predict/TN-Cuddalore?window=next_six_months")
-    assert res_next6m.status_code == 200
 
-    # Experimental 12-month climate prediction
-    res_12m = client.get("/api/predict/climate-12m/TN-Cuddalore")
-    assert res_12m.status_code == 200
-    data_12m = res_12m.get_json()
-    assert data_12m["product"] == "climate_informed_12m_forecast"
-    assert len(data_12m["forecast"]) == 12
+def test_model_artifact_identity_invalidates_district_and_state_cache(state_inputs, monkeypatch):
+    sf, _, seen = state_inputs
+    sf.forecast_state_twelve_months('TN', '2021-02-28')
+    model, card = sf.climate.load_bundle()
+    monkeypatch.setattr(sf.climate, 'load_bundle', lambda **kwargs: (model, {**card, 'model_sha256': 'b'*64}))
+    predict = sf.climate.forecast_from_evidence
+    def updated(evidence, **kwargs):
+        value = predict(evidence, **kwargs)
+        value['model_sha256'] = 'b'*64
+        return value
+    monkeypatch.setattr(sf.climate, 'forecast_from_evidence', updated)
+    assert sf.forecast_state_twelve_months('TN', '2021-02-28')['model_sha256'] == 'b'*64
+    assert len(seen) == 8
 
-    # Batch scores
-    res_scores = client.get("/api/scores")
-    assert res_scores.status_code == 200
-    assert "districts" in res_scores.get_json()
+
+def test_as_of_is_part_of_cache_identity_even_with_same_origin_month(state_inputs, monkeypatch):
+    sf, _, seen = state_inputs
+    sf.forecast_state_twelve_months('TN', '2021-02-28')
+    predict = sf.climate.forecast_from_evidence
+    def updated(evidence, **kwargs):
+        value = predict(evidence, **kwargs)
+        value['as_of'] = evidence['as_of'].date().isoformat()
+        return value
+    monkeypatch.setattr(sf.climate, 'forecast_from_evidence', updated)
+    earlier = sf.forecast_state_twelve_months('TN', '2021-02-27')
+    assert earlier['as_of'] == '2021-02-27' and len(seen) == 8
+    assert seen[-1]['frame'].date.max() == pd.Timestamp('2021-01-01')
+
+
+def test_different_states_are_isolated(state_inputs, monkeypatch):
+    sf, frame, seen = state_inputs
+    other = frame.copy()
+    other['district_id'] = other.district_id.str.replace('TN-', 'HR-')
+    other['gwl_current'] += 30
+    combined = pd.concat([frame, other], ignore_index=True)
+    combined.attrs.update(frame.attrs)
+    monkeypatch.setattr(sf, 'get_feature_matrix', lambda: combined)
+    monkeypatch.setattr(sf, 'get_state_districts', lambda code: [code+'-'+d for d in 'ABCD'])
+    tn = sf.forecast_state_twelve_months('TN', '2021-02-28')
+    hr = sf.forecast_state_twelve_months('HR', '2021-02-28')
+    assert tn['forecast'][0]['predicted_gwl'] == 9
+    assert hr['forecast'][0]['predicted_gwl'] == 39
+    assert all(d.startswith('HR-') for d in hr['contributing_district_ids'])
+    assert sf.forecast_state_twelve_months('TN', '2021-02-28')['forecast'] == tn['forecast']
+    assert len(seen) == 8
+
+
+def test_summary_failure_is_503_instead_of_empty_success(state_inputs, client, monkeypatch):
+    sf, _, _ = state_inputs
+    monkeypatch.setattr(sf, 'forecast_state_twelve_months', lambda *a, **kw: {'status':'model_unavailable'})
+    response = client.get('/api/states/summary?as_of=2021-02-28')
+    assert response.status_code == 503
+    assert response.get_json()['status'] == 'unavailable'
+
+
+def test_registry_endpoint_provides_shared_server_as_of(client):
+    value = client.get('/api/states?as_of=2021-02-28').get_json()
+    assert value['as_of'] == '2021-02-28' and value['horizon_months'] == 12
+
+
+def test_feature_file_revision_reloads_verification_and_failure_cannot_serve_cache(state_inputs, monkeypatch):
+    sf, fixture, seen = state_inputs
+    # Exercise the production snapshot loader with isolated signatures, never write real data.
+    from importlib.util import spec_from_file_location, module_from_spec
+    spec = spec_from_file_location('state_snapshot_under_test', ROOT/'models/state_forecast.py')
+    real = module_from_spec(spec)
+    spec.loader.exec_module(real)
+    version = [1]
+    loaded = []
+    def loader():
+        loaded.append(version[0])
+        if version[0] == 3:
+            raise ValueError('manifest no longer verifies')
+        return fixture.copy()
+    monkeypatch.setattr(real, '_file_signature', lambda paths: tuple([version[0]]))
+    monkeypatch.setattr(real, 'load_feature_matrix', loader)
+    first = real.get_feature_matrix()
+    assert real.get_feature_matrix() is first and loaded == [1]
+    version[0] = 2
+    assert real.get_feature_matrix() is not first and loaded == [1, 2]
+    version[0] = 3
+    with pytest.raises(ValueError, match='manifest'):
+        real.get_feature_matrix()
+    with pytest.raises(ValueError, match='manifest'):
+        real.get_feature_matrix()
+
+
+def test_registry_change_during_request_is_rejected(state_inputs, monkeypatch):
+    sf, _, seen = state_inputs
+    calls = []
+    monkeypatch.setattr(sf, '_REGISTRY_SNAPSHOT', None)
+    def changing_registry(code):
+        calls.append(code)
+        if len(calls) == 3:
+            sf._REGISTRY_SNAPSHOT = ('new', 'new-hash', ())
+        return ['TN-A', 'TN-B']
+    monkeypatch.setattr(sf, 'get_state_districts', changing_registry)
+    value = sf.forecast_state_twelve_months('TN', '2021-02-28')
+    assert value['status'] == 'model_unavailable' and not seen

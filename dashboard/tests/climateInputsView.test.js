@@ -33,7 +33,7 @@ test('weather table presents only the six exact input months, units and assumpti
   assert.match(table,/<td>0\.00<\/td>/);
   assert.match(table,/<td>-5\.00<\/td>/);
   assert.match(html,/not weather predictions/);
-  assert.match(html,/12-month seasonal\/trend graph above does not use weather inputs/);
+  assert.match(html,/12-month XGBoost outlook has its own monthly weather inputs/);
   assert.match(html,/separate evaporation forecast is not provided/);
   assert.deepEqual(data,before);
 });

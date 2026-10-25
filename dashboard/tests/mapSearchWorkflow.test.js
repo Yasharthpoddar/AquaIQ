@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { afterEach, beforeEach, test } from 'node:test';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { fetchExperimentalScenario, fetchScores } from '../src/api.js';
+import { fetchClimate12mForecast, fetchScores } from '../src/api.js';
 import { districtForecastPath } from '../src/components/districtNavigation.js';
 import { districtSearchKeyAction, searchDistricts } from '../src/components/districtSearch.js';
 import { loadJsx } from './helpers/loadJsx.js';
@@ -55,7 +55,7 @@ test('the production map search retains its exact field and canonical catalog wi
   assert.match(html, /Search district/);
 });
 
-test('clicking the actual map suggestion opens its canonical district graph and scenario API', async () => {
+test('clicking the actual map suggestion opens its canonical district graph and XGBoost API', async () => {
   const requests = recordScenarioRequests();
   let route;
   const control = MapDistrictSearch({ scores: districts,
@@ -66,9 +66,9 @@ test('clicking the actual map suggestion opens its canonical district graph and 
   const options = descendants(list, node => node.props?.role === 'option');
   options[1].props.onClick();
   assert.equal(route, '/district/HP-Bilaspur#forecast-graph');
-  const response = await fetchExperimentalScenario(districtFromPath(route));
+  const response = await fetchClimate12mForecast(districtFromPath(route));
   assert.equal(response.district_id, districts[2].district_id);
-  assert.deepEqual(requests, ['/api/research/scenario/HP-Bilaspur?months=12']);
+  assert.deepEqual(requests, ['/api/predict/climate-12m/HP-Bilaspur?months=12']);
 });
 
 test('exact Enter selects the map catalog ID and requests that district even without a polygon', async () => {
@@ -84,9 +84,9 @@ test('exact Enter selects the map catalog ID and requests that district even wit
   assert.equal(action.result.district, districts[3]);
   control.props.onSelect(action.result.district);
   assert.equal(route, '/district/MH-Mumbai_Suburban#forecast-graph');
-  const response = await fetchExperimentalScenario(districtFromPath(route));
+  const response = await fetchClimate12mForecast(districtFromPath(route));
   assert.equal(response.district_id, districts[3].district_id);
-  assert.deepEqual(requests, ['/api/research/scenario/MH-Mumbai_Suburban?months=12']);
+  assert.deepEqual(requests, ['/api/predict/climate-12m/MH-Mumbai_Suburban?months=12']);
 });
 
 test('ambiguous map Enter keeps district identity unresolved until a labelled option is chosen', () => {

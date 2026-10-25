@@ -1,10 +1,9 @@
-import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, NavLink, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import States from './pages/States';
 import DistrictDetail from './pages/DistrictDetail';
 import Alerts from './pages/Alerts';
 import Simulate from './pages/Simulate';
-import ResearchForecast from './components/ResearchForecast';
 import './App.css';
 
 function App() {
@@ -25,7 +24,7 @@ function App() {
         </nav>
         <main className="main-content">
           <Routes>
-            <Route path="/research" element={<div className="page"><h1>Twelve-month groundwater research</h1><ResearchForecast /></div>} />
+            <Route path="/research" element={<Navigate to="/" replace />} />
             <Route path="/" element={<Home />} />
             <Route path="/states" element={<States />} />
             <Route path="/states/:id" element={<States />} />

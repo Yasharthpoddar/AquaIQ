@@ -1,0 +1,160 @@
+{
+  "source_sha256": "8d26aad32c4c11a909a27d2d5bc9f624b2225b7338f0f3eaa66acba62db071c7",
+  "boundary_sha256": "e724c14bc5ee68bcdd6cee8c89222b80cb61e180e55c1dab3d067f09b3b9dc8f",
+  "boundary_crs": "EPSG:4326",
+  "boundary_invalid_geometries": 0,
+  "boundary_year_labels": [
+    "2011_c",
+    "2012_c",
+    "2014_c",
+    "2015_c",
+    "2016_c",
+    "2017_c",
+    "2018",
+    "2019",
+    "update2014",
+    "update2025"
+  ],
+  "telangana": {
+    "raw_readings": 56679,
+    "unique_named_coordinates": 2223,
+    "accepted_candidate_readings": 55595,
+    "candidate_district_months": 3222,
+    "candidate_districts": 33,
+    "rejection_reasons": {
+      "negative_depth": 106,
+      "unresolved_canonical_district": 979
+    },
+    "coordinates_disagree_with_parent_crosswalk_readings": 40845,
+    "candidate_observed_months_by_district": {
+      "TS-Adilabad": 98,
+      "TS-Bhadradri_Kothagudem": 99,
+      "TS-Hyderabad": 99,
+      "TS-Jagtial": 97,
+      "TS-Jangaon": 87,
+      "TS-Jayashankar_Bhupalapally": 98,
+      "TS-Jogulamba_Gadwal": 98,
+      "TS-Kamareddy": 97,
+      "TS-Karimnagar": 98,
+      "TS-Khammam": 98,
+      "TS-Komaram_Bheem": 98,
+      "TS-Mahabubabad": 98,
+      "TS-Mahabubnagar": 98,
+      "TS-Mancherial": 98,
+      "TS-Medak": 98,
+      "TS-Medchal_Malkajgiri": 98,
+      "TS-Mulugu": 98,
+      "TS-Nagarkurnool": 97,
+      "TS-Nalgonda": 99,
+      "TS-Narayanpet": 98,
+      "TS-Nirmal": 98,
+      "TS-Nizamabad": 98,
+      "TS-Peddapalli": 98,
+      "TS-Rajanna_Sircilla": 97,
+      "TS-Ranga_Reddy": 99,
+      "TS-Sangareddy": 98,
+      "TS-Siddipet": 98,
+      "TS-Suryapet": 98,
+      "TS-Vikarabad": 100,
+      "TS-Wanaparthy": 98,
+      "TS-Warangal_Rural": 97,
+      "TS-Warangal_Urban": 96,
+      "TS-Yadadri_Bhuvanagiri": 98
+    },
+    "publication_status": "not_ingested",
+    "limitation": "The boundary carries mixed/undated administrative metadata and station identity/coordinate provenance is not independently certified. Candidate coordinate assignment cannot certify location-specific truth. Existing immutable source/features/model are preserved."
+  },
+  "mumbai_suburban": {
+    "separate_boundary_present": false,
+    "mumbai_polygon_area_km2": 577.783127600805,
+    "suburban_unique_source_coordinates": 18,
+    "coordinates_inside_mumbai_polygon": 16,
+    "weather": {
+      "imd_rainfall_district_monthly.csv": {
+        "source_sha256": "0bc3ec52da3648b5f2166c490e604d0fd781fc95c07fc5ab66ab89d73c57ff21",
+        "district_labels": [
+          "Mumbai"
+        ],
+        "spatial_methods": [
+          "nearest_usable_cell"
+        ],
+        "max_source_cell_distance_m": 15106.139806377096
+      },
+      "era5_district_monthly.csv": {
+        "source_sha256": "a93d7d938ec9b6cec20363c41786a9aa7863c7093ed324a2fee683b50d35da65",
+        "district_labels": [
+          "Mumbai"
+        ],
+        "spatial_methods": [
+          "not_recorded_in_csv"
+        ],
+        "max_source_cell_distance_m": null
+      },
+      "raw_imd_january_2024_probe": {
+        "source_sha256": "09d3c89a084f13f3ec534170ce9d98fafc6ff8c29b87d1c83cc2fcd82b495601",
+        "cells": [
+          {
+            "latitude": 19.0,
+            "longitude": 73.0,
+            "rainfall_mm": 0.0,
+            "spatial_method": "nearest_usable_cell",
+            "distance_m": 15106.139806377096
+          }
+        ]
+      },
+      "raw_era5_grid_probe": {
+        "source_sha256": "6fe76f7f43a9c389038f189dd49575598d02e9aeb19be3e615934351a0b00eb8",
+        "download_archive_sha256": "4edf8ff080ce5e7b380924cac345e87f1e886c6937ceed53268ac254ce4cff41",
+        "archive_members": [
+          "data_stream-moda_stepType-avgua.nc",
+          "data_stream-moda_stepType-avgad.nc"
+        ],
+        "temperature_units": null,
+        "evaporation_metadata": {
+          "GRIB_paramId": "228251",
+          "GRIB_dataType": "fc",
+          "GRIB_numberOfPoints": "15609",
+          "GRIB_typeOfLevel": "surface",
+          "GRIB_stepUnits": "1",
+          "GRIB_stepType": "avgad",
+          "GRIB_gridType": "regular_ll",
+          "GRIB_uvRelativeToGrid": "0",
+          "GRIB_NV": "0",
+          "GRIB_Nx": "121",
+          "GRIB_Ny": "129",
+          "GRIB_cfName": "unknown",
+          "GRIB_cfVarName": "pev",
+          "GRIB_gridDefinitionDescription": "Latitude/Longitude Grid",
+          "GRIB_iDirectionIncrementInDegrees": "0.25",
+          "GRIB_iScansNegatively": "0",
+          "GRIB_jDirectionIncrementInDegrees": "0.25",
+          "GRIB_jPointsAreConsecutive": "0",
+          "GRIB_jScansPositively": "0",
+          "GRIB_latitudeOfFirstGridPointInDegrees": "38.0",
+          "GRIB_latitudeOfLastGridPointInDegrees": "6.0",
+          "GRIB_longitudeOfFirstGridPointInDegrees": "68.0",
+          "GRIB_longitudeOfLastGridPointInDegrees": "98.0",
+          "GRIB_missingValue": "3.4028234663852886e+38",
+          "GRIB_name": "Potential evaporation",
+          "GRIB_shortName": "pev",
+          "GRIB_totalNumber": "0",
+          "GRIB_units": "m",
+          "long_name": "Potential evaporation",
+          "units": "m",
+          "standard_name": "unknown",
+          "GRIB_surface": "0.0"
+        },
+        "cells": [
+          {
+            "latitude": 19.0,
+            "longitude": 73.0,
+            "spatial_method": "nearest_usable_cell",
+            "distance_m": 15106.139806377096
+          }
+        ]
+      }
+    },
+    "assignment_status": "missing_environment_fallback",
+    "limitation": "A single combined-looking polygon and coarse grid resolution do not verify a distinct district boundary or identical spatial weights. No Mumbai-to-Suburban alias or unvalidated nearest-cell transfer is applied."
+  }
+}

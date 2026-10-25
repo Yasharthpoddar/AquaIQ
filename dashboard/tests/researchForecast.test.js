@@ -113,7 +113,7 @@ test('carried inputs retain their source month and age instead of appearing as f
   assert.match(html, /do not certify acquisition or model-availability times/);
 });
 
-test('optional research page preserves direct-horizon disclosures without replacing the original dashboard', () => {
+test('preserved internal research component retains disclosures and is absent from application routes', () => {
   const html = renderToStaticMarkup(createElement(ResearchForecast, { districtId: 'TS-Adilabad' }));
   assert.match(html, /12 calendar months ahead/);
   assert.match(html, /direct M\+12 target/);
@@ -129,7 +129,8 @@ test('optional research page preserves direct-horizon disclosures without replac
   const graphPanel = readFileSync(new URL('../src/components/ForecastGraphPanel.jsx', import.meta.url), 'utf8');
   assert.match(graphPanel, /<h2>Monthly research projections<\/h2>/);
   const app = readFileSync(new URL('../src/App.jsx', import.meta.url), 'utf8');
-  assert.match(app, /<Route path="\/research" element=\{<div className="page"><h1>Twelve-month groundwater research<\/h1><ResearchForecast \/>/);
+  assert.match(app, /<Route path="\/research" element=\{<Navigate to="\/" replace \/>\} \/>/);
+  assert.doesNotMatch(app, /import ResearchForecast|<ResearchForecast/);
   assert.doesNotMatch(app, /<NavLink to="\/research"/);
 });
 

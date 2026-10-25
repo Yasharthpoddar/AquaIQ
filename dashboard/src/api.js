@@ -9,7 +9,7 @@ export const API_BASE = import.meta.env?.VITE_API_URL || '';
 // Remove settled requests so retries and later visits always read fresh data.
 const pendingReads = new Map();
 
-function getJson(path, label, researchErrors = false, allowClimateUnavailable = false) {
+function getJson(path, label, researchErrors = false, unavailableProduct = null) {
   const url = `${API_BASE}${path}`;
   if (pendingReads.has(url)) return pendingReads.get(url);
   const request = (async () => {
@@ -19,14 +19,15 @@ function getJson(path, label, researchErrors = false, allowClimateUnavailable = 
       if (researchErrors) {
         const failure = await res.json().catch(() => null);
         // Preserve this product's structured artifact failure for schema validation.
-        if (allowClimateUnavailable && res.status === 503
-          && failure?.product === 'climate_informed_12m_forecast' && failure.status === 'model_unavailable') return failure;
+        if (unavailableProduct && res.status === 503
+          && failure?.product === unavailableProduct && failure.status === 'model_unavailable') return failure;
         if (['direct_12month_research', 'direct_12month_research_graph', 'experimental_12month_scenario', 'climate_informed_12m_forecast'].includes(failure?.product)
           && Array.isArray(failure.unavailable_reasons)
           && failure.unavailable_reasons.every(reason => typeof reason === 'string')) {
           detail = ` ${failure.unavailable_reasons.join(' ')}`;
         }
-        if (allowClimateUnavailable && !detail && typeof failure?.message === 'string') detail = ` ${failure.message}`;
+        if (unavailableProduct && !detail && typeof failure?.message === 'string') detail = ` ${failure.message}`;
+        if (unavailableProduct && !detail && typeof failure?.error === 'string') detail = ` ${failure.error}`;
       }
       throw new Error(`${label} fetch failed: ${res.status}${detail}`);
     }
@@ -104,7 +105,7 @@ export async function fetchExperimentalScenario(id, asOf = null) {
 export async function fetchClimate12mForecast(id, asOf = null) {
   const params = new URLSearchParams({ months: '12' });
   if (asOf) params.set('as_of', asOf);
-  return getJson(`/api/predict/climate-12m/${encodeURIComponent(id)}?${params}`, 'Twelve-month climate forecast', true, true);
+  return getJson(`/api/predict/climate-12m/${encodeURIComponent(id)}?${params}`, 'Twelve-month forecast', true, 'climate_informed_12m_forecast');
 }
 
 // State-wise groundwater forecasting endpoints
@@ -112,15 +113,16 @@ export async function fetchStates() {
   return getJson('/api/states', 'States');
 }
 
-export async function fetchStatesSummary(horizon = 12) {
+export async function fetchStatesSummary(horizon = 12, asOf = null) {
   const params = new URLSearchParams({ horizon: String(horizon) });
+  if (asOf) params.set('as_of', asOf);
   return getJson(`/api/states/summary?${params}`, 'States summary');
 }
 
 export async function fetchStatePredict(stateId, horizon = 12, asOf = null) {
   const params = new URLSearchParams({ horizon: String(horizon) });
   if (asOf) params.set('as_of', asOf);
-  return getJson(`/api/predict/state/${encodeURIComponent(stateId)}?${params}`, 'State prediction');
+  return getJson(`/api/predict/state/${encodeURIComponent(stateId)}?${params}`, 'State forecast', true, 'state_groundwater_12m_forecast');
 }
 
 export async function postSimulate(payload) {

@@ -33,7 +33,8 @@ def physical_frame(start="2010-01-01", end="2024-12-01", observed_end="2021-01-0
 
 
 @pytest.fixture(autouse=True)
-def reset_bundle_cache():
+def reset_bundle_cache(monkeypatch):
+    monkeypatch.setenv("AQUAIQ_ENABLE_SYNC_FORECAST_FALLBACK", "true")
     climate12m._CACHE.clear()
     yield
     climate12m._CACHE.clear()
@@ -149,8 +150,9 @@ def test_12m_checkpoint_loader_rejects_6m_bundle(tmp_path):
         climate12m.load_bundle(ckpt_path, expected_generation="test-gen")
 
 
+@pytest.mark.requires_db
 def test_forecast_next_twelve_months_returns_exact_12_points():
-    res = climate12m.forecast_next_twelve_months("DL-Delhi")
+    res = climate12m.forecast_next_twelve_months("HR-Kaithal", _allow_storage=False)
     assert res["status"] == "forecast"
     assert res["product"] == "climate_informed_12m_forecast"
     assert res["model_version"] == "1.0-climate-conditioned-12m-xgb"
@@ -164,9 +166,10 @@ def test_forecast_next_twelve_months_returns_exact_12_points():
             assert np.isfinite(item["weather"][field])
 
 
+@pytest.mark.requires_db
 def test_api_12m_prediction_success():
     client = create_app().test_client()
-    res = client.get("/api/predict/climate-12m/DL-Delhi")
+    res = client.get("/api/predict/climate-12m/HR-Kaithal?as_of=2026-10-25")
     assert res.status_code == 200
     data = res.get_json()
     assert data["status"] == "forecast"
@@ -188,12 +191,14 @@ def test_api_12m_prediction_rejects_invalid_months_or_window():
     assert "Unsupported parameter" in r2.get_json()["error"]
 
 
+@pytest.mark.requires_db
 def test_api_12m_prediction_not_found():
     client = create_app().test_client()
     res = client.get("/api/predict/climate-12m/NONEXISTENT_DISTRICT_XYZ")
     assert res.status_code == 404
 
 
+@pytest.mark.requires_db
 def test_legacy_6m_prediction_remains_compatible():
     client = create_app().test_client()
     res = client.get("/api/predict/DL-Delhi?window=next_six_months")
@@ -250,8 +255,9 @@ def test_corrupt_artifact_raises_explicit_runtime_error(tmp_path):
         climate12m.load_bundle(ckpt_file)
 
 
+@pytest.mark.requires_db
 def test_12m_forecast_response_schema_and_baselines():
-    res = climate12m.forecast_next_twelve_months("DL-Delhi")
+    res = climate12m.forecast_next_twelve_months("HR-Kaithal", _allow_storage=False)
     assert res["status"] == "forecast"
     assert "baseline_policy" in res
     assert len(res["forecast"]) == 12

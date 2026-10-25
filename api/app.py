@@ -73,7 +73,7 @@ def create_app(config_override=None):
     # A reverse-proxy deployment uses an empty setting and same-origin /api.
     origins = cors_origins(app.config["AQUAIQ_CORS_ORIGINS"])
     app.config["AQUAIQ_CORS_ORIGINS"] = origins
-    CORS(app, resources={r"/api/*": {"origins": origins}})
+    CORS(app, resources={r"/api/*": {"origins": origins}}, always_send=False)
 
     # Register blueprints
     from api.routes.predict import predict_bp

@@ -1,11 +1,13 @@
-"""Historical model endpoint and clearly labelled present-day projections."""
+import os
+from copy import deepcopy
 import math
 from flask import Blueprint, request
 from models.ensemble import forecast_result
 from models.monthly_projection import forecast_next_six_months
 from models.climate_forecast_12m import forecast_next_twelve_months, MODEL_VERSION as MODEL_VERSION_12M, PRODUCT_NAME as PRODUCT_NAME_12M
+from models import forecast_storage
 from api.district_resolver import resolve_district_id
-from api.contracts import response, parse_as_of, failure
+from api.contracts import response, parse_as_of, parse_forecast_as_of, failure
 
 predict_bp = Blueprint('predict', __name__)
 
@@ -68,8 +70,40 @@ def get_climate_12m_prediction(district_id):
             raise ValueError('Unsupported parameter for 12-month climate prediction; use as_of.')
         if request.args.get('months', '12') != '12':
             raise ValueError('Only a twelve-month prediction horizon is supported; months must equal 12.')
-        cutoff = parse_as_of()
+        cutoff = parse_forecast_as_of()
         canonical = resolve_district_id(district_id)
+
+        stored = forecast_storage.get_district_forecast(canonical, cutoff)
+        if stored is not None:
+            data = deepcopy(stored)
+            data['requested_id'] = district_id
+            data['resolved_id'] = canonical
+            return response(data)
+
+        sync_enabled = os.getenv("AQUAIQ_ENABLE_SYNC_FORECAST_FALLBACK", "false").lower() in ("true", "1")
+        if not sync_enabled:
+            diag = forecast_storage.get_generation_diagnostics(cutoff)
+            err_payload = {
+                "product": PRODUCT_NAME_12M,
+                "model_version": MODEL_VERSION_12M,
+                "status": "model_unavailable",
+                "district_id": canonical,
+                "requested_id": district_id,
+                "resolved_id": canonical,
+                "forecast": [],
+                "horizon_months": 12,
+                "units": "m_bgl",
+                "as_of": cutoff.isoformat(),
+                "forecast_origin": cutoff.replace(day=1).isoformat(),
+                "timezone": "Asia/Kolkata",
+                "projection_method": "climate_conditioned_xgboost_12m",
+                "estimated_current_gwl": None,
+                "message": diag.get("message") or f"Persistent 12-month XGBoost forecast for district '{district_id}' is not available. Run 'python -m scripts.precompute_forecasts --horizon 12' to precompute.",
+                "unavailable_reason": diag.get("reason", "forecast_generation_missing"),
+                "diagnostics": diag,
+            }
+            return response(err_payload, 503)
+
         data = forecast_next_twelve_months(canonical, cutoff)
         _validate_12m_forecast(data)
         data['requested_id'] = district_id

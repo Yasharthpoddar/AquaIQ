@@ -203,9 +203,15 @@ def blend_components(components, weights=None):
 
 
 def _readiness(frame, cutoff):
-    observed = frame[frame.is_observed.fillna(False) & np.isfinite(pd.to_numeric(frame.gwl_current,errors='coerce'))]
-    start = pd.Timestamp(CONFIG['date_range']['start'])
-    end = min(cutoff,pd.Timestamp(CONFIG['date_range']['end']))
+    cutoff = _as_of(cutoff)
+    end = min(_completed_feature_month(cutoff),pd.Timestamp(CONFIG['date_range']['end']))
+    flags = frame.is_observed.astype('string').str.lower().isin(['true','1'])
+    if 'is_imputed' in frame:
+        flags &= frame.is_imputed.astype('string').str.lower().isin(['false','0'])
+    dates = pd.to_datetime(frame.date)
+    values = pd.to_numeric(frame.gwl_current,errors='coerce')
+    observed = frame[flags & np.isfinite(values) & values.ge(0) & dates.le(end)]
+    start = pd.to_datetime(observed.date).min() if len(observed) else end
     interval = CONFIG.get('crisis_score',{}).get('observation_interval_months',3)
     months = max(1,(end.year-start.year)*12+end.month-start.month+1)
     expected = math.ceil(months/interval)
@@ -213,6 +219,8 @@ def _readiness(frame, cutoff):
     pct = min(100.,100.*count/expected)
     minimum = CONFIG['crisis_score']['fallback_strategy']['min_months_required']
     return {'observed_months':count,'expected_monitoring_rounds':expected,'observation_interval_months':interval,
+        'monitoring_start': start.date().isoformat() if count else None,
+        'last_observed_date': pd.to_datetime(observed.date).max().date().isoformat() if count else None,
         'readiness_score':round(pct,1),'eligible':count>=minimum and pct>=CONFIG['crisis_score']['data_readiness_min_pct']}
 
 

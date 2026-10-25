@@ -12,6 +12,8 @@ const formatMonth = value => {
 
 const formatDepth = value => Number.isFinite(value) ? `${value.toFixed(2)} m` : 'Unavailable';
 const formatDelta = value => Number.isFinite(value) ? `${value >= 0 ? '+' : ''}${value.toFixed(2)}` : null;
+const isReference = value => value?.model_version === '1.0-reference-12m';
+const methodLabel = value => isReference(value) ? value.evidence_tier === 'C' ? 'Regional reference estimate' : 'Local persistence estimate' : 'XGBoost Forecast';
 
 export function Forecast12mTooltip({ active, payload }) {
   if (!active || !payload?.length) return null;
@@ -24,14 +26,12 @@ export function Forecast12mTooltip({ active, payload }) {
     <div role="tooltip" className="forecast-tooltip" style={{ background: '#fff', border: '1px solid #cbd5e1', borderRadius: 8, padding: '0.65rem 0.85rem', boxShadow: '0 4px 12px rgba(15,23,42,0.12)', fontSize: '0.82rem', lineHeight: 1.45 }}>
       <strong>{month} (M+{row.horizon})</strong>
       <div style={{ color: '#2563eb', fontWeight: 600, marginTop: '0.25rem' }}>
-        Experimental XGBoost: {depth}
+        {row.evidenceTier && row.evidenceTier !== 'A' ? 'Fallback estimate' : 'XGBoost Forecast'}: {depth}
       </div>
-      <div>Persistence reference: {formatDepth(row.persistence)}</div>
-      <div>Seasonal-naive reference: {formatDepth(row.seasonal)}</div>
-      {row.seasonalReferenceDate && <div>Seasonal source month: {formatMonth(row.seasonalReferenceDate.slice(0, 7))}</div>}
       {delta && <div style={{ color: '#64748b', fontSize: '0.78rem' }}>Change from current anchor: {delta} m</div>}
+      {Number.isFinite(row.lower) && <div>Historical prediction range: {row.lower.toFixed(2)}–{row.upper.toFixed(2)} m</div>}
       <div style={{ marginTop: '0.35rem', paddingTop: '0.35rem', borderTop: '1px solid #f1f5f9', color: '#475569', fontSize: '0.75rem' }}>
-        <strong>Assumed climatology inputs</strong>
+        <strong>{row.evidenceTier && row.evidenceTier !== 'A' ? 'Environmental predictors not used' : 'Assumed climatology inputs'}</strong>
         <div>Rainfall: {Number.isFinite(row.rainfall) ? `${row.rainfall.toFixed(1)} mm` : '—'}</div>
         <div>Temp: {Number.isFinite(row.temperature) ? `${row.temperature.toFixed(1)} °C` : '—'}</div>
         <div>ET: {Number.isFinite(row.evapotranspiration) ? `${row.evapotranspiration.toFixed(1)} mm` : '—'}</div>
@@ -49,13 +49,9 @@ export function forecast12mPlot(value, dimensions = {}) {
       <YAxis width={54} tickLine={false} axisLine={false} />
       <Tooltip content={<Forecast12mTooltip />} />
       <Legend />
-      <Line dataKey="persistence" name="Persistence reference" stroke="#15803d" strokeWidth={2.5}
-        dot={false} activeDot={{ r: 4 }} isAnimationActive={false} connectNulls={false} />
-      <Line dataKey="seasonal" name="Seasonal-naive reference" stroke="#64748b" strokeDasharray="5 4" strokeWidth={2}
-        dot={{ r: 2 }} activeDot={{ r: 4 }} isAnimationActive={false} connectNulls={false} />
       <Line
         dataKey="predicted"
-        name="Experimental XGBoost"
+        name={methodLabel(value)}
         stroke="#2563eb"
         strokeWidth={1.8}
         dot={{ r: 3, fill: '#fff', strokeWidth: 2 }}
@@ -79,14 +75,13 @@ export function ClimateForecast12mView({ value = null, loading = false, error = 
       <header className="section-heading">
         <div>
           <h2>Next 12 months</h2>
-          <p className="muted">Groundwater depth · metres below ground · climate-conditioned XGBoost</p>
+          <p className="muted">Groundwater depth · metres below ground · {value ? methodLabel(value) : 'district forecasts and estimates'}</p>
         </div>
         <span className="experimental-badge">Experimental forecast</span>
       </header>
       <p className="forecast-note">
-        Experimental XGBoost estimates use assumed historical rainfall, temperature and evapotranspiration climatology, not live weather predictions. Current forecasting skill is unverified.
+        {isReference(value) ? 'This fallback provides a complete outlook with limited evidence. It does not resolve local future weather or pumping effects.' : 'Experimental XGBoost estimates use assumed historical rainfall, temperature and evapotranspiration climatology, not live weather predictions. Current forecasting skill is unverified.'}
       </p>
-      <p className="forecast-note">In the preserved original v1 historical test, persistence had lower MAE than XGBoost at every horizon. The repaired v2 model remains experimental; pooled R² does not establish superiority to persistence.</p>
 
       {loading && (
         <div role="status" className="forecast-placeholder">
@@ -107,7 +102,14 @@ export function ClimateForecast12mView({ value = null, loading = false, error = 
             <span>District: {value.district_id}</span>
             <span>As of {value.as_of} · {value.timezone || 'Asia/Kolkata'}</span>
           </div>
-          {value.estimate_type && <div className="inline-state" role="note">
+          {value.evidence_tier && <div className="inline-state" role="note">
+            <strong>Evidence tier {value.evidence_tier} · {methodLabel(value)}</strong>
+            <p>{value.warning}</p>
+            <p>{value.observation_count} genuine observed district months · latest {value.last_observed_date || 'none locally mapped'}.</p>
+            {value.fallback_reason && <p>Fallback reason: {value.fallback_reason}</p>}
+            <p>Environmental fields without usable history: {Object.entries(value.input_missingness || {}).filter(([, missing]) => missing).map(([field]) => field).join(', ') || 'none'}.</p>
+          </div>}
+          {['district_level', 'zone_fallback'].includes(value.estimate_type) && <div className="inline-state" role="note">
             <strong>{zoneFallback ? `Zone fallback · ${value.source_zone}` : 'District-level evidence'}</strong>
             <p>{zoneFallback ? `The source depths and weather inputs describe a zone aggregate, not this district’s own measurements. ${value.zone_fallback_reason || ''}`
               : 'Source-marked district measurements anchor these estimates; current depths may still be estimated across an observation gap.'}</p>
@@ -119,18 +121,14 @@ export function ClimateForecast12mView({ value = null, loading = false, error = 
                 <div>
                   <span>{zoneFallback ? 'Latest source-marked zone aggregate' : 'Latest source-marked observation'}</span>
                   <strong>{formatMonth(value.last_observed_date?.slice(0, 7))} · {formatDepth(value.last_observed_gwl)}</strong>
-                  <small>{value.data_age_months != null ? `${value.data_age_months} calendar months before forecast origin` : 'Observation date recorded'}</small>
+                  <small>{value.data_age_months != null ? `${value.data_age_months} calendar months before forecast origin` : value.last_observed_date ? 'Observation date recorded' : 'No local measurement'}</small>
                 </div>
                 <div>
                   <span>{estimatedAnchor ? 'Estimated current depth' : 'Observed current-month anchor'}</span>
                   <strong>{formatDepth(value.estimated_current_gwl)}</strong>
-                  <small>{value.current_depth_basis === 'observed_month' ? 'Observed in the current month' : 'Estimated from trend and seasonality across observation gap'}</small>
+                  <small>{value.current_depth_basis === 'observed_month' ? 'Observed in the current month' : value.current_depth_basis === 'regional_reference' ? 'Regional reference anchor; no local reading' : 'Estimated across the observation gap; not a new measurement'}</small>
                 </div>
               </div>
-              <p className="forecast-note"><strong>Persistence is the primary reference:</strong> it holds the {estimatedAnchor ? 'estimated current anchor' : 'observed origin depth'} constant.
-                {' '}An estimated anchor is not an observed-origin persistence forecast and has not been validated by the historical observed-origin benchmark.
-                {' '}Seasonal naive uses a source-marked value from the target month one year earlier when available; unavailable references remain gaps.</p>
-              {typeof value.baseline_policy?.description === 'string' && <p className="muted">{value.baseline_policy.description}</p>}
 
               <div className="chart-caption">
                 <span>{formatMonth(value.forecast_start)}–{formatMonth(value.forecast_end)}</span>
@@ -147,15 +145,13 @@ export function ClimateForecast12mView({ value = null, loading = false, error = 
                 <summary>View all 12 monthly predictions &amp; climate inputs</summary>
                 <div className="table-scroll">
                   <table className="data-table">
-                    <caption>12-month experimental estimates, baseline references and assumed climatology inputs. Depths are metres below ground; unavailable values are not filled.</caption>
+                    <caption>{methodLabel(value)} · 12 months. Depths are metres below ground; unavailable values are not filled.</caption>
                     <thead>
                       <tr>
                         <th scope="col">Month</th>
                         <th scope="col">Horizon</th>
-                        <th scope="col">XGBoost depth (m bgl)</th>
-                        <th scope="col">Persistence (m bgl)</th>
-                        <th scope="col">Seasonal naive (m bgl)</th>
-                        <th scope="col">Seasonal source month</th>
+                        <th scope="col">Predicted depth (m bgl)</th>
+                        <th scope="col">Historical range (m bgl)</th>
                         <th scope="col">Change (m)</th>
                         <th scope="col">Assumed rainfall (mm/month)</th>
                         <th scope="col">Assumed temp (°C)</th>
@@ -168,9 +164,7 @@ export function ClimateForecast12mView({ value = null, loading = false, error = 
                           <th scope="row">{formatMonth(row.month)}</th>
                           <td>M+{row.horizon}</td>
                           <td>{Number.isFinite(row.predicted) ? row.predicted.toFixed(2) : '—'}</td>
-                          <td>{formatDepth(row.persistence)}</td>
-                          <td>{formatDepth(row.seasonal)}</td>
-                          <td>{row.seasonalReferenceDate ? formatMonth(row.seasonalReferenceDate.slice(0, 7)) : 'Unavailable'}</td>
+                          <td>{Number.isFinite(row.lower) ? `${row.lower.toFixed(2)}–${row.upper.toFixed(2)}` : 'Unavailable'}</td>
                           <td>{formatDelta(row.delta) ?? '—'}</td>
                           <td>{Number.isFinite(row.rainfall) ? row.rainfall.toFixed(1) : '—'}</td>
                           <td>{Number.isFinite(row.temperature) ? row.temperature.toFixed(1) : '—'}</td>
@@ -195,6 +189,7 @@ export function ClimateForecast12mView({ value = null, loading = false, error = 
             <div className="inline-state" role="status">
               <h3>Model artifact unavailable</h3>
               <p>{value.message || '12-month climate model checkpoint is unavailable.'}</p>
+              <button className="button button-secondary" type="button" onClick={onRetry}>Retry forecast</button>
             </div>
           )}
 
@@ -202,6 +197,8 @@ export function ClimateForecast12mView({ value = null, loading = false, error = 
             <summary>Model &amp; climate provenance details</summary>
             <p><strong>Model:</strong> {value.model_version} ({value.product})</p>
             <p><strong>Projection method:</strong> {value.projection_method}</p>
+            <p><strong>Generation:</strong> {value.generation_id || 'Legacy output'}</p>
+            <p><strong>Uncertainty:</strong> {value.uncertainty?.status || 'Unavailable'}. {value.uncertainty?.limitations || value.uncertainty?.reason || ''}</p>
             {value.model_sha256 && <p><strong>Model SHA-256:</strong> <code>{value.model_sha256}</code></p>}
             {value.model_train_target_cutoff && <p><strong>Training cutoff:</strong> {value.model_train_target_cutoff}</p>}
             <p><strong>Weather input policy:</strong> {weatherBasis.description || 'Historical same-month climatology available at forecast origin.'}</p>
@@ -209,6 +206,7 @@ export function ClimateForecast12mView({ value = null, loading = false, error = 
               <p><strong>Latest usable historical weather date:</strong> {weatherBasis.latest_usable_weather_date}</p>
             )}
             <p><strong>Evaluation status:</strong> Historical benchmark results concern their recorded model version, matched cases and observed origins. They do not validate estimates anchored across today’s observation gap. No method is selected here using the old final test. This research model is not approved for operational water management decisions.</p>
+            <p>{isReference(value) ? 'Local persistence holds the last genuine observation constant. Zero-history estimates use a district-balanced state or global seasonal reference, excluding this district. These estimates have no validated target-specific skill.' : 'Historical comparisons have not established XGBoost superiority to simple reference methods. When the current depth is not observed, trend and seasonality estimate the starting anchor; only XGBoost supplies the twelve future monthly predictions.'}</p>
             {Array.isArray(value.limitations) && value.limitations.length > 0 && (
               <>
                 <h3>Limitations</h3>
@@ -236,8 +234,7 @@ export function ClimateForecast12m({ districtId }) {
     setValue(null);
     setLoading(true);
     setError(null);
-    fetchClimate12mForecast(districtId)
-      .then(result => validateClimate12mForecast(result, districtId))
+    loadDistrictForecast(districtId)
       .then(result => {
         if (!cancelled) {
           setValue(result);
@@ -269,6 +266,11 @@ export function ClimateForecast12m({ districtId }) {
       onRetry={() => setRetry(count => count + 1)}
     />
   );
+}
+
+// A failed or incompatible XGBoost response never requests an alternative model.
+export async function loadDistrictForecast(districtId, read = fetchClimate12mForecast) {
+  return validateClimate12mForecast(await read(districtId), districtId);
 }
 
 export default function DistrictForecastGraph({ districtId }) {

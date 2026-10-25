@@ -175,25 +175,40 @@ def forecast_weather(frame, as_of, months=6, overrides=None):
         metadata["assumptions"].append(
             "Usable weather history may include limited causal fills; its end dates do not establish fresh measurement dates."
         )
+    # History is already sorted, validated, and limited to the completed month.
+    # Index calendar months and usable fields once instead of copying a frame
+    # for each target/field. Keep Series.mean() on the original numeric dtype
+    # and sample order so this optimization also preserves floating results.
+    history_dates = pd.DatetimeIndex(history["date"])
+    history_months = history_dates.month.to_numpy()
+    history_years = history_dates.year.to_numpy()
+    month_positions = {
+        month: np.flatnonzero(history_months == month)
+        for month in targets.month.unique()
+    }
+    field_values = {column: history[column] for column in WEATHER_COLUMNS}
+    field_available = {
+        column: values.notna().to_numpy() for column, values in field_values.items()
+    }
     rows = []
     for target in targets:
         row = {"date": target}
         references = {"date": target.date().isoformat(), "fields": {}}
-        matching = history[history.date.dt.month == target.month] if len(history) else history
+        matching = month_positions[target.month]
         for column in WEATHER_COLUMNS:
-            samples = matching.loc[matching[column].notna(), ["date", column]].tail(MAX_REFERENCE_YEARS)
-            years = samples.date.dt.year.nunique() if len(samples) else 0
+            positions = matching[field_available[column][matching]][-MAX_REFERENCE_YEARS:]
+            years = len(np.unique(history_years[positions]))
             references["fields"][column] = {
                 "sample_years": int(years),
-                "reference_start": samples.date.min().date().isoformat() if len(samples) else None,
-                "reference_end": samples.date.max().date().isoformat() if len(samples) else None,
+                "reference_start": history_dates[positions[0]].date().isoformat() if len(positions) else None,
+                "reference_end": history_dates[positions[-1]].date().isoformat() if len(positions) else None,
             }
             if years < MIN_REFERENCE_YEARS:
                 metadata["missing_inputs"].append({"date": target.date().isoformat(), "field": column,
                                                     "sample_years": int(years), "required_years": MIN_REFERENCE_YEARS})
                 row[column] = np.nan
             else:
-                row[column] = float(samples[column].mean())
+                row[column] = float(field_values[column].iloc[positions].mean())
         rows.append(row)
         metadata["reference_months"].append(references)
     digest = hashlib.sha256()

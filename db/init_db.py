@@ -12,7 +12,8 @@ def init_db():
             with connection.cursor() as cursor:
                 cursor.execute((ROOT / 'db/schema.sql').read_text(encoding='utf-8'))
                 cursor.execute((ROOT / 'db/migrations/003_pipeline_provenance.sql').read_text(encoding='utf-8'))
-        print('Database schema verified; pipeline provenance migration applied.')
+                cursor.execute((ROOT / 'db/migrations/004_xgboost_forecast_storage.sql').read_text(encoding='utf-8'))
+        print('Database schema verified; pipeline provenance and forecast storage migrations applied.')
     finally:
         connection.close()
 

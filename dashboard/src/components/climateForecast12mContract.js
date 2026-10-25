@@ -1,4 +1,4 @@
-/** Validate calendar alignment and keep missing baseline values unavailable. */
+/** Validate the district XGBoost output and its exact twelve calendar months. */
 const realDate = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value)
   && Number.isFinite(Date.parse(`${value}T00:00:00Z`))
   && new Date(`${value}T00:00:00Z`).toISOString().slice(0, 10) === value;
@@ -22,7 +22,8 @@ export function validateClimate12mForecast(value, expectedDistrict = null) {
   if (value.product !== 'climate_informed_12m_forecast') {
     invalid(`Expected product climate_informed_12m_forecast, got ${value.product}`);
   }
-  if (!['1.0-climate-conditioned-12m-xgb', '2.0-climatology-12m-xgb'].includes(value.model_version)) {
+  const reference = value.model_version === '1.0-reference-12m';
+  if (!['1.0-climate-conditioned-12m-xgb', '2.0-climatology-12m-xgb', '1.0-reference-12m'].includes(value.model_version)) {
     invalid(`Expected model_version 1.0-climate-conditioned-12m-xgb or 2.0-climatology-12m-xgb, got ${value.model_version}`);
   }
   if (value.horizon_months !== 12) {
@@ -31,6 +32,12 @@ export function validateClimate12mForecast(value, expectedDistrict = null) {
   if (value.units !== 'm_bgl') {
     invalid(`Expected units m_bgl, got ${value.units}`);
   }
+  if (reference) {
+    if (!['B', 'C', 'D'].includes(value.evidence_tier) || !Number.isInteger(value.observation_count) || value.observation_count < 0
+      || (value.evidence_tier === 'C') !== (value.observation_count === 0)
+      || value.projection_method !== (value.evidence_tier === 'C' ? 'regional_seasonal_reference' : 'local_persistence')
+      || typeof value.warning !== 'string' || !value.warning.trim()) invalid('Invalid reference evidence or method');
+  } else if (value.projection_method !== 'climate_conditioned_xgboost_12m') invalid('Expected the twelve-month XGBoost method');
   if (!['forecast', 'insufficient_data', 'model_unavailable'].includes(value.status)) {
     invalid(`Unexpected status: ${value.status}`);
   }
@@ -52,7 +59,7 @@ export function validateClimate12mForecast(value, expectedDistrict = null) {
     if (!Number.isFinite(value.estimated_current_gwl) || value.estimated_current_gwl < 0) {
       invalid(`estimated_current_gwl must be a nonnegative finite number`);
     }
-    if (value.estimate_type !== undefined && !['district_level', 'zone_fallback'].includes(value.estimate_type)) invalid('Missing evidence scope');
+    if (value.estimate_type !== undefined && !['district_level', 'zone_fallback', 'regional_reference'].includes(value.estimate_type)) invalid('Missing evidence scope');
     if (value.estimate_type === 'zone_fallback' && (value.source_zone == null || String(value.source_zone).trim() === ''
       || typeof value.zone_fallback_reason !== 'string' || !value.zone_fallback_reason.trim())) invalid('Missing zone fallback provenance');
     const months = nextMonths(value.as_of);
@@ -76,12 +83,14 @@ export function validateClimate12mForecast(value, expectedDistrict = null) {
         invalid(`Forecast item ${i} missing weather object`);
       }
       for (const field of ['rainfall_mm', 'temperature_c', 'evapotranspiration_mm']) {
-        if (!Number.isFinite(weather[field])) {
+        if (reference ? weather[field] !== null : !Number.isFinite(weather[field])) {
           invalid(`Forecast item ${i} weather ${field} is not finite`);
         }
       }
+      if (row.lower_gwl !== undefined && (!depth(row.lower_gwl) || !depth(row.upper_gwl)
+        || row.lower_gwl > row.predicted_gwl || row.upper_gwl < row.predicted_gwl)) invalid('Invalid prediction range');
       if (weather.rainfall_mm < 0 || weather.evapotranspiration_mm < 0) invalid(`Forecast item ${i} has negative rainfall or evapotranspiration`);
-      // Older saved presentation fixtures may lack baselines. Never synthesize them.
+      // Preserve validation of optional scientific references even though the product does not render them.
       if (row.baselines !== undefined) {
         const baseline = row.baselines;
         if (!baseline || typeof baseline !== 'object') invalid(`Forecast item ${i} invalid baselines`);
@@ -115,8 +124,9 @@ export function climate12mChartRows(value) {
     rainfall: row.weather?.rainfall_mm,
     temperature: row.weather?.temperature_c,
     evapotranspiration: row.weather?.evapotranspiration_mm,
-    persistence: row.baselines?.persistence ?? null,
-    seasonal: row.baselines?.seasonal ?? null,
-    seasonalReferenceDate: row.baselines?.seasonal_reference_date ?? null,
+    lower: row.lower_gwl,
+    upper: row.upper_gwl,
+    method: value.forecast_method || value.projection_method,
+    evidenceTier: value.evidence_tier,
   }));
 }

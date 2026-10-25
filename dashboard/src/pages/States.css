@@ -1,0 +1,62 @@
+.states-page { max-width: 1280px; margin-inline: auto; }
+.states-page > * + * { margin-top: 24px; }
+.state-page-heading, .states-page .section-heading, .state-explorer-controls { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; }
+.state-page-heading h1 { font-size: clamp(1.65rem, 3vw, 2.25rem); line-height: 1.2; }
+.states-page .card { padding: 24px; min-width: 0; }
+.state-science-note, .states-page .forecast-note { color: #475569; line-height: 1.65; font-size: .93rem; }
+.state-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.state-stats article { display: flex; flex-direction: column; gap: 10px; }
+.state-stats article > span, .state-stats small { color: #475569; font-size: .82rem; }
+.state-stats strong { font-size: clamp(1.2rem, 2vw, 1.65rem); line-height: 1.3; }
+.state-stats strong small { font-size: 1rem; }
+.state-selector { flex: 1 1 300px; max-width: 540px; position: relative; z-index: 1100; }
+.state-selector label, .state-table-filter { display: block; font-size: .86rem; font-weight: 600; color: #334155; }
+.state-search-input { display: flex; gap: 8px; margin-top: 8px; }
+.states-page input { min-width: 0; width: 100%; padding: 11px 12px; border: 1px solid #94a3b8; border-radius: 8px; background: white; color: #0f172a; font: inherit; }
+.state-search-results { position: absolute; inset: 100% 0 auto; margin: 4px 0 0; padding: 4px; list-style: none; background: white; border: 1px solid #cbd5e1; border-radius: 10px; box-shadow: 0 8px 24px #0f172a20; max-height: 340px; overflow-y: auto; }
+.state-search-results button { display: flex; flex-direction: column; text-align: left; width: 100%; padding: 12px; border: 0; border-radius: 6px; background: white; color: #0f172a; cursor: pointer; gap: 4px; }
+.state-search-results button[aria-selected=true], .state-search-results button:hover { background: #eff6ff; }
+.state-search-results small, .state-search-status { color: #475569; }
+.state-metric-control { border: 0; padding: 0; margin: 0; }
+.state-metric-control legend { font-size: .86rem; font-weight: 600; margin-bottom: 8px; }
+.state-metric-control button { border: 1px solid #cbd5e1; border-radius: 6px; background: #fff; padding: 11px; color: #334155; cursor: pointer; }
+.state-metric-control button + button { margin-left: 6px; }
+.state-metric-control button[aria-pressed=true] { background: #eff6ff; border-color: #2563eb; color: #1d4ed8; }
+.state-explorer-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 28px; margin-top: 24px; }
+.state-map-panel, .state-selected-panel, .state-chart, .state-summary-scroll { min-width: 0; }
+.states-page h2 { font-size: 1.2rem; margin-bottom: 6px; }
+.states-page .muted { color: #475569; font-size: .9rem; }
+.state-map-canvas { height: clamp(310px, 43vw, 440px); width: 100%; border-radius: 10px; z-index: 0; background: #f1f5f9; }
+.state-map-wrapper { margin-top: 16px; }
+.state-map-legend { display: flex; flex-wrap: wrap; gap: 10px 16px; padding-top: 12px; color: #334155; font-size: .78rem; }
+.state-map-legend span { display: inline-flex; align-items: center; gap: 5px; }
+.state-map-legend i { width: 12px; height: 12px; border: 1px solid #64748b; border-radius: 3px; }
+.state-selected-panel { border-left: 1px solid #e2e8f0; padding-left: 28px; }
+.state-facts { margin: 20px 0; }
+.state-facts > div { padding: 14px 0; border-bottom: 1px solid #e2e8f0; }
+.state-facts dt { color: #475569; font-size: .86rem; }
+.state-facts dd { margin: 6px 0 0; font-size: 1.25rem; font-weight: 600; }
+.state-chart-card .chart-caption { display: flex; gap: 12px; flex-wrap: wrap; justify-content: space-between; margin: 18px 0; color: #475569; font-size: .86rem; }
+.state-chart-tooltip { max-width: 300px; padding: 12px; background: #fff; border: 1px solid #cbd5e1; border-radius: 8px; box-shadow: 0 4px 16px #0f172a18; font-size: .85rem; }
+.state-chart-tooltip p { margin: 6px 0 0; }
+.states-page .table-scroll { max-width: 100%; overflow-x: auto; }
+.states-page .data-table { width: 100%; border-collapse: collapse; text-align: left; font-size: .88rem; }
+.states-page .data-table th, .states-page .data-table td { padding: 14px 12px; border-bottom: 1px solid #e2e8f0; }
+.states-page .data-table thead { background: #f8fafc; }
+.states-page caption { text-align: left; padding: 16px 0; color: #475569; }
+.states-page tr[aria-selected=true] { background: #eff6ff; }
+.state-name-button { background: none; border: 0; color: #1d4ed8; text-align: left; cursor: pointer; font: inherit; font-weight: 600; }
+.state-name-button small { display: block; color: #475569; margin-top: 4px; }
+.state-status { display: inline-block; padding: 4px 8px; background: #f1f5f9; border-radius: 20px; color: #475569; font-size: .78rem; }
+.state-status.available { background: #e0f2fe; color: #075985; }
+.state-table-filter input { display: block; margin-top: 8px; }
+.state-district-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 10px; margin-top: 16px; }
+.state-district-grid a { display: flex; flex-direction: column; gap: 5px; padding: 14px; border: 1px solid #e2e8f0; border-radius: 8px; color: #1d4ed8; text-decoration: none; overflow-wrap: anywhere; }
+.state-district-grid span, .state-district-grid small { font-size: .8rem; color: #475569; }
+.states-page details { margin-top: 18px; }
+.states-page summary { cursor: pointer; font-weight: 600; color: #1d4ed8; padding-block: 8px; }
+.states-page code { overflow-wrap: anywhere; }
+.state-loading, .states-page .forecast-placeholder { display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 180px; }
+.states-page :is(button, input, a, summary, [tabindex]):focus-visible { outline: 3px solid #2563eb; outline-offset: 3px; }
+@media (max-width: 900px) { .state-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .state-explorer-grid { grid-template-columns: minmax(0, 1fr); } .state-selected-panel { border-left: 0; border-top: 1px solid #e2e8f0; padding: 20px 0 0; } }
+@media (max-width: 540px) { .states-page .card { padding: 16px; } .state-stats { gap: 10px; } .state-stats strong { font-size: 1.15rem; } .state-explorer-controls { gap: 18px; } .state-selector { flex-basis: 100%; } .state-summary-scroll table { min-width: 690px; } .states-page .section-heading { flex-direction: column; } }

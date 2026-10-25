@@ -41,3 +41,16 @@ def test_invalid_environment_fails_at_startup(monkeypatch):
     monkeypatch.setenv("AQUAIQ_CORS_ORIGINS", "*")
     with pytest.raises(ValueError):
         create_app()
+
+
+def test_default_development_origins():
+    client = create_app({"TESTING": True}).test_client()
+    for origin in ("http://127.0.0.1:5173", "http://localhost:5173", "http://127.0.0.1:3000", "http://localhost:3000"):
+        res = client.get("/api/config", headers={"Origin": origin})
+        assert res.status_code == 200
+        assert res.headers.get("Access-Control-Allow-Origin") == origin
+
+    # Requests without Origin header should not receive an arbitrary default Access-Control-Allow-Origin
+    no_origin_res = client.get("/api/config")
+    assert no_origin_res.status_code == 200
+    assert "Access-Control-Allow-Origin" not in no_origin_res.headers

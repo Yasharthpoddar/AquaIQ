@@ -29,8 +29,11 @@ export function getStateColor(state, metric = 'depth') {
 export function buildStateLookup(states = []) {
   const lookup = {};
   states.forEach(s => {
-    if (s.state_id) lookup[s.state_id.toUpperCase()] = s;
-    if (s.state_name) lookup[s.state_name.toLowerCase()] = s;
+    if (s.state_id) {
+      const id = s.state_id.toUpperCase();
+      if (lookup[id]) throw new Error(`Duplicate state ID: ${id}`);
+      lookup[id] = s;
+    }
   });
   return lookup;
 }
@@ -38,7 +41,15 @@ export function buildStateLookup(states = []) {
 export function matchState(properties = {}, lookup = {}) {
   const sid = String(properties.state_id || '').toUpperCase();
   if (sid && lookup[sid]) return lookup[sid];
-  const sName = String(properties.state_name || properties.st_nm || '').toLowerCase();
-  if (sName && lookup[sName]) return lookup[sName];
   return null;
+}
+
+export function searchStates(states = [], query = '') {
+  const terms = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  return states.filter(row => terms.every(term => `${row.state_name} ${row.state_id}`.toLowerCase().includes(term)));
+}
+
+export function stateSelectionId(states, candidate) {
+  const id = String(candidate || '').trim().toUpperCase();
+  return states.some(row => row.state_id === id) ? id : null;
 }

@@ -3,6 +3,13 @@ venv/
 __pycache__/
 *.pyc
 .env
+.env.*
+!.env.example
+*.db
+*.sqlite
+*.sqlite3
+*.pem
+*.key
 
 # Data — too large for git, downloaded fresh by each teammate
 data/raw/*
@@ -60,6 +67,9 @@ reports/candidates/station_history_20261015/*.png
 reports/candidates/rainfall_refresh/
 
 reports/candidates/forecast_replay/*.csv
+reports/nationwide_*/cases.csv
+reports/nationwide_*/candidate_*.csv
+reports/nationwide_*/outputs/
 
 # Reproducible audit row exports; retain compact aggregate reports in Git.
 reports/audit-*/**/*.csv

@@ -10,7 +10,7 @@ const numberLabel = value => Number.isFinite(value) ? value.toFixed(2) : 'Unavai
 export function ClimateInputsView({ districtId, data = null, loading = false, error = null, onRetry = () => {} }) {
   return <section className="card forecast-card" aria-label="Rainfall, temperature and evapotranspiration inputs" aria-busy={loading}>
     <header className="section-heading"><div><h2>Rainfall &amp; climate inputs</h2><p className="muted">Existing six-month model · assumed weather, not weather predictions</p></div><span className="experimental-badge">Model input assumptions</span></header>
-    <p className="forecast-note">These inputs belong to a separate six-month groundwater model. The 12-month seasonal/trend graph above does not use weather inputs.</p>
+    <p className="forecast-note">These inputs belong to the separate six-month XGBoost groundwater model. The 12-month XGBoost outlook has its own monthly weather inputs.</p>
     {loading && <p className="inline-state" role="status">Loading rainfall, temperature and evapotranspiration inputs…</p>}
     {error && <div className="inline-state error-state" role="alert"><p>{error}</p><button className="button button-secondary" type="button" onClick={onRetry}>Retry climate inputs</button></div>}
     {data && <>

@@ -24,6 +24,13 @@ def parse_as_of_value(value):
 def parse_as_of():
     return parse_as_of_value(request.args.get('as_of'))
 
+def parse_forecast_as_of():
+    cutoff = parse_as_of()
+    if 'as_of' not in request.args:
+        from models.forecast_storage import latest_published_as_of
+        return latest_published_as_of(cutoff) or cutoff
+    return cutoff
+
 def failure(error):
     if isinstance(error,LookupError):
         return response({'status':'not_found','error':str(error)},404)

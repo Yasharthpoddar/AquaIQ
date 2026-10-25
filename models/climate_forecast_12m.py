@@ -6,6 +6,7 @@ Uses a separate 12-month model checkpoint, explicit future weather policy,
 and leakage-safe chronological evaluation with a 12-month embargo.
 """
 from datetime import datetime, timezone
+from copy import deepcopy
 from pathlib import Path
 import json
 import math
@@ -346,7 +347,7 @@ def train(frame, cutoff=DEFAULT_TRAIN_CUTOFF, checkpoint=None, parameters=None):
             'feature_importance': importance, 'evaluation': evaluation,
             'evaluation_protocol': {
                 'embargo_months': 12,
-                'training_weather': 'Realized historical weather conditions as conditional covariates.',
+                'training_weather': 'Origin-available same-calendar-month historical climatology, identical to serving encoding.',
                 'evaluation_weather': 'Climatology calculated only from origin-available historical weather; future weather observations excluded.',
                 'target_policy': 'Both origin and target groundwater values explicitly observed; exact calendar-date joins.'
             },
@@ -364,7 +365,7 @@ def train(frame, cutoff=DEFAULT_TRAIN_CUTOFF, checkpoint=None, parameters=None):
     return model, publish_bundle(model, card, checkpoint)
 
 
-def forecast_from_evidence(evidence, weather_override=None):
+def forecast_from_evidence(evidence, weather_override=None, *, _verified_bundle=None):
     """Forecast exactly 12 monthly points from district evidence and origin weather assumptions."""
     cutoff = _as_of(evidence['as_of'])
     origin = cutoff.to_period('M').to_timestamp()
@@ -418,7 +419,12 @@ def forecast_from_evidence(evidence, weather_override=None):
         return result
 
     try:
-        model, card = load_bundle(expected_generation=evidence['generation'])
+        # The state request may share its already verified immutable bundle snapshot.
+        # Ordinary district requests retain the same loader and validation path.
+        model, card = (_verified_bundle if _verified_bundle is not None
+                       else load_bundle(expected_generation=evidence['generation']))
+        if _verified_bundle is not None and card.get('feature_generation_id') != evidence['generation']:
+            raise ValueError('12-month climate feature generation differs from the verified bundle.')
     except Exception as exc:
         result.update(status='model_unavailable', message=str(exc))
         return result
@@ -521,8 +527,14 @@ def forecast_from_evidence(evidence, weather_override=None):
     return finite_json(result)
 
 
-def forecast_next_twelve_months(district_id, as_of=None, weather_override=None):
+def forecast_next_twelve_months(district_id, as_of=None, weather_override=None, *, _allow_storage=True):
     """Entrypoint to forecast next twelve months for a given district."""
+    if _allow_storage and weather_override is None:
+        from models import forecast_storage
+        cutoff = _as_of(as_of).date()
+        stored = forecast_storage.get_district_forecast(district_id, cutoff)
+        if stored is not None:
+            return deepcopy(stored)
     return forecast_from_evidence(select_evidence(district_id, as_of), weather_override)
 
 
