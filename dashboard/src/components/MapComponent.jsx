@@ -132,8 +132,8 @@ function MapComponent({ scores = [], geojsonUrl, onDistrictClick, catalogLoading
 
             const tooltipContent = match
               ? `<strong>${tooltipText(match.name || dName)}</strong> (${tooltipText(match.state || sName)})<br/>
-                 ${Number.isFinite(match.score) ? `Project index: <strong>${match.score}</strong> · <span style="font-weight:600">${tooltipText(match.tier || 'Unclassified')}</span>` : 'Groundwater evidence unavailable'}<br/>
-                 <small style="color:#64748b">${match.estimate_type === 'zone_fallback' ? 'Agro-climatic zone estimate' : 'Estimate using district history'}${match.last_observed_date ? ` · Source-backed month: ${tooltipText(match.last_observed_date)}` : ''}</small>`
+                 ${Number.isFinite(match.score) ? `Project index: <strong>${match.score}</strong> · <span style="font-weight:600">${tooltipText(match.tier || 'Unclassified')}</span>` : 'Risk index unavailable; open this district for its twelve-month forecast.'}<br/>
+                 <small style="color:#64748b">${Number.isFinite(match.score) ? match.estimate_type === 'zone_fallback' ? 'Agro-climatic zone estimate' : 'Estimate using district history' : 'District forecast methods and evidence are shown separately.'}${match.last_observed_date ? ` · Source-backed month: ${tooltipText(match.last_observed_date)}` : ''}</small>`
               : `<strong>${tooltipText(dName)}</strong> (${tooltipText(sName)})<br/><small style="color:#94a3b8">District evidence unavailable</small>`;
 
             layer.bindTooltip(tooltipContent, { sticky: true });
@@ -146,10 +146,21 @@ function MapComponent({ scores = [], geojsonUrl, onDistrictClick, catalogLoading
               geojsonLayer.current?.resetStyle(layer);
             });
 
-            layer.on('click', () => {
+            const select = () => {
               if (onDistrictClick && match && match.district_id) {
                 onDistrictClick(match.district_id);
               }
+            };
+            layer.on('click', select);
+            layer.on('add', () => {
+              const element = layer.getElement();
+              if (!element || !match) return;
+              element.setAttribute('tabindex', '0');
+              element.setAttribute('role', 'button');
+              element.setAttribute('aria-label', `Open district ${match.name}, ${match.state}`);
+              element.addEventListener('keydown', event => {
+                if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); select(); }
+              });
             });
           },
         }).addTo(map);
@@ -172,7 +183,8 @@ function MapComponent({ scores = [], geojsonUrl, onDistrictClick, catalogLoading
       </div>}
       <div className="map-controls">
       {coverage && !catalogLoading && !catalogError && <div className="map-coverage" role="status">
-        <p>District boundaries match {coverage.mapped} of {scores.length} scored district records.</p>
+        <p>District boundaries match {coverage.mapped} of {scores.length} registered districts.</p>
+        <p>Colours show the separate risk index. Grey means no published risk score; registered districts remain searchable.</p>
         {coverage.missing.length > 0 && <p>Available without a separate matching boundary: {coverage.missing.map((district, index) => <span key={district.district_id}>
           {index > 0 && ' · '}<button type="button" className="alert-tab" onClick={() => onDistrictClick?.(district.district_id)}>{district.name}, {district.state}</button>
         </span>)}. Open a district to review its evidence.</p>}
@@ -194,7 +206,7 @@ function MapComponent({ scores = [], geojsonUrl, onDistrictClick, catalogLoading
         ))}
         <div className="legend-item">
           <span className="legend-swatch" style={{ background: DEFAULT_COLOR }} />
-          <span>Evidence unavailable</span>
+          <span>Risk index unavailable</span>
         </div>
       </div>
     </div>

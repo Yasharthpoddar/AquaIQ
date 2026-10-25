@@ -1,14 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MapComponent from '../components/MapComponent';
-import { fetchScores } from '../api';
+import { fetchScores, fetchDistrictCatalog, fetchStatesSummary } from '../api';
+import { mergeDistrictScores, validateDistrictCatalog, validateHomeForecastSummary } from '../components/districtCatalog.js';
+import { ForecastCoverage, RiskIndexNotice } from '../components/ForecastCoverage.jsx';
 import { districtForecastPath } from '../components/districtNavigation.js';
 import '../App.css';
 
 /**
  * Home page — India choropleth map + summary stats.
  * Uses the Leaflet MapComponent with GeoJSON boundaries.
- * Loads 725 canonical Indian districts from AquaIQ batch scoring API.
+ * District navigation and published forecasts are independent of risk scoring.
  */
 
 // GeoJSON path — served from public/ folder
@@ -52,6 +54,34 @@ function Home() {
   const [error, setError] = useState(null);
   const [status, setStatus] = useState('loading');
   const [retry, setRetry] = useState(0);
+  const [catalog, setCatalog] = useState([]);
+  const [catalogLoading, setCatalogLoading] = useState(true);
+  const [catalogError, setCatalogError] = useState(null);
+  const [catalogRetry, setCatalogRetry] = useState(0);
+  const [forecastSummary, setForecastSummary] = useState(null);
+  const [forecastLoading, setForecastLoading] = useState(true);
+  const [forecastError, setForecastError] = useState(null);
+  const [forecastRetry, setForecastRetry] = useState(0);
+
+  useEffect(() => {
+    let cancelled = false;
+    setCatalogLoading(true); setCatalogError(null);
+    fetchDistrictCatalog().then(validateDistrictCatalog).then(data => {
+      if (!cancelled) { setCatalog(data.districts); setTotalDistricts(data.total); }
+    }).catch(error => { if (!cancelled) { setCatalog([]); setCatalogError(error.message || 'District registry unavailable.'); } })
+      .finally(() => { if (!cancelled) setCatalogLoading(false); });
+    return () => { cancelled = true; };
+  }, [catalogRetry]);
+
+  useEffect(() => {
+    let cancelled = false;
+    setForecastLoading(true); setForecastError(null); setForecastSummary(null);
+    fetchStatesSummary().then(validateHomeForecastSummary).then(data => {
+      if (!cancelled) setForecastSummary(data);
+    }).catch(error => { if (!cancelled) setForecastError(error.message || 'Forecast coverage unavailable.'); })
+      .finally(() => { if (!cancelled) setForecastLoading(false); });
+    return () => { cancelled = true; };
+  }, [forecastRetry]);
 
   useEffect(() => {
     let cancelled = false;
@@ -70,7 +100,6 @@ function Home() {
           district_level: rows.filter(row => Number.isFinite(row.score) && row.estimate_type === 'district_level').length,
           zone_fallback: rows.filter(row => Number.isFinite(row.score) && row.estimate_type === 'zone_fallback').length,
         });
-        setTotalDistricts(rows.length);
         setStatus(rows.length ? (data.status || 'success') : 'awaiting_complete_scoring_run');
       })
       .catch(err => {
@@ -97,26 +126,22 @@ function Home() {
   const observations = validScores.map(row => row.last_observed_date).filter(Boolean).sort();
   const uncalibrated = scores.some(row => row.weights_status === 'initial_uncalibrated');
   const scoresReady = !loading && !error && status === 'success';
+  const mappedDistricts = useMemo(() => mergeDistrictScores(catalog, scores), [catalog, scores]);
 
   return (
     <div className="page">
       <header className="page-heading"><p className="eyebrow">AquaIQ analytics</p><h1>Groundwater overview</h1><p className="subtitle">Explore district evidence and experimental estimates for the next 12 months.</p></header>
-      {error && <div className="empty-state" role="alert">
-        <p>{error}</p>
-        <button className="alert-tab" onClick={() => setRetry(value => value + 1)}>Retry scores</button>
-      </div>}
-      {!loading && !error && status === 'awaiting_complete_scoring_run' && <div className="empty-state" role="status">
-        <p>Scores are awaiting a complete scoring run for the current model and data. Risk tiers are unavailable.</p>
-        <button className="alert-tab" onClick={() => setRetry(value => value + 1)}>Check again</button>
-      </div>}
-      {scoresReady && <p className="subtitle" role="status">
+      <ForecastCoverage summary={forecastSummary} loading={forecastLoading} error={forecastError}
+        onRetry={() => setForecastRetry(value => value + 1)} />
+      <RiskIndexNotice loading={loading} error={error} ready={scoresReady} onRetry={() => setRetry(value => value + 1)} />
+      {scoresReady && totalDistricts > 0 && <p className="subtitle" role="status">
         {validScores.length} scored · {totalDistricts - validScores.length} unavailable · {totalDistricts} districts
         {observations.length > 0 && ` · Source months ${observations[0].slice(0,7)}–${observations.at(-1).slice(0,7)}`}
       </p>}
       {scoresReady && uncalibrated && <p className="compact-note">Uncalibrated project index · not a crisis probability. Monthly estimates are experimental.</p>}
 
       {/* Summary cards */}
-      <div className="summary-cards">
+      {scoresReady && <><h2>Project risk index</h2><div className="summary-cards">
         {Object.entries(tierCounts).map(([tier, count], i) => (
           <div
             key={tier}
@@ -133,10 +158,10 @@ function Home() {
             <div className="card-label">{tier}</div>
           </div>
         ))}
-      </div>
+      </div></>}
 
       {/* Stats bar */}
-      {scoresReady && (
+      {scoresReady && totalDistricts > 0 && (
         <div className="stats-bar fade-in">
           <div className="stat-item">
             <span>📊</span>
@@ -165,26 +190,20 @@ function Home() {
 
       {/* Leaflet choropleth map */}
       <MapComponent
-        scores={scores}
+        scores={mappedDistricts}
         geojsonUrl={GEOJSON_URL}
         onDistrictClick={handleDistrictClick}
-        catalogLoading={loading}
-        catalogError={error || (status === 'awaiting_complete_scoring_run' ? 'District catalog is awaiting a complete scoring run.' : null)}
-        onCatalogRetry={() => setRetry(value => value + 1)}
+        catalogLoading={catalogLoading}
+        catalogError={catalogError}
+        onCatalogRetry={() => setCatalogRetry(value => value + 1)}
       />
 
       {/* District list (top risk) */}
-      <h2>Districts ranked by project index</h2>
+      {scoresReady && <><h2>Districts ranked by project index</h2>
       <div className="district-list">
-        {loading ? (
-          <>
-            {[...Array(5)].map((_, i) => (
-              <div key={i} className="skeleton-pulse" style={{ height: '56px', marginBottom: '8px' }} />
-            ))}
-          </>
-        ) : scoresReady && validScores.length === 0 ? (
+        {validScores.length === 0 ? (
           <div className="empty-state">Groundwater evidence is unavailable for this scoring run.</div>
-        ) : scoresReady ? (
+        ) : (
           [...validScores].sort((a, b) => b.score - a.score).slice(0, 50).map((d, i) => (
             <div
               key={d.district_id}
@@ -203,8 +222,8 @@ function Home() {
               </span>
             </div>
           ))
-        ) : null}
-      </div>
+        )}
+      </div></>}
     </div>
   );
 }

@@ -47,6 +47,10 @@ export async function fetchScores() {
   return getJson('/api/scores', 'Scores');
 }
 
+export async function fetchDistrictCatalog() {
+  return getJson('/api/districts', 'District catalog');
+}
+
 export async function fetchAlerts(tier = null, limit = 100) {
   const params = new URLSearchParams();
   if (tier && tier !== 'All') params.set('tier', tier);

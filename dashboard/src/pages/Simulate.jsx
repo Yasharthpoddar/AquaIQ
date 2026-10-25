@@ -1,5 +1,6 @@
-import { useEffect, useReducer, useRef, useState } from 'react';
-import { fetchScores, postSimulate } from '../api.js';
+import { useEffect, useMemo, useReducer, useRef, useState } from 'react';
+import { fetchDistrictCatalog, fetchScores, postSimulate } from '../api.js';
+import { mergeDistrictScores, validateDistrictCatalog } from '../components/districtCatalog.js';
 import DistrictSearch from '../components/DistrictSearch.jsx';
 import {
   SIMULATION_PRESETS, INITIAL_SIMULATION_INPUTS, TIER_COLORS, availableSimulationEvidence, canExportComparison, comparisonCsv,
@@ -118,6 +119,7 @@ export function ComparisonResults({ comparison = null, busy = false, selectedDis
 
 export default function Simulate() {
   const [districts, setDistricts] = useState([]);
+  const [scoreRecords, setScoreRecords] = useState([]);
   const [districtId, setDistrictId] = useState('');
   const [districtLoading, setDistrictLoading] = useState(true);
   const [districtError, setDistrictError] = useState(null);
@@ -131,7 +133,8 @@ export default function Simulate() {
   const sequence = useRef(0);
   const runner = useRef(null);
   if (!runner.current) runner.current = createScenarioRunner(postSimulate);
-  const selectedDistrict = districts.find(district => district.district_id === districtId) || null;
+  const catalogWithScores = useMemo(() => mergeDistrictScores(districts, scoreRecords), [districts, scoreRecords]);
+  const selectedDistrict = catalogWithScores.find(district => district.district_id === districtId) || null;
 
   useEffect(() => {
     alive.current = true;
@@ -141,9 +144,8 @@ export default function Simulate() {
   useEffect(() => {
     let cancelled = false;
     setDistrictLoading(true); setDistrictError(null);
-    fetchScores().then(data => {
+    fetchDistrictCatalog().then(validateDistrictCatalog).then(data => {
       if (cancelled) return;
-      if (data.status === 'awaiting_complete_scoring_run') throw new Error('District indices are being rebuilt. Retry after scoring completes.');
       const records = Array.isArray(data.districts)
         ? data.districts.filter(district => typeof district?.district_id === 'string' && district.district_id) : [];
       if (!records.length) throw new Error('No districts are available. Retry the district list.');
@@ -153,6 +155,13 @@ export default function Simulate() {
     }).catch(error => {
       if (!cancelled) { setDistricts([]); setDistrictId(''); setDistrictError(error.message || 'Districts could not be loaded.'); }
     }).finally(() => { if (!cancelled) setDistrictLoading(false); });
+    return () => { cancelled = true; };
+  }, [districtRetry]);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchScores().then(data => { if (!cancelled) setScoreRecords(Array.isArray(data.districts) ? data.districts : []); })
+      .catch(() => { if (!cancelled) setScoreRecords([]); });
     return () => { cancelled = true; };
   }, [districtRetry]);
 

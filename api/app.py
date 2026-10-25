@@ -108,6 +108,7 @@ def create_app(config_override=None):
             "endpoints": [
                 "/api/config",
                 "/api/scores",
+                "/api/districts",
                 "/api/predict/<district_id>",
                 "/api/predict/climate-12m/<district_id>",
                 "/api/states",

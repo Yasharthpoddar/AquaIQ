@@ -10,6 +10,8 @@ Read the [current methods, setup, migration, API and reproducibility guide](docs
 
 The dashboard shows supported forecasts and fallback estimates with distinct method/evidence labels, warnings and historical ranges. Present-period reliability and prospective skill remain unverified; historical ranges under-cover their nominal 90% target. HGB remains abstained. The project risk index is uncalibrated and separate from these depth forecasts. Historical experiments below retain their original scope and results.
 
+Home displays published forecast coverage and evidence counts. District search, map links and the Simulate selector use `/api/districts`, so an unavailable risk-scoring run cannot hide registered districts or their twelve-month forecasts.
+
 ## Preserved historical twelve-month research evidence
 
 This section concerns the earlier direct M+12 Adilabad/Telangana study, not the current climate-conditioned monthly or state XGBoost product. Its benchmark values are preserved unchanged.

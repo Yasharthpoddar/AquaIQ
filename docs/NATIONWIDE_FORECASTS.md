@@ -46,6 +46,8 @@ $env:AQUAIQ_FORECAST_SCHEMA='aquaiq_test_nationwide_20261025'
 
 API examples: `/api/states`, `/api/states/summary?horizon=12&as_of=2026-10-25`, `/api/predict/state/TS?horizon=12&as_of=2026-10-25`, `/api/predict/climate-12m/AN-Nicobars?months=12&as_of=2026-10-25`. Six-month endpoint and climate projection query parameters are unchanged.
 
+`GET /api/districts` returns every canonical district ID, name and state independently of the database, model artifacts and scoring runs. Home and Simulate use this registry for navigation; optional risk records enrich it without removing districts. Home's primary cards show published forecast evidence counts. The separate six-month risk index may be unavailable or awaiting a matching scoring run without blocking district search, map navigation or twelve-month forecasts. Map colours retain their explicit risk-index meaning; grey does not imply a missing district forecast.
+
 ## Validation design and limitations
 
 The [saved validation](../reports/nationwide_20261025/validation.json) contains tier, district, horizon and experiment metrics on identical target observations. Fallback calibration origins are January/July 2017–2018. Evaluation starts July 2019, then rolls across January/July 2020–2023 plus January 2025. XGBoost calibration uses January/July 2021 after its frozen 2019 training-label cutoff and twelve-month embargo; its evaluation starts July 2022, after all calibration targets. Earlier evaluation origins are purged. Empty origins remain recorded. January 2025 tests include the January 2026 refresh at M+12. Tests condition on calendar observation months; provider publication timestamps remain unknown.
