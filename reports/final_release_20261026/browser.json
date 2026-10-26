@@ -1,0 +1,16 @@
+{
+  "passed": [
+    "State TS shows all registered districts, 12 months, and mixed evidence",
+    "State page has no horizontal overflow at desktop/tablet/mobile widths",
+    "District tier A renders real published values, evidence and historical ranges",
+    "District tier B renders real published values, evidence and historical ranges",
+    "District tier C renders real published values, evidence and historical ranges",
+    "District tier D renders real published values, evidence and historical ranges",
+    "District API failure and retry recover without hiding forecast card",
+    "State summary failure leaves selected state usable; retry recovers",
+    "State search and keyboard navigation update the selected forecast"
+  ],
+  "errors": [],
+  "source": "real isolated published generation",
+  "as_of": "2026-10-26"
+}

@@ -139,8 +139,6 @@ def test_TC23_non_numeric_input_is_rejected(sim):
         compute_crisis_score(sim, "abc", 3)
 
 
-@pytest.mark.xfail(strict=True, reason="DEFECT D-01: NaN passes np.clip and returns a made-up score "
-                                       "(64.79 / Warning) instead of being rejected")
 def test_TC24_nan_input_is_rejected(sim):
     with pytest.raises((ValueError, RuntimeError)):
         compute_crisis_score(sim, float("nan"), 3)

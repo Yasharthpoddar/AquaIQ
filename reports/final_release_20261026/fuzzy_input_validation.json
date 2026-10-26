@@ -1,0 +1,42 @@
+{
+  "defect": "NaN could pass input clipping and produce a fabricated finite fuzzy risk score; infinity was silently converted to a boundary observation.",
+  "change": "Reject nonfinite rainfall deficit or depletion rate with ValueError before assigning either reusable simulation input. Finite clipping, inference rules and tier mapping are unchanged.",
+  "tests": {
+    "command": ".\\venv\\Scripts\\python.exe -B -m pytest -q tests/test_fuzzy_input_validation.py tests/test_fuzzy_crisis_unit.py tests/test_tiers.py tests/test_backtest.py -p no:cacheprovider --disable-warnings --basetemp=scratch/pytest-fuzzy-finite-related",
+    "passed": 71,
+    "failed": 0,
+    "skipped": 0,
+    "xfail": 0,
+    "duration_seconds": 19.69
+  },
+  "finite_comparison": {
+    "reference_commit": "bfd2ed048d543dd0907cafb2a6d7f81821417cfc",
+    "reference_git_blob_oid": "711d5323ce300759c66adf9827a9323b7f96e3d5",
+    "reference_file": "models/fuzzy_logic.py",
+    "procedure": "Read the committed file with git show; extract and compile only its compute_crisis_score AST function with the same NumPy and score_to_tier globals. Build separate original and corrected fuzzy simulations. Evaluate the Cartesian product below in the stated order and assert exact equality of every returned (score, tier) tuple.",
+    "rainfall_deficit_values_percent": [-100.0, 0.0, 5.0, 15.0, 25.0, 35.0, 40.0, 55.0, 75.0, 100.0, 150.0],
+    "depletion_rate_values_cm_per_year": [-10.0, 0.0, 0.5, 1.5, 2.5, 3.5, 4.0, 5.5, 7.0, 10.0, 15.0, 40.0],
+    "pairs_checked": 132,
+    "exact_score_and_tier_matches": 132,
+    "mismatches": 0,
+    "clipped_endpoints_included": true
+  },
+  "guard_checks": {
+    "nan_rejected_in_either_argument": true,
+    "positive_and_negative_infinity_rejected_in_either_argument": true,
+    "numpy_float32_nan_rejected": true,
+    "invalid_inputs_rejected_before_simulation_mutation": true,
+    "reused_simulation_works_after_rejection": true,
+    "existing_nonnumeric_typeerror_contract_preserved": true,
+    "finite_numpy_scalar_inputs_preserved": true,
+    "obsolete_user_regression_xfail_removed": true
+  },
+  "scope": {
+    "fuzzy_rule_or_finite_score_change": false,
+    "twelve_month_model_or_generation_changed_by_this_fix": false,
+    "database_writes_by_this_fix": 0,
+    "risk_scoring_code_fingerprint_changes": true,
+    "risk_identity_note": "The risk pipeline fingerprints fuzzy_logic.py. The corrected implementation therefore invalidates stale risk signatures as designed; isolated rescoring is verified separately by the release coordinator."
+  },
+  "git_diff_check": "passed"
+}

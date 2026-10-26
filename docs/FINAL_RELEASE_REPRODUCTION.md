@@ -76,6 +76,12 @@ $replayPython = Join-Path (Get-Location) 'scratch/final_release_replay/environme
 
 The wrapper verifies cached acquisition bytes, builds a new isolated feature snapshot, proves calibration-prefix equality, initializes only the explicit private schema, computes forecasts and compares all six expected identities/coverage values. Its child interpreter runs with `-I` in the independent environment. It deliberately supplies baseline data and local connection configuration; neither source credentials nor ignored observation rows enter the report. Outputs, source revisions and code changes that alter identity must be investigated rather than overwritten to force a match. For another run, choose new scratch paths, report and schema names.
 
+The separate [complete export comparison](../reports/final_release_20261026/clean_output_comparison.json) also verified exact equality of all 725 district and 36 state forecast objects, including values, tiers and evidence. Only `computed_at` timestamps were excluded. After generating both export directories, reproduce it with:
+
+```powershell
+.\venv\Scripts\python.exe -B -m scripts.compare_release_replay --expected scratch/final_release_outputs --replay scratch/clean_release_20261026/checkout/scratch/final_replay_outputs --output scratch/final_release_output_comparison.json
+```
+
 ## Individual offline build and diagnostic commands
 
 These alternatives expose the main steps. All outputs below are new ignored paths. Keep the recorded v2 manifest and V3 snapshot immutable.
@@ -114,7 +120,7 @@ Manual/PDF targets use actual source dates, verified `m_bgl` units and conservat
 
 All 31 refreshed 2026–2030 manual CSV bodies were acquired and checked: each is the same 243-byte header, with zero observations. Telemetry remains quarantined: 274,930 rows, 91 station fingerprints, 41 fingerprints with both signs, 16 accepted manual same-day pairs and zero exact timestamp pairs. `RL_MSL` does not establish sensor datum. The new 2026 CGWB high-frequency guidance requires reference/installation information and manual dip validation; it does not authorize a universal sign flip. Provider-specific metadata and independent overlap remain necessary.
 
-The authorized ERA5 request returned HTTP 403 with a manual dataset-terms gate. No new weather arrays were obtained, so comparison against newly acquired values was impossible. The account owner must review and manually accept the terms before a separately authorized retry; credentials and terms acceptance were not fabricated. The SoI edition-2025 archive and metadata ZIP were downloaded and hashed. Two actual Mumbai district geometries were selected for diagnostics without changing coordinates or production geography. Both polygons lack interior usable ERA5 centers and select the same external coarse cell. Alternative footprint weighting changes 216 historical Mumbai Suburban feature rows and fails frozen-model compatibility. It was not promoted or scored as an improved trained model.
+The authorized ERA5 request returned HTTP 403 with a manual dataset-terms gate. No new weather arrays were obtained, so comparison against newly acquired values was impossible. The account owner must review and manually accept the terms before a separately authorized retry; credentials and terms acceptance were not fabricated. The SoI edition-2025 archive and metadata ZIP were downloaded and hashed. Two actual Mumbai district geometries were selected for diagnostics without changing coordinates or production geography. Both polygons lack interior usable ERA5 centers and select the same external coarse cell. Filling Suburban from the current-rule nearest-cell proxy changes 216 pre-2020 rows and fails frozen-model compatibility; footprint weighting additionally changes the aggregation definition. Neither alternative was promoted or scored as an improved trained model.
 
 Prior GWRA, aquifer, SoilGrids, WorldCover, SRTM and GRACE investigations remain in the catalog. Resource-assessment categories are context; a VRT/tile index is not downloaded raster data; one soil pixel is not a district predictor; coarse total-water storage is not measured groundwater depth. No auxiliary candidate was promoted by this release.
 
@@ -130,3 +136,11 @@ npm.cmd --prefix dashboard run build
 ```
 
 The source-focused results recorded for this release are 24 groundwater tests, 25 weather/boundary tests, 35 interval/forecast Python tests and nine focused frontend tests. Broader release checks are recorded separately by the release coordinator; the counts above must not be summed as a complete distinct-suite total. Source audits and isolated replay do not replace service/API verification or establish future scientific accuracy.
+
+The 27 October follow-up also fixes transient Windows checkpoint replacement and rejects nonfinite direct fuzzy inputs. Finite risk scores are unchanged, but the code signature changes, so the old risk run deliberately fails the matching-signature lookup. The equivalent validated local run is in `aquaiq_test_final_score_20261027` (721 available/four unavailable); the prior scoring namespace remains intact. To recreate it, use a new isolated schema:
+
+```powershell
+.\venv\Scripts\python.exe -B -m models.score_all --date 2026-10-26 --test-schema aquaiq_test_final_score_replay_20261027
+```
+
+The restored backend on port 5000 uses `AQUAIQ_FORECAST_SCHEMA=aquaiq_test_enrichment_20261026`, retaining the prior forecast generation, and `AQUAIQ_SCORING_SCHEMA=aquaiq_test_final_score_20261027`. The new final forecast remains separately published in `aquaiq_test_final_release_20261026`. Set `AQUAIQ_ENABLE_SYNC_FORECAST_FALLBACK=false`; selecting a different forecast namespace is an explicit deployment choice. The frontend on port 5173 now runs the patched Vite 8.3.3 install. See the final report for executed complete-suite, API, browser and replay results.

@@ -1,0 +1,35 @@
+{
+  "schema_version": "aquaiq-state-test-isolation-validation-v1",
+  "validated_at_utc": "2026-10-26T19:27:38Z",
+  "scope": "tests/test_state_forecasting.py inference-only API client fixture",
+  "original_failure": {
+    "test": "test_api_horizon_dates_identity_and_structured_model_failure",
+    "expected_http_status": 503,
+    "observed_http_status": 200,
+    "cause": "A real published forecast was served before the mocked synchronous inference function could run. The default as_of also consulted the live published-generation date."
+  },
+  "isolation": {
+    "mocked_persistence_reads": [
+      "models.forecast_storage.latest_published_as_of",
+      "models.forecast_storage.get_state_forecast",
+      "models.forecast_storage.get_nationwide_summary"
+    ],
+    "database_access_guard": "The fixture replaces forecast_storage.storage_connection with pytest.fail so an unexpected storage access fails the test rather than consulting a live database.",
+    "inference_call_assertion": "The model-unavailable request invokes the mock exactly once with canonical state TN and the request's default date.",
+    "production_route_or_storage_behavior_changed": false,
+    "frozen_generation_dependencies_changed": false,
+    "database_modified": false
+  },
+  "verification": {
+    "command": ".\\venv\\Scripts\\python.exe -B -m pytest tests/test_state_forecasting.py -q --disable-warnings -p no:cacheprovider --basetemp=scratch/pytest-state-isolation --junitxml=scratch/state-isolation-tests.xml",
+    "exit_code": 0,
+    "tests": 34,
+    "passed": 34,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "duration_seconds": 7.788,
+    "raw_junit_path_ignored": "scratch/state-isolation-tests.xml",
+    "full_suite_rerun": false
+  }
+}

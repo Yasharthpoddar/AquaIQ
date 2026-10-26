@@ -281,7 +281,18 @@ def test_historical_baseline_evidence_preserved_without_superiority_requirement(
 
 @pytest.fixture
 def client(monkeypatch):
+    """Exercise synchronous inference without consulting a published database."""
+    from models import forecast_storage
+
     monkeypatch.setenv("AQUAIQ_ENABLE_SYNC_FORECAST_FALLBACK", "true")
+    monkeypatch.setattr(forecast_storage, 'latest_published_as_of', lambda cutoff: None)
+    monkeypatch.setattr(forecast_storage, 'get_state_forecast', lambda *args, **kwargs: None)
+    monkeypatch.setattr(forecast_storage, 'get_nationwide_summary', lambda *args, **kwargs: None)
+
+    def unexpected_storage_connection():
+        pytest.fail('The inference-only API fixture must not access forecast storage.')
+
+    monkeypatch.setattr(forecast_storage, 'storage_connection', unexpected_storage_connection)
     app = create_app()
     app.config['TESTING'] = True
     return app.test_client()
@@ -293,10 +304,16 @@ def test_api_horizon_dates_identity_and_structured_model_failure(client, monkeyp
     for query in ['horizon=6','horizon=bad','as_of=bad','as_of=2099-01-01']:
         assert client.get('/api/predict/state/TN?'+query).status_code == 400
     assert client.get('/api/predict/state/Atlantis').status_code == 404
-    monkeypatch.setattr(routes, 'forecast_state_twelve_months',
-        lambda code, as_of: dict(status='model_unavailable', state_id=code, forecast=[]))
+    inference_calls = []
+
+    def unavailable(code, as_of):
+        inference_calls.append((code, as_of))
+        return dict(status='model_unavailable', state_id=code, forecast=[])
+
+    monkeypatch.setattr(routes, 'forecast_state_twelve_months', unavailable)
     response = client.get('/api/predict/state/TN')
     assert response.status_code == 503 and response.get_json()['forecast'] == []
+    assert inference_calls == [('TN', date.today())]
     assert client.get('/api/states/summary?horizon=6').status_code == 400
 
 

@@ -1,0 +1,16 @@
+{
+  "checked_at_utc": "2026-10-26T19:37:07.920387+00:00",
+  "frontend_url": "http://127.0.0.1:5173/",
+  "backend_url": "http://127.0.0.1:5000",
+  "frontend_http": 200,
+  "forecast_http": 200,
+  "forecast_generation": "600edc35-506d-501d-82c2-5cc2ebcfe699",
+  "as_of": "2026-10-26",
+  "forecast_horizons": 12,
+  "scoring_schema": "aquaiq_test_final_score_20261027",
+  "scoring_run": "478dcf69-fad7-5448-92f2-f6093f8dd85c",
+  "score_records": 725,
+  "vite_version": "8.3.3",
+  "root_npm_ci": "70 packages; zero reported vulnerabilities",
+  "service_action": "Prior servers were stopped when checked; restored original ports after clean-environment tests, retained prior forecast generation and selected new isolated equivalent scoring snapshot."
+}

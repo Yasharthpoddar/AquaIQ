@@ -1,0 +1,28 @@
+{
+  "test": "independent_environment_complete_forecast_export_comparison",
+  "passed": true,
+  "ignored_fields": [
+    "computed_at"
+  ],
+  "panels": {
+    "districts": {
+      "records": 725,
+      "horizons": 8700,
+      "complete_objects_equal": true,
+      "normalized_sha256": "43a1ee105620e902dc5b531781371e757e370db66528414eb28858d8ac6a2487",
+      "tier_counts": {
+        "A": 551,
+        "B": 116,
+        "C": 57,
+        "D": 1
+      }
+    },
+    "states": {
+      "records": 36,
+      "horizons": 432,
+      "complete_objects_equal": true,
+      "normalized_sha256": "decfbe45fc34b52b2d1507571f4941076f92aad301270099dd907bf02e68ea20"
+    }
+  },
+  "comparison": "Exact complete numeric values, dates, deltas, bounds, tiers, methods, evidence and provenance; no tolerance."
+}

@@ -122,6 +122,11 @@ def compute_crisis_score(sim, rainfall_deficit_val: float, depletion_rate_val: f
     Run the FIS for a single district's inputs.
     Returns (crisis_score, tier).
     """
+    # Clipping does not reject NaN and would turn infinity into a boundary
+    # observation. Validate both inputs before changing the reusable simulation.
+    if not np.isfinite(rainfall_deficit_val) or not np.isfinite(depletion_rate_val):
+        raise ValueError('Fuzzy inputs must be finite observations.')
+
     # Clamp inputs to valid ranges
     rainfall_deficit_val = np.clip(rainfall_deficit_val, 0, 100)
     depletion_rate_val = np.clip(depletion_rate_val, 0, 15)

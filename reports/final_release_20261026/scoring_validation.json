@@ -1,0 +1,34 @@
+{
+  "test": "finite_risk_snapshot_exact_equality",
+  "schema": "aquaiq_test_final_score_20261027",
+  "run_id": "478dcf69-fad7-5448-92f2-f6093f8dd85c",
+  "as_of": "2026-10-26",
+  "all_725_score_records_unchanged": true,
+  "compared_fields": [
+    "district_id",
+    "forecast_date",
+    "aquaiq_score",
+    "tier",
+    "estimate_type",
+    "zone_fallback_reason",
+    "top_factor_1",
+    "top_factor_2",
+    "top_factor_3",
+    "last_observed_date",
+    "feature_generation",
+    "model_version"
+  ],
+  "tier_counts": {
+    "Unknown": 4,
+    "Watch": 357,
+    "Safe": 312,
+    "Warning": 46,
+    "Crisis": 6
+  },
+  "previous_forecast_generation_preserved": [
+    "600edc35-506d-501d-82c2-5cc2ebcfe699"
+  ],
+  "source_tables_modified": false,
+  "prior_scoring_schema_modified": false,
+  "signature_changed": "Expected because nonfinite input validation changed fuzzy implementation; new isolated run, same finite outputs."
+}

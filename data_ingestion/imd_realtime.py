@@ -28,6 +28,7 @@ CONTROL_URL = "https://imdpune.gov.in/cmpg/Realtimedata/Rainfall/dataddmmyyyy.ph
 GRID_DOCS = "https://imdpune.gov.in/cmpg/Griddata/Rainfall_25_Bin.html"
 NY, NX = 129, 135
 DAY_BYTES = NY * NX * 4
+_CHECKPOINT_REPLACE_RETRY_DELAYS = (0.01, 0.02, 0.04, 0.08)
 
 
 class DailyDownloadError(RuntimeError):
@@ -51,7 +52,17 @@ def _atomic_json(path: Path, payload: dict) -> None:
             stream.write("\n")
             stream.flush()
             os.fsync(stream.fileno())
-        temporary.replace(path)
+        # Windows readers without delete sharing can briefly block rename even
+        # after our own file handle is closed. Permission denials can also be
+        # permanent: bound retries and leave the previous checkpoint untouched.
+        for delay in (*_CHECKPOINT_REPLACE_RETRY_DELAYS, None):
+            try:
+                temporary.replace(path)
+                break
+            except PermissionError as error:
+                if getattr(error, "winerror", None) not in (5, 32, 33) or delay is None:
+                    raise
+                time.sleep(delay)
     finally:
         if temporary is not None:
             temporary.unlink(missing_ok=True)
