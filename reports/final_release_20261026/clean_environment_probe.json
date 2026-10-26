@@ -1,0 +1,38 @@
+{
+  "checked_at_utc": "2026-10-26T14:34:11.553764+00:00",
+  "checkout_commit": "87e40ca2f48e1e1fd2f381f17b8a7b9c236c3f8b",
+  "independent_environment": true,
+  "shared_site_packages": false,
+  "pip_check": "passed",
+  "probe": {
+    "python": "3.13.15",
+    "prefix": "C:\\Users\\Yasharth\\Downloads\\AquaIQ\\scratch\\clean_release_20261026\\environment",
+    "packages": {
+      "numpy": "2.5.4",
+      "pandas": "3.0.6",
+      "scipy": "1.18.1",
+      "xgboost": "3.4.1",
+      "scikit-learn": "1.9.1",
+      "Flask": "3.1.3",
+      "netCDF4": "1.7.4",
+      "geopandas": "1.2.0"
+    },
+    "code_only_feature_load": {
+      "type": "ValueError",
+      "message": "Feature manifest missing. Rebuild physical-unit causal features before training."
+    },
+    "tracked_model_verified_sha256": "4b22e2165664e1c1dd21c81ccf95d894655f0a0d589017a9ab87df0588a73a03",
+    "missing_runtime_assets": [
+      "data/raw/cgwb_combined.csv",
+      "data/raw/india_districts.geojson",
+      "data/processed/features_matrix.csv",
+      "data/processed/feature_manifest.json",
+      ".env"
+    ]
+  },
+  "code_only_clone_reproduces_forecasts": false,
+  "source_asset_status": "Code-only feature loading was actually attempted. Exact ignored baseline assets and a credentialed local test database require separate acquisition/restoration; metadata access alone is not asset availability.",
+  "supplied_asset_replay": "not_yet_attempted",
+  "working_service_modified": false,
+  "database_writes": false
+}

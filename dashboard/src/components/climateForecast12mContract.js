@@ -87,8 +87,13 @@ export function validateClimate12mForecast(value, expectedDistrict = null) {
           invalid(`Forecast item ${i} weather ${field} is not finite`);
         }
       }
-      if (row.lower_gwl !== undefined && (!depth(row.lower_gwl) || !depth(row.upper_gwl)
+      if ((row.lower_gwl !== undefined || row.upper_gwl !== undefined) && (!depth(row.lower_gwl) || !depth(row.upper_gwl)
         || row.lower_gwl > row.predicted_gwl || row.upper_gwl < row.predicted_gwl)) invalid('Invalid prediction range');
+      if (value.uncertainty?.policy_version === '2.0-empirical-error-band-disclosure') {
+        if (!['unavailable', 'historical_reference_only', 'empirical_undercovered'].includes(row.interval_status)) invalid('Invalid interval status');
+        if (row.interval_status === 'unavailable' ? row.lower_gwl !== undefined || row.upper_gwl !== undefined
+          : row.lower_gwl === undefined || row.upper_gwl === undefined) invalid('Interval status contradicts its bounds');
+      }
       if (weather.rainfall_mm < 0 || weather.evapotranspiration_mm < 0) invalid(`Forecast item ${i} has negative rainfall or evapotranspiration`);
       // Preserve validation of optional scientific references even though the product does not render them.
       if (row.baselines !== undefined) {
@@ -108,6 +113,10 @@ export function validateClimate12mForecast(value, expectedDistrict = null) {
     if (value.forecast_start !== months[0] || value.forecast_end !== months[11]) {
       invalid(`Start/End mismatch: start=${value.forecast_start}, end=${value.forecast_end}`);
     }
+    if (value.uncertainty?.policy_version === '2.0-empirical-error-band-disclosure'
+      && (!['unavailable', 'historical_reference_only', 'empirical_undercovered'].includes(value.uncertainty.status)
+        || value.uncertainty.local_coverage_guarantee !== false
+        || value.uncertainty.status === 'unavailable' && value.forecast.some(row => row.interval_status !== 'unavailable'))) invalid('Invalid uncertainty disclosure');
   }
 
   return value;
@@ -124,8 +133,11 @@ export function climate12mChartRows(value) {
     rainfall: row.weather?.rainfall_mm,
     temperature: row.weather?.temperature_c,
     evapotranspiration: row.weather?.evapotranspiration_mm,
-    lower: row.lower_gwl,
-    upper: row.upper_gwl,
+    // A previously published partial band can have global unavailable status.
+    // Keep point values, but do not display bounds that their metadata disowns.
+    lower: value.uncertainty?.status === 'unavailable' || row.interval_status === 'unavailable' ? undefined : row.lower_gwl,
+    upper: value.uncertainty?.status === 'unavailable' || row.interval_status === 'unavailable' ? undefined : row.upper_gwl,
+    intervalStatus: row.interval_status || (value.uncertainty?.status === 'unavailable' ? 'unavailable' : 'historical_reference_only'),
     method: value.forecast_method || value.projection_method,
     evidenceTier: value.evidence_tier,
   }));

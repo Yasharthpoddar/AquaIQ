@@ -15,6 +15,7 @@ from models import climate_forecast_12m as climate
 from models.monthly_projection import fit_projection, MIN_OBSERVATIONS, MIN_SPAN_MONTHS
 from models.ensemble import _as_of, _completed_feature_month
 from models.xgboost_model import observed_mask
+from models.interval_evidence import attach_error_bands, load_validation_evidence, validate_disclosure
 
 VERSION = '1.0-tiered-12m'
 REFERENCE_VERSION = '1.0-reference-12m'
@@ -195,18 +196,8 @@ def forecast_district(district_id, frame, cutoff, generation, bundle, reference,
             if np.isfinite(pd.to_numeric(frame[k],errors='coerce')).any() else None),
             'available_fraction': float(np.isfinite(pd.to_numeric(frame[k],errors='coerce')).mean()) if len(frame) else 0.} for k in WEATHER},
         uncertainty={'status': 'unavailable', 'reason': 'No independent pre-origin calibration for this method/horizon.'})
-    if calibration:
-        radii = calibration.get('radii_m', {}).get(tier, {})
-        for row in result['forecast']:
-            radius = radii.get(str(row['horizon']))
-            if radius is not None:
-                row.update(lower_gwl=max(0., round(row['predicted_gwl']-radius,4)), upper_gwl=round(row['predicted_gwl']+radius,4))
-        if all('lower_gwl' in row for row in result['forecast']):
-            result['uncertainty'] = {'status': 'historical_calibration', 'nominal_coverage': .9,
-                'calibration_id': calibration['calibration_id'], 'max_calibration_target': calibration['max_calibration_target'],
-                'sample_counts_by_horizon': calibration.get('sample_counts', {}).get(tier, {}),
-                'limitations': 'Marginal historical absolute-residual ranges; spatial dependence, observation age and distribution shift prevent guaranteed local coverage.'}
-    return result
+    return attach_error_bands(result, calibration, cutoff,
+        evidence=load_validation_evidence() if calibration else None)
 
 
 def validate_complete_generation(identity, districts, states=None, summary=None):
@@ -216,6 +207,7 @@ def validate_complete_generation(identity, districts, states=None, summary=None)
     origin = pd.Timestamp(identity['forecast_origin'])
     months = pd.date_range(origin+pd.offsets.MonthBegin(1),periods=12,freq='MS')
     for did,res in districts.items():
+        validate_disclosure(res)
         if (res.get('status')!='forecast' or res.get('district_id')!=did or res.get('units')!='m_bgl'
                 or res.get('evidence_tier') not in TIERS or len(res.get('forecast',[]))!=12
                 or res.get('as_of') != str(identity['as_of']) or res.get('forecast_origin') != origin.date().isoformat()

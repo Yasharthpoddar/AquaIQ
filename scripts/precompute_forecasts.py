@@ -140,6 +140,8 @@ def run_precomputation(as_of=None, horizon=12, batch_size=50, dry_run=False,
         raise RuntimeError('Feature snapshot changed after generation identity verification.')
     bundle = identity['bundle']
     card = bundle[1]
+    if explicit and card.get('data_sha256') != frame.attrs.get('data_sha256'):
+        raise ValueError('Candidate model card does not match the loaded feature dataframe fingerprint.')
     districts = identity['districts']
 
     available = frame.loc[frame.date.le(_completed_feature_month(cutoff_ts))]

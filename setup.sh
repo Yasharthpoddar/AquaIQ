@@ -18,7 +18,11 @@ venv/bin/python -m pip install --upgrade pip
 venv/bin/python -m pip install -r requirements.txt
 venv/bin/python -m pip check
 mkdir -p data/raw data/processed models/checkpoints reports
-venv/bin/python -m db.init_db
+initialization_arguments=()
+if [[ -n "${AQUAIQ_SETUP_TEST_SCHEMA:-}" ]]; then
+  initialization_arguments=(--test-schema "$AQUAIQ_SETUP_TEST_SCHEMA")
+fi
+venv/bin/python -m db.init_db "${initialization_arguments[@]}"
 venv/bin/python -c 'from pathlib import Path; import yaml; yaml.safe_load(Path("config.yaml").read_text(encoding="utf-8")); print("config.yaml is valid")'
 echo 'Setup complete. Activate with: source venv/bin/activate'
 echo 'See README.md for climate regeneration, pipeline execution, and dashboard setup.'

@@ -1,0 +1,60 @@
+{
+  "focused_pytest": {
+    "command": ".\\venv\\Scripts\\python.exe -B -m pytest -q tests/test_release_weather.py tests/test_release_boundaries.py -p no:cacheprovider --disable-warnings --basetemp=scratch/pytest-release-weather-boundaries-final --junitxml=scratch/weather-boundary-tests-final.xml",
+    "passed": 25,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "warnings": 13,
+    "console_duration_seconds": 10.67,
+    "junit_duration_seconds": 10.656,
+    "executed_at": "2026-10-26T20:36:19.977573+05:30"
+  },
+  "independent_diagnostic_runs": {
+    "era5_footprint_cells.csv": {
+      "first_sha256": "2ce59ea905a899970d9d8d9f27f648185e12df1715a1e5fbad503083cca731b4",
+      "second_sha256": "2ce59ea905a899970d9d8d9f27f648185e12df1715a1e5fbad503083cca731b4",
+      "bitwise_equal": true
+    },
+    "era5_proxy_diagnostics.csv": {
+      "first_sha256": "ad31662d0084f820f8eded739a29b58fde56b7cedd516315fbb3c6ad6a65cec2",
+      "second_sha256": "ad31662d0084f820f8eded739a29b58fde56b7cedd516315fbb3c6ad6a65cec2",
+      "bitwise_equal": true
+    },
+    "imd_proxy_diagnostics.csv": {
+      "first_sha256": "99bf9904defe786fed5cba74b8a1f27ff380b31a2e2f09dea69ce4dc87bd4db8",
+      "second_sha256": "99bf9904defe786fed5cba74b8a1f27ff380b31a2e2f09dea69ce4dc87bd4db8",
+      "bitwise_equal": true
+    }
+  },
+  "frozen_compatibility_check": {
+    "district_id": "MH-Mumbai_Suburban",
+    "historical_rows_changed": 216,
+    "candidate_persisted": false,
+    "guard": "rejected_historical_weather_change"
+  },
+  "live_authenticated_probe": {
+    "http_status": 403,
+    "manual_terms_gate_observed": true,
+    "source_data_downloaded": false,
+    "credential_values_logged": false
+  },
+  "official_boundary_download": {
+    "sha256_verified": true,
+    "size_bytes": 202524438,
+    "continued_ranges_verified": true,
+    "repeated_prefix_bytes_requested": 0
+  },
+  "official_boundary_subset": {
+    "source_records": 808,
+    "selected_records": 2,
+    "coordinates_or_attributes_changed": false,
+    "national_geometry_bytes_written": 0,
+    "sidecar_subset_bytes_written": 50179
+  },
+  "production_features_changed": false,
+  "production_model_artifacts_changed": false,
+  "database_writes_by_weather_investigation": 0,
+  "historical_observation_boundary_migration_performed": false,
+  "accuracy_claim": "No promoted weather method and no claimed held-out improvement; a changed historical weather definition fails frozen compatibility"
+}

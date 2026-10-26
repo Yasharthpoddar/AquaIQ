@@ -1,0 +1,172 @@
+{
+  "as_of": "2026-10-26",
+  "scope": "Weather access and separate candidate boundary diagnostics; no production integration",
+  "sources": [
+    {
+      "id": "era5_monthly_authorized_release_probe",
+      "publisher": "ECMWF / Copernicus Climate Change Service",
+      "dataset": "reanalysis-era5-single-levels-monthly-means",
+      "url": "https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels-monthly-means",
+      "doi": "10.24381/cds.f17050d7",
+      "setup_and_manual_terms_url": "https://cds.climate.copernicus.eu/how-to-api",
+      "license": "CC-BY licence displayed by the official dataset catalogue; current terms require manual acceptance",
+      "catalogue_update_date": "2026-10-06",
+      "status": {
+        "discovered": true,
+        "metadata_accessible": true,
+        "downloadable": false,
+        "downloaded": false,
+        "parsed": false,
+        "integrated": false,
+        "validated": false
+      },
+      "downloadable_scope": "Existing configured account failed this bounded request; not a claim about public dataset availability",
+      "authorization_attempted": true,
+      "credential_validity_independently_verified": false,
+      "existing_configuration_read_by_client_only": true,
+      "credential_values_logged": false,
+      "optional_client_installed": "cdsapi==0.7.7",
+      "request": {
+        "product_type": [
+          "monthly_averaged_reanalysis"
+        ],
+        "variable": [
+          "2m_temperature",
+          "potential_evaporation"
+        ],
+        "year": [
+          "2025"
+        ],
+        "month": [
+          "01"
+        ],
+        "time": [
+          "00:00"
+        ],
+        "area": [
+          38,
+          68,
+          6,
+          98
+        ],
+        "data_format": "netcdf",
+        "download_format": "unarchived"
+      },
+      "checked_at_utc": "2026-10-26T10:22:05.727635+00:00",
+      "http_status": 403,
+      "failure_reason": "manual_dataset_terms_or_licence_acceptance_required",
+      "sanitized_evidence": {
+        "http_status": 403,
+        "evidence_flags": {
+          "required licences": true,
+          "required licenses": false,
+          "not accepted": true,
+          "not all of the required": false,
+          "invalid token": false,
+          "unauthorized": false,
+          "invalid credentials": false
+        },
+        "only_boolean_error_evidence_logged": true
+      },
+      "manual_terms_accepted_by_agent": false,
+      "new_source_bytes_downloaded": 0,
+      "new_or_changed_values_vs_existing_arrays": "Unassessed: provider rejected before returning data",
+      "checksum_and_numerical_overlap_comparison": "Not possible without acquired arrays; compare_overlap is tested on controlled arrays",
+      "next_step": "The account owner must review and manually accept the dataset terms, then explicitly rerun into fresh isolated paths",
+      "original_manifest_note": "First preserved manifest has accessible=null; the actual HTTP403 and sanitized terms flags establish this request was blocked. New code records accessible=false on 401/403."
+    },
+    {
+      "id": "soi_abdb_2025_district_geometry",
+      "publisher": "Survey of India, NGDR & UGID",
+      "page_url": "https://surveyofindia.gov.in/pages/administrative-boundary-data-base-abdb-",
+      "url": "https://surveyofindia.gov.in/documents/State_District_Subdistrict_PAN%20INDIA.rar",
+      "status": {
+        "discovered": true,
+        "metadata_accessible": true,
+        "downloadable": true,
+        "downloaded": true,
+        "parsed": true,
+        "integrated": false,
+        "validated": true
+      },
+      "downloaded_at_utc": "2026-10-26T14:41:44.271403+00:00",
+      "last_modified_http": "Tue, 12 May 2026 08:51:34 GMT",
+      "size_bytes": 202524438,
+      "sha256": "b8325e5d9dd0f04a6663d775363fe38cd2f23bd9dbae3fb7118b4e6e0ce0bcb7",
+      "coverage": "National source; exact LGD519 Mumbai and LGD518 Mumbai Suburban records parsed locally",
+      "source_record_count": 808,
+      "selected_records": 2,
+      "license": "Metadata accessConstraints=copyright and useConstraints=copyright; Geospatial Guidelines 2021 apply",
+      "terms_url": "https://surveyofindia.gov.in/pages/terms-and-conditions",
+      "attribution": "Survey of India",
+      "raw_and_derived_polygons_committed": false,
+      "redistribution_permission_assumed": false,
+      "acquisition": "Public official direct link, initial GET then verified byte-range continuation with unchanged Last-Modified",
+      "resume_evidence": [
+        {
+          "attempt": 1,
+          "start": 71478207,
+          "http_status": 206,
+          "content_range": "bytes 71478207-202524437/202524438",
+          "last_modified": "Tue, 12 May 2026 08:51:34 GMT"
+        },
+        {
+          "attempt": 2,
+          "start": 202259302,
+          "http_status": 206,
+          "content_range": "bytes 202259302-202524437/202524438",
+          "last_modified": "Tue, 12 May 2026 08:51:34 GMT"
+        }
+      ],
+      "repeated_prefix_bytes_requested": 0
+    },
+    {
+      "id": "soi_abdb_2025_district_metadata",
+      "publisher": "Survey of India",
+      "url": "https://surveyofindia.gov.in/documents/Metadata_ABDB.zip",
+      "status": {
+        "discovered": true,
+        "metadata_accessible": true,
+        "downloadable": true,
+        "downloaded": true,
+        "parsed": true,
+        "integrated": false,
+        "validated": true
+      },
+      "size_bytes": 38879,
+      "sha256": "1a14716b73f00fc8391f2708a7975c2f2c1ad4a4e91aafb6dce6546a039e9514",
+      "last_modified_http": "Fri, 29 May 2026 04:41:24 GMT",
+      "metadata_identifier": "SOI/ABDB/VECTOR/50000/2025/DISTRICT/INDIA",
+      "publication_date": "2026-05-06",
+      "edition": "2025",
+      "creation_and_temporal_extent": "2022-2025",
+      "maharashtra_orgi_harmonization_year": 2025,
+      "equivalent_scale_denominator": 50000,
+      "publisher_horizontal_rmse_statement_m": 12.5,
+      "maintenance_frequency": "asNeeded",
+      "declared_horizontal_reference": "LCC-WGS84; EPSG7755",
+      "license": "copyright; Geospatial Guidelines 2021",
+      "parsed_member": "DISTRICT BOUNDARY.xlsx",
+      "interpretation": "A dated contemporary boundary definition, not proof that all historical observations use this vintage"
+    },
+    {
+      "id": "mrsac_mumbai_suburban_map",
+      "publisher": "Maharashtra Remote Sensing Applications Centre",
+      "url": "https://mrsac.gov.in/writereaddata/MRSAC/map/15638756425d36d93a68368Dist_Mumbai_Sub.pdf",
+      "status": {
+        "discovered": true,
+        "metadata_accessible": null,
+        "downloadable": null,
+        "downloaded": false,
+        "parsed": false,
+        "integrated": false,
+        "validated": false
+      },
+      "failure": "URLError / bounded request timeout; no source body acquired",
+      "license": "Not independently verified; no redistribution or extraction performed"
+    }
+  ],
+  "new_weather_grid_observations_acquired": 0,
+  "new_groundwater_observations_acquired_by_this_investigation": 0,
+  "production_weather_features_changed": false
+}

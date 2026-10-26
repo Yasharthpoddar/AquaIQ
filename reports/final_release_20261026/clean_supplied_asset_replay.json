@@ -1,0 +1,75 @@
+{
+  "test": "independent_environment_supplied_asset_replay",
+  "matches": {
+    "feature_generation": true,
+    "feature_csv": true,
+    "calibration_values": true,
+    "generation_id": true,
+    "all_districts": true,
+    "all_horizons": true
+  },
+  "source_patch_sha256": "32255fe1a2e872d9da36a2a65f5cbd9f902f3858442d8fdd33f1a6b928c5ffc2",
+  "copied_public_source_files": 206,
+  "supplied_baseline_hashes": {
+    "data/raw/india_districts.geojson": "e724c14bc5ee68bcdd6cee8c89222b80cb61e180e55c1dab3d067f09b3b9dc8f",
+    "data/processed/features_matrix.csv": "3958737b033a16e722f633a15ad77d80bc5b2a8fb3bea888697f0410362c24ae",
+    "data/processed/feature_manifest.json": "afc96a9e13655ffa2ccb2bf18a027b9bb1ed34c21260b901301cef6fd35c8b91"
+  },
+  "credential_values_or_hashes_recorded": false,
+  "acquisition_command": "cached source acquisition/checksum validation succeeded; bodies were not redownloaded",
+  "generation": {
+    "generation_id": "015b39d9-56c3-57eb-839c-6d62ce26de9e",
+    "status": "published",
+    "districts_total": 725,
+    "districts_forecast": 725,
+    "districts_insufficient": 0,
+    "districts_unavailable": 0,
+    "states_total": 36,
+    "states_available": 36,
+    "states_insufficient": 0,
+    "validation": {
+      "districts": 725,
+      "horizons": 8700,
+      "tier_counts": {
+        "C": 57,
+        "B": 116,
+        "A": 551,
+        "D": 1
+      }
+    },
+    "duration_seconds": 103.23,
+    "as_of": "2026-10-26",
+    "completed_at": "2026-10-26T15:04:06.400030+00:00"
+  },
+  "build": {
+    "version": "official-missing-month-overlay-v2",
+    "generation_id": "physical-v3-official-c9ade81d95720f91",
+    "feature_csv_sha256": "3a4a560667d732b50c6a1712f4d9ceb13b411d4ae2c7a984e08ffc2aada21042",
+    "before_observed_months": 36890,
+    "after_observed_months": 43384,
+    "new_observed_months": 6494,
+    "retained_existing_months": 561,
+    "districts_gaining_observed_months": 653,
+    "newly_observed_districts": 16,
+    "frozen_model_compatibility": {
+      "train_target_cutoff": "2019-12-31",
+      "training_rows_checked": 156600,
+      "identical_training_values": true,
+      "identical_weather_and_schema": true,
+      "training_subset_sha256": "cf9ef53ffa72cc9a496ab965cb95d034116c9f4fabd00b21458242afce4af626",
+      "policy": "Same immutable model weights; only post-training missing groundwater months added with unchanged physical-v3 rules."
+    },
+    "public_database_changed": false,
+    "baseline_files_changed": false,
+    "weather_features_changed": false
+  },
+  "isolated_schema": "aquaiq_test_clean_final_20261026",
+  "working_service_modified": false,
+  "public_source_tables_modified": false,
+  "code_only_fresh_clone_claim": false,
+  "limits": [
+    "Ignored raw/baseline data and local credentials were supplied; this is not independent acquisition of the old baseline.",
+    "A public current-source catalog is not an exact download recipe for the original combined baseline hash.",
+    "The source patch was applied to a clean checkout before commit; its complete public source hash is recorded."
+  ]
+}

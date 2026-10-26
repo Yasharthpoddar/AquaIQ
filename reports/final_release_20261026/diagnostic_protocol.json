@@ -1,0 +1,14 @@
+{
+  "version": "final-release-diagnostic-v1",
+  "origins": ["2025-02-28", "2025-07-31"],
+  "purpose": "Measure the unchanged point method after newly audited January2025 observations can enter origin history. Compare both input versions on exactly identical available measured targets.",
+  "selection": "Source acceptance uses provenance and conservative data-quality rules. No model, radius, feature, threshold or method is fitted or selected using these diagnostic outcomes.",
+  "calibration": "Keep all original radii and sample counts unchanged after proving input/label equality through July2022. Unsupported ranges are withheld by a calibration-only tail-support disclosure rule.",
+  "limitations": [
+    "The January2026 target values were inspected previously; this is an expanded retrospective diagnostic, not a new blind holdout or independent evaluation period.",
+    "Overlapping targets and repeated districts are not independent cases.",
+    "Reporting dates do not prove source publication availability at each origin.",
+    "No target history enters pseudo-cold references, and no pretrained XGBoost is used for that experiment.",
+    "Absent target labels for newly monitored districts do not establish their forecast skill."
+  ]
+}

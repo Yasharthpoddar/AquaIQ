@@ -29,6 +29,13 @@ from models.district_registry import get_registry
 from models.tiered_forecast import VERSION as PIPELINE_VERSION, CALIBRATION_PATH, validate_complete_generation
 
 ROOT = Path(__file__).resolve().parents[1]
+GENERATION_IMPLEMENTATION_FILES = (
+    'models/forecast_storage.py', 'models/tiered_forecast.py', 'models/district_registry.py',
+    'scripts/precompute_forecasts.py', 'models/climate_forecast_12m.py', 'models/climate_forecast.py',
+    'models/climate_inputs.py', 'models/monthly_projection.py', 'models/ensemble.py',
+    'models/xgboost_model.py', 'models/state_forecast.py', 'models/state_mapping.py',
+    'models/interval_evidence.py',
+)
 
 _STORAGE_LOCK = RLock()
 _DISTRICT_L1_CACHE = ForecastCache(1500)
@@ -83,6 +90,9 @@ def compute_input_identity(as_of=None, horizon=12, *, feature_directory=None, ch
     manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
     feature_generation_id = manifest.get('generation_id') or manifest.get('feature_generation_id', '')
     feature_data_sha256 = manifest.get('feature_csv_sha256') or manifest.get('data_sha256', '')
+    from models.xgboost_model import sha256_file
+    if sha256_file(matrix_path) != feature_data_sha256:
+        raise ValueError('Feature CSV checksum differs from the generation manifest; current input identity is unverified.')
 
     # 2. Model bundle and card
     bundle = climate.load_bundle(checkpoint, expected_generation=feature_generation_id) if checkpoint is not None else climate.load_bundle(expected_generation=feature_generation_id)
@@ -105,10 +115,11 @@ def compute_input_identity(as_of=None, horizon=12, *, feature_directory=None, ch
     calibration_file = Path(calibration_path) if calibration_path is not None else CALIBRATION_PATH
     signature_basis = {
         'pipeline_version': PIPELINE_VERSION,
-        'implementation_sha256': _sha256_bytes(b''.join((ROOT / p).read_bytes() for p in (
-            'models/tiered_forecast.py', 'models/district_registry.py', 'scripts/precompute_forecasts.py',
-            'models/climate_forecast_12m.py', 'models/climate_inputs.py', 'models/monthly_projection.py'))),
-        'calibration_sha256': _sha256_bytes(calibration_file.read_bytes()) if calibration_file.exists() else None,
+        'implementation_sha256': _sha256_bytes(b''.join((ROOT / p).read_text(encoding='utf-8').encode('utf-8')
+            for p in GENERATION_IMPLEMENTATION_FILES)),
+        'calibration_sha256': _sha256_bytes(_canonical_json(json.loads(calibration_file.read_text(encoding='utf-8'))).encode('utf-8')) if calibration_file.exists() else None,
+        'interval_evidence_sha256': _sha256_bytes(_canonical_json(json.loads((ROOT/'models/artifacts/interval_reliability.json').read_text(encoding='utf-8'))).encode('utf-8'))
+            if (ROOT/'models/artifacts/interval_reliability.json').exists() else None,
         'as_of': cutoff.isoformat(),
         'horizon_months': 12,
         'model_id': 'tiered_district_12m_forecast',

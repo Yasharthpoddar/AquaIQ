@@ -23,7 +23,7 @@ from preprocessing.pipeline import apply_causal_gwl_imputation
 from preprocessing.features import build_gwl_features, FEATURES_LIST
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = 'official-missing-month-overlay-v1'
+VERSION = 'official-missing-month-overlay-v2'
 GWL_COLUMNS = ['GWL_current', 'GWL_lag_3mo', 'GWL_lag_6mo',
                'gwl_current', 'gwl_lag_3mo', 'gwl_lag_6mo']
 
@@ -65,8 +65,9 @@ def validate_months(frame, *, as_of, registry_ids):
 def read_candidate(directory, *, as_of, registry_ids):
     directory = Path(directory)
     manifest = json.loads((directory / 'manifest.json').read_text(encoding='utf-8'))
-    if manifest.get('artifact_version') != 'nwdp-cgwb-manual-v1':
-        raise ValueError('Only the reviewed NWDP manual processing version is accepted by this overlay.')
+    artifact_version = manifest.get('artifact_version')
+    if artifact_version not in {'nwdp-cgwb-manual-v1', 'cgwb-nwdp-missing-month-merge-v1'}:
+        raise ValueError('Only reviewed manual processing versions are accepted by this overlay.')
     hashes = manifest.get('output_sha256', {})
     filename = 'canonical_district_month_candidates.csv'
     if filename not in hashes or len(hashes) < 2 or not manifest.get('geojson_sha256'):
@@ -84,8 +85,32 @@ def read_candidate(directory, *, as_of, registry_ids):
     for source in manifest['sources']:
         if not source.get('downloaded') or sha256_file(source['path']) != source.get('sha256'):
             raise ValueError('Candidate raw resource differs from its acquisition checksum.')
-    months = validate_months(pd.read_csv(directory / filename, dtype={'district_id': str}),
+    csv_options = {'float_precision': 'round_trip'} if artifact_version == 'cgwb-nwdp-missing-month-merge-v1' else {}
+    months = validate_months(pd.read_csv(directory / filename, dtype={'district_id': str}, **csv_options),
         as_of=as_of, registry_ids=registry_ids)
+    if artifact_version == 'cgwb-nwdp-missing-month-merge-v1':
+        parent_path = Path(manifest.get('nwdp_parent_manifest_path', ''))
+        if (not parent_path.is_file() or sha256_file(parent_path) != manifest.get('nwdp_parent_manifest_sha256')
+                or sha256_file(directory/'nwdp_parent_manifest.json') != manifest.get('nwdp_parent_manifest_sha256')):
+            raise ValueError('Combined candidate has an altered/missing parent source manifest.')
+        parent_card = json.loads(parent_path.read_text(encoding='utf-8'))
+        if parent_card.get('artifact_version') != 'nwdp-cgwb-manual-v1':
+            raise ValueError('Combined candidate requires the reviewed original NWDP parent.')
+        parent_months, _ = read_candidate(parent_path.parent, as_of=as_of, registry_ids=registry_ids)
+        keys = ['district_id','date']
+        fields = keys + ['gwl_mean','station_count','reading_count','first_observation_date','last_observation_date','source','metric','units','is_observed']
+        inherited = months.set_index(keys).reindex(pd.MultiIndex.from_frame(parent_months[keys])).reset_index()
+        try:
+            pd.testing.assert_frame_equal(parent_months[fields], inherited[fields], check_dtype=False, check_exact=True)
+        except AssertionError as error:
+            raise ValueError('Combined candidate must preserve every parent month and value exactly.') from error
+        extra = months.merge(parent_months[keys],on=keys,how='left',indicator=True).loc[lambda rows:rows['_merge'].eq('left_only')]
+        if (len(extra) != manifest.get('additional_observed_months')
+                or not extra.date.eq(pd.Timestamp('2025-01-01')).all()):
+            raise ValueError('Combined candidate adds only independently audited January 2025 whole months.')
+        extraction = Path(manifest.get('extraction_manifest_path',''))
+        if not extraction.is_file() or sha256_file(extraction) != manifest.get('extraction_manifest_sha256'):
+            raise ValueError('Combined candidate PDF extraction provenance differs.')
     return months, manifest
 
 
@@ -190,7 +215,8 @@ def build_snapshot(candidate_directory, output, *, as_of, baseline_directory=Non
     months, source = read_candidate(candidate_directory, as_of=as_of, registry_ids=registry_ids)
     if source.get('baseline_features_sha256') != base.attrs['feature_manifest']['feature_csv_sha256']:
         raise ValueError('Candidate was audited against a different baseline feature export.')
-    provenance = {'algorithm': VERSION, 'implementation_sha256': sha256_file(__file__),
+    implementation_sha = hashlib.sha256(Path(__file__).read_text(encoding='utf-8').encode('utf-8')).hexdigest()
+    provenance = {'algorithm': VERSION, 'implementation_sha256': implementation_sha,
         'baseline_feature_sha256': base.attrs['feature_manifest']['feature_csv_sha256'],
         'candidate_manifest_sha256': sha256_file(Path(candidate_directory) / 'manifest.json'), 'as_of': as_of}
     generation = 'physical-v3-official-' + hashlib.sha256(json.dumps(provenance, sort_keys=True).encode()).hexdigest()[:16]
@@ -204,10 +230,15 @@ def build_snapshot(candidate_directory, output, *, as_of, baseline_directory=Non
     from models.climate_forecast_12m import load_bundle
     proof = prove_frozen_compatibility(base, candidate, load_bundle(expected_generation=base.attrs['feature_generation_id'])[1]['train_target_cutoff'])
     output.mkdir(parents=True, exist_ok=False)
-    candidate.to_csv(output / 'features_matrix.csv', index=False, float_format='%.17g')
+    candidate.to_csv(output / 'features_matrix.csv', index=False, float_format='%.17g', lineterminator='\n')
     manifest['feature_csv_sha256'] = sha256_file(output / 'features_matrix.csv')
     _write_json(output / 'feature_manifest.json', manifest)
-    copy_frozen_bundle(base, candidate, output / 'frozen_bundle')
+    # Bind the card to the actual loadable export. CSV round trips can change
+    # nullable integer/float dtypes (and therefore the dataframe fingerprint)
+    # even when all physical values are identical.
+    persisted = load_feature_matrix(output)
+    prove_frozen_compatibility(base, persisted, proof['train_target_cutoff'])
+    copy_frozen_bundle(base, persisted, output / 'frozen_bundle')
     added.to_csv(output / 'added_observed_months.csv', index=False)
     overlaps.to_csv(output / 'retained_existing_months.csv', index=False)
     before = base.loc[observed_mask(base)].groupby('district_id').date.agg(['count', 'min', 'max'])

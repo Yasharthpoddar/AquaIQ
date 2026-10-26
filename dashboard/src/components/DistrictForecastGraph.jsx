@@ -14,6 +14,10 @@ const formatDepth = value => Number.isFinite(value) ? `${value.toFixed(2)} m` : 
 const formatDelta = value => Number.isFinite(value) ? `${value >= 0 ? '+' : ''}${value.toFixed(2)}` : null;
 const isReference = value => value?.model_version === '1.0-reference-12m';
 const methodLabel = value => isReference(value) ? value.evidence_tier === 'C' ? 'Regional reference estimate' : 'Local persistence estimate' : 'XGBoost Forecast';
+const intervalLabel = status => status === 'empirical_undercovered' ? 'Historical undercoverage' : status === 'unavailable' ? 'Unavailable' : 'Historical reference only';
+const uncertaintyLabel = value => value?.uncertainty?.status === 'unavailable' ? 'Uncertainty ranges unavailable'
+  : value?.uncertainty?.status === 'empirical_undercovered' ? 'Historical error bands showed undercoverage'
+    : 'Historical error bands are not calibrated prediction intervals';
 
 export function Forecast12mTooltip({ active, payload }) {
   if (!active || !payload?.length) return null;
@@ -29,7 +33,7 @@ export function Forecast12mTooltip({ active, payload }) {
         {row.evidenceTier && row.evidenceTier !== 'A' ? 'Fallback estimate' : 'XGBoost Forecast'}: {depth}
       </div>
       {delta && <div style={{ color: '#64748b', fontSize: '0.78rem' }}>Change from current anchor: {delta} m</div>}
-      {Number.isFinite(row.lower) && <div>Historical prediction range: {row.lower.toFixed(2)}–{row.upper.toFixed(2)} m</div>}
+      {Number.isFinite(row.lower) && <div>Historical error band: {row.lower.toFixed(2)}–{row.upper.toFixed(2)} m · {intervalLabel(row.intervalStatus)}</div>}
       <div style={{ marginTop: '0.35rem', paddingTop: '0.35rem', borderTop: '1px solid #f1f5f9', color: '#475569', fontSize: '0.75rem' }}>
         <strong>{row.evidenceTier && row.evidenceTier !== 'A' ? 'Environmental predictors not used' : 'Assumed climatology inputs'}</strong>
         <div>Rainfall: {Number.isFinite(row.rainfall) ? `${row.rainfall.toFixed(1)} mm` : '—'}</div>
@@ -117,6 +121,14 @@ export function ClimateForecast12mView({ value = null, loading = false, error = 
 
           {isForecast && (
             <>
+              <div className="inline-state" role="note">
+                <strong>{uncertaintyLabel(value)}</strong>
+                <p>{value.uncertainty?.reason || 'A historical residual quantile does not establish a 90% probability for this district.'}</p>
+                <p>These estimates have no guaranteed local coverage. Unsupported horizons remain unavailable.</p>
+                {value.uncertainty?.historical_validation && <small>
+                  Historical tier panel: {value.uncertainty.historical_validation.covered_cases} of {value.uncertainty.historical_validation.band_cases} cases within the original band, across {value.uncertainty.historical_validation.band_districts} districts. This is a pooled descriptive fraction, not this district’s probability.
+                </small>}
+              </div>
               <div className="forecast-facts">
                 <div>
                   <span>{zoneFallback ? 'Latest source-marked zone aggregate' : 'Latest source-marked observation'}</span>
@@ -151,7 +163,7 @@ export function ClimateForecast12mView({ value = null, loading = false, error = 
                         <th scope="col">Month</th>
                         <th scope="col">Horizon</th>
                         <th scope="col">Predicted depth (m bgl)</th>
-                        <th scope="col">Historical range (m bgl)</th>
+                        <th scope="col">Historical range (uncalibrated, m bgl)</th>
                         <th scope="col">Change (m)</th>
                         <th scope="col">Assumed rainfall (mm/month)</th>
                         <th scope="col">Assumed temp (°C)</th>
@@ -164,7 +176,7 @@ export function ClimateForecast12mView({ value = null, loading = false, error = 
                           <th scope="row">{formatMonth(row.month)}</th>
                           <td>M+{row.horizon}</td>
                           <td>{Number.isFinite(row.predicted) ? row.predicted.toFixed(2) : '—'}</td>
-                          <td>{Number.isFinite(row.lower) ? `${row.lower.toFixed(2)}–${row.upper.toFixed(2)}` : 'Unavailable'}</td>
+                          <td>{Number.isFinite(row.lower) ? `${row.lower.toFixed(2)}–${row.upper.toFixed(2)}` : 'Unavailable'}<div className="muted"><small>{intervalLabel(row.intervalStatus)}</small></div></td>
                           <td>{formatDelta(row.delta) ?? '—'}</td>
                           <td>{Number.isFinite(row.rainfall) ? row.rainfall.toFixed(1) : '—'}</td>
                           <td>{Number.isFinite(row.temperature) ? row.temperature.toFixed(1) : '—'}</td>
@@ -198,7 +210,7 @@ export function ClimateForecast12mView({ value = null, loading = false, error = 
             <p><strong>Model:</strong> {value.model_version} ({value.product})</p>
             <p><strong>Projection method:</strong> {value.projection_method}</p>
             <p><strong>Generation:</strong> {value.generation_id || 'Legacy output'}</p>
-            <p><strong>Uncertainty:</strong> {value.uncertainty?.status || 'Unavailable'}. {value.uncertainty?.limitations || value.uncertainty?.reason || ''}</p>
+            <p><strong>Uncertainty:</strong> {uncertaintyLabel(value)}. {value.uncertainty?.limitations || value.uncertainty?.reason || ''}</p>
             {value.model_sha256 && <p><strong>Model SHA-256:</strong> <code>{value.model_sha256}</code></p>}
             {value.model_train_target_cutoff && <p><strong>Training cutoff:</strong> {value.model_train_target_cutoff}</p>}
             <p><strong>Weather input policy:</strong> {weatherBasis.description || 'Historical same-month climatology available at forecast origin.'}</p>

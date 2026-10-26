@@ -1,4 +1,4 @@
-param([string]$PythonExecutable = 'py')
+param([string]$PythonExecutable = 'py', [string]$TestSchema = '')
 $ErrorActionPreference = 'Stop'
 Set-Location -LiteralPath $PSScriptRoot
 
@@ -28,7 +28,9 @@ Invoke-AquaIQPython $environmentPython @('-m', 'pip', 'check')
 foreach ($directory in @('data\raw', 'data\processed', 'models\checkpoints', 'reports')) {
     New-Item -ItemType Directory -Path $directory -Force | Out-Null
 }
-Invoke-AquaIQPython $environmentPython @('-m', 'db.init_db')
+$initializeArguments = @('-m', 'db.init_db')
+if ($TestSchema) { $initializeArguments += @('--test-schema', $TestSchema) }
+Invoke-AquaIQPython $environmentPython $initializeArguments
 Invoke-AquaIQPython $environmentPython @('-c', "from pathlib import Path; import yaml; yaml.safe_load(Path('config.yaml').read_text(encoding='utf-8')); print('config.yaml is valid')")
 Write-Host 'Setup complete. Activate with: .\venv\Scripts\Activate.ps1'
 Write-Host 'See README.md for climate regeneration, pipeline execution, and dashboard setup.'

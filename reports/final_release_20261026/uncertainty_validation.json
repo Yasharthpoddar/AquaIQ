@@ -1,0 +1,20 @@
+{
+  "python_tests": {
+    "passed": 35,
+    "failed": 0,
+    "skipped": 0,
+    "command": "python -B -m pytest tests/test_interval_evidence.py tests/test_tiered_forecast.py -q -p no:cacheprovider --junitxml=scratch/interval-tests.xml"
+  },
+  "frontend_focused_tests": {
+    "passed": 9,
+    "failed": 0,
+    "command": "node --test tests/intervalDisclosure.test.js tests/tieredForecast.test.js"
+  },
+  "frontend_lint": "passed",
+  "frontend_production_build": "passed",
+  "largest_js_chunk_bytes": 365508,
+  "point_predictions_changed": false,
+  "calibration_radii_changed": false,
+  "database_modified": false,
+  "evidence_sha256": "342980fa6b60b1794531a1d81caddd5611c0bd2c76e1b0a9dfcdf521e97fbcb4"
+}

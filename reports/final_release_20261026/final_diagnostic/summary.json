@@ -1,0 +1,2011 @@
+{
+  "protocol": {
+    "version": "final-release-diagnostic-v1",
+    "origins": [
+      "2025-02-28",
+      "2025-07-31"
+    ],
+    "purpose": "Measure the unchanged point method after newly audited January2025 observations can enter origin history. Compare both input versions on exactly identical available measured targets.",
+    "selection": "Source acceptance uses provenance and conservative data-quality rules. No model, radius, feature, threshold or method is fitted or selected using these diagnostic outcomes.",
+    "calibration": "Keep all original radii and sample counts unchanged after proving input/label equality through July2022. Unsupported ranges are withheld by a calibration-only tail-support disclosure rule.",
+    "limitations": [
+      "The January2026 target values were inspected previously; this is an expanded retrospective diagnostic, not a new blind holdout or independent evaluation period.",
+      "Overlapping targets and repeated districts are not independent cases.",
+      "Reporting dates do not prove source publication availability at each origin.",
+      "No target history enters pseudo-cold references, and no pretrained XGBoost is used for that experiment.",
+      "Absent target labels for newly monitored districts do not establish their forecast skill."
+    ]
+  },
+  "identity": {
+    "parent_csv_sha256": "e83990a7fc66e58bd74829f5523dd021dd9cff87894271a99c6202d2a1872115",
+    "candidate_csv_sha256": "3a4a560667d732b50c6a1712f4d9ceb13b411d4ae2c7a984e08ffc2aada21042",
+    "model_sha256": "4b22e2165664e1c1dd21c81ccf95d894655f0a0d589017a9ab87df0588a73a03",
+    "protocol_sha256": "e9ccba3d45e1ec625fe810e6fde778e18b14d6e4828c3ae6c1491a5ddc6a6231"
+  },
+  "overall": {
+    "cases": 1278,
+    "districts": 639,
+    "states": 31,
+    "origin_dates": [
+      "2025-02-28",
+      "2025-07-31"
+    ],
+    "target_dates": [
+      "2026-01-01"
+    ],
+    "parent": {
+      "n": 1278,
+      "mae_m": 2.501062938028169,
+      "rmse_m": 4.511016459124816
+    },
+    "candidate": {
+      "n": 1278,
+      "mae_m": 1.8020878876369324,
+      "rmse_m": 3.0252698737010464
+    },
+    "persistence_paired": {
+      "candidate": {
+        "n": 1260,
+        "mae_m": 1.740688666984127,
+        "rmse_m": 2.7975239985307896
+      },
+      "baseline": {
+        "n": 1260,
+        "mae_m": 1.6189842109316177,
+        "rmse_m": 2.797380945081652
+      },
+      "districts": 630
+    },
+    "seasonal_paired": {
+      "candidate": {
+        "n": 1126,
+        "mae_m": 1.792023323268206,
+        "rmse_m": 2.895109744717291
+      },
+      "baseline": {
+        "n": 1126,
+        "mae_m": 1.6342541861045248,
+        "rmse_m": 2.8854586662784687
+      },
+      "districts": 563
+    }
+  },
+  "by_tier": {
+    "A": {
+      "cases": 1086,
+      "districts": 543,
+      "states": 29,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 1086,
+        "mae_m": 2.329583150460405,
+        "rmse_m": 4.358709703766361
+      },
+      "candidate": {
+        "n": 1086,
+        "mae_m": 1.7436888911602209,
+        "rmse_m": 2.791105390812652
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 1086,
+          "mae_m": 1.7436888911602209,
+          "rmse_m": 2.791105390812652
+        },
+        "baseline": {
+          "n": 1086,
+          "mae_m": 1.602484159954844,
+          "rmse_m": 2.790938355378772
+        },
+        "districts": 543
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 954,
+          "mae_m": 1.8036643400419288,
+          "rmse_m": 2.9030757583139755
+        },
+        "baseline": {
+          "n": 954,
+          "mae_m": 1.6174497468457203,
+          "rmse_m": 2.8917118821889005
+        },
+        "districts": 477
+      }
+    },
+    "B": {
+      "cases": 174,
+      "districts": 87,
+      "states": 20,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 174,
+        "mae_m": 3.1246639850574716,
+        "rmse_m": 4.604544701162574
+      },
+      "candidate": {
+        "n": 174,
+        "mae_m": 1.7219631298850575,
+        "rmse_m": 2.8372568461507672
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 174,
+          "mae_m": 1.7219631298850575,
+          "rmse_m": 2.8372568461507672
+        },
+        "baseline": {
+          "n": 174,
+          "mae_m": 1.7219672877176877,
+          "rmse_m": 2.837261017506097
+        },
+        "districts": 87
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 172,
+          "mae_m": 1.7274562883720928,
+          "rmse_m": 2.8505220223842747
+        },
+        "baseline": {
+          "n": 172,
+          "mae_m": 1.72746020385394,
+          "rmse_m": 2.8505260951752285
+        },
+        "districts": 86
+      }
+    },
+    "C": {
+      "cases": 18,
+      "districts": 9,
+      "states": 3,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 18,
+        "mae_m": 6.818866666666667,
+        "rmse_m": 9.67539622088476
+      },
+      "candidate": {
+        "n": 18,
+        "mae_m": 6.100033333333333,
+        "rmse_m": 10.098537906768705
+      }
+    }
+  },
+  "by_horizon": {
+    "6": {
+      "cases": 639,
+      "districts": 639,
+      "states": 31,
+      "origin_dates": [
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 639,
+        "mae_m": 2.4765808613458526,
+        "rmse_m": 4.515962299195239
+      },
+      "candidate": {
+        "n": 639,
+        "mae_m": 1.8328452200312988,
+        "rmse_m": 3.0220662253377437
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 630,
+          "mae_m": 1.7718853898412694,
+          "rmse_m": 2.7940097027615067
+        },
+        "baseline": {
+          "n": 630,
+          "mae_m": 1.6189842109316177,
+          "rmse_m": 2.797380945081652
+        },
+        "districts": 630
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 563,
+          "mae_m": 1.84500060017762,
+          "rmse_m": 2.9004521590348635
+        },
+        "baseline": {
+          "n": 563,
+          "mae_m": 1.6342541861045248,
+          "rmse_m": 2.8854586662784687
+        },
+        "districts": 563
+      }
+    },
+    "11": {
+      "cases": 639,
+      "districts": 639,
+      "states": 31,
+      "origin_dates": [
+        "2025-02-28"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 639,
+        "mae_m": 2.525545014710485,
+        "rmse_m": 4.50606519052235
+      },
+      "candidate": {
+        "n": 639,
+        "mae_m": 1.7713305552425664,
+        "rmse_m": 3.0284701331066763
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 630,
+          "mae_m": 1.709491944126984,
+          "rmse_m": 2.8010338851191983
+        },
+        "baseline": {
+          "n": 630,
+          "mae_m": 1.6189842109316177,
+          "rmse_m": 2.797380945081652
+        },
+        "districts": 630
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 563,
+          "mae_m": 1.739046046358792,
+          "rmse_m": 2.88975745367393
+        },
+        "baseline": {
+          "n": 563,
+          "mae_m": 1.6342541861045248,
+          "rmse_m": 2.8854586662784687
+        },
+        "districts": 563
+      }
+    }
+  },
+  "by_state": {
+    "AP": {
+      "cases": 26,
+      "districts": 13,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 26,
+        "mae_m": 1.8807586076923077,
+        "rmse_m": 2.182155568343652
+      },
+      "candidate": {
+        "n": 26,
+        "mae_m": 1.2307666076923078,
+        "rmse_m": 1.653790642381028
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 26,
+          "mae_m": 1.2307666076923078,
+          "rmse_m": 1.653790642381028
+        },
+        "baseline": {
+          "n": 26,
+          "mae_m": 0.9489287529173379,
+          "rmse_m": 1.433279294909413
+        },
+        "districts": 13
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 26,
+          "mae_m": 1.2307666076923078,
+          "rmse_m": 1.653790642381028
+        },
+        "baseline": {
+          "n": 26,
+          "mae_m": 0.9489287529173379,
+          "rmse_m": 1.433279294909413
+        },
+        "districts": 13
+      }
+    },
+    "AR": {
+      "cases": 12,
+      "districts": 6,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 12,
+        "mae_m": 2.2748258666666668,
+        "rmse_m": 3.3079762444591387
+      },
+      "candidate": {
+        "n": 12,
+        "mae_m": 0.9114934666666671,
+        "rmse_m": 1.3974097146671005
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 12,
+          "mae_m": 0.9114934666666671,
+          "rmse_m": 1.3974097146671005
+        },
+        "baseline": {
+          "n": 12,
+          "mae_m": 0.5883101333333337,
+          "rmse_m": 0.8158111324379503
+        },
+        "districts": 6
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 12,
+          "mae_m": 0.9114934666666671,
+          "rmse_m": 1.3974097146671005
+        },
+        "baseline": {
+          "n": 12,
+          "mae_m": 0.5883101333333337,
+          "rmse_m": 0.8158111324379503
+        },
+        "districts": 6
+      }
+    },
+    "AS": {
+      "cases": 60,
+      "districts": 30,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 60,
+        "mae_m": 1.02965468,
+        "rmse_m": 1.3912973054491993
+      },
+      "candidate": {
+        "n": 60,
+        "mae_m": 0.68716106,
+        "rmse_m": 1.0195975894942748
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 60,
+          "mae_m": 0.68716106,
+          "rmse_m": 1.0195975894942748
+        },
+        "baseline": {
+          "n": 60,
+          "mae_m": 0.3920330993840143,
+          "rmse_m": 0.6144966675890757
+        },
+        "districts": 30
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 60,
+          "mae_m": 0.68716106,
+          "rmse_m": 1.0195975894942748
+        },
+        "baseline": {
+          "n": 60,
+          "mae_m": 0.3920330993840143,
+          "rmse_m": 0.6144966675890757
+        },
+        "districts": 30
+      }
+    },
+    "BR": {
+      "cases": 76,
+      "districts": 38,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 76,
+        "mae_m": 1.216456897368421,
+        "rmse_m": 1.5842292017136652
+      },
+      "candidate": {
+        "n": 76,
+        "mae_m": 1.216456897368421,
+        "rmse_m": 1.5842292017136652
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 76,
+          "mae_m": 1.216456897368421,
+          "rmse_m": 1.5842292017136652
+        },
+        "baseline": {
+          "n": 76,
+          "mae_m": 1.7575154172428737,
+          "rmse_m": 2.0759448388850625
+        },
+        "districts": 38
+      }
+    },
+    "CG": {
+      "cases": 46,
+      "districts": 23,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 46,
+        "mae_m": 0.9806751913043479,
+        "rmse_m": 1.2322769504264883
+      },
+      "candidate": {
+        "n": 46,
+        "mae_m": 0.8186823000000002,
+        "rmse_m": 0.9879611401948025
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 46,
+          "mae_m": 0.8186823000000002,
+          "rmse_m": 0.9879611401948025
+        },
+        "baseline": {
+          "n": 46,
+          "mae_m": 0.5359136015267719,
+          "rmse_m": 0.6261272671753143
+        },
+        "districts": 23
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 46,
+          "mae_m": 0.8186823000000002,
+          "rmse_m": 0.9879611401948025
+        },
+        "baseline": {
+          "n": 46,
+          "mae_m": 0.5359136015267719,
+          "rmse_m": 0.6261272671753143
+        },
+        "districts": 23
+      }
+    },
+    "CH": {
+      "cases": 2,
+      "districts": 1,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 2,
+        "mae_m": 3.235150000000001,
+        "rmse_m": 3.258518793102167
+      },
+      "candidate": {
+        "n": 2,
+        "mae_m": 3.235150000000001,
+        "rmse_m": 3.258518793102167
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 2,
+          "mae_m": 3.235150000000001,
+          "rmse_m": 3.258518793102167
+        },
+        "baseline": {
+          "n": 2,
+          "mae_m": 2.932857142857145,
+          "rmse_m": 2.932857142857145
+        },
+        "districts": 1
+      }
+    },
+    "DL": {
+      "cases": 2,
+      "districts": 1,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 2,
+        "mae_m": 2.217275,
+        "rmse_m": 2.217504461241284
+      },
+      "candidate": {
+        "n": 2,
+        "mae_m": 1.2796750000000001,
+        "rmse_m": 1.296565488367248
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 2,
+          "mae_m": 1.2796750000000001,
+          "rmse_m": 1.296565488367248
+        },
+        "baseline": {
+          "n": 2,
+          "mae_m": 0.8445892857142852,
+          "rmse_m": 0.8445892857142852
+        },
+        "districts": 1
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 2,
+          "mae_m": 1.2796750000000001,
+          "rmse_m": 1.296565488367248
+        },
+        "baseline": {
+          "n": 2,
+          "mae_m": 0.8445892857142852,
+          "rmse_m": 0.8445892857142852
+        },
+        "districts": 1
+      }
+    },
+    "GA": {
+      "cases": 4,
+      "districts": 2,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 4,
+        "mae_m": 0.8206,
+        "rmse_m": 0.9527404816822076
+      },
+      "candidate": {
+        "n": 4,
+        "mae_m": 0.7602773500000002,
+        "rmse_m": 0.8558849588326959
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 4,
+          "mae_m": 0.7602773500000002,
+          "rmse_m": 0.8558849588326959
+        },
+        "baseline": {
+          "n": 4,
+          "mae_m": 0.16609123888888933,
+          "rmse_m": 0.1705156396188496
+        },
+        "districts": 2
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 4,
+          "mae_m": 0.7602773500000002,
+          "rmse_m": 0.8558849588326959
+        },
+        "baseline": {
+          "n": 4,
+          "mae_m": 0.16609123888888933,
+          "rmse_m": 0.1705156396188496
+        },
+        "districts": 2
+      }
+    },
+    "GJ": {
+      "cases": 68,
+      "districts": 34,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 68,
+        "mae_m": 6.3501455852941175,
+        "rmse_m": 11.13627762370954
+      },
+      "candidate": {
+        "n": 68,
+        "mae_m": 2.7675743588235293,
+        "rmse_m": 4.6361345763026325
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 68,
+          "mae_m": 2.7675743588235293,
+          "rmse_m": 4.6361345763026325
+        },
+        "baseline": {
+          "n": 68,
+          "mae_m": 2.7116731425809193,
+          "rmse_m": 4.680894035073213
+        },
+        "districts": 34
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 68,
+          "mae_m": 2.7675743588235293,
+          "rmse_m": 4.6361345763026325
+        },
+        "baseline": {
+          "n": 68,
+          "mae_m": 2.7116731425809193,
+          "rmse_m": 4.680894035073213
+        },
+        "districts": 34
+      }
+    },
+    "HP": {
+      "cases": 18,
+      "districts": 9,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 18,
+        "mae_m": 7.017843222222222,
+        "rmse_m": 8.678251223673561
+      },
+      "candidate": {
+        "n": 18,
+        "mae_m": 3.0958543333333335,
+        "rmse_m": 3.8572612126384436
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 18,
+          "mae_m": 3.0958543333333335,
+          "rmse_m": 3.8572612126384436
+        },
+        "baseline": {
+          "n": 18,
+          "mae_m": 1.768291058513974,
+          "rmse_m": 2.3998032134261345
+        },
+        "districts": 9
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 18,
+          "mae_m": 3.0958543333333335,
+          "rmse_m": 3.8572612126384436
+        },
+        "baseline": {
+          "n": 18,
+          "mae_m": 1.768291058513974,
+          "rmse_m": 2.3998032134261345
+        },
+        "districts": 9
+      }
+    },
+    "HR": {
+      "cases": 44,
+      "districts": 22,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 44,
+        "mae_m": 4.583171336363637,
+        "rmse_m": 7.845466113281325
+      },
+      "candidate": {
+        "n": 44,
+        "mae_m": 3.787935245454545,
+        "rmse_m": 5.376143853813866
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 44,
+          "mae_m": 3.787935245454545,
+          "rmse_m": 5.376143853813866
+        },
+        "baseline": {
+          "n": 44,
+          "mae_m": 4.369992888963444,
+          "rmse_m": 5.570053900300625
+        },
+        "districts": 22
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 42,
+          "mae_m": 3.903275019047619,
+          "rmse_m": 5.49444273846555
+        },
+        "baseline": {
+          "n": 42,
+          "mae_m": 4.559278264628369,
+          "rmse_m": 5.700480284483941
+        },
+        "districts": 21
+      }
+    },
+    "JH": {
+      "cases": 46,
+      "districts": 23,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 46,
+        "mae_m": 1.1084555478260867,
+        "rmse_m": 1.349322765677329
+      },
+      "candidate": {
+        "n": 46,
+        "mae_m": 1.1084555478260867,
+        "rmse_m": 1.349322765677329
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 46,
+          "mae_m": 1.1084555478260867,
+          "rmse_m": 1.349322765677329
+        },
+        "baseline": {
+          "n": 46,
+          "mae_m": 0.7901690708109588,
+          "rmse_m": 0.9868411308094708
+        },
+        "districts": 23
+      }
+    },
+    "JK": {
+      "cases": 14,
+      "districts": 7,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 14,
+        "mae_m": 7.523428085714286,
+        "rmse_m": 10.086955283259291
+      },
+      "candidate": {
+        "n": 14,
+        "mae_m": 1.6865159142857142,
+        "rmse_m": 2.009881332274108
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 14,
+          "mae_m": 1.6865159142857142,
+          "rmse_m": 2.009881332274108
+        },
+        "baseline": {
+          "n": 14,
+          "mae_m": 1.279915922971562,
+          "rmse_m": 1.433155629880889
+        },
+        "districts": 7
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 14,
+          "mae_m": 1.6865159142857142,
+          "rmse_m": 2.009881332274108
+        },
+        "baseline": {
+          "n": 14,
+          "mae_m": 1.279915922971562,
+          "rmse_m": 1.433155629880889
+        },
+        "districts": 7
+      }
+    },
+    "KA": {
+      "cases": 60,
+      "districts": 30,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 60,
+        "mae_m": 2.686179553333333,
+        "rmse_m": 3.497211428842996
+      },
+      "candidate": {
+        "n": 60,
+        "mae_m": 2.1358803533333335,
+        "rmse_m": 2.9607318692277316
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 60,
+          "mae_m": 2.1358803533333335,
+          "rmse_m": 2.9607318692277316
+        },
+        "baseline": {
+          "n": 60,
+          "mae_m": 1.3198439091355387,
+          "rmse_m": 2.2914926892974035
+        },
+        "districts": 30
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 58,
+          "mae_m": 1.9517279517241382,
+          "rmse_m": 2.6722248451225834
+        },
+        "baseline": {
+          "n": 58,
+          "mae_m": 1.157114389335615,
+          "rmse_m": 2.0431436355941988
+        },
+        "districts": 29
+      }
+    },
+    "KL": {
+      "cases": 28,
+      "districts": 14,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 28,
+        "mae_m": 0.9658252642857142,
+        "rmse_m": 1.2160070421121978
+      },
+      "candidate": {
+        "n": 28,
+        "mae_m": 1.1920456357142857,
+        "rmse_m": 1.4805586617256143
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 28,
+          "mae_m": 1.1920456357142857,
+          "rmse_m": 1.4805586617256143
+        },
+        "baseline": {
+          "n": 28,
+          "mae_m": 0.49924303043208734,
+          "rmse_m": 0.6964059900297481
+        },
+        "districts": 14
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 28,
+          "mae_m": 1.1920456357142857,
+          "rmse_m": 1.4805586617256143
+        },
+        "baseline": {
+          "n": 28,
+          "mae_m": 0.49924303043208734,
+          "rmse_m": 0.6964059900297481
+        },
+        "districts": 14
+      }
+    },
+    "MH": {
+      "cases": 70,
+      "districts": 35,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 70,
+        "mae_m": 1.1538981799999999,
+        "rmse_m": 1.657392621315103
+      },
+      "candidate": {
+        "n": 70,
+        "mae_m": 0.8925953628571427,
+        "rmse_m": 1.1971690540892252
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 70,
+          "mae_m": 0.8925953628571427,
+          "rmse_m": 1.1971690540892252
+        },
+        "baseline": {
+          "n": 70,
+          "mae_m": 0.7366091995277978,
+          "rmse_m": 1.027649430093872
+        },
+        "districts": 35
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 70,
+          "mae_m": 0.8925953628571427,
+          "rmse_m": 1.1971690540892252
+        },
+        "baseline": {
+          "n": 70,
+          "mae_m": 0.7366091995277978,
+          "rmse_m": 1.027649430093872
+        },
+        "districts": 35
+      }
+    },
+    "ML": {
+      "cases": 18,
+      "districts": 9,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 18,
+        "mae_m": 1.9417450222222226,
+        "rmse_m": 2.712794715146093
+      },
+      "candidate": {
+        "n": 18,
+        "mae_m": 0.7068963000000001,
+        "rmse_m": 1.01246490451994
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 18,
+          "mae_m": 0.7068963000000001,
+          "rmse_m": 1.01246490451994
+        },
+        "baseline": {
+          "n": 18,
+          "mae_m": 0.39941080705467363,
+          "rmse_m": 0.5540551083625312
+        },
+        "districts": 9
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 18,
+          "mae_m": 0.7068963000000001,
+          "rmse_m": 1.01246490451994
+        },
+        "baseline": {
+          "n": 18,
+          "mae_m": 0.39941080705467363,
+          "rmse_m": 0.5540551083625312
+        },
+        "districts": 9
+      }
+    },
+    "MN": {
+      "cases": 14,
+      "districts": 7,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 14,
+        "mae_m": 3.799428571428571,
+        "rmse_m": 4.131792071936133
+      },
+      "candidate": {
+        "n": 14,
+        "mae_m": 2.7607142857142852,
+        "rmse_m": 3.6024758351524224
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 4,
+          "mae_m": 1.845,
+          "rmse_m": 2.1927722179925575
+        },
+        "baseline": {
+          "n": 4,
+          "mae_m": 1.845,
+          "rmse_m": 2.1927722179925575
+        },
+        "districts": 2
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 4,
+          "mae_m": 1.845,
+          "rmse_m": 2.1927722179925575
+        },
+        "baseline": {
+          "n": 4,
+          "mae_m": 1.845,
+          "rmse_m": 2.1927722179925575
+        },
+        "districts": 2
+      }
+    },
+    "MP": {
+      "cases": 104,
+      "districts": 52,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 104,
+        "mae_m": 1.8212744980769229,
+        "rmse_m": 2.321915009030876
+      },
+      "candidate": {
+        "n": 104,
+        "mae_m": 1.9685556326923077,
+        "rmse_m": 2.5486219857100396
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 104,
+          "mae_m": 1.9685556326923077,
+          "rmse_m": 2.5486219857100396
+        },
+        "baseline": {
+          "n": 104,
+          "mae_m": 1.7934408983547359,
+          "rmse_m": 2.33859597881421
+        },
+        "districts": 52
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 104,
+          "mae_m": 1.9685556326923077,
+          "rmse_m": 2.5486219857100396
+        },
+        "baseline": {
+          "n": 104,
+          "mae_m": 1.7934408983547359,
+          "rmse_m": 2.33859597881421
+        },
+        "districts": 52
+      }
+    },
+    "MZ": {
+      "cases": 8,
+      "districts": 4,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 8,
+        "mae_m": 3.5812,
+        "rmse_m": 3.755105649645559
+      },
+      "candidate": {
+        "n": 8,
+        "mae_m": 3.2463000000000006,
+        "rmse_m": 3.48983737729998
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 2,
+          "mae_m": 1.85,
+          "rmse_m": 1.85
+        },
+        "baseline": {
+          "n": 2,
+          "mae_m": 1.85,
+          "rmse_m": 1.85
+        },
+        "districts": 1
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 2,
+          "mae_m": 1.85,
+          "rmse_m": 1.85
+        },
+        "baseline": {
+          "n": 2,
+          "mae_m": 1.85,
+          "rmse_m": 1.85
+        },
+        "districts": 1
+      }
+    },
+    "NL": {
+      "cases": 14,
+      "districts": 7,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 14,
+        "mae_m": 3.9812748571428567,
+        "rmse_m": 4.521919220884537
+      },
+      "candidate": {
+        "n": 14,
+        "mae_m": 0.8493196000000003,
+        "rmse_m": 1.051274256262039
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 14,
+          "mae_m": 0.8493196000000003,
+          "rmse_m": 1.051274256262039
+        },
+        "baseline": {
+          "n": 14,
+          "mae_m": 0.6655898523149728,
+          "rmse_m": 0.7856603018180238
+        },
+        "districts": 7
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 14,
+          "mae_m": 0.8493196000000003,
+          "rmse_m": 1.051274256262039
+        },
+        "baseline": {
+          "n": 14,
+          "mae_m": 0.6655898523149728,
+          "rmse_m": 0.7856603018180238
+        },
+        "districts": 7
+      }
+    },
+    "OD": {
+      "cases": 60,
+      "districts": 30,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 60,
+        "mae_m": 0.8486610633333335,
+        "rmse_m": 1.0206379199916042
+      },
+      "candidate": {
+        "n": 60,
+        "mae_m": 0.8088226533333335,
+        "rmse_m": 0.989202297346767
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 60,
+          "mae_m": 0.8088226533333335,
+          "rmse_m": 0.989202297346767
+        },
+        "baseline": {
+          "n": 60,
+          "mae_m": 0.5597622075663538,
+          "rmse_m": 0.9333924944479133
+        },
+        "districts": 30
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 60,
+          "mae_m": 0.8088226533333335,
+          "rmse_m": 0.989202297346767
+        },
+        "baseline": {
+          "n": 60,
+          "mae_m": 0.5597622075663538,
+          "rmse_m": 0.9333924944479133
+        },
+        "districts": 30
+      }
+    },
+    "PB": {
+      "cases": 44,
+      "districts": 22,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 44,
+        "mae_m": 4.006880727272726,
+        "rmse_m": 5.514731377114007
+      },
+      "candidate": {
+        "n": 44,
+        "mae_m": 3.112979272727273,
+        "rmse_m": 3.723877672461174
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 44,
+          "mae_m": 3.112979272727273,
+          "rmse_m": 3.723877672461174
+        },
+        "baseline": {
+          "n": 44,
+          "mae_m": 2.3559140340770344,
+          "rmse_m": 2.861632963641978
+        },
+        "districts": 22
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 42,
+          "mae_m": 3.1744989523809526,
+          "rmse_m": 3.7893017778857527
+        },
+        "baseline": {
+          "n": 42,
+          "mae_m": 2.3470687023664163,
+          "rmse_m": 2.8759816937103335
+        },
+        "districts": 21
+      }
+    },
+    "PY": {
+      "cases": 4,
+      "districts": 2,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 4,
+        "mae_m": 3.6336999999999997,
+        "rmse_m": 3.751011094358426
+      },
+      "candidate": {
+        "n": 4,
+        "mae_m": 1.7879750000000003,
+        "rmse_m": 1.9286046464996396
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 4,
+          "mae_m": 1.7879750000000003,
+          "rmse_m": 1.9286046464996396
+        },
+        "baseline": {
+          "n": 4,
+          "mae_m": 0.14750000000000008,
+          "rmse_m": 0.1754458605952275
+        },
+        "districts": 2
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 4,
+          "mae_m": 1.7879750000000003,
+          "rmse_m": 1.9286046464996396
+        },
+        "baseline": {
+          "n": 4,
+          "mae_m": 0.14750000000000008,
+          "rmse_m": 0.1754458605952275
+        },
+        "districts": 2
+      }
+    },
+    "RJ": {
+      "cases": 66,
+      "districts": 33,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 66,
+        "mae_m": 3.4912946,
+        "rmse_m": 4.563355699671363
+      },
+      "candidate": {
+        "n": 66,
+        "mae_m": 3.0869635090909098,
+        "rmse_m": 3.9894378599627696
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 66,
+          "mae_m": 3.0869635090909098,
+          "rmse_m": 3.9894378599627696
+        },
+        "baseline": {
+          "n": 66,
+          "mae_m": 3.239789881680481,
+          "rmse_m": 4.850531758025036
+        },
+        "districts": 33
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 66,
+          "mae_m": 3.0869635090909098,
+          "rmse_m": 3.9894378599627696
+        },
+        "baseline": {
+          "n": 66,
+          "mae_m": 3.239789881680481,
+          "rmse_m": 4.850531758025036
+        },
+        "districts": 33
+      }
+    },
+    "TN": {
+      "cases": 74,
+      "districts": 37,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 74,
+        "mae_m": 1.8611046108108107,
+        "rmse_m": 2.5147005706272627
+      },
+      "candidate": {
+        "n": 74,
+        "mae_m": 1.5269324783783784,
+        "rmse_m": 2.158000816622181
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 74,
+          "mae_m": 1.5269324783783784,
+          "rmse_m": 2.158000816622181
+        },
+        "baseline": {
+          "n": 74,
+          "mae_m": 2.095766593020883,
+          "rmse_m": 2.607014959481458
+        },
+        "districts": 37
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 74,
+          "mae_m": 1.5269324783783784,
+          "rmse_m": 2.158000816622181
+        },
+        "baseline": {
+          "n": 74,
+          "mae_m": 2.095766593020883,
+          "rmse_m": 2.607014959481458
+        },
+        "districts": 37
+      }
+    },
+    "TR": {
+      "cases": 16,
+      "districts": 8,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 16,
+        "mae_m": 1.0939170125,
+        "rmse_m": 1.4592020877806924
+      },
+      "candidate": {
+        "n": 16,
+        "mae_m": 0.5850777125,
+        "rmse_m": 0.8280140563698367
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 16,
+          "mae_m": 0.5850777125,
+          "rmse_m": 0.8280140563698367
+        },
+        "baseline": {
+          "n": 16,
+          "mae_m": 0.39095570713869465,
+          "rmse_m": 0.5078158197668758
+        },
+        "districts": 8
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 16,
+          "mae_m": 0.5850777125,
+          "rmse_m": 0.8280140563698367
+        },
+        "baseline": {
+          "n": 16,
+          "mae_m": 0.39095570713869465,
+          "rmse_m": 0.5078158197668758
+        },
+        "districts": 8
+      }
+    },
+    "TS": {
+      "cases": 66,
+      "districts": 33,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 66,
+        "mae_m": 1.3165503030303032,
+        "rmse_m": 1.879525442252145
+      },
+      "candidate": {
+        "n": 66,
+        "mae_m": 1.7432528151515152,
+        "rmse_m": 2.236158405946308
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 66,
+          "mae_m": 1.7432528151515152,
+          "rmse_m": 2.236158405946308
+        },
+        "baseline": {
+          "n": 66,
+          "mae_m": 1.741858222776319,
+          "rmse_m": 2.2585409189535506
+        },
+        "districts": 33
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 62,
+          "mae_m": 1.78776675483871,
+          "rmse_m": 2.290388157424954
+        },
+        "baseline": {
+          "n": 62,
+          "mae_m": 1.7572378339231787,
+          "rmse_m": 2.2978491763137057
+        },
+        "districts": 31
+      }
+    },
+    "UK": {
+      "cases": 22,
+      "districts": 11,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 22,
+        "mae_m": 6.543610445454546,
+        "rmse_m": 9.484754510285796
+      },
+      "candidate": {
+        "n": 22,
+        "mae_m": 6.272210445454544,
+        "rmse_m": 9.895577117976284
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 20,
+          "mae_m": 4.08642149,
+          "rmse_m": 5.346441671485571
+        },
+        "baseline": {
+          "n": 20,
+          "mae_m": 3.8728250888070272,
+          "rmse_m": 5.634351842750692
+        },
+        "districts": 10
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 20,
+          "mae_m": 4.08642149,
+          "rmse_m": 5.346441671485571
+        },
+        "baseline": {
+          "n": 20,
+          "mae_m": 3.8728250888070272,
+          "rmse_m": 5.634351842750692
+        },
+        "districts": 10
+      }
+    },
+    "UP": {
+      "cases": 148,
+      "districts": 74,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 148,
+        "mae_m": 2.1284081554054053,
+        "rmse_m": 3.7457501005291025
+      },
+      "candidate": {
+        "n": 148,
+        "mae_m": 1.7442324000000002,
+        "rmse_m": 3.441462404640413
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 148,
+          "mae_m": 1.7442324000000002,
+          "rmse_m": 3.441462404640413
+        },
+        "baseline": {
+          "n": 148,
+          "mae_m": 1.7103475771046408,
+          "rmse_m": 3.486564538338851
+        },
+        "districts": 74
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 148,
+          "mae_m": 1.7442324000000002,
+          "rmse_m": 3.441462404640413
+        },
+        "baseline": {
+          "n": 148,
+          "mae_m": 1.7103475771046408,
+          "rmse_m": 3.486564538338851
+        },
+        "districts": 74
+      }
+    },
+    "WB": {
+      "cases": 44,
+      "districts": 22,
+      "states": 1,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 44,
+        "mae_m": 4.234807563636363,
+        "rmse_m": 5.668236555389854
+      },
+      "candidate": {
+        "n": 44,
+        "mae_m": 0.9913115090909091,
+        "rmse_m": 1.7313581056965148
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 44,
+          "mae_m": 0.9913115090909091,
+          "rmse_m": 1.7313581056965148
+        },
+        "baseline": {
+          "n": 44,
+          "mae_m": 0.8650504297984655,
+          "rmse_m": 1.6815666435190388
+        },
+        "districts": 22
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 44,
+          "mae_m": 0.9913115090909091,
+          "rmse_m": 1.7313581056965148
+        },
+        "baseline": {
+          "n": 44,
+          "mae_m": 0.8650504297984655,
+          "rmse_m": 1.6815666435190388
+        },
+        "districts": 22
+      }
+    }
+  },
+  "by_age": {
+    "0-3": {
+      "cases": 586,
+      "districts": 586,
+      "states": 29,
+      "origin_dates": [
+        "2025-02-28"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 586,
+        "mae_m": 2.544399278668942,
+        "rmse_m": 4.517636868756646
+      },
+      "candidate": {
+        "n": 586,
+        "mae_m": 1.7330109858361777,
+        "rmse_m": 2.8531799389102916
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 586,
+          "mae_m": 1.7330109858361777,
+          "rmse_m": 2.8531799389102916
+        },
+        "baseline": {
+          "n": 586,
+          "mae_m": 1.601124565538395,
+          "rmse_m": 2.8350152289153945
+        },
+        "districts": 586
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 563,
+          "mae_m": 1.739046046358792,
+          "rmse_m": 2.88975745367393
+        },
+        "baseline": {
+          "n": 563,
+          "mae_m": 1.6342541861045248,
+          "rmse_m": 2.8854586662784687
+        },
+        "districts": 563
+      }
+    },
+    "13-36": {
+      "cases": 86,
+      "districts": 43,
+      "states": 5,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 86,
+        "mae_m": 1.273347711627907,
+        "rmse_m": 1.6269749178957453
+      },
+      "candidate": {
+        "n": 86,
+        "mae_m": 1.273347711627907,
+        "rmse_m": 1.6269749178957453
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 86,
+          "mae_m": 1.273347711627907,
+          "rmse_m": 1.6269749178957453
+        },
+        "baseline": {
+          "n": 86,
+          "mae_m": 1.7595827325136362,
+          "rmse_m": 2.0665121996570694
+        },
+        "districts": 43
+      }
+    },
+    "4-12": {
+      "cases": 588,
+      "districts": 587,
+      "states": 29,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 588,
+        "mae_m": 2.5052601263605445,
+        "rmse_m": 4.542689042253101
+      },
+      "candidate": {
+        "n": 588,
+        "mae_m": 1.8166928222789118,
+        "rmse_m": 2.875795786228174
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 588,
+          "mae_m": 1.8166928222789118,
+          "rmse_m": 2.875795786228174
+        },
+        "baseline": {
+          "n": 588,
+          "mae_m": 1.616219379884636,
+          "rmse_m": 2.852020256518549
+        },
+        "districts": 587
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 563,
+          "mae_m": 1.84500060017762,
+          "rmse_m": 2.9004521590348635
+        },
+        "baseline": {
+          "n": 563,
+          "mae_m": 1.6342541861045248,
+          "rmse_m": 2.8854586662784687
+        },
+        "districts": 563
+      }
+    },
+    "no_local_history": {
+      "cases": 18,
+      "districts": 9,
+      "states": 3,
+      "origin_dates": [
+        "2025-02-28",
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 18,
+        "mae_m": 6.818866666666667,
+        "rmse_m": 9.67539622088476
+      },
+      "candidate": {
+        "n": 18,
+        "mae_m": 6.100033333333333,
+        "rmse_m": 10.098537906768705
+      }
+    }
+  },
+  "by_origin": {
+    "2025-02-28": {
+      "cases": 639,
+      "districts": 639,
+      "states": 31,
+      "origin_dates": [
+        "2025-02-28"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 639,
+        "mae_m": 2.525545014710485,
+        "rmse_m": 4.50606519052235
+      },
+      "candidate": {
+        "n": 639,
+        "mae_m": 1.7713305552425664,
+        "rmse_m": 3.0284701331066763
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 630,
+          "mae_m": 1.709491944126984,
+          "rmse_m": 2.8010338851191983
+        },
+        "baseline": {
+          "n": 630,
+          "mae_m": 1.6189842109316177,
+          "rmse_m": 2.797380945081652
+        },
+        "districts": 630
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 563,
+          "mae_m": 1.739046046358792,
+          "rmse_m": 2.88975745367393
+        },
+        "baseline": {
+          "n": 563,
+          "mae_m": 1.6342541861045248,
+          "rmse_m": 2.8854586662784687
+        },
+        "districts": 563
+      }
+    },
+    "2025-07-31": {
+      "cases": 639,
+      "districts": 639,
+      "states": 31,
+      "origin_dates": [
+        "2025-07-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "parent": {
+        "n": 639,
+        "mae_m": 2.4765808613458526,
+        "rmse_m": 4.515962299195239
+      },
+      "candidate": {
+        "n": 639,
+        "mae_m": 1.8328452200312988,
+        "rmse_m": 3.0220662253377437
+      },
+      "persistence_paired": {
+        "candidate": {
+          "n": 630,
+          "mae_m": 1.7718853898412694,
+          "rmse_m": 2.7940097027615067
+        },
+        "baseline": {
+          "n": 630,
+          "mae_m": 1.6189842109316177,
+          "rmse_m": 2.797380945081652
+        },
+        "districts": 630
+      },
+      "seasonal_paired": {
+        "candidate": {
+          "n": 563,
+          "mae_m": 1.84500060017762,
+          "rmse_m": 2.9004521590348635
+        },
+        "baseline": {
+          "n": 563,
+          "mae_m": 1.6342541861045248,
+          "rmse_m": 2.8854586662784687
+        },
+        "districts": 563
+      }
+    }
+  },
+  "pseudo_cold": {
+    "regional_reference": {
+      "n": 1278,
+      "mae_m": 3.3023140896978864,
+      "rmse_m": 6.004143292786092
+    },
+    "global_reference": {
+      "n": 1278,
+      "mae_m": 3.845025781533646,
+      "rmse_m": 7.376221307373662
+    },
+    "state_blocked_reference": {
+      "n": 1278,
+      "mae_m": 3.8858140323853148,
+      "rmse_m": 7.404880295358526
+    }
+  },
+  "all_target_histories_excluded": true,
+  "cases_sha256": "f99db74e27adef6b10d8b6dc93cd6ef586965688c9ed9028de0433dcc0026608",
+  "new_blind_evaluation": false,
+  "model_or_interval_selection_performed": false
+}

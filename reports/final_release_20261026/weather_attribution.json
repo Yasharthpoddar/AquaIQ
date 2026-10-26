@@ -1,0 +1,390 @@
+{
+  "source_archive_sha256": "b8325e5d9dd0f04a6663d775363fe38cd2f23bd9dbae3fb7118b4e6e0ce0bcb7",
+  "baseline_boundary_sha256": "e724c14bc5ee68bcdd6cee8c89222b80cb61e180e55c1dab3d067f09b3b9dc8f",
+  "baseline_era5_sha256": "6fe76f7f43a9c389038f189dd49575598d02e9aeb19be3e615934351a0b00eb8",
+  "source_crs_wkt": "PROJCRS[\"LCC_WGS84\",BASEGEOGCRS[\"WGS 84\",DATUM[\"World Geodetic System 1984\",ELLIPSOID[\"WGS 84\",6378137,298.257223563,LENGTHUNIT[\"metre\",1]],ID[\"EPSG\",6326]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"Degree\",0.0174532925199433]]],CONVERSION[\"unnamed\",METHOD[\"Lambert Conic Conformal (2SP)\",ID[\"EPSG\",9802]],PARAMETER[\"Latitude of false origin\",24,ANGLEUNIT[\"Degree\",0.0174532925199433],ID[\"EPSG\",8821]],PARAMETER[\"Longitude of false origin\",80,ANGLEUNIT[\"Degree\",0.0174532925199433],ID[\"EPSG\",8822]],PARAMETER[\"Latitude of 1st standard parallel\",12.472944,ANGLEUNIT[\"Degree\",0.0174532925199433],ID[\"EPSG\",8823]],PARAMETER[\"Latitude of 2nd standard parallel\",35.172806,ANGLEUNIT[\"Degree\",0.0174532925199433],ID[\"EPSG\",8824]],PARAMETER[\"Easting at false origin\",4000000,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8826]],PARAMETER[\"Northing at false origin\",4000000,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8827]]],CS[Cartesian,2],AXIS[\"easting\",east,ORDER[1],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]],AXIS[\"northing\",north,ORDER[2],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]]",
+  "source_prj_exactly_equals_metadata_epsg7755": false,
+  "source_prj_used_without_overriding": true,
+  "crs_comparison_at_representative_points": [
+    {
+      "source_prj_lon_lat": [
+        72.82784556426307,
+        18.972660727018425
+      ],
+      "forced_metadata_epsg_lon_lat": [
+        72.8278457639133,
+        18.972660827789298
+      ]
+    },
+    {
+      "source_prj_lon_lat": [
+        72.89677278438299,
+        19.12495475135559
+      ],
+      "forced_metadata_epsg_lon_lat": [
+        72.8967729808839,
+        19.12495484829119
+      ]
+    }
+  ],
+  "era5_districts": [
+    {
+      "district_id": "MH-Mumbai",
+      "source_name": "MUMBAI",
+      "source_lgd_code": "519",
+      "geometry_valid": true,
+      "native_projected_area_km2": 62.302472942120964,
+      "geographic_bounds": [
+        72.79249653705706,
+        18.893405216016177,
+        72.90618490022136,
+        19.053004223263702
+      ],
+      "interior_usable_grid_centers": 0,
+      "selected_cells": [
+        {
+          "latitude": 19.0,
+          "longitude": 73.0,
+          "spatial_method": "nearest_usable_cell",
+          "distance_m": 18521.955290597165
+        }
+      ],
+      "source_cell_footprints_overlapping": 2,
+      "diagnostic_months": 276,
+      "alternative_finite_area_fraction_min": 0.9999999999999998,
+      "alternative_finite_area_fraction_max": 0.9999999999999998,
+      "alternative_vs_nearest_max_difference_degC": 1.4475008681756698,
+      "alternative_vs_nearest_max_difference_pet_mm_month": 136.32790639628553
+    },
+    {
+      "district_id": "MH-Mumbai_Suburban",
+      "source_name": "MUMBAI SUBURBAN",
+      "source_lgd_code": "518",
+      "geometry_valid": true,
+      "native_projected_area_km2": 418.3377224045996,
+      "geographic_bounds": [
+        72.75795959988213,
+        18.978895778291058,
+        72.9811293626922,
+        19.26960960893274
+      ],
+      "interior_usable_grid_centers": 0,
+      "selected_cells": [
+        {
+          "latitude": 19.0,
+          "longitude": 73.0,
+          "spatial_method": "nearest_usable_cell",
+          "distance_m": 17694.06697932028
+        }
+      ],
+      "source_cell_footprints_overlapping": 4,
+      "diagnostic_months": 276,
+      "alternative_finite_area_fraction_min": 0.9999999999999994,
+      "alternative_finite_area_fraction_max": 0.9999999999999994,
+      "alternative_vs_nearest_max_difference_degC": 0.3955261672993302,
+      "alternative_vs_nearest_max_difference_pet_mm_month": 22.12612159995956
+    }
+  ],
+  "imd_distinct_assignment_patterns": {
+    "MH-Mumbai": {
+      "[(19.0, 72.75)]": [
+        {
+          "latitude": 19.0,
+          "longitude": 72.75,
+          "spatial_method": "nearest_usable_cell",
+          "distance_m": 8591.10882524855
+        }
+      ]
+    },
+    "MH-Mumbai_Suburban": {
+      "[(19.0, 73.0)]": [
+        {
+          "latitude": 19.0,
+          "longitude": 73.0,
+          "spatial_method": "nearest_usable_cell",
+          "distance_m": 17694.06697932028
+        }
+      ]
+    }
+  },
+  "imd_source_years": [
+    {
+      "year": 1992,
+      "sha256": "5b8f542bd1ae1792025dc38eb67023327dc6f1af2f1122832e7128cba34cb4c7",
+      "size_bytes": 25495560
+    },
+    {
+      "year": 1993,
+      "sha256": "acf30d074c16b4404c3dccc2f4be6a4bb812eda06acc86f70161bea7d7b37a8e",
+      "size_bytes": 25425900
+    },
+    {
+      "year": 1994,
+      "sha256": "ea431a0940e329e7ca607885d475a5350a0810076ac5846eaa303faa46576e6b",
+      "size_bytes": 25425900
+    },
+    {
+      "year": 1995,
+      "sha256": "0b8f4b5884f6e9e51b8027a0727ea8c8a1cf94ef3bd7439d046a2787141d1302",
+      "size_bytes": 25425900
+    },
+    {
+      "year": 1996,
+      "sha256": "28ddc49f8af38bd9b6297f986a894d0a724cb6d9f00444ffd8daa4f9012baed1",
+      "size_bytes": 25495560
+    },
+    {
+      "year": 1997,
+      "sha256": "b1cb4b43da4434b833ad60e02ee63fd78734cd4b3d5eda9f21a9acfb2bb9bd44",
+      "size_bytes": 25425900
+    },
+    {
+      "year": 1998,
+      "sha256": "f481d8619e16438133899140a8d4bf40b552a2815f3f5ced28919f553d1b813a",
+      "size_bytes": 25425900
+    },
+    {
+      "year": 1999,
+      "sha256": "a13672034666d04bbaa25f2248acb78f711c9faf58e1d412dd389a14854dfa68",
+      "size_bytes": 25425900
+    },
+    {
+      "year": 2000,
+      "sha256": "2f2b20a58c883e117467beb1767cd4bce4e517fef9d53f4b00318eea4ba2de25",
+      "size_bytes": 25495560
+    },
+    {
+      "year": 2001,
+      "sha256": "83185ebbab190a95c87bee058f36835de5758c24908805f85f2b3394a127fd37",
+      "size_bytes": 25425900
+    },
+    {
+      "year": 2002,
+      "sha256": "b138efce173261e6ede0ba06cbb90c1a21462222c44fd3dc46f6a85c24a1ca8b",
+      "size_bytes": 25425900
+    },
+    {
+      "year": 2003,
+      "sha256": "5542e3441278325c038d7933fc294087afb1acc75cd8d37c51e76ce4d6462d08",
+      "size_bytes": 25425900
+    },
+    {
+      "year": 2004,
+      "sha256": "8d671a7b4eeeb21802599d8b48ce34576093a2df46030ab2fac32228e62d4bc7",
+      "size_bytes": 25495560
+    },
+    {
+      "year": 2005,
+      "sha256": "8e22a50a30c92d9cb948cbcce8faa678b49c00f881e2c0eca77a353fb6670bd2",
+      "size_bytes": 25425900
+    },
+    {
+      "year": 2006,
+      "sha256": "79d1d9acb4da5614dc00991c03c114fa9031fa4e3bca9e9e32150472043f4cba",
+      "size_bytes": 25425900
+    },
+    {
+      "year": 2007,
+      "sha256": "6056e795aaa11f261ad2c4c781f1c5fe303c9d05cfc8f0afabd47d2fc49c5da8",
+      "size_bytes": 25425900
+    },
+    {
+      "year": 2008,
+      "sha256": "8c22bbde0d4753cdb9c142536d9498b3b21b2cb3fdbe48da29a20951fb9d3799",
+      "size_bytes": 25495560
+    },
+    {
+      "year": 2009,
+      "sha256": "1023548bcc409d95541e4b52f86ac37e7648cf2cd9c34ed42bf8ce0a45eb108e",
+      "size_bytes": 25425900
+    },
+    {
+      "year": 2010,
+      "sha256": "1db12d8eb5a471d3623ff448bdd72a25a3afc577c0b979233083e0c183a143d0",
+      "size_bytes": 25425900
+    },
+    {
+      "year": 2011,
+      "sha256": "1f656dc6498b8bcb8423ed8713b4b8469c0d66771b67bd2e985a3071240ac67b",
+      "size_bytes": 25425900
+    },
+    {
+      "year": 2012,
+      "sha256": "3f007292029a212edde5ee1ee618242c8f2a64062d80e196d20f9576e8f77381",
+      "size_bytes": 25495560
+    },
+    {
+      "year": 2013,
+      "sha256": "81bbab9f686bcd0c487e52a4fb54e4623efea198e74a742df5159a0977a8a02b",
+      "size_bytes": 25425900
+    },
+    {
+      "year": 2014,
+      "sha256": "1e89531d9772acbdd2e83fa8bb8972ef09a52f0e4ec6adbeb408b1d98a167b22",
+      "size_bytes": 25425900
+    },
+    {
+      "year": 2015,
+      "sha256": "72a9c97f58fb12d82d06ecdd821a9724865e48683c15a34d72f8804d244b9202",
+      "size_bytes": 25425900
+    },
+    {
+      "year": 2016,
+      "sha256": "7d47dd937eb68d3e64e77f20d40597eeebb4d5329704857f604c4c4618dbf838",
+      "size_bytes": 25495560
+    },
+    {
+      "year": 2017,
+      "sha256": "dc9109fc3c4c2dbcf8eea97114fa53a814ce677a8e64b567389f7d3da076c23a",
+      "size_bytes": 25425900
+    },
+    {
+      "year": 2018,
+      "sha256": "78ae74184b0ece2a9a03bb16cca6f7361abcae1e772ce3e6d685110b2af18c33",
+      "size_bytes": 25425900
+    },
+    {
+      "year": 2019,
+      "sha256": "dfb714184e16624cd43af8e932e3245c0d6cf1bacd9556e2cf44d962c9733f3f",
+      "size_bytes": 25425900
+    },
+    {
+      "year": 2020,
+      "sha256": "e19532760221e68711132c98f05cc3ceb7b399e55dbe9bd35b02589bbf2e46ff",
+      "size_bytes": 25495560
+    },
+    {
+      "year": 2021,
+      "sha256": "7f5128e82aa6d362b165898f7f5902d5edd12cb8265c71e2304f89053d5a2678",
+      "size_bytes": 25425900
+    },
+    {
+      "year": 2022,
+      "sha256": "9cd1654631ed918f55fbe12e08ef7c0593019c4a3399e695f0b0398283fcbb3e",
+      "size_bytes": 25425900
+    },
+    {
+      "year": 2023,
+      "sha256": "f308b916a4a2a57a66ce9d4987c60bb7756041434baed31f4342122dc3800ced",
+      "size_bytes": 25425900
+    },
+    {
+      "year": 2024,
+      "sha256": "09d3c89a084f13f3ec534170ce9d98fafc6ff8c29b87d1c83cc2fcd82b495601",
+      "size_bytes": 25495560
+    },
+    {
+      "year": 2025,
+      "sha256": "b4fa5ffb389496c0fa7d5a468d1cb47e4db0bcabcd11be4f273c0e6cfa7d611d",
+      "size_bytes": 25425900
+    }
+  ],
+  "imd_proxy_months_per_district": {
+    "MH-Mumbai": 408,
+    "MH-Mumbai_Suburban": 408
+  },
+  "era5_proxy_start": "2002-01-01",
+  "era5_proxy_end": "2024-12-01",
+  "new_weather_grid_observations_acquired": 0,
+  "new_groundwater_observations": 0,
+  "production_features_changed": false,
+  "decision": "Do not fill Mumbai Suburban from a shared out-of-district coarse cell. Footprint-area weighting uses offshore-centered cells and changes the trained center-point/nearest definition; it needs a separate artifact/protocol before any skill claim.",
+  "historical_accuracy_evaluation": "Not promoted or scored as a trained district model: target-feature training values would change and the existing frozen compatibility proof requires unchanged historical weather. Existing holdout has already been inspected.",
+  "output_sha256": {
+    "era5_footprint_cells.csv": "2ce59ea905a899970d9d8d9f27f648185e12df1715a1e5fbad503083cca731b4",
+    "era5_proxy_diagnostics.csv": "ad31662d0084f820f8eded739a29b58fde56b7cedd516315fbb3c6ad6a65cec2",
+    "imd_proxy_diagnostics.csv": "99bf9904defe786fed5cba74b8a1f27ff380b31a2e2f09dea69ce4dc87bd4db8"
+  },
+  "era5_footprint_cells": [
+    {
+      "district_id": "MH-Mumbai",
+      "latitude": 19.0,
+      "longitude": 72.75,
+      "intersection_area_km2_in_source_lcc": 60.59532341297139,
+      "fraction_of_source_polygon": 0.9725990085379835,
+      "center_within_polygon": false,
+      "both_source_fields_ever_usable": true
+    },
+    {
+      "district_id": "MH-Mumbai",
+      "latitude": 19.0,
+      "longitude": 73.0,
+      "intersection_area_km2_in_source_lcc": 1.7071495291495569,
+      "fraction_of_source_polygon": 0.02740099146201628,
+      "center_within_polygon": false,
+      "both_source_fields_ever_usable": true
+    },
+    {
+      "district_id": "MH-Mumbai_Suburban",
+      "latitude": 19.25,
+      "longitude": 72.75,
+      "intersection_area_km2_in_source_lcc": 131.8215116594585,
+      "fraction_of_source_polygon": 0.31510787719967076,
+      "center_within_polygon": false,
+      "both_source_fields_ever_usable": true
+    },
+    {
+      "district_id": "MH-Mumbai_Suburban",
+      "latitude": 19.25,
+      "longitude": 73.0,
+      "intersection_area_km2_in_source_lcc": 100.40353443260727,
+      "fraction_of_source_polygon": 0.24000593074774398,
+      "center_within_polygon": false,
+      "both_source_fields_ever_usable": true
+    },
+    {
+      "district_id": "MH-Mumbai_Suburban",
+      "latitude": 19.0,
+      "longitude": 72.75,
+      "intersection_area_km2_in_source_lcc": 42.87973324710574,
+      "fraction_of_source_polygon": 0.10250027896273281,
+      "center_within_polygon": false,
+      "both_source_fields_ever_usable": true
+    },
+    {
+      "district_id": "MH-Mumbai_Suburban",
+      "latitude": 19.0,
+      "longitude": 73.0,
+      "intersection_area_km2_in_source_lcc": 143.23294306542783,
+      "fraction_of_source_polygon": 0.34238591308985195,
+      "center_within_polygon": false,
+      "both_source_fields_ever_usable": true
+    }
+  ],
+  "source_vintage_metadata": {
+    "id": "soi_abdb_2025_district_metadata",
+    "publisher": "Survey of India",
+    "url": "https://surveyofindia.gov.in/documents/Metadata_ABDB.zip",
+    "status": {
+      "discovered": true,
+      "metadata_accessible": true,
+      "downloadable": true,
+      "downloaded": true,
+      "parsed": true,
+      "integrated": false,
+      "validated": true
+    },
+    "size_bytes": 38879,
+    "sha256": "1a14716b73f00fc8391f2708a7975c2f2c1ad4a4e91aafb6dce6546a039e9514",
+    "last_modified_http": "Fri, 29 May 2026 04:41:24 GMT",
+    "metadata_identifier": "SOI/ABDB/VECTOR/50000/2025/DISTRICT/INDIA",
+    "publication_date": "2026-05-06",
+    "edition": "2025",
+    "creation_and_temporal_extent": "2022-2025",
+    "maharashtra_orgi_harmonization_year": 2025,
+    "equivalent_scale_denominator": 50000,
+    "publisher_horizontal_rmse_statement_m": 12.5,
+    "maintenance_frequency": "asNeeded",
+    "declared_horizontal_reference": "LCC-WGS84; EPSG7755",
+    "license": "copyright; Geospatial Guidelines 2021",
+    "parsed_member": "DISTRICT BOUNDARY.xlsx",
+    "interpretation": "A dated contemporary boundary definition, not proof that all historical observations use this vintage"
+  },
+  "frozen_compatibility_check": {
+    "district_id": "MH-Mumbai_Suburban",
+    "historical_rows_changed": 216,
+    "candidate_persisted": false,
+    "guard": "rejected_historical_weather_change"
+  },
+  "scope_note": "All diagnostic CSVs and polygons remain ignored local candidate artifacts. The committed aggregate has no observation rows."
+}

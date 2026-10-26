@@ -1,0 +1,48 @@
+{
+  "source_archive_sha256": "b8325e5d9dd0f04a6663d775363fe38cd2f23bd9dbae3fb7118b4e6e0ce0bcb7",
+  "source_member": "State_District_Subdistrict_PAN INDIA/District_Subdistrict_PAN INDIA/District Boundary",
+  "national_geometry_bytes_written": 0,
+  "subset_bytes_written": 50179,
+  "source_records": 808,
+  "selected_records": [
+    {
+      "source_record_index": 470,
+      "source_record_bytes": 17312,
+      "raw_record_content_sha256": "d0032b551f41381d55b4d1cb2d57abd4e0d2ddb467cb3170c33de61725d04853",
+      "attributes": {
+        "OBJECTID": "546",
+        "STATE_UT": "MAHARASHTRA",
+        "STATE_LGD": "27",
+        "DISTRICT": "MUMBAI",
+        "DIST_LGD": "519",
+        "REMARKS": "",
+        "Shape_Leng": "65047.93446500000",
+        "Shape_Area": "62302472.9420999959"
+      }
+    },
+    {
+      "source_record_index": 483,
+      "source_record_bytes": 31188,
+      "raw_record_content_sha256": "60a1e91f4ff3ef4573f45f92136cbf5d1fa591d74ace144fee85ca569a7c125d",
+      "attributes": {
+        "OBJECTID": "559",
+        "STATE_UT": "MAHARASHTRA",
+        "STATE_LGD": "27",
+        "DISTRICT": "MUMBAI SUBURBAN",
+        "DIST_LGD": "518",
+        "REMARKS": "",
+        "Shape_Leng": "123184.31513500000",
+        "Shape_Area": "418337722.404999971"
+      }
+    }
+  ],
+  "coordinate_values_changed": false,
+  "source_crs_wkt": "PROJCS[\"LCC_WGS84\",GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]],PROJECTION[\"Lambert_Conformal_Conic\"],PARAMETER[\"False_Easting\",4000000.0],PARAMETER[\"False_Northing\",4000000.0],PARAMETER[\"Central_Meridian\",80.0],PARAMETER[\"Standard_Parallel_1\",12.472944],PARAMETER[\"Standard_Parallel_2\",35.172806],PARAMETER[\"Latitude_Of_Origin\",24.0],UNIT[\"Meter\",1.0]]",
+  "output_sha256": {
+    "mumbai_districts.cpg": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824",
+    "mumbai_districts.dbf": "d2f8af22cacc7438c75ef16175995476cbd45704a7cfc3a1fb42c067fbc85333",
+    "mumbai_districts.prj": "4e0115a1711327038fc52f74a11a80ee1c399c8d84e8f0e5f54bf00b9fd20f16",
+    "mumbai_districts.shp": "4a17632dadb554cc994136ac53aa0a7c941491eed53e9cbfb224d9a3e26fb91b",
+    "mumbai_districts.shx": "c4d77846d425d0f6ee93165156f2ed081966fd3559ef890c1e80ea1b92f37589"
+  }
+}

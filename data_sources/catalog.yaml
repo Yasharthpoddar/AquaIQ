@@ -1,16 +1,27 @@
 schema_version: aquaiq-official-sources-v1
 checked_date: '2026-10-26'
-scope: Official/scientific source evidence for isolated enrichment; no raw downloads committed.
-status_convention: Boolean stages are independent. null means not established at dataset level; details distinguish
-  metadata-only access and prior probes.
-boundary_vintage: Fixed project mixed 2011/update-2025 snapshot; not certified current or historical administrative
-  boundaries.
+scope: Official/scientific source evidence for the isolated final release; raw downloads and candidate data remain
+  local and ignored.
+status_convention: Boolean stages are independent. accessible means the specified data request/resource was available,
+  not merely its landing page. null means unestablished. validated always has a stated scope; empty schemas, documentation
+  and index files are not validated numerical forecast inputs.
+boundary_vintage: Production remains the fixed project mixed 2011/update-2025 snapshot. The downloaded SoI edition-2025
+  boundary is an isolated diagnostic, not a historical migration or certification of production geography.
 evidence_sha256:
   reports/candidates/groundwater_updates/enrichment_20261026/nwdp_manual_v1/manifest.json: d4db31536e7369e5d170a399de92896594e7810cdbd2b588f93ab5b3fae60e9a
   reports/data_enrichment/telemetry_review.json: 1e260b477b25d05a19906b9c809ad9e30dc4873bdc9f47cbbd746b5b09aa15e9
   data_sources/nwdp_resources.json: 0fd79ea38c2ac69a7fb8a438991afea6b835578a1e6d2b75fc63e12a208a9a2e
   reports/data_enrichment/weather_sources.json: 5369db7217b8739bc18843912005b6ccbe1552d73019db3ef9df094ca8c4a491
   reports/data_enrichment/auxiliary_sources.json: dbfa66b3294ce09fbd05c6585a23f3d231d544661b4390e2b7f88bc598ead7ed
+  reports/candidates/groundwater_updates/final_release_20261026/pdf_january_2025_v2/manifest.json: a6e32fab5b3b9f16aa734b53e96a28bc8cf702dd306a27fd559fb549d93f420e
+  reports/final_release_20261026/groundwater_sources.json: 9148a571e62e2cde76f742965cfe513d16fdaf3ff4c7b1bd3dca05c6c439f6f9
+  reports/final_release_20261026/weather_boundary_sources.json: 0e98729d56a9eb9bac0952324caf8e0cd4242aac475eb378d47ddbffe52c29b1
+  reports/final_release_20261026/weather_boundary_subset_provenance.json: e5002c95b6c18f2100b0a17e89bd08ecbd083239bc99a1fe4e4bd16d1406473d
+  reports/final_release_20261026/weather_attribution.json: 5f2d35af229cebe3b4c7c5648ee1325dbcdae9bb463191864bc7a86a48cbba5f
+  reports/final_release_20261026/weather_validation.json: e34bf76a6e36858cf3b4bd3fff42a2828d23ccd0bde9abeb0be498aeccf393bb
+  reports/final_release_20261026/calibration_v3.json: feff5b397b5567b73e62e48a1cb535f51e93b65ced1386cbfc72aa337e139d01
+  reports/final_release_20261026/clean_environment_probe.json: db061bf2c6074d7f87c48c238b1f385e5fd531ce671d852124f3997eadcba177
+  reports/final_release_20261026/clean_supplied_asset_replay.json: 9330fe2f8b764302145606b2b5f2f9bfe4e3df7d227a2de93d91434c722f2f0d
 sources:
 - id: nwdp_manual_7413b8de-2f99-45d3-b673-3d145012d3e8
   name: Ground Water Level CGWB Andaman And Nicobar Islands (2021 - 2025) Manual Quarterly
@@ -19,7 +30,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_an_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_an_2021_2025.csv
   reused_existing: true
   size_bytes: 50678
   sha256: 754916474e33946646c8542ac17e349abf0d9b3d5d0f288e06e175556e80af4b
@@ -58,7 +69,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_rj_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_rj_2021_2025.csv
   reused_existing: true
   size_bytes: 1159746
   sha256: adbc9a481bca2d1f93bf6539a8ee72994a3ee9e5533b8d0cefcdbbd9f0c7293e
@@ -97,7 +108,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_tn_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_tn_2021_2025.csv
   reused_existing: true
   size_bytes: 1702164
   sha256: c0f0a0d8c2c03433d8b33493a48f9177dfc2201579ff4548ad51378e7327b93e
@@ -136,7 +147,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_tr_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_tr_2021_2025.csv
   reused_existing: true
   size_bytes: 59642
   sha256: f99534eeb13ffc69a88a610b1ff4f836f48c0e2bd48c19c478317e4473a5e484
@@ -175,7 +186,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_uk_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_uk_2021_2025.csv
   reused_existing: true
   size_bytes: 162697
   sha256: 5927a112619a451665e00ea83a9a503d3182fe027dbc980dacbf211f59ee06d0
@@ -214,7 +225,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_up_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_up_2021_2025.csv
   reused_existing: true
   size_bytes: 793069
   sha256: 9647367409a301d4db92930fa0109991cab09166f4c87e832fd98f9282286d33
@@ -253,7 +264,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_wb_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_wb_2021_2025.csv
   reused_existing: true
   size_bytes: 1110405
   sha256: 65a5169dcb37cf93edba04134c4ea83e31d76d090df2155d083f16928f9f59ba
@@ -292,7 +303,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_ar_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_ar_2021_2025.csv
   reused_existing: true
   size_bytes: 25595
   sha256: 5e6339d917551ff5f11bc11c2680c088b32e84abcd641b640f2b2eca20c9b9c0
@@ -331,7 +342,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_as_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_as_2021_2025.csv
   reused_existing: true
   size_bytes: 268379
   sha256: 1362fbbad9a9a77121f16e4ebf885dbff64db08e91c00fb0cc23e1462f6c1e76
@@ -370,7 +381,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_br_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_br_2021_2025.csv
   reused_existing: true
   size_bytes: 609585
   sha256: 54de69eaedde20326565006174337b6ec363c3a8edc9f26b4cd60c9f29a47537
@@ -409,7 +420,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_cg_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_cg_2021_2025.csv
   reused_existing: true
   size_bytes: 1099389
   sha256: e11000cd113ddd6d386fdf0bef3b355132c8610c634641b7fdbb96b17ff0aeba
@@ -448,7 +459,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_ch_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_ch_2021_2025.csv
   reused_existing: true
   size_bytes: 28899
   sha256: 9dad456f38ecc9073c95c520f4b4d232af062168906fcef3f5a230328ee2d842
@@ -487,7 +498,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_dl_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_dl_2021_2025.csv
   reused_existing: true
   size_bytes: 81418
   sha256: 18636a50b083e4b1a3248a363b802a493798f9b211515ac0ede4dd71e663fad4
@@ -526,7 +537,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_dn_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_dn_2021_2025.csv
   reused_existing: true
   size_bytes: 12927
   sha256: d62d70c02bc769af229f4fd80e98879378c7ca812a7da5612fb73fa1876a7f86
@@ -565,7 +576,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_ga_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_ga_2021_2025.csv
   reused_existing: true
   size_bytes: 132160
   sha256: 6a5430b44896b84452f8455d385cd4736ff7ac12d8e67816505a362a067ffe3f
@@ -604,7 +615,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_gj_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_gj_2021_2025.csv
   reused_existing: true
   size_bytes: 848503
   sha256: 0d008db9bde5ccc9d40db7ea2e7bc0837441b82b13b66879efb6023ad8426c60
@@ -643,7 +654,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_hp_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_hp_2021_2025.csv
   reused_existing: true
   size_bytes: 156788
   sha256: e959d4412ee982d3dac388b6c7e7c4524526b4d759db6be9dd925b5e4b3c2070
@@ -682,7 +693,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_hr_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_hr_2021_2025.csv
   reused_existing: true
   size_bytes: 499493
   sha256: 7fbb59270f681f0b434d81ab0b14c19a667ebd6fabf22d3d2738fc243012f844
@@ -721,7 +732,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_jh_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_jh_2021_2025.csv
   reused_existing: true
   size_bytes: 593518
   sha256: 81460a4227c0db6f6be7abfa163124a5c1b984e0ca0758e455d50b4557304df1
@@ -760,7 +771,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_jk_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_jk_2021_2025.csv
   reused_existing: true
   size_bytes: 214017
   sha256: fea67b8c8807ef7a84ca352ff88bf726f3cd0dea19af25d09bc19f7710fc2196
@@ -799,7 +810,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_ka_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_ka_2021_2025.csv
   reused_existing: true
   size_bytes: 2543880
   sha256: 940a8d117b24dcdb35260d3f89c6249172062186111395ca03c31955654b7e4e
@@ -838,7 +849,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_kl_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_kl_2021_2025.csv
   reused_existing: true
   size_bytes: 1739999
   sha256: 7bdf1aabff9406c647993e14b97f25af5372db761736e806e0c0f6efe7ba04a5
@@ -877,7 +888,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_mh_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_mh_2021_2025.csv
   reused_existing: true
   size_bytes: 1754883
   sha256: 5fd40cbfc51ad349e25cd7678e3bafdac732d470986ec1c55c39a23b174b04d0
@@ -916,7 +927,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_ml_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_ml_2021_2025.csv
   reused_existing: true
   size_bytes: 45856
   sha256: e65368b06e9bb458042000968fa42c83505172e78bcab4911e022c38f3a55658
@@ -955,7 +966,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_mp_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_mp_2021_2025.csv
   reused_existing: true
   size_bytes: 1763240
   sha256: 02c34c3178ca9468465deeac5f646c6f8e3d5197068367e6ad050d7e326be84d
@@ -994,7 +1005,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_nl_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_nl_2021_2025.csv
   reused_existing: true
   size_bytes: 9051
   sha256: cd10c0d200af49ff61058bc06e961a5578abebbca2f263ae8307400eb5d44d07
@@ -1033,7 +1044,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_od_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_od_2021_2025.csv
   reused_existing: true
   size_bytes: 2152970
   sha256: 7cc399b047221a52e913eabdc5e65e84e260a52864cc77fd0ee576286e2e27ce
@@ -1072,7 +1083,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_pb_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_pb_2021_2025.csv
   reused_existing: true
   size_bytes: 582219
   sha256: 2707e2c319912d6169548b029268c1b2329c5572097cdfb4817543b0de585d6c
@@ -1111,7 +1122,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_ap_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_ap_2021_2025.csv
   reused_existing: true
   size_bytes: 1481218
   sha256: 1bb1399deb6391566ca6ac4bfe1e255fd2a99eb19e32feca0de587839c504dbb
@@ -1150,7 +1161,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_ts_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_ts_2021_2025.csv
   reused_existing: true
   size_bytes: 1095897
   sha256: 45b1c5dc68312fb48ef2f9d52722d0237fd8db63674476edc0f084d41bd5bb25
@@ -1189,7 +1200,7 @@ sources:
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_py_2021_2025.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_py_2021_2025.csv
   reused_existing: true
   size_bytes: 26889
   sha256: a44a0c47aa3f9cd393d20a658d921bc21e953bc7c02823ca031e9b392c1513fa
@@ -1223,12 +1234,12 @@ sources:
     is cache verification, not a certified initial download instant.
 - id: nwdp_manual_c0886194-96fd-4e46-8cf2-82fcf1a69057
   name: Ground Water Level CGWB Andaman And Nicobar Islands (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:17:28.921819'
+  metadata_last_modified: '2026-10-26T00:16:04.712103'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_an_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_an_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -1260,14 +1271,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:09.722131+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_1bd14e55-0fc9-4e01-9a44-2e268ae0ae99
   name: Ground Water Level CGWB Andhra Pradesh (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:17:30.560333'
+  metadata_last_modified: '2026-10-26T00:16:06.367717'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_ap_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_ap_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -1299,14 +1317,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:09.689502+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_a5710ea2-6889-4125-b68c-e112a00d8f09
   name: Ground Water Level CGWB Arunachal Pradesh (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:17:32.174226'
+  metadata_last_modified: '2026-10-26T00:16:07.864029'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_ar_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_ar_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -1338,14 +1363,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:09.839761+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_a563a6ff-9972-483d-884d-9e09161509ff
   name: Ground Water Level CGWB Assam (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:17:34.041548'
+  metadata_last_modified: '2026-10-26T00:16:09.284020'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_as_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_as_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -1377,14 +1409,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:09.893768+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_dc48e2f4-5944-4f3e-9e45-2eec001058e5
   name: Ground Water Level CGWB Bihar (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:17:36.228259'
+  metadata_last_modified: '2026-10-26T00:16:10.718051'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_br_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_br_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -1416,14 +1455,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:10.009700+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_550d8b72-e310-4fef-99d0-2e7912b77eea
   name: Ground Water Level CGWB Chhattisgarh (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:17:37.932490'
+  metadata_last_modified: '2026-10-26T00:16:12.269472'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_cg_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_cg_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -1455,14 +1501,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:10.054339+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_619fe37e-74ca-4f09-b896-04a4ac6c8eab
   name: Ground Water Level CGWB Chandigarh (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:17:39.579525'
+  metadata_last_modified: '2026-10-26T00:16:13.801189'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_ch_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_ch_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -1494,14 +1547,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:10.166633+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_6e357dfe-c0c3-447d-9c99-fd3eb544b2b5
   name: Ground Water Level CGWB Delhi (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:17:41.400354'
+  metadata_last_modified: '2026-10-26T00:16:15.413499'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_dl_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_dl_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -1533,14 +1593,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:10.214420+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_ce83ecff-bccf-4d18-b962-59f46ebd6f9b
   name: Ground Water Level CGWB Dadra And Nagar Haveli (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:17:42.920798'
+  metadata_last_modified: '2026-10-26T00:16:16.984881'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_dn_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_dn_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -1572,14 +1639,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:10.329042+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_94facedc-a5a8-4114-bb23-dcf4d75c98fb
   name: Ground Water Level CGWB Goa (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:17:44.464711'
+  metadata_last_modified: '2026-10-26T00:16:18.503431'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_ga_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_ga_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -1611,14 +1685,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:10.388577+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_3c9ea0a0-28b4-49a5-a14f-c9db90cc4bf0
   name: Ground Water Level CGWB Gujarat (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:17:46.320023'
+  metadata_last_modified: '2026-10-26T00:16:20.113757'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_gj_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_gj_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -1650,14 +1731,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:10.480295+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_5e981bdb-9664-4210-a812-fd7229ff55a5
   name: Ground Water Level CGWB Himachal Pradesh (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:17:47.912391'
+  metadata_last_modified: '2026-10-26T00:16:21.796898'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_hp_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_hp_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -1689,14 +1777,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:10.531182+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_00a546a5-db9d-4586-887b-4170b01a6dfc
   name: Ground Water Level CGWB Haryana (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:17:49.477527'
+  metadata_last_modified: '2026-10-26T00:16:23.375449'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_hr_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_hr_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -1728,14 +1823,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:10.631415+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_80ce70c1-0ef0-4daa-b0ee-4f67d28430c2
   name: Ground Water Level CGWB Jharkhand (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:17:51.151496'
+  metadata_last_modified: '2026-10-26T00:16:24.941200'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_jh_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_jh_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -1767,14 +1869,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:10.676653+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_e6463586-1187-4367-a60e-b3f103dafc82
   name: Ground Water Level CGWB Jammu & Kashmir (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:17:52.781747'
+  metadata_last_modified: '2026-10-26T00:16:26.479848'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_jk_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_jk_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -1806,14 +1915,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:10.798065+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_84bb8743-79e9-4856-95ee-b79c96126fcf
   name: Ground Water Level CGWB Karnataka (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:17:54.448358'
+  metadata_last_modified: '2026-10-26T00:16:28.135392'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_ka_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_ka_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -1845,14 +1961,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:10.826820+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_e6c267cd-6f76-49f6-ae06-809a87830b47
   name: Ground Water Level CGWB Kerala (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:17:56.198124'
+  metadata_last_modified: '2026-10-26T00:16:29.664909'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_kl_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_kl_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -1884,14 +2007,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:10.943067+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_59f9aee6-701e-42db-860c-b0f7663f6383
   name: Ground Water Level CGWB Maharashtra (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:17:57.832619'
+  metadata_last_modified: '2026-10-26T00:16:31.270317'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_mh_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_mh_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -1923,14 +2053,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:10.989916+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_042ad1ca-e437-476d-89db-ae4cc8d93bdf
   name: Ground Water Level CGWB Meghalaya (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:17:59.244091'
+  metadata_last_modified: '2026-10-26T00:16:32.839607'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_ml_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_ml_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -1962,14 +2099,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:11.092123+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_bb0861b8-54c6-4951-b49f-1b9ae0a047d3
   name: Ground Water Level CGWB Madhya Pradesh (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:18:00.918281'
+  metadata_last_modified: '2026-10-26T00:16:34.523650'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_mp_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_mp_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -2001,14 +2145,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:11.125907+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_ec2946f3-889d-4a8b-90f3-b7e774b18989
   name: Ground Water Level CGWB Nagaland (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:18:02.470131'
+  metadata_last_modified: '2026-10-26T00:16:36.180207'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_nl_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_nl_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -2040,14 +2191,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:11.236376+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_62c5c7ed-64c4-4420-871b-f8b45532ab59
   name: Ground Water Level CGWB Odisha (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:18:04.375206'
+  metadata_last_modified: '2026-10-26T00:16:37.742011'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_od_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_od_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -2079,14 +2237,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:11.261369+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_cfe24362-d4bf-4316-8ef1-3131dacc4216
   name: Ground Water Level CGWB Punjab (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:18:06.201970'
+  metadata_last_modified: '2026-10-26T00:16:39.316831'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_pb_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_pb_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -2118,14 +2283,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:11.362664+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_77128d62-e921-4d1d-8815-01e29d651086
   name: Ground Water Level CGWB Puducherry (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:18:08.007065'
+  metadata_last_modified: '2026-10-26T00:16:40.926235'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_py_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_py_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -2157,14 +2329,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:11.392065+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_12537471-6467-4415-81e2-a605b08b98f6
   name: Ground Water Level CGWB Rajasthan (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:18:09.765887'
+  metadata_last_modified: '2026-10-26T00:16:42.613902'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_rj_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_rj_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -2196,14 +2375,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:11.516064+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_94d55b3e-ff8d-4dcc-9aef-735fb828eade
   name: Ground Water Level CGWB Tamil Nadu (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:18:11.480947'
+  metadata_last_modified: '2026-10-26T00:16:44.139882'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_tn_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_tn_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -2235,14 +2421,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:11.535404+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_413d270d-973c-4a7f-9c5b-103cb2892aba
   name: Ground Water Level CGWB Tripura (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:18:13.109479'
+  metadata_last_modified: '2026-10-26T00:16:46.438335'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_tr_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_tr_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -2274,14 +2467,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:11.681165+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_7e951b93-7025-45c4-be72-378a8db544cd
   name: Ground Water Level CGWB Telangana (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:18:14.709617'
+  metadata_last_modified: '2026-10-26T00:16:48.320620'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_ts_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_ts_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -2313,14 +2513,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:11.701738+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_d849b593-058b-4cee-ad9f-40f621e2af89
   name: Ground Water Level CGWB Uttarakhand (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:18:16.352405'
+  metadata_last_modified: '2026-10-26T00:16:51.453989'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_uk_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_uk_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -2352,14 +2559,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:11.835428+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_b5c58f1e-03b5-4403-8eed-e70d17a33479
   name: Ground Water Level CGWB Uttar Pradesh (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:18:18.086861'
+  metadata_last_modified: '2026-10-26T00:16:53.074222'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_up_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_up_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -2391,14 +2605,21 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:11.862977+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_manual_6182a04b-ac69-4f8d-96a4-964161282bb5
   name: Ground Water Level CGWB West Bengal (2026 - 2030) Manual Quarterly
-  metadata_last_modified: '2026-10-25T00:18:19.809444'
+  metadata_last_modified: '2026-10-26T00:16:54.675591'
   publisher: CGWB / National Water Informatics Centre
   license_id: other-open
   license_title: Other (Open)
   license_url: null
-  path: data\raw\official_enrichment\nwdp_20261026\gwl_manual_quarterly_cgwb_wb_2026_2030.csv
+  path: data/raw/official_enrichment/nwdp_20261026/gwl_manual_quarterly_cgwb_wb_2026_2030.csv
   reused_existing: true
   size_bytes: 243
   sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
@@ -2430,6 +2651,13 @@ sources:
   download_date_local: '2026-10-26'
   download_time_note: Acquired during this run; acquisition manifest was reconstructed from cached files. Timestamp
     is cache verification, not a certified initial download instant.
+  current_resource_checked_at_utc: '2026-10-26T14:44:12.007001+00:00'
+  current_resource_http_status: 200
+  current_resource_bytes: 243
+  current_resource_sha256: cc7824b6b3b72f9e9818f1ca4edab27eeb37b82d6af4092c9d7801d5389d03b6
+  current_resource_observation_rows: 0
+  current_resource_decision: Actual refreshed CSV body remains the schema-validated empty header. Nightly metadata
+    timestamps are not new measurements.
 - id: nwdp_telemetry_65e7d4d2-61f1-473b-b069-a39bac7420bd
   name: Ground Water Level CGWB Assam (2021 - 2025) Telemetry Six Hourly
   url: https://nwdp.nwic.gov.in/dataset/d49e68c8-f232-4187-82ca-db7e42e09744/resource/65e7d4d2-61f1-473b-b069-a39bac7420bd/download/gwl_tel_6_hourly_cgwb_as_2021_2025.csv
@@ -2447,21 +2675,37 @@ sources:
   role: candidate_groundwater_telemetry_not_integrated
   units: provider metres; per-well sign/datum unresolved
   downloaded_at_utc: '2026-10-25T22:45:40.327326+00:00'
-  status: &id001
+  status:
     discovered: true
     accessible: true
     downloaded: true
     parsed: true
     integrated: false
     validated: false
-  decision: Retain as audited source candidate only; do not reverse signs or pool with quarterly manual targets.
-  blockers: &id002
+  decision: Retain quarantined source records. RL_MSL is not sensor/reference metadata. No blanket sign flip, RL_MSL
+    subtraction or manual/telemetry pooling.
+  blockers: &id001
   - Provider telemetry values are predominantly negative while the deployed target is positive depth below ground
     level. Dataset title and general description do not certify a per-well sign convention or reference datum.
   - No independently certified cross-product well identifiers/aquifer/construction continuity. Exact name+coordinate
     overlap is reported but cannot establish equivalence.
   - Six-hourly readings require station-balanced temporal aggregation and overlap validation before modeling; no
     manual/telemetry pooling performed.
+  stations: 68
+  negative_rows: 152135
+  zero_rows: 45
+  positive_rows: 8679
+  missing_elevation_rows: 0
+  zero_elevation_rows: 2166
+  positive_elevation_rows: 158693
+  validation_scope: Parsed source units/sign/elevation profile only; per-well datum and export sign not certified,
+    so measured m_bgl target conversion is not validated.
+  review_evidence: reports/final_release_20261026/groundwater_sources.json
+  release_requirements: &id002
+  - Provider-certified per-well exported variable, sign convention and units.
+  - Stable well identifiers and installation/reference-elevation, sensor-depth and cable-length metadata.
+  - Manual dip calibration/correction and maintenance/clock logs, with sufficient independently accepted overlap.
+  - Station-balanced temporal aggregation, quality flags and a prospective verification period.
 - id: nwdp_telemetry_48ee490f-d9b8-4a0c-9c4b-979c80c6ca23
   name: Ground Water Level CGWB Bihar (2021 - 2025) Telemetry Six Hourly
   url: https://nwdp.nwic.gov.in/dataset/d49e68c8-f232-4187-82ca-db7e42e09744/resource/48ee490f-d9b8-4a0c-9c4b-979c80c6ca23/download/gwl_tel_6_hourly_cgwb_br_2021_2025.csv
@@ -2479,9 +2723,27 @@ sources:
   role: candidate_groundwater_telemetry_not_integrated
   units: provider metres; per-well sign/datum unresolved
   downloaded_at_utc: '2026-10-25T22:45:39.027164+00:00'
-  status: *id001
-  decision: Retain as audited source candidate only; do not reverse signs or pool with quarterly manual targets.
-  blockers: *id002
+  status:
+    discovered: true
+    accessible: true
+    downloaded: true
+    parsed: true
+    integrated: false
+    validated: false
+  decision: Retain quarantined source records. RL_MSL is not sensor/reference metadata. No blanket sign flip, RL_MSL
+    subtraction or manual/telemetry pooling.
+  blockers: *id001
+  stations: 23
+  negative_rows: 52520
+  zero_rows: 60
+  positive_rows: 418
+  missing_elevation_rows: 0
+  zero_elevation_rows: 0
+  positive_elevation_rows: 52998
+  validation_scope: Parsed source units/sign/elevation profile only; per-well datum and export sign not certified,
+    so measured m_bgl target conversion is not validated.
+  review_evidence: reports/final_release_20261026/groundwater_sources.json
+  release_requirements: *id002
 - id: nwdp_telemetry_c471dcb8-c968-45af-b69d-0e8fc0e1b3ee
   name: Ground Water Level CGWB Assam (2026 - 2030) Telemetry Six Hourly
   url: https://nwdp.nwic.gov.in/dataset/d49e68c8-f232-4187-82ca-db7e42e09744/resource/c471dcb8-c968-45af-b69d-0e8fc0e1b3ee/download/gwl_tel_6_hourly_cgwb_as_2026_2030.csv
@@ -2499,9 +2761,27 @@ sources:
   role: candidate_groundwater_telemetry_not_integrated
   units: provider metres; per-well sign/datum unresolved
   downloaded_at_utc: '2026-10-25T22:45:40.748989+00:00'
-  status: *id001
-  decision: Retain as audited source candidate only; do not reverse signs or pool with quarterly manual targets.
-  blockers: *id002
+  status:
+    discovered: true
+    accessible: true
+    downloaded: true
+    parsed: true
+    integrated: false
+    validated: false
+  decision: Retain quarantined source records. RL_MSL is not sensor/reference metadata. No blanket sign flip, RL_MSL
+    subtraction or manual/telemetry pooling.
+  blockers: *id001
+  stations: 68
+  negative_rows: 43697
+  zero_rows: 0
+  positive_rows: 1364
+  missing_elevation_rows: 0
+  zero_elevation_rows: 677
+  positive_elevation_rows: 44384
+  validation_scope: Parsed source units/sign/elevation profile only; per-well datum and export sign not certified,
+    so measured m_bgl target conversion is not validated.
+  review_evidence: reports/final_release_20261026/groundwater_sources.json
+  release_requirements: *id002
 - id: nwdp_telemetry_439e1ed2-80d1-4882-b40f-7c7207527000
   name: Ground Water Level CGWB Bihar (2026 - 2030) Telemetry Six Hourly
   url: https://nwdp.nwic.gov.in/dataset/d49e68c8-f232-4187-82ca-db7e42e09744/resource/439e1ed2-80d1-4882-b40f-7c7207527000/download/gwl_tel_6_hourly_cgwb_br_2026_2030.csv
@@ -2519,9 +2799,27 @@ sources:
   role: candidate_groundwater_telemetry_not_integrated
   units: provider metres; per-well sign/datum unresolved
   downloaded_at_utc: '2026-10-25T22:45:41.393966+00:00'
-  status: *id001
-  decision: Retain as audited source candidate only; do not reverse signs or pool with quarterly manual targets.
-  blockers: *id002
+  status:
+    discovered: true
+    accessible: true
+    downloaded: true
+    parsed: true
+    integrated: false
+    validated: false
+  decision: Retain quarantined source records. RL_MSL is not sensor/reference metadata. No blanket sign flip, RL_MSL
+    subtraction or manual/telemetry pooling.
+  blockers: *id001
+  stations: 22
+  negative_rows: 15926
+  zero_rows: 0
+  positive_rows: 86
+  missing_elevation_rows: 0
+  zero_elevation_rows: 0
+  positive_elevation_rows: 16012
+  validation_scope: Parsed source units/sign/elevation profile only; per-well datum and export sign not certified,
+    so measured m_bgl target conversion is not validated.
+  review_evidence: reports/final_release_20261026/groundwater_sources.json
+  release_requirements: *id002
 - id: 5b0a8a48-83cf-4ffd-8cf2-5e299e51dc60
   name: Ground Water Level Maharashtra_GW Maharashtra (2021 - 2025) Telemetry Six Hourly
   metadata_last_modified: '2026-01-24T23:27:12.629991'
@@ -2572,23 +2870,39 @@ sources:
   publisher: Central Ground Water Board
   landing_page: https://cgwb.gov.in/en/ground-water-level-monitoring
   resource_url: https://cgwb.gov.in/wl_data/January_WL_1994-2025.pdf
-  role: complementary_measured_groundwater_archive_not_pooled
+  role: measured_groundwater_missing_month_target
   units: m_bgl
   coverage_period: Advertised January 1994-2025; existing strict parser inspects January 2025 pages 1-332 only.
   acquired_in_this_run: false
   downloaded_at_utc: null
   size_bytes: 38514524
   sha256: 6ebb9cbf401c3fb7aca65c31b421ccf586c6fadbce5abb4d2a222e538b0534cd
-  license: CGWB attribution/copyright policy; raw PDF stays local.
+  license: CGWB attribution/copyright policy; no separate open-data grant supplied
   status:
     discovered: true
     accessible: null
     downloaded: true
     parsed: true
-    integrated: false
-    validated: false
-  decision: Previously acquired and inspected archive, not a new download. Do not pool overlapping products without
-    certified station IDs. Current resource accessibility was not established by the failed web fetch.
+    integrated: true
+    validated: true
+  decision: Integrate only 542 strictly audited missing January 2025 months into an isolated candidate. No overlapping
+    cross-product station pooling; no new blind skill claim.
+  actual_observation_period: January 2025
+  acquired_this_run: false
+  license_url: https://cgwb.gov.in/en/copyright-policy
+  validation_scope: Strict source/coordinates/date/duplicate screening and isolated candidate generation; not independent
+    future accuracy.
+  path: data/raw/updates/20261015/cgwb/January_WL_1994-2025.pdf
+  accepted_source_rows: 15075
+  rejected_source_rows: 817
+  additional_observed_months: 542
+  new_source_readings_contributing: 14213
+  source_precedence: Existing genuine district months and original NWDP candidate keep their exact values; PDF adds
+    whole missing months only.
+  aquifer_metadata_caveat: Dataset title is not individual well construction metadata. Retain generic measured m_bgl
+    without claiming a certified unconfined water table.
+  candidate_manifest_path: reports/candidates/groundwater_updates/final_release_20261026/pdf_january_2025_v2/manifest.json
+  candidate_manifest_sha256: a6e32fab5b3b9f16aa734b53e96a28bc8cf702dd306a27fd559fb549d93f420e
 - id: imd_rainfall_netcdf_2025
   publisher: India Meteorological Department
   landing_page: https://www.imdpune.gov.in/cmpg/Griddata/Rainfall_25_NetCDF.html
@@ -2666,24 +2980,26 @@ sources:
   role: model_predictor
   status:
     discovered: true
-    accessible: null
+    accessible: false
     downloaded: false
     parsed: false
     integrated: false
     validated: false
   metadata_downloaded: true
-  data_request_submitted: false
-  blocker: Optional cdsapi client is not installed in the project venv. Official API guide requires an account token
-    and manually accepted dataset terms; no credential-dependent job or terms acceptance was attempted. This is
-    not evidence the data endpoint is unavailable.
+  data_request_submitted: true
+  blocker: 'Supersedes the earlier missing-client probe: cdsapi 0.7.7 was installed and the bounded authorized January
+    2025 request returned HTTP 403 requiring manually accepted dataset terms. No new arrays downloaded; not a public-dataset
+    unavailability claim.'
   api_guide: https://cds.climate.copernicus.eu/how-to-api
   existing_source_start: 2002-01
   existing_source_end: 2024-12
   existing_source_sha256: 4edf8ff080ce5e7b380924cac345e87f1e886c6937ceed53268ac254ce4cff41
-  decision: Retain existing weather inputs and fix deterministic extraction of existing immutable split-field ZIP;
-    new historical months remain an explicit acquisition follow-up.
+  decision: Retain unchanged historical weather. Account owner must review and manually accept terms before a separately
+    authorized retry into fresh isolated paths.
   status_details:
-    accessible: metadata_http200; authenticated data retrieval not tested
+    metadata_accessible: true
+    data_accessible_for_checked_account_request: false
+    latest_probe: era5_monthly_authorized_release_probe
 - id: imd_realtime_rainfall
   publisher: India Meteorological Department
   landing_page: https://www.imdpune.gov.in/cmpg/Realtimedata/Rainfall/Rain_Download.html
@@ -2758,11 +3074,11 @@ sources:
   checked_at_utc: '2026-10-25T22:48:18.552093+00:00'
   download_error_type: ConnectTimeout
   license: Not verified; no polygon acquired or redistributed
-  decision: Retain explicit missing weather attribution. District page uses inconsistent areas and malformed/swapped
-    coordinate headings; map is a PDF rather than an acquired georeferenced boundary. No Mumbai-to-Suburban alias
-    or invented centroid was applied.
+  decision: The MRSAC PDF remains unacquired after timeout. Separately acquired SoI 2025 geometry supports isolated
+    Mumbai/Suburban diagnostics; it does not justify a production alias, invented centroid or historical migration.
   status_details:
     accessible: web-index content checked; direct HTTP requests timed out
+  additional_official_evidence: soi_abdb_2025_district_geometry
 - id: cgwb_gwra_2025_blocks
   publisher: Central Ground Water Board, Ministry of Jal Shakti, Government of India
   landing_page: https://cgwb.gov.in/en/ground-water-resource-assessment-0
@@ -3048,3 +3364,292 @@ sources:
     labels.
   - LegacyJPLURL returned404;currentGSFCcatalog andexactNetCDFHEAD succeeded.
   decision: No download or predictiveintegration;no unjustified downscaling or conversion to measured depth.
+- id: cgwb_high_frequency_guidance_2026
+  publisher: Central Ground Water Board, Ministry of Jal Shakti
+  landing_page: https://cgwb.gov.in/cgwbpnm/public/publication-detail/1932
+  resource_url: https://cgwb.gov.in/cgwbpnm/public/download/1932
+  sha256: b07dcc160175153df97f36ddac04170e89b42224b6bd7179109df776932fff12
+  size_bytes: 7653133
+  pages: 124
+  publication_date: February 2026
+  download_date: '2026-10-26'
+  role: source_validation_and_datum_requirements_not_measurements
+  license: CGWB copyright/attribution policy; raw PDF local
+  license_url: https://cgwb.gov.in/en/copyright-policy
+  relevant_pdf_pages:
+  - 49
+  - 50
+  - 53
+  - 54
+  - 55
+  - 115
+  status:
+    discovered: true
+    accessible: true
+    downloaded: true
+    parsed: true
+    integrated: false
+    validated: true
+  finding: Guidance requires installation/reference metadata and manual-dip validation; it flags negative/zero depths
+    rather than prescribing a blanket sign flip. It does not supply station-specific correction logs.
+  path: data/raw/official_enrichment/final_release_20261026/groundwater/high_frequency_guidance_2026.pdf
+- id: nwdp_manual_2026_refresh_check
+  publisher: CGWB / National Water Informatics Centre
+  landing_page: https://nwdp.nwic.gov.in/dataset/gwl-manual-quarterly-central-ground-water-board-department
+  resource_url: https://nwdp.nwic.gov.in/api/3/action/package_show?id=gwl-manual-quarterly-central-ground-water-board-department
+  metadata_sha256: 906d2428da89779237b994b9032fe8dbe890fce9455c5081cc56996b102731b7
+  metadata_size_bytes: 120914
+  role: current_resource_availability_and_empty_schema_check
+  license: Other (Open); specific license URL not supplied
+  checked_date: '2026-10-26'
+  resource_count: 31
+  observation_rows: 0
+  status:
+    discovered: true
+    accessible: true
+    downloaded: true
+    parsed: true
+    integrated: false
+    validated: true
+  validation_scope: 31 small current CSV bodies match the hash of the previously schema-validated empty header;
+    nightly timestamps do not signify observations.
+  path: data/raw/official_enrichment/final_release_20261026/groundwater/manual_metadata_current.json
+- id: cgwb_wb_andaman_sikkim_yearbook_2024_2025
+  publisher: Central Ground Water Board, Eastern Region
+  landing_page: https://cgwb.gov.in/cgwbpnm/public/publication-detail/2027
+  resource_url: https://cgwb.gov.in/cgwbpnm/public/download/2027
+  sha256: 2414bae680e56f54035f31621b7d9d97a3fe7909ffed7d8f43e1dc268e08d530
+  size_bytes: 15855569
+  downloaded_at_utc: '2026-10-26T14:50:50.680029+00:00'
+  http_last_modified: Wed, 25 Mar 2026 09:55:01 GMT
+  pages: 197
+  role: regional_yearbook_context_and_measurement_metadata_review
+  license: CGWB copyright/attribution policy; no separate open-data grant supplied; raw PDF remains local
+  license_url: https://cgwb.gov.in/en/copyright-policy
+  status:
+    discovered: true
+    accessible: true
+    downloaded: true
+    parsed: true
+    integrated: false
+    validated: false
+  validation_scope: Relevant text/figures reviewed; no additional numeric station-depth table accepted.
+  relevant_pdf_pages:
+  - 194
+  - 195
+  - 196
+  finding: Sikkim narrative describes four confined-aquifer piezometers, so the January archive dataset title cannot
+    certify individual aquifer type. Generic measured m_bgl values are retained without reinterpreting them as a
+    certified unconfined water table.
+  date_caveat: Published label is 2024-2025 but Sikkim running headers say 2023-24. Observation dates must come
+    from actual tables, never these inconsistent labels.
+  path: data/raw/official_enrichment/final_release_20261026/groundwater/wb_an_sikkim_2024_2025.pdf
+- id: era5_monthly_authorized_release_probe
+  publisher: ECMWF / Copernicus Climate Change Service
+  dataset: reanalysis-era5-single-levels-monthly-means
+  doi: 10.24381/cds.f17050d7
+  setup_and_manual_terms_url: https://cds.climate.copernicus.eu/how-to-api
+  license: CC-BY licence displayed by the official dataset catalogue; current terms require manual acceptance
+  catalogue_update_date: '2026-10-06'
+  downloadable_scope: Existing configured account failed this bounded request; not a claim about public dataset
+    availability
+  authorization_attempted: true
+  credential_validity_independently_verified: false
+  existing_configuration_read_by_client_only: true
+  credential_values_logged: false
+  optional_client_installed: cdsapi==0.7.7
+  request:
+    product_type:
+    - monthly_averaged_reanalysis
+    variable:
+    - 2m_temperature
+    - potential_evaporation
+    year:
+    - '2025'
+    month:
+    - '01'
+    time:
+    - 00:00
+    area:
+    - 38
+    - 68
+    - 6
+    - 98
+    data_format: netcdf
+    download_format: unarchived
+  checked_at_utc: '2026-10-26T10:22:05.727635+00:00'
+  http_status: 403
+  failure_reason: manual_dataset_terms_or_licence_acceptance_required
+  sanitized_evidence:
+    http_status: 403
+    evidence_flags:
+      required licences: true
+      required licenses: false
+      not accepted: true
+      not all of the required: false
+      invalid token: false
+      unauthorized: false
+      invalid credentials: false
+    only_boolean_error_evidence_logged: true
+  manual_terms_accepted_by_agent: false
+  new_source_bytes_downloaded: 0
+  new_or_changed_values_vs_existing_arrays: 'Unassessed: provider rejected before returning data'
+  checksum_and_numerical_overlap_comparison: Not possible without acquired arrays; compare_overlap is tested on
+    controlled arrays
+  next_step: The account owner must review and manually accept the dataset terms, then explicitly rerun into fresh
+    isolated paths
+  original_manifest_note: First preserved manifest has accessible=null; the actual HTTP403 and sanitized terms flags
+    establish this request was blocked. New code records accessible=false on 401/403.
+  landing_page: https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels-monthly-means
+  resource_url: https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels-monthly-means
+  metadata_accessible: true
+  downloadable: false
+  status:
+    discovered: true
+    accessible: false
+    downloaded: false
+    parsed: false
+    integrated: false
+    validated: false
+  role: candidate_weather_predictor_access_probe
+  validation_scope: Provider rejected bounded data request at manual terms gate; no arrays to checksum or compare.
+- id: soi_abdb_2025_district_geometry
+  publisher: Survey of India, NGDR & UGID
+  downloaded_at_utc: '2026-10-26T14:41:44.271403+00:00'
+  last_modified_http: Tue, 12 May 2026 08:51:34 GMT
+  size_bytes: 202524438
+  sha256: b8325e5d9dd0f04a6663d775363fe38cd2f23bd9dbae3fb7118b4e6e0ce0bcb7
+  coverage: National source; exact LGD519 Mumbai and LGD518 Mumbai Suburban records parsed locally
+  source_record_count: 808
+  selected_records: 2
+  license: Metadata accessConstraints=copyright and useConstraints=copyright; Geospatial Guidelines 2021 apply
+  terms_url: https://surveyofindia.gov.in/pages/terms-and-conditions
+  attribution: Survey of India
+  raw_and_derived_polygons_committed: false
+  redistribution_permission_assumed: false
+  acquisition: Public official direct link, initial GET then verified byte-range continuation with unchanged Last-Modified
+  resume_evidence:
+  - attempt: 1
+    start: 71478207
+    http_status: 206
+    content_range: bytes 71478207-202524437/202524438
+    last_modified: Tue, 12 May 2026 08:51:34 GMT
+  - attempt: 2
+    start: 202259302
+    http_status: 206
+    content_range: bytes 202259302-202524437/202524438
+    last_modified: Tue, 12 May 2026 08:51:34 GMT
+  repeated_prefix_bytes_requested: 0
+  landing_page: https://surveyofindia.gov.in/pages/administrative-boundary-data-base-abdb-
+  resource_url: https://surveyofindia.gov.in/documents/State_District_Subdistrict_PAN%20INDIA.rar
+  metadata_accessible: true
+  downloadable: true
+  status:
+    discovered: true
+    accessible: true
+    downloaded: true
+    parsed: true
+    integrated: false
+    validated: true
+  role: isolated_candidate_boundary_geometry
+  validation_scope: Full archive bytes hash verified; only two Mumbai district records selected and parsed for diagnostics.
+    No production geometry or historical observations migrated.
+- id: soi_abdb_2025_district_metadata
+  publisher: Survey of India
+  size_bytes: 38879
+  sha256: 1a14716b73f00fc8391f2708a7975c2f2c1ad4a4e91aafb6dce6546a039e9514
+  last_modified_http: Fri, 29 May 2026 04:41:24 GMT
+  metadata_identifier: SOI/ABDB/VECTOR/50000/2025/DISTRICT/INDIA
+  publication_date: '2026-05-06'
+  edition: '2025'
+  creation_and_temporal_extent: 2022-2025
+  maharashtra_orgi_harmonization_year: 2025
+  equivalent_scale_denominator: 50000
+  publisher_horizontal_rmse_statement_m: 12.5
+  maintenance_frequency: asNeeded
+  declared_horizontal_reference: LCC-WGS84; EPSG7755
+  license: copyright; Geospatial Guidelines 2021
+  parsed_member: DISTRICT BOUNDARY.xlsx
+  interpretation: A dated contemporary boundary definition, not proof that all historical observations use this
+    vintage
+  landing_page: https://surveyofindia.gov.in/documents/Metadata_ABDB.zip
+  resource_url: https://surveyofindia.gov.in/documents/Metadata_ABDB.zip
+  metadata_accessible: true
+  downloadable: true
+  status:
+    discovered: true
+    accessible: true
+    downloaded: true
+    parsed: true
+    integrated: false
+    validated: true
+  role: candidate_boundary_vintage_metadata
+  validation_scope: Official district metadata workbook parsed; geographic vintage does not establish historical
+    observation geography.
+- id: mrsac_mumbai_suburban_map
+  publisher: Maharashtra Remote Sensing Applications Centre
+  failure: URLError / bounded request timeout; no source body acquired
+  license: Not independently verified; no redistribution or extraction performed
+  landing_page: https://mrsac.gov.in/writereaddata/MRSAC/map/15638756425d36d93a68368Dist_Mumbai_Sub.pdf
+  resource_url: https://mrsac.gov.in/writereaddata/MRSAC/map/15638756425d36d93a68368Dist_Mumbai_Sub.pdf
+  metadata_accessible: null
+  downloadable: null
+  status:
+    discovered: true
+    accessible: null
+    downloaded: false
+    parsed: false
+    integrated: false
+    validated: false
+  role: candidate_boundary_pdf_unacquired
+  validation_scope: No source body acquired; a timeout does not establish permanent source unavailability.
+final_release:
+  as_of: '2026-10-26'
+  feature_directory: data/processed/enrichment/final_release_20261026_v3
+  feature_generation_id: physical-v3-official-c9ade81d95720f91
+  feature_csv_sha256: 3a4a560667d732b50c6a1712f4d9ceb13b411d4ae2c7a984e08ffc2aada21042
+  groundwater_candidate: reports/candidates/groundwater_updates/final_release_20261026/pdf_january_2025_v2
+  candidate_manifest_sha256: a6e32fab5b3b9f16aa734b53e96a28bc8cf702dd306a27fd559fb549d93f420e
+  calibration_path: reports/final_release_20261026/calibration_v3.json
+  genuine_observed_district_months: 43384
+  additional_months_vs_previous_enrichment: 542
+  newly_locally_observed_districts_vs_previous_enrichment:
+  - AR-Kamle
+  - AR-Longding
+  - SK-East_Sikkim
+  - UK-Pithoragarh
+  - UK-Rudraprayag
+  remaining_zero_local_history_districts: 57
+  new_weather_observations_acquired: 0
+  source_target_definition: Generic measured groundwater depth m_bgl; dataset-level titles do not certify individual
+    aquifer type.
+  reproduction_guide: docs/FINAL_RELEASE_REPRODUCTION.md
+  clean_replay_report: reports/final_release_20261026/clean_supplied_asset_replay.json
+  code_only_fresh_clone_reproduces_forecasts: false
+  supplied_asset_clean_replay_matches: true
+  previous_publication_or_working_service_replaced: false
+telemetry_comparison:
+  rows: 274930
+  stations: 91
+  stations_with_both_negative_and_positive_values: 41
+  accepted_manual_station_fingerprint_overlap: 53
+  accepted_manual_same_day_pairs: 16
+  accepted_manual_exact_timestamp_pairs: 0
+  raw_signed_daily_difference_mae_m: 9.9740625
+  difference_interpretation: Unconverted source difference, not forecast MAE or evidence licensing a sign transformation.
+  release_requirements:
+  - Provider-certified per-well exported variable, sign convention and units.
+  - Stable well identifiers and installation/reference-elevation, sensor-depth and cable-length metadata.
+  - Manual dip calibration/correction and maintenance/clock logs, with sufficient independently accepted overlap.
+  - Station-balanced temporal aggregation, quality flags and a prospective verification period.
+  integrated: false
+  conversion_performed: false
+weather_boundary_diagnostic:
+  report: reports/final_release_20261026/weather_attribution.json
+  new_weather_grid_observations_acquired: 0
+  new_groundwater_observations: 0
+  production_weather_features_changed: false
+  production_geometry_changed: false
+  decision: SoI geometry has no interior usable ERA5 grid centers for either Mumbai district; both select the same
+    external ERA5 center. Alternative footprint weighting changes trained historical weather and is not promoted.
+  frozen_compatibility_guard: 216 historical Mumbai Suburban rows would change; candidate not persisted.

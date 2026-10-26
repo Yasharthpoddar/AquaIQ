@@ -78,6 +78,11 @@ reports/data_enrichment/*.png
 # Intermediate seal superseded by final_evaluation after portability review.
 reports/data_enrichment/release_evaluation/
 
+# Final-release diagnostics retain aggregate metrics, not observation cases.
+reports/final_release_20261026/**/cases.csv
+reports/final_release_20261026/**/cold_cases.csv
+reports/final_release_20261026/outputs/
+
 # Reproducible audit row exports; retain compact aggregate reports in Git.
 reports/audit-*/**/*.csv
 reports/candidates/correlation/

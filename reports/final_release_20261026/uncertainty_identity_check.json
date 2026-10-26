@@ -1,0 +1,83 @@
+{
+  "current_feature_generation_id": "physical-v3-official-c9ade81d95720f91",
+  "audited_feature_generation_id": "physical-v3-official-a891508e320439f9",
+  "calibration_file": "reports/final_release_20261026/calibration_v3.json",
+  "old_audit_not_misapplied": true,
+  "statuses": {
+    "A": {
+      "status": "historical_reference_only",
+      "available_horizons": [
+        1,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10,
+        12
+      ],
+      "unavailable_horizons": [
+        2,
+        5,
+        11
+      ]
+    },
+    "B": {
+      "status": "historical_reference_only",
+      "available_horizons": [
+        1,
+        4,
+        6,
+        7,
+        8,
+        10,
+        12
+      ],
+      "unavailable_horizons": [
+        2,
+        3,
+        5,
+        9,
+        11
+      ]
+    },
+    "C": {
+      "status": "unavailable",
+      "available_horizons": [],
+      "unavailable_horizons": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    "D": {
+      "status": "unavailable",
+      "available_horizons": [],
+      "unavailable_horizons": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  },
+  "artifact_sha256": "342980fa6b60b1794531a1d81caddd5611c0bd2c76e1b0a9dfcdf521e97fbcb4"
+}
