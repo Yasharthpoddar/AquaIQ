@@ -111,22 +111,31 @@ class RegionalReference:
         return np.asarray(vals), metadata
 
 
-def load_calibration(cutoff):
-    if not CALIBRATION_PATH.exists():
+def load_calibration(cutoff, *, path=None, generation=None, bundle=None):
+    calibration_path = Path(path) if path is not None else CALIBRATION_PATH
+    if not calibration_path.exists():
         return None
-    card = json.loads(CALIBRATION_PATH.read_text(encoding='utf-8'))
+    card = json.loads(calibration_path.read_text(encoding='utf-8'))
     if card.get('pipeline_version') != VERSION or pd.Timestamp(card['max_calibration_target']) > _completed_feature_month(cutoff):
         return None
     from models.climate_forecast_12m import load_bundle
     from models.ensemble import feature_generation
-    if (card.get('feature_generation_id') != feature_generation()
-            or card.get('xgboost_sha256') != load_bundle(expected_generation=card['feature_generation_id'])[1]['model_sha256']):
+    expected_generation = generation if generation is not None else feature_generation()
+    verified_bundle = bundle if bundle is not None else load_bundle(expected_generation=card['feature_generation_id'])
+    if (card.get('feature_generation_id') != expected_generation
+            or card.get('xgboost_sha256') != verified_bundle[1]['model_sha256']
+            or verified_bundle[1].get('feature_generation_id') != expected_generation):
         raise ValueError('Calibration identity is incompatible with feature/model inputs.')
     return card
 
 
 def forecast_district(district_id, frame, cutoff, generation, bundle, reference, *, calibration=None):
     cutoff = _as_of(cutoff); origin = cutoff.to_period('M').to_timestamp()
+    # Per-source manifests can be large. Pandas propagates/deep-copies attrs on
+    # each column operation; provenance is already passed explicitly below.
+    # Drop only local metadata, preserving the caller's immutable snapshot.
+    frame = frame.copy(deep=False)
+    frame.attrs = {}
     frame = frame.loc[frame.date.le(_completed_feature_month(cutoff))].copy()
     hist = observations(frame, cutoff)
     ready = readiness(frame, cutoff)

@@ -1,0 +1,66 @@
+{
+  "identity": {
+    "protocol_sha256": "9b3a11926c84355395c01e0e59b39512761fa3b1499d36e0040d2411320ff8ff",
+    "baseline_feature_sha256": "3958737b033a16e722f633a15ad77d80bc5b2a8fb3bea888697f0410362c24ae",
+    "candidate_feature_sha256": "e83990a7fc66e58bd74829f5523dd021dd9cff87894271a99c6202d2a1872115",
+    "model_sha256": "4b22e2165664e1c1dd21c81ccf95d894655f0a0d589017a9ab87df0588a73a03"
+  },
+  "candidate_selected": true,
+  "selection_basis": "Predeclared development paired MAE; final labels were not evaluated.",
+  "development_metrics": {
+    "cases": 4323,
+    "districts": 639,
+    "origins": 3,
+    "candidate": {
+      "n": 4323,
+      "mae_m": 1.9301571326692937,
+      "rmse_m": 3.788775230660806
+    },
+    "unchanged_inputs": {
+      "n": 4323,
+      "mae_m": 2.4215940498027906,
+      "rmse_m": 4.821229984804299
+    },
+    "paired_mae_change_m": -0.4914369171334969,
+    "persistence_paired": {
+      "candidate": {
+        "n": 4289,
+        "mae_m": 1.86168655089925,
+        "rmse_m": 3.4547589963068384
+      },
+      "baseline": {
+        "n": 4289,
+        "mae_m": 2.4255013566843133,
+        "rmse_m": 4.119027785222014
+      },
+      "districts": 633
+    },
+    "seasonal_paired": {
+      "candidate": {
+        "n": 3958,
+        "mae_m": 1.7511383778370293,
+        "rmse_m": 3.0721169038935394
+      },
+      "baseline": {
+        "n": 3958,
+        "mae_m": 1.811996650874347,
+        "rmse_m": 3.2015921402627487
+      },
+      "districts": 626
+    },
+    "candidate_ranges": {
+      "n": 4217,
+      "districts": 630,
+      "empirical_coverage": 0.8681527152003794,
+      "nominal_calibration_quantile": 0.9
+    },
+    "baseline_ranges": {
+      "n": 4221,
+      "districts": 631,
+      "empirical_coverage": 0.855484482350154,
+      "nominal_calibration_quantile": 0.9
+    }
+  },
+  "calibration_sha256": "8901f55463b2e6e8df50dd84db1435446368e9b3e3b912f74d396383d9af59a1",
+  "calibration_cases_sha256": "ce356c512e69ea027fabba6c5f2136a4ef4fd60a8573402c420f752b6da9e3a5"
+}

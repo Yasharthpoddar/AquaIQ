@@ -1,0 +1,6 @@
+district_id,origin,target_date,horizon,actual,xgboost,persistence,rule
+KA-Chamarajanagara,2021-05-01,2022-04-01,11,7.28,7.2661,5.96625,adaptive_newly_unlocked
+KA-Chamarajanagara,2021-08-01,2022-04-01,8,7.28,8.057,5.96625,adaptive_newly_unlocked
+KA-Chamarajanagara,2021-11-01,2022-04-01,5,7.28,7.3581,5.96625,adaptive_newly_unlocked
+KA-Chamarajanagara,2022-01-01,2022-04-01,3,7.28,7.2238,5.96625,adaptive_newly_unlocked
+KA-Chamarajanagara,2025-01-01,2026-01-01,12,4.85625,5.6666,7.28,adaptive_newly_unlocked

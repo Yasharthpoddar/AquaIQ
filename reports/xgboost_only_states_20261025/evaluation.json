@@ -1,0 +1,775 @@
+{
+  "protocol": "Frozen deployed XGBoost, retrospective origin-limited inputs, fixed equal district panels",
+  "model_sha256": "4b22e2165664e1c1dd21c81ccf95d894655f0a0d589017a9ab87df0588a73a03",
+  "train_target_cutoff": "2019-12-31",
+  "data_sha256": "85d3c2b33c24f26c31380f2878b159a99f6f8cc382fbe363cc50c79a9aa4f3fa",
+  "feature_generation": "physical-v3-causal-monthly-a3f9468a2569",
+  "origins": [
+    "2021-01-01",
+    "2021-05-01",
+    "2021-08-01",
+    "2021-11-01",
+    "2022-01-01",
+    "2022-05-01",
+    "2022-08-01",
+    "2022-11-01",
+    "2023-01-01",
+    "2023-05-01",
+    "2023-08-01",
+    "2023-11-01",
+    "2024-01-01",
+    "2024-05-01",
+    "2024-08-01",
+    "2024-11-01",
+    "2025-01-01",
+    "2025-05-01",
+    "2025-08-01",
+    "2025-11-01"
+  ],
+  "attempted_state_origins": 720,
+  "available_state_origins": 320,
+  "eligible_cases": 60,
+  "target_range": [
+    "2026-01-01",
+    "2026-01-01"
+  ],
+  "comparison": {
+    "xgb_and_observed_persistence": {
+      "xgboost": {
+        "n": 60,
+        "mae_m": 1.5054276045684063,
+        "rmse_m": 2.314306958361795,
+        "r2": 0.8374799542363511
+      },
+      "persistence": {
+        "n": 60,
+        "mae_m": 1.4569088792667395,
+        "rmse_m": 2.2337429747861104,
+        "r2": 0.8485980694477808
+      }
+    },
+    "all_three_matched": {
+      "xgboost": {
+        "n": 0,
+        "mae_m": null,
+        "rmse_m": null,
+        "r2": null
+      },
+      "persistence": {
+        "n": 0,
+        "mae_m": null,
+        "rmse_m": null,
+        "r2": null
+      },
+      "seasonal_naive": {
+        "n": 0,
+        "mae_m": null,
+        "rmse_m": null,
+        "r2": null
+      }
+    }
+  },
+  "by_horizon": {
+    "2": {
+      "xgb_and_observed_persistence": {
+        "xgboost": {
+          "n": 15,
+          "mae_m": 1.4069633991545132,
+          "rmse_m": 2.178886188567445,
+          "r2": 0.855943086451531
+        },
+        "persistence": {
+          "n": 15,
+          "mae_m": 1.45690887926674,
+          "rmse_m": 2.23374297478611,
+          "r2": 0.8485980694477808
+        }
+      },
+      "all_three_matched": {
+        "xgboost": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "persistence": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "seasonal_naive": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        }
+      }
+    },
+    "5": {
+      "xgb_and_observed_persistence": {
+        "xgboost": {
+          "n": 15,
+          "mae_m": 1.718221448666719,
+          "rmse_m": 2.388158943307803,
+          "r2": 0.8269420841234458
+        },
+        "persistence": {
+          "n": 15,
+          "mae_m": 1.45690887926674,
+          "rmse_m": 2.23374297478611,
+          "r2": 0.8485980694477808
+        }
+      },
+      "all_three_matched": {
+        "xgboost": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "persistence": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "seasonal_naive": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        }
+      }
+    },
+    "8": {
+      "xgb_and_observed_persistence": {
+        "xgboost": {
+          "n": 15,
+          "mae_m": 1.4971657550301178,
+          "rmse_m": 2.4276902432736516,
+          "r2": 0.8211653951122266
+        },
+        "persistence": {
+          "n": 15,
+          "mae_m": 1.45690887926674,
+          "rmse_m": 2.23374297478611,
+          "r2": 0.8485980694477808
+        }
+      },
+      "all_three_matched": {
+        "xgboost": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "persistence": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "seasonal_naive": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        }
+      }
+    },
+    "12": {
+      "xgb_and_observed_persistence": {
+        "xgboost": {
+          "n": 15,
+          "mae_m": 1.399359815422275,
+          "rmse_m": 2.2537831997710427,
+          "r2": 0.8458692512582013
+        },
+        "persistence": {
+          "n": 15,
+          "mae_m": 1.45690887926674,
+          "rmse_m": 2.23374297478611,
+          "r2": 0.8485980694477808
+        }
+      },
+      "all_three_matched": {
+        "xgboost": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "persistence": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "seasonal_naive": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        }
+      }
+    }
+  },
+  "by_state": {
+    "AP": {
+      "xgb_and_observed_persistence": {
+        "xgboost": {
+          "n": 4,
+          "mae_m": 1.530294491666667,
+          "rmse_m": 1.58881175685647,
+          "r2": null
+        },
+        "persistence": {
+          "n": 4,
+          "mae_m": 0.21056856666666768,
+          "rmse_m": 0.21056856666666768,
+          "r2": null
+        }
+      },
+      "all_three_matched": {
+        "xgboost": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "persistence": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "seasonal_naive": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        }
+      }
+    },
+    "BR": {
+      "xgb_and_observed_persistence": {
+        "xgboost": {
+          "n": 4,
+          "mae_m": 0.2091095382352941,
+          "rmse_m": 0.3107881285634604,
+          "r2": null
+        },
+        "persistence": {
+          "n": 4,
+          "mae_m": 0.22008827941176445,
+          "rmse_m": 0.22008827941176445,
+          "r2": null
+        }
+      },
+      "all_three_matched": {
+        "xgboost": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "persistence": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "seasonal_naive": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        }
+      }
+    },
+    "GJ": {
+      "xgb_and_observed_persistence": {
+        "xgboost": {
+          "n": 4,
+          "mae_m": 5.735642699999999,
+          "rmse_m": 5.749971145107015,
+          "r2": null
+        },
+        "persistence": {
+          "n": 4,
+          "mae_m": 6.047963339130435,
+          "rmse_m": 6.047963339130435,
+          "r2": null
+        }
+      },
+      "all_three_matched": {
+        "xgboost": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "persistence": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "seasonal_naive": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        }
+      }
+    },
+    "HP": {
+      "xgb_and_observed_persistence": {
+        "xgboost": {
+          "n": 4,
+          "mae_m": 5.670738666666667,
+          "rmse_m": 5.685129741923525,
+          "r2": null
+        },
+        "persistence": {
+          "n": 4,
+          "mae_m": 5.115001116666666,
+          "rmse_m": 5.115001116666666,
+          "r2": null
+        }
+      },
+      "all_three_matched": {
+        "xgboost": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "persistence": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "seasonal_naive": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        }
+      }
+    },
+    "HR": {
+      "xgb_and_observed_persistence": {
+        "xgboost": {
+          "n": 4,
+          "mae_m": 2.025851389473684,
+          "rmse_m": 2.0368018949096287,
+          "r2": null
+        },
+        "persistence": {
+          "n": 4,
+          "mae_m": 1.025214178947369,
+          "rmse_m": 1.025214178947369,
+          "r2": null
+        }
+      },
+      "all_three_matched": {
+        "xgboost": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "persistence": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "seasonal_naive": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        }
+      }
+    },
+    "JH": {
+      "xgb_and_observed_persistence": {
+        "xgboost": {
+          "n": 4,
+          "mae_m": 0.3738372289473679,
+          "rmse_m": 0.4537348045143349,
+          "r2": null
+        },
+        "persistence": {
+          "n": 4,
+          "mae_m": 0.7392550842105257,
+          "rmse_m": 0.7392550842105257,
+          "r2": null
+        }
+      },
+      "all_three_matched": {
+        "xgboost": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "persistence": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "seasonal_naive": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        }
+      }
+    },
+    "KA": {
+      "xgb_and_observed_persistence": {
+        "xgboost": {
+          "n": 4,
+          "mae_m": 0.9662257294117642,
+          "rmse_m": 1.0160978656986224,
+          "r2": null
+        },
+        "persistence": {
+          "n": 4,
+          "mae_m": 0.8120296352941176,
+          "rmse_m": 0.8120296352941176,
+          "r2": null
+        }
+      },
+      "all_three_matched": {
+        "xgboost": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "persistence": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "seasonal_naive": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        }
+      }
+    },
+    "KL": {
+      "xgb_and_observed_persistence": {
+        "xgboost": {
+          "n": 4,
+          "mae_m": 0.6097613071428576,
+          "rmse_m": 0.6506303355697198,
+          "r2": null
+        },
+        "persistence": {
+          "n": 4,
+          "mae_m": 0.20084640714285928,
+          "rmse_m": 0.20084640714285928,
+          "r2": null
+        }
+      },
+      "all_three_matched": {
+        "xgboost": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "persistence": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "seasonal_naive": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        }
+      }
+    },
+    "MH": {
+      "xgb_and_observed_persistence": {
+        "xgboost": {
+          "n": 4,
+          "mae_m": 0.9321492346153846,
+          "rmse_m": 0.9823080384833707,
+          "r2": null
+        },
+        "persistence": {
+          "n": 4,
+          "mae_m": 0.9881524615384611,
+          "rmse_m": 0.9881524615384611,
+          "r2": null
+        }
+      },
+      "all_three_matched": {
+        "xgboost": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "persistence": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "seasonal_naive": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        }
+      }
+    },
+    "MP": {
+      "xgb_and_observed_persistence": {
+        "xgboost": {
+          "n": 4,
+          "mae_m": 0.5127989787234049,
+          "rmse_m": 0.53974800527646,
+          "r2": null
+        },
+        "persistence": {
+          "n": 4,
+          "mae_m": 1.174329627659577,
+          "rmse_m": 1.174329627659577,
+          "r2": null
+        }
+      },
+      "all_three_matched": {
+        "xgboost": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "persistence": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "seasonal_naive": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        }
+      }
+    },
+    "OD": {
+      "xgb_and_observed_persistence": {
+        "xgboost": {
+          "n": 4,
+          "mae_m": 0.1965935219999998,
+          "rmse_m": 0.2413002153191285,
+          "r2": null
+        },
+        "persistence": {
+          "n": 4,
+          "mae_m": 0.060239820000000055,
+          "rmse_m": 0.060239820000000055,
+          "r2": null
+        }
+      },
+      "all_three_matched": {
+        "xgboost": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "persistence": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "seasonal_naive": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        }
+      }
+    },
+    "PB": {
+      "xgb_and_observed_persistence": {
+        "xgboost": {
+          "n": 4,
+          "mae_m": 0.4390527264705888,
+          "rmse_m": 0.49842302307616343,
+          "r2": null
+        },
+        "persistence": {
+          "n": 4,
+          "mae_m": 1.7052889764705839,
+          "rmse_m": 1.7052889764705839,
+          "r2": null
+        }
+      },
+      "all_three_matched": {
+        "xgboost": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "persistence": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "seasonal_naive": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        }
+      }
+    },
+    "RJ": {
+      "xgb_and_observed_persistence": {
+        "xgboost": {
+          "n": 4,
+          "mae_m": 1.6830674551724147,
+          "rmse_m": 1.700540703323666,
+          "r2": null
+        },
+        "persistence": {
+          "n": 4,
+          "mae_m": 1.2996842758620701,
+          "rmse_m": 1.2996842758620701,
+          "r2": null
+        }
+      },
+      "all_three_matched": {
+        "xgboost": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "persistence": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "seasonal_naive": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        }
+      }
+    },
+    "TN": {
+      "xgb_and_observed_persistence": {
+        "xgboost": {
+          "n": 4,
+          "mae_m": 0.35977499999999996,
+          "rmse_m": 0.4090744990453041,
+          "r2": null
+        },
+        "persistence": {
+          "n": 4,
+          "mae_m": 0.8002360699999995,
+          "rmse_m": 0.8002360699999995,
+          "r2": null
+        }
+      },
+      "all_three_matched": {
+        "xgboost": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "persistence": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "seasonal_naive": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        }
+      }
+    },
+    "TR": {
+      "xgb_and_observed_persistence": {
+        "xgboost": {
+          "n": 4,
+          "mae_m": 1.3365161,
+          "rmse_m": 1.3799163699511685,
+          "r2": null
+        },
+        "persistence": {
+          "n": 4,
+          "mae_m": 1.4547353500000004,
+          "rmse_m": 1.4547353500000004,
+          "r2": null
+        }
+      },
+      "all_three_matched": {
+        "xgboost": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "persistence": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        },
+        "seasonal_naive": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null,
+          "r2": null
+        }
+      }
+    }
+  },
+  "limitations": [
+    "This is a new retrospective diagnostic on previously inspected historical data, not an untouched final test or prospective campaign.",
+    "No model training, tuning, selection or promotion. Origins fixed before looking at outcomes; 2020 is embargoed.",
+    "A target is eligible only when every origin-selected district has an exact observed month label. Panel never shrinks to fit target availability.",
+    "Persistence is each panel district latest observed depth at origin, averaged equally. Seasonal naive requires exact target-minus-12-month observed values for the full panel.",
+    "Weather uses origin-limited historical climatology; current anchors and lags can be estimated across gaps. No realized future weather supplied.",
+    "Publication, retrieval and measurement acquisition times remain unknown. Monthly cutoff is a retrospective timing assumption, not evidence of live availability.",
+    "State labels are equally weighted source-marked district measurements, not independently collected representative state observations. Stable well IDs and composition remain unknown.",
+    "Unobserved target months are excluded, never imputed. Available cases may be strongly selected and unrepresentative."
+  ],
+  "evidence_hashes": {
+    "cases.csv": "47f415244490c05573042919ae4722aac715bf0dd91bb7b9b15a2eb28ffe8e41",
+    "exclusions.csv": "3b7e6c13e067976c6b76aa6119696dbdf811b9848ad09d27baee8f093a623f56",
+    "panels.json": "a8cc6041d12bc8fb71114b55bd40759d525e34e15c347a37571826dc136dd770"
+  }
+}

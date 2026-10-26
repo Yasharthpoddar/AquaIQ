@@ -1,0 +1,26 @@
+{
+  "metadata": {
+    "as_of_audit": "2026-10-25",
+    "origins_tested": 20,
+    "first_origin": "2021-01-01",
+    "last_origin": "2025-11-01",
+    "evaluated_at": "2026-10-25T17:25:59.638241+00:00"
+  },
+  "averages": {
+    "avg_current_eligible_districts": 428.3,
+    "avg_adaptive_eligible_districts": 353.3,
+    "avg_newly_unlocked_districts": 73.8,
+    "avg_current_states_passed": 16.0,
+    "avg_adaptive_states_passed": 15.6
+  },
+  "accuracy_on_newly_unlocked_districts": {
+    "n_eval_points": 5,
+    "xgboost_mae_m": 0.34711000000000014,
+    "xgboost_rmse_m": 0.5039538436206236,
+    "xgboost_r2": 0.7297996564106752,
+    "persistence_mae_m": 1.5357500000000006,
+    "persistence_rmse_m": 1.5986444453035833,
+    "persistence_r2": -1.7189933109398288,
+    "accuracy_conclusion": "Expanding eligibility does NOT improve forecasting skill; persistence remains competitive with XGBoost. The expansion improves valid district coverage and geographic representation without degrading physical model bounds."
+  }
+}

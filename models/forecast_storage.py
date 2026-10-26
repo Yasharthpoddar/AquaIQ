@@ -67,7 +67,7 @@ def _canonical_json(obj):
     return json.dumps(obj, sort_keys=True, separators=(',', ':'), default=str)
 
 
-def compute_input_identity(as_of=None, horizon=12):
+def compute_input_identity(as_of=None, horizon=12, *, feature_directory=None, checkpoint=None, calibration_path=None):
     """Compute verified hash identities for all inputs to the 12-month XGBoost forecast."""
     if horizon != 12:
         raise ValueError("Only horizon=12 is currently supported for XGBoost precomputation.")
@@ -75,8 +75,9 @@ def compute_input_identity(as_of=None, horizon=12):
     origin = cutoff.replace(day=1)
 
     # 1. Feature matrix and manifest
-    manifest_path = ROOT / 'data/processed/feature_manifest.json'
-    matrix_path = ROOT / 'data/processed/features_matrix.csv'
+    directory = Path(feature_directory) if feature_directory is not None else ROOT / 'data/processed'
+    manifest_path = directory / 'feature_manifest.json'
+    matrix_path = directory / 'features_matrix.csv'
     if not manifest_path.exists() or not matrix_path.exists():
         raise FileNotFoundError("Processed feature matrix or manifest is missing.")
     manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
@@ -84,7 +85,7 @@ def compute_input_identity(as_of=None, horizon=12):
     feature_data_sha256 = manifest.get('feature_csv_sha256') or manifest.get('data_sha256', '')
 
     # 2. Model bundle and card
-    bundle = climate.load_bundle(expected_generation=feature_generation_id)
+    bundle = climate.load_bundle(checkpoint, expected_generation=feature_generation_id) if checkpoint is not None else climate.load_bundle(expected_generation=feature_generation_id)
     card = bundle[1]
     model_sha256 = card.get('model_sha256', '')
     model_card_sha256 = _sha256_bytes(json.dumps(card, sort_keys=True).encode('utf-8'))
@@ -101,12 +102,13 @@ def compute_input_identity(as_of=None, horizon=12):
     state_registry_hash = _sha256_bytes(_canonical_json(STATES_REGISTRY).encode('utf-8'))
     config_hash = _sha256_bytes(_canonical_json(CONFIG).encode('utf-8'))
 
+    calibration_file = Path(calibration_path) if calibration_path is not None else CALIBRATION_PATH
     signature_basis = {
         'pipeline_version': PIPELINE_VERSION,
         'implementation_sha256': _sha256_bytes(b''.join((ROOT / p).read_bytes() for p in (
             'models/tiered_forecast.py', 'models/district_registry.py', 'scripts/precompute_forecasts.py',
             'models/climate_forecast_12m.py', 'models/climate_inputs.py', 'models/monthly_projection.py'))),
-        'calibration_sha256': _sha256_bytes(CALIBRATION_PATH.read_bytes()) if CALIBRATION_PATH.exists() else None,
+        'calibration_sha256': _sha256_bytes(calibration_file.read_bytes()) if calibration_file.exists() else None,
         'as_of': cutoff.isoformat(),
         'horizon_months': 12,
         'model_id': 'tiered_district_12m_forecast',

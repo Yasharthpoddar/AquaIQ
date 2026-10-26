@@ -9,12 +9,11 @@ Includes:
 Produces data/processed/era5_district_monthly.csv for database ingestion.
 """
 
-import glob
 import argparse
 import hashlib
 import json
-import os
 import sys
+import tempfile
 import zipfile
 from pathlib import Path
 
@@ -27,6 +26,7 @@ from shapely.geometry import Point
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from data_ingestion.spatial import assign_grid_cells
+from data_ingestion.weather_enrichment import publish_new_file
 ERA5_DIR = ROOT / "data" / "raw" / "era5"
 CLEAN_NC_PATH = ROOT / "data" / "processed" / "era5_india_2002_2024_clean.nc"
 GEOJSON_PATH = ROOT / "data" / "raw" / "india_districts.geojson"
@@ -83,33 +83,172 @@ def evaporation_monthly(values, attrs, times):
     return np.maximum(0.0, result)
 
 
+def _validate_era5_dataset(dataset):
+    """Require complete, aligned source fields; do not infer aggregation units."""
+    time_name = "valid_time" if "valid_time" in dataset.coords else "time"
+    required = {time_name, "latitude", "longitude"}
+    if not required.issubset(dataset.coords) or not {"t2m", "pev"}.issubset(dataset.data_vars):
+        raise ValueError("ERA5 must contain both t2m and pev with time/latitude/longitude coordinates")
+    times = pd.DatetimeIndex(dataset[time_name].values)
+    if (times.empty or times.has_duplicates or not times.is_monotonic_increasing
+            or not times.equals(pd.date_range(times[0], periods=len(times), freq="MS"))):
+        raise ValueError("ERA5 source must contain unique consecutive calendar-month timestamps")
+    for name in ("latitude", "longitude"):
+        values = np.asarray(dataset[name].values)
+        if (values.ndim != 1 or len(values) == 0 or not np.isfinite(values).all()
+                or len(np.unique(values)) != len(values)):
+            raise ValueError("ERA5 has invalid spatial coordinates")
+    for name in ("t2m", "pev"):
+        if dataset[name].dims != (time_name, "latitude", "longitude"):
+            raise ValueError(f"ERA5 {name} has incompatible dimensions")
+        values = np.asarray(dataset[name].values)
+        if np.isinf(values).any() or not np.isfinite(values).any(axis=(1, 2)).all():
+            raise ValueError(f"ERA5 {name} has infinite values or completely missing months")
+    if dataset.t2m.attrs.get("units") != "K":
+        raise ValueError("ERA5 t2m source units must be Kelvin")
+    # This routine validates the documented evaporation conversion once. It
+    # never applies the conversion to the stored raw daily-average source field.
+    evaporation_monthly(dataset.pev.values, dict(dataset.pev.attrs), times)
+    return time_name
+
+
+def _canonical_month_axis(dataset):
+    """Map inspected monthly timestamp labels to month starts, without shifting months.
+
+    The CDS moda avgad evaporation member labels monthly means at 06:00 on
+    day one, whereas the avgua temperature member labels them at 00:00. This
+    is a source representation difference, not an extra six hours of rainfall
+    or a daily observation. Other sub-month timestamp conventions fail closed.
+    """
+    time_name = "valid_time" if "valid_time" in dataset.coords else "time"
+    if time_name not in dataset.coords:
+        raise ValueError("ERA5 source member has no monthly time coordinate")
+    times = pd.DatetimeIndex(dataset[time_name].values)
+    if (times.empty or times.has_duplicates or not times.is_monotonic_increasing
+            or (times.day != 1).any() or (times.minute != 0).any()
+            or (times.second != 0).any() or (times.microsecond != 0).any()
+            or (times.nanosecond != 0).any()):
+        raise ValueError("ERA5 source member has an unverified monthly timestamp convention")
+    hours = set(times.hour)
+    if hours != {0}:
+        if not (hours == {6} and set(dataset.data_vars) == {"pev"}
+                and dataset.pev.attrs.get("GRIB_stepType") == "avgad"
+                and dataset.pev.attrs.get("units") == "m"):
+            raise ValueError("Unverified sub-day label for an ERA5 monthly field")
+    metadata = {"time_name": time_name, "original_first": str(times[0]),
+                "original_last": str(times[-1]), "source_hour_utc": next(iter(hours)),
+                "mapping": "same_calendar_month_start; inspected CDS moda monthly product"}
+    return dataset.assign_coords({time_name: times.to_period("M").to_timestamp()}), metadata
+
+
+def prepare_era5_nc(source, output, *, max_uncompressed_bytes=128 * 1024 * 1024):
+    """Merge split CDS ZIP responses without extracting archive paths.
+
+    The immutable download may be a ZIP despite its .nc extension. Read only
+    bounded NetCDF members in memory, demand identical spatial/calendar axes
+    and reject duplicate variables. The inspected monthly 00/06 UTC labels
+    map to the same calendar month. Existing files are never overwritten.
+    """
+    import netCDF4
+
+    source, output = Path(source).resolve(), Path(output).resolve()
+    sidecar = output.with_suffix(".prepare.json")
+    if source == output or output.exists() or sidecar.exists():
+        raise FileExistsError("Choose a new ERA5 output path; source and existing artifacts are immutable")
+    source_hash = hashlib.sha256(source.read_bytes()).hexdigest()
+    loaded, member_metadata = [], []
+    if zipfile.is_zipfile(source):
+        with zipfile.ZipFile(source) as archive:
+            members = archive.infolist()
+            if (not members or len(members) > 8 or any(member.is_dir() for member in members)
+                    or sum(member.file_size for member in members) > max_uncompressed_bytes
+                    or len({member.filename for member in members}) != len(members)):
+                raise ValueError("ERA5 archive is empty, duplicated or exceeds bounded member/size limits")
+            for index, member in enumerate(members):
+                # No archive path is ever written, including unexpected members.
+                if (Path(member.filename).name != member.filename or "\\" in member.filename
+                        or not member.filename.lower().endswith(".nc") or member.flag_bits & 1):
+                    raise ValueError("ERA5 archive contains an unverified member path/type")
+                payload = archive.read(member)
+                handle = netCDF4.Dataset(f"era5-member-{index}.nc", memory=payload)
+                try:
+                    with xr.open_dataset(xr.backends.NetCDF4DataStore(handle)) as dataset:
+                        loaded.append(dataset.load())
+                finally:
+                    # Xarray owns and normally closes the NetCDF4 handle.
+                    if handle.isopen():
+                        handle.close()
+                member_metadata.append({"name": member.filename, "size_bytes": member.file_size,
+                                        "sha256": hashlib.sha256(payload).hexdigest()})
+    else:
+        if source.stat().st_size > max_uncompressed_bytes:
+            raise ValueError("ERA5 source exceeds bounded NetCDF size")
+        with xr.open_dataset(source, engine="netcdf4") as dataset:
+            loaded.append(dataset.load())
+    variable_names = [name for dataset in loaded for name in dataset.data_vars]
+    if len(variable_names) != len(set(variable_names)):
+        raise ValueError("Duplicate ERA5 variables across archive members")
+    normalized, time_mappings = [], []
+    for dataset in loaded:
+        normalized_dataset, mapping = _canonical_month_axis(dataset)
+        normalized.append(normalized_dataset)
+        time_mappings.append(mapping)
+    try:
+        merged = xr.merge(normalized, join="exact", compat="equals", combine_attrs="override")
+    except (ValueError, TypeError) as error:
+        raise ValueError("ERA5 archive members have conflicting coordinate axes") from error
+    time_name = _validate_era5_dataset(merged)
+    converted = merged.t2m - np.float32(273.15)
+    if "t2m_celsius" in merged:
+        if not np.array_equal(merged.t2m_celsius.values, converted.values, equal_nan=True):
+            raise ValueError("Existing Celsius field disagrees with the Kelvin source")
+    else:
+        merged["t2m_celsius"] = converted
+    merged.t2m_celsius.attrs.update(units="degC", conversion="t2m_K - 273.15")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(dir=output.parent, suffix=".nc.partial", delete=False) as stream:
+            temporary = Path(stream.name)
+        merged.to_netcdf(temporary, engine="netcdf4")
+        with xr.open_dataset(temporary, engine="netcdf4") as checked:
+            _validate_era5_dataset(checked)
+        if hashlib.sha256(source.read_bytes()).hexdigest() != source_hash:
+            raise ValueError("ERA5 source changed during preparation")
+        metadata = {"generator": "era5-split-zip-v1", "source_sha256": source_hash,
+                    "source_file": source.name, "source_size_bytes": source.stat().st_size,
+                    "members": member_metadata, "csv_or_netcdf_sha256": hashlib.sha256(temporary.read_bytes()).hexdigest(),
+                    "monthly_timestamp_mappings": time_mappings,
+                    "variables": sorted(merged.data_vars), "months": merged.sizes[time_name],
+                    "date_start": str(pd.Timestamp(merged[time_name].values[0]).date()),
+                    "date_end": str(pd.Timestamp(merged[time_name].values[-1]).date()),
+                    "raw_source_modified": False, "evaporation_source_units_preserved": True}
+        # Atomic no-clobber publication also protects a file created after the
+        # initial path check. No downloaded/derived artifact is replaced.
+        publish_new_file(temporary, output)
+        with sidecar.open("x", encoding="utf-8") as stream:
+            json.dump(metadata, stream, indent=2)
+            stream.write("\n")
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
+        merged.close()
+        for dataset in loaded:
+            dataset.close()
+    return str(output)
+
+
 def find_or_extract_nc():
-    """Locate a valid NetCDF dataset, extracting zip files if necessary."""
+    """Locate a complete dataset, safely merging the one raw CDS source if needed."""
     if CLEAN_NC_PATH.exists():
-        try:
-            ds = xr.open_dataset(CLEAN_NC_PATH, engine="netcdf4")
-            ds.close()
-            return str(CLEAN_NC_PATH)
-        except Exception:
-            pass
-
-    # Look in raw era5 dir
-    candidates = glob.glob(str(ERA5_DIR / "*"))
-    for cand in candidates:
-        if cand.endswith((".nc", ".zip")):
-            with open(cand, "rb") as f:
-                header = f.read(4)
-            if header.startswith(b"PK"):
-                print(f"Extracting zip archive {cand}...")
-                with zipfile.ZipFile(cand, "r") as z:
-                    z.extractall(ERA5_DIR)
-                extracted_ncs = [f for f in glob.glob(str(ERA5_DIR / "*.nc")) if f != cand]
-                if extracted_ncs:
-                    return extracted_ncs[0]
-            elif header.startswith((b"CDF", b"\x89HDF")):
-                return cand
-
-    raise SystemExit("No valid NetCDF or zip archive found in ERA5 directories.")
+        # An unrelated or incomplete existing artifact must not be overwritten.
+        with xr.open_dataset(CLEAN_NC_PATH, engine="netcdf4") as dataset:
+            _validate_era5_dataset(dataset)
+        return str(CLEAN_NC_PATH)
+    candidates = sorted(path for path in ERA5_DIR.glob("*") if path.suffix.lower() in {".nc", ".zip"})
+    if len(candidates) != 1:
+        raise ValueError("Select one immutable ERA5 source explicitly; none or multiple raw sources were found")
+    return prepare_era5_nc(candidates[0], CLEAN_NC_PATH)
 
 
 def process_era5_to_districts(nc_path=None, geojson_path=None, out_path=None):
@@ -234,5 +373,14 @@ if __name__ == "__main__":
     parser.add_argument("--nc")
     parser.add_argument("--geojson")
     parser.add_argument("--out")
+    parser.add_argument("--prepare-source", type=Path, help="Prepare one immutable CDS NetCDF/ZIP without district aggregation")
+    parser.add_argument("--prepared-out", type=Path, help="Explicit new clean NetCDF path for --prepare-source")
     args = parser.parse_args()
-    process_era5_to_districts(args.nc, args.geojson, args.out)
+    if args.prepare_source:
+        if not args.prepared_out or any((args.nc, args.geojson, args.out)):
+            parser.error("--prepare-source requires --prepared-out and cannot accompany aggregation options")
+        print(prepare_era5_nc(args.prepare_source, args.prepared_out))
+    elif args.prepared_out:
+        parser.error("--prepared-out requires --prepare-source")
+    else:
+        process_era5_to_districts(args.nc, args.geojson, args.out)

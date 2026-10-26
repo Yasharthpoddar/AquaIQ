@@ -71,6 +71,11 @@ reports/nationwide_*/cases.csv
 reports/nationwide_*/candidate_*.csv
 reports/nationwide_*/outputs/
 
+# Official enrichment keeps station rows and generated forecasts local.
+reports/data_enrichment/*evaluation/*.csv
+reports/data_enrichment/outputs/
+reports/data_enrichment/*.png
+
 # Reproducible audit row exports; retain compact aggregate reports in Git.
 reports/audit-*/**/*.csv
 reports/candidates/correlation/

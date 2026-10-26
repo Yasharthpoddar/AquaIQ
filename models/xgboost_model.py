@@ -143,9 +143,9 @@ def dataframe_hash(df):
     return digest.hexdigest()
 
 
-def load_feature_matrix():
+def load_feature_matrix(processed_dir=None):
     """Load one verified generation, without unrelated CSV provenance merges."""
-    processed = ROOT / CONFIG["paths"]["data_processed"]
+    processed = Path(processed_dir) if processed_dir is not None else ROOT / CONFIG["paths"]["data_processed"]
     manifest_path = processed / "feature_manifest.json"
     if not manifest_path.exists():
         raise ValueError("Feature manifest missing. Rebuild physical-unit causal features before training.")
@@ -154,9 +154,12 @@ def load_feature_matrix():
     if csv_path.exists():
         if sha256_file(csv_path) != manifest.get("feature_csv_sha256"):
             raise ValueError("Feature CSV checksum differs from generation manifest.")
-        df = pd.read_csv(csv_path, parse_dates=["date"])
+        options = {"float_precision": "round_trip"} if processed_dir is not None else {}
+        df = pd.read_csv(csv_path, parse_dates=["date"], **options)
         source = "verified features_matrix.csv"
     else:
+        if processed_dir is not None:
+            raise FileNotFoundError("An explicit feature snapshot requires its own verified CSV; database fallback is forbidden.")
         from db.connection import read_frame
         conn = get_connection()
         try:

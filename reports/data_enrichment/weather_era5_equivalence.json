@@ -1,0 +1,23 @@
+{
+  "unchanged_raw_sha256": "4edf8ff080ce5e7b380924cac345e87f1e886c6937ceed53268ac254ce4cff41",
+  "existing_clean_sha256": "6fe76f7f43a9c389038f189dd49575598d02e9aeb19be3e615934351a0b00eb8",
+  "new_prepared_sha256": "691a8dcdc02786d8c05e306e2a70011c530d9090d21de559d3809dde629cd74a",
+  "coords_equal": true,
+  "variables": {
+    "pev": {
+      "bitwise_equal_values": true,
+      "nonfinite_mask_equal": true,
+      "max_absolute_difference": 0.0
+    },
+    "t2m": {
+      "bitwise_equal_values": true,
+      "nonfinite_mask_equal": true,
+      "max_absolute_difference": 0.0
+    },
+    "t2m_celsius": {
+      "bitwise_equal_values": true,
+      "nonfinite_mask_equal": true,
+      "max_absolute_difference": 0.0
+    }
+  }
+}

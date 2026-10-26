@@ -1,0 +1,54 @@
+{
+  "backend_full": {
+    "passed": 1202,
+    "skipped": 14,
+    "warnings": 11,
+    "log": "scratch/xgb-states-backend-tests-elevated.txt"
+  },
+  "backend_final_state": {
+    "passed": 22,
+    "log": "scratch/xgb-states-backend-final.txt"
+  },
+  "frontend": {
+    "passed": 146,
+    "log": "scratch/xgb-states-frontend-pass.txt"
+  },
+  "lint": "passed",
+  "build": "passed; large-bundle warning",
+  "browser": {
+    "fixture_type": "synthetic UI only",
+    "passed": [
+      "Search typing, ArrowDown/Enter selection, route and twelve forecast values",
+      "Map click selects and highlights correct state",
+      "Late response from previous state cannot replace selected state",
+      "Hover displays date and depth",
+      "Sparse state abstains without fallback",
+      "503 model failure and retry",
+      "Desktop, tablet and mobile chart/container widths",
+      "Summary failure, boundary failure and retries"
+    ],
+    "requests": [
+      "/api/states/summary?horizon=12",
+      "/api/predict/state/HR?horizon=12&as_of=2026-10-25",
+      "/api/predict/state/TN?horizon=12&as_of=2026-10-25",
+      "/api/predict/state/HR?horizon=12&as_of=2026-10-25",
+      "/api/predict/state/TN?horizon=12&as_of=2026-10-25",
+      "/api/predict/state/HR?horizon=12&as_of=2026-10-25",
+      "/api/predict/state/LA?horizon=12&as_of=2026-10-25",
+      "/api/predict/state/HR?horizon=12&as_of=2026-10-25",
+      "/api/predict/state/HR?horizon=12&as_of=2026-10-25",
+      "/api/states/summary?horizon=12",
+      "/api/states/summary?horizon=12",
+      "/api/predict/state/HR?horizon=12&as_of=2026-10-25",
+      "/api/states/summary?horizon=12",
+      "/api/predict/state/HR?horizon=12&as_of=2026-10-25"
+    ],
+    "errors": []
+  },
+  "real_payload_contracts": [
+    "summary",
+    "HR",
+    "TN",
+    "LA"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "protocol_version": "official-enrichment-paired-v1",
+  "frozen_before_metrics": true,
+  "comparison": "Identical frozen XGBoost bytes and tier rules; baseline inputs versus an append-only overlay of audited post-2019 manual district months. Environmental definitions and training-period inputs must be identical.",
+  "calibration_origins": ["2021-01-31", "2021-07-31"],
+  "development_origins": ["2022-10-31", "2023-01-31", "2023-07-31"],
+  "final_origins": ["2024-07-31", "2025-01-31"],
+  "target_policy": "Only source-marked genuine district-month depths. Both versions and baselines use identical district/origin/horizon/target values; current-origin-month groundwater is unavailable until the next month.",
+  "calibration": "90th percentile absolute residual (higher empirical quantile) by actual serving tier and horizon. No borrowing from evaluation or final labels; unsupported horizons retain unavailable ranges.",
+  "selection": "Retain the appended-data forecast as an experimental candidate if pooled development MAE is no greater than unchanged-input MAE. This decision is frozen before final evaluation. Final labels only report performance, never tune or select. Data acquisition and integrity fixes are retained independently of forecast selection.",
+  "baselines": ["unchanged_input_serving_path", "last_genuine_local_depth", "exact_previous_year_observed_month"],
+  "geographic_checks": "Pseudo-cold reference excludes all target history and never invokes the XGBoost artifact. A sensitivity excludes every target-state district from the donor panel. Natural sparse subsets use actual observed count <=23; no hidden target history is used to fit a transfer model.",
+  "uncertainty": "Report empirical interval coverage and sample counts. Nominal 90% is a calibration quantile, not a validated per-district probability.",
+  "limitations": [
+    "Retrospective conditional-on-observation-date replay: provider publication-time snapshots are unavailable.",
+    "Calendar holdout is protected within this experiment, but source distributions and the original model were inspected previously; this is not blind prospective validation.",
+    "District station panels, well identities and aquifer datums may differ. New district means do not establish identical-well changes.",
+    "Temporal cases share districts and overlapping targets; counts are not independent sample sizes.",
+    "Cold-start reference evaluation does not confer spatial independence on the already-trained XGBoost artifact.",
+    "No new pooled learner, hydrogeological transfer model, hyperparameter search or model refit is justified without consistent predictors and separate training/calibration evidence."
+  ]
+}

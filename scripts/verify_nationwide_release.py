@@ -16,9 +16,13 @@ from models import forecast_storage as storage, climate_forecast_12m as climate
 from api.app import create_app
 
 
-def run(schema, output, as_of='2026-10-25'):
+def run(schema, output, as_of='2026-10-25', *, feature_directory=None, checkpoint=None, calibration_path=None):
     os.environ['AQUAIQ_FORECAST_SCHEMA']=schema
-    identity=storage.compute_input_identity(as_of)
+    explicit = any(v is not None for v in (feature_directory,checkpoint,calibration_path))
+    if explicit and not all(v is not None for v in (feature_directory,checkpoint,calibration_path)):
+        raise ValueError('Candidate verification requires explicit features, checkpoint and calibration paths.')
+    identity=(storage.compute_input_identity(as_of, feature_directory=feature_directory,
+        checkpoint=checkpoint, calibration_path=calibration_path) if explicit else storage.compute_input_identity(as_of))
     active=storage.get_active_generation(as_of)
     if not active or active['generation_id']!=identity['generation_id']:
         raise ValueError('Published generation does not match the final verified implementation.')
@@ -80,4 +84,6 @@ def run(schema, output, as_of='2026-10-25'):
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--schema',required=True);p.add_argument('--output',default='reports/nationwide_20261025/release_verification.json')
-    p.add_argument('--as-of',default='2026-10-25');a=p.parse_args();run(a.schema,a.output,a.as_of)
+    p.add_argument('--as-of',default='2026-10-25')
+    p.add_argument('--feature-directory',type=Path);p.add_argument('--checkpoint',type=Path);p.add_argument('--calibration-path',type=Path)
+    a=p.parse_args();run(a.schema,a.output,a.as_of,feature_directory=a.feature_directory,checkpoint=a.checkpoint,calibration_path=a.calibration_path)

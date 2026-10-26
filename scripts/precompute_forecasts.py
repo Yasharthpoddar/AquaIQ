@@ -49,10 +49,41 @@ STATE_LIMITATIONS = [
     'Observed history uses the districts reporting each month; its composition can differ from the complete forecast panel.',
     'Current depth and future estimates are unverified for operational use. Source month labels do not certify publication time or stable wells.',
 ]
+FORECAST_OUTPUT_TABLES = (
+    'forecast_generations', 'district_forecast_records',
+    'district_forecast_horizons', 'state_forecast_records',
+    'state_forecast_horizons', 'nationwide_summary_records',
+)
+
+
+def isolate_candidate_connection(connection):
+    """Fail closed before candidate reads/writes can resolve public outputs.
+
+    A matching current schema alone is insufficient: a caller's search path
+    may fall through to public for missing tables. Require the actual six
+    private base tables, then remove public from relation resolution. Explicit
+    pg_temp last also prevents temporary relations from shadowing the outputs.
+    """
+    with connection.cursor() as cur:
+        cur.execute('SELECT pg_catalog.current_schema()')
+        schema = cur.fetchone()[0]
+        if not re.fullmatch(r'aquaiq_test_[a-z0-9_]+', str(schema)):
+            raise ValueError('Candidate publication is restricted to an aquaiq_test_* schema.')
+        cur.execute('''SELECT c.relname, c.relkind, n.nspname
+            FROM pg_catalog.pg_class AS c
+            JOIN pg_catalog.pg_namespace AS n ON n.oid = c.relnamespace
+            WHERE n.nspname = %s AND c.relname = ANY(%s)''',
+            (schema, list(FORECAST_OUTPUT_TABLES)))
+        expected = {(name, 'r', schema) for name in FORECAST_OUTPUT_TABLES}
+        if set(cur.fetchall()) != expected:
+            raise ValueError('Candidate publication requires all six private base output tables; public fallback, views and foreign tables are forbidden.')
+        cur.execute(sql.SQL('SET search_path TO {}, pg_temp').format(sql.Identifier(schema)))
+    return schema
 
 
 def run_precomputation(as_of=None, horizon=12, batch_size=50, dry_run=False,
-                       validate_only=False, force=False, connection=None, notes=None, export_dir=None):
+                       validate_only=False, force=False, connection=None, notes=None, export_dir=None,
+                       feature_directory=None, checkpoint=None, calibration_path=None):
     """Core reproducible precomputation pipeline for district and state XGBoost forecasts."""
     started_time = time.perf_counter()
     cutoff = _as_of(as_of).date()
@@ -62,7 +93,16 @@ def run_precomputation(as_of=None, horizon=12, batch_size=50, dry_run=False,
     print(f"AquaIQ Precomputation Pipeline — As-Of: {cutoff.isoformat()}, Horizon: {horizon}m")
 
     # 1. Establish and verify input identities
-    identity = compute_input_identity(cutoff, horizon)
+    explicit = any(value is not None for value in (feature_directory, checkpoint, calibration_path))
+    if explicit and not all(value is not None for value in (feature_directory, checkpoint, calibration_path)):
+        raise ValueError('Candidate generation requires explicit features, checkpoint and calibration paths.')
+    if explicit and not dry_run:
+        if connection is None:
+            raise ValueError('Candidate publication requires an explicitly isolated test connection.')
+        isolate_candidate_connection(connection)
+    identity = (compute_input_identity(cutoff, horizon, feature_directory=feature_directory,
+                checkpoint=checkpoint, calibration_path=calibration_path) if explicit
+                else compute_input_identity(cutoff, horizon))
     print(f"Verified Model: {identity['model_version']} (SHA-256: {identity['model_sha256'][:16]}...)")
     print(f"Verified Feature Data: {identity['feature_generation_id']}")
     print(f"Generation Signature: {identity['generation_signature'][:16]}...")
@@ -90,7 +130,11 @@ def run_precomputation(as_of=None, horizon=12, batch_size=50, dry_run=False,
             return {'status': 'already_published', 'generation': active}
 
     # 4. Load verified snapshot once
-    frame = get_feature_matrix()
+    if explicit:
+        from models.xgboost_model import load_feature_matrix
+        frame = load_feature_matrix(feature_directory)
+    else:
+        frame = get_feature_matrix()
     if (frame.attrs.get('feature_generation_id') != identity['feature_generation_id']
             or frame.attrs['feature_manifest']['feature_csv_sha256'] != identity['feature_data_sha256']):
         raise RuntimeError('Feature snapshot changed after generation identity verification.')
@@ -108,7 +152,8 @@ def run_precomputation(as_of=None, horizon=12, batch_size=50, dry_run=False,
     reconcile_features(frame, registry)
     meta_by_id = {r['district_id']: r for r in registry}
     reference = RegionalReference(available, cutoff_ts)
-    calibration = load_calibration(cutoff_ts)
+    calibration = (load_calibration(cutoff_ts, path=calibration_path,
+        generation=identity['feature_generation_id'], bundle=bundle) if explicit else load_calibration(cutoff_ts))
     district_results = {}
     for idx, district_id in enumerate(districts, 1):
         district = district_groups.get(district_id, available.iloc[:0]).copy()
@@ -315,7 +360,14 @@ def main(argv=None):
     parser.add_argument('--output', type=Path, default=None, help='Path to write summary execution JSON report')
     parser.add_argument('--export-dir', type=Path, help='Save complete district/state JSON outputs locally')
     parser.add_argument('--test-schema', help='Create/use an isolated aquaiq_test_* forecast schema; never changes public source tables')
+    parser.add_argument('--feature-directory', type=Path, help='Verified candidate features; requires explicit checkpoint/calibration and dry-run or test schema')
+    parser.add_argument('--checkpoint', type=Path, help='Candidate model pointer; the deployed artifact remains unchanged')
+    parser.add_argument('--calibration-path', type=Path, help='Candidate calibration JSON, or an explicit absent path for unavailable ranges')
     args = parser.parse_args(argv)
+    explicit = (args.feature_directory, args.checkpoint, args.calibration_path)
+    if any(value is not None for value in explicit):
+        if not all(value is not None for value in explicit) or not (args.dry_run or args.test_schema):
+            parser.error('Explicit candidate inputs require all three paths and --dry-run or --test-schema.')
 
     connection = None
     if args.test_schema:
@@ -335,7 +387,9 @@ def main(argv=None):
             batch_size=args.batch_size,
             dry_run=args.dry_run,
             validate_only=args.validate_only,
-            force=args.force, export_dir=args.export_dir, connection=connection
+            force=args.force, export_dir=args.export_dir, connection=connection,
+            feature_directory=args.feature_directory, checkpoint=args.checkpoint,
+            calibration_path=args.calibration_path
         )
     finally:
         if connection is not None: connection.close()

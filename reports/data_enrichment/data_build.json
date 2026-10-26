@@ -1,0 +1,22 @@
+{
+  "version": "official-missing-month-overlay-v1",
+  "generation_id": "physical-v3-official-a891508e320439f9",
+  "feature_csv_sha256": "e83990a7fc66e58bd74829f5523dd021dd9cff87894271a99c6202d2a1872115",
+  "before_observed_months": 36890,
+  "after_observed_months": 42842,
+  "new_observed_months": 5952,
+  "retained_existing_months": 561,
+  "districts_gaining_observed_months": 639,
+  "newly_observed_districts": 11,
+  "frozen_model_compatibility": {
+    "train_target_cutoff": "2019-12-31",
+    "training_rows_checked": 156600,
+    "identical_training_values": true,
+    "identical_weather_and_schema": true,
+    "training_subset_sha256": "cf9ef53ffa72cc9a496ab965cb95d034116c9f4fabd00b21458242afce4af626",
+    "policy": "Same immutable model weights; only post-training missing groundwater months added with unchanged physical-v3 rules."
+  },
+  "public_database_changed": false,
+  "baseline_files_changed": false,
+  "weather_features_changed": false
+}

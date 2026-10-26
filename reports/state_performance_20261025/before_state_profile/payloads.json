@@ -1,0 +1,432 @@
+{
+  "response": {
+    "aggregation_method": "equal_weight_fixed_district_xgboost_panel",
+    "as_of": "2026-10-25",
+    "computed_at": "2026-10-25T07:54:17.765175+00:00",
+    "contributing_district_ids": [
+      "HR-Ambala",
+      "HR-Bhiwani",
+      "HR-Faridabad",
+      "HR-Fatehabad",
+      "HR-Hisar",
+      "HR-Jhajjar",
+      "HR-Jind",
+      "HR-Kaithal",
+      "HR-Karnal",
+      "HR-Kurukshetra",
+      "HR-Mahendragarh",
+      "HR-Palwal",
+      "HR-Panchkula",
+      "HR-Panipat",
+      "HR-Rewari",
+      "HR-Rohtak",
+      "HR-Sirsa",
+      "HR-Sonipat",
+      "HR-Yamunanagar"
+    ],
+    "contributing_districts_count": 19,
+    "current_depth_basis": "estimated_district_inputs",
+    "district_coverage_pct": 86.4,
+    "districts": [
+      "HR-Ambala",
+      "HR-Bhiwani",
+      "HR-Charkhi_Dadri",
+      "HR-Faridabad",
+      "HR-Fatehabad",
+      "HR-Gurugram",
+      "HR-Hisar",
+      "HR-Jhajjar",
+      "HR-Jind",
+      "HR-Kaithal",
+      "HR-Karnal",
+      "HR-Kurukshetra",
+      "HR-Mahendragarh",
+      "HR-Nuh",
+      "HR-Palwal",
+      "HR-Panchkula",
+      "HR-Panipat",
+      "HR-Rewari",
+      "HR-Rohtak",
+      "HR-Sirsa",
+      "HR-Sonipat",
+      "HR-Yamunanagar"
+    ],
+    "estimated_current_gwl_m_bgl": 16.9335,
+    "evaluation": {
+      "historical_report": "reports/xgboost_only_states_20261025/evaluation.json",
+      "prospective_skill_verified": false,
+      "status": "experimental"
+    },
+    "evaluation_status": "experimental_state_outlook",
+    "excluded_districts": [
+      {
+        "district_id": "HR-Charkhi_Dadri",
+        "reason": "Insufficient individual district observation coverage."
+      },
+      {
+        "district_id": "HR-Gurugram",
+        "reason": "Insufficient individual district observation coverage."
+      },
+      {
+        "district_id": "HR-Nuh",
+        "reason": "Insufficient individual district observation coverage."
+      }
+    ],
+    "feature_generation": "physical-v3-causal-monthly-a3f9468a2569",
+    "forecast": [
+      {
+        "delta_from_current_m": 0.1016,
+        "horizon": 1,
+        "is_forecast": true,
+        "is_observed": false,
+        "predicted_gwl": 17.0351,
+        "target_date": "2026-11-01",
+        "units": "m_bgl"
+      },
+      {
+        "delta_from_current_m": 0.1023,
+        "horizon": 2,
+        "is_forecast": true,
+        "is_observed": false,
+        "predicted_gwl": 17.0357,
+        "target_date": "2026-12-01",
+        "units": "m_bgl"
+      },
+      {
+        "delta_from_current_m": 0.0539,
+        "horizon": 3,
+        "is_forecast": true,
+        "is_observed": false,
+        "predicted_gwl": 16.9874,
+        "target_date": "2027-01-01",
+        "units": "m_bgl"
+      },
+      {
+        "delta_from_current_m": 0.1502,
+        "horizon": 4,
+        "is_forecast": true,
+        "is_observed": false,
+        "predicted_gwl": 17.0836,
+        "target_date": "2027-02-01",
+        "units": "m_bgl"
+      },
+      {
+        "delta_from_current_m": -0.096,
+        "horizon": 5,
+        "is_forecast": true,
+        "is_observed": false,
+        "predicted_gwl": 16.8375,
+        "target_date": "2027-03-01",
+        "units": "m_bgl"
+      },
+      {
+        "delta_from_current_m": 0.4161,
+        "horizon": 6,
+        "is_forecast": true,
+        "is_observed": false,
+        "predicted_gwl": 17.3495,
+        "target_date": "2027-04-01",
+        "units": "m_bgl"
+      },
+      {
+        "delta_from_current_m": 1.1851,
+        "horizon": 7,
+        "is_forecast": true,
+        "is_observed": false,
+        "predicted_gwl": 18.1186,
+        "target_date": "2027-05-01",
+        "units": "m_bgl"
+      },
+      {
+        "delta_from_current_m": 1.1493,
+        "horizon": 8,
+        "is_forecast": true,
+        "is_observed": false,
+        "predicted_gwl": 18.0828,
+        "target_date": "2027-06-01",
+        "units": "m_bgl"
+      },
+      {
+        "delta_from_current_m": 0.6655,
+        "horizon": 9,
+        "is_forecast": true,
+        "is_observed": false,
+        "predicted_gwl": 17.5989,
+        "target_date": "2027-07-01",
+        "units": "m_bgl"
+      },
+      {
+        "delta_from_current_m": 0.0749,
+        "horizon": 10,
+        "is_forecast": true,
+        "is_observed": false,
+        "predicted_gwl": 17.0084,
+        "target_date": "2027-08-01",
+        "units": "m_bgl"
+      },
+      {
+        "delta_from_current_m": 0.0517,
+        "horizon": 11,
+        "is_forecast": true,
+        "is_observed": false,
+        "predicted_gwl": 16.9851,
+        "target_date": "2027-09-01",
+        "units": "m_bgl"
+      },
+      {
+        "delta_from_current_m": -0.3755,
+        "horizon": 12,
+        "is_forecast": true,
+        "is_observed": false,
+        "predicted_gwl": 16.558,
+        "target_date": "2027-10-01",
+        "units": "m_bgl"
+      }
+    ],
+    "forecast_origin": "2026-10-01",
+    "history": [
+      {
+        "contributing_districts_count": 1,
+        "date": "2019-04-01",
+        "district_coverage_pct": 4.5,
+        "gwl_m_bgl": 4.69,
+        "is_forecast": false,
+        "is_observed": true,
+        "total_districts_in_state": 22
+      },
+      {
+        "contributing_districts_count": 21,
+        "date": "2019-05-01",
+        "district_coverage_pct": 95.5,
+        "gwl_m_bgl": 16.409274519047617,
+        "is_forecast": false,
+        "is_observed": true,
+        "total_districts_in_state": 22
+      },
+      {
+        "contributing_districts_count": 21,
+        "date": "2019-08-01",
+        "district_coverage_pct": 95.5,
+        "gwl_m_bgl": 16.56744108095238,
+        "is_forecast": false,
+        "is_observed": true,
+        "total_districts_in_state": 22
+      },
+      {
+        "contributing_districts_count": 21,
+        "date": "2019-10-01",
+        "district_coverage_pct": 95.5,
+        "gwl_m_bgl": 15.86954638095238,
+        "is_forecast": false,
+        "is_observed": true,
+        "total_districts_in_state": 22
+      },
+      {
+        "contributing_districts_count": 1,
+        "date": "2019-11-01",
+        "district_coverage_pct": 4.5,
+        "gwl_m_bgl": 34.85,
+        "is_forecast": false,
+        "is_observed": true,
+        "total_districts_in_state": 22
+      },
+      {
+        "contributing_districts_count": 2,
+        "date": "2019-12-01",
+        "district_coverage_pct": 9.1,
+        "gwl_m_bgl": 18.605,
+        "is_forecast": false,
+        "is_observed": true,
+        "total_districts_in_state": 22
+      },
+      {
+        "contributing_districts_count": 14,
+        "date": "2020-01-01",
+        "district_coverage_pct": 63.6,
+        "gwl_m_bgl": 15.778759378571428,
+        "is_forecast": false,
+        "is_observed": true,
+        "total_districts_in_state": 22
+      },
+      {
+        "contributing_districts_count": 2,
+        "date": "2020-02-01",
+        "district_coverage_pct": 9.1,
+        "gwl_m_bgl": 50.254999999999995,
+        "is_forecast": false,
+        "is_observed": true,
+        "total_districts_in_state": 22
+      },
+      {
+        "contributing_districts_count": 1,
+        "date": "2020-03-01",
+        "district_coverage_pct": 4.5,
+        "gwl_m_bgl": 34.85,
+        "is_forecast": false,
+        "is_observed": true,
+        "total_districts_in_state": 22
+      },
+      {
+        "contributing_districts_count": 1,
+        "date": "2020-04-01",
+        "district_coverage_pct": 4.5,
+        "gwl_m_bgl": 34.85,
+        "is_forecast": false,
+        "is_observed": true,
+        "total_districts_in_state": 22
+      },
+      {
+        "contributing_districts_count": 1,
+        "date": "2020-05-01",
+        "district_coverage_pct": 4.5,
+        "gwl_m_bgl": 34.85,
+        "is_forecast": false,
+        "is_observed": true,
+        "total_districts_in_state": 22
+      },
+      {
+        "contributing_districts_count": 1,
+        "date": "2020-06-01",
+        "district_coverage_pct": 4.5,
+        "gwl_m_bgl": 34.85,
+        "is_forecast": false,
+        "is_observed": true,
+        "total_districts_in_state": 22
+      },
+      {
+        "contributing_districts_count": 1,
+        "date": "2020-07-01",
+        "district_coverage_pct": 4.5,
+        "gwl_m_bgl": 34.85,
+        "is_forecast": false,
+        "is_observed": true,
+        "total_districts_in_state": 22
+      },
+      {
+        "contributing_districts_count": 21,
+        "date": "2020-08-01",
+        "district_coverage_pct": 95.5,
+        "gwl_m_bgl": 16.104885095238096,
+        "is_forecast": false,
+        "is_observed": true,
+        "total_districts_in_state": 22
+      },
+      {
+        "contributing_districts_count": 1,
+        "date": "2020-09-01",
+        "district_coverage_pct": 4.5,
+        "gwl_m_bgl": 34.85,
+        "is_forecast": false,
+        "is_observed": true,
+        "total_districts_in_state": 22
+      },
+      {
+        "contributing_districts_count": 1,
+        "date": "2020-10-01",
+        "district_coverage_pct": 4.5,
+        "gwl_m_bgl": 34.85,
+        "is_forecast": false,
+        "is_observed": true,
+        "total_districts_in_state": 22
+      },
+      {
+        "contributing_districts_count": 21,
+        "date": "2020-11-01",
+        "district_coverage_pct": 95.5,
+        "gwl_m_bgl": 22.223699557142858,
+        "is_forecast": false,
+        "is_observed": true,
+        "total_districts_in_state": 22
+      },
+      {
+        "contributing_districts_count": 1,
+        "date": "2020-12-01",
+        "district_coverage_pct": 4.5,
+        "gwl_m_bgl": 34.85,
+        "is_forecast": false,
+        "is_observed": true,
+        "total_districts_in_state": 22
+      },
+      {
+        "contributing_districts_count": 21,
+        "date": "2021-01-01",
+        "district_coverage_pct": 95.5,
+        "gwl_m_bgl": 17.921285142857144,
+        "is_forecast": false,
+        "is_observed": true,
+        "total_districts_in_state": 22
+      },
+      {
+        "contributing_districts_count": 1,
+        "date": "2021-02-01",
+        "district_coverage_pct": 4.5,
+        "gwl_m_bgl": 34.85,
+        "is_forecast": false,
+        "is_observed": true,
+        "total_districts_in_state": 22
+      },
+      {
+        "contributing_districts_count": 1,
+        "date": "2021-03-01",
+        "district_coverage_pct": 4.5,
+        "gwl_m_bgl": 34.85,
+        "is_forecast": false,
+        "is_observed": true,
+        "total_districts_in_state": 22
+      },
+      {
+        "contributing_districts_count": 1,
+        "date": "2021-04-01",
+        "district_coverage_pct": 4.5,
+        "gwl_m_bgl": 34.85,
+        "is_forecast": false,
+        "is_observed": true,
+        "total_districts_in_state": 22
+      },
+      {
+        "contributing_districts_count": 1,
+        "date": "2021-05-01",
+        "district_coverage_pct": 4.5,
+        "gwl_m_bgl": 34.87541,
+        "is_forecast": false,
+        "is_observed": true,
+        "total_districts_in_state": 22
+      },
+      {
+        "contributing_districts_count": 22,
+        "date": "2026-01-01",
+        "district_coverage_pct": 100.0,
+        "gwl_m_bgl": 17.052761845454544,
+        "is_forecast": false,
+        "is_observed": true,
+        "total_districts_in_state": 22
+      }
+    ],
+    "horizon_months": 12,
+    "last_observed_date": "2026-01-01",
+    "last_observed_gwl_m_bgl": 17.052761845454544,
+    "limitations": [
+      "Equal weights apply to a fixed panel of eligible district XGBoost forecasts; this is not an area- or well-weighted state estimate.",
+      "Districts without sufficient individual evidence are excluded; zone fallback estimates never enter the state panel.",
+      "Current district depths are estimated across observation gaps; future weather uses historical climatology assumptions.",
+      "Observed history uses the districts reporting in each month, whose composition can differ from the forecast panel.",
+      "Depth in metres below ground is not groundwater volume. State-wide and prospective forecasting accuracy remain unverified.",
+      "Month labels and source observation flags do not establish acquisition/publication dates or stable well panels."
+    ],
+    "model_name": "district_xgboost_equal_weight",
+    "model_sha256": "4b22e2165664e1c1dd21c81ccf95d894655f0a0d589017a9ab87df0588a73a03",
+    "model_train_target_cutoff": "2019-12-31",
+    "model_version": "2.0-state-district-xgboost",
+    "panel_id": "442bd93c03cbc0aa9842682aca92729a3d99bc00582cd7a83bdcfb7cbb938cf8",
+    "product": "state_groundwater_12m_forecast",
+    "requested_state_id": "HR",
+    "resolved_state_id": "HR",
+    "st_code": "06",
+    "state_id": "HR",
+    "state_name": "Haryana",
+    "state_type": "State",
+    "status": "forecast",
+    "total_districts_in_state": 22,
+    "units": "m_bgl"
+  }
+}

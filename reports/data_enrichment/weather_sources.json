@@ -1,0 +1,234 @@
+{
+  "schema_version": "aquaiq-weather-enrichment-v1",
+  "created_at_utc": "2026-10-25T22:50:11.798951+00:00",
+  "sources": [
+    {
+      "id": "imd_rainfall_netcdf_2025",
+      "publisher": "India Meteorological Department",
+      "landing_page": "https://www.imdpune.gov.in/cmpg/Griddata/Rainfall_25_NetCDF.html",
+      "resource_url": "https://www.imdpune.gov.in/cmpg/Griddata/RF25.php",
+      "request_method": "POST",
+      "request_form": {
+        "RF25": "2025"
+      },
+      "downloaded_at_utc": "2026-10-25T22:43:12.213778+00:00",
+      "size_bytes": 25431832,
+      "sha256": "7d03cd397ebb1d7209ffae947d3965113643e1f30023cca657f0aa2c800af035",
+      "format": "NetCDF",
+      "coverage_start": "2025-01-01",
+      "last_observation_date": "2025-12-31",
+      "geographic_resolution_degrees": 0.25,
+      "coordinates": "latitude/longitude degrees; source datum not separately declared",
+      "variables": {
+        "rainfall": "mm/day"
+      },
+      "role": "model_predictor_comparison",
+      "license": "No explicit open redistribution license found on product page; attribution requested",
+      "attribution": "Pai et al. (2014), MAUSAM 65(1), 1-18",
+      "status": {
+        "discovered": true,
+        "accessible": true,
+        "downloaded": true,
+        "parsed": true,
+        "integrated": false,
+        "validated": true
+      },
+      "valid_grid_day_values": 1811860,
+      "missing_grid_day_values": 4544615,
+      "decision": "Rejected as additional information: exactly mirrors every usable existing 2025 annual-binary grid-day value and missing mask."
+    },
+    {
+      "id": "imd_temperature_max_2025",
+      "publisher": "India Meteorological Department",
+      "landing_page": "https://www.imdpune.gov.in/cmpg/Griddata/Max_1_Bin.html",
+      "resource_url": "https://www.imdpune.gov.in/cmpg/Griddata/maxtemp.php",
+      "request_method": "POST",
+      "request_form": {
+        "maxtemp": "2025"
+      },
+      "downloaded_at_utc": "2026-10-25T22:43:12.194004+00:00",
+      "size_bytes": 1403060,
+      "sha256": "673775eafe685d180c5d7a19018287599697a3f6800332470ab27ca512bd4b88",
+      "format": "little-endian float32 GRD",
+      "coverage_start": "2025-01-01",
+      "last_observation_date": "2025-12-31",
+      "geographic_resolution_degrees": 1.0,
+      "coordinates": "latitude/longitude degrees; source datum not separately declared",
+      "variables": {
+        "daily_maximum_temperature": "degC"
+      },
+      "role": "model_predictor_comparison",
+      "license": "No explicit open redistribution license found on product page; attribution requested",
+      "attribution": "Srivastava, Rajeevan and Kshirsagar (2009), DOI:10.1002/asl.232",
+      "status": {
+        "discovered": true,
+        "accessible": true,
+        "downloaded": true,
+        "parsed": true,
+        "integrated": false,
+        "validated": true
+      },
+      "valid_grid_day_values": 129552,
+      "missing_grid_day_values": 221213,
+      "decision": "Rejected as direct model substitution: daily maximum at 1 degree is a distinct variable from ERA5 monthly mean 2 m temperature at 0.25 degree; existing model is not trained on it. No temperature/PEV inference invented."
+    },
+    {
+      "id": "era5_monthly_newer_metadata",
+      "publisher": "Copernicus Climate Change Service / ECMWF",
+      "landing_page": "https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels-monthly-means",
+      "resource_url": "https://cds.climate.copernicus.eu/api/catalogue/v1/collections/reanalysis-era5-single-levels-monthly-means",
+      "metadata_downloaded_at_utc": "2026-10-25T22:48:33.682927+00:00",
+      "metadata_size_bytes": 7841,
+      "metadata_sha256": "266e0169a67d95cd3dfd754722b437cdafa8dea949c37ade9b7afd58ba417ac8",
+      "license": "CC-BY-4.0",
+      "license_url": "https://spdx.org/licenses/CC-BY-4.0",
+      "dataset_updated": "2026-10-06T00:00:00Z",
+      "advertised_last_month": "2026-09-01T00:00:00+00:00",
+      "doi": "10.24381/cds.f17050d7",
+      "role": "model_predictor",
+      "status": {
+        "discovered": true,
+        "accessible": "metadata_http200; authenticated data retrieval not tested",
+        "downloaded": false,
+        "parsed": false,
+        "integrated": false,
+        "validated": false
+      },
+      "metadata_downloaded": true,
+      "data_request_submitted": false,
+      "blocker": "Optional cdsapi client is not installed in the project venv. Official API guide requires an account token and manually accepted dataset terms; no credential-dependent job or terms acceptance was attempted. This is not evidence the data endpoint is unavailable.",
+      "api_guide": "https://cds.climate.copernicus.eu/how-to-api",
+      "existing_source_start": "2002-01",
+      "existing_source_end": "2024-12",
+      "existing_source_sha256": "4edf8ff080ce5e7b380924cac345e87f1e886c6937ceed53268ac254ce4cff41",
+      "decision": "Retain existing weather inputs and fix deterministic extraction of existing immutable split-field ZIP; new historical months remain an explicit acquisition follow-up."
+    },
+    {
+      "id": "imd_realtime_rainfall",
+      "publisher": "India Meteorological Department",
+      "landing_page": "https://www.imdpune.gov.in/cmpg/Realtimedata/Rainfall/Rain_Download.html",
+      "resource_url": "https://imdpune.gov.in/cmpg/Realtimedata/Rainfall/rain.php",
+      "role": "provisional_model_predictor",
+      "license": "No explicit open redistribution license verified",
+      "status": {
+        "discovered": true,
+        "accessible": true,
+        "downloaded": "existing three historical probe files reviewed locally; no new 2026 daily files acquired",
+        "parsed": true,
+        "integrated": false,
+        "validated": false
+      },
+      "decision": "Retain existing fail-closed overlap gate: provisional values differ from quality-controlled annual archive. No relaxed tolerance was tuned to accept the candidate.",
+      "sampled_overlap": [
+        {
+          "date": "2025-01-01",
+          "realtime_sha256": "ea403270a847be37e71cd39f6e2d32768088083678c04993916783ab40e9917e",
+          "shared_usable_cells": 4964,
+          "cells_outside_tolerance": 2,
+          "mean_absolute_difference_mm": 2.6091425188071876e-05,
+          "maximum_absolute_difference_mm": 0.09020289033651352,
+          "passed": false
+        },
+        {
+          "date": "2025-06-15",
+          "realtime_sha256": "f7f61b028e3efbd884c8254ba6dab4be749e6b1a5a5b9d368a37fe6ad839a1a7",
+          "shared_usable_cells": 4964,
+          "cells_outside_tolerance": 346,
+          "mean_absolute_difference_mm": 0.1646196982457809,
+          "maximum_absolute_difference_mm": 55.66600799560547,
+          "passed": false
+        },
+        {
+          "date": "2025-09-30",
+          "realtime_sha256": "124f8d49f64ad49e4e117386ac8165863b2c07ffe20bdcd4e0948c1fe64a89fb",
+          "shared_usable_cells": 4964,
+          "cells_outside_tolerance": 261,
+          "mean_absolute_difference_mm": 0.009501329716351583,
+          "maximum_absolute_difference_mm": 7.852302551269531,
+          "passed": false
+        }
+      ],
+      "limitation": "Differences on three dates do not establish the magnitude of error for every date or district; product revisions are plausible. Original report retained."
+    },
+    {
+      "id": "imdweb_wrapper",
+      "publisher": "LWCC website; official IMD publisher not verified",
+      "landing_page": "https://imdweb.lwcc.in/",
+      "resource_url": null,
+      "metadata_size_bytes": 419,
+      "metadata_sha256": "439bbc49e28ae251bd545fc3a6be27e1905dc9d05bbe100872cd36c49f0cb577",
+      "role": "discovery_only",
+      "status": {
+        "discovered": true,
+        "accessible": "HTMLshell_http200",
+        "downloaded": false,
+        "parsed": false,
+        "integrated": false,
+        "validated": false
+      },
+      "decision": "Fetched419byte application shell; no independently attributed raw observation resource was acquired. Prefer underlying official IMD endpoints."
+    },
+    {
+      "id": "mumbai_suburban_official_geography",
+      "publisher": "Mumbai Suburban District / Maharashtra Remote Sensing Applications Centre",
+      "landing_page": "https://mumbaisuburban.gov.in/en/about-district/",
+      "resource_url": "https://mrsac.gov.in/writereaddata/MRSAC/map/15638756425d36d93a68368Dist_Mumbai_Sub.pdf",
+      "role": "spatial_mapping_candidate",
+      "status": {
+        "discovered": true,
+        "accessible": "web-index content checked; direct HTTP requests timed out",
+        "downloaded": false,
+        "parsed": false,
+        "integrated": false,
+        "validated": false
+      },
+      "checked_at_utc": "2026-10-25T22:48:18.552093+00:00",
+      "download_error_type": "ConnectTimeout",
+      "license": "Not verified; no polygon acquired or redistributed",
+      "decision": "Retain explicit missing weather attribution. District page uses inconsistent areas and malformed/swapped coordinate headings; map is a PDF rather than an acquired georeferenced boundary. No Mumbai-to-Suburban alias or invented centroid was applied."
+    }
+  ],
+  "rainfall_comparison": {
+    "year": 2025,
+    "binary_sha256": "b4fa5ffb389496c0fa7d5a468d1cb47e4db0bcabcd11be4f273c0e6cfa7d611d",
+    "netcdf_sha256": "7d03cd397ebb1d7209ffae947d3965113643e1f30023cca657f0aa2c800af035",
+    "valid_grid_day_values_binary": 1811860,
+    "valid_grid_day_values_netcdf": 1811860,
+    "mask_differences": 0,
+    "identical_shared_values": 1811860,
+    "differing_shared_values": 0,
+    "maximum_absolute_difference_mm": 0.0,
+    "new_valid_grid_day_values": 0,
+    "same_product_observations": true
+  },
+  "existing_feature_completeness_before_and_after_weather_investigation": {
+    "feature_rows": 215325,
+    "districts": 725,
+    "date_start": "2002-01-01",
+    "date_end": "2026-09-01",
+    "nonmissing_values": {
+      "rainfall_current": 209960,
+      "temperature": 201272,
+      "evapotranspiration": 201272
+    },
+    "districts_with_no_weather_attribution": [
+      "MH-Mumbai_Suburban"
+    ],
+    "weather_values_changed": 0
+  },
+  "new_genuine_groundwater_observations": 0,
+  "new_weather_observations_integrated": 0,
+  "weather_attribution_districts_recovered": 0,
+  "model_predictor_definitions_changed": false,
+  "trained_weights_changed": false,
+  "retained_improvement": "Safe bounded split CDS archive preparation; exact deployed predictor array equivalence verified in weather_era5_equivalence.json. No unsafe archive extraction or first-member-only selection.",
+  "raw_downloads_committed": false,
+  "public_database_changes": false,
+  "focused_validation": {
+    "command": ".\\venv\\Scripts\\python.exe -B -m pytest -q tests/test_weather_enrichment.py tests/test_data_correctness.py tests/test_spatial_fallback.py --disable-warnings --basetemp=scratch/pytest-weather-enrichment-publish-fix",
+    "passed": 41,
+    "failed": 0,
+    "warnings": 48,
+    "duration_seconds": 312.74
+  }
+}
