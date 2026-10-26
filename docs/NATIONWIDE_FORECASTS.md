@@ -1,5 +1,7 @@
 # Complete district forecasting
 
+The [26 October official-data enrichment guide](OFFICIAL_DATA_ENRICHMENT.md) describes a later isolated snapshot: 5,952 additional genuine district months, unchanged model weights/training/weather definitions, and 551 A / 111 B / 62 C / 1 D. The original nationwide snapshot and validation below remain the preserved comparison baseline. Use the release-specific feature, model, calibration and namespace paths to reproduce the enrichment.
+
 The serving product is a persistent, versioned twelve-month generation for **every district registered in the repository crosswalk**. The 2026-10-25 snapshot contains 725 districts in 36 states/UTs. This is a fixed project inventory, not a claim to match the latest national administrative inventory. Registry metadata is validated and counts are calculated at runtime.
 
 ## Methods and evidence

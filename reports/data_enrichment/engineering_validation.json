@@ -1,0 +1,88 @@
+{
+  "full_python_suite": {
+    "command": "python -u -B -m pytest -q -p no:cacheprovider --disable-warnings --basetemp=scratch/pytest-enrichment-verified-full --junitxml=scratch/enrichment-full-tests.xml",
+    "passed": 1422,
+    "skipped": 37,
+    "warnings": 58,
+    "failed": 0,
+    "duration_seconds": 428.26,
+    "scope_note": "Executed successful full run after disk recovery; final seal portability and schema fixture follow-ups are verified separately."
+  },
+  "storage_and_scoring_integration": {
+    "command": "python -B -m pytest tests/test_forecast_storage.py tests/test_scoring_storage.py tests/test_enrichment_isolation.py --integration -p no:cacheprovider -q --disable-warnings --basetemp=scratch/pytest-enrichment-storage-release",
+    "passed": 38,
+    "failed": 0,
+    "duration_seconds": 197.86,
+    "database_scope": "Disposable isolated PostgreSQL schemas; source/public writes forbidden."
+  },
+  "causal_overlay_and_seal_followup": {
+    "command": "python -B -m pytest tests/test_enrichment_isolation.py tests/test_enrichment_evaluation.py tests/test_official_enrichment.py --integration -p no:cacheprovider -q --disable-warnings --basetemp=scratch/pytest-enrichment-last-guards",
+    "passed": 39,
+    "failed": 0,
+    "duration_seconds": 7.54
+  },
+  "frontend": {
+    "tests_passed": 155,
+    "tests_failed": 0,
+    "lint": "passed",
+    "production_build": "passed",
+    "largest_javascript_chunk_bytes": 365508,
+    "bundle_warning_threshold_kb": 500,
+    "bundle_size_warning": false,
+    "production_browser_before_candidate": "Five real-score/map/alerts flows passed; evidence in auxiliary_sources.json.",
+    "final_head_tests_passed": 155,
+    "final_head_duration_seconds": 21.506
+  },
+  "investigated_failed_attempts": [
+    "A broad initial Python run and candidate export failed when C: had zero free bytes. These are not counted as successful verification or publication.",
+    "The first isolation DB fixture exceeded PostgreSQL's 63-byte identifier limit. The fixture was shortened and CLI validation now rejects overlong schema names before connecting.",
+    "A Git branch switch changed code byte hashes via Windows line endings. Final evaluation rejected that seal. The portable seal normalizes only LF/CRLF and requires a new development replay before final evaluation.",
+    "Automatic approval review rejected blanket cleanup of older pytest runs. A narrow cleanup of two inspected assistant-created fixture directories was approved; reports, source inputs and user work were preserved."
+  ],
+  "candidate_api_verification": {
+    "district_state_reads": 761,
+    "inference_calls_during_reads": 0,
+    "legacy_six_month_products": "passed"
+  },
+  "candidate_browser": {
+    "passed": 9,
+    "page_errors": 0,
+    "widths": [
+      1440,
+      768,
+      390
+    ]
+  },
+  "preservation": {
+    "public_tables_unchanged": 14,
+    "baseline_files_unchanged": true,
+    "model_weights_unchanged": true
+  },
+  "final_temporal_evaluation": {
+    "cases": 843,
+    "districts": 640,
+    "selection_before_final": true,
+    "identity_matches_seal": true
+  },
+  "git_workflow": "Scan staged content and verify the non-force push; final commit SHA is reported in the completion message.",
+  "live_app_browser": {
+    "passed": 5,
+    "page_errors": 0
+  },
+  "live_app": {
+    "frontend": "http://127.0.0.1:5173",
+    "backend": "http://127.0.0.1:5000",
+    "generation_id": "600edc35-506d-501d-82c2-5cc2ebcfe699",
+    "evidence_tier_counts": {
+      "A": 551,
+      "B": 111,
+      "C": 62,
+      "D": 1
+    },
+    "scoring_namespace": "aquaiq_test_nationwide_20261025"
+  },
+  "staged_content_scan": {
+    "scanned_files": 25,
+    "findings": []
+  }
+}

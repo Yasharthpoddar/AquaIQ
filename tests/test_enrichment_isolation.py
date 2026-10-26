@@ -54,10 +54,17 @@ def test_other_schemas_rejected_without_table_queries(schema):
     assert cursor.execute.call_count == 1
 
 
+def test_cli_rejects_postgres_identifier_truncation_before_connection(monkeypatch):
+    monkeypatch.setattr(precompute, 'get_connection', lambda: pytest.fail('overlong schema must fail before connecting'))
+    with pytest.raises(SystemExit) as failure:
+        precompute.main(['--test-schema', 'aquaiq_test_' + 'x' * 60])
+    assert failure.value.code == 2
+
+
 @pytest.fixture
 def private_connection():
     connection = get_connection()
-    schema = 'aquaiq_test_candidate_isolation_' + uuid.uuid4().hex
+    schema = 'aquaiq_test_isolation_' + uuid.uuid4().hex
     with connection:
         with connection.cursor() as cursor:
             cursor.execute(sql.SQL('CREATE SCHEMA {}').format(sql.Identifier(schema)))

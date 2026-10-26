@@ -1,0 +1,12 @@
+{
+  "frontend": "http://127.0.0.1:5173",
+  "backend": "http://127.0.0.1:5000",
+  "generation_id": "600edc35-506d-501d-82c2-5cc2ebcfe699",
+  "evidence_tier_counts": {
+    "A": 551,
+    "B": 111,
+    "C": 62,
+    "D": 1
+  },
+  "scoring_namespace": "aquaiq_test_nationwide_20261025"
+}

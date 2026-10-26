@@ -3,14 +3,15 @@
  */
 const { chromium }=require(process.env.AQUAIQ_PLAYWRIGHT || 'playwright');
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
-const root=path.resolve(__dirname,'../..'),build=path.join(root,'scratch/nationwide-ui-build');
-const districts=JSON.parse(fs.readFileSync(path.join(root,'scratch/nationwide-complete/districts.json')));
+const root=path.resolve(__dirname,'../..'),build=path.resolve(process.env.AQUAIQ_UI_BUILD || path.join(root,'scratch/nationwide-ui-build'));
+const districts=JSON.parse(fs.readFileSync(process.env.AQUAIQ_DISTRICT_OUTPUTS || path.join(root,'scratch/nationwide-complete/districts.json')));
+const apiBase=process.env.AQUAIQ_API_URL || 'http://127.0.0.1:5057',asOf=process.env.AQUAIQ_AS_OF || '2026-10-25';
 const results=[],errors=[];let failForecast=false,failSummary=false;
 const server=http.createServer((req,res)=>{
   const url=new URL(req.url,'http://127.0.0.1');
   if(url.pathname.startsWith('/api/')) {
-    if(!url.searchParams.has('as_of'))url.searchParams.set('as_of','2026-10-25');
-    const proxied=http.get('http://127.0.0.1:5057'+url.pathname+url.search,r=>{res.writeHead(r.statusCode,r.headers);r.pipe(res);});
+    if(!url.searchParams.has('as_of'))url.searchParams.set('as_of',asOf);
+    const proxied=http.get(apiBase+url.pathname+url.search,r=>{res.writeHead(r.statusCode,r.headers);r.pipe(res);});
     proxied.on('error',()=>{res.writeHead(503,{'content-type':'application/json'});res.end(JSON.stringify({error:'Local browser test proxy unavailable'}));});
     return;
   }
@@ -73,7 +74,7 @@ const server=http.createServer((req,res)=>{
     await page.getByRole('heading',{name:'Tamil Nadu forecast',exact:true}).waitFor();
     results.push('State search and keyboard navigation update the selected forecast');
     assert.deepEqual(errors,[]);
-    const report={passed:results,errors,source:'real isolated published generation',as_of:'2026-10-25'};
-    fs.writeFileSync(path.join(root,'reports/nationwide_20261025/browser.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));
+    const report={passed:results,errors,source:'real isolated published generation',as_of:asOf};
+    fs.writeFileSync(process.env.AQUAIQ_BROWSER_REPORT || path.join(root,'reports/nationwide_20261025/browser.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));
   } finally {await browser.close();await new Promise(resolve=>server.close(resolve));}
 })().catch(e=>{console.error(e);server.close();process.exitCode=1;});

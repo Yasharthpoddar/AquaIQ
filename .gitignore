@@ -75,6 +75,8 @@ reports/nationwide_*/outputs/
 reports/data_enrichment/*evaluation/*.csv
 reports/data_enrichment/outputs/
 reports/data_enrichment/*.png
+# Intermediate seal superseded by final_evaluation after portability review.
+reports/data_enrichment/release_evaluation/
 
 # Reproducible audit row exports; retain compact aggregate reports in Git.
 reports/audit-*/**/*.csv

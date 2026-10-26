@@ -79,3 +79,12 @@ def test_evaluation_seal_changes_with_code_or_card(tmp_path, monkeypatch):
     (tmp_path/'predictor.py').write_text('different implementation')
     assert evaluation.code_identity() != original
     assert evaluation.card_identity({'train_cutoff':'2019'}) != evaluation.card_identity({'train_cutoff':'2020'})
+
+
+def test_evaluation_code_seal_is_portable_across_git_line_endings(tmp_path, monkeypatch):
+    monkeypatch.setattr(evaluation, 'ROOT', tmp_path)
+    monkeypatch.setattr(evaluation, 'SEALED_CODE', ('predictor.py',))
+    (tmp_path/'predictor.py').write_bytes(b'x = 1\ny = 2\n')
+    original = evaluation.code_identity()
+    (tmp_path/'predictor.py').write_bytes(b'x = 1\r\ny = 2\r\n')
+    assert evaluation.code_identity() == original

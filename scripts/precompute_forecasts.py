@@ -371,8 +371,8 @@ def main(argv=None):
 
     connection = None
     if args.test_schema:
-        if not re.fullmatch(r'aquaiq_test_[a-z0-9_]+', args.test_schema):
-            parser.error('--test-schema must be aquaiq_test_* with lowercase letters, digits and underscores')
+        if not re.fullmatch(r'aquaiq_test_[a-z0-9_]+', args.test_schema) or len(args.test_schema) > 63:
+            parser.error('--test-schema must be aquaiq_test_* with lowercase letters, digits and underscores, at most 63 characters')
         connection = get_connection()
         with connection:
             with connection.cursor() as cur:

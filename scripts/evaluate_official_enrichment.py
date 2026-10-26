@@ -25,7 +25,11 @@ SEALED_CODE = ('scripts/evaluate_official_enrichment.py', 'models/tiered_forecas
 
 
 def code_identity():
-    files = {name:sha256_file(ROOT/name) for name in SEALED_CODE}
+    # Git checkouts can translate LF to CRLF on Windows without changing code.
+    # Bind normalized UTF-8 source text so only that representation difference
+    # is portable; all tokens, whitespace and comments still participate.
+    files = {name:hashlib.sha256((ROOT/name).read_text(encoding='utf-8').encode('utf-8')).hexdigest()
+             for name in SEALED_CODE}
     return hashlib.sha256(json.dumps(files,sort_keys=True).encode()).hexdigest()
 
 
