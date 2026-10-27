@@ -1,0 +1,3352 @@
+{
+  "version": "aquaiq-accuracy-nested-development-v1",
+  "created_at_utc": "2026-10-27T07:51:18.254302+00:00",
+  "starting_commit": "d992d396b103a57f04e1ebf433e3591aa626550d",
+  "audit_directory": "reports/accuracy_experiments_20261027/audit_v2",
+  "audit_sha256": "2a5f056346e9407ef4eea81be8feaf47f1b1d6c762f9e8d1cc930dcdaf19842c",
+  "pairs_sha256": "c2bf37a491f93de4859c09119336ec2a74657c203540ba966d578e0ee9869ef9",
+  "folds": {
+    "outer": [
+      {
+        "name": "rolling_2020",
+        "year": 2020,
+        "train_target_cutoff": "2018-12-31",
+        "validation_origin_start": "2020-01-01",
+        "validation_origin_end": "2020-12-01",
+        "validation_target_end": "2021-12-31",
+        "inner_years": [
+          2016,
+          2017
+        ]
+      },
+      {
+        "name": "rolling_2021",
+        "year": 2021,
+        "train_target_cutoff": "2019-12-31",
+        "validation_origin_start": "2021-01-01",
+        "validation_origin_end": "2021-12-01",
+        "validation_target_end": "2022-12-31",
+        "inner_years": [
+          2017,
+          2018
+        ]
+      }
+    ],
+    "inner": [
+      {
+        "name": "rolling_2016",
+        "year": 2016,
+        "train_target_cutoff": "2014-12-31",
+        "validation_origin_start": "2016-01-01",
+        "validation_origin_end": "2016-12-01",
+        "validation_target_end": "2017-12-31"
+      },
+      {
+        "name": "rolling_2017",
+        "year": 2017,
+        "train_target_cutoff": "2015-12-31",
+        "validation_origin_start": "2017-01-01",
+        "validation_origin_end": "2017-12-01",
+        "validation_target_end": "2018-12-31"
+      },
+      {
+        "name": "rolling_2018",
+        "year": 2018,
+        "train_target_cutoff": "2016-12-31",
+        "validation_origin_start": "2018-01-01",
+        "validation_origin_end": "2018-12-01",
+        "validation_target_end": "2019-12-31"
+      }
+    ],
+    "availability": [
+      {
+        "fold": {
+          "name": "rolling_2007",
+          "year": 2007,
+          "train_target_cutoff": "2005-12-31",
+          "validation_origin_start": "2007-01-01",
+          "validation_origin_end": "2007-12-01",
+          "validation_target_end": "2008-12-31"
+        },
+        "training": {
+          "n": 2416,
+          "districts": 429,
+          "origin_range": [
+            "2005-01-01",
+            "2005-08-01"
+          ],
+          "target_range": [
+            "2005-05-01",
+            "2005-11-01"
+          ],
+          "by_horizon": {
+            "3": {
+              "n": 830,
+              "districts": 415,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "4": {
+              "n": 391,
+              "districts": 391,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "6": {
+              "n": 428,
+              "districts": 428,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "7": {
+              "n": 377,
+              "districts": 377,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "10": {
+              "n": 390,
+              "districts": 390,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            }
+          }
+        },
+        "validation": {
+          "n": 6682,
+          "districts": 431,
+          "origin_range": [
+            "2007-01-01",
+            "2007-11-01"
+          ],
+          "target_range": [
+            "2007-05-01",
+            "2008-11-01"
+          ],
+          "by_horizon": {
+            "2": {
+              "n": 421,
+              "districts": 421,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "3": {
+              "n": 829,
+              "districts": 417,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "4": {
+              "n": 427,
+              "districts": 427,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "5": {
+              "n": 411,
+              "districts": 411,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "6": {
+              "n": 837,
+              "districts": 427,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "7": {
+              "n": 414,
+              "districts": 414,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "8": {
+              "n": 424,
+              "districts": 424,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "9": {
+              "n": 821,
+              "districts": 425,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "10": {
+              "n": 424,
+              "districts": 424,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "12": {
+              "n": 1674,
+              "districts": 431,
+              "origin_months": 4,
+              "target_months": 4,
+              "supported": true
+            }
+          }
+        },
+        "eligible": false
+      },
+      {
+        "fold": {
+          "name": "rolling_2008",
+          "year": 2008,
+          "train_target_cutoff": "2006-12-31",
+          "validation_origin_start": "2008-01-01",
+          "validation_origin_end": "2008-12-01",
+          "validation_target_end": "2009-12-31"
+        },
+        "training": {
+          "n": 9150,
+          "districts": 430,
+          "origin_range": [
+            "2005-01-01",
+            "2006-08-01"
+          ],
+          "target_range": [
+            "2005-05-01",
+            "2006-11-01"
+          ],
+          "by_horizon": {
+            "2": {
+              "n": 427,
+              "districts": 427,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "3": {
+              "n": 1678,
+              "districts": 428,
+              "origin_months": 4,
+              "target_months": 4,
+              "supported": true
+            },
+            "4": {
+              "n": 816,
+              "districts": 429,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "5": {
+              "n": 414,
+              "districts": 414,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "6": {
+              "n": 1279,
+              "districts": 428,
+              "origin_months": 3,
+              "target_months": 3,
+              "supported": true
+            },
+            "7": {
+              "n": 800,
+              "districts": 428,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "8": {
+              "n": 428,
+              "districts": 428,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "9": {
+              "n": 838,
+              "districts": 427,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "10": {
+              "n": 816,
+              "districts": 428,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "12": {
+              "n": 1654,
+              "districts": 429,
+              "origin_months": 4,
+              "target_months": 4,
+              "supported": true
+            }
+          }
+        },
+        "validation": {
+          "n": 6672,
+          "districts": 432,
+          "origin_range": [
+            "2008-01-01",
+            "2008-11-01"
+          ],
+          "target_range": [
+            "2008-05-01",
+            "2009-11-01"
+          ],
+          "by_horizon": {
+            "2": {
+              "n": 424,
+              "districts": 424,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "3": {
+              "n": 823,
+              "districts": 419,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "4": {
+              "n": 413,
+              "districts": 413,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "5": {
+              "n": 422,
+              "districts": 422,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "6": {
+              "n": 826,
+              "districts": 413,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "7": {
+              "n": 416,
+              "districts": 416,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "8": {
+              "n": 414,
+              "districts": 414,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "9": {
+              "n": 829,
+              "districts": 426,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "10": {
+              "n": 422,
+              "districts": 422,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "12": {
+              "n": 1683,
+              "districts": 430,
+              "origin_months": 4,
+              "target_months": 4,
+              "supported": true
+            }
+          }
+        },
+        "eligible": false
+      },
+      {
+        "fold": {
+          "name": "rolling_2009",
+          "year": 2009,
+          "train_target_cutoff": "2007-12-31",
+          "validation_origin_start": "2009-01-01",
+          "validation_origin_end": "2009-12-01",
+          "validation_target_end": "2010-12-31"
+        },
+        "training": {
+          "n": 15896,
+          "districts": 433,
+          "origin_range": [
+            "2005-01-01",
+            "2007-08-01"
+          ],
+          "target_range": [
+            "2005-05-01",
+            "2007-11-01"
+          ],
+          "by_horizon": {
+            "2": {
+              "n": 854,
+              "districts": 428,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "3": {
+              "n": 2507,
+              "districts": 431,
+              "origin_months": 6,
+              "target_months": 6,
+              "supported": true
+            },
+            "4": {
+              "n": 1243,
+              "districts": 429,
+              "origin_months": 3,
+              "target_months": 3,
+              "supported": true
+            },
+            "5": {
+              "n": 838,
+              "districts": 428,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "6": {
+              "n": 2131,
+              "districts": 431,
+              "origin_months": 5,
+              "target_months": 5,
+              "supported": true
+            },
+            "7": {
+              "n": 1214,
+              "districts": 428,
+              "origin_months": 3,
+              "target_months": 3,
+              "supported": true
+            },
+            "8": {
+              "n": 855,
+              "districts": 430,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "9": {
+              "n": 1674,
+              "districts": 429,
+              "origin_months": 4,
+              "target_months": 4,
+              "supported": true
+            },
+            "10": {
+              "n": 1240,
+              "districts": 428,
+              "origin_months": 3,
+              "target_months": 3,
+              "supported": true
+            },
+            "12": {
+              "n": 3340,
+              "districts": 429,
+              "origin_months": 8,
+              "target_months": 8,
+              "supported": true
+            }
+          }
+        },
+        "validation": {
+          "n": 6731,
+          "districts": 431,
+          "origin_range": [
+            "2009-01-01",
+            "2009-11-01"
+          ],
+          "target_range": [
+            "2009-05-01",
+            "2010-11-01"
+          ],
+          "by_horizon": {
+            "2": {
+              "n": 427,
+              "districts": 427,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "3": {
+              "n": 841,
+              "districts": 427,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "4": {
+              "n": 414,
+              "districts": 414,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "5": {
+              "n": 425,
+              "districts": 425,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "6": {
+              "n": 829,
+              "districts": 416,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "7": {
+              "n": 426,
+              "districts": 426,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "8": {
+              "n": 413,
+              "districts": 413,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "9": {
+              "n": 839,
+              "districts": 428,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "10": {
+              "n": 428,
+              "districts": 428,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "12": {
+              "n": 1689,
+              "districts": 430,
+              "origin_months": 4,
+              "target_months": 4,
+              "supported": true
+            }
+          }
+        },
+        "eligible": false
+      },
+      {
+        "fold": {
+          "name": "rolling_2010",
+          "year": 2010,
+          "train_target_cutoff": "2008-12-31",
+          "validation_origin_start": "2010-01-01",
+          "validation_origin_end": "2010-12-01",
+          "validation_target_end": "2011-12-31"
+        },
+        "training": {
+          "n": 22545,
+          "districts": 434,
+          "origin_range": [
+            "2005-01-01",
+            "2008-08-01"
+          ],
+          "target_range": [
+            "2005-05-01",
+            "2008-11-01"
+          ],
+          "by_horizon": {
+            "2": {
+              "n": 1275,
+              "districts": 428,
+              "origin_months": 3,
+              "target_months": 3,
+              "supported": true
+            },
+            "3": {
+              "n": 3330,
+              "districts": 432,
+              "origin_months": 8,
+              "target_months": 8,
+              "supported": true
+            },
+            "4": {
+              "n": 1656,
+              "districts": 429,
+              "origin_months": 4,
+              "target_months": 4,
+              "supported": true
+            },
+            "5": {
+              "n": 1249,
+              "districts": 428,
+              "origin_months": 3,
+              "target_months": 3,
+              "supported": true
+            },
+            "6": {
+              "n": 2955,
+              "districts": 431,
+              "origin_months": 7,
+              "target_months": 7,
+              "supported": true
+            },
+            "7": {
+              "n": 1630,
+              "districts": 428,
+              "origin_months": 4,
+              "target_months": 4,
+              "supported": true
+            },
+            "8": {
+              "n": 1279,
+              "districts": 430,
+              "origin_months": 3,
+              "target_months": 3,
+              "supported": true
+            },
+            "9": {
+              "n": 2495,
+              "districts": 432,
+              "origin_months": 6,
+              "target_months": 6,
+              "supported": true
+            },
+            "10": {
+              "n": 1662,
+              "districts": 428,
+              "origin_months": 4,
+              "target_months": 4,
+              "supported": true
+            },
+            "12": {
+              "n": 5014,
+              "districts": 432,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            }
+          }
+        },
+        "validation": {
+          "n": 6697,
+          "districts": 430,
+          "origin_range": [
+            "2010-01-01",
+            "2010-11-01"
+          ],
+          "target_range": [
+            "2010-05-01",
+            "2011-11-01"
+          ],
+          "by_horizon": {
+            "2": {
+              "n": 426,
+              "districts": 426,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "3": {
+              "n": 837,
+              "districts": 426,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "4": {
+              "n": 410,
+              "districts": 410,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "5": {
+              "n": 426,
+              "districts": 426,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "6": {
+              "n": 823,
+              "districts": 413,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "7": {
+              "n": 424,
+              "districts": 424,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "8": {
+              "n": 413,
+              "districts": 413,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "9": {
+              "n": 833,
+              "districts": 425,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "10": {
+              "n": 423,
+              "districts": 423,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "12": {
+              "n": 1682,
+              "districts": 429,
+              "origin_months": 4,
+              "target_months": 4,
+              "supported": true
+            }
+          }
+        },
+        "eligible": false
+      },
+      {
+        "fold": {
+          "name": "rolling_2011",
+          "year": 2011,
+          "train_target_cutoff": "2009-12-31",
+          "validation_origin_start": "2011-01-01",
+          "validation_origin_end": "2011-12-01",
+          "validation_target_end": "2012-12-31"
+        },
+        "training": {
+          "n": 29255,
+          "districts": 434,
+          "origin_range": [
+            "2005-01-01",
+            "2009-08-01"
+          ],
+          "target_range": [
+            "2005-05-01",
+            "2009-11-01"
+          ],
+          "by_horizon": {
+            "2": {
+              "n": 1699,
+              "districts": 428,
+              "origin_months": 4,
+              "target_months": 4,
+              "supported": true
+            },
+            "3": {
+              "n": 4171,
+              "districts": 432,
+              "origin_months": 10,
+              "target_months": 10,
+              "supported": true
+            },
+            "4": {
+              "n": 2070,
+              "districts": 429,
+              "origin_months": 5,
+              "target_months": 5,
+              "supported": true
+            },
+            "5": {
+              "n": 1671,
+              "districts": 431,
+              "origin_months": 4,
+              "target_months": 4,
+              "supported": true
+            },
+            "6": {
+              "n": 3784,
+              "districts": 432,
+              "origin_months": 9,
+              "target_months": 9,
+              "supported": true
+            },
+            "7": {
+              "n": 2056,
+              "districts": 429,
+              "origin_months": 5,
+              "target_months": 5,
+              "supported": true
+            },
+            "8": {
+              "n": 1693,
+              "districts": 430,
+              "origin_months": 4,
+              "target_months": 4,
+              "supported": true
+            },
+            "9": {
+              "n": 3324,
+              "districts": 432,
+              "origin_months": 8,
+              "target_months": 8,
+              "supported": true
+            },
+            "10": {
+              "n": 2090,
+              "districts": 429,
+              "origin_months": 5,
+              "target_months": 5,
+              "supported": true
+            },
+            "12": {
+              "n": 6697,
+              "districts": 433,
+              "origin_months": 16,
+              "target_months": 16,
+              "supported": true
+            }
+          }
+        },
+        "validation": {
+          "n": 5860,
+          "districts": 428,
+          "origin_range": [
+            "2011-01-01",
+            "2011-11-01"
+          ],
+          "target_range": [
+            "2011-05-01",
+            "2012-11-01"
+          ],
+          "by_horizon": {
+            "2": {
+              "n": 424,
+              "districts": 424,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "3": {
+              "n": 833,
+              "districts": 423,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "4": {
+              "n": 413,
+              "districts": 413,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "5": {
+              "n": 422,
+              "districts": 422,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "6": {
+              "n": 819,
+              "districts": 412,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "7": {
+              "n": 423,
+              "districts": 423,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "8": {
+              "n": 412,
+              "districts": 412,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "9": {
+              "n": 422,
+              "districts": 409,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "10": {
+              "n": 425,
+              "districts": 425,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "12": {
+              "n": 1267,
+              "districts": 428,
+              "origin_months": 4,
+              "target_months": 4,
+              "supported": true
+            }
+          }
+        },
+        "eligible": true
+      },
+      {
+        "fold": {
+          "name": "rolling_2012",
+          "year": 2012,
+          "train_target_cutoff": "2010-12-31",
+          "validation_origin_start": "2012-01-01",
+          "validation_origin_end": "2012-12-01",
+          "validation_target_end": "2013-12-31"
+        },
+        "training": {
+          "n": 35966,
+          "districts": 434,
+          "origin_range": [
+            "2005-01-01",
+            "2010-08-01"
+          ],
+          "target_range": [
+            "2005-05-01",
+            "2010-11-01"
+          ],
+          "by_horizon": {
+            "2": {
+              "n": 2126,
+              "districts": 429,
+              "origin_months": 5,
+              "target_months": 5,
+              "supported": true
+            },
+            "3": {
+              "n": 5008,
+              "districts": 433,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "4": {
+              "n": 2480,
+              "districts": 429,
+              "origin_months": 6,
+              "target_months": 6,
+              "supported": true
+            },
+            "5": {
+              "n": 2096,
+              "districts": 431,
+              "origin_months": 5,
+              "target_months": 5,
+              "supported": true
+            },
+            "6": {
+              "n": 4608,
+              "districts": 432,
+              "origin_months": 11,
+              "target_months": 11,
+              "supported": true
+            },
+            "7": {
+              "n": 2480,
+              "districts": 429,
+              "origin_months": 6,
+              "target_months": 6,
+              "supported": true
+            },
+            "8": {
+              "n": 2106,
+              "districts": 430,
+              "origin_months": 5,
+              "target_months": 5,
+              "supported": true
+            },
+            "9": {
+              "n": 4163,
+              "districts": 434,
+              "origin_months": 10,
+              "target_months": 10,
+              "supported": true
+            },
+            "10": {
+              "n": 2513,
+              "districts": 429,
+              "origin_months": 6,
+              "target_months": 6,
+              "supported": true
+            },
+            "12": {
+              "n": 8386,
+              "districts": 433,
+              "origin_months": 20,
+              "target_months": 20,
+              "supported": true
+            }
+          }
+        },
+        "validation": {
+          "n": 4444,
+          "districts": 435,
+          "origin_range": [
+            "2012-01-01",
+            "2012-11-01"
+          ],
+          "target_range": [
+            "2012-05-01",
+            "2013-11-01"
+          ],
+          "by_horizon": {
+            "2": {
+              "n": 425,
+              "districts": 425,
+              "origin_months": 1,
+              "target_months": 1,
+              "supported": true
+            },
+            "3": {
+              "n": 35,
+              "districts": 22,
+              "origin_months": 3,
+              "target_months": 3,
+              "supported": true
+            },
+            "4": {
+              "n": 433,
+              "districts": 425,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "5": {
+              "n": 71,
+              "districts": 71,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "6": {
+              "n": 827,
+              "districts": 426,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "7": {
+              "n": 25,
+              "districts": 25,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": false
+            },
+            "8": {
+              "n": 420,
+              "districts": 409,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "9": {
+              "n": 429,
+              "districts": 408,
+              "origin_months": 3,
+              "target_months": 3,
+              "supported": true
+            },
+            "10": {
+              "n": 444,
+              "districts": 424,
+              "origin_months": 3,
+              "target_months": 3,
+              "supported": true
+            },
+            "11": {
+              "n": 68,
+              "districts": 60,
+              "origin_months": 2,
+              "target_months": 2,
+              "supported": true
+            },
+            "12": {
+              "n": 1267,
+              "districts": 432,
+              "origin_months": 4,
+              "target_months": 4,
+              "supported": true
+            }
+          }
+        },
+        "eligible": true
+      },
+      {
+        "fold": {
+          "name": "rolling_2013",
+          "year": 2013,
+          "train_target_cutoff": "2011-12-31",
+          "validation_origin_start": "2013-01-01",
+          "validation_origin_end": "2013-12-01",
+          "validation_target_end": "2014-12-31"
+        },
+        "training": {
+          "n": 42663,
+          "districts": 434,
+          "origin_range": [
+            "2005-01-01",
+            "2011-08-01"
+          ],
+          "target_range": [
+            "2005-05-01",
+            "2011-11-01"
+          ],
+          "by_horizon": {
+            "2": {
+              "n": 2552,
+              "districts": 430,
+              "origin_months": 6,
+              "target_months": 6,
+              "supported": true
+            },
+            "3": {
+              "n": 5841,
+              "districts": 433,
+              "origin_months": 14,
+              "target_months": 14,
+              "supported": true
+            },
+            "4": {
+              "n": 2893,
+              "districts": 429,
+              "origin_months": 7,
+              "target_months": 7,
+              "supported": true
+            },
+            "5": {
+              "n": 2522,
+              "districts": 432,
+              "origin_months": 6,
+              "target_months": 6,
+              "supported": true
+            },
+            "6": {
+              "n": 5431,
+              "districts": 432,
+              "origin_months": 13,
+              "target_months": 13,
+              "supported": true
+            },
+            "7": {
+              "n": 2903,
+              "districts": 429,
+              "origin_months": 7,
+              "target_months": 7,
+              "supported": true
+            },
+            "8": {
+              "n": 2519,
+              "districts": 430,
+              "origin_months": 6,
+              "target_months": 6,
+              "supported": true
+            },
+            "9": {
+              "n": 4996,
+              "districts": 434,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "10": {
+              "n": 2938,
+              "districts": 430,
+              "origin_months": 7,
+              "target_months": 7,
+              "supported": true
+            },
+            "12": {
+              "n": 10068,
+              "districts": 433,
+              "origin_months": 24,
+              "target_months": 24,
+              "supported": true
+            }
+          }
+        },
+        "validation": {
+          "n": 10587,
+          "districts": 555,
+          "origin_range": [
+            "2013-01-01",
+            "2013-12-01"
+          ],
+          "target_range": [
+            "2013-02-01",
+            "2014-12-01"
+          ],
+          "by_horizon": {
+            "1": {
+              "n": 197,
+              "districts": 65,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "2": {
+              "n": 720,
+              "districts": 544,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "3": {
+              "n": 1188,
+              "districts": 525,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "4": {
+              "n": 743,
+              "districts": 546,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "5": {
+              "n": 747,
+              "districts": 520,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "6": {
+              "n": 1128,
+              "districts": 507,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "7": {
+              "n": 763,
+              "districts": 525,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "8": {
+              "n": 735,
+              "districts": 538,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "9": {
+              "n": 1198,
+              "districts": 538,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "10": {
+              "n": 738,
+              "districts": 549,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "11": {
+              "n": 208,
+              "districts": 65,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "12": {
+              "n": 2222,
+              "districts": 552,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            }
+          }
+        },
+        "eligible": true
+      },
+      {
+        "fold": {
+          "name": "rolling_2014",
+          "year": 2014,
+          "train_target_cutoff": "2012-12-31",
+          "validation_origin_start": "2014-01-01",
+          "validation_origin_end": "2014-12-01",
+          "validation_target_end": "2015-12-31"
+        },
+        "training": {
+          "n": 47294,
+          "districts": 436,
+          "origin_range": [
+            "2005-01-01",
+            "2012-08-01"
+          ],
+          "target_range": [
+            "2005-05-01",
+            "2012-11-01"
+          ],
+          "by_horizon": {
+            "2": {
+              "n": 2976,
+              "districts": 430,
+              "origin_months": 7,
+              "target_months": 7,
+              "supported": true
+            },
+            "3": {
+              "n": 5868,
+              "districts": 433,
+              "origin_months": 16,
+              "target_months": 16,
+              "supported": true
+            },
+            "4": {
+              "n": 3301,
+              "districts": 429,
+              "origin_months": 8,
+              "target_months": 8,
+              "supported": true
+            },
+            "5": {
+              "n": 2944,
+              "districts": 432,
+              "origin_months": 7,
+              "target_months": 7,
+              "supported": true
+            },
+            "6": {
+              "n": 6242,
+              "districts": 432,
+              "origin_months": 15,
+              "target_months": 15,
+              "supported": true
+            },
+            "7": {
+              "n": 2917,
+              "districts": 429,
+              "origin_months": 8,
+              "target_months": 8,
+              "supported": true
+            },
+            "8": {
+              "n": 2931,
+              "districts": 430,
+              "origin_months": 7,
+              "target_months": 7,
+              "supported": true
+            },
+            "9": {
+              "n": 5418,
+              "districts": 434,
+              "origin_months": 14,
+              "target_months": 14,
+              "supported": true
+            },
+            "10": {
+              "n": 3362,
+              "districts": 434,
+              "origin_months": 8,
+              "target_months": 8,
+              "supported": true
+            },
+            "12": {
+              "n": 11335,
+              "districts": 434,
+              "origin_months": 28,
+              "target_months": 28,
+              "supported": true
+            }
+          }
+        },
+        "validation": {
+          "n": 10813,
+          "districts": 554,
+          "origin_range": [
+            "2014-01-01",
+            "2014-12-01"
+          ],
+          "target_range": [
+            "2014-02-01",
+            "2015-12-01"
+          ],
+          "by_horizon": {
+            "1": {
+              "n": 250,
+              "districts": 65,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "2": {
+              "n": 714,
+              "districts": 492,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "3": {
+              "n": 1193,
+              "districts": 518,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "4": {
+              "n": 772,
+              "districts": 530,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "5": {
+              "n": 797,
+              "districts": 524,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "6": {
+              "n": 1078,
+              "districts": 454,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "7": {
+              "n": 795,
+              "districts": 522,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "8": {
+              "n": 775,
+              "districts": 531,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "9": {
+              "n": 1191,
+              "districts": 524,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "10": {
+              "n": 719,
+              "districts": 493,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "11": {
+              "n": 256,
+              "districts": 67,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "12": {
+              "n": 2273,
+              "districts": 554,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            }
+          }
+        },
+        "eligible": true
+      },
+      {
+        "fold": {
+          "name": "rolling_2015",
+          "year": 2015,
+          "train_target_cutoff": "2013-12-31",
+          "validation_origin_start": "2015-01-01",
+          "validation_origin_end": "2015-12-01",
+          "validation_target_end": "2016-12-31"
+        },
+        "training": {
+          "n": 54569,
+          "districts": 556,
+          "origin_range": [
+            "2005-01-01",
+            "2013-11-01"
+          ],
+          "target_range": [
+            "2005-05-01",
+            "2013-12-01"
+          ],
+          "by_horizon": {
+            "1": {
+              "n": 181,
+              "districts": 65,
+              "origin_months": 11,
+              "target_months": 11,
+              "supported": true
+            },
+            "2": {
+              "n": 3574,
+              "districts": 461,
+              "origin_months": 18,
+              "target_months": 18,
+              "supported": true
+            },
+            "3": {
+              "n": 7019,
+              "districts": 546,
+              "origin_months": 26,
+              "target_months": 26,
+              "supported": true
+            },
+            "4": {
+              "n": 3978,
+              "districts": 528,
+              "origin_months": 17,
+              "target_months": 17,
+              "supported": true
+            },
+            "5": {
+              "n": 3127,
+              "districts": 456,
+              "origin_months": 16,
+              "target_months": 16,
+              "supported": true
+            },
+            "6": {
+              "n": 7219,
+              "districts": 517,
+              "origin_months": 22,
+              "target_months": 22,
+              "supported": true
+            },
+            "7": {
+              "n": 3555,
+              "districts": 543,
+              "origin_months": 14,
+              "target_months": 14,
+              "supported": true
+            },
+            "8": {
+              "n": 3423,
+              "districts": 457,
+              "origin_months": 13,
+              "target_months": 13,
+              "supported": true
+            },
+            "9": {
+              "n": 5877,
+              "districts": 437,
+              "origin_months": 20,
+              "target_months": 20,
+              "supported": true
+            },
+            "10": {
+              "n": 3930,
+              "districts": 552,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "11": {
+              "n": 84,
+              "districts": 64,
+              "origin_months": 3,
+              "target_months": 3,
+              "supported": true
+            },
+            "12": {
+              "n": 12602,
+              "districts": 436,
+              "origin_months": 32,
+              "target_months": 32,
+              "supported": true
+            }
+          }
+        },
+        "validation": {
+          "n": 10976,
+          "districts": 552,
+          "origin_range": [
+            "2015-01-01",
+            "2015-12-01"
+          ],
+          "target_range": [
+            "2015-02-01",
+            "2016-12-01"
+          ],
+          "by_horizon": {
+            "1": {
+              "n": 271,
+              "districts": 66,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "2": {
+              "n": 761,
+              "districts": 518,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "3": {
+              "n": 1253,
+              "districts": 531,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "4": {
+              "n": 790,
+              "districts": 543,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "5": {
+              "n": 782,
+              "districts": 510,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "6": {
+              "n": 1166,
+              "districts": 507,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "7": {
+              "n": 794,
+              "districts": 531,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "8": {
+              "n": 748,
+              "districts": 519,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "9": {
+              "n": 1221,
+              "districts": 544,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "10": {
+              "n": 730,
+              "districts": 540,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "11": {
+              "n": 212,
+              "districts": 66,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "12": {
+              "n": 2248,
+              "districts": 551,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            }
+          }
+        },
+        "eligible": true
+      },
+      {
+        "fold": {
+          "name": "rolling_2016",
+          "year": 2016,
+          "train_target_cutoff": "2014-12-31",
+          "validation_origin_start": "2016-01-01",
+          "validation_origin_end": "2016-12-01",
+          "validation_target_end": "2017-12-31"
+        },
+        "training": {
+          "n": 65300,
+          "districts": 558,
+          "origin_range": [
+            "2005-01-01",
+            "2014-11-01"
+          ],
+          "target_range": [
+            "2005-05-01",
+            "2014-12-01"
+          ],
+          "by_horizon": {
+            "1": {
+              "n": 430,
+              "districts": 66,
+              "origin_months": 23,
+              "target_months": 23,
+              "supported": true
+            },
+            "2": {
+              "n": 4343,
+              "districts": 548,
+              "origin_months": 30,
+              "target_months": 30,
+              "supported": true
+            },
+            "3": {
+              "n": 8205,
+              "districts": 550,
+              "origin_months": 38,
+              "target_months": 38,
+              "supported": true
+            },
+            "4": {
+              "n": 4750,
+              "districts": 552,
+              "origin_months": 29,
+              "target_months": 29,
+              "supported": true
+            },
+            "5": {
+              "n": 3908,
+              "districts": 541,
+              "origin_months": 28,
+              "target_months": 28,
+              "supported": true
+            },
+            "6": {
+              "n": 8332,
+              "districts": 519,
+              "origin_months": 34,
+              "target_months": 34,
+              "supported": true
+            },
+            "7": {
+              "n": 4336,
+              "districts": 546,
+              "origin_months": 26,
+              "target_months": 26,
+              "supported": true
+            },
+            "8": {
+              "n": 4174,
+              "districts": 547,
+              "origin_months": 25,
+              "target_months": 25,
+              "supported": true
+            },
+            "9": {
+              "n": 7095,
+              "districts": 546,
+              "origin_months": 32,
+              "target_months": 32,
+              "supported": true
+            },
+            "10": {
+              "n": 4610,
+              "districts": 553,
+              "origin_months": 24,
+              "target_months": 24,
+              "supported": true
+            },
+            "11": {
+              "n": 293,
+              "districts": 65,
+              "origin_months": 15,
+              "target_months": 15,
+              "supported": true
+            },
+            "12": {
+              "n": 14824,
+              "districts": 556,
+              "origin_months": 44,
+              "target_months": 44,
+              "supported": true
+            }
+          }
+        },
+        "validation": {
+          "n": 10017,
+          "districts": 554,
+          "origin_range": [
+            "2016-01-01",
+            "2016-12-01"
+          ],
+          "target_range": [
+            "2016-02-01",
+            "2017-12-01"
+          ],
+          "by_horizon": {
+            "1": {
+              "n": 172,
+              "districts": 61,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "2": {
+              "n": 684,
+              "districts": 536,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "3": {
+              "n": 1186,
+              "districts": 538,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "4": {
+              "n": 679,
+              "districts": 513,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "5": {
+              "n": 739,
+              "districts": 536,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "6": {
+              "n": 1035,
+              "districts": 502,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "7": {
+              "n": 703,
+              "districts": 514,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "8": {
+              "n": 697,
+              "districts": 532,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "9": {
+              "n": 1120,
+              "districts": 538,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "10": {
+              "n": 658,
+              "districts": 517,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "11": {
+              "n": 166,
+              "districts": 61,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "12": {
+              "n": 2178,
+              "districts": 552,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            }
+          }
+        },
+        "eligible": true
+      },
+      {
+        "fold": {
+          "name": "rolling_2017",
+          "year": 2017,
+          "train_target_cutoff": "2015-12-31",
+          "validation_origin_start": "2017-01-01",
+          "validation_origin_end": "2017-12-01",
+          "validation_target_end": "2018-12-31"
+        },
+        "training": {
+          "n": 76439,
+          "districts": 558,
+          "origin_range": [
+            "2005-01-01",
+            "2015-11-01"
+          ],
+          "target_range": [
+            "2005-05-01",
+            "2015-12-01"
+          ],
+          "by_horizon": {
+            "1": {
+              "n": 699,
+              "districts": 67,
+              "origin_months": 35,
+              "target_months": 35,
+              "supported": true
+            },
+            "2": {
+              "n": 5080,
+              "districts": 551,
+              "origin_months": 42,
+              "target_months": 42,
+              "supported": true
+            },
+            "3": {
+              "n": 9467,
+              "districts": 554,
+              "origin_months": 50,
+              "target_months": 50,
+              "supported": true
+            },
+            "4": {
+              "n": 5536,
+              "districts": 554,
+              "origin_months": 41,
+              "target_months": 41,
+              "supported": true
+            },
+            "5": {
+              "n": 4730,
+              "districts": 552,
+              "origin_months": 40,
+              "target_months": 40,
+              "supported": true
+            },
+            "6": {
+              "n": 9470,
+              "districts": 519,
+              "origin_months": 46,
+              "target_months": 46,
+              "supported": true
+            },
+            "7": {
+              "n": 5148,
+              "districts": 551,
+              "origin_months": 38,
+              "target_months": 38,
+              "supported": true
+            },
+            "8": {
+              "n": 4975,
+              "districts": 551,
+              "origin_months": 37,
+              "target_months": 37,
+              "supported": true
+            },
+            "9": {
+              "n": 8291,
+              "districts": 550,
+              "origin_months": 44,
+              "target_months": 44,
+              "supported": true
+            },
+            "10": {
+              "n": 5395,
+              "districts": 553,
+              "origin_months": 36,
+              "target_months": 36,
+              "supported": true
+            },
+            "11": {
+              "n": 551,
+              "districts": 67,
+              "origin_months": 27,
+              "target_months": 27,
+              "supported": true
+            },
+            "12": {
+              "n": 17097,
+              "districts": 556,
+              "origin_months": 56,
+              "target_months": 56,
+              "supported": true
+            }
+          }
+        },
+        "validation": {
+          "n": 10209,
+          "districts": 551,
+          "origin_range": [
+            "2017-01-01",
+            "2017-12-01"
+          ],
+          "target_range": [
+            "2017-02-01",
+            "2018-12-01"
+          ],
+          "by_horizon": {
+            "1": {
+              "n": 195,
+              "districts": 78,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "2": {
+              "n": 624,
+              "districts": 479,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "3": {
+              "n": 1130,
+              "districts": 538,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "4": {
+              "n": 749,
+              "districts": 534,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "5": {
+              "n": 796,
+              "districts": 542,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "6": {
+              "n": 977,
+              "districts": 444,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "7": {
+              "n": 817,
+              "districts": 540,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "8": {
+              "n": 721,
+              "districts": 536,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "9": {
+              "n": 1123,
+              "districts": 541,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "10": {
+              "n": 740,
+              "districts": 539,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "11": {
+              "n": 349,
+              "districts": 121,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "12": {
+              "n": 1988,
+              "districts": 550,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            }
+          }
+        },
+        "eligible": true
+      },
+      {
+        "fold": {
+          "name": "rolling_2018",
+          "year": 2018,
+          "train_target_cutoff": "2016-12-31",
+          "validation_origin_start": "2018-01-01",
+          "validation_origin_end": "2018-12-01",
+          "validation_target_end": "2019-12-31"
+        },
+        "training": {
+          "n": 86790,
+          "districts": 558,
+          "origin_range": [
+            "2005-01-01",
+            "2016-11-01"
+          ],
+          "target_range": [
+            "2005-05-01",
+            "2016-12-01"
+          ],
+          "by_horizon": {
+            "1": {
+              "n": 880,
+              "districts": 68,
+              "origin_months": 47,
+              "target_months": 47,
+              "supported": true
+            },
+            "2": {
+              "n": 5742,
+              "districts": 552,
+              "origin_months": 54,
+              "target_months": 54,
+              "supported": true
+            },
+            "3": {
+              "n": 10668,
+              "districts": 555,
+              "origin_months": 62,
+              "target_months": 62,
+              "supported": true
+            },
+            "4": {
+              "n": 6238,
+              "districts": 554,
+              "origin_months": 53,
+              "target_months": 53,
+              "supported": true
+            },
+            "5": {
+              "n": 5450,
+              "districts": 552,
+              "origin_months": 52,
+              "target_months": 52,
+              "supported": true
+            },
+            "6": {
+              "n": 10586,
+              "districts": 519,
+              "origin_months": 58,
+              "target_months": 58,
+              "supported": true
+            },
+            "7": {
+              "n": 5880,
+              "districts": 551,
+              "origin_months": 50,
+              "target_months": 50,
+              "supported": true
+            },
+            "8": {
+              "n": 5682,
+              "districts": 551,
+              "origin_months": 49,
+              "target_months": 49,
+              "supported": true
+            },
+            "9": {
+              "n": 9487,
+              "districts": 553,
+              "origin_months": 56,
+              "target_months": 56,
+              "supported": true
+            },
+            "10": {
+              "n": 6078,
+              "districts": 553,
+              "origin_months": 48,
+              "target_months": 48,
+              "supported": true
+            },
+            "11": {
+              "n": 754,
+              "districts": 68,
+              "origin_months": 39,
+              "target_months": 39,
+              "supported": true
+            },
+            "12": {
+              "n": 19345,
+              "districts": 556,
+              "origin_months": 68,
+              "target_months": 68,
+              "supported": true
+            }
+          }
+        },
+        "validation": {
+          "n": 9681,
+          "districts": 549,
+          "origin_range": [
+            "2018-01-01",
+            "2018-12-01"
+          ],
+          "target_range": [
+            "2018-02-01",
+            "2019-12-01"
+          ],
+          "by_horizon": {
+            "1": {
+              "n": 355,
+              "districts": 139,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "2": {
+              "n": 618,
+              "districts": 366,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "3": {
+              "n": 996,
+              "districts": 535,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "4": {
+              "n": 801,
+              "districts": 532,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "5": {
+              "n": 830,
+              "districts": 531,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "6": {
+              "n": 691,
+              "districts": 301,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "7": {
+              "n": 824,
+              "districts": 530,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "8": {
+              "n": 813,
+              "districts": 529,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "9": {
+              "n": 955,
+              "districts": 541,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "10": {
+              "n": 589,
+              "districts": 360,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "11": {
+              "n": 309,
+              "districts": 143,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "12": {
+              "n": 1900,
+              "districts": 547,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            }
+          }
+        },
+        "eligible": true
+      },
+      {
+        "fold": {
+          "name": "rolling_2019",
+          "year": 2019,
+          "train_target_cutoff": "2017-12-31",
+          "validation_origin_start": "2019-01-01",
+          "validation_origin_end": "2019-12-01",
+          "validation_target_end": "2020-12-31"
+        },
+        "training": {
+          "n": 96923,
+          "districts": 558,
+          "origin_range": [
+            "2005-01-01",
+            "2017-11-01"
+          ],
+          "target_range": [
+            "2005-05-01",
+            "2017-12-01"
+          ],
+          "by_horizon": {
+            "1": {
+              "n": 1068,
+              "districts": 136,
+              "origin_months": 59,
+              "target_months": 59,
+              "supported": true
+            },
+            "2": {
+              "n": 6419,
+              "districts": 553,
+              "origin_months": 66,
+              "target_months": 66,
+              "supported": true
+            },
+            "3": {
+              "n": 11796,
+              "districts": 555,
+              "origin_months": 74,
+              "target_months": 74,
+              "supported": true
+            },
+            "4": {
+              "n": 6938,
+              "districts": 554,
+              "origin_months": 65,
+              "target_months": 65,
+              "supported": true
+            },
+            "5": {
+              "n": 6189,
+              "districts": 552,
+              "origin_months": 64,
+              "target_months": 64,
+              "supported": true
+            },
+            "6": {
+              "n": 11564,
+              "districts": 519,
+              "origin_months": 70,
+              "target_months": 70,
+              "supported": true
+            },
+            "7": {
+              "n": 6680,
+              "districts": 551,
+              "origin_months": 62,
+              "target_months": 62,
+              "supported": true
+            },
+            "8": {
+              "n": 6386,
+              "districts": 552,
+              "origin_months": 61,
+              "target_months": 61,
+              "supported": true
+            },
+            "9": {
+              "n": 10607,
+              "districts": 555,
+              "origin_months": 68,
+              "target_months": 68,
+              "supported": true
+            },
+            "10": {
+              "n": 6770,
+              "districts": 553,
+              "origin_months": 60,
+              "target_months": 60,
+              "supported": true
+            },
+            "11": {
+              "n": 983,
+              "districts": 131,
+              "origin_months": 51,
+              "target_months": 51,
+              "supported": true
+            },
+            "12": {
+              "n": 21523,
+              "districts": 557,
+              "origin_months": 80,
+              "target_months": 80,
+              "supported": true
+            }
+          }
+        },
+        "validation": {
+          "n": 7712,
+          "districts": 549,
+          "origin_range": [
+            "2019-01-01",
+            "2019-12-01"
+          ],
+          "target_range": [
+            "2019-02-01",
+            "2020-12-01"
+          ],
+          "by_horizon": {
+            "1": {
+              "n": 185,
+              "districts": 67,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "2": {
+              "n": 716,
+              "districts": 539,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "3": {
+              "n": 1133,
+              "districts": 543,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "4": {
+              "n": 599,
+              "districts": 463,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "5": {
+              "n": 782,
+              "districts": 543,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "6": {
+              "n": 501,
+              "districts": 370,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "7": {
+              "n": 687,
+              "districts": 484,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "8": {
+              "n": 563,
+              "districts": 456,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "9": {
+              "n": 492,
+              "districts": 361,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "10": {
+              "n": 621,
+              "districts": 517,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "11": {
+              "n": 119,
+              "districts": 28,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "12": {
+              "n": 1314,
+              "districts": 546,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            }
+          }
+        },
+        "eligible": true
+      },
+      {
+        "fold": {
+          "name": "rolling_2020",
+          "year": 2020,
+          "train_target_cutoff": "2018-12-31",
+          "validation_origin_start": "2020-01-01",
+          "validation_origin_end": "2020-12-01",
+          "validation_target_end": "2021-12-31",
+          "inner_years": [
+            2016,
+            2017
+          ]
+        },
+        "training": {
+          "n": 107034,
+          "districts": 558,
+          "origin_range": [
+            "2005-01-01",
+            "2018-11-01"
+          ],
+          "target_range": [
+            "2005-05-01",
+            "2018-12-01"
+          ],
+          "by_horizon": {
+            "1": {
+              "n": 1371,
+              "districts": 184,
+              "origin_months": 71,
+              "target_months": 71,
+              "supported": true
+            },
+            "2": {
+              "n": 7213,
+              "districts": 553,
+              "origin_months": 78,
+              "target_months": 78,
+              "supported": true
+            },
+            "3": {
+              "n": 12741,
+              "districts": 555,
+              "origin_months": 86,
+              "target_months": 86,
+              "supported": true
+            },
+            "4": {
+              "n": 7749,
+              "districts": 554,
+              "origin_months": 77,
+              "target_months": 77,
+              "supported": true
+            },
+            "5": {
+              "n": 7070,
+              "districts": 554,
+              "origin_months": 76,
+              "target_months": 76,
+              "supported": true
+            },
+            "6": {
+              "n": 12422,
+              "districts": 522,
+              "origin_months": 82,
+              "target_months": 82,
+              "supported": true
+            },
+            "7": {
+              "n": 7420,
+              "districts": 553,
+              "origin_months": 74,
+              "target_months": 74,
+              "supported": true
+            },
+            "8": {
+              "n": 7169,
+              "districts": 552,
+              "origin_months": 73,
+              "target_months": 73,
+              "supported": true
+            },
+            "9": {
+              "n": 11778,
+              "districts": 555,
+              "origin_months": 80,
+              "target_months": 80,
+              "supported": true
+            },
+            "10": {
+              "n": 7262,
+              "districts": 553,
+              "origin_months": 72,
+              "target_months": 72,
+              "supported": true
+            },
+            "11": {
+              "n": 1328,
+              "districts": 192,
+              "origin_months": 63,
+              "target_months": 63,
+              "supported": true
+            },
+            "12": {
+              "n": 23511,
+              "districts": 557,
+              "origin_months": 92,
+              "target_months": 92,
+              "supported": true
+            }
+          }
+        },
+        "validation": {
+          "n": 4731,
+          "districts": 543,
+          "origin_range": [
+            "2020-01-01",
+            "2020-12-01"
+          ],
+          "target_range": [
+            "2020-02-01",
+            "2021-12-01"
+          ],
+          "by_horizon": {
+            "1": {
+              "n": 90,
+              "districts": 9,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": false
+            },
+            "2": {
+              "n": 587,
+              "districts": 509,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "3": {
+              "n": 416,
+              "districts": 338,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "4": {
+              "n": 82,
+              "districts": 13,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "5": {
+              "n": 415,
+              "districts": 345,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "6": {
+              "n": 94,
+              "districts": 31,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "7": {
+              "n": 394,
+              "districts": 330,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "8": {
+              "n": 70,
+              "districts": 14,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "9": {
+              "n": 574,
+              "districts": 497,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "10": {
+              "n": 558,
+              "districts": 502,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "11": {
+              "n": 66,
+              "districts": 17,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "12": {
+              "n": 1385,
+              "districts": 541,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            }
+          }
+        },
+        "eligible": true
+      },
+      {
+        "fold": {
+          "name": "rolling_2021",
+          "year": 2021,
+          "train_target_cutoff": "2019-12-31",
+          "validation_origin_start": "2021-01-01",
+          "validation_origin_end": "2021-12-01",
+          "validation_target_end": "2022-12-31",
+          "inner_years": [
+            2017,
+            2018
+          ]
+        },
+        "training": {
+          "n": 116601,
+          "districts": 558,
+          "origin_range": [
+            "2005-01-01",
+            "2019-11-01"
+          ],
+          "target_range": [
+            "2005-05-01",
+            "2019-12-01"
+          ],
+          "by_horizon": {
+            "1": {
+              "n": 1608,
+              "districts": 209,
+              "origin_months": 83,
+              "target_months": 83,
+              "supported": true
+            },
+            "2": {
+              "n": 7758,
+              "districts": 555,
+              "origin_months": 90,
+              "target_months": 90,
+              "supported": true
+            },
+            "3": {
+              "n": 13867,
+              "districts": 555,
+              "origin_months": 98,
+              "target_months": 98,
+              "supported": true
+            },
+            "4": {
+              "n": 8417,
+              "districts": 554,
+              "origin_months": 89,
+              "target_months": 89,
+              "supported": true
+            },
+            "5": {
+              "n": 7918,
+              "districts": 556,
+              "origin_months": 88,
+              "target_months": 88,
+              "supported": true
+            },
+            "6": {
+              "n": 13169,
+              "districts": 523,
+              "origin_months": 94,
+              "target_months": 94,
+              "supported": true
+            },
+            "7": {
+              "n": 8232,
+              "districts": 554,
+              "origin_months": 86,
+              "target_months": 86,
+              "supported": true
+            },
+            "8": {
+              "n": 7917,
+              "districts": 553,
+              "origin_months": 85,
+              "target_months": 85,
+              "supported": true
+            },
+            "9": {
+              "n": 12709,
+              "districts": 555,
+              "origin_months": 92,
+              "target_months": 92,
+              "supported": true
+            },
+            "10": {
+              "n": 8011,
+              "districts": 554,
+              "origin_months": 84,
+              "target_months": 84,
+              "supported": true
+            },
+            "11": {
+              "n": 1584,
+              "districts": 226,
+              "origin_months": 75,
+              "target_months": 75,
+              "supported": true
+            },
+            "12": {
+              "n": 25411,
+              "districts": 557,
+              "origin_months": 104,
+              "target_months": 104,
+              "supported": true
+            }
+          }
+        },
+        "validation": {
+          "n": 7412,
+          "districts": 618,
+          "origin_range": [
+            "2021-01-01",
+            "2021-12-01"
+          ],
+          "target_range": [
+            "2021-02-01",
+            "2022-12-01"
+          ],
+          "by_horizon": {
+            "1": {
+              "n": 80,
+              "districts": 26,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "2": {
+              "n": 659,
+              "districts": 585,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "3": {
+              "n": 678,
+              "districts": 577,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "4": {
+              "n": 155,
+              "districts": 103,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "5": {
+              "n": 733,
+              "districts": 585,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "6": {
+              "n": 553,
+              "districts": 469,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "7": {
+              "n": 709,
+              "districts": 580,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "8": {
+              "n": 161,
+              "districts": 108,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "9": {
+              "n": 1133,
+              "districts": 601,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "10": {
+              "n": 655,
+              "districts": 583,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "11": {
+              "n": 70,
+              "districts": 20,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            },
+            "12": {
+              "n": 1826,
+              "districts": 611,
+              "origin_months": 12,
+              "target_months": 12,
+              "supported": true
+            }
+          }
+        },
+        "eligible": true
+      }
+    ]
+  },
+  "primary_metric": "Equal mean of inner-fold district-macro MAE on identical seasonal-eligible cases across ALL candidates and baselines; every district with >=1 eligible case has equal weight within a fold.",
+  "secondary_metrics": [
+    "case-weighted MAE",
+    "RMSE",
+    "signed error",
+    "median absolute error",
+    "coverage",
+    "full-population district-macro MAE"
+  ],
+  "minimum_subgroup_support": {
+    "cases": 30,
+    "districts": 10
+  },
+  "horizon_model_training_support": {
+    "cases": 500,
+    "districts": 50,
+    "target_years": 5
+  },
+  "fold_rule": "Last two eligible origin years whose full twelve-horizon target window ends strictly before 2023; training labels through December y-2, validation origins January-December y, validation targets through December y+1. At least 20,000 train rows, 250 train districts, five train target years; 1,000 validation rows and 100 districts. Each outer uses the last two eligible inner validation years with their entire target window ending by its training-label cutoff. Target windows overlap; dependent cases are acknowledged.",
+  "selection_rule": "Per outer: rank candidates and both baselines on its two inner folds only, tie by mean RMSE then name. Outer labels never select features, trees or candidate. Final development recipe uses the union of inner years only. Keep the existing candidate if the final winner is a baseline/reference or no new recipe beats current_recipe.",
+  "early_stopping": "Only early_stopping/slower_learning candidates use up to 480 trees and 40 rounds on inner folds. Outer/final tree counts are rounded medians of selected inner best counts. Early stopping monitors delta MAE; selection scores reconstructed floored depth rounded to four decimals.",
+  "candidates": [
+    {
+      "name": "production_recipe",
+      "family": "reference",
+      "parameters": {
+        "n_estimators": 240,
+        "max_depth": 3,
+        "min_child_weight": 30,
+        "reg_lambda": 20.0,
+        "reg_alpha": 0.1
+      },
+      "hypothesis": "Reference recipe refitted on identical causal data.",
+      "expected_benefit": "Benchmark structural changes.",
+      "failure_mode": "No incremental benefit.",
+      "status": "eligible",
+      "eligibility_failures": []
+    },
+    {
+      "name": "current_recipe",
+      "family": "reference",
+      "hypothesis": "Reference recipe refitted on identical causal data.",
+      "expected_benefit": "Benchmark structural changes.",
+      "failure_mode": "No incremental benefit.",
+      "status": "eligible",
+      "eligibility_failures": []
+    },
+    {
+      "name": "district_balanced",
+      "family": "A",
+      "balanced": true,
+      "hypothesis": "Dense districts dominate squared-error fitting.",
+      "expected_benefit": "Improve equal-district generalization.",
+      "failure_mode": "Noisy sparse districts receive more weight.",
+      "status": "eligible",
+      "eligibility_failures": []
+    },
+    {
+      "name": "individual_horizons",
+      "family": "B",
+      "structure": "individual",
+      "hypothesis": "A single horizon function limits temporal specialization.",
+      "expected_benefit": "Fit different horizon responses.",
+      "failure_mode": "Small horizon samples increase variance.",
+      "status": "unsupported",
+      "eligibility_failures": [
+        {
+          "fold": "rolling_2016",
+          "horizons": [
+            1
+          ],
+          "support": {
+            "cases": 430,
+            "districts": 66,
+            "target_years": 2
+          }
+        },
+        {
+          "fold": "rolling_2016",
+          "horizons": [
+            11
+          ],
+          "support": {
+            "cases": 293,
+            "districts": 65,
+            "target_years": 2
+          }
+        },
+        {
+          "fold": "rolling_2017",
+          "horizons": [
+            1
+          ],
+          "support": {
+            "cases": 699,
+            "districts": 67,
+            "target_years": 3
+          }
+        },
+        {
+          "fold": "rolling_2017",
+          "horizons": [
+            11
+          ],
+          "support": {
+            "cases": 551,
+            "districts": 67,
+            "target_years": 3
+          }
+        },
+        {
+          "fold": "rolling_2018",
+          "horizons": [
+            1
+          ],
+          "support": {
+            "cases": 880,
+            "districts": 68,
+            "target_years": 4
+          }
+        },
+        {
+          "fold": "rolling_2018",
+          "horizons": [
+            11
+          ],
+          "support": {
+            "cases": 754,
+            "districts": 68,
+            "target_years": 4
+          }
+        }
+      ]
+    },
+    {
+      "name": "three_horizon_groups",
+      "family": "B",
+      "structure": "grouped",
+      "hypothesis": "A single horizon function limits temporal specialization.",
+      "expected_benefit": "Fit different horizon responses.",
+      "failure_mode": "Small horizon samples increase variance.",
+      "status": "eligible",
+      "eligibility_failures": []
+    },
+    {
+      "name": "early_stopping",
+      "family": "C",
+      "early_stopping": true,
+      "hypothesis": "Capacity, regularization, learning rate or sampling mismatches generalization.",
+      "expected_benefit": "Reduce out-of-time residuals.",
+      "failure_mode": "Underfitting or unstable subsampling.",
+      "status": "eligible",
+      "eligibility_failures": []
+    },
+    {
+      "name": "shallow_stronger_regularization",
+      "family": "C",
+      "parameters": {
+        "max_depth": 2,
+        "min_child_weight": 120,
+        "reg_lambda": 80.0,
+        "reg_alpha": 0.4
+      },
+      "hypothesis": "Capacity, regularization, learning rate or sampling mismatches generalization.",
+      "expected_benefit": "Reduce out-of-time residuals.",
+      "failure_mode": "Underfitting or unstable subsampling.",
+      "status": "eligible",
+      "eligibility_failures": []
+    },
+    {
+      "name": "slower_learning",
+      "family": "C",
+      "parameters": {
+        "learning_rate": 0.02
+      },
+      "early_stopping": true,
+      "hypothesis": "Capacity, regularization, learning rate or sampling mismatches generalization.",
+      "expected_benefit": "Reduce out-of-time residuals.",
+      "failure_mode": "Underfitting or unstable subsampling.",
+      "status": "eligible",
+      "eligibility_failures": []
+    },
+    {
+      "name": "lower_subsampling",
+      "family": "C",
+      "parameters": {
+        "subsample": 0.7,
+        "colsample_bytree": 0.7
+      },
+      "hypothesis": "Capacity, regularization, learning rate or sampling mismatches generalization.",
+      "expected_benefit": "Reduce out-of-time residuals.",
+      "failure_mode": "Underfitting or unstable subsampling.",
+      "status": "eligible",
+      "eligibility_failures": []
+    },
+    {
+      "name": "absolute_error",
+      "family": "D",
+      "parameters": {
+        "objective": "reg:absoluteerror"
+      },
+      "hypothesis": "Large residuals exert too much squared-loss influence.",
+      "expected_benefit": "Improve typical error.",
+      "failure_mode": "Large-error RMSE or signed bias worsens.",
+      "status": "eligible",
+      "eligibility_failures": []
+    },
+    {
+      "name": "pseudo_huber",
+      "family": "D",
+      "parameters": {
+        "objective": "reg:pseudohubererror",
+        "huber_slope": 1.0
+      },
+      "hypothesis": "Large residuals exert too much squared-loss influence.",
+      "expected_benefit": "Improve typical error.",
+      "failure_mode": "Large-error RMSE or signed bias worsens.",
+      "status": "eligible",
+      "eligibility_failures": []
+    },
+    {
+      "name": "without_ground",
+      "family": "E",
+      "drop_group": "ground",
+      "hypothesis": "A feature group adds complexity without out-of-time information.",
+      "expected_benefit": "Reduce unstable splits.",
+      "failure_mode": "Remove meaningful causal signal.",
+      "status": "eligible",
+      "eligibility_failures": []
+    },
+    {
+      "name": "without_calendar",
+      "family": "E",
+      "drop_group": "calendar",
+      "hypothesis": "A feature group adds complexity without out-of-time information.",
+      "expected_benefit": "Reduce unstable splits.",
+      "failure_mode": "Remove meaningful causal signal.",
+      "status": "eligible",
+      "eligibility_failures": []
+    },
+    {
+      "name": "without_weather",
+      "family": "E",
+      "drop_group": "weather",
+      "hypothesis": "A feature group adds complexity without out-of-time information.",
+      "expected_benefit": "Reduce unstable splits.",
+      "failure_mode": "Remove meaningful causal signal.",
+      "status": "eligible",
+      "eligibility_failures": []
+    },
+    {
+      "name": "without_cumulative",
+      "family": "E",
+      "drop_group": "cumulative",
+      "hypothesis": "A feature group adds complexity without out-of-time information.",
+      "expected_benefit": "Reduce unstable splits.",
+      "failure_mode": "Remove meaningful causal signal.",
+      "status": "eligible",
+      "eligibility_failures": []
+    },
+    {
+      "name": "ridge",
+      "family": "F",
+      "kind": "ridge",
+      "alpha": 100.0,
+      "hypothesis": "A simple regularized or damped trend model generalizes better.",
+      "expected_benefit": "Provide an inexpensive challenger.",
+      "failure_mode": "Linear assumptions miss seasonal nonlinearities.",
+      "status": "eligible",
+      "eligibility_failures": []
+    },
+    {
+      "name": "damped_local_trend",
+      "family": "F",
+      "kind": "trend",
+      "window_months": 36,
+      "damping_months": 6.0,
+      "hypothesis": "A simple regularized or damped trend model generalizes better.",
+      "expected_benefit": "Provide an inexpensive challenger.",
+      "failure_mode": "Linear assumptions miss seasonal nonlinearities.",
+      "status": "eligible",
+      "eligibility_failures": []
+    }
+  ],
+  "base_parameters": {
+    "n_estimators": 461,
+    "max_depth": 4,
+    "learning_rate": 0.04,
+    "min_child_weight": 60,
+    "reg_lambda": 40.0,
+    "reg_alpha": 0.2,
+    "subsample": 0.85,
+    "colsample_bytree": 0.9,
+    "random_state": 42,
+    "n_jobs": 4,
+    "tree_method": "hist",
+    "objective": "reg:squarederror",
+    "eval_metric": "mae"
+  },
+  "feature_groups": {
+    "ground": [
+      "origin_gwl",
+      "origin_gwl_lag_3mo",
+      "origin_gwl_lag_6mo"
+    ],
+    "calendar": [
+      "horizon_months",
+      "origin_month_sin",
+      "origin_month_cos",
+      "target_month_sin",
+      "target_month_cos"
+    ],
+    "weather": [
+      "origin_rainfall",
+      "origin_temperature",
+      "origin_evapotranspiration",
+      "target_rainfall",
+      "target_temperature",
+      "target_evapotranspiration"
+    ],
+    "cumulative": [
+      "cumulative_rainfall",
+      "cumulative_evapotranspiration",
+      "mean_temperature"
+    ]
+  },
+  "unsupported_candidate_rule": "Support is checked before fitting on every inner/outer training partition. A recipe failing a predeclared horizon support threshold is excluded from all folds, with exact reasons retained. No validation cases are removed to rescue it.",
+  "horizon_groups": [
+    [
+      1,
+      2,
+      3,
+      4
+    ],
+    [
+      5,
+      6,
+      7,
+      8
+    ],
+    [
+      9,
+      10,
+      11,
+      12
+    ]
+  ],
+  "horizon_group_rationale": "Three contiguous four-month product segments provide short/middle/long horizon sharing; specified independently of residuals.",
+  "baselines": [
+    "persistence",
+    "seasonal"
+  ],
+  "final_label_cutoff": "2025-01-31",
+  "fixed_artifact_policy": "Frozen artifact valid only where its 2019-12-31 training cutoff precedes origins. Current 2025-fit artifact is contaminated on all development folds and appears in a separate diagnostic only. Reference recipes are refitted on each chronological training partition.",
+  "target": "observed_target_depth_minus_observed_origin_depth_m_bgl",
+  "forecast_reconstruction": "round(max(0, observed_origin_gwl + predicted_delta),4)",
+  "scope": "Controlled observed-origin depth prediction experiment; not a full serving-tier replay or a prospective test. Genuine observed endpoints only; origin-available causal features. Source publication dates remain unverified.",
+  "january2026_for_tuning": false,
+  "old_2023_2024_for_tuning": false,
+  "production_promotion_prohibited": true,
+  "old_promotion_requirements": {
+    "threshold_units": "0.02 is a relative MAE reduction of 2%; 0.10 is a relative MAE increase of 10%, not metres.",
+    "untouched_post_refit_test_required": true,
+    "rolling_validation_mae_gain_vs_frozen_and_persistence_at_least": 0.02,
+    "rolling_validation_seasonal_paired_mae_no_worse": true,
+    "supported_horizon_or_new_history_group_maximum_mae_regression": 0.1,
+    "supported_panel_minimum_cases": 30,
+    "supported_panel_minimum_districts": 10,
+    "complete_725_by_12_outputs_and_36_states": true,
+    "all_contract_and_rollback_checks_pass": true,
+    "rule": "All requirements must pass. No independent untouched later labels currently exist; keep production unchanged regardless of inspected diagnostic gains."
+  },
+  "bounded_compute": {
+    "recipe_count": 17,
+    "inner_folds": 3,
+    "outer_folds": 2,
+    "maximum_cell_fits": 85,
+    "xgb_workers": 4,
+    "maximum_trees_per_member": 480,
+    "maximum_wall_seconds": 7200
+  },
+  "training_code": {
+    "scripts/run_accuracy_experiments.py": "dd536023608dcf1e36d8c8189435ae8dfc705c37a6107ee9510edf75d84cad61",
+    "models/accuracy_experiments.py": "b36c09783d3ad8b87a8090a871bd28b0bf5fef9846836f583bd7201dd973689e",
+    "models/accuracy_challengers.py": "7bcdf61ae5cdc3d67da51ba72bc37704bbc438dc75fffd58a0243ca4197c55d0",
+    "models/enriched_training_data.py": "e16c65a99d63af1bf06c3fd3e0fd487195ba2958cb2eb8225b496a346a1408d8",
+    "models/climate_forecast_12m.py": "2659acff31a1a7c39dc5d95d3def5d46f52cd29586eb697a2433b9928e423345",
+    "models/climate_forecast.py": "06380d1997f9ae2eaec123ba84777c9df1d46839e80de6dcba28ecc0a4965229",
+    "models/climate_inputs.py": "c37eef65e37891a1c8c43e107e70d8808cd8743dd4b9f74a2d7c7d6d5924efdb",
+    "models/monthly_projection.py": "0ab907910edf8f3e34d3523dad1c68e0408e2de001909277577d1803de36952d"
+  },
+  "environment": {
+    "python": "3.13.15",
+    "xgboost": "3.4.1",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "scope": "Publish completed reliability/retraining, cleanup and accuracy work to main",
+  "strict_staged_scan": {
+    "scanned_files": 56,
+    "findings": [
+      {
+        "path": "reports/accuracy_experiments_20261027/pytest.xml",
+        "reason": "credential_url"
+      }
+    ]
+  },
+  "strict_staged_scan_exit_code": 1,
+  "classified_false_positives": [
+    {
+      "path": "reports/accuracy_experiments_20261027/pytest.xml",
+      "reason": "Two parameterized negative-test names contain explicit synthetic userinfo URLs; source literals/concatenations verified by AST against the already committed CORS/NWDP rejection tests.",
+      "source_files": [
+        "tests/test_cors_configuration.py",
+        "tests/test_nwdp_manual.py"
+      ],
+      "occurrences": 2,
+      "actual_secret": false
+    }
+  ],
+  "unclassified_or_actual_secret_findings": [],
+  "new_large_file_findings": [],
+  "raw_case_data_staged": false,
+  "models_and_protocol_index_bytes_exact": true,
+  "production_pointer_and_frozen_bundle_unchanged_vs_origin_main": true,
+  "validation_reference": "reports/repository_cleanup_20261027/verification.json",
+  "validation_python_passed": 1775,
+  "validation_python_skipped": 1,
+  "frontend_tests_passed": 160,
+  "lint_and_build_passed": true,
+  "scientific_evidence_modified_for_publication": false,
+  "force_push_permitted_or_needed": false,
+  "safe_to_publish": true
+}

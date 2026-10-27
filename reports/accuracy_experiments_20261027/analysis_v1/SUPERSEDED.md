@@ -1,0 +1,1 @@
+Superseded by ../analysis_v2/comparison.json. A reporting reference-name collision hid a failed subgroup gate; raw fold results and predictions were unchanged. Use ../../accuracy_experiments_20261027/REPORT.md and verification_v2.json.

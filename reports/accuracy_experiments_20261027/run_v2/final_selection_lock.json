@@ -1,0 +1,87 @@
+{
+  "selected": "three_horizon_groups",
+  "inner_years_only": [
+    2016,
+    2017,
+    2018
+  ],
+  "ranks": {
+    "production_recipe": {
+      "mean_fold_district_macro_mae_m": 1.3887612693722786,
+      "mean_fold_rmse_m": 2.471731187357799
+    },
+    "current_recipe": {
+      "mean_fold_district_macro_mae_m": 1.3317443293096736,
+      "mean_fold_rmse_m": 2.384603733476245
+    },
+    "district_balanced": {
+      "mean_fold_district_macro_mae_m": 1.3350005505018323,
+      "mean_fold_rmse_m": 2.38370632083609
+    },
+    "three_horizon_groups": {
+      "mean_fold_district_macro_mae_m": 1.323125417990705,
+      "mean_fold_rmse_m": 2.403245293990014
+    },
+    "early_stopping": {
+      "mean_fold_district_macro_mae_m": 1.3308426924855463,
+      "mean_fold_rmse_m": 2.3826007743498216
+    },
+    "shallow_stronger_regularization": {
+      "mean_fold_district_macro_mae_m": 1.4004817876444242,
+      "mean_fold_rmse_m": 2.4761117752334894
+    },
+    "slower_learning": {
+      "mean_fold_district_macro_mae_m": 1.356894270840802,
+      "mean_fold_rmse_m": 2.4312534525380247
+    },
+    "lower_subsampling": {
+      "mean_fold_district_macro_mae_m": 1.334491564892067,
+      "mean_fold_rmse_m": 2.401931173172541
+    },
+    "absolute_error": {
+      "mean_fold_district_macro_mae_m": 1.3444399758772347,
+      "mean_fold_rmse_m": 2.4947084812534714
+    },
+    "pseudo_huber": {
+      "mean_fold_district_macro_mae_m": 1.325987942710955,
+      "mean_fold_rmse_m": 2.451419857289777
+    },
+    "without_ground": {
+      "mean_fold_district_macro_mae_m": 1.5182940469562418,
+      "mean_fold_rmse_m": 2.710524915884682
+    },
+    "without_calendar": {
+      "mean_fold_district_macro_mae_m": 1.3428950956277452,
+      "mean_fold_rmse_m": 2.3997916269514854
+    },
+    "without_weather": {
+      "mean_fold_district_macro_mae_m": 1.3557062211183466,
+      "mean_fold_rmse_m": 2.4072461832964733
+    },
+    "without_cumulative": {
+      "mean_fold_district_macro_mae_m": 1.3332332537753508,
+      "mean_fold_rmse_m": 2.38121278214514
+    },
+    "ridge": {
+      "mean_fold_district_macro_mae_m": 1.4164376465546598,
+      "mean_fold_rmse_m": 2.4358485094644813
+    },
+    "damped_local_trend": {
+      "mean_fold_district_macro_mae_m": 2.1147584407901743,
+      "mean_fold_rmse_m": 3.199662330021276
+    },
+    "persistence": {
+      "mean_fold_district_macro_mae_m": 2.078394061258205,
+      "mean_fold_rmse_m": 3.1470772089397774
+    },
+    "seasonal": {
+      "mean_fold_district_macro_mae_m": 1.4102832561629468,
+      "mean_fold_rmse_m": 2.4678991586649532
+    }
+  },
+  "production_changed": false,
+  "promotion_eligible": false,
+  "promotion_blocker": "No untouched post-refit test; no full new serving/API/rollback gate assessment.",
+  "old_candidate_retained": true,
+  "new_candidate_checkpoint": null
+}

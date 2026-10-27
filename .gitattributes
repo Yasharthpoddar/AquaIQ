@@ -1,3 +1,5 @@
 # Model pointers and experiment seals bind exact bytes across checkouts.
 /models/artifacts/enriched_retraining_*/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 /reports/retraining_*/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/models/artifacts/accuracy_experiments_*/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/reports/accuracy_experiments_*/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

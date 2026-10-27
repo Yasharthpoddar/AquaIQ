@@ -1,0 +1,48 @@
+{
+  "decision": "retain_existing_experimental_candidate_and_frozen_production",
+  "recommended_research_checkpoint": "models/artifacts/enriched_retraining_20261027/checkpoint.json",
+  "recommended_research_model_sha256": "e4e57de9f681b2f2702c9b86a00be06b04147123ecea0579f6abcf3cdc586192",
+  "rejected_replacement_checkpoint": "models/artifacts/accuracy_experiments_20261027_run_v2_three_horizon_groups/checkpoint.json",
+  "rejection_reasons": [
+    "Inner-selected horizon grouping worsens outer mean district-macro MAE and RMSE versus the refitted current recipe.",
+    "Full-fold mean macro gain versus frozen reference is 1.9267%, below 2%.",
+    "Supported 2021 M+11 MAE regression against frozen is 17.969%, above 10%.",
+    "No untouched post-refit test; new candidate full nationwide serving/API gates were not assessed."
+  ],
+  "selection_used_outer_results": false,
+  "explanation": "Outer evidence rejects the locked selection procedure as a replacement. No alternate recipe was selected after viewing the outer rankings.",
+  "development_gates": {
+    "full_macro_relative_improvement_vs_frozen": 0.01926707775417058,
+    "full_macro_relative_improvement_vs_persistence": 0.2117122445135481,
+    "full_macro_2pct_vs_frozen_pass": false,
+    "full_macro_2pct_vs_persistence_pass": true,
+    "seasonal_paired_macro_no_worse_pass": true,
+    "supported_frozen_subgroup_checks_pass": false,
+    "untouched_post_refit_test_pass": false,
+    "new_candidate_full_serving_API_contract_gate": "not executed; no claim of pass",
+    "promotion_eligible": false
+  },
+  "failed_subgroups": [
+    {
+      "year": 2020,
+      "reference": "current_recipe",
+      "group": "horizon",
+      "value": "8.0",
+      "cases": 70,
+      "districts": 14,
+      "relative_mae_regression": 0.10402376910818778
+    },
+    {
+      "year": 2021,
+      "reference": "frozen_fixed_reference",
+      "group": "horizon",
+      "value": "11.0",
+      "cases": 70,
+      "districts": 20,
+      "relative_mae_regression": 0.17969008647258278
+    }
+  ],
+  "candidate_better_than_current_district_fraction": 0.4683954619124797,
+  "production_changed": false,
+  "promoted": false
+}

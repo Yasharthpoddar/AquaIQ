@@ -87,6 +87,11 @@ reports/final_release_20261026/outputs/
 reports/retraining_20261027/**/*.csv
 reports/retraining_20261027/outputs/
 
+# Accuracy studies keep row-level observations and per-fold learners local.
+reports/accuracy_experiments_*/**/*.csv
+reports/accuracy_experiments_*/**/fold_artifacts/
+reports/accuracy_experiments_*/**/*diagnostics*.json
+
 # Reproducible audit row exports; retain compact aggregate reports in Git.
 reports/audit-*/**/*.csv
 reports/candidates/correlation/

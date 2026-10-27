@@ -1,0 +1,5 @@
+{
+  "format": "aquaiq-isolated-accuracy-v1",
+  "card_path": "model_card.json",
+  "card_sha256": "1fcc69cdebefd38a283b21760307207c89d4cd555fefbab2d9f67e1c787f8d95"
+}

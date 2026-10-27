@@ -1,0 +1,81 @@
+{
+  "winner": "three_horizon_groups",
+  "inner_years": [
+    2017,
+    2018
+  ],
+  "ranks": {
+    "production_recipe": {
+      "mean_fold_district_macro_mae_m": 1.401023060984743,
+      "mean_fold_rmse_m": 2.6160511355116247
+    },
+    "current_recipe": {
+      "mean_fold_district_macro_mae_m": 1.3422573948446095,
+      "mean_fold_rmse_m": 2.526653346265831
+    },
+    "district_balanced": {
+      "mean_fold_district_macro_mae_m": 1.3459157112789248,
+      "mean_fold_rmse_m": 2.5207774118632766
+    },
+    "three_horizon_groups": {
+      "mean_fold_district_macro_mae_m": 1.3361800448835184,
+      "mean_fold_rmse_m": 2.54763445264523
+    },
+    "early_stopping": {
+      "mean_fold_district_macro_mae_m": 1.3414229357287086,
+      "mean_fold_rmse_m": 2.5247777429012594
+    },
+    "shallow_stronger_regularization": {
+      "mean_fold_district_macro_mae_m": 1.4121167979599485,
+      "mean_fold_rmse_m": 2.6203491315942036
+    },
+    "slower_learning": {
+      "mean_fold_district_macro_mae_m": 1.3675553780429266,
+      "mean_fold_rmse_m": 2.5733152670810986
+    },
+    "lower_subsampling": {
+      "mean_fold_district_macro_mae_m": 1.3457127648430758,
+      "mean_fold_rmse_m": 2.5466265027530257
+    },
+    "absolute_error": {
+      "mean_fold_district_macro_mae_m": 1.3564975112962006,
+      "mean_fold_rmse_m": 2.650779651386121
+    },
+    "pseudo_huber": {
+      "mean_fold_district_macro_mae_m": 1.3388907103662508,
+      "mean_fold_rmse_m": 2.606568961487179
+    },
+    "without_ground": {
+      "mean_fold_district_macro_mae_m": 1.530921729828052,
+      "mean_fold_rmse_m": 2.873026640371713
+    },
+    "without_calendar": {
+      "mean_fold_district_macro_mae_m": 1.3510656825653526,
+      "mean_fold_rmse_m": 2.536726576005819
+    },
+    "without_weather": {
+      "mean_fold_district_macro_mae_m": 1.3682520888904506,
+      "mean_fold_rmse_m": 2.5514844922286146
+    },
+    "without_cumulative": {
+      "mean_fold_district_macro_mae_m": 1.3482692110686094,
+      "mean_fold_rmse_m": 2.5258335156776126
+    },
+    "ridge": {
+      "mean_fold_district_macro_mae_m": 1.422388939729182,
+      "mean_fold_rmse_m": 2.558846093892898
+    },
+    "damped_local_trend": {
+      "mean_fold_district_macro_mae_m": 2.137147570440678,
+      "mean_fold_rmse_m": 3.3416584530029274
+    },
+    "persistence": {
+      "mean_fold_district_macro_mae_m": 2.101084330405059,
+      "mean_fold_rmse_m": 3.281628936995228
+    },
+    "seasonal": {
+      "mean_fold_district_macro_mae_m": 1.4178782567985542,
+      "mean_fold_rmse_m": 2.5814761852471797
+    }
+  }
+}

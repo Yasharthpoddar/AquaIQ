@@ -1,0 +1,1388 @@
+{
+  "candidate_version": "3.0-accuracy-experimental-three_horizon_groups",
+  "units": "m_bgl",
+  "target": "observed_target_depth_minus_observed_origin_depth_m_bgl",
+  "train_target_cutoff": "2025-01-31",
+  "training_pairs": {
+    "n": 145494,
+    "districts": 641,
+    "origin_range": [
+      "2005-01-01",
+      "2024-11-01"
+    ],
+    "target_range": [
+      "2005-05-01",
+      "2025-01-01"
+    ],
+    "by_horizon": {
+      "1": {
+        "n": 1951,
+        "districts": 238,
+        "origin_months": 130,
+        "target_months": 130,
+        "supported": true
+      },
+      "2": {
+        "n": 10513,
+        "districts": 632,
+        "origin_months": 135,
+        "target_months": 135,
+        "supported": true
+      },
+      "3": {
+        "n": 16934,
+        "districts": 633,
+        "origin_months": 147,
+        "target_months": 147,
+        "supported": true
+      },
+      "4": {
+        "n": 9790,
+        "districts": 626,
+        "origin_months": 136,
+        "target_months": 136,
+        "supported": true
+      },
+      "5": {
+        "n": 10781,
+        "districts": 633,
+        "origin_months": 138,
+        "target_months": 138,
+        "supported": true
+      },
+      "6": {
+        "n": 15044,
+        "districts": 588,
+        "origin_months": 142,
+        "target_months": 142,
+        "supported": true
+      },
+      "7": {
+        "n": 10734,
+        "districts": 630,
+        "origin_months": 135,
+        "target_months": 135,
+        "supported": true
+      },
+      "8": {
+        "n": 9437,
+        "districts": 622,
+        "origin_months": 134,
+        "target_months": 134,
+        "supported": true
+      },
+      "9": {
+        "n": 15844,
+        "districts": 629,
+        "origin_months": 140,
+        "target_months": 140,
+        "supported": true
+      },
+      "10": {
+        "n": 10436,
+        "districts": 630,
+        "origin_months": 132,
+        "target_months": 132,
+        "supported": true
+      },
+      "11": {
+        "n": 1875,
+        "districts": 237,
+        "origin_months": 120,
+        "target_months": 120,
+        "supported": true
+      },
+      "12": {
+        "n": 32155,
+        "districts": 638,
+        "origin_months": 153,
+        "target_months": 153,
+        "supported": true
+      }
+    }
+  },
+  "training_dataset_fingerprint": "9537c9e91f64aaf716eb7f77748457b6dabbfd0c6151967c4a814659b20d1a34",
+  "source_pairs_csv_sha256": "c2bf37a491f93de4859c09119336ec2a74657c203540ba966d578e0ee9869ef9",
+  "feature_generation": "physical-v3-official-c9ade81d95720f91",
+  "feature_csv_sha256": "3a4a560667d732b50c6a1712f4d9ceb13b411d4ae2c7a984e08ffc2aada21042",
+  "training_code": {
+    "scripts/run_accuracy_experiments.py": "dd536023608dcf1e36d8c8189435ae8dfc705c37a6107ee9510edf75d84cad61",
+    "models/accuracy_experiments.py": "b36c09783d3ad8b87a8090a871bd28b0bf5fef9846836f583bd7201dd973689e",
+    "models/accuracy_challengers.py": "7bcdf61ae5cdc3d67da51ba72bc37704bbc438dc75fffd58a0243ca4197c55d0",
+    "models/enriched_training_data.py": "e16c65a99d63af1bf06c3fd3e0fd487195ba2958cb2eb8225b496a346a1408d8",
+    "models/climate_forecast_12m.py": "2659acff31a1a7c39dc5d95d3def5d46f52cd29586eb697a2433b9928e423345",
+    "models/climate_forecast.py": "06380d1997f9ae2eaec123ba84777c9df1d46839e80de6dcba28ecc0a4965229",
+    "models/climate_inputs.py": "c37eef65e37891a1c8c43e107e70d8808cd8743dd4b9f74a2d7c7d6d5924efdb",
+    "models/monthly_projection.py": "0ab907910edf8f3e34d3523dad1c68e0408e2de001909277577d1803de36952d"
+  },
+  "protocol_sha256": "a526b1e89964415fe54ee0f0d1b22d9172647972bcdd7ef5a93bb3b128f3e185",
+  "environment": {
+    "python": "3.13.15",
+    "xgboost": "3.4.1",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1"
+  },
+  "selection": {
+    "selected": "three_horizon_groups",
+    "inner_years_only": [
+      2016,
+      2017,
+      2018
+    ],
+    "ranks": {
+      "production_recipe": {
+        "mean_fold_district_macro_mae_m": 1.3887612693722786,
+        "mean_fold_rmse_m": 2.471731187357799
+      },
+      "current_recipe": {
+        "mean_fold_district_macro_mae_m": 1.3317443293096736,
+        "mean_fold_rmse_m": 2.384603733476245
+      },
+      "district_balanced": {
+        "mean_fold_district_macro_mae_m": 1.3350005505018323,
+        "mean_fold_rmse_m": 2.38370632083609
+      },
+      "three_horizon_groups": {
+        "mean_fold_district_macro_mae_m": 1.323125417990705,
+        "mean_fold_rmse_m": 2.403245293990014
+      },
+      "early_stopping": {
+        "mean_fold_district_macro_mae_m": 1.3308426924855463,
+        "mean_fold_rmse_m": 2.3826007743498216
+      },
+      "shallow_stronger_regularization": {
+        "mean_fold_district_macro_mae_m": 1.4004817876444242,
+        "mean_fold_rmse_m": 2.4761117752334894
+      },
+      "slower_learning": {
+        "mean_fold_district_macro_mae_m": 1.356894270840802,
+        "mean_fold_rmse_m": 2.4312534525380247
+      },
+      "lower_subsampling": {
+        "mean_fold_district_macro_mae_m": 1.334491564892067,
+        "mean_fold_rmse_m": 2.401931173172541
+      },
+      "absolute_error": {
+        "mean_fold_district_macro_mae_m": 1.3444399758772347,
+        "mean_fold_rmse_m": 2.4947084812534714
+      },
+      "pseudo_huber": {
+        "mean_fold_district_macro_mae_m": 1.325987942710955,
+        "mean_fold_rmse_m": 2.451419857289777
+      },
+      "without_ground": {
+        "mean_fold_district_macro_mae_m": 1.5182940469562418,
+        "mean_fold_rmse_m": 2.710524915884682
+      },
+      "without_calendar": {
+        "mean_fold_district_macro_mae_m": 1.3428950956277452,
+        "mean_fold_rmse_m": 2.3997916269514854
+      },
+      "without_weather": {
+        "mean_fold_district_macro_mae_m": 1.3557062211183466,
+        "mean_fold_rmse_m": 2.4072461832964733
+      },
+      "without_cumulative": {
+        "mean_fold_district_macro_mae_m": 1.3332332537753508,
+        "mean_fold_rmse_m": 2.38121278214514
+      },
+      "ridge": {
+        "mean_fold_district_macro_mae_m": 1.4164376465546598,
+        "mean_fold_rmse_m": 2.4358485094644813
+      },
+      "damped_local_trend": {
+        "mean_fold_district_macro_mae_m": 2.1147584407901743,
+        "mean_fold_rmse_m": 3.199662330021276
+      },
+      "persistence": {
+        "mean_fold_district_macro_mae_m": 2.078394061258205,
+        "mean_fold_rmse_m": 3.1470772089397774
+      },
+      "seasonal": {
+        "mean_fold_district_macro_mae_m": 1.4102832561629468,
+        "mean_fold_rmse_m": 2.4678991586649532
+      }
+    },
+    "production_changed": false,
+    "promotion_eligible": false,
+    "promotion_blocker": "No untouched post-refit test; no full new serving/API/rollback gate assessment.",
+    "old_candidate_retained": true,
+    "new_candidate_checkpoint": null
+  },
+  "validation_folds": {
+    "inner_2016": {
+      "training": {
+        "n": 65300,
+        "districts": 558,
+        "origin_range": [
+          "2005-01-01",
+          "2014-11-01"
+        ],
+        "target_range": [
+          "2005-05-01",
+          "2014-12-01"
+        ],
+        "by_horizon": {
+          "1": {
+            "n": 430,
+            "districts": 66,
+            "origin_months": 23,
+            "target_months": 23,
+            "supported": true
+          },
+          "2": {
+            "n": 4343,
+            "districts": 548,
+            "origin_months": 30,
+            "target_months": 30,
+            "supported": true
+          },
+          "3": {
+            "n": 8205,
+            "districts": 550,
+            "origin_months": 38,
+            "target_months": 38,
+            "supported": true
+          },
+          "4": {
+            "n": 4750,
+            "districts": 552,
+            "origin_months": 29,
+            "target_months": 29,
+            "supported": true
+          },
+          "5": {
+            "n": 3908,
+            "districts": 541,
+            "origin_months": 28,
+            "target_months": 28,
+            "supported": true
+          },
+          "6": {
+            "n": 8332,
+            "districts": 519,
+            "origin_months": 34,
+            "target_months": 34,
+            "supported": true
+          },
+          "7": {
+            "n": 4336,
+            "districts": 546,
+            "origin_months": 26,
+            "target_months": 26,
+            "supported": true
+          },
+          "8": {
+            "n": 4174,
+            "districts": 547,
+            "origin_months": 25,
+            "target_months": 25,
+            "supported": true
+          },
+          "9": {
+            "n": 7095,
+            "districts": 546,
+            "origin_months": 32,
+            "target_months": 32,
+            "supported": true
+          },
+          "10": {
+            "n": 4610,
+            "districts": 553,
+            "origin_months": 24,
+            "target_months": 24,
+            "supported": true
+          },
+          "11": {
+            "n": 293,
+            "districts": 65,
+            "origin_months": 15,
+            "target_months": 15,
+            "supported": true
+          },
+          "12": {
+            "n": 14824,
+            "districts": 556,
+            "origin_months": 44,
+            "target_months": 44,
+            "supported": true
+          }
+        }
+      },
+      "validation": {
+        "n": 10017,
+        "districts": 554,
+        "origin_range": [
+          "2016-01-01",
+          "2016-12-01"
+        ],
+        "target_range": [
+          "2016-02-01",
+          "2017-12-01"
+        ],
+        "by_horizon": {
+          "1": {
+            "n": 172,
+            "districts": 61,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "2": {
+            "n": 684,
+            "districts": 536,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "3": {
+            "n": 1186,
+            "districts": 538,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "4": {
+            "n": 679,
+            "districts": 513,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "5": {
+            "n": 739,
+            "districts": 536,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "6": {
+            "n": 1035,
+            "districts": 502,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "7": {
+            "n": 703,
+            "districts": 514,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "8": {
+            "n": 697,
+            "districts": 532,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "9": {
+            "n": 1120,
+            "districts": 538,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "10": {
+            "n": 658,
+            "districts": 517,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "11": {
+            "n": 166,
+            "districts": 61,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "12": {
+            "n": 2178,
+            "districts": 552,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          }
+        }
+      },
+      "training_fingerprint": "3526d817fc32d25493a186b14dd9db016f8261d1e691621bba6b5c8a1048b37b",
+      "case_keys_sha256": "5e571d4701af97bddfda486ef8b2179165bbd58e6d322314ee7a8f5c093727f5",
+      "train_pairs_per_district": {
+        "0": 1.0,
+        "0.1": 22.0,
+        "0.5": 142.0,
+        "0.9": 157.0,
+        "1": 340.0
+      },
+      "top_ten_district_training_pair_fraction": 0.04914241960183767,
+      "balanced_district_total_weight": 117.02508960573476
+    },
+    "inner_2017": {
+      "training": {
+        "n": 76439,
+        "districts": 558,
+        "origin_range": [
+          "2005-01-01",
+          "2015-11-01"
+        ],
+        "target_range": [
+          "2005-05-01",
+          "2015-12-01"
+        ],
+        "by_horizon": {
+          "1": {
+            "n": 699,
+            "districts": 67,
+            "origin_months": 35,
+            "target_months": 35,
+            "supported": true
+          },
+          "2": {
+            "n": 5080,
+            "districts": 551,
+            "origin_months": 42,
+            "target_months": 42,
+            "supported": true
+          },
+          "3": {
+            "n": 9467,
+            "districts": 554,
+            "origin_months": 50,
+            "target_months": 50,
+            "supported": true
+          },
+          "4": {
+            "n": 5536,
+            "districts": 554,
+            "origin_months": 41,
+            "target_months": 41,
+            "supported": true
+          },
+          "5": {
+            "n": 4730,
+            "districts": 552,
+            "origin_months": 40,
+            "target_months": 40,
+            "supported": true
+          },
+          "6": {
+            "n": 9470,
+            "districts": 519,
+            "origin_months": 46,
+            "target_months": 46,
+            "supported": true
+          },
+          "7": {
+            "n": 5148,
+            "districts": 551,
+            "origin_months": 38,
+            "target_months": 38,
+            "supported": true
+          },
+          "8": {
+            "n": 4975,
+            "districts": 551,
+            "origin_months": 37,
+            "target_months": 37,
+            "supported": true
+          },
+          "9": {
+            "n": 8291,
+            "districts": 550,
+            "origin_months": 44,
+            "target_months": 44,
+            "supported": true
+          },
+          "10": {
+            "n": 5395,
+            "districts": 553,
+            "origin_months": 36,
+            "target_months": 36,
+            "supported": true
+          },
+          "11": {
+            "n": 551,
+            "districts": 67,
+            "origin_months": 27,
+            "target_months": 27,
+            "supported": true
+          },
+          "12": {
+            "n": 17097,
+            "districts": 556,
+            "origin_months": 56,
+            "target_months": 56,
+            "supported": true
+          }
+        }
+      },
+      "validation": {
+        "n": 10209,
+        "districts": 551,
+        "origin_range": [
+          "2017-01-01",
+          "2017-12-01"
+        ],
+        "target_range": [
+          "2017-02-01",
+          "2018-12-01"
+        ],
+        "by_horizon": {
+          "1": {
+            "n": 195,
+            "districts": 78,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "2": {
+            "n": 624,
+            "districts": 479,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "3": {
+            "n": 1130,
+            "districts": 538,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "4": {
+            "n": 749,
+            "districts": 534,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "5": {
+            "n": 796,
+            "districts": 542,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "6": {
+            "n": 977,
+            "districts": 444,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "7": {
+            "n": 817,
+            "districts": 540,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "8": {
+            "n": 721,
+            "districts": 536,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "9": {
+            "n": 1123,
+            "districts": 541,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "10": {
+            "n": 740,
+            "districts": 539,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "11": {
+            "n": 349,
+            "districts": 121,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "12": {
+            "n": 1988,
+            "districts": 550,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          }
+        }
+      },
+      "training_fingerprint": "70c26c2fb61c1e777118773c474e28aa01371a2ae4e141123c7ee72d02ee0949",
+      "case_keys_sha256": "26f7418da2133b098110cc55ce04e8766765c6e16eaf2dd5c7363df4b9f72a32",
+      "train_pairs_per_district": {
+        "0": 1.0,
+        "0.1": 38.0,
+        "0.5": 158.0,
+        "0.9": 182.0,
+        "1": 484.0
+      },
+      "top_ten_district_training_pair_fraction": 0.060819738615104854,
+      "balanced_district_total_weight": 136.98745519713262
+    },
+    "inner_2018": {
+      "training": {
+        "n": 86790,
+        "districts": 558,
+        "origin_range": [
+          "2005-01-01",
+          "2016-11-01"
+        ],
+        "target_range": [
+          "2005-05-01",
+          "2016-12-01"
+        ],
+        "by_horizon": {
+          "1": {
+            "n": 880,
+            "districts": 68,
+            "origin_months": 47,
+            "target_months": 47,
+            "supported": true
+          },
+          "2": {
+            "n": 5742,
+            "districts": 552,
+            "origin_months": 54,
+            "target_months": 54,
+            "supported": true
+          },
+          "3": {
+            "n": 10668,
+            "districts": 555,
+            "origin_months": 62,
+            "target_months": 62,
+            "supported": true
+          },
+          "4": {
+            "n": 6238,
+            "districts": 554,
+            "origin_months": 53,
+            "target_months": 53,
+            "supported": true
+          },
+          "5": {
+            "n": 5450,
+            "districts": 552,
+            "origin_months": 52,
+            "target_months": 52,
+            "supported": true
+          },
+          "6": {
+            "n": 10586,
+            "districts": 519,
+            "origin_months": 58,
+            "target_months": 58,
+            "supported": true
+          },
+          "7": {
+            "n": 5880,
+            "districts": 551,
+            "origin_months": 50,
+            "target_months": 50,
+            "supported": true
+          },
+          "8": {
+            "n": 5682,
+            "districts": 551,
+            "origin_months": 49,
+            "target_months": 49,
+            "supported": true
+          },
+          "9": {
+            "n": 9487,
+            "districts": 553,
+            "origin_months": 56,
+            "target_months": 56,
+            "supported": true
+          },
+          "10": {
+            "n": 6078,
+            "districts": 553,
+            "origin_months": 48,
+            "target_months": 48,
+            "supported": true
+          },
+          "11": {
+            "n": 754,
+            "districts": 68,
+            "origin_months": 39,
+            "target_months": 39,
+            "supported": true
+          },
+          "12": {
+            "n": 19345,
+            "districts": 556,
+            "origin_months": 68,
+            "target_months": 68,
+            "supported": true
+          }
+        }
+      },
+      "validation": {
+        "n": 9681,
+        "districts": 549,
+        "origin_range": [
+          "2018-01-01",
+          "2018-12-01"
+        ],
+        "target_range": [
+          "2018-02-01",
+          "2019-12-01"
+        ],
+        "by_horizon": {
+          "1": {
+            "n": 355,
+            "districts": 139,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "2": {
+            "n": 618,
+            "districts": 366,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "3": {
+            "n": 996,
+            "districts": 535,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "4": {
+            "n": 801,
+            "districts": 532,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "5": {
+            "n": 830,
+            "districts": 531,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "6": {
+            "n": 691,
+            "districts": 301,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "7": {
+            "n": 824,
+            "districts": 530,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "8": {
+            "n": 813,
+            "districts": 529,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "9": {
+            "n": 955,
+            "districts": 541,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "10": {
+            "n": 589,
+            "districts": 360,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "11": {
+            "n": 309,
+            "districts": 143,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "12": {
+            "n": 1900,
+            "districts": 547,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          }
+        }
+      },
+      "training_fingerprint": "223d4f21f8b14cfedd62501417c0906aaed297b44cd0fbe6fdf4915d4fc43b28",
+      "case_keys_sha256": "fb2ac925ebf602bd68a67f57f07b5da2acad49cf9dc31c006c47f13b1d8e654a",
+      "train_pairs_per_district": {
+        "0": 2.0,
+        "0.1": 54.0,
+        "0.5": 174.0,
+        "0.9": 207.0,
+        "1": 628.0
+      },
+      "top_ten_district_training_pair_fraction": 0.06317548104620348,
+      "balanced_district_total_weight": 155.53763440860214
+    },
+    "outer_2020": {
+      "training": {
+        "n": 107034,
+        "districts": 558,
+        "origin_range": [
+          "2005-01-01",
+          "2018-11-01"
+        ],
+        "target_range": [
+          "2005-05-01",
+          "2018-12-01"
+        ],
+        "by_horizon": {
+          "1": {
+            "n": 1371,
+            "districts": 184,
+            "origin_months": 71,
+            "target_months": 71,
+            "supported": true
+          },
+          "2": {
+            "n": 7213,
+            "districts": 553,
+            "origin_months": 78,
+            "target_months": 78,
+            "supported": true
+          },
+          "3": {
+            "n": 12741,
+            "districts": 555,
+            "origin_months": 86,
+            "target_months": 86,
+            "supported": true
+          },
+          "4": {
+            "n": 7749,
+            "districts": 554,
+            "origin_months": 77,
+            "target_months": 77,
+            "supported": true
+          },
+          "5": {
+            "n": 7070,
+            "districts": 554,
+            "origin_months": 76,
+            "target_months": 76,
+            "supported": true
+          },
+          "6": {
+            "n": 12422,
+            "districts": 522,
+            "origin_months": 82,
+            "target_months": 82,
+            "supported": true
+          },
+          "7": {
+            "n": 7420,
+            "districts": 553,
+            "origin_months": 74,
+            "target_months": 74,
+            "supported": true
+          },
+          "8": {
+            "n": 7169,
+            "districts": 552,
+            "origin_months": 73,
+            "target_months": 73,
+            "supported": true
+          },
+          "9": {
+            "n": 11778,
+            "districts": 555,
+            "origin_months": 80,
+            "target_months": 80,
+            "supported": true
+          },
+          "10": {
+            "n": 7262,
+            "districts": 553,
+            "origin_months": 72,
+            "target_months": 72,
+            "supported": true
+          },
+          "11": {
+            "n": 1328,
+            "districts": 192,
+            "origin_months": 63,
+            "target_months": 63,
+            "supported": true
+          },
+          "12": {
+            "n": 23511,
+            "districts": 557,
+            "origin_months": 92,
+            "target_months": 92,
+            "supported": true
+          }
+        }
+      },
+      "validation": {
+        "n": 4731,
+        "districts": 543,
+        "origin_range": [
+          "2020-01-01",
+          "2020-12-01"
+        ],
+        "target_range": [
+          "2020-02-01",
+          "2021-12-01"
+        ],
+        "by_horizon": {
+          "1": {
+            "n": 90,
+            "districts": 9,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": false
+          },
+          "2": {
+            "n": 587,
+            "districts": 509,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "3": {
+            "n": 416,
+            "districts": 338,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "4": {
+            "n": 82,
+            "districts": 13,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "5": {
+            "n": 415,
+            "districts": 345,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "6": {
+            "n": 94,
+            "districts": 31,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "7": {
+            "n": 394,
+            "districts": 330,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "8": {
+            "n": 70,
+            "districts": 14,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "9": {
+            "n": 574,
+            "districts": 497,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "10": {
+            "n": 558,
+            "districts": 502,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "11": {
+            "n": 66,
+            "districts": 17,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "12": {
+            "n": 1385,
+            "districts": 541,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          }
+        }
+      },
+      "training_fingerprint": "534f829ea6dbd2c564c260f28141b386d4392a54ca7485da852a2e748025d760",
+      "case_keys_sha256": "56af9e717c8f0537696ad296d22cb6757bdd8d3abc5f95640fa0d72799c04a49",
+      "train_pairs_per_district": {
+        "0": 3.0,
+        "0.1": 82.0,
+        "0.5": 202.0,
+        "0.9": 237.0,
+        "1": 886.0
+      },
+      "top_ten_district_training_pair_fraction": 0.0728460115477325,
+      "balanced_district_total_weight": 191.81720430107526
+    },
+    "outer_2021": {
+      "training": {
+        "n": 116601,
+        "districts": 558,
+        "origin_range": [
+          "2005-01-01",
+          "2019-11-01"
+        ],
+        "target_range": [
+          "2005-05-01",
+          "2019-12-01"
+        ],
+        "by_horizon": {
+          "1": {
+            "n": 1608,
+            "districts": 209,
+            "origin_months": 83,
+            "target_months": 83,
+            "supported": true
+          },
+          "2": {
+            "n": 7758,
+            "districts": 555,
+            "origin_months": 90,
+            "target_months": 90,
+            "supported": true
+          },
+          "3": {
+            "n": 13867,
+            "districts": 555,
+            "origin_months": 98,
+            "target_months": 98,
+            "supported": true
+          },
+          "4": {
+            "n": 8417,
+            "districts": 554,
+            "origin_months": 89,
+            "target_months": 89,
+            "supported": true
+          },
+          "5": {
+            "n": 7918,
+            "districts": 556,
+            "origin_months": 88,
+            "target_months": 88,
+            "supported": true
+          },
+          "6": {
+            "n": 13169,
+            "districts": 523,
+            "origin_months": 94,
+            "target_months": 94,
+            "supported": true
+          },
+          "7": {
+            "n": 8232,
+            "districts": 554,
+            "origin_months": 86,
+            "target_months": 86,
+            "supported": true
+          },
+          "8": {
+            "n": 7917,
+            "districts": 553,
+            "origin_months": 85,
+            "target_months": 85,
+            "supported": true
+          },
+          "9": {
+            "n": 12709,
+            "districts": 555,
+            "origin_months": 92,
+            "target_months": 92,
+            "supported": true
+          },
+          "10": {
+            "n": 8011,
+            "districts": 554,
+            "origin_months": 84,
+            "target_months": 84,
+            "supported": true
+          },
+          "11": {
+            "n": 1584,
+            "districts": 226,
+            "origin_months": 75,
+            "target_months": 75,
+            "supported": true
+          },
+          "12": {
+            "n": 25411,
+            "districts": 557,
+            "origin_months": 104,
+            "target_months": 104,
+            "supported": true
+          }
+        }
+      },
+      "validation": {
+        "n": 7412,
+        "districts": 618,
+        "origin_range": [
+          "2021-01-01",
+          "2021-12-01"
+        ],
+        "target_range": [
+          "2021-02-01",
+          "2022-12-01"
+        ],
+        "by_horizon": {
+          "1": {
+            "n": 80,
+            "districts": 26,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "2": {
+            "n": 659,
+            "districts": 585,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "3": {
+            "n": 678,
+            "districts": 577,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "4": {
+            "n": 155,
+            "districts": 103,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "5": {
+            "n": 733,
+            "districts": 585,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "6": {
+            "n": 553,
+            "districts": 469,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "7": {
+            "n": 709,
+            "districts": 580,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "8": {
+            "n": 161,
+            "districts": 108,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "9": {
+            "n": 1133,
+            "districts": 601,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "10": {
+            "n": 655,
+            "districts": 583,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "11": {
+            "n": 70,
+            "districts": 20,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          },
+          "12": {
+            "n": 1826,
+            "districts": 611,
+            "origin_months": 12,
+            "target_months": 12,
+            "supported": true
+          }
+        }
+      },
+      "training_fingerprint": "5e9016cdaeac142bc16219f01a2e93458ae5e17e21466effe05afc4d7db4856e",
+      "case_keys_sha256": "a0f4bb1d8f04f0624055af5df5b174032fc6bdbb791cf4fc9394494376f4abc8",
+      "train_pairs_per_district": {
+        "0": 3.0,
+        "0.1": 94.0,
+        "0.5": 214.0,
+        "0.9": 249.0,
+        "1": 1009.0
+      },
+      "top_ten_district_training_pair_fraction": 0.0767317604480236,
+      "balanced_district_total_weight": 208.96236559139786
+    }
+  },
+  "uncertainty": "unavailable",
+  "promoted": false,
+  "repeat_training_predictions_exact": true,
+  "note": "Isolated adapter format, not a production model pointer; no production dispatch changed.",
+  "ordered_input_features": [
+    "origin_gwl",
+    "origin_gwl_lag_3mo",
+    "origin_gwl_lag_6mo",
+    "origin_rainfall",
+    "origin_temperature",
+    "origin_evapotranspiration",
+    "horizon_months",
+    "origin_month_sin",
+    "origin_month_cos",
+    "target_month_sin",
+    "target_month_cos",
+    "target_rainfall",
+    "target_temperature",
+    "target_evapotranspiration",
+    "cumulative_rainfall",
+    "cumulative_evapotranspiration",
+    "mean_temperature"
+  ],
+  "feature_schema_sha256": "89ec17cedc0751550639232ead3b952b34c28c0bdc23c31275325628d8071113",
+  "fitted_features": [
+    "origin_gwl",
+    "origin_gwl_lag_3mo",
+    "origin_gwl_lag_6mo",
+    "origin_rainfall",
+    "origin_temperature",
+    "origin_evapotranspiration",
+    "horizon_months",
+    "origin_month_sin",
+    "origin_month_cos",
+    "target_month_sin",
+    "target_month_cos",
+    "target_rainfall",
+    "target_temperature",
+    "target_evapotranspiration",
+    "cumulative_rainfall",
+    "cumulative_evapotranspiration",
+    "mean_temperature"
+  ],
+  "recipe": {
+    "name": "three_horizon_groups",
+    "family": "B",
+    "structure": "grouped",
+    "hypothesis": "A single horizon function limits temporal specialization.",
+    "expected_benefit": "Fit different horizon responses.",
+    "failure_mode": "Small horizon samples increase variance.",
+    "status": "eligible",
+    "eligibility_failures": []
+  },
+  "fit_details": [
+    {
+      "horizons": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "n": 39188,
+      "districts": 638,
+      "target_years": 21,
+      "trees": 461
+    },
+    {
+      "horizons": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "n": 45996,
+      "districts": 639,
+      "target_years": 21,
+      "trees": 461
+    },
+    {
+      "horizons": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "n": 60310,
+      "districts": 639,
+      "target_years": 21,
+      "trees": 461
+    }
+  ],
+  "members": [
+    {
+      "horizons": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "path": "model_00.json",
+      "sha256": "2baaffc3eaacd5dca3c473dd0d0a6977ff85ef941ab7658c4411384368430738",
+      "kind": "xgb"
+    },
+    {
+      "horizons": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "path": "model_01.json",
+      "sha256": "257ae0fdbefd3cf22d5e99349211a15d95f139b1a3305375e6d640b296c29db0",
+      "kind": "xgb"
+    },
+    {
+      "horizons": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "path": "model_02.json",
+      "sha256": "d4f09a52f40991ede6f8189637c739d54e4627185ff92960b913c9ccd8112d1f",
+      "kind": "xgb"
+    }
+  ],
+  "artifact_format": "aquaiq-isolated-accuracy-v1"
+}

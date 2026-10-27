@@ -1,0 +1,76 @@
+{
+  "full_python": {
+    "command": ".\\venv\\Scripts\\python.exe -B -m pytest --integration -o tmp_path_retention_policy=failed --basetemp scratch/pytest-accuracy-complete-v2 --junitxml scratch/accuracy-complete-v2.xml -q",
+    "passed": 1772,
+    "skipped": 1,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 413.449,
+    "warnings": 70,
+    "skip_details": [
+      {
+        "test": "test_candidate_output_rejects_a_symlink_that_escapes_the_candidate_root",
+        "reason": "Creating directory symlinks needs Windows developer mode or privileges"
+      }
+    ],
+    "integration_enabled": true
+  },
+  "targeted_python": {
+    "command": ".\\venv\\Scripts\\python.exe -B -m pytest tests/test_accuracy_experiments.py tests/test_accuracy_challengers.py tests/test_enriched_training_data.py tests/test_enriched_retraining.py tests/test_retrained_evaluation.py tests/test_retraining_acceptance.py tests/test_retrained_shared.py -q -o tmp_path_retention_policy=failed --basetemp scratch/pytest-accuracy-targeted-final-v2 --junitxml scratch/accuracy-targeted-final-v2.xml",
+    "passed": 136,
+    "seconds": 28.86,
+    "overlaps_full_suite": true
+  },
+  "frontend": {
+    "test_command": "npm.cmd --prefix dashboard test",
+    "passed": 160,
+    "failed": 0,
+    "lint_command": "npm.cmd --prefix dashboard run lint",
+    "lint_exit_code": 0,
+    "build_command": "npm.cmd --prefix dashboard run build",
+    "build_exit_code": 0,
+    "largest_js_chunk_bytes": 365385
+  },
+  "warnings": [
+    "One sklearn single-label confusion-matrix warning",
+    "One netCDF4/NumPy binary-size import warning",
+    "68 xarray/netCDF4 NumPy-shape deprecations; numerical fixtures passed"
+  ],
+  "unsuccessful_attempts": [
+    {
+      "run": "python_full_v1",
+      "reason": "Disk exhaustion from retained temporary raster fixtures; no valid final summary. Removed only this run's resolved scratch/pytest-accuracy-complete-v1 directory and reran with tmp_path_retention_policy=failed."
+    },
+    {
+      "run": "targeted_final",
+      "passed": 135,
+      "failed": 1,
+      "reason": "Windows sandbox denied atomic replace in test-only summary.json; identical focused suite passed when rerun outside sandbox."
+    },
+    {
+      "run": "audit initial",
+      "reason": "Audit harness omitted the reference helper required by Tier B persistence dispatch; corrected and reran under fresh audit_v2 output."
+    },
+    {
+      "run": "experiment_v1",
+      "reason": "Stopped on predeclared individual-horizon training support failure. No completed fold or outer selection. Added outcome-independent preflight exclusions; retained the same supported recipes, folds and hyperparameters in protocol_v2."
+    }
+  ],
+  "reporting_python": {
+    "command": ".\\venv\\Scripts\\python.exe -B -m pytest tests/test_accuracy_reporting.py -q -o tmp_path_retention_policy=failed --basetemp scratch/pytest-accuracy-reporting-v1",
+    "passed": 3,
+    "seconds": 3.28,
+    "added_after_full_suite": true
+  },
+  "summary_correction": {
+    "superseded": "analysis_v1/comparison.json and REPORT_analysis_v1_SUPERSEDED.md",
+    "corrected": "analysis_v2/comparison.json",
+    "reason": "A reference metric dictionary overwrote the reference name during reporting, causing a failed subgroup gate to display as passing. Training, raw fold gates and predictions were unchanged. Separate reference_name field and regression tests fix the reporting error."
+  },
+  "final_model_and_reporting_tests": {
+    "passed": 23,
+    "seconds": 10.95,
+    "command": ".\\venv\\Scripts\\python.exe -B -m pytest tests/test_accuracy_experiments.py tests/test_accuracy_challengers.py tests/test_accuracy_reporting.py -q -o tmp_path_retention_policy=failed --basetemp scratch/pytest-accuracy-final-23",
+    "overlaps_other_runs": true
+  }
+}

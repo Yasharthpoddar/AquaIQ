@@ -1,0 +1,138 @@
+[
+  {
+    "district_id": "AP-Anantapur",
+    "origin": "2025-01-31",
+    "tier": "A",
+    "frozen": {
+      "public_predicted_gwl": 6.0327,
+      "anchor": 5.8821,
+      "method": "climate_conditioned_xgboost_12m",
+      "last_observed_date": "2025-01-01"
+    },
+    "retrained": {
+      "public_predicted_gwl": 5.9951,
+      "anchor": 5.8821,
+      "method": "climate_conditioned_xgboost_12m",
+      "last_observed_date": "2025-01-01"
+    }
+  },
+  {
+    "district_id": "AP-Anantapur",
+    "origin": "2025-12-31",
+    "tier": "A",
+    "frozen": {
+      "public_predicted_gwl": 6.1393,
+      "anchor": 5.2956,
+      "method": "climate_conditioned_xgboost_12m",
+      "last_observed_date": "2025-01-01"
+    },
+    "retrained": {
+      "public_predicted_gwl": 6.1456,
+      "anchor": 5.2956,
+      "method": "climate_conditioned_xgboost_12m",
+      "last_observed_date": "2025-01-01"
+    }
+  },
+  {
+    "district_id": "AR-Lower_Dibang_Valley",
+    "origin": "2025-01-31",
+    "tier": "B",
+    "frozen": {
+      "public_predicted_gwl": 9.98,
+      "anchor": 9.98,
+      "method": "local_persistence",
+      "last_observed_date": "2025-01-01"
+    },
+    "retrained": {
+      "public_predicted_gwl": 9.98,
+      "anchor": 9.98,
+      "method": "local_persistence",
+      "last_observed_date": "2025-01-01"
+    }
+  },
+  {
+    "district_id": "AR-Lower_Dibang_Valley",
+    "origin": "2025-12-31",
+    "tier": "B",
+    "frozen": {
+      "public_predicted_gwl": 9.98,
+      "anchor": 9.98,
+      "method": "local_persistence",
+      "last_observed_date": "2025-01-01"
+    },
+    "retrained": {
+      "public_predicted_gwl": 9.98,
+      "anchor": 9.98,
+      "method": "local_persistence",
+      "last_observed_date": "2025-01-01"
+    }
+  },
+  {
+    "district_id": "MN-Bishnupur",
+    "origin": "2025-01-31",
+    "tier": "C",
+    "frozen": {
+      "public_predicted_gwl": 3.17,
+      "anchor": 3.17,
+      "method": "regional_seasonal_reference",
+      "last_observed_date": null
+    },
+    "retrained": {
+      "public_predicted_gwl": 3.17,
+      "anchor": 3.17,
+      "method": "regional_seasonal_reference",
+      "last_observed_date": null
+    }
+  },
+  {
+    "district_id": "MN-Bishnupur",
+    "origin": "2025-12-31",
+    "tier": "C",
+    "frozen": {
+      "public_predicted_gwl": 3.17,
+      "anchor": 3.17,
+      "method": "regional_seasonal_reference",
+      "last_observed_date": null
+    },
+    "retrained": {
+      "public_predicted_gwl": 3.17,
+      "anchor": 3.17,
+      "method": "regional_seasonal_reference",
+      "last_observed_date": null
+    }
+  },
+  {
+    "district_id": "GJ-Gandhinagar",
+    "origin": "2025-01-31",
+    "tier": "A",
+    "frozen": {
+      "public_predicted_gwl": 22.2093,
+      "anchor": 22.298,
+      "method": "climate_conditioned_xgboost_12m",
+      "last_observed_date": "2025-01-01"
+    },
+    "retrained": {
+      "public_predicted_gwl": 22.9466,
+      "anchor": 22.298,
+      "method": "climate_conditioned_xgboost_12m",
+      "last_observed_date": "2025-01-01"
+    }
+  },
+  {
+    "district_id": "GJ-Gandhinagar",
+    "origin": "2025-12-31",
+    "tier": "A",
+    "frozen": {
+      "public_predicted_gwl": 22.0587,
+      "anchor": 21.4109,
+      "method": "climate_conditioned_xgboost_12m",
+      "last_observed_date": "2025-01-01"
+    },
+    "retrained": {
+      "public_predicted_gwl": 22.9869,
+      "anchor": 21.4109,
+      "method": "climate_conditioned_xgboost_12m",
+      "last_observed_date": "2025-01-01"
+    }
+  }
+]

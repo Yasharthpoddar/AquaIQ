@@ -1,0 +1,53 @@
+{
+  "candidate_checkpoint": "models/artifacts/accuracy_experiments_20261027_run_v2_three_horizon_groups/checkpoint.json",
+  "artifact_hashes": {
+    "models\\artifacts\\accuracy_experiments_20261027_run_v2_three_horizon_groups\\checkpoint.json": "20a2c51516d13720d90bf1c0eab9df00454d355e90a51c26e39ac653df5ee233",
+    "models\\artifacts\\accuracy_experiments_20261027_run_v2_three_horizon_groups\\model_00.json": "2baaffc3eaacd5dca3c473dd0d0a6977ff85ef941ab7658c4411384368430738",
+    "models\\artifacts\\accuracy_experiments_20261027_run_v2_three_horizon_groups\\model_01.json": "257ae0fdbefd3cf22d5e99349211a15d95f139b1a3305375e6d640b296c29db0",
+    "models\\artifacts\\accuracy_experiments_20261027_run_v2_three_horizon_groups\\model_02.json": "d4f09a52f40991ede6f8189637c739d54e4627185ff92960b913c9ccd8112d1f",
+    "models\\artifacts\\accuracy_experiments_20261027_run_v2_three_horizon_groups\\model_card.json": "1fcc69cdebefd38a283b21760307207c89d4cd555fefbab2d9f67e1c787f8d95"
+  },
+  "sample_predictions": 120,
+  "horizons": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "finite_nonnegative": true,
+  "fitted_feature_order": [
+    "origin_gwl",
+    "origin_gwl_lag_3mo",
+    "origin_gwl_lag_6mo",
+    "origin_rainfall",
+    "origin_temperature",
+    "origin_evapotranspiration",
+    "horizon_months",
+    "origin_month_sin",
+    "origin_month_cos",
+    "target_month_sin",
+    "target_month_cos",
+    "target_rainfall",
+    "target_temperature",
+    "target_evapotranspiration",
+    "cumulative_rainfall",
+    "cumulative_evapotranspiration",
+    "mean_temperature"
+  ],
+  "repeat_training_predictions_exact": true,
+  "reloaded_depth_max_difference_m": 0.0,
+  "old_assets_unchanged": true,
+  "old_asset_count": 53,
+  "public_tables_unchanged": true,
+  "public_table_count": 14,
+  "new_candidate_serving_api_gate": "not executed",
+  "promotion_eligible": false
+}
