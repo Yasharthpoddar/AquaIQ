@@ -1,0 +1,24 @@
+{
+  "generation_id": "14544bb9-8ce0-5dfc-b5c7-2907dfc1392b",
+  "status": "published",
+  "districts_total": 725,
+  "districts_forecast": 725,
+  "districts_insufficient": 0,
+  "districts_unavailable": 0,
+  "states_total": 36,
+  "states_available": 36,
+  "states_insufficient": 0,
+  "validation": {
+    "districts": 725,
+    "horizons": 8700,
+    "tier_counts": {
+      "C": 57,
+      "B": 116,
+      "A": 551,
+      "D": 1
+    }
+  },
+  "duration_seconds": 194.04,
+  "as_of": "2026-10-27",
+  "completed_at": "2026-10-27T01:22:01.741372+00:00"
+}

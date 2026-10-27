@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "source": "Actual staged Git blobs, not copied working files",
+  "model_sha256": "e4e57de9f681b2f2702c9b86a00be06b04147123ecea0579f6abcf3cdc586192",
+  "feature_schema_count": 17,
+  "predictions_checked": 120,
+  "predictions_exactly_equal": true,
+  "hash_checked_model_and_card": true
+}

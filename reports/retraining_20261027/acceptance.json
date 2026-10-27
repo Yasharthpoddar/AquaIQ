@@ -1,0 +1,1294 @@
+{
+  "schema_version": "aquaiq-locked-retraining-assessment-v1",
+  "selected": "deeper_regularized",
+  "locked_parameters": {
+    "n_estimators": 461,
+    "max_depth": 4,
+    "learning_rate": 0.04,
+    "min_child_weight": 60,
+    "reg_lambda": 40.0,
+    "reg_alpha": 0.2,
+    "subsample": 0.85,
+    "colsample_bytree": 0.9,
+    "random_state": 42,
+    "n_jobs": 4,
+    "tree_method": "hist",
+    "objective": "reg:squarederror"
+  },
+  "locked_scores": {
+    "current_structure": {
+      "folds": 2,
+      "district_macro_mae_m": 1.9402077226461154,
+      "mean_fold_rmse_m": 3.457606173751973,
+      "final_trees": 448
+    },
+    "deeper_regularized": {
+      "folds": 2,
+      "district_macro_mae_m": 1.9134403762132786,
+      "mean_fold_rmse_m": 3.420833073377022,
+      "final_trees": 461
+    },
+    "shallow_regularized": {
+      "folds": 2,
+      "district_macro_mae_m": 1.9839590042149438,
+      "mean_fold_rmse_m": 3.5141785598729545,
+      "final_trees": 478
+    }
+  },
+  "selection_recomputed": false,
+  "diagnostic_metrics_used": false,
+  "promoted": false,
+  "promotion_eligible": false,
+  "decision": "keep_frozen_production",
+  "checks": {
+    "relative_mean_fold_macro_gain_vs_frozen": true,
+    "relative_mean_fold_macro_gain_vs_persistence": true,
+    "seasonal_paired_mean_fold_macro_no_worse": true,
+    "supported_subgroups_no_excess_regression": true,
+    "complete_contracts_and_rollback_verified": true,
+    "untouched_post_refit_test_available": false
+  },
+  "blocking_reasons": [
+    "untouched_post_refit_test_available"
+  ],
+  "blocking_reason_details": {
+    "untouched_post_refit_test_available": "No genuinely untouched post-refit test evidence is available."
+  },
+  "requirements": {
+    "threshold_units": "0.02 is a relative MAE reduction of 2%; 0.10 is a relative MAE increase of 10%, not metres.",
+    "untouched_post_refit_test_required": true,
+    "rolling_validation_mae_gain_vs_frozen_and_persistence_at_least": 0.02,
+    "rolling_validation_seasonal_paired_mae_no_worse": true,
+    "supported_horizon_or_new_history_group_maximum_mae_regression": 0.1,
+    "supported_panel_minimum_cases": 30,
+    "supported_panel_minimum_districts": 10,
+    "complete_725_by_12_outputs_and_36_states": true,
+    "all_contract_and_rollback_checks_pass": true,
+    "rule": "All requirements must pass. No independent untouched later labels currently exist; keep production unchanged regardless of inspected diagnostic gains."
+  },
+  "threshold_units": "Relative fractions: 0.02 means a 2% reduction; 0.10 means a 10% increase, not metres.",
+  "validation": {
+    "fold_metrics": {
+      "rolling_2023": {
+        "frozen": {
+          "n": 2692,
+          "districts": 477,
+          "mae_m": 1.9992861516755864,
+          "district_macro_mae_m": 1.7048778663886095
+        },
+        "retrained": {
+          "n": 2692,
+          "districts": 477,
+          "mae_m": 1.9458295260778802,
+          "district_macro_mae_m": 1.6751460211561842
+        },
+        "persistence": {
+          "n": 2692,
+          "districts": 477,
+          "mae_m": 2.5594468994676784,
+          "district_macro_mae_m": 2.3909897810093623
+        }
+      },
+      "rolling_2024": {
+        "frozen": {
+          "n": 910,
+          "districts": 277,
+          "mae_m": 1.9039841964203792,
+          "district_macro_mae_m": 2.251068653476905
+        },
+        "retrained": {
+          "n": 910,
+          "districts": 277,
+          "mae_m": 1.793898710980647,
+          "district_macro_mae_m": 2.151734731270373
+        },
+        "persistence": {
+          "n": 910,
+          "districts": 277,
+          "mae_m": 2.485291122730818,
+          "district_macro_mae_m": 2.6434680933582775
+        }
+      }
+    },
+    "mean_fold_district_macro_mae_m": {
+      "frozen": 1.9779732599327573,
+      "retrained": 1.9134403762132786,
+      "persistence": 2.5172289371838197
+    },
+    "relative_gain_checks": {
+      "frozen": {
+        "candidate_mean_fold_macro_mae_m": 1.9134403762132786,
+        "baseline_mean_fold_macro_mae_m": 1.9779732599327573,
+        "required_relative_gain": 0.02,
+        "observed_relative_gain": 0.03262576144314134,
+        "maximum_candidate_mae_m": 1.938413794734102,
+        "passed": true,
+        "zero_baseline": false
+      },
+      "persistence": {
+        "candidate_mean_fold_macro_mae_m": 1.9134403762132786,
+        "baseline_mean_fold_macro_mae_m": 2.5172289371838197,
+        "required_relative_gain": 0.02,
+        "observed_relative_gain": 0.23986239473555268,
+        "maximum_candidate_mae_m": 2.466884358440143,
+        "passed": true,
+        "zero_baseline": false
+      }
+    },
+    "seasonal_paired_fold_metrics": {
+      "rolling_2023": {
+        "frozen": {
+          "n": 2487,
+          "districts": 470,
+          "mae_m": 1.8539713975483727,
+          "district_macro_mae_m": 1.6959426815843206
+        },
+        "retrained": {
+          "n": 2487,
+          "districts": 470,
+          "mae_m": 1.7875815313354873,
+          "district_macro_mae_m": 1.6471845128951963
+        },
+        "persistence": {
+          "n": 2487,
+          "districts": 470,
+          "mae_m": 2.4432684011701644,
+          "district_macro_mae_m": 2.4248181964452717
+        },
+        "seasonal": {
+          "n": 2487,
+          "districts": 470,
+          "mae_m": 2.1952477918363345,
+          "district_macro_mae_m": 1.9305985947570017
+        }
+      },
+      "rolling_2024": {
+        "frozen": {
+          "n": 837,
+          "districts": 272,
+          "mae_m": 1.9160569353704284,
+          "district_macro_mae_m": 2.248075978326259
+        },
+        "retrained": {
+          "n": 837,
+          "districts": 272,
+          "mae_m": 1.8074723803511419,
+          "district_macro_mae_m": 2.1537707997503617
+        },
+        "persistence": {
+          "n": 837,
+          "districts": 272,
+          "mae_m": 2.5048221501390087,
+          "district_macro_mae_m": 2.6467429792255017
+        },
+        "seasonal": {
+          "n": 837,
+          "districts": 272,
+          "mae_m": 1.997976612472238,
+          "district_macro_mae_m": 2.401489052773485
+        }
+      }
+    },
+    "seasonal_paired_mean_fold_macro_mae_m": {
+      "frozen": 1.9720093299552899,
+      "retrained": 1.900477656322779,
+      "persistence": 2.5357805878353865,
+      "seasonal": 2.1660438237652433
+    },
+    "seasonal_gate_status": "passed",
+    "subgroup_gate_status": "passed",
+    "subgroup_checks": [
+      {
+        "fold": "rolling_2023",
+        "kind": "horizon",
+        "name": "1",
+        "cases": 25,
+        "districts": 18,
+        "status": "insufficient_support"
+      },
+      {
+        "fold": "rolling_2023",
+        "kind": "horizon",
+        "name": "2",
+        "cases": 316,
+        "districts": 260,
+        "status": "passed",
+        "metrics": {
+          "frozen": {
+            "n": 316,
+            "districts": 260,
+            "mae_m": 2.1225167763180286,
+            "district_macro_mae_m": 1.9086789850188013
+          },
+          "retrained": {
+            "n": 316,
+            "districts": 260,
+            "mae_m": 2.112789111860757,
+            "district_macro_mae_m": 1.9236438630804116
+          },
+          "persistence": {
+            "n": 316,
+            "districts": 260,
+            "mae_m": 2.362132428368798,
+            "district_macro_mae_m": 2.170058849995963
+          }
+        },
+        "relative_regression_limit": 0.1,
+        "comparisons": {
+          "frozen": {
+            "baseline_mae_m": 2.1225167763180286,
+            "maximum_candidate_mae_m": 2.3347684539498315,
+            "passed": true
+          },
+          "persistence": {
+            "baseline_mae_m": 2.362132428368798,
+            "maximum_candidate_mae_m": 2.5983456712056783,
+            "passed": true
+          }
+        }
+      },
+      {
+        "fold": "rolling_2023",
+        "kind": "horizon",
+        "name": "3",
+        "cases": 490,
+        "districts": 343,
+        "status": "passed",
+        "metrics": {
+          "frozen": {
+            "n": 490,
+            "districts": 343,
+            "mae_m": 1.4927715157725594,
+            "district_macro_mae_m": 1.4310286839260056
+          },
+          "retrained": {
+            "n": 490,
+            "districts": 343,
+            "mae_m": 1.4847095803174253,
+            "district_macro_mae_m": 1.405974874666995
+          },
+          "persistence": {
+            "n": 490,
+            "districts": 343,
+            "mae_m": 2.43560520843311,
+            "district_macro_mae_m": 2.5005766951388337
+          }
+        },
+        "relative_regression_limit": 0.1,
+        "comparisons": {
+          "frozen": {
+            "baseline_mae_m": 1.4927715157725594,
+            "maximum_candidate_mae_m": 1.6420486673498154,
+            "passed": true
+          },
+          "persistence": {
+            "baseline_mae_m": 2.43560520843311,
+            "maximum_candidate_mae_m": 2.6791657292764213,
+            "passed": true
+          }
+        }
+      },
+      {
+        "fold": "rolling_2023",
+        "kind": "horizon",
+        "name": "4",
+        "cases": 328,
+        "districts": 326,
+        "status": "passed",
+        "metrics": {
+          "frozen": {
+            "n": 328,
+            "districts": 326,
+            "mae_m": 1.5877193305974193,
+            "district_macro_mae_m": 1.586345586937482
+          },
+          "retrained": {
+            "n": 328,
+            "districts": 326,
+            "mae_m": 1.488656205908125,
+            "district_macro_mae_m": 1.4875743114764894
+          },
+          "persistence": {
+            "n": 328,
+            "districts": 326,
+            "mae_m": 2.686605237272299,
+            "district_macro_mae_m": 2.685229569155967
+          }
+        },
+        "relative_regression_limit": 0.1,
+        "comparisons": {
+          "frozen": {
+            "baseline_mae_m": 1.5877193305974193,
+            "maximum_candidate_mae_m": 1.7464912636571615,
+            "passed": true
+          },
+          "persistence": {
+            "baseline_mae_m": 2.686605237272299,
+            "maximum_candidate_mae_m": 2.955265760999529,
+            "passed": true
+          }
+        }
+      },
+      {
+        "fold": "rolling_2023",
+        "kind": "horizon",
+        "name": "5",
+        "cases": 343,
+        "districts": 239,
+        "status": "passed",
+        "metrics": {
+          "frozen": {
+            "n": 343,
+            "districts": 239,
+            "mae_m": 2.3702490706821373,
+            "district_macro_mae_m": 2.156412819646101
+          },
+          "retrained": {
+            "n": 343,
+            "districts": 239,
+            "mae_m": 2.317064491005235,
+            "district_macro_mae_m": 2.1247094570988923
+          },
+          "persistence": {
+            "n": 343,
+            "districts": 239,
+            "mae_m": 2.811320600968515,
+            "district_macro_mae_m": 2.7509636767430803
+          }
+        },
+        "relative_regression_limit": 0.1,
+        "comparisons": {
+          "frozen": {
+            "baseline_mae_m": 2.3702490706821373,
+            "maximum_candidate_mae_m": 2.607273977750351,
+            "passed": true
+          },
+          "persistence": {
+            "baseline_mae_m": 2.811320600968515,
+            "maximum_candidate_mae_m": 3.092452661065367,
+            "passed": true
+          }
+        }
+      },
+      {
+        "fold": "rolling_2023",
+        "kind": "horizon",
+        "name": "6",
+        "cases": 136,
+        "districts": 131,
+        "status": "passed",
+        "metrics": {
+          "frozen": {
+            "n": 136,
+            "districts": 131,
+            "mae_m": 3.051209937328831,
+            "district_macro_mae_m": 2.4955631812975207
+          },
+          "retrained": {
+            "n": 136,
+            "districts": 131,
+            "mae_m": 2.881486689077395,
+            "district_macro_mae_m": 2.4175395608019383
+          },
+          "persistence": {
+            "n": 136,
+            "districts": 131,
+            "mae_m": 3.8468279474850275,
+            "district_macro_mae_m": 3.2077952711301014
+          }
+        },
+        "relative_regression_limit": 0.1,
+        "comparisons": {
+          "frozen": {
+            "baseline_mae_m": 3.051209937328831,
+            "maximum_candidate_mae_m": 3.3563309310617147,
+            "passed": true
+          },
+          "persistence": {
+            "baseline_mae_m": 3.8468279474850275,
+            "maximum_candidate_mae_m": 4.231510742233531,
+            "passed": true
+          }
+        }
+      },
+      {
+        "fold": "rolling_2023",
+        "kind": "horizon",
+        "name": "7",
+        "cases": 391,
+        "districts": 337,
+        "status": "passed",
+        "metrics": {
+          "frozen": {
+            "n": 391,
+            "districts": 337,
+            "mae_m": 1.9364319244431833,
+            "district_macro_mae_m": 1.8359628936226573
+          },
+          "retrained": {
+            "n": 391,
+            "districts": 337,
+            "mae_m": 1.9218128696394943,
+            "district_macro_mae_m": 1.8236924540545312
+          },
+          "persistence": {
+            "n": 391,
+            "districts": 337,
+            "mae_m": 2.484969800072084,
+            "district_macro_mae_m": 2.388739934450254
+          }
+        },
+        "relative_regression_limit": 0.1,
+        "comparisons": {
+          "frozen": {
+            "baseline_mae_m": 1.9364319244431833,
+            "maximum_candidate_mae_m": 2.130075116887502,
+            "passed": true
+          },
+          "persistence": {
+            "baseline_mae_m": 2.484969800072084,
+            "maximum_candidate_mae_m": 2.7334667800792927,
+            "passed": true
+          }
+        }
+      },
+      {
+        "fold": "rolling_2023",
+        "kind": "horizon",
+        "name": "8",
+        "cases": 154,
+        "districts": 152,
+        "status": "passed",
+        "metrics": {
+          "frozen": {
+            "n": 154,
+            "districts": 152,
+            "mae_m": 2.144403662043158,
+            "district_macro_mae_m": 2.131567181702834
+          },
+          "retrained": {
+            "n": 154,
+            "districts": 152,
+            "mae_m": 2.0025596980867024,
+            "district_macro_mae_m": 1.9904570570537239
+          },
+          "persistence": {
+            "n": 154,
+            "districts": 152,
+            "mae_m": 2.4603886685109644,
+            "district_macro_mae_m": 2.4565821968249146
+          }
+        },
+        "relative_regression_limit": 0.1,
+        "comparisons": {
+          "frozen": {
+            "baseline_mae_m": 2.144403662043158,
+            "maximum_candidate_mae_m": 2.358844028247474,
+            "passed": true
+          },
+          "persistence": {
+            "baseline_mae_m": 2.4603886685109644,
+            "maximum_candidate_mae_m": 2.706427535362061,
+            "passed": true
+          }
+        }
+      },
+      {
+        "fold": "rolling_2023",
+        "kind": "horizon",
+        "name": "9",
+        "cases": 24,
+        "districts": 24,
+        "status": "insufficient_support"
+      },
+      {
+        "fold": "rolling_2023",
+        "kind": "horizon",
+        "name": "10",
+        "cases": 228,
+        "districts": 226,
+        "status": "passed",
+        "metrics": {
+          "frozen": {
+            "n": 228,
+            "districts": 226,
+            "mae_m": 1.7740698145972988,
+            "district_macro_mae_m": 1.7523679531298466
+          },
+          "retrained": {
+            "n": 228,
+            "districts": 226,
+            "mae_m": 1.7550664606953186,
+            "district_macro_mae_m": 1.733810294410712
+          },
+          "persistence": {
+            "n": 228,
+            "districts": 226,
+            "mae_m": 1.8719474279601136,
+            "district_macro_mae_m": 1.8585159439597998
+          }
+        },
+        "relative_regression_limit": 0.1,
+        "comparisons": {
+          "frozen": {
+            "baseline_mae_m": 1.7740698145972988,
+            "maximum_candidate_mae_m": 1.951476796057029,
+            "passed": true
+          },
+          "persistence": {
+            "baseline_mae_m": 1.8719474279601136,
+            "maximum_candidate_mae_m": 2.0591421707561253,
+            "passed": true
+          }
+        }
+      },
+      {
+        "fold": "rolling_2023",
+        "kind": "horizon",
+        "name": "11",
+        "cases": 2,
+        "districts": 2,
+        "status": "insufficient_support"
+      },
+      {
+        "fold": "rolling_2023",
+        "kind": "horizon",
+        "name": "12",
+        "cases": 255,
+        "districts": 255,
+        "status": "passed",
+        "metrics": {
+          "frozen": {
+            "n": 255,
+            "districts": 255,
+            "mae_m": 2.0798211455349382,
+            "district_macro_mae_m": 2.0798211455349382
+          },
+          "retrained": {
+            "n": 255,
+            "districts": 255,
+            "mae_m": 2.087944162891277,
+            "district_macro_mae_m": 2.087944162891277
+          },
+          "persistence": {
+            "n": 255,
+            "districts": 255,
+            "mae_m": 2.18930823784647,
+            "district_macro_mae_m": 2.18930823784647
+          }
+        },
+        "relative_regression_limit": 0.1,
+        "comparisons": {
+          "frozen": {
+            "baseline_mae_m": 2.0798211455349382,
+            "maximum_candidate_mae_m": 2.2878032600884324,
+            "passed": true
+          },
+          "persistence": {
+            "baseline_mae_m": 2.18930823784647,
+            "maximum_candidate_mae_m": 2.408239061631117,
+            "passed": true
+          }
+        }
+      },
+      {
+        "fold": "rolling_2023",
+        "kind": "history_group",
+        "name": "gained_accepted_history",
+        "cases": 2692,
+        "districts": 477,
+        "status": "passed",
+        "metrics": {
+          "frozen": {
+            "n": 2692,
+            "districts": 477,
+            "mae_m": 1.9992861516755864,
+            "district_macro_mae_m": 1.7048778663886095
+          },
+          "retrained": {
+            "n": 2692,
+            "districts": 477,
+            "mae_m": 1.9458295260778802,
+            "district_macro_mae_m": 1.6751460211561842
+          },
+          "persistence": {
+            "n": 2692,
+            "districts": 477,
+            "mae_m": 2.5594468994676784,
+            "district_macro_mae_m": 2.3909897810093623
+          }
+        },
+        "relative_regression_limit": 0.1,
+        "comparisons": {
+          "frozen": {
+            "baseline_mae_m": 1.9992861516755864,
+            "maximum_candidate_mae_m": 2.1992147668431454,
+            "passed": true
+          },
+          "persistence": {
+            "baseline_mae_m": 2.5594468994676784,
+            "maximum_candidate_mae_m": 2.8153915894144466,
+            "passed": true
+          }
+        }
+      },
+      {
+        "fold": "rolling_2023",
+        "kind": "history_group",
+        "name": "newly_local_history",
+        "cases": 17,
+        "districts": 3,
+        "status": "insufficient_support"
+      },
+      {
+        "fold": "rolling_2023",
+        "kind": "history_group",
+        "name": "substantial_original_history",
+        "cases": 2384,
+        "districts": 406,
+        "status": "passed",
+        "metrics": {
+          "frozen": {
+            "n": 2384,
+            "districts": 406,
+            "mae_m": 1.955477375568514,
+            "district_macro_mae_m": 1.7009480423232675
+          },
+          "retrained": {
+            "n": 2384,
+            "districts": 406,
+            "mae_m": 1.8909318331803548,
+            "district_macro_mae_m": 1.6599240134765552
+          },
+          "persistence": {
+            "n": 2384,
+            "districts": 406,
+            "mae_m": 2.507680535844547,
+            "district_macro_mae_m": 2.369149781411706
+          }
+        },
+        "relative_regression_limit": 0.1,
+        "comparisons": {
+          "frozen": {
+            "baseline_mae_m": 1.955477375568514,
+            "maximum_candidate_mae_m": 2.1510251131253657,
+            "passed": true
+          },
+          "persistence": {
+            "baseline_mae_m": 2.507680535844547,
+            "maximum_candidate_mae_m": 2.758448589429002,
+            "passed": true
+          }
+        }
+      },
+      {
+        "fold": "rolling_2024",
+        "kind": "horizon",
+        "name": "1",
+        "cases": 9,
+        "districts": 8,
+        "status": "insufficient_support"
+      },
+      {
+        "fold": "rolling_2024",
+        "kind": "horizon",
+        "name": "2",
+        "cases": 50,
+        "districts": 46,
+        "status": "passed",
+        "metrics": {
+          "frozen": {
+            "n": 50,
+            "districts": 46,
+            "mae_m": 2.5362870220999993,
+            "district_macro_mae_m": 2.6950897573523367
+          },
+          "retrained": {
+            "n": 50,
+            "districts": 46,
+            "mae_m": 2.309783035687323,
+            "district_macro_mae_m": 2.451598060189118
+          },
+          "persistence": {
+            "n": 50,
+            "districts": 46,
+            "mae_m": 2.2560099772573006,
+            "district_macro_mae_m": 2.3300778297289875
+          }
+        },
+        "relative_regression_limit": 0.1,
+        "comparisons": {
+          "frozen": {
+            "baseline_mae_m": 2.5362870220999993,
+            "maximum_candidate_mae_m": 2.7899157243099997,
+            "passed": true
+          },
+          "persistence": {
+            "baseline_mae_m": 2.2560099772573006,
+            "maximum_candidate_mae_m": 2.4816109749830306,
+            "passed": true
+          }
+        }
+      },
+      {
+        "fold": "rolling_2024",
+        "kind": "horizon",
+        "name": "3",
+        "cases": 151,
+        "districts": 83,
+        "status": "passed",
+        "metrics": {
+          "frozen": {
+            "n": 151,
+            "districts": 83,
+            "mae_m": 1.3044150776856138,
+            "district_macro_mae_m": 1.3188337551354656
+          },
+          "retrained": {
+            "n": 151,
+            "districts": 83,
+            "mae_m": 1.2759247062631218,
+            "district_macro_mae_m": 1.2879159491043808
+          },
+          "persistence": {
+            "n": 151,
+            "districts": 83,
+            "mae_m": 2.0284622136742745,
+            "district_macro_mae_m": 1.9517906511622582
+          }
+        },
+        "relative_regression_limit": 0.1,
+        "comparisons": {
+          "frozen": {
+            "baseline_mae_m": 1.3044150776856138,
+            "maximum_candidate_mae_m": 1.4348565854541753,
+            "passed": true
+          },
+          "persistence": {
+            "baseline_mae_m": 2.0284622136742745,
+            "maximum_candidate_mae_m": 2.231308435041702,
+            "passed": true
+          }
+        }
+      },
+      {
+        "fold": "rolling_2024",
+        "kind": "horizon",
+        "name": "4",
+        "cases": 73,
+        "districts": 70,
+        "status": "passed",
+        "metrics": {
+          "frozen": {
+            "n": 73,
+            "districts": 70,
+            "mae_m": 1.1691056297895734,
+            "district_macro_mae_m": 1.167108334276593
+          },
+          "retrained": {
+            "n": 73,
+            "districts": 70,
+            "mae_m": 1.1480393093800663,
+            "district_macro_mae_m": 1.1462921970206585
+          },
+          "persistence": {
+            "n": 73,
+            "districts": 70,
+            "mae_m": 2.333279217130342,
+            "district_macro_mae_m": 2.3476876374112083
+          }
+        },
+        "relative_regression_limit": 0.1,
+        "comparisons": {
+          "frozen": {
+            "baseline_mae_m": 1.1691056297895734,
+            "maximum_candidate_mae_m": 1.286016192768531,
+            "passed": true
+          },
+          "persistence": {
+            "baseline_mae_m": 2.333279217130342,
+            "maximum_candidate_mae_m": 2.566607138843376,
+            "passed": true
+          }
+        }
+      },
+      {
+        "fold": "rolling_2024",
+        "kind": "horizon",
+        "name": "5",
+        "cases": 84,
+        "districts": 81,
+        "status": "passed",
+        "metrics": {
+          "frozen": {
+            "n": 84,
+            "districts": 81,
+            "mae_m": 2.963781167258079,
+            "district_macro_mae_m": 3.048654454327619
+          },
+          "retrained": {
+            "n": 84,
+            "districts": 81,
+            "mae_m": 2.665270576139416,
+            "district_macro_mae_m": 2.7442601734310563
+          },
+          "persistence": {
+            "n": 84,
+            "districts": 81,
+            "mae_m": 3.2844838501520686,
+            "district_macro_mae_m": 3.3607066528476675
+          }
+        },
+        "relative_regression_limit": 0.1,
+        "comparisons": {
+          "frozen": {
+            "baseline_mae_m": 2.963781167258079,
+            "maximum_candidate_mae_m": 3.260159283983887,
+            "passed": true
+          },
+          "persistence": {
+            "baseline_mae_m": 3.2844838501520686,
+            "maximum_candidate_mae_m": 3.6129322351672757,
+            "passed": true
+          }
+        }
+      },
+      {
+        "fold": "rolling_2024",
+        "kind": "horizon",
+        "name": "6",
+        "cases": 67,
+        "districts": 61,
+        "status": "passed",
+        "metrics": {
+          "frozen": {
+            "n": 67,
+            "districts": 61,
+            "mae_m": 1.3844204476589705,
+            "district_macro_mae_m": 1.3786786936812154
+          },
+          "retrained": {
+            "n": 67,
+            "districts": 61,
+            "mae_m": 1.3153523712187105,
+            "district_macro_mae_m": 1.2789812791576773
+          },
+          "persistence": {
+            "n": 67,
+            "districts": 61,
+            "mae_m": 2.6340405744218196,
+            "district_macro_mae_m": 2.6241547594577255
+          }
+        },
+        "relative_regression_limit": 0.1,
+        "comparisons": {
+          "frozen": {
+            "baseline_mae_m": 1.3844204476589705,
+            "maximum_candidate_mae_m": 1.5228624924248677,
+            "passed": true
+          },
+          "persistence": {
+            "baseline_mae_m": 2.6340405744218196,
+            "maximum_candidate_mae_m": 2.8974446318640017,
+            "passed": true
+          }
+        }
+      },
+      {
+        "fold": "rolling_2024",
+        "kind": "horizon",
+        "name": "7",
+        "cases": 101,
+        "districts": 100,
+        "status": "passed",
+        "metrics": {
+          "frozen": {
+            "n": 101,
+            "districts": 100,
+            "mae_m": 1.5639616548029789,
+            "district_macro_mae_m": 1.5660565352130846
+          },
+          "retrained": {
+            "n": 101,
+            "districts": 100,
+            "mae_m": 1.427861278775946,
+            "district_macro_mae_m": 1.4277277367789685
+          },
+          "persistence": {
+            "n": 101,
+            "districts": 100,
+            "mae_m": 2.537908165203267,
+            "district_macro_mae_m": 2.5526047501301745
+          }
+        },
+        "relative_regression_limit": 0.1,
+        "comparisons": {
+          "frozen": {
+            "baseline_mae_m": 1.5639616548029789,
+            "maximum_candidate_mae_m": 1.720357820283277,
+            "passed": true
+          },
+          "persistence": {
+            "baseline_mae_m": 2.537908165203267,
+            "maximum_candidate_mae_m": 2.7916989817235938,
+            "passed": true
+          }
+        }
+      },
+      {
+        "fold": "rolling_2024",
+        "kind": "horizon",
+        "name": "8",
+        "cases": 49,
+        "districts": 48,
+        "status": "passed",
+        "metrics": {
+          "frozen": {
+            "n": 49,
+            "districts": 48,
+            "mae_m": 2.5146964901213558,
+            "district_macro_mae_m": 2.552673782205668
+          },
+          "retrained": {
+            "n": 49,
+            "districts": 48,
+            "mae_m": 2.3298808471534214,
+            "district_macro_mae_m": 2.3648023653151515
+          },
+          "persistence": {
+            "n": 49,
+            "districts": 48,
+            "mae_m": 3.797839742379386,
+            "district_macro_mae_m": 3.847148346824655
+          }
+        },
+        "relative_regression_limit": 0.1,
+        "comparisons": {
+          "frozen": {
+            "baseline_mae_m": 2.5146964901213558,
+            "maximum_candidate_mae_m": 2.7661661391334915,
+            "passed": true
+          },
+          "persistence": {
+            "baseline_mae_m": 3.797839742379386,
+            "maximum_candidate_mae_m": 4.177623716617325,
+            "passed": true
+          }
+        }
+      },
+      {
+        "fold": "rolling_2024",
+        "kind": "horizon",
+        "name": "9",
+        "cases": 23,
+        "districts": 23,
+        "status": "insufficient_support"
+      },
+      {
+        "fold": "rolling_2024",
+        "kind": "horizon",
+        "name": "10",
+        "cases": 62,
+        "districts": 62,
+        "status": "passed",
+        "metrics": {
+          "frozen": {
+            "n": 62,
+            "districts": 62,
+            "mae_m": 1.3763420906751405,
+            "district_macro_mae_m": 1.3763420906751405
+          },
+          "retrained": {
+            "n": 62,
+            "districts": 62,
+            "mae_m": 1.2297606505653162,
+            "district_macro_mae_m": 1.2297606505653162
+          },
+          "persistence": {
+            "n": 62,
+            "districts": 62,
+            "mae_m": 1.6793084763207327,
+            "district_macro_mae_m": 1.6793084763207327
+          }
+        },
+        "relative_regression_limit": 0.1,
+        "comparisons": {
+          "frozen": {
+            "baseline_mae_m": 1.3763420906751405,
+            "maximum_candidate_mae_m": 1.5139762997426547,
+            "passed": true
+          },
+          "persistence": {
+            "baseline_mae_m": 1.6793084763207327,
+            "maximum_candidate_mae_m": 1.847239323952806,
+            "passed": true
+          }
+        }
+      },
+      {
+        "fold": "rolling_2024",
+        "kind": "horizon",
+        "name": "11",
+        "cases": 0,
+        "districts": 0,
+        "status": "insufficient_support"
+      },
+      {
+        "fold": "rolling_2024",
+        "kind": "horizon",
+        "name": "12",
+        "cases": 241,
+        "districts": 241,
+        "status": "passed",
+        "metrics": {
+          "frozen": {
+            "n": 241,
+            "districts": 241,
+            "mae_m": 2.3857669751940125,
+            "district_macro_mae_m": 2.3857669751940125
+          },
+          "retrained": {
+            "n": 241,
+            "districts": 241,
+            "mae_m": 2.304694192333163,
+            "district_macro_mae_m": 2.304694192333163
+          },
+          "persistence": {
+            "n": 241,
+            "districts": 241,
+            "mae_m": 2.606115294156732,
+            "district_macro_mae_m": 2.606115294156732
+          }
+        },
+        "relative_regression_limit": 0.1,
+        "comparisons": {
+          "frozen": {
+            "baseline_mae_m": 2.3857669751940125,
+            "maximum_candidate_mae_m": 2.624343672713414,
+            "passed": true
+          },
+          "persistence": {
+            "baseline_mae_m": 2.606115294156732,
+            "maximum_candidate_mae_m": 2.8667268235724053,
+            "passed": true
+          }
+        }
+      },
+      {
+        "fold": "rolling_2024",
+        "kind": "history_group",
+        "name": "gained_accepted_history",
+        "cases": 910,
+        "districts": 277,
+        "status": "passed",
+        "metrics": {
+          "frozen": {
+            "n": 910,
+            "districts": 277,
+            "mae_m": 1.9039841964203792,
+            "district_macro_mae_m": 2.251068653476905
+          },
+          "retrained": {
+            "n": 910,
+            "districts": 277,
+            "mae_m": 1.793898710980647,
+            "district_macro_mae_m": 2.151734731270373
+          },
+          "persistence": {
+            "n": 910,
+            "districts": 277,
+            "mae_m": 2.485291122730818,
+            "district_macro_mae_m": 2.6434680933582775
+          }
+        },
+        "relative_regression_limit": 0.1,
+        "comparisons": {
+          "frozen": {
+            "baseline_mae_m": 1.9039841964203792,
+            "maximum_candidate_mae_m": 2.0943826160624175,
+            "passed": true
+          },
+          "persistence": {
+            "baseline_mae_m": 2.485291122730818,
+            "maximum_candidate_mae_m": 2.7338202350039,
+            "passed": true
+          }
+        }
+      },
+      {
+        "fold": "rolling_2024",
+        "kind": "history_group",
+        "name": "newly_local_history",
+        "cases": 0,
+        "districts": 0,
+        "status": "insufficient_support"
+      },
+      {
+        "fold": "rolling_2024",
+        "kind": "history_group",
+        "name": "substantial_original_history",
+        "cases": 829,
+        "districts": 246,
+        "status": "passed",
+        "metrics": {
+          "frozen": {
+            "n": 829,
+            "districts": 246,
+            "mae_m": 1.919444846957936,
+            "district_macro_mae_m": 2.248514867336563
+          },
+          "retrained": {
+            "n": 829,
+            "districts": 246,
+            "mae_m": 1.8137177205429489,
+            "district_macro_mae_m": 2.162502215836734
+          },
+          "persistence": {
+            "n": 829,
+            "districts": 246,
+            "mae_m": 2.498259139260007,
+            "district_macro_mae_m": 2.6387941988570303
+          }
+        },
+        "relative_regression_limit": 0.1,
+        "comparisons": {
+          "frozen": {
+            "baseline_mae_m": 1.919444846957936,
+            "maximum_candidate_mae_m": 2.1113893316537298,
+            "passed": true
+          },
+          "persistence": {
+            "baseline_mae_m": 2.498259139260007,
+            "maximum_candidate_mae_m": 2.748085053186008,
+            "passed": true
+          }
+        }
+      }
+    ],
+    "supported_panels": 22,
+    "insufficient_support_panels": [
+      {
+        "fold": "rolling_2023",
+        "kind": "horizon",
+        "name": "1",
+        "cases": 25,
+        "districts": 18,
+        "status": "insufficient_support"
+      },
+      {
+        "fold": "rolling_2023",
+        "kind": "horizon",
+        "name": "9",
+        "cases": 24,
+        "districts": 24,
+        "status": "insufficient_support"
+      },
+      {
+        "fold": "rolling_2023",
+        "kind": "horizon",
+        "name": "11",
+        "cases": 2,
+        "districts": 2,
+        "status": "insufficient_support"
+      },
+      {
+        "fold": "rolling_2023",
+        "kind": "history_group",
+        "name": "newly_local_history",
+        "cases": 17,
+        "districts": 3,
+        "status": "insufficient_support"
+      },
+      {
+        "fold": "rolling_2024",
+        "kind": "horizon",
+        "name": "1",
+        "cases": 9,
+        "districts": 8,
+        "status": "insufficient_support"
+      },
+      {
+        "fold": "rolling_2024",
+        "kind": "horizon",
+        "name": "9",
+        "cases": 23,
+        "districts": 23,
+        "status": "insufficient_support"
+      },
+      {
+        "fold": "rolling_2024",
+        "kind": "horizon",
+        "name": "11",
+        "cases": 0,
+        "districts": 0,
+        "status": "insufficient_support"
+      },
+      {
+        "fold": "rolling_2024",
+        "kind": "history_group",
+        "name": "newly_local_history",
+        "cases": 0,
+        "districts": 0,
+        "status": "insufficient_support"
+      }
+    ]
+  },
+  "inputs": {
+    "protocol_sha256": "f08ef1f4a1a0c138ee3c88bb321d5fbe2a1aea105c8355e981e81b249bdb5293",
+    "selection_sha256": "22f69319949b08cb7a9b34a13698377e36e4ae33167d2832dbacbdc1d96f83c0",
+    "validation_evidence": [
+      {
+        "candidate": "current_structure",
+        "fold": "rolling_2023",
+        "file": "validation_rolling_2023_current_structure.csv",
+        "sha256": "d683aa36339919f787fe4a748ab1a3c05b149ad9e5950d65d8a2ad1b8d9e4b45",
+        "cases": 2692
+      },
+      {
+        "candidate": "shallow_regularized",
+        "fold": "rolling_2023",
+        "file": "validation_rolling_2023_shallow_regularized.csv",
+        "sha256": "4414032909d357ae41ecf2c413f8ecd6d65389c105d061195616dde593a4b435",
+        "cases": 2692
+      },
+      {
+        "candidate": "deeper_regularized",
+        "fold": "rolling_2023",
+        "file": "validation_rolling_2023_deeper_regularized.csv",
+        "sha256": "3ab29ebbf927872e771fbbfd11e4cf62a9e10aa16daec78664ffa0fcb92e779d",
+        "cases": 2692
+      },
+      {
+        "candidate": "current_structure",
+        "fold": "rolling_2024",
+        "file": "validation_rolling_2024_current_structure.csv",
+        "sha256": "5076b0438232a4acec8ef9c0137bfd02e2f91ac02f1cf8ddd13086183dfaad13",
+        "cases": 910
+      },
+      {
+        "candidate": "shallow_regularized",
+        "fold": "rolling_2024",
+        "file": "validation_rolling_2024_shallow_regularized.csv",
+        "sha256": "ff30e8eb19ce906cf177baad1814cd3111324c973a42131b90c72c4ff2421967",
+        "cases": 910
+      },
+      {
+        "candidate": "deeper_regularized",
+        "fold": "rolling_2024",
+        "file": "validation_rolling_2024_deeper_regularized.csv",
+        "sha256": "5e5e45e72ce019829a53d796421190f162fec4c7516bab6525542c417a24b5c7",
+        "cases": 910
+      }
+    ],
+    "contract_report_sha256": "cf8a790ef14285a6f233dd4f38ed101bdac2b5e97b236126442388377dc330b1",
+    "training_summary_sha256": "a81a59e6b200f07af563178b66e7e1ef1f7fd52972069c45258775f83a046660"
+  },
+  "limitations": [
+    "Previously inspected January 2026 results are excluded from acceptance calculations.",
+    "No untouched post-refit test currently exists; external availability defaults to false.",
+    "Unsupported subgroups are reported without a pass claim; zero-error baselines cannot show positive relative gain.",
+    "This utility does not select another candidate or change serving models or database publications."
+  ],
+  "created_at_utc": "2026-10-27T01:33:51.118917+00:00",
+  "assessment_code_sha256": "8a230e7bbf36f23e6c4fcba78400ea39509ef87379f87b4078d0878f0aed70ec"
+}

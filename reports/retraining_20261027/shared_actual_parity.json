@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "as_of": "2025-02-28",
+  "comparisons": [
+    {
+      "district_id": "AP-Anantapur",
+      "tier": "A",
+      "all_12_points_and_metadata_exact": true
+    },
+    {
+      "district_id": "AN-North_and_Middle_Andaman",
+      "tier": "B",
+      "all_12_points_and_metadata_exact": true
+    },
+    {
+      "district_id": "AN-Nicobars",
+      "tier": "C",
+      "all_12_points_and_metadata_exact": true
+    },
+    {
+      "district_id": "MH-Mumbai_Suburban",
+      "tier": "D",
+      "all_12_points_and_metadata_exact": true
+    }
+  ],
+  "ignored_fields": [
+    "computed_at"
+  ],
+  "same_models_data_weather_lags_and_forecast_math": true
+}

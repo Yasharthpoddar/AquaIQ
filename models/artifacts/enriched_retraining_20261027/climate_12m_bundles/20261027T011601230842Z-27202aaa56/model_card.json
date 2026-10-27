@@ -1,0 +1,210 @@
+{
+  "version": "1.0-climate-conditioned-12m-xgb",
+  "candidate_version": "2.0-enriched-retraining-experimental",
+  "features": [
+    "origin_gwl",
+    "origin_gwl_lag_3mo",
+    "origin_gwl_lag_6mo",
+    "origin_rainfall",
+    "origin_temperature",
+    "origin_evapotranspiration",
+    "horizon_months",
+    "origin_month_sin",
+    "origin_month_cos",
+    "target_month_sin",
+    "target_month_cos",
+    "target_rainfall",
+    "target_temperature",
+    "target_evapotranspiration",
+    "cumulative_rainfall",
+    "cumulative_evapotranspiration",
+    "mean_temperature"
+  ],
+  "feature_schema_sha256": "89ec17cedc0751550639232ead3b952b34c28c0bdc23c31275325628d8071113",
+  "units": {
+    "gwl": "m_bgl",
+    "rainfall": "mm/month",
+    "temperature": "degC",
+    "evapotranspiration": "mm/month"
+  },
+  "target": "gwl_change_from_origin",
+  "horizons_months": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "created_at": "2026-10-27T01:16:01.210146+00:00",
+  "parameters": {
+    "n_estimators": 461,
+    "max_depth": 4,
+    "learning_rate": 0.04,
+    "min_child_weight": 60,
+    "reg_lambda": 40.0,
+    "reg_alpha": 0.2,
+    "subsample": 0.85,
+    "colsample_bytree": 0.9,
+    "random_state": 42,
+    "n_jobs": 4,
+    "tree_method": "hist",
+    "objective": "reg:squarederror"
+  },
+  "feature_generation_id": "physical-v3-official-c9ade81d95720f91",
+  "data_source": "verified features_matrix.csv",
+  "data_sha256": "2982c2d53bfe2b747a7d86821323d0f8bd58d1d755baa713d1b8741a40999209",
+  "feature_csv_sha256": "3a4a560667d732b50c6a1712f4d9ceb13b411d4ae2c7a984e08ffc2aada21042",
+  "train_target_cutoff": "2025-01-31",
+  "max_train_target_date": "2025-01-01",
+  "max_train_origin": "2024-11-01",
+  "n_train_observed_pairs": 145494,
+  "training_districts": 641,
+  "training_counts_by_horizon": {
+    "1": 1951,
+    "2": 10513,
+    "3": 16934,
+    "4": 9790,
+    "5": 10781,
+    "6": 15044,
+    "7": 10734,
+    "8": 9437,
+    "9": 15844,
+    "10": 10436,
+    "11": 1875,
+    "12": 32155
+  },
+  "protocol_sha256": "f08ef1f4a1a0c138ee3c88bb321d5fbe2a1aea105c8355e981e81b249bdb5293",
+  "training_code_sha256": "6c0d584514bd456eb164dc13be4e61fe096f51ab9048ce6d5fd1946d9203bcf2",
+  "inclusion": {
+    "pairs_with_new_target": 20720,
+    "pairs_with_new_origin": 17620,
+    "new_months_used_as_target": 6071,
+    "new_months_used_in_either_role": 6165,
+    "january2025_pairs_with_new_target": 431,
+    "latest_training_target": "2025-01-01"
+  },
+  "evaluation_protocol": {
+    "version": "enriched-xgboost-retraining-v1",
+    "reference_commit": "73cb6feda5ad641c7500f28da01e087d81be4c52",
+    "feature_generation": "physical-v3-official-c9ade81d95720f91",
+    "feature_csv_sha256": "3a4a560667d732b50c6a1712f4d9ceb13b411d4ae2c7a984e08ffc2aada21042",
+    "frozen_model_sha256": "4b22e2165664e1c1dd21c81ccf95d894655f0a0d589017a9ab87df0588a73a03",
+    "target": "observed_target_depth_minus_observed_origin_depth_m_bgl",
+    "horizons": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "feature_policy": "Existing 17-feature serving encoding; historical climatology uses completed origin month, past-only lag/projection fallback; observed origin anchor in training. No future weather or groundwater in features.",
+    "folds": [
+      {
+        "name": "rolling_2023",
+        "train_target_cutoff": "2021-12-31",
+        "validation_origin_start": "2023-01-01",
+        "validation_origin_end": "2023-12-01",
+        "validation_target_end": "2024-01-01"
+      },
+      {
+        "name": "rolling_2024",
+        "train_target_cutoff": "2022-12-31",
+        "validation_origin_start": "2024-01-01",
+        "validation_origin_end": "2024-12-01",
+        "validation_target_end": "2025-01-01"
+      }
+    ],
+    "selection": {
+      "primary": "Mean across folds of district-macro MAE on identical observed-origin pairs, with ties broken by mean fold RMSE then candidate name.",
+      "candidates": [
+        {
+          "name": "current_structure",
+          "max_depth": 3,
+          "min_child_weight": 30,
+          "reg_lambda": 20.0,
+          "reg_alpha": 0.1
+        },
+        {
+          "name": "shallow_regularized",
+          "max_depth": 2,
+          "min_child_weight": 60,
+          "reg_lambda": 40.0,
+          "reg_alpha": 0.2
+        },
+        {
+          "name": "deeper_regularized",
+          "max_depth": 4,
+          "min_child_weight": 60,
+          "reg_lambda": 40.0,
+          "reg_alpha": 0.2
+        }
+      ],
+      "maximum_trees": 480,
+      "early_stopping_rounds": 40,
+      "final_tree_count": "Median of selected candidate fold best_iteration+1, rounded to nearest integer; no January2026 tuning.",
+      "seed": 42
+    },
+    "final_fit_target_cutoff": "2025-01-31",
+    "final_diagnostic_origins": [
+      "2025-01-31",
+      "2025-02-28",
+      "2025-03-31",
+      "2025-04-30",
+      "2025-05-31",
+      "2025-06-30",
+      "2025-07-31",
+      "2025-08-31",
+      "2025-09-30",
+      "2025-10-31",
+      "2025-11-30",
+      "2025-12-31"
+    ],
+    "final_diagnostic_scope": "Previously inspected January2026 labels through actual tiered serving path. A retrospective diagnostic, not an untouched test. Repeated districts/target months are dependent.",
+    "promotion_requirements": {
+      "threshold_units": "0.02 is a relative MAE reduction of 2%; 0.10 is a relative MAE increase of 10%, not metres.",
+      "untouched_post_refit_test_required": true,
+      "rolling_validation_mae_gain_vs_frozen_and_persistence_at_least": 0.02,
+      "rolling_validation_seasonal_paired_mae_no_worse": true,
+      "supported_horizon_or_new_history_group_maximum_mae_regression": 0.1,
+      "supported_panel_minimum_cases": 30,
+      "supported_panel_minimum_districts": 10,
+      "complete_725_by_12_outputs_and_36_states": true,
+      "all_contract_and_rollback_checks_pass": true,
+      "rule": "All requirements must pass. No independent untouched later labels currently exist; keep production unchanged regardless of inspected diagnostic gains."
+    },
+    "uncertainty": "Old-model calibration cannot be rebound to new weights. Candidate intervals remain unavailable.",
+    "limitations": [
+      "New measurements have source observation dates but historical publication availability is not established.",
+      "Observed-origin training does not establish skill for estimated anchors across stale observation gaps.",
+      "The original artifact card records realized-weather training; the candidate uses causal serving-weather assumptions, so gains cannot be attributed solely to enrichment.",
+      "The old train() twelve-month-embargo holdout is empty once January2025 labels enter fitting. Earlier folds retain that embargo; the final as-of serving replay uses labels learned by each origin and is explicitly retrospective.",
+      "Unmonitored districts retain the existing regional reference; no local skill is inferred from pooled fitting."
+    ]
+  },
+  "validation_assessment": {
+    "status": "experimental_not_promoted",
+    "sufficient_for_operational_use": false,
+    "untouched_test_available": false
+  },
+  "uncertainty": {
+    "status": "unavailable",
+    "reason": "Retrained weights have no independently validated matching calibration."
+  },
+  "reference_model_sha256": "4b22e2165664e1c1dd21c81ccf95d894655f0a0d589017a9ab87df0588a73a03",
+  "bundle_schema_version": 1,
+  "model_sha256": "e4e57de9f681b2f2702c9b86a00be06b04147123ecea0579f6abcf3cdc586192"
+}

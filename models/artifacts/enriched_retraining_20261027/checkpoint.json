@@ -1,0 +1,7 @@
+{
+  "bundle_schema_version": 1,
+  "model_path": "climate_12m_bundles/20261027T011601230842Z-27202aaa56/model.json",
+  "card_path": "climate_12m_bundles/20261027T011601230842Z-27202aaa56/model_card.json",
+  "model_sha256": "e4e57de9f681b2f2702c9b86a00be06b04147123ecea0579f6abcf3cdc586192",
+  "card_sha256": "30d837e15fac7184609330197c1bb3ff6d3e6daf6154dcb4267fe26784662176"
+}

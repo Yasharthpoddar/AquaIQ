@@ -83,6 +83,10 @@ reports/final_release_20261026/**/cases.csv
 reports/final_release_20261026/**/cold_cases.csv
 reports/final_release_20261026/outputs/
 
+# Retraining retains compact aggregate reports and model bundles, not target cases.
+reports/retraining_20261027/**/*.csv
+reports/retraining_20261027/outputs/
+
 # Reproducible audit row exports; retain compact aggregate reports in Git.
 reports/audit-*/**/*.csv
 reports/candidates/correlation/

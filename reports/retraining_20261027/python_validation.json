@@ -1,0 +1,32 @@
+{
+  "command": ".\\venv\\Scripts\\python.exe -B -m pytest --integration --basetemp scratch/pytest-retraining-complete-final-20261027 --junitxml scratch/retraining-complete-final.xml -q",
+  "exit_code": 0,
+  "tests": 1753,
+  "passed": 1752,
+  "failures": 0,
+  "errors": 0,
+  "skipped": [
+    {
+      "test": "tests.test_six_month_selection::test_candidate_output_rejects_a_symlink_that_escapes_the_candidate_root",
+      "reason": "Creating directory symlinks needs Windows developer mode or privileges"
+    }
+  ],
+  "warnings": 70,
+  "console_seconds": 571.06,
+  "integration_enabled": true,
+  "focused_retraining_tests": 98,
+  "focused_seconds": 34.64,
+  "initial_focused_environment_issue": "88passed/6setup errors when sandbox TEMP could not create numbered pytest directories. Explicit workspace basetemp resolved all errors; no product fix was needed.",
+  "junit_sanitization": "Only synthetic userinfo fixture labels redacted; raw report retained in ignored scratch.",
+  "warning_review": "One sklearn single-label warning, one netCDF4/NumPy binary-size warning,68xarray/netCDF4 NumPy shape deprecations. Numeric fixtures passed.",
+  "previous_complete_run": {
+    "passed": 1728,
+    "skipped": 1,
+    "seconds": 566.54
+  },
+  "shared_helper_focused": {
+    "passed": 86,
+    "seconds": 52.25,
+    "actual_tiers_A_to_D_parity": "shared_actual_parity.json"
+  }
+}

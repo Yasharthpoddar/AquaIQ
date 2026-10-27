@@ -1,0 +1,196 @@
+{
+  "selected_configuration": "deeper_regularized",
+  "source_selection": "reports\\retraining_20261027\\training\\selection.json",
+  "selection_sha256": "22f69319949b08cb7a9b34a13698377e36e4ae33167d2832dbacbdc1d96f83c0",
+  "sources": [
+    {
+      "fold": "rolling_2023",
+      "file": "reports\\retraining_20261027\\training\\validation_rolling_2023_deeper_regularized.csv",
+      "sha256": "3ab29ebbf927872e771fbbfd11e4cf62a9e10aa16daec78664ffa0fcb92e779d",
+      "all_cases": 2692,
+      "common_cases": 2487,
+      "common_districts": 470,
+      "train_target_cutoff": "2021-12-31"
+    },
+    {
+      "fold": "rolling_2024",
+      "file": "reports\\retraining_20261027\\training\\validation_rolling_2024_deeper_regularized.csv",
+      "sha256": "5e5e45e72ce019829a53d796421190f162fec4c7516bab6525542c417a24b5c7",
+      "all_cases": 910,
+      "common_cases": 837,
+      "common_districts": 272,
+      "train_target_cutoff": "2022-12-31"
+    }
+  ],
+  "methods": [
+    "frozen",
+    "retrained",
+    "persistence",
+    "seasonal"
+  ],
+  "population": "Identical seasonal-supported rows for all four methods; pooled across the two locked folds.",
+  "metric": "case-weighted mean absolute depth error in metres; selection itself used mean fold district-macro MAE",
+  "scope": "Retrospective earlier validation of fold models; not final-refit, blind-test or prospective performance.",
+  "new_blind_evaluation": false,
+  "model_training_or_selection_performed": false,
+  "rows": [
+    {
+      "horizon": 1,
+      "all_eligible_cases": 34,
+      "common_cases": 13,
+      "excluded_missing_seasonal": 21,
+      "common_districts": 10,
+      "mae_m": {
+        "frozen": 5.714256155693282,
+        "retrained": 3.3806542505050765,
+        "persistence": 8.050725870151455,
+        "seasonal": 1.359556206389138
+      }
+    },
+    {
+      "horizon": 2,
+      "all_eligible_cases": 366,
+      "common_cases": 334,
+      "excluded_missing_seasonal": 32,
+      "common_districts": 251,
+      "mae_m": {
+        "frozen": 2.119085350365383,
+        "retrained": 2.0847043256417055,
+        "persistence": 2.2880427082606185,
+        "seasonal": 2.2838902115415056
+      }
+    },
+    {
+      "horizon": 3,
+      "all_eligible_cases": 641,
+      "common_cases": 604,
+      "excluded_missing_seasonal": 37,
+      "common_districts": 337,
+      "mae_m": {
+        "frozen": 1.3359176468188605,
+        "retrained": 1.309388966434659,
+        "persistence": 2.264380351468168,
+        "seasonal": 1.9552529534289116
+      }
+    },
+    {
+      "horizon": 4,
+      "all_eligible_cases": 401,
+      "common_cases": 377,
+      "excluded_missing_seasonal": 24,
+      "common_districts": 319,
+      "mae_m": {
+        "frozen": 1.4613778358962044,
+        "retrained": 1.3660450555212105,
+        "persistence": 2.607910698374077,
+        "seasonal": 1.7896385742504495
+      }
+    },
+    {
+      "horizon": 5,
+      "all_eligible_cases": 427,
+      "common_cases": 356,
+      "excluded_missing_seasonal": 71,
+      "common_districts": 231,
+      "mae_m": {
+        "frozen": 2.447866573988037,
+        "retrained": 2.2914685855796466,
+        "persistence": 2.9514928882855354,
+        "seasonal": 2.4542322619367614
+      }
+    },
+    {
+      "horizon": 6,
+      "all_eligible_cases": 203,
+      "common_cases": 177,
+      "excluded_missing_seasonal": 26,
+      "common_districts": 126,
+      "mae_m": {
+        "frozen": 2.08912237300124,
+        "retrained": 1.932496898804118,
+        "persistence": 3.018498006923578,
+        "seasonal": 2.532818752403198
+      }
+    },
+    {
+      "horizon": 7,
+      "all_eligible_cases": 492,
+      "common_cases": 470,
+      "excluded_missing_seasonal": 22,
+      "common_districts": 325,
+      "mae_m": {
+        "frozen": 1.7181869378617083,
+        "retrained": 1.6807430337068314,
+        "persistence": 2.379666233326314,
+        "seasonal": 2.035582329909305
+      }
+    },
+    {
+      "horizon": 8,
+      "all_eligible_cases": 203,
+      "common_cases": 189,
+      "excluded_missing_seasonal": 14,
+      "common_districts": 148,
+      "mae_m": {
+        "frozen": 2.2367782519494837,
+        "retrained": 2.0770037630210996,
+        "persistence": 2.744911613666272,
+        "seasonal": 2.1780940319277824
+      }
+    },
+    {
+      "horizon": 9,
+      "all_eligible_cases": 47,
+      "common_cases": 39,
+      "excluded_missing_seasonal": 8,
+      "common_districts": 30,
+      "mae_m": {
+        "frozen": 1.1750005028186596,
+        "retrained": 1.0746927644090671,
+        "persistence": 1.4680543657059755,
+        "seasonal": 1.4292435908417596
+      }
+    },
+    {
+      "horizon": 10,
+      "all_eligible_cases": 290,
+      "common_cases": 267,
+      "excluded_missing_seasonal": 23,
+      "common_districts": 221,
+      "mae_m": {
+        "frozen": 1.661380303219396,
+        "retrained": 1.6249527282512626,
+        "persistence": 1.7964772894451155,
+        "seasonal": 2.0806282149418696
+      }
+    },
+    {
+      "horizon": 11,
+      "all_eligible_cases": 2,
+      "common_cases": 2,
+      "excluded_missing_seasonal": 0,
+      "common_districts": 2,
+      "mae_m": {
+        "frozen": 4.210538136625672,
+        "retrained": 4.2549081769231805,
+        "persistence": 3.856451871657754,
+        "seasonal": 3.856451871657754
+      }
+    },
+    {
+      "horizon": 12,
+      "all_eligible_cases": 496,
+      "common_cases": 496,
+      "excluded_missing_seasonal": 0,
+      "common_districts": 268,
+      "mae_m": {
+        "frozen": 2.228476276478158,
+        "retrained": 2.193260205422516,
+        "persistence": 2.391829408352061,
+        "seasonal": 2.391829408352061
+      }
+    }
+  ],
+  "figure_script_sha256": "8f58ce158b13f9c08e387c000dfe1a36fc2ad06cb93cfd12a149c8ae99f1f03a",
+  "figure_sha256": "8d28cb8b52bc51e7c8b3c393703047259e7fbec7210cf534ce37deefbfd24ac5"
+}

@@ -1,0 +1,2708 @@
+{
+  "phase": "locked_before_retrospective_final_diagnostic",
+  "selected": "deeper_regularized",
+  "scores": {
+    "current_structure": {
+      "folds": 2,
+      "district_macro_mae_m": 1.9402077226461154,
+      "mean_fold_rmse_m": 3.457606173751973,
+      "final_trees": 448
+    },
+    "deeper_regularized": {
+      "folds": 2,
+      "district_macro_mae_m": 1.9134403762132786,
+      "mean_fold_rmse_m": 3.420833073377022,
+      "final_trees": 461
+    },
+    "shallow_regularized": {
+      "folds": 2,
+      "district_macro_mae_m": 1.9839590042149438,
+      "mean_fold_rmse_m": 3.5141785598729545,
+      "final_trees": 478
+    }
+  },
+  "parameters": {
+    "n_estimators": 461,
+    "max_depth": 4,
+    "learning_rate": 0.04,
+    "min_child_weight": 60,
+    "reg_lambda": 40.0,
+    "reg_alpha": 0.2,
+    "subsample": 0.85,
+    "colsample_bytree": 0.9,
+    "random_state": 42,
+    "n_jobs": 4,
+    "tree_method": "hist",
+    "objective": "reg:squarederror"
+  },
+  "fold_results": [
+    {
+      "phase": "earlier_validation",
+      "candidate": "current_structure",
+      "fold": {
+        "name": "rolling_2023",
+        "train_target_cutoff": "2021-12-31",
+        "validation_origin_start": "2023-01-01",
+        "validation_origin_end": "2023-12-01",
+        "validation_target_end": "2024-01-01"
+      },
+      "parameters": {
+        "n_estimators": 480,
+        "max_depth": 3,
+        "learning_rate": 0.04,
+        "min_child_weight": 30,
+        "reg_lambda": 20.0,
+        "reg_alpha": 0.1,
+        "subsample": 0.85,
+        "colsample_bytree": 0.9,
+        "random_state": 42,
+        "n_jobs": 4,
+        "tree_method": "hist",
+        "objective": "reg:squarederror",
+        "early_stopping_rounds": 40
+      },
+      "best_iteration": 415,
+      "train_pairs": 127402,
+      "train_districts": 626,
+      "validation_cases_file": "validation_rolling_2023_current_structure.csv",
+      "validation_cases_sha256": "d683aa36339919f787fe4a748ab1a3c05b149ad9e5950d65d8a2ad1b8d9e4b45",
+      "max_train_target": "2021-12-01",
+      "metrics": {
+        "frozen": {
+          "n": 2692,
+          "districts": 477,
+          "mae_m": 1.9992861516755864,
+          "rmse_m": 3.985100672315761,
+          "district_macro_mae_m": 1.7048778663886095
+        },
+        "retrained": {
+          "n": 2692,
+          "districts": 477,
+          "mae_m": 1.9449327476708174,
+          "rmse_m": 3.8400567682285995,
+          "district_macro_mae_m": 1.686620919792152
+        },
+        "persistence": {
+          "n": 2692,
+          "districts": 477,
+          "mae_m": 2.5594468994676784,
+          "rmse_m": 4.593067680252524,
+          "district_macro_mae_m": 2.3909897810093623
+        },
+        "seasonal_paired": {
+          "frozen": {
+            "n": 2487,
+            "districts": 470,
+            "mae_m": 1.8539713975483727,
+            "rmse_m": 3.50162608685229,
+            "district_macro_mae_m": 1.6959426815843206
+          },
+          "retrained": {
+            "n": 2487,
+            "districts": 470,
+            "mae_m": 1.7891231909403231,
+            "rmse_m": 3.3001444602348697,
+            "district_macro_mae_m": 1.661703468995836
+          },
+          "persistence": {
+            "n": 2487,
+            "districts": 470,
+            "mae_m": 2.4432684011701644,
+            "rmse_m": 4.248898609217365,
+            "district_macro_mae_m": 2.4248181964452717
+          },
+          "seasonal": {
+            "n": 2487,
+            "districts": 470,
+            "mae_m": 2.1952477918363345,
+            "rmse_m": 3.8126387813454268,
+            "district_macro_mae_m": 1.9305985947570017
+          }
+        },
+        "dates": {
+          "origin_date": [
+            "2023-01-01",
+            "2023-11-01"
+          ],
+          "target_date": [
+            "2023-02-01",
+            "2024-01-01"
+          ]
+        },
+        "by_horizon": {
+          "1": {
+            "frozen": {
+              "n": 25,
+              "districts": 18,
+              "mae_m": 7.042917316206774,
+              "rmse_m": 13.016846475829352,
+              "district_macro_mae_m": 5.579972538357617
+            },
+            "retrained": {
+              "n": 25,
+              "districts": 18,
+              "mae_m": 5.648248478732641,
+              "rmse_m": 11.853604075242721,
+              "district_macro_mae_m": 4.551133836722183
+            },
+            "persistence": {
+              "n": 25,
+              "districts": 18,
+              "mae_m": 8.194627959637478,
+              "rmse_m": 15.445908418968342,
+              "district_macro_mae_m": 6.41146431783865
+            }
+          },
+          "2": {
+            "frozen": {
+              "n": 316,
+              "districts": 260,
+              "mae_m": 2.1225167763180286,
+              "rmse_m": 3.868841655911992,
+              "district_macro_mae_m": 1.9086789850188013
+            },
+            "retrained": {
+              "n": 316,
+              "districts": 260,
+              "mae_m": 2.098009974797223,
+              "rmse_m": 3.7890912361325357,
+              "district_macro_mae_m": 1.902506295846187
+            },
+            "persistence": {
+              "n": 316,
+              "districts": 260,
+              "mae_m": 2.362132428368798,
+              "rmse_m": 4.2361822039302535,
+              "district_macro_mae_m": 2.170058849995963
+            }
+          },
+          "3": {
+            "frozen": {
+              "n": 490,
+              "districts": 343,
+              "mae_m": 1.4927715157725594,
+              "rmse_m": 2.720674801502307,
+              "district_macro_mae_m": 1.4310286839260056
+            },
+            "retrained": {
+              "n": 490,
+              "districts": 343,
+              "mae_m": 1.4701954958789314,
+              "rmse_m": 2.7193888541937428,
+              "district_macro_mae_m": 1.4068951108578256
+            },
+            "persistence": {
+              "n": 490,
+              "districts": 343,
+              "mae_m": 2.43560520843311,
+              "rmse_m": 3.577605573764346,
+              "district_macro_mae_m": 2.5005766951388337
+            }
+          },
+          "4": {
+            "frozen": {
+              "n": 328,
+              "districts": 326,
+              "mae_m": 1.5877193305974193,
+              "rmse_m": 3.443431639501798,
+              "district_macro_mae_m": 1.586345586937482
+            },
+            "retrained": {
+              "n": 328,
+              "districts": 326,
+              "mae_m": 1.4740844584626556,
+              "rmse_m": 2.974466166807751,
+              "district_macro_mae_m": 1.4725080764549194
+            },
+            "persistence": {
+              "n": 328,
+              "districts": 326,
+              "mae_m": 2.686605237272299,
+              "rmse_m": 4.6576882915083075,
+              "district_macro_mae_m": 2.685229569155967
+            }
+          },
+          "5": {
+            "frozen": {
+              "n": 343,
+              "districts": 239,
+              "mae_m": 2.3702490706821373,
+              "rmse_m": 4.657443924866997,
+              "district_macro_mae_m": 2.156412819646101
+            },
+            "retrained": {
+              "n": 343,
+              "districts": 239,
+              "mae_m": 2.3217682858929023,
+              "rmse_m": 4.65104406110665,
+              "district_macro_mae_m": 2.1259766548626016
+            },
+            "persistence": {
+              "n": 343,
+              "districts": 239,
+              "mae_m": 2.811320600968515,
+              "rmse_m": 4.919918701277559,
+              "district_macro_mae_m": 2.7509636767430803
+            }
+          },
+          "6": {
+            "frozen": {
+              "n": 136,
+              "districts": 131,
+              "mae_m": 3.051209937328831,
+              "rmse_m": 6.5470630839734145,
+              "district_macro_mae_m": 2.4955631812975207
+            },
+            "retrained": {
+              "n": 136,
+              "districts": 131,
+              "mae_m": 2.80537745923938,
+              "rmse_m": 5.905461319260356,
+              "district_macro_mae_m": 2.366953949877289
+            },
+            "persistence": {
+              "n": 136,
+              "districts": 131,
+              "mae_m": 3.8468279474850275,
+              "rmse_m": 7.632566178647823,
+              "district_macro_mae_m": 3.2077952711301014
+            }
+          },
+          "7": {
+            "frozen": {
+              "n": 391,
+              "districts": 337,
+              "mae_m": 1.9364319244431833,
+              "rmse_m": 3.6578512046092717,
+              "district_macro_mae_m": 1.8359628936226573
+            },
+            "retrained": {
+              "n": 391,
+              "districts": 337,
+              "mae_m": 1.9401322455241037,
+              "rmse_m": 3.772026224950125,
+              "district_macro_mae_m": 1.8316960999723657
+            },
+            "persistence": {
+              "n": 391,
+              "districts": 337,
+              "mae_m": 2.484969800072084,
+              "rmse_m": 3.982687498516194,
+              "district_macro_mae_m": 2.388739934450254
+            }
+          },
+          "8": {
+            "frozen": {
+              "n": 154,
+              "districts": 152,
+              "mae_m": 2.144403662043158,
+              "rmse_m": 3.624232470754791,
+              "district_macro_mae_m": 2.131567181702834
+            },
+            "retrained": {
+              "n": 154,
+              "districts": 152,
+              "mae_m": 2.124042019786789,
+              "rmse_m": 3.5361862757679092,
+              "district_macro_mae_m": 2.1131880751767738
+            },
+            "persistence": {
+              "n": 154,
+              "districts": 152,
+              "mae_m": 2.4603886685109644,
+              "rmse_m": 3.975538556461107,
+              "district_macro_mae_m": 2.4565821968249146
+            }
+          },
+          "9": {
+            "frozen": {
+              "n": 24,
+              "districts": 24,
+              "mae_m": 1.0189036532931393,
+              "rmse_m": 1.5166701503889684,
+              "district_macro_mae_m": 1.0189036532931393
+            },
+            "retrained": {
+              "n": 24,
+              "districts": 24,
+              "mae_m": 0.9444910034853086,
+              "rmse_m": 1.3914434729225287,
+              "district_macro_mae_m": 0.9444910034853086
+            },
+            "persistence": {
+              "n": 24,
+              "districts": 24,
+              "mae_m": 1.3880543881610972,
+              "rmse_m": 1.6632454138723312,
+              "district_macro_mae_m": 1.3880543881610972
+            }
+          },
+          "10": {
+            "frozen": {
+              "n": 228,
+              "districts": 226,
+              "mae_m": 1.7740698145972988,
+              "rmse_m": 2.744501555966179,
+              "district_macro_mae_m": 1.7523679531298466
+            },
+            "retrained": {
+              "n": 228,
+              "districts": 226,
+              "mae_m": 1.74966358217186,
+              "rmse_m": 2.6780814447973773,
+              "district_macro_mae_m": 1.728056840185659
+            },
+            "persistence": {
+              "n": 228,
+              "districts": 226,
+              "mae_m": 1.8719474279601136,
+              "rmse_m": 3.0532502297237127,
+              "district_macro_mae_m": 1.8585159439597998
+            }
+          },
+          "11": {
+            "frozen": {
+              "n": 2,
+              "districts": 2,
+              "mae_m": 4.210538136625672,
+              "rmse_m": 4.311508553011319,
+              "district_macro_mae_m": 4.210538136625672
+            },
+            "retrained": {
+              "n": 2,
+              "districts": 2,
+              "mae_m": 4.254305208886052,
+              "rmse_m": 4.361877943814929,
+              "district_macro_mae_m": 4.254305208886052
+            },
+            "persistence": {
+              "n": 2,
+              "districts": 2,
+              "mae_m": 3.856451871657754,
+              "rmse_m": 4.167463358792571,
+              "district_macro_mae_m": 3.856451871657754
+            }
+          },
+          "12": {
+            "frozen": {
+              "n": 255,
+              "districts": 255,
+              "mae_m": 2.0798211455349382,
+              "rmse_m": 3.9287021998388814,
+              "district_macro_mae_m": 2.0798211455349382
+            },
+            "retrained": {
+              "n": 255,
+              "districts": 255,
+              "mae_m": 2.09409557085357,
+              "rmse_m": 3.8346882884914177,
+              "district_macro_mae_m": 2.09409557085357
+            },
+            "persistence": {
+              "n": 255,
+              "districts": 255,
+              "mae_m": 2.18930823784647,
+              "rmse_m": 4.284438847148275,
+              "district_macro_mae_m": 2.18930823784647
+            }
+          }
+        },
+        "by_history_group": {
+          "gained_accepted_history": {
+            "frozen": {
+              "n": 2692,
+              "districts": 477,
+              "mae_m": 1.9992861516755864,
+              "rmse_m": 3.985100672315761,
+              "district_macro_mae_m": 1.7048778663886095
+            },
+            "retrained": {
+              "n": 2692,
+              "districts": 477,
+              "mae_m": 1.9449327476708174,
+              "rmse_m": 3.8400567682285995,
+              "district_macro_mae_m": 1.686620919792152
+            },
+            "persistence": {
+              "n": 2692,
+              "districts": 477,
+              "mae_m": 2.5594468994676784,
+              "rmse_m": 4.593067680252524,
+              "district_macro_mae_m": 2.3909897810093623
+            }
+          },
+          "newly_local_history": {
+            "frozen": {
+              "n": 17,
+              "districts": 3,
+              "mae_m": 0.87191805150579,
+              "rmse_m": 1.1424286272044604,
+              "district_macro_mae_m": 1.4881382186313477
+            },
+            "retrained": {
+              "n": 17,
+              "districts": 3,
+              "mae_m": 1.09962979982881,
+              "rmse_m": 1.5188753914735047,
+              "district_macro_mae_m": 2.1741974376440054
+            },
+            "persistence": {
+              "n": 17,
+              "districts": 3,
+              "mae_m": 1.1141176470588237,
+              "rmse_m": 1.2967515976016197,
+              "district_macro_mae_m": 0.9984444444444449
+            }
+          },
+          "substantial_original_history": {
+            "frozen": {
+              "n": 2384,
+              "districts": 406,
+              "mae_m": 1.955477375568514,
+              "rmse_m": 3.7795584280141443,
+              "district_macro_mae_m": 1.7009480423232675
+            },
+            "retrained": {
+              "n": 2384,
+              "districts": 406,
+              "mae_m": 1.885862010886086,
+              "rmse_m": 3.582276761771909,
+              "district_macro_mae_m": 1.6653078326689243
+            },
+            "persistence": {
+              "n": 2384,
+              "districts": 406,
+              "mae_m": 2.507680535844547,
+              "rmse_m": 4.45376665904542,
+              "district_macro_mae_m": 2.369149781411706
+            }
+          }
+        }
+      }
+    },
+    {
+      "phase": "earlier_validation",
+      "candidate": "shallow_regularized",
+      "fold": {
+        "name": "rolling_2023",
+        "train_target_cutoff": "2021-12-31",
+        "validation_origin_start": "2023-01-01",
+        "validation_origin_end": "2023-12-01",
+        "validation_target_end": "2024-01-01"
+      },
+      "parameters": {
+        "n_estimators": 480,
+        "max_depth": 2,
+        "learning_rate": 0.04,
+        "min_child_weight": 60,
+        "reg_lambda": 40.0,
+        "reg_alpha": 0.2,
+        "subsample": 0.85,
+        "colsample_bytree": 0.9,
+        "random_state": 42,
+        "n_jobs": 4,
+        "tree_method": "hist",
+        "objective": "reg:squarederror",
+        "early_stopping_rounds": 40
+      },
+      "best_iteration": 479,
+      "train_pairs": 127402,
+      "train_districts": 626,
+      "validation_cases_file": "validation_rolling_2023_shallow_regularized.csv",
+      "validation_cases_sha256": "4414032909d357ae41ecf2c413f8ecd6d65389c105d061195616dde593a4b435",
+      "max_train_target": "2021-12-01",
+      "metrics": {
+        "frozen": {
+          "n": 2692,
+          "districts": 477,
+          "mae_m": 1.9992861516755864,
+          "rmse_m": 3.985100672315761,
+          "district_macro_mae_m": 1.7048778663886095
+        },
+        "retrained": {
+          "n": 2692,
+          "districts": 477,
+          "mae_m": 1.9941023702945748,
+          "rmse_m": 3.8927766075578876,
+          "district_macro_mae_m": 1.7103906763323922
+        },
+        "persistence": {
+          "n": 2692,
+          "districts": 477,
+          "mae_m": 2.5594468994676784,
+          "rmse_m": 4.593067680252524,
+          "district_macro_mae_m": 2.3909897810093623
+        },
+        "seasonal_paired": {
+          "frozen": {
+            "n": 2487,
+            "districts": 470,
+            "mae_m": 1.8539713975483727,
+            "rmse_m": 3.50162608685229,
+            "district_macro_mae_m": 1.6959426815843206
+          },
+          "retrained": {
+            "n": 2487,
+            "districts": 470,
+            "mae_m": 1.8356321334894075,
+            "rmse_m": 3.3480393281895537,
+            "district_macro_mae_m": 1.683362423833249
+          },
+          "persistence": {
+            "n": 2487,
+            "districts": 470,
+            "mae_m": 2.4432684011701644,
+            "rmse_m": 4.248898609217365,
+            "district_macro_mae_m": 2.4248181964452717
+          },
+          "seasonal": {
+            "n": 2487,
+            "districts": 470,
+            "mae_m": 2.1952477918363345,
+            "rmse_m": 3.8126387813454268,
+            "district_macro_mae_m": 1.9305985947570017
+          }
+        },
+        "dates": {
+          "origin_date": [
+            "2023-01-01",
+            "2023-11-01"
+          ],
+          "target_date": [
+            "2023-02-01",
+            "2024-01-01"
+          ]
+        },
+        "by_horizon": {
+          "1": {
+            "frozen": {
+              "n": 25,
+              "districts": 18,
+              "mae_m": 7.042917316206774,
+              "rmse_m": 13.016846475829352,
+              "district_macro_mae_m": 5.579972538357617
+            },
+            "retrained": {
+              "n": 25,
+              "districts": 18,
+              "mae_m": 6.471904501565775,
+              "rmse_m": 12.313893471926361,
+              "district_macro_mae_m": 5.142972196644188
+            },
+            "persistence": {
+              "n": 25,
+              "districts": 18,
+              "mae_m": 8.194627959637478,
+              "rmse_m": 15.445908418968342,
+              "district_macro_mae_m": 6.41146431783865
+            }
+          },
+          "2": {
+            "frozen": {
+              "n": 316,
+              "districts": 260,
+              "mae_m": 2.1225167763180286,
+              "rmse_m": 3.868841655911992,
+              "district_macro_mae_m": 1.9086789850188013
+            },
+            "retrained": {
+              "n": 316,
+              "districts": 260,
+              "mae_m": 2.1517845911388367,
+              "rmse_m": 3.839365965788972,
+              "district_macro_mae_m": 1.9492283154088754
+            },
+            "persistence": {
+              "n": 316,
+              "districts": 260,
+              "mae_m": 2.362132428368798,
+              "rmse_m": 4.2361822039302535,
+              "district_macro_mae_m": 2.170058849995963
+            }
+          },
+          "3": {
+            "frozen": {
+              "n": 490,
+              "districts": 343,
+              "mae_m": 1.4927715157725594,
+              "rmse_m": 2.720674801502307,
+              "district_macro_mae_m": 1.4310286839260056
+            },
+            "retrained": {
+              "n": 490,
+              "districts": 343,
+              "mae_m": 1.5351935661667526,
+              "rmse_m": 2.891356992793862,
+              "district_macro_mae_m": 1.4600418610220816
+            },
+            "persistence": {
+              "n": 490,
+              "districts": 343,
+              "mae_m": 2.43560520843311,
+              "rmse_m": 3.577605573764346,
+              "district_macro_mae_m": 2.5005766951388337
+            }
+          },
+          "4": {
+            "frozen": {
+              "n": 328,
+              "districts": 326,
+              "mae_m": 1.5877193305974193,
+              "rmse_m": 3.443431639501798,
+              "district_macro_mae_m": 1.586345586937482
+            },
+            "retrained": {
+              "n": 328,
+              "districts": 326,
+              "mae_m": 1.5471884604441166,
+              "rmse_m": 3.123872294256387,
+              "district_macro_mae_m": 1.5456251284278573
+            },
+            "persistence": {
+              "n": 328,
+              "districts": 326,
+              "mae_m": 2.686605237272299,
+              "rmse_m": 4.6576882915083075,
+              "district_macro_mae_m": 2.685229569155967
+            }
+          },
+          "5": {
+            "frozen": {
+              "n": 343,
+              "districts": 239,
+              "mae_m": 2.3702490706821373,
+              "rmse_m": 4.657443924866997,
+              "district_macro_mae_m": 2.156412819646101
+            },
+            "retrained": {
+              "n": 343,
+              "districts": 239,
+              "mae_m": 2.3670344227922975,
+              "rmse_m": 4.635865422407104,
+              "district_macro_mae_m": 2.1679941624859187
+            },
+            "persistence": {
+              "n": 343,
+              "districts": 239,
+              "mae_m": 2.811320600968515,
+              "rmse_m": 4.919918701277559,
+              "district_macro_mae_m": 2.7509636767430803
+            }
+          },
+          "6": {
+            "frozen": {
+              "n": 136,
+              "districts": 131,
+              "mae_m": 3.051209937328831,
+              "rmse_m": 6.5470630839734145,
+              "district_macro_mae_m": 2.4955631812975207
+            },
+            "retrained": {
+              "n": 136,
+              "districts": 131,
+              "mae_m": 2.9519166628883644,
+              "rmse_m": 6.199298246663418,
+              "district_macro_mae_m": 2.4518069950834733
+            },
+            "persistence": {
+              "n": 136,
+              "districts": 131,
+              "mae_m": 3.8468279474850275,
+              "rmse_m": 7.632566178647823,
+              "district_macro_mae_m": 3.2077952711301014
+            }
+          },
+          "7": {
+            "frozen": {
+              "n": 391,
+              "districts": 337,
+              "mae_m": 1.9364319244431833,
+              "rmse_m": 3.6578512046092717,
+              "district_macro_mae_m": 1.8359628936226573
+            },
+            "retrained": {
+              "n": 391,
+              "districts": 337,
+              "mae_m": 1.9430433101938356,
+              "rmse_m": 3.6920101780746037,
+              "district_macro_mae_m": 1.8342209098077955
+            },
+            "persistence": {
+              "n": 391,
+              "districts": 337,
+              "mae_m": 2.484969800072084,
+              "rmse_m": 3.982687498516194,
+              "district_macro_mae_m": 2.388739934450254
+            }
+          },
+          "8": {
+            "frozen": {
+              "n": 154,
+              "districts": 152,
+              "mae_m": 2.144403662043158,
+              "rmse_m": 3.624232470754791,
+              "district_macro_mae_m": 2.131567181702834
+            },
+            "retrained": {
+              "n": 154,
+              "districts": 152,
+              "mae_m": 2.126436190559851,
+              "rmse_m": 3.2958426161696415,
+              "district_macro_mae_m": 2.1142791788378994
+            },
+            "persistence": {
+              "n": 154,
+              "districts": 152,
+              "mae_m": 2.4603886685109644,
+              "rmse_m": 3.975538556461107,
+              "district_macro_mae_m": 2.4565821968249146
+            }
+          },
+          "9": {
+            "frozen": {
+              "n": 24,
+              "districts": 24,
+              "mae_m": 1.0189036532931393,
+              "rmse_m": 1.5166701503889684,
+              "district_macro_mae_m": 1.0189036532931393
+            },
+            "retrained": {
+              "n": 24,
+              "districts": 24,
+              "mae_m": 1.0729410274270041,
+              "rmse_m": 1.5099420880079388,
+              "district_macro_mae_m": 1.0729410274270041
+            },
+            "persistence": {
+              "n": 24,
+              "districts": 24,
+              "mae_m": 1.3880543881610972,
+              "rmse_m": 1.6632454138723312,
+              "district_macro_mae_m": 1.3880543881610972
+            }
+          },
+          "10": {
+            "frozen": {
+              "n": 228,
+              "districts": 226,
+              "mae_m": 1.7740698145972988,
+              "rmse_m": 2.744501555966179,
+              "district_macro_mae_m": 1.7523679531298466
+            },
+            "retrained": {
+              "n": 228,
+              "districts": 226,
+              "mae_m": 1.7576936509968686,
+              "rmse_m": 2.645398641945476,
+              "district_macro_mae_m": 1.7366052755794061
+            },
+            "persistence": {
+              "n": 228,
+              "districts": 226,
+              "mae_m": 1.8719474279601136,
+              "rmse_m": 3.0532502297237127,
+              "district_macro_mae_m": 1.8585159439597998
+            }
+          },
+          "11": {
+            "frozen": {
+              "n": 2,
+              "districts": 2,
+              "mae_m": 4.210538136625672,
+              "rmse_m": 4.311508553011319,
+              "district_macro_mae_m": 4.210538136625672
+            },
+            "retrained": {
+              "n": 2,
+              "districts": 2,
+              "mae_m": 4.269182960355664,
+              "rmse_m": 4.368350790410024,
+              "district_macro_mae_m": 4.269182960355664
+            },
+            "persistence": {
+              "n": 2,
+              "districts": 2,
+              "mae_m": 3.856451871657754,
+              "rmse_m": 4.167463358792571,
+              "district_macro_mae_m": 3.856451871657754
+            }
+          },
+          "12": {
+            "frozen": {
+              "n": 255,
+              "districts": 255,
+              "mae_m": 2.0798211455349382,
+              "rmse_m": 3.9287021998388814,
+              "district_macro_mae_m": 2.0798211455349382
+            },
+            "retrained": {
+              "n": 255,
+              "districts": 255,
+              "mae_m": 2.082516436226559,
+              "rmse_m": 3.8392108285447955,
+              "district_macro_mae_m": 2.082516436226559
+            },
+            "persistence": {
+              "n": 255,
+              "districts": 255,
+              "mae_m": 2.18930823784647,
+              "rmse_m": 4.284438847148275,
+              "district_macro_mae_m": 2.18930823784647
+            }
+          }
+        },
+        "by_history_group": {
+          "gained_accepted_history": {
+            "frozen": {
+              "n": 2692,
+              "districts": 477,
+              "mae_m": 1.9992861516755864,
+              "rmse_m": 3.985100672315761,
+              "district_macro_mae_m": 1.7048778663886095
+            },
+            "retrained": {
+              "n": 2692,
+              "districts": 477,
+              "mae_m": 1.9941023702945748,
+              "rmse_m": 3.8927766075578876,
+              "district_macro_mae_m": 1.7103906763323922
+            },
+            "persistence": {
+              "n": 2692,
+              "districts": 477,
+              "mae_m": 2.5594468994676784,
+              "rmse_m": 4.593067680252524,
+              "district_macro_mae_m": 2.3909897810093623
+            }
+          },
+          "newly_local_history": {
+            "frozen": {
+              "n": 17,
+              "districts": 3,
+              "mae_m": 0.87191805150579,
+              "rmse_m": 1.1424286272044604,
+              "district_macro_mae_m": 1.4881382186313477
+            },
+            "retrained": {
+              "n": 17,
+              "districts": 3,
+              "mae_m": 1.0903907496525962,
+              "rmse_m": 1.5138454324550736,
+              "district_macro_mae_m": 2.146080059380995
+            },
+            "persistence": {
+              "n": 17,
+              "districts": 3,
+              "mae_m": 1.1141176470588237,
+              "rmse_m": 1.2967515976016197,
+              "district_macro_mae_m": 0.9984444444444449
+            }
+          },
+          "substantial_original_history": {
+            "frozen": {
+              "n": 2384,
+              "districts": 406,
+              "mae_m": 1.955477375568514,
+              "rmse_m": 3.7795584280141443,
+              "district_macro_mae_m": 1.7009480423232675
+            },
+            "retrained": {
+              "n": 2384,
+              "districts": 406,
+              "mae_m": 1.9376047072364702,
+              "rmse_m": 3.658510635268335,
+              "district_macro_mae_m": 1.6961139437269592
+            },
+            "persistence": {
+              "n": 2384,
+              "districts": 406,
+              "mae_m": 2.507680535844547,
+              "rmse_m": 4.45376665904542,
+              "district_macro_mae_m": 2.369149781411706
+            }
+          }
+        }
+      }
+    },
+    {
+      "phase": "earlier_validation",
+      "candidate": "deeper_regularized",
+      "fold": {
+        "name": "rolling_2023",
+        "train_target_cutoff": "2021-12-31",
+        "validation_origin_start": "2023-01-01",
+        "validation_origin_end": "2023-12-01",
+        "validation_target_end": "2024-01-01"
+      },
+      "parameters": {
+        "n_estimators": 480,
+        "max_depth": 4,
+        "learning_rate": 0.04,
+        "min_child_weight": 60,
+        "reg_lambda": 40.0,
+        "reg_alpha": 0.2,
+        "subsample": 0.85,
+        "colsample_bytree": 0.9,
+        "random_state": 42,
+        "n_jobs": 4,
+        "tree_method": "hist",
+        "objective": "reg:squarederror",
+        "early_stopping_rounds": 40
+      },
+      "best_iteration": 446,
+      "train_pairs": 127402,
+      "train_districts": 626,
+      "validation_cases_file": "validation_rolling_2023_deeper_regularized.csv",
+      "validation_cases_sha256": "3ab29ebbf927872e771fbbfd11e4cf62a9e10aa16daec78664ffa0fcb92e779d",
+      "max_train_target": "2021-12-01",
+      "metrics": {
+        "frozen": {
+          "n": 2692,
+          "districts": 477,
+          "mae_m": 1.9992861516755864,
+          "rmse_m": 3.985100672315761,
+          "district_macro_mae_m": 1.7048778663886095
+        },
+        "retrained": {
+          "n": 2692,
+          "districts": 477,
+          "mae_m": 1.9458295260778802,
+          "rmse_m": 3.822182401853445,
+          "district_macro_mae_m": 1.6751460211561842
+        },
+        "persistence": {
+          "n": 2692,
+          "districts": 477,
+          "mae_m": 2.5594468994676784,
+          "rmse_m": 4.593067680252524,
+          "district_macro_mae_m": 2.3909897810093623
+        },
+        "seasonal_paired": {
+          "frozen": {
+            "n": 2487,
+            "districts": 470,
+            "mae_m": 1.8539713975483727,
+            "rmse_m": 3.50162608685229,
+            "district_macro_mae_m": 1.6959426815843206
+          },
+          "retrained": {
+            "n": 2487,
+            "districts": 470,
+            "mae_m": 1.7875815313354873,
+            "rmse_m": 3.2635249321876474,
+            "district_macro_mae_m": 1.6471845128951963
+          },
+          "persistence": {
+            "n": 2487,
+            "districts": 470,
+            "mae_m": 2.4432684011701644,
+            "rmse_m": 4.248898609217365,
+            "district_macro_mae_m": 2.4248181964452717
+          },
+          "seasonal": {
+            "n": 2487,
+            "districts": 470,
+            "mae_m": 2.1952477918363345,
+            "rmse_m": 3.8126387813454268,
+            "district_macro_mae_m": 1.9305985947570017
+          }
+        },
+        "dates": {
+          "origin_date": [
+            "2023-01-01",
+            "2023-11-01"
+          ],
+          "target_date": [
+            "2023-02-01",
+            "2024-01-01"
+          ]
+        },
+        "by_horizon": {
+          "1": {
+            "frozen": {
+              "n": 25,
+              "districts": 18,
+              "mae_m": 7.042917316206774,
+              "rmse_m": 13.016846475829352,
+              "district_macro_mae_m": 5.579972538357617
+            },
+            "retrained": {
+              "n": 25,
+              "districts": 18,
+              "mae_m": 5.863978007683377,
+              "rmse_m": 11.894643051255123,
+              "district_macro_mae_m": 4.688013437396953
+            },
+            "persistence": {
+              "n": 25,
+              "districts": 18,
+              "mae_m": 8.194627959637478,
+              "rmse_m": 15.445908418968342,
+              "district_macro_mae_m": 6.41146431783865
+            }
+          },
+          "2": {
+            "frozen": {
+              "n": 316,
+              "districts": 260,
+              "mae_m": 2.1225167763180286,
+              "rmse_m": 3.868841655911992,
+              "district_macro_mae_m": 1.9086789850188013
+            },
+            "retrained": {
+              "n": 316,
+              "districts": 260,
+              "mae_m": 2.112789111860757,
+              "rmse_m": 3.8073575889111906,
+              "district_macro_mae_m": 1.9236438630804116
+            },
+            "persistence": {
+              "n": 316,
+              "districts": 260,
+              "mae_m": 2.362132428368798,
+              "rmse_m": 4.2361822039302535,
+              "district_macro_mae_m": 2.170058849995963
+            }
+          },
+          "3": {
+            "frozen": {
+              "n": 490,
+              "districts": 343,
+              "mae_m": 1.4927715157725594,
+              "rmse_m": 2.720674801502307,
+              "district_macro_mae_m": 1.4310286839260056
+            },
+            "retrained": {
+              "n": 490,
+              "districts": 343,
+              "mae_m": 1.4847095803174253,
+              "rmse_m": 2.8022848634677664,
+              "district_macro_mae_m": 1.405974874666995
+            },
+            "persistence": {
+              "n": 490,
+              "districts": 343,
+              "mae_m": 2.43560520843311,
+              "rmse_m": 3.577605573764346,
+              "district_macro_mae_m": 2.5005766951388337
+            }
+          },
+          "4": {
+            "frozen": {
+              "n": 328,
+              "districts": 326,
+              "mae_m": 1.5877193305974193,
+              "rmse_m": 3.443431639501798,
+              "district_macro_mae_m": 1.586345586937482
+            },
+            "retrained": {
+              "n": 328,
+              "districts": 326,
+              "mae_m": 1.488656205908125,
+              "rmse_m": 2.9821391577988363,
+              "district_macro_mae_m": 1.4875743114764894
+            },
+            "persistence": {
+              "n": 328,
+              "districts": 326,
+              "mae_m": 2.686605237272299,
+              "rmse_m": 4.6576882915083075,
+              "district_macro_mae_m": 2.685229569155967
+            }
+          },
+          "5": {
+            "frozen": {
+              "n": 343,
+              "districts": 239,
+              "mae_m": 2.3702490706821373,
+              "rmse_m": 4.657443924866997,
+              "district_macro_mae_m": 2.156412819646101
+            },
+            "retrained": {
+              "n": 343,
+              "districts": 239,
+              "mae_m": 2.317064491005235,
+              "rmse_m": 4.630293101547093,
+              "district_macro_mae_m": 2.1247094570988923
+            },
+            "persistence": {
+              "n": 343,
+              "districts": 239,
+              "mae_m": 2.811320600968515,
+              "rmse_m": 4.919918701277559,
+              "district_macro_mae_m": 2.7509636767430803
+            }
+          },
+          "6": {
+            "frozen": {
+              "n": 136,
+              "districts": 131,
+              "mae_m": 3.051209937328831,
+              "rmse_m": 6.5470630839734145,
+              "district_macro_mae_m": 2.4955631812975207
+            },
+            "retrained": {
+              "n": 136,
+              "districts": 131,
+              "mae_m": 2.881486689077395,
+              "rmse_m": 6.008880466401936,
+              "district_macro_mae_m": 2.4175395608019383
+            },
+            "persistence": {
+              "n": 136,
+              "districts": 131,
+              "mae_m": 3.8468279474850275,
+              "rmse_m": 7.632566178647823,
+              "district_macro_mae_m": 3.2077952711301014
+            }
+          },
+          "7": {
+            "frozen": {
+              "n": 391,
+              "districts": 337,
+              "mae_m": 1.9364319244431833,
+              "rmse_m": 3.6578512046092717,
+              "district_macro_mae_m": 1.8359628936226573
+            },
+            "retrained": {
+              "n": 391,
+              "districts": 337,
+              "mae_m": 1.9218128696394943,
+              "rmse_m": 3.704652545883438,
+              "district_macro_mae_m": 1.8236924540545312
+            },
+            "persistence": {
+              "n": 391,
+              "districts": 337,
+              "mae_m": 2.484969800072084,
+              "rmse_m": 3.982687498516194,
+              "district_macro_mae_m": 2.388739934450254
+            }
+          },
+          "8": {
+            "frozen": {
+              "n": 154,
+              "districts": 152,
+              "mae_m": 2.144403662043158,
+              "rmse_m": 3.624232470754791,
+              "district_macro_mae_m": 2.131567181702834
+            },
+            "retrained": {
+              "n": 154,
+              "districts": 152,
+              "mae_m": 2.0025596980867024,
+              "rmse_m": 3.1652974338129964,
+              "district_macro_mae_m": 1.9904570570537239
+            },
+            "persistence": {
+              "n": 154,
+              "districts": 152,
+              "mae_m": 2.4603886685109644,
+              "rmse_m": 3.975538556461107,
+              "district_macro_mae_m": 2.4565821968249146
+            }
+          },
+          "9": {
+            "frozen": {
+              "n": 24,
+              "districts": 24,
+              "mae_m": 1.0189036532931393,
+              "rmse_m": 1.5166701503889684,
+              "district_macro_mae_m": 1.0189036532931393
+            },
+            "retrained": {
+              "n": 24,
+              "districts": 24,
+              "mae_m": 0.8581782572831776,
+              "rmse_m": 1.313753122239383,
+              "district_macro_mae_m": 0.8581782572831776
+            },
+            "persistence": {
+              "n": 24,
+              "districts": 24,
+              "mae_m": 1.3880543881610972,
+              "rmse_m": 1.6632454138723312,
+              "district_macro_mae_m": 1.3880543881610972
+            }
+          },
+          "10": {
+            "frozen": {
+              "n": 228,
+              "districts": 226,
+              "mae_m": 1.7740698145972988,
+              "rmse_m": 2.744501555966179,
+              "district_macro_mae_m": 1.7523679531298466
+            },
+            "retrained": {
+              "n": 228,
+              "districts": 226,
+              "mae_m": 1.7550664606953186,
+              "rmse_m": 2.6270082261731185,
+              "district_macro_mae_m": 1.733810294410712
+            },
+            "persistence": {
+              "n": 228,
+              "districts": 226,
+              "mae_m": 1.8719474279601136,
+              "rmse_m": 3.0532502297237127,
+              "district_macro_mae_m": 1.8585159439597998
+            }
+          },
+          "11": {
+            "frozen": {
+              "n": 2,
+              "districts": 2,
+              "mae_m": 4.210538136625672,
+              "rmse_m": 4.311508553011319,
+              "district_macro_mae_m": 4.210538136625672
+            },
+            "retrained": {
+              "n": 2,
+              "districts": 2,
+              "mae_m": 4.2549081769231805,
+              "rmse_m": 4.331264473912729,
+              "district_macro_mae_m": 4.2549081769231805
+            },
+            "persistence": {
+              "n": 2,
+              "districts": 2,
+              "mae_m": 3.856451871657754,
+              "rmse_m": 4.167463358792571,
+              "district_macro_mae_m": 3.856451871657754
+            }
+          },
+          "12": {
+            "frozen": {
+              "n": 255,
+              "districts": 255,
+              "mae_m": 2.0798211455349382,
+              "rmse_m": 3.9287021998388814,
+              "district_macro_mae_m": 2.0798211455349382
+            },
+            "retrained": {
+              "n": 255,
+              "districts": 255,
+              "mae_m": 2.087944162891277,
+              "rmse_m": 3.767309281104958,
+              "district_macro_mae_m": 2.087944162891277
+            },
+            "persistence": {
+              "n": 255,
+              "districts": 255,
+              "mae_m": 2.18930823784647,
+              "rmse_m": 4.284438847148275,
+              "district_macro_mae_m": 2.18930823784647
+            }
+          }
+        },
+        "by_history_group": {
+          "gained_accepted_history": {
+            "frozen": {
+              "n": 2692,
+              "districts": 477,
+              "mae_m": 1.9992861516755864,
+              "rmse_m": 3.985100672315761,
+              "district_macro_mae_m": 1.7048778663886095
+            },
+            "retrained": {
+              "n": 2692,
+              "districts": 477,
+              "mae_m": 1.9458295260778802,
+              "rmse_m": 3.822182401853445,
+              "district_macro_mae_m": 1.6751460211561842
+            },
+            "persistence": {
+              "n": 2692,
+              "districts": 477,
+              "mae_m": 2.5594468994676784,
+              "rmse_m": 4.593067680252524,
+              "district_macro_mae_m": 2.3909897810093623
+            }
+          },
+          "newly_local_history": {
+            "frozen": {
+              "n": 17,
+              "districts": 3,
+              "mae_m": 0.87191805150579,
+              "rmse_m": 1.1424286272044604,
+              "district_macro_mae_m": 1.4881382186313477
+            },
+            "retrained": {
+              "n": 17,
+              "districts": 3,
+              "mae_m": 1.0256582912101468,
+              "rmse_m": 1.2158505093470462,
+              "district_macro_mae_m": 1.4902230736580162
+            },
+            "persistence": {
+              "n": 17,
+              "districts": 3,
+              "mae_m": 1.1141176470588237,
+              "rmse_m": 1.2967515976016197,
+              "district_macro_mae_m": 0.9984444444444449
+            }
+          },
+          "substantial_original_history": {
+            "frozen": {
+              "n": 2384,
+              "districts": 406,
+              "mae_m": 1.955477375568514,
+              "rmse_m": 3.7795584280141443,
+              "district_macro_mae_m": 1.7009480423232675
+            },
+            "retrained": {
+              "n": 2384,
+              "districts": 406,
+              "mae_m": 1.8909318331803548,
+              "rmse_m": 3.5925839787168172,
+              "district_macro_mae_m": 1.6599240134765552
+            },
+            "persistence": {
+              "n": 2384,
+              "districts": 406,
+              "mae_m": 2.507680535844547,
+              "rmse_m": 4.45376665904542,
+              "district_macro_mae_m": 2.369149781411706
+            }
+          }
+        }
+      }
+    },
+    {
+      "phase": "earlier_validation",
+      "candidate": "current_structure",
+      "fold": {
+        "name": "rolling_2024",
+        "train_target_cutoff": "2022-12-31",
+        "validation_origin_start": "2024-01-01",
+        "validation_origin_end": "2024-12-01",
+        "validation_target_end": "2025-01-01"
+      },
+      "parameters": {
+        "n_estimators": 480,
+        "max_depth": 3,
+        "learning_rate": 0.04,
+        "min_child_weight": 30,
+        "reg_lambda": 20.0,
+        "reg_alpha": 0.1,
+        "subsample": 0.85,
+        "colsample_bytree": 0.9,
+        "random_state": 42,
+        "n_jobs": 4,
+        "tree_method": "hist",
+        "objective": "reg:squarederror",
+        "early_stopping_rounds": 40
+      },
+      "best_iteration": 478,
+      "train_pairs": 136791,
+      "train_districts": 632,
+      "validation_cases_file": "validation_rolling_2024_current_structure.csv",
+      "validation_cases_sha256": "5076b0438232a4acec8ef9c0137bfd02e2f91ac02f1cf8ddd13086183dfaad13",
+      "max_train_target": "2022-12-01",
+      "metrics": {
+        "frozen": {
+          "n": 910,
+          "districts": 277,
+          "mae_m": 1.9039841964203792,
+          "rmse_m": 3.137137404386541,
+          "district_macro_mae_m": 2.251068653476905
+        },
+        "retrained": {
+          "n": 910,
+          "districts": 277,
+          "mae_m": 1.8245542534284955,
+          "rmse_m": 3.075155579275347,
+          "district_macro_mae_m": 2.1937945255000786
+        },
+        "persistence": {
+          "n": 910,
+          "districts": 277,
+          "mae_m": 2.485291122730818,
+          "rmse_m": 3.6864229338581,
+          "district_macro_mae_m": 2.6434680933582775
+        },
+        "seasonal_paired": {
+          "frozen": {
+            "n": 837,
+            "districts": 272,
+            "mae_m": 1.9160569353704284,
+            "rmse_m": 3.1793881752207445,
+            "district_macro_mae_m": 2.248075978326259
+          },
+          "retrained": {
+            "n": 837,
+            "districts": 272,
+            "mae_m": 1.8378631385823663,
+            "rmse_m": 3.1168939087687444,
+            "district_macro_mae_m": 2.1943076284714333
+          },
+          "persistence": {
+            "n": 837,
+            "districts": 272,
+            "mae_m": 2.5048221501390087,
+            "rmse_m": 3.7331747289690265,
+            "district_macro_mae_m": 2.6467429792255017
+          },
+          "seasonal": {
+            "n": 837,
+            "districts": 272,
+            "mae_m": 1.997976612472238,
+            "rmse_m": 3.3742648070160346,
+            "district_macro_mae_m": 2.401489052773485
+          }
+        },
+        "dates": {
+          "origin_date": [
+            "2024-01-01",
+            "2024-11-01"
+          ],
+          "target_date": [
+            "2024-02-01",
+            "2025-01-01"
+          ]
+        },
+        "by_horizon": {
+          "1": {
+            "frozen": {
+              "n": 9,
+              "districts": 8,
+              "mae_m": 1.2967812059275987,
+              "rmse_m": 1.7526933617024325,
+              "district_macro_mae_m": 1.2496034181395252
+            },
+            "retrained": {
+              "n": 9,
+              "districts": 8,
+              "mae_m": 1.2724892783117974,
+              "rmse_m": 1.6172936150569037,
+              "district_macro_mae_m": 1.2295341989675244
+            },
+            "persistence": {
+              "n": 9,
+              "districts": 8,
+              "mae_m": 1.0244394219499087,
+              "rmse_m": 1.5091288133544358,
+              "district_macro_mae_m": 0.889886705302817
+            }
+          },
+          "2": {
+            "frozen": {
+              "n": 50,
+              "districts": 46,
+              "mae_m": 2.5362870220999993,
+              "rmse_m": 3.746436940634126,
+              "district_macro_mae_m": 2.6950897573523367
+            },
+            "retrained": {
+              "n": 50,
+              "districts": 46,
+              "mae_m": 2.3598691717891476,
+              "rmse_m": 3.5780338283083037,
+              "district_macro_mae_m": 2.5063687541161954
+            },
+            "persistence": {
+              "n": 50,
+              "districts": 46,
+              "mae_m": 2.2560099772573006,
+              "rmse_m": 3.7127658657192106,
+              "district_macro_mae_m": 2.3300778297289875
+            }
+          },
+          "3": {
+            "frozen": {
+              "n": 151,
+              "districts": 83,
+              "mae_m": 1.3044150776856138,
+              "rmse_m": 1.8922390202516153,
+              "district_macro_mae_m": 1.3188337551354656
+            },
+            "retrained": {
+              "n": 151,
+              "districts": 83,
+              "mae_m": 1.2847801275077007,
+              "rmse_m": 1.862201369124084,
+              "district_macro_mae_m": 1.3017159704929515
+            },
+            "persistence": {
+              "n": 151,
+              "districts": 83,
+              "mae_m": 2.0284622136742745,
+              "rmse_m": 2.684290896225221,
+              "district_macro_mae_m": 1.9517906511622582
+            }
+          },
+          "4": {
+            "frozen": {
+              "n": 73,
+              "districts": 70,
+              "mae_m": 1.1691056297895734,
+              "rmse_m": 1.6498334951850864,
+              "district_macro_mae_m": 1.167108334276593
+            },
+            "retrained": {
+              "n": 73,
+              "districts": 70,
+              "mae_m": 1.1535285504124635,
+              "rmse_m": 1.6275460892007647,
+              "district_macro_mae_m": 1.1491340305276438
+            },
+            "persistence": {
+              "n": 73,
+              "districts": 70,
+              "mae_m": 2.333279217130342,
+              "rmse_m": 2.7849262736029714,
+              "district_macro_mae_m": 2.3476876374112083
+            }
+          },
+          "5": {
+            "frozen": {
+              "n": 84,
+              "districts": 81,
+              "mae_m": 2.963781167258079,
+              "rmse_m": 4.3130441957063175,
+              "district_macro_mae_m": 3.048654454327619
+            },
+            "retrained": {
+              "n": 84,
+              "districts": 81,
+              "mae_m": 2.7587840405132846,
+              "rmse_m": 4.070173000508789,
+              "district_macro_mae_m": 2.8376737407531967
+            },
+            "persistence": {
+              "n": 84,
+              "districts": 81,
+              "mae_m": 3.2844838501520686,
+              "rmse_m": 4.8032156958280545,
+              "district_macro_mae_m": 3.3607066528476675
+            }
+          },
+          "6": {
+            "frozen": {
+              "n": 67,
+              "districts": 61,
+              "mae_m": 1.3844204476589705,
+              "rmse_m": 2.024245820099747,
+              "district_macro_mae_m": 1.3786786936812154
+            },
+            "retrained": {
+              "n": 67,
+              "districts": 61,
+              "mae_m": 1.3072366153744535,
+              "rmse_m": 1.986134758738489,
+              "district_macro_mae_m": 1.2853282095503666
+            },
+            "persistence": {
+              "n": 67,
+              "districts": 61,
+              "mae_m": 2.6340405744218196,
+              "rmse_m": 2.987279576345572,
+              "district_macro_mae_m": 2.6241547594577255
+            }
+          },
+          "7": {
+            "frozen": {
+              "n": 101,
+              "districts": 100,
+              "mae_m": 1.5639616548029789,
+              "rmse_m": 2.2962825116637573,
+              "district_macro_mae_m": 1.5660565352130846
+            },
+            "retrained": {
+              "n": 101,
+              "districts": 100,
+              "mae_m": 1.4832862418452815,
+              "rmse_m": 2.2336543348179534,
+              "district_macro_mae_m": 1.4840232003992935
+            },
+            "persistence": {
+              "n": 101,
+              "districts": 100,
+              "mae_m": 2.537908165203267,
+              "rmse_m": 3.1879554143508755,
+              "district_macro_mae_m": 2.5526047501301745
+            }
+          },
+          "8": {
+            "frozen": {
+              "n": 49,
+              "districts": 48,
+              "mae_m": 2.5146964901213558,
+              "rmse_m": 3.59241516342151,
+              "district_macro_mae_m": 2.552673782205668
+            },
+            "retrained": {
+              "n": 49,
+              "districts": 48,
+              "mae_m": 2.400420396633519,
+              "rmse_m": 3.4582491593801747,
+              "district_macro_mae_m": 2.4359881303420536
+            },
+            "persistence": {
+              "n": 49,
+              "districts": 48,
+              "mae_m": 3.797839742379386,
+              "rmse_m": 4.911417071558377,
+              "district_macro_mae_m": 3.847148346824655
+            }
+          },
+          "9": {
+            "frozen": {
+              "n": 23,
+              "districts": 23,
+              "mae_m": 1.2448589235451126,
+              "rmse_m": 1.6484600473731035,
+              "district_macro_mae_m": 1.2448589235451126
+            },
+            "retrained": {
+              "n": 23,
+              "districts": 23,
+              "mae_m": 1.1373249859820458,
+              "rmse_m": 1.495900705512118,
+              "district_macro_mae_m": 1.1373249859820458
+            },
+            "persistence": {
+              "n": 23,
+              "districts": 23,
+              "mae_m": 1.5641802401950629,
+              "rmse_m": 1.9663565260055247,
+              "district_macro_mae_m": 1.5641802401950629
+            }
+          },
+          "10": {
+            "frozen": {
+              "n": 62,
+              "districts": 62,
+              "mae_m": 1.3763420906751405,
+              "rmse_m": 2.0472191500745804,
+              "district_macro_mae_m": 1.3763420906751405
+            },
+            "retrained": {
+              "n": 62,
+              "districts": 62,
+              "mae_m": 1.2794650232351614,
+              "rmse_m": 1.9495905889600802,
+              "district_macro_mae_m": 1.2794650232351614
+            },
+            "persistence": {
+              "n": 62,
+              "districts": 62,
+              "mae_m": 1.6793084763207327,
+              "rmse_m": 2.2420577976644367,
+              "district_macro_mae_m": 1.6793084763207327
+            }
+          },
+          "11": {
+            "frozen": {
+              "n": 0,
+              "districts": 0,
+              "mae_m": null,
+              "rmse_m": null,
+              "district_macro_mae_m": null
+            },
+            "retrained": {
+              "n": 0,
+              "districts": 0,
+              "mae_m": null,
+              "rmse_m": null,
+              "district_macro_mae_m": null
+            },
+            "persistence": {
+              "n": 0,
+              "districts": 0,
+              "mae_m": null,
+              "rmse_m": null,
+              "district_macro_mae_m": null
+            }
+          },
+          "12": {
+            "frozen": {
+              "n": 241,
+              "districts": 241,
+              "mae_m": 2.3857669751940125,
+              "rmse_m": 4.156015527658998,
+              "district_macro_mae_m": 2.3857669751940125
+            },
+            "retrained": {
+              "n": 241,
+              "districts": 241,
+              "mae_m": 2.3255128484610266,
+              "rmse_m": 4.1705894199687865,
+              "district_macro_mae_m": 2.3255128484610266
+            },
+            "persistence": {
+              "n": 241,
+              "districts": 241,
+              "mae_m": 2.606115294156732,
+              "rmse_m": 4.489649472558249,
+              "district_macro_mae_m": 2.606115294156732
+            }
+          }
+        },
+        "by_history_group": {
+          "gained_accepted_history": {
+            "frozen": {
+              "n": 910,
+              "districts": 277,
+              "mae_m": 1.9039841964203792,
+              "rmse_m": 3.137137404386541,
+              "district_macro_mae_m": 2.251068653476905
+            },
+            "retrained": {
+              "n": 910,
+              "districts": 277,
+              "mae_m": 1.8245542534284955,
+              "rmse_m": 3.075155579275347,
+              "district_macro_mae_m": 2.1937945255000786
+            },
+            "persistence": {
+              "n": 910,
+              "districts": 277,
+              "mae_m": 2.485291122730818,
+              "rmse_m": 3.6864229338581,
+              "district_macro_mae_m": 2.6434680933582775
+            }
+          },
+          "newly_local_history": {
+            "frozen": {
+              "n": 0,
+              "districts": 0,
+              "mae_m": null,
+              "rmse_m": null,
+              "district_macro_mae_m": null
+            },
+            "retrained": {
+              "n": 0,
+              "districts": 0,
+              "mae_m": null,
+              "rmse_m": null,
+              "district_macro_mae_m": null
+            },
+            "persistence": {
+              "n": 0,
+              "districts": 0,
+              "mae_m": null,
+              "rmse_m": null,
+              "district_macro_mae_m": null
+            }
+          },
+          "substantial_original_history": {
+            "frozen": {
+              "n": 829,
+              "districts": 246,
+              "mae_m": 1.919444846957936,
+              "rmse_m": 3.176887814145978,
+              "district_macro_mae_m": 2.248514867336563
+            },
+            "retrained": {
+              "n": 829,
+              "districts": 246,
+              "mae_m": 1.8420033103725486,
+              "rmse_m": 3.124868657663011,
+              "district_macro_mae_m": 2.1985218196736946
+            },
+            "persistence": {
+              "n": 829,
+              "districts": 246,
+              "mae_m": 2.498259139260007,
+              "rmse_m": 3.700778568634989,
+              "district_macro_mae_m": 2.6387941988570303
+            }
+          }
+        }
+      }
+    },
+    {
+      "phase": "earlier_validation",
+      "candidate": "shallow_regularized",
+      "fold": {
+        "name": "rolling_2024",
+        "train_target_cutoff": "2022-12-31",
+        "validation_origin_start": "2024-01-01",
+        "validation_origin_end": "2024-12-01",
+        "validation_target_end": "2025-01-01"
+      },
+      "parameters": {
+        "n_estimators": 480,
+        "max_depth": 2,
+        "learning_rate": 0.04,
+        "min_child_weight": 60,
+        "reg_lambda": 40.0,
+        "reg_alpha": 0.2,
+        "subsample": 0.85,
+        "colsample_bytree": 0.9,
+        "random_state": 42,
+        "n_jobs": 4,
+        "tree_method": "hist",
+        "objective": "reg:squarederror",
+        "early_stopping_rounds": 40
+      },
+      "best_iteration": 476,
+      "train_pairs": 136791,
+      "train_districts": 632,
+      "validation_cases_file": "validation_rolling_2024_shallow_regularized.csv",
+      "validation_cases_sha256": "ff30e8eb19ce906cf177baad1814cd3111324c973a42131b90c72c4ff2421967",
+      "max_train_target": "2022-12-01",
+      "metrics": {
+        "frozen": {
+          "n": 910,
+          "districts": 277,
+          "mae_m": 1.9039841964203792,
+          "rmse_m": 3.137137404386541,
+          "district_macro_mae_m": 2.251068653476905
+        },
+        "retrained": {
+          "n": 910,
+          "districts": 277,
+          "mae_m": 1.8861180531242863,
+          "rmse_m": 3.135580512188021,
+          "district_macro_mae_m": 2.2575273320974953
+        },
+        "persistence": {
+          "n": 910,
+          "districts": 277,
+          "mae_m": 2.485291122730818,
+          "rmse_m": 3.6864229338581,
+          "district_macro_mae_m": 2.6434680933582775
+        },
+        "seasonal_paired": {
+          "frozen": {
+            "n": 837,
+            "districts": 272,
+            "mae_m": 1.9160569353704284,
+            "rmse_m": 3.1793881752207445,
+            "district_macro_mae_m": 2.248075978326259
+          },
+          "retrained": {
+            "n": 837,
+            "districts": 272,
+            "mae_m": 1.8936409269992334,
+            "rmse_m": 3.1760308573192986,
+            "district_macro_mae_m": 2.2514141835183317
+          },
+          "persistence": {
+            "n": 837,
+            "districts": 272,
+            "mae_m": 2.5048221501390087,
+            "rmse_m": 3.7331747289690265,
+            "district_macro_mae_m": 2.6467429792255017
+          },
+          "seasonal": {
+            "n": 837,
+            "districts": 272,
+            "mae_m": 1.997976612472238,
+            "rmse_m": 3.3742648070160346,
+            "district_macro_mae_m": 2.401489052773485
+          }
+        },
+        "dates": {
+          "origin_date": [
+            "2024-01-01",
+            "2024-11-01"
+          ],
+          "target_date": [
+            "2024-02-01",
+            "2025-01-01"
+          ]
+        },
+        "by_horizon": {
+          "1": {
+            "frozen": {
+              "n": 9,
+              "districts": 8,
+              "mae_m": 1.2967812059275987,
+              "rmse_m": 1.7526933617024325,
+              "district_macro_mae_m": 1.2496034181395252
+            },
+            "retrained": {
+              "n": 9,
+              "districts": 8,
+              "mae_m": 1.369292924158779,
+              "rmse_m": 1.8281081231900103,
+              "district_macro_mae_m": 1.3321781314950547
+            },
+            "persistence": {
+              "n": 9,
+              "districts": 8,
+              "mae_m": 1.0244394219499087,
+              "rmse_m": 1.5091288133544358,
+              "district_macro_mae_m": 0.889886705302817
+            }
+          },
+          "2": {
+            "frozen": {
+              "n": 50,
+              "districts": 46,
+              "mae_m": 2.5362870220999993,
+              "rmse_m": 3.746436940634126,
+              "district_macro_mae_m": 2.6950897573523367
+            },
+            "retrained": {
+              "n": 50,
+              "districts": 46,
+              "mae_m": 2.4665136847060003,
+              "rmse_m": 3.7112351341665777,
+              "district_macro_mae_m": 2.619432290358953
+            },
+            "persistence": {
+              "n": 50,
+              "districts": 46,
+              "mae_m": 2.2560099772573006,
+              "rmse_m": 3.7127658657192106,
+              "district_macro_mae_m": 2.3300778297289875
+            }
+          },
+          "3": {
+            "frozen": {
+              "n": 151,
+              "districts": 83,
+              "mae_m": 1.3044150776856138,
+              "rmse_m": 1.8922390202516153,
+              "district_macro_mae_m": 1.3188337551354656
+            },
+            "retrained": {
+              "n": 151,
+              "districts": 83,
+              "mae_m": 1.3357779916207704,
+              "rmse_m": 1.9126805635319628,
+              "district_macro_mae_m": 1.361314446826613
+            },
+            "persistence": {
+              "n": 151,
+              "districts": 83,
+              "mae_m": 2.0284622136742745,
+              "rmse_m": 2.684290896225221,
+              "district_macro_mae_m": 1.9517906511622582
+            }
+          },
+          "4": {
+            "frozen": {
+              "n": 73,
+              "districts": 70,
+              "mae_m": 1.1691056297895734,
+              "rmse_m": 1.6498334951850864,
+              "district_macro_mae_m": 1.167108334276593
+            },
+            "retrained": {
+              "n": 73,
+              "districts": 70,
+              "mae_m": 1.1293603626261755,
+              "rmse_m": 1.6013929851533415,
+              "district_macro_mae_m": 1.1269110678094676
+            },
+            "persistence": {
+              "n": 73,
+              "districts": 70,
+              "mae_m": 2.333279217130342,
+              "rmse_m": 2.7849262736029714,
+              "district_macro_mae_m": 2.3476876374112083
+            }
+          },
+          "5": {
+            "frozen": {
+              "n": 84,
+              "districts": 81,
+              "mae_m": 2.963781167258079,
+              "rmse_m": 4.3130441957063175,
+              "district_macro_mae_m": 3.048654454327619
+            },
+            "retrained": {
+              "n": 84,
+              "districts": 81,
+              "mae_m": 2.878449007923355,
+              "rmse_m": 4.284278763677365,
+              "district_macro_mae_m": 2.9568738415252547
+            },
+            "persistence": {
+              "n": 84,
+              "districts": 81,
+              "mae_m": 3.2844838501520686,
+              "rmse_m": 4.8032156958280545,
+              "district_macro_mae_m": 3.3607066528476675
+            }
+          },
+          "6": {
+            "frozen": {
+              "n": 67,
+              "districts": 61,
+              "mae_m": 1.3844204476589705,
+              "rmse_m": 2.024245820099747,
+              "district_macro_mae_m": 1.3786786936812154
+            },
+            "retrained": {
+              "n": 67,
+              "districts": 61,
+              "mae_m": 1.3755705271286582,
+              "rmse_m": 2.0240688006431036,
+              "district_macro_mae_m": 1.3710406604241252
+            },
+            "persistence": {
+              "n": 67,
+              "districts": 61,
+              "mae_m": 2.6340405744218196,
+              "rmse_m": 2.987279576345572,
+              "district_macro_mae_m": 2.6241547594577255
+            }
+          },
+          "7": {
+            "frozen": {
+              "n": 101,
+              "districts": 100,
+              "mae_m": 1.5639616548029789,
+              "rmse_m": 2.2962825116637573,
+              "district_macro_mae_m": 1.5660565352130846
+            },
+            "retrained": {
+              "n": 101,
+              "districts": 100,
+              "mae_m": 1.5657931317177887,
+              "rmse_m": 2.28887666112694,
+              "district_macro_mae_m": 1.5665556081603935
+            },
+            "persistence": {
+              "n": 101,
+              "districts": 100,
+              "mae_m": 2.537908165203267,
+              "rmse_m": 3.1879554143508755,
+              "district_macro_mae_m": 2.5526047501301745
+            }
+          },
+          "8": {
+            "frozen": {
+              "n": 49,
+              "districts": 48,
+              "mae_m": 2.5146964901213558,
+              "rmse_m": 3.59241516342151,
+              "district_macro_mae_m": 2.552673782205668
+            },
+            "retrained": {
+              "n": 49,
+              "districts": 48,
+              "mae_m": 2.4495385195177244,
+              "rmse_m": 3.5725282890515384,
+              "district_macro_mae_m": 2.4876833256791904
+            },
+            "persistence": {
+              "n": 49,
+              "districts": 48,
+              "mae_m": 3.797839742379386,
+              "rmse_m": 4.911417071558377,
+              "district_macro_mae_m": 3.847148346824655
+            }
+          },
+          "9": {
+            "frozen": {
+              "n": 23,
+              "districts": 23,
+              "mae_m": 1.2448589235451126,
+              "rmse_m": 1.6484600473731035,
+              "district_macro_mae_m": 1.2448589235451126
+            },
+            "retrained": {
+              "n": 23,
+              "districts": 23,
+              "mae_m": 1.2374834148014235,
+              "rmse_m": 1.633260614712951,
+              "district_macro_mae_m": 1.2374834148014235
+            },
+            "persistence": {
+              "n": 23,
+              "districts": 23,
+              "mae_m": 1.5641802401950629,
+              "rmse_m": 1.9663565260055247,
+              "district_macro_mae_m": 1.5641802401950629
+            }
+          },
+          "10": {
+            "frozen": {
+              "n": 62,
+              "districts": 62,
+              "mae_m": 1.3763420906751405,
+              "rmse_m": 2.0472191500745804,
+              "district_macro_mae_m": 1.3763420906751405
+            },
+            "retrained": {
+              "n": 62,
+              "districts": 62,
+              "mae_m": 1.394340363569962,
+              "rmse_m": 2.059198287562817,
+              "district_macro_mae_m": 1.394340363569962
+            },
+            "persistence": {
+              "n": 62,
+              "districts": 62,
+              "mae_m": 1.6793084763207327,
+              "rmse_m": 2.2420577976644367,
+              "district_macro_mae_m": 1.6793084763207327
+            }
+          },
+          "11": {
+            "frozen": {
+              "n": 0,
+              "districts": 0,
+              "mae_m": null,
+              "rmse_m": null,
+              "district_macro_mae_m": null
+            },
+            "retrained": {
+              "n": 0,
+              "districts": 0,
+              "mae_m": null,
+              "rmse_m": null,
+              "district_macro_mae_m": null
+            },
+            "persistence": {
+              "n": 0,
+              "districts": 0,
+              "mae_m": null,
+              "rmse_m": null,
+              "district_macro_mae_m": null
+            }
+          },
+          "12": {
+            "frozen": {
+              "n": 241,
+              "districts": 241,
+              "mae_m": 2.3857669751940125,
+              "rmse_m": 4.156015527658998,
+              "district_macro_mae_m": 2.3857669751940125
+            },
+            "retrained": {
+              "n": 241,
+              "districts": 241,
+              "mae_m": 2.3632185384195306,
+              "rmse_m": 4.171408216058754,
+              "district_macro_mae_m": 2.3632185384195306
+            },
+            "persistence": {
+              "n": 241,
+              "districts": 241,
+              "mae_m": 2.606115294156732,
+              "rmse_m": 4.489649472558249,
+              "district_macro_mae_m": 2.606115294156732
+            }
+          }
+        },
+        "by_history_group": {
+          "gained_accepted_history": {
+            "frozen": {
+              "n": 910,
+              "districts": 277,
+              "mae_m": 1.9039841964203792,
+              "rmse_m": 3.137137404386541,
+              "district_macro_mae_m": 2.251068653476905
+            },
+            "retrained": {
+              "n": 910,
+              "districts": 277,
+              "mae_m": 1.8861180531242863,
+              "rmse_m": 3.135580512188021,
+              "district_macro_mae_m": 2.2575273320974953
+            },
+            "persistence": {
+              "n": 910,
+              "districts": 277,
+              "mae_m": 2.485291122730818,
+              "rmse_m": 3.6864229338581,
+              "district_macro_mae_m": 2.6434680933582775
+            }
+          },
+          "newly_local_history": {
+            "frozen": {
+              "n": 0,
+              "districts": 0,
+              "mae_m": null,
+              "rmse_m": null,
+              "district_macro_mae_m": null
+            },
+            "retrained": {
+              "n": 0,
+              "districts": 0,
+              "mae_m": null,
+              "rmse_m": null,
+              "district_macro_mae_m": null
+            },
+            "persistence": {
+              "n": 0,
+              "districts": 0,
+              "mae_m": null,
+              "rmse_m": null,
+              "district_macro_mae_m": null
+            }
+          },
+          "substantial_original_history": {
+            "frozen": {
+              "n": 829,
+              "districts": 246,
+              "mae_m": 1.919444846957936,
+              "rmse_m": 3.176887814145978,
+              "district_macro_mae_m": 2.248514867336563
+            },
+            "retrained": {
+              "n": 829,
+              "districts": 246,
+              "mae_m": 1.9079435337493909,
+              "rmse_m": 3.185790730935678,
+              "district_macro_mae_m": 2.265510273282271
+            },
+            "persistence": {
+              "n": 829,
+              "districts": 246,
+              "mae_m": 2.498259139260007,
+              "rmse_m": 3.700778568634989,
+              "district_macro_mae_m": 2.6387941988570303
+            }
+          }
+        }
+      }
+    },
+    {
+      "phase": "earlier_validation",
+      "candidate": "deeper_regularized",
+      "fold": {
+        "name": "rolling_2024",
+        "train_target_cutoff": "2022-12-31",
+        "validation_origin_start": "2024-01-01",
+        "validation_origin_end": "2024-12-01",
+        "validation_target_end": "2025-01-01"
+      },
+      "parameters": {
+        "n_estimators": 480,
+        "max_depth": 4,
+        "learning_rate": 0.04,
+        "min_child_weight": 60,
+        "reg_lambda": 40.0,
+        "reg_alpha": 0.2,
+        "subsample": 0.85,
+        "colsample_bytree": 0.9,
+        "random_state": 42,
+        "n_jobs": 4,
+        "tree_method": "hist",
+        "objective": "reg:squarederror",
+        "early_stopping_rounds": 40
+      },
+      "best_iteration": 474,
+      "train_pairs": 136791,
+      "train_districts": 632,
+      "validation_cases_file": "validation_rolling_2024_deeper_regularized.csv",
+      "validation_cases_sha256": "5e5e45e72ce019829a53d796421190f162fec4c7516bab6525542c417a24b5c7",
+      "max_train_target": "2022-12-01",
+      "metrics": {
+        "frozen": {
+          "n": 910,
+          "districts": 277,
+          "mae_m": 1.9039841964203792,
+          "rmse_m": 3.137137404386541,
+          "district_macro_mae_m": 2.251068653476905
+        },
+        "retrained": {
+          "n": 910,
+          "districts": 277,
+          "mae_m": 1.793898710980647,
+          "rmse_m": 3.0194837449005987,
+          "district_macro_mae_m": 2.151734731270373
+        },
+        "persistence": {
+          "n": 910,
+          "districts": 277,
+          "mae_m": 2.485291122730818,
+          "rmse_m": 3.6864229338581,
+          "district_macro_mae_m": 2.6434680933582775
+        },
+        "seasonal_paired": {
+          "frozen": {
+            "n": 837,
+            "districts": 272,
+            "mae_m": 1.9160569353704284,
+            "rmse_m": 3.1793881752207445,
+            "district_macro_mae_m": 2.248075978326259
+          },
+          "retrained": {
+            "n": 837,
+            "districts": 272,
+            "mae_m": 1.8074723803511419,
+            "rmse_m": 3.0583266953953765,
+            "district_macro_mae_m": 2.1537707997503617
+          },
+          "persistence": {
+            "n": 837,
+            "districts": 272,
+            "mae_m": 2.5048221501390087,
+            "rmse_m": 3.7331747289690265,
+            "district_macro_mae_m": 2.6467429792255017
+          },
+          "seasonal": {
+            "n": 837,
+            "districts": 272,
+            "mae_m": 1.997976612472238,
+            "rmse_m": 3.3742648070160346,
+            "district_macro_mae_m": 2.401489052773485
+          }
+        },
+        "dates": {
+          "origin_date": [
+            "2024-01-01",
+            "2024-11-01"
+          ],
+          "target_date": [
+            "2024-02-01",
+            "2025-01-01"
+          ]
+        },
+        "by_horizon": {
+          "1": {
+            "frozen": {
+              "n": 9,
+              "districts": 8,
+              "mae_m": 1.2967812059275987,
+              "rmse_m": 1.7526933617024325,
+              "district_macro_mae_m": 1.2496034181395252
+            },
+            "retrained": {
+              "n": 9,
+              "districts": 8,
+              "mae_m": 1.2347352401699638,
+              "rmse_m": 1.5317398668301263,
+              "district_macro_mae_m": 1.1931624565923293
+            },
+            "persistence": {
+              "n": 9,
+              "districts": 8,
+              "mae_m": 1.0244394219499087,
+              "rmse_m": 1.5091288133544358,
+              "district_macro_mae_m": 0.889886705302817
+            }
+          },
+          "2": {
+            "frozen": {
+              "n": 50,
+              "districts": 46,
+              "mae_m": 2.5362870220999993,
+              "rmse_m": 3.746436940634126,
+              "district_macro_mae_m": 2.6950897573523367
+            },
+            "retrained": {
+              "n": 50,
+              "districts": 46,
+              "mae_m": 2.309783035687323,
+              "rmse_m": 3.508659111300592,
+              "district_macro_mae_m": 2.451598060189118
+            },
+            "persistence": {
+              "n": 50,
+              "districts": 46,
+              "mae_m": 2.2560099772573006,
+              "rmse_m": 3.7127658657192106,
+              "district_macro_mae_m": 2.3300778297289875
+            }
+          },
+          "3": {
+            "frozen": {
+              "n": 151,
+              "districts": 83,
+              "mae_m": 1.3044150776856138,
+              "rmse_m": 1.8922390202516153,
+              "district_macro_mae_m": 1.3188337551354656
+            },
+            "retrained": {
+              "n": 151,
+              "districts": 83,
+              "mae_m": 1.2759247062631218,
+              "rmse_m": 1.814525945581406,
+              "district_macro_mae_m": 1.2879159491043808
+            },
+            "persistence": {
+              "n": 151,
+              "districts": 83,
+              "mae_m": 2.0284622136742745,
+              "rmse_m": 2.684290896225221,
+              "district_macro_mae_m": 1.9517906511622582
+            }
+          },
+          "4": {
+            "frozen": {
+              "n": 73,
+              "districts": 70,
+              "mae_m": 1.1691056297895734,
+              "rmse_m": 1.6498334951850864,
+              "district_macro_mae_m": 1.167108334276593
+            },
+            "retrained": {
+              "n": 73,
+              "districts": 70,
+              "mae_m": 1.1480393093800663,
+              "rmse_m": 1.642451992340557,
+              "district_macro_mae_m": 1.1462921970206585
+            },
+            "persistence": {
+              "n": 73,
+              "districts": 70,
+              "mae_m": 2.333279217130342,
+              "rmse_m": 2.7849262736029714,
+              "district_macro_mae_m": 2.3476876374112083
+            }
+          },
+          "5": {
+            "frozen": {
+              "n": 84,
+              "districts": 81,
+              "mae_m": 2.963781167258079,
+              "rmse_m": 4.3130441957063175,
+              "district_macro_mae_m": 3.048654454327619
+            },
+            "retrained": {
+              "n": 84,
+              "districts": 81,
+              "mae_m": 2.665270576139416,
+              "rmse_m": 3.917387673143615,
+              "district_macro_mae_m": 2.7442601734310563
+            },
+            "persistence": {
+              "n": 84,
+              "districts": 81,
+              "mae_m": 3.2844838501520686,
+              "rmse_m": 4.8032156958280545,
+              "district_macro_mae_m": 3.3607066528476675
+            }
+          },
+          "6": {
+            "frozen": {
+              "n": 67,
+              "districts": 61,
+              "mae_m": 1.3844204476589705,
+              "rmse_m": 2.024245820099747,
+              "district_macro_mae_m": 1.3786786936812154
+            },
+            "retrained": {
+              "n": 67,
+              "districts": 61,
+              "mae_m": 1.3153523712187105,
+              "rmse_m": 2.003821638033009,
+              "district_macro_mae_m": 1.2789812791576773
+            },
+            "persistence": {
+              "n": 67,
+              "districts": 61,
+              "mae_m": 2.6340405744218196,
+              "rmse_m": 2.987279576345572,
+              "district_macro_mae_m": 2.6241547594577255
+            }
+          },
+          "7": {
+            "frozen": {
+              "n": 101,
+              "districts": 100,
+              "mae_m": 1.5639616548029789,
+              "rmse_m": 2.2962825116637573,
+              "district_macro_mae_m": 1.5660565352130846
+            },
+            "retrained": {
+              "n": 101,
+              "districts": 100,
+              "mae_m": 1.427861278775946,
+              "rmse_m": 2.180497983316396,
+              "district_macro_mae_m": 1.4277277367789685
+            },
+            "persistence": {
+              "n": 101,
+              "districts": 100,
+              "mae_m": 2.537908165203267,
+              "rmse_m": 3.1879554143508755,
+              "district_macro_mae_m": 2.5526047501301745
+            }
+          },
+          "8": {
+            "frozen": {
+              "n": 49,
+              "districts": 48,
+              "mae_m": 2.5146964901213558,
+              "rmse_m": 3.59241516342151,
+              "district_macro_mae_m": 2.552673782205668
+            },
+            "retrained": {
+              "n": 49,
+              "districts": 48,
+              "mae_m": 2.3298808471534214,
+              "rmse_m": 3.360018653502679,
+              "district_macro_mae_m": 2.3648023653151515
+            },
+            "persistence": {
+              "n": 49,
+              "districts": 48,
+              "mae_m": 3.797839742379386,
+              "rmse_m": 4.911417071558377,
+              "district_macro_mae_m": 3.847148346824655
+            }
+          },
+          "9": {
+            "frozen": {
+              "n": 23,
+              "districts": 23,
+              "mae_m": 1.2448589235451126,
+              "rmse_m": 1.6484600473731035,
+              "district_macro_mae_m": 1.2448589235451126
+            },
+            "retrained": {
+              "n": 23,
+              "districts": 23,
+              "mae_m": 1.1873308345400984,
+              "rmse_m": 1.6183705859898028,
+              "district_macro_mae_m": 1.1873308345400984
+            },
+            "persistence": {
+              "n": 23,
+              "districts": 23,
+              "mae_m": 1.5641802401950629,
+              "rmse_m": 1.9663565260055247,
+              "district_macro_mae_m": 1.5641802401950629
+            }
+          },
+          "10": {
+            "frozen": {
+              "n": 62,
+              "districts": 62,
+              "mae_m": 1.3763420906751405,
+              "rmse_m": 2.0472191500745804,
+              "district_macro_mae_m": 1.3763420906751405
+            },
+            "retrained": {
+              "n": 62,
+              "districts": 62,
+              "mae_m": 1.2297606505653162,
+              "rmse_m": 1.9014444100695702,
+              "district_macro_mae_m": 1.2297606505653162
+            },
+            "persistence": {
+              "n": 62,
+              "districts": 62,
+              "mae_m": 1.6793084763207327,
+              "rmse_m": 2.2420577976644367,
+              "district_macro_mae_m": 1.6793084763207327
+            }
+          },
+          "11": {
+            "frozen": {
+              "n": 0,
+              "districts": 0,
+              "mae_m": null,
+              "rmse_m": null,
+              "district_macro_mae_m": null
+            },
+            "retrained": {
+              "n": 0,
+              "districts": 0,
+              "mae_m": null,
+              "rmse_m": null,
+              "district_macro_mae_m": null
+            },
+            "persistence": {
+              "n": 0,
+              "districts": 0,
+              "mae_m": null,
+              "rmse_m": null,
+              "district_macro_mae_m": null
+            }
+          },
+          "12": {
+            "frozen": {
+              "n": 241,
+              "districts": 241,
+              "mae_m": 2.3857669751940125,
+              "rmse_m": 4.156015527658998,
+              "district_macro_mae_m": 2.3857669751940125
+            },
+            "retrained": {
+              "n": 241,
+              "districts": 241,
+              "mae_m": 2.304694192333163,
+              "rmse_m": 4.119626237896067,
+              "district_macro_mae_m": 2.304694192333163
+            },
+            "persistence": {
+              "n": 241,
+              "districts": 241,
+              "mae_m": 2.606115294156732,
+              "rmse_m": 4.489649472558249,
+              "district_macro_mae_m": 2.606115294156732
+            }
+          }
+        },
+        "by_history_group": {
+          "gained_accepted_history": {
+            "frozen": {
+              "n": 910,
+              "districts": 277,
+              "mae_m": 1.9039841964203792,
+              "rmse_m": 3.137137404386541,
+              "district_macro_mae_m": 2.251068653476905
+            },
+            "retrained": {
+              "n": 910,
+              "districts": 277,
+              "mae_m": 1.793898710980647,
+              "rmse_m": 3.0194837449005987,
+              "district_macro_mae_m": 2.151734731270373
+            },
+            "persistence": {
+              "n": 910,
+              "districts": 277,
+              "mae_m": 2.485291122730818,
+              "rmse_m": 3.6864229338581,
+              "district_macro_mae_m": 2.6434680933582775
+            }
+          },
+          "newly_local_history": {
+            "frozen": {
+              "n": 0,
+              "districts": 0,
+              "mae_m": null,
+              "rmse_m": null,
+              "district_macro_mae_m": null
+            },
+            "retrained": {
+              "n": 0,
+              "districts": 0,
+              "mae_m": null,
+              "rmse_m": null,
+              "district_macro_mae_m": null
+            },
+            "persistence": {
+              "n": 0,
+              "districts": 0,
+              "mae_m": null,
+              "rmse_m": null,
+              "district_macro_mae_m": null
+            }
+          },
+          "substantial_original_history": {
+            "frozen": {
+              "n": 829,
+              "districts": 246,
+              "mae_m": 1.919444846957936,
+              "rmse_m": 3.176887814145978,
+              "district_macro_mae_m": 2.248514867336563
+            },
+            "retrained": {
+              "n": 829,
+              "districts": 246,
+              "mae_m": 1.8137177205429489,
+              "rmse_m": 3.07404798639198,
+              "district_macro_mae_m": 2.162502215836734
+            },
+            "persistence": {
+              "n": 829,
+              "districts": 246,
+              "mae_m": 2.498259139260007,
+              "rmse_m": 3.700778568634989,
+              "district_macro_mae_m": 2.6387941988570303
+            }
+          }
+        }
+      }
+    }
+  ],
+  "protocol_sha256": "f08ef1f4a1a0c138ee3c88bb321d5fbe2a1aea105c8355e981e81b249bdb5293",
+  "training_code_sha256": "6c0d584514bd456eb164dc13be4e61fe096f51ab9048ce6d5fd1946d9203bcf2",
+  "final_target_cutoff": "2025-01-31",
+  "selection_uses_january2026_labels": false
+}

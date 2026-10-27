@@ -1,0 +1,389 @@
+{
+  "definition": "Static audited data cohorts; no cohort is an input feature or a claim of local prospective skill. Rich-history cohort uses only original measured dates through January2025.",
+  "groups": {
+    "gained_any_measured_month": {
+      "cohort_districts": 653,
+      "status": "evaluated",
+      "cases": 7560,
+      "districts": 630,
+      "states": 31,
+      "origins": 12,
+      "target_months": 1,
+      "origin_dates": [
+        "2025-01-31",
+        "2025-02-28",
+        "2025-03-31",
+        "2025-04-30",
+        "2025-05-31",
+        "2025-06-30",
+        "2025-07-31",
+        "2025-08-31",
+        "2025-09-30",
+        "2025-10-31",
+        "2025-11-30",
+        "2025-12-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "case_keys_sha256": "0aa1499a96f8386df31cce7379f75a467af496c2f493bb561894b961b2ca64c1",
+      "baseline_availability": {
+        "persistence": {
+          "available_cases": 7560,
+          "missing_cases": 0
+        },
+        "seasonal": {
+          "available_cases": 6756,
+          "missing_cases": 804
+        }
+      },
+      "frozen": {
+        "n": 7560,
+        "mae_m": 1.7157551656613756,
+        "rmse_m": 2.8307408841641184
+      },
+      "retrained": {
+        "n": 7560,
+        "mae_m": 1.6661951535978836,
+        "rmse_m": 2.779110760059326
+      },
+      "persistence_paired": {
+        "status": "evaluated",
+        "cases": 7560,
+        "districts": 630,
+        "states": 31,
+        "origins": 12,
+        "target_months": 1,
+        "origin_dates": [
+          "2025-01-31",
+          "2025-02-28",
+          "2025-03-31",
+          "2025-04-30",
+          "2025-05-31",
+          "2025-06-30",
+          "2025-07-31",
+          "2025-08-31",
+          "2025-09-30",
+          "2025-10-31",
+          "2025-11-30",
+          "2025-12-31"
+        ],
+        "target_dates": [
+          "2026-01-01"
+        ],
+        "case_keys_sha256": "0aa1499a96f8386df31cce7379f75a467af496c2f493bb561894b961b2ca64c1",
+        "excluded_cases": 0,
+        "paired_baselines": [
+          "persistence"
+        ],
+        "frozen": {
+          "n": 7560,
+          "mae_m": 1.7157551656613756,
+          "rmse_m": 2.8307408841641184
+        },
+        "retrained": {
+          "n": 7560,
+          "mae_m": 1.6661951535978836,
+          "rmse_m": 2.779110760059326
+        },
+        "persistence": {
+          "n": 7560,
+          "mae_m": 1.618984210931618,
+          "rmse_m": 2.7973809450816516
+        }
+      },
+      "seasonal_paired": {
+        "status": "evaluated",
+        "cases": 6756,
+        "districts": 563,
+        "states": 28,
+        "origins": 12,
+        "target_months": 1,
+        "origin_dates": [
+          "2025-01-31",
+          "2025-02-28",
+          "2025-03-31",
+          "2025-04-30",
+          "2025-05-31",
+          "2025-06-30",
+          "2025-07-31",
+          "2025-08-31",
+          "2025-09-30",
+          "2025-10-31",
+          "2025-11-30",
+          "2025-12-31"
+        ],
+        "target_dates": [
+          "2026-01-01"
+        ],
+        "case_keys_sha256": "3892dffe82daa85374c5ded653a366f30f2dd46547b214eba273414ef19876d9",
+        "excluded_cases": 804,
+        "paired_baselines": [
+          "persistence",
+          "seasonal"
+        ],
+        "frozen": {
+          "n": 6756,
+          "mae_m": 1.776655885642392,
+          "rmse_m": 2.9386600891078993
+        },
+        "retrained": {
+          "n": 6756,
+          "mae_m": 1.723345026465364,
+          "rmse_m": 2.884739445612907
+        },
+        "persistence": {
+          "n": 6756,
+          "mae_m": 1.6342541861045246,
+          "rmse_m": 2.8854586662784683
+        },
+        "seasonal": {
+          "n": 6756,
+          "mae_m": 1.6342541861045246,
+          "rmse_m": 2.8854586662784683
+        }
+      }
+    },
+    "newly_local_vs_original_baseline": {
+      "cohort_districts": 16,
+      "status": "unavailable",
+      "cases": 0,
+      "districts": 0,
+      "states": 0,
+      "origins": 0,
+      "target_months": 0,
+      "origin_dates": [],
+      "target_dates": [],
+      "case_keys_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "baseline_availability": {
+        "persistence": {
+          "available_cases": 0,
+          "missing_cases": 0
+        },
+        "seasonal": {
+          "available_cases": 0,
+          "missing_cases": 0
+        }
+      },
+      "frozen": {
+        "n": 0,
+        "mae_m": null,
+        "rmse_m": null
+      },
+      "retrained": {
+        "n": 0,
+        "mae_m": null,
+        "rmse_m": null
+      },
+      "persistence_paired": {
+        "status": "unavailable",
+        "cases": 0,
+        "districts": 0,
+        "states": 0,
+        "origins": 0,
+        "target_months": 0,
+        "origin_dates": [],
+        "target_dates": [],
+        "case_keys_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "excluded_cases": 0,
+        "paired_baselines": [
+          "persistence"
+        ],
+        "frozen": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null
+        },
+        "retrained": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null
+        },
+        "persistence": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null
+        }
+      },
+      "seasonal_paired": {
+        "status": "unavailable",
+        "cases": 0,
+        "districts": 0,
+        "states": 0,
+        "origins": 0,
+        "target_months": 0,
+        "origin_dates": [],
+        "target_dates": [],
+        "case_keys_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "excluded_cases": 0,
+        "paired_baselines": [
+          "persistence",
+          "seasonal"
+        ],
+        "frozen": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null
+        },
+        "retrained": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null
+        },
+        "persistence": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null
+        },
+        "seasonal": {
+          "n": 0,
+          "mae_m": null,
+          "rmse_m": null
+        }
+      }
+    },
+    "substantial_original_history_at_least_24_by_january2025": {
+      "cohort_districts": 548,
+      "status": "evaluated",
+      "cases": 6468,
+      "districts": 539,
+      "states": 29,
+      "origins": 12,
+      "target_months": 1,
+      "origin_dates": [
+        "2025-01-31",
+        "2025-02-28",
+        "2025-03-31",
+        "2025-04-30",
+        "2025-05-31",
+        "2025-06-30",
+        "2025-07-31",
+        "2025-08-31",
+        "2025-09-30",
+        "2025-10-31",
+        "2025-11-30",
+        "2025-12-31"
+      ],
+      "target_dates": [
+        "2026-01-01"
+      ],
+      "case_keys_sha256": "cee6e7a6ee138d7c2a1cc84473d24cb523e641ee4e22f10bd701c4bcf214b773",
+      "baseline_availability": {
+        "persistence": {
+          "available_cases": 6468,
+          "missing_cases": 0
+        },
+        "seasonal": {
+          "available_cases": 5676,
+          "missing_cases": 792
+        }
+      },
+      "frozen": {
+        "n": 6468,
+        "mae_m": 1.7051159531230673,
+        "rmse_m": 2.8215107587378885
+      },
+      "retrained": {
+        "n": 6468,
+        "mae_m": 1.6462803793444651,
+        "rmse_m": 2.7590513151855918
+      },
+      "persistence_paired": {
+        "status": "evaluated",
+        "cases": 6468,
+        "districts": 539,
+        "states": 29,
+        "origins": 12,
+        "target_months": 1,
+        "origin_dates": [
+          "2025-01-31",
+          "2025-02-28",
+          "2025-03-31",
+          "2025-04-30",
+          "2025-05-31",
+          "2025-06-30",
+          "2025-07-31",
+          "2025-08-31",
+          "2025-09-30",
+          "2025-10-31",
+          "2025-11-30",
+          "2025-12-31"
+        ],
+        "target_dates": [
+          "2026-01-01"
+        ],
+        "case_keys_sha256": "cee6e7a6ee138d7c2a1cc84473d24cb523e641ee4e22f10bd701c4bcf214b773",
+        "excluded_cases": 0,
+        "paired_baselines": [
+          "persistence"
+        ],
+        "frozen": {
+          "n": 6468,
+          "mae_m": 1.7051159531230673,
+          "rmse_m": 2.8215107587378885
+        },
+        "retrained": {
+          "n": 6468,
+          "mae_m": 1.6462803793444651,
+          "rmse_m": 2.7590513151855918
+        },
+        "persistence": {
+          "n": 6468,
+          "mae_m": 1.593881467990324,
+          "rmse_m": 2.7735508115169605
+        }
+      },
+      "seasonal_paired": {
+        "status": "evaluated",
+        "cases": 5676,
+        "districts": 473,
+        "states": 26,
+        "origins": 12,
+        "target_months": 1,
+        "origin_dates": [
+          "2025-01-31",
+          "2025-02-28",
+          "2025-03-31",
+          "2025-04-30",
+          "2025-05-31",
+          "2025-06-30",
+          "2025-07-31",
+          "2025-08-31",
+          "2025-09-30",
+          "2025-10-31",
+          "2025-11-30",
+          "2025-12-31"
+        ],
+        "target_dates": [
+          "2026-01-01"
+        ],
+        "case_keys_sha256": "764325eb4c68cdd051096b17b4450c1acbf312f5d3a7440ce161557bfa0ebf54",
+        "excluded_cases": 792,
+        "paired_baselines": [
+          "persistence",
+          "seasonal"
+        ],
+        "frozen": {
+          "n": 5676,
+          "mae_m": 1.7751343752290345,
+          "rmse_m": 2.9463711800912717
+        },
+        "retrained": {
+          "n": 5676,
+          "mae_m": 1.7106447761099368,
+          "rmse_m": 2.880266494409354
+        },
+        "persistence": {
+          "n": 5676,
+          "mae_m": 1.607773238132585,
+          "rmse_m": 2.873427781619212
+        },
+        "seasonal": {
+          "n": 5676,
+          "mae_m": 1.607773238132585,
+          "rmse_m": 2.873427781619212
+        }
+      }
+    }
+  }
+}

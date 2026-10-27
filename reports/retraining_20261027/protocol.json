@@ -1,0 +1,49 @@
+{
+  "version": "enriched-xgboost-retraining-v1",
+  "reference_commit": "73cb6feda5ad641c7500f28da01e087d81be4c52",
+  "feature_generation": "physical-v3-official-c9ade81d95720f91",
+  "feature_csv_sha256": "3a4a560667d732b50c6a1712f4d9ceb13b411d4ae2c7a984e08ffc2aada21042",
+  "frozen_model_sha256": "4b22e2165664e1c1dd21c81ccf95d894655f0a0d589017a9ab87df0588a73a03",
+  "target": "observed_target_depth_minus_observed_origin_depth_m_bgl",
+  "horizons": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+  "feature_policy": "Existing 17-feature serving encoding; historical climatology uses completed origin month, past-only lag/projection fallback; observed origin anchor in training. No future weather or groundwater in features.",
+  "folds": [
+    {"name": "rolling_2023", "train_target_cutoff": "2021-12-31", "validation_origin_start": "2023-01-01", "validation_origin_end": "2023-12-01", "validation_target_end": "2024-01-01"},
+    {"name": "rolling_2024", "train_target_cutoff": "2022-12-31", "validation_origin_start": "2024-01-01", "validation_origin_end": "2024-12-01", "validation_target_end": "2025-01-01"}
+  ],
+  "selection": {
+    "primary": "Mean across folds of district-macro MAE on identical observed-origin pairs, with ties broken by mean fold RMSE then candidate name.",
+    "candidates": [
+      {"name": "current_structure", "max_depth": 3, "min_child_weight": 30, "reg_lambda": 20.0, "reg_alpha": 0.1},
+      {"name": "shallow_regularized", "max_depth": 2, "min_child_weight": 60, "reg_lambda": 40.0, "reg_alpha": 0.2},
+      {"name": "deeper_regularized", "max_depth": 4, "min_child_weight": 60, "reg_lambda": 40.0, "reg_alpha": 0.2}
+    ],
+    "maximum_trees": 480,
+    "early_stopping_rounds": 40,
+    "final_tree_count": "Median of selected candidate fold best_iteration+1, rounded to nearest integer; no January2026 tuning.",
+    "seed": 42
+  },
+  "final_fit_target_cutoff": "2025-01-31",
+  "final_diagnostic_origins": ["2025-01-31", "2025-02-28", "2025-03-31", "2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31"],
+  "final_diagnostic_scope": "Previously inspected January2026 labels through actual tiered serving path. A retrospective diagnostic, not an untouched test. Repeated districts/target months are dependent.",
+  "promotion_requirements": {
+    "threshold_units": "0.02 is a relative MAE reduction of 2%; 0.10 is a relative MAE increase of 10%, not metres.",
+    "untouched_post_refit_test_required": true,
+    "rolling_validation_mae_gain_vs_frozen_and_persistence_at_least": 0.02,
+    "rolling_validation_seasonal_paired_mae_no_worse": true,
+    "supported_horizon_or_new_history_group_maximum_mae_regression": 0.10,
+    "supported_panel_minimum_cases": 30,
+    "supported_panel_minimum_districts": 10,
+    "complete_725_by_12_outputs_and_36_states": true,
+    "all_contract_and_rollback_checks_pass": true,
+    "rule": "All requirements must pass. No independent untouched later labels currently exist; keep production unchanged regardless of inspected diagnostic gains."
+  },
+  "uncertainty": "Old-model calibration cannot be rebound to new weights. Candidate intervals remain unavailable.",
+  "limitations": [
+    "New measurements have source observation dates but historical publication availability is not established.",
+    "Observed-origin training does not establish skill for estimated anchors across stale observation gaps.",
+    "The original artifact card records realized-weather training; the candidate uses causal serving-weather assumptions, so gains cannot be attributed solely to enrichment.",
+    "The old train() twelve-month-embargo holdout is empty once January2025 labels enter fitting. Earlier folds retain that embargo; the final as-of serving replay uses labels learned by each origin and is explicitly retrospective.",
+    "Unmonitored districts retain the existing regional reference; no local skill is inferred from pooled fitting."
+  ]
+}

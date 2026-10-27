@@ -1,0 +1,53 @@
+{
+  "version": "retraining-frontend-validation-v1",
+  "checked_at_utc": "2026-10-27T01:17:08.642733+00:00",
+  "scope": "Current dashboard source contracts, lint and production build; no frontend source or lockfile changes.",
+  "environment": {
+    "node": "v22.18.0",
+    "npm": "10.9.3",
+    "vite": "8.3.3"
+  },
+  "tests": {
+    "command": "npm.cmd --prefix dashboard test",
+    "script": "node --test tests/*.test.js",
+    "exit_code": 0,
+    "tests": 160,
+    "passed": 160,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "duration_ms": 24612.2338
+  },
+  "lint": {
+    "command": "npm.cmd --prefix dashboard run lint",
+    "script": "oxlint",
+    "exit_code": 0
+  },
+  "build": {
+    "command": "npm.cmd --prefix dashboard run build",
+    "script": "vite build",
+    "exit_code": 0,
+    "duration_seconds": 8.53,
+    "modules_transformed": 621,
+    "largest_javascript_asset": "dashboard/dist/assets/charts-uX9ocqko.js",
+    "largest_javascript_bytes": 365385,
+    "largest_javascript_sha256": "122ea0f0f8b7ce52a90ddc037e36a92821ecf1ab92d14583a6657ab5e357e252",
+    "reported_gzip_kb": 105.33,
+    "warnings": [
+      "PLUGIN_TIMINGS advisory: JavaScript plugin callbacks took 2.5s of the 8.5s build; not a build failure."
+    ]
+  },
+  "source_fingerprints": {
+    "dashboard/package.json": "0546400ec42f87580641bb6e91cefdac41e32eb7294598e77410bc15dff66760",
+    "dashboard/package-lock.json": "5429a825ce518558c0a113b162c85a20a192ba037c04c2a2f8eacedfb021145e"
+  },
+  "frontend_source_or_lockfiles_written": false,
+  "production_build_output_written": true,
+  "database_accessed": false,
+  "model_or_training_artifacts_written": false,
+  "limits": [
+    "Passing frontend tests/build does not establish retrained-model accuracy or complete backend/API correctness.",
+    "Commands ran against the existing installed root dashboard dependencies; no new dependency installation or npm audit was performed by this check."
+  ]
+}
