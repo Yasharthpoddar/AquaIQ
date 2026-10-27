@@ -1,0 +1,32 @@
+{
+  "created_at_utc": "2026-10-27T10:16:07.481585+00:00",
+  "root": "C:\\Users\\Yasharth\\Downloads\\AquaIQ",
+  "groups": [
+    {
+      "path": "scratch/pytest-repository-cleanup-20261027",
+      "classification": "pytest_fixture",
+      "tracked_status": "ignored",
+      "files": 3,
+      "bytes": 16312462,
+      "reason": "Created by this cleanup verification; successful receipts and sanitized JUnit retained.",
+      "dependency_check": "Absent from the pre-cleanup preservation seal; exact successful generator commands recorded.",
+      "recovery": "Rerun the recorded pytest or frontend build command.",
+      "action": "delete"
+    },
+    {
+      "path": "scratch/repository_cleanup_20261027/frontend-dist",
+      "classification": "validation_build",
+      "tracked_status": "ignored",
+      "files": 12,
+      "bytes": 5371176,
+      "reason": "Created by this cleanup verification; successful receipts and sanitized JUnit retained.",
+      "dependency_check": "Absent from the pre-cleanup preservation seal; exact successful generator commands recorded.",
+      "recovery": "Rerun the recorded pytest or frontend build command.",
+      "action": "delete"
+    }
+  ],
+  "files": 15,
+  "logical_bytes": 21683638,
+  "deletion_files_sha256": "90c50e4962bec98557d35b13662d1ba227696e22108e6867d4557a3432bd66ca",
+  "tracked_files_to_delete": 0
+}

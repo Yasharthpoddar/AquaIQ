@@ -1,0 +1,9 @@
+{
+  "starting_branch": "feature/aquaiq-accuracy-experiments-20261027",
+  "starting_commit": "d992d396b103a57f04e1ebf433e3591aa626550d",
+  "cleanup_branch": "chore/aquaiq-safe-cleanup-20261027",
+  "status": "## chore/aquaiq-safe-cleanup-20261027\n M .gitattributes\n M .gitignore\n?? docs/ACCURACY_EXPERIMENTS.md\n?? models/accuracy_challengers.py\n?? models/accuracy_experiments.py\n?? models/artifacts/accuracy_experiments_20261027_run_v2_three_horizon_groups/\n?? reports/accuracy_experiments_20261027/\n?? reports/repository_cleanup_20261027/\n?? scripts/audit_accuracy_baselines.py\n?? scripts/run_accuracy_experiments.py\n?? scripts/summarize_accuracy_experiments.py\n?? tests/test_accuracy_challengers.py\n?? tests/test_accuracy_experiments.py\n?? tests/test_accuracy_reporting.py\n",
+  "staged": "",
+  "tracked_files": 1696,
+  "note": "Pre-existing .gitignore/.gitattributes edits and all local accuracy work are preserved and excluded from the cleanup commit."
+}

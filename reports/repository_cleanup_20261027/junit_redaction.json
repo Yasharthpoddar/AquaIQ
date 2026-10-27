@@ -1,0 +1,12 @@
+{
+  "raw_sha256": "4bae05ad159ca69af2cf673a928c5b00cccf31ca5ec674b4f4c7445dd2d1c7f5",
+  "published_sha256": "f413f8bcc3824a51263c39b962e9d2dab09bbd32ca20030b2443bb7abc92b7da",
+  "synthetic_fixture_labels_redacted": 2,
+  "allowed_source_files": [
+    "tests/test_cors_configuration.py",
+    "tests/test_nwdp_manual.py"
+  ],
+  "source_literal_concatenation_verified_with_AST": true,
+  "test_counts_and_outcomes_changed": false,
+  "private_values_read": false
+}

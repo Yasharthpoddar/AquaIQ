@@ -1,0 +1,4 @@
+{
+  "command": ".\\venv\\Scripts\\python.exe -B -m scripts.scan_staged_content",
+  "exit_code": 0
+}

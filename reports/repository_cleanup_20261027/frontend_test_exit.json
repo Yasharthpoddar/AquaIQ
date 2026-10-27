@@ -1,0 +1,4 @@
+{
+  "command": "npm.cmd --prefix dashboard test",
+  "exit_code": 0
+}

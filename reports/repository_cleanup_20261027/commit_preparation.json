@@ -1,0 +1,18 @@
+{
+  "cleanup_only_staged_paths": true,
+  "staged_files_reviewed": 35,
+  "new_files_only": true,
+  "application_source_deletions": 0,
+  "git_working_whitespace_exit": 0,
+  "git_staged_whitespace_exit": 0,
+  "staged_scan": {
+    "scanned_files": 35,
+    "findings": []
+  },
+  "all_staged_bytes_equal_working_bytes": true,
+  "root_ignore_attributes_staged": false,
+  "cleanup_report_links_resolve": true,
+  "no_push_requested_or_performed": true,
+  "expected_final_staged_files_after_receipts": 38,
+  "note": "The two final scan receipts and this receipt are added next. The exact final scanner result is rechecked before commit and recorded in the local commit receipt."
+}

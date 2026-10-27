@@ -1,0 +1,13 @@
+{
+  "plan_sha256": "226a2ae27c051a5c8382eab710202853d5232d1eb8c76c565977fad65e35e8a3",
+  "removed_files": 49050,
+  "removed_empty_directories": 25812,
+  "logical_bytes_removed": 15189054667,
+  "disk_free_before": 1210294272,
+  "disk_free_after": 16488337408,
+  "remaining_group_directories": [],
+  "failed_files": [],
+  "tracked_files_removed": 0,
+  "database_operations": false,
+  "finished_at_utc": "2026-10-27T10:06:14.040900+00:00"
+}
