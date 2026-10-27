@@ -1,0 +1,4 @@
+{
+  "command": ".\\venv\\Scripts\\python.exe -B scripts/restore_report_archive.py --destination scratch/simplification_archive_verification",
+  "exit_code": 0
+}

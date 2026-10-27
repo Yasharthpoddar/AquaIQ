@@ -1,0 +1,3370 @@
+[
+  {
+    "path": "scratch/accuracy-complete-v1.xml",
+    "files": 1,
+    "logical_bytes": 38,
+    "mtime_utc_ns": 1793071864139898900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/accuracy-complete-v2.xml",
+    "files": 1,
+    "logical_bytes": 249940,
+    "mtime_utc_ns": 1793087840141387200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/accuracy-targeted-final-v2.xml",
+    "files": 1,
+    "logical_bytes": 20127,
+    "mtime_utc_ns": 1793087779766252400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/accuracy-targeted-final.xml",
+    "files": 1,
+    "logical_bytes": 23949,
+    "mtime_utc_ns": 1793087654523892700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/acquire_nwdp_recent.py",
+    "files": 1,
+    "logical_bytes": 2528,
+    "mtime_utc_ns": 1792968099053353200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/acquire_telemetry.py",
+    "files": 1,
+    "logical_bytes": 1395,
+    "mtime_utc_ns": 1792968333114699600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/additional-integration-fixed.log",
+    "files": 1,
+    "logical_bytes": 101,
+    "mtime_utc_ns": 1792952077984359900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/additional-integration.log",
+    "files": 1,
+    "logical_bytes": 2619,
+    "mtime_utc_ns": 1792952042105160100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/all-district-scenario-server-20261021-01",
+    "files": 4,
+    "logical_bytes": 6422,
+    "mtime_utc_ns": 1792597994698157900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/all-district-twelve-month-build-01",
+    "files": 6,
+    "logical_bytes": 5088932,
+    "mtime_utc_ns": 1792597935834038000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/atomic-checkpoint-final.xml",
+    "files": 1,
+    "logical_bytes": 11548,
+    "mtime_utc_ns": 1793042922654964700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit-2026-10-17",
+    "files": 3,
+    "logical_bytes": 103756,
+    "mtime_utc_ns": 1792209687050748000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit-2026-10-17-api-live.log",
+    "files": 1,
+    "logical_bytes": 86,
+    "mtime_utc_ns": 1792209649665971600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit-2026-10-17-completeness.log",
+    "files": 1,
+    "logical_bytes": 141,
+    "mtime_utc_ns": 1792209772913946600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit-2026-10-17-correlation.log",
+    "files": 1,
+    "logical_bytes": 1102,
+    "mtime_utc_ns": 1792178745652899800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit-2026-10-17-data-quality.log",
+    "files": 1,
+    "logical_bytes": 172,
+    "mtime_utc_ns": 1792209600805364800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit-2026-10-17-db.log",
+    "files": 1,
+    "logical_bytes": 117,
+    "mtime_utc_ns": 1792178553942777700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit-2026-10-17-db.xml",
+    "files": 1,
+    "logical_bytes": 1614,
+    "mtime_utc_ns": 1792178553827685800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit-2026-10-17-extremes.log",
+    "files": 1,
+    "logical_bytes": 2611,
+    "mtime_utc_ns": 1792209744659319600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit-2026-10-17-final-pipeline.log",
+    "files": 1,
+    "logical_bytes": 506896,
+    "mtime_utc_ns": 1792210341932527600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit-2026-10-17-final-unit.log",
+    "files": 1,
+    "logical_bytes": 2765,
+    "mtime_utc_ns": 1792209668308424500,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit-2026-10-17-final-unit.xml",
+    "files": 1,
+    "logical_bytes": 112754,
+    "mtime_utc_ns": 1792209668014392700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit-2026-10-17-pipeline.log",
+    "files": 1,
+    "logical_bytes": 506877,
+    "mtime_utc_ns": 1792178943961171200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit-2026-10-17-release-db.log",
+    "files": 1,
+    "logical_bytes": 118,
+    "mtime_utc_ns": 1792210011436952700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit-2026-10-17-release-db.xml",
+    "files": 1,
+    "logical_bytes": 1768,
+    "mtime_utc_ns": 1792210011199876100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit-2026-10-17-release-unit.log",
+    "files": 1,
+    "logical_bytes": 3153,
+    "mtime_utc_ns": 1792210286135681700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit-2026-10-17-release-unit.xml",
+    "files": 1,
+    "logical_bytes": 113601,
+    "mtime_utc_ns": 1792210285968682500,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit-2026-10-17-source-smoke.log",
+    "files": 1,
+    "logical_bytes": 2378,
+    "mtime_utc_ns": 1792178811391224900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit-2026-10-17-unit.log",
+    "files": 1,
+    "logical_bytes": 2683,
+    "mtime_utc_ns": 1792178523159514500,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit-2026-10-17-unit.xml",
+    "files": 1,
+    "logical_bytes": 103377,
+    "mtime_utc_ns": 1792178522976713100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit-pipeline-2026-10-17",
+    "files": 28,
+    "logical_bytes": 96934029,
+    "mtime_utc_ns": 1792178943959701700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit-pipeline-final-2026-10-17",
+    "files": 28,
+    "logical_bytes": 96932590,
+    "mtime_utc_ns": 1792210341930538800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit12m",
+    "files": 10,
+    "logical_bytes": 12702,
+    "mtime_utc_ns": 1792851512603684400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit_api_20261017.py",
+    "files": 1,
+    "logical_bytes": 3865,
+    "mtime_utc_ns": 1792209638082013700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit_extremes_20261017.py",
+    "files": 1,
+    "logical_bytes": 4441,
+    "mtime_utc_ns": 1792209726935920700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit_observations.py",
+    "files": 1,
+    "logical_bytes": 2712,
+    "mtime_utc_ns": 1792859809783243700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit_states.py",
+    "files": 1,
+    "logical_bytes": 1879,
+    "mtime_utc_ns": 1792859784092008600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/audit_state_aggregation.py",
+    "files": 1,
+    "logical_bytes": 1511,
+    "mtime_utc_ns": 1792859903912339300,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/auxiliary_pdfs",
+    "files": 6,
+    "logical_bytes": 385131,
+    "mtime_utc_ns": 1792968559351780000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/benchmark_approaches.py",
+    "files": 1,
+    "logical_bytes": 6777,
+    "mtime_utc_ns": 1792860177080338900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/browser-final.log",
+    "files": 1,
+    "logical_bytes": 845,
+    "mtime_utc_ns": 1792953415607736500,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/browser.log",
+    "files": 1,
+    "logical_bytes": 845,
+    "mtime_utc_ns": 1792952034624370600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/build-final.log",
+    "files": 1,
+    "logical_bytes": 1051,
+    "mtime_utc_ns": 1792953403798511900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/build_auxiliary_report.py",
+    "files": 1,
+    "logical_bytes": 15461,
+    "mtime_utc_ns": 1792986958462903000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/build_nwdp_catalog.py",
+    "files": 1,
+    "logical_bytes": 4733,
+    "mtime_utc_ns": 1792986956436766400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/check_cols.py",
+    "files": 1,
+    "logical_bytes": 765,
+    "mtime_utc_ns": 1791781282408802000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/check_targets_by_year.py",
+    "files": 1,
+    "logical_bytes": 1535,
+    "mtime_utc_ns": 1791781300093343400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/check_tier_distribution.py",
+    "files": 1,
+    "logical_bytes": 1485,
+    "mtime_utc_ns": 1791781657314137400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/clean_release_20261026",
+    "files": 1621,
+    "logical_bytes": 562375337,
+    "mtime_utc_ns": 1793010023316587800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/clean_staged_whitespace.py",
+    "files": 1,
+    "logical_bytes": 453,
+    "mtime_utc_ns": 1792952872331400400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/collect_engineering_results.py",
+    "files": 1,
+    "logical_bytes": 3430,
+    "mtime_utc_ns": 1792953104874527900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/completion_baseline",
+    "files": 2,
+    "logical_bytes": 205753,
+    "mtime_utc_ns": 1792949945080351400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/coverage-after.json",
+    "files": 1,
+    "logical_bytes": 571,
+    "mtime_utc_ns": 1792950376594340500,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/coverage-after.log",
+    "files": 1,
+    "logical_bytes": 1395,
+    "mtime_utc_ns": 1792950376595339600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/coverage-before.json",
+    "files": 1,
+    "logical_bytes": 410,
+    "mtime_utc_ns": 1792950131365925600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/coverage-before.log",
+    "files": 1,
+    "logical_bytes": 1327,
+    "mtime_utc_ns": 1792950131387923500,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/current-scenario-server-20261021-01",
+    "files": 4,
+    "logical_bytes": 4270,
+    "mtime_utc_ns": 1792596387647281700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/current-twelve-month-scenario-build-01",
+    "files": 6,
+    "logical_bytes": 5087466,
+    "mtime_utc_ns": 1792596322905847700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/dashboard-baseline",
+    "files": 7,
+    "logical_bytes": 5370853,
+    "mtime_utc_ns": 1792968148842728300,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/debug_test_backtest.py",
+    "files": 1,
+    "logical_bytes": 677,
+    "mtime_utc_ns": 1791782271744490800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/district-tier-A.png",
+    "files": 1,
+    "logical_bytes": 105762,
+    "mtime_utc_ns": 1793064863320075200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/district-tier-B.png",
+    "files": 1,
+    "logical_bytes": 107282,
+    "mtime_utc_ns": 1793064864050047200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/district-tier-C.png",
+    "files": 1,
+    "logical_bytes": 98285,
+    "mtime_utc_ns": 1793064864720043400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/district-tier-D.png",
+    "files": 1,
+    "logical_bytes": 109922,
+    "mtime_utc_ns": 1793064865713976300,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/download_auxiliary_urllib.py",
+    "files": 1,
+    "logical_bytes": 2825,
+    "mtime_utc_ns": 1792968314695588400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/edit_api.py",
+    "files": 1,
+    "logical_bytes": 807,
+    "mtime_utc_ns": 1792950480826681000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/edit_frontend.py",
+    "files": 1,
+    "logical_bytes": 3226,
+    "mtime_utc_ns": 1792950667041189700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/edit_precompute.py",
+    "files": 1,
+    "logical_bytes": 5316,
+    "mtime_utc_ns": 1792950272194477100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/edit_storage.py",
+    "files": 1,
+    "logical_bytes": 387,
+    "mtime_utc_ns": 1792950973121497800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/edit_storage_tests.py",
+    "files": 1,
+    "logical_bytes": 2763,
+    "mtime_utc_ns": 1792951389916894300,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/enrichment-full-tests.xml",
+    "files": 1,
+    "logical_bytes": 215323,
+    "mtime_utc_ns": 1792988232188875700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/era5_weather_equivalence_20261026.json",
+    "files": 1,
+    "logical_bytes": 746,
+    "mtime_utc_ns": 1792968395638007100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/evaluate_states.py",
+    "files": 1,
+    "logical_bytes": 11339,
+    "mtime_utc_ns": 1792861880721992600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/explore_12m.py",
+    "files": 1,
+    "logical_bytes": 5320,
+    "mtime_utc_ns": 1792833282968870000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/final-focused.log",
+    "files": 1,
+    "logical_bytes": 101,
+    "mtime_utc_ns": 1792952377758251200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/final-stabilization-build-20261020",
+    "files": 6,
+    "logical_bytes": 5061783,
+    "mtime_utc_ns": 1792466393153376300,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/finalize_audit_report_20261017.py",
+    "files": 1,
+    "logical_bytes": 8274,
+    "mtime_utc_ns": 1792210301987658900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/finalize_nwdp_metadata.py",
+    "files": 1,
+    "logical_bytes": 876,
+    "mtime_utc_ns": 1792987141528797100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/final_copy_fixes.py",
+    "files": 1,
+    "logical_bytes": 1354,
+    "mtime_utc_ns": 1792953395215289600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/final_release_outputs",
+    "files": 3,
+    "logical_bytes": 16569327,
+    "mtime_utc_ns": 1793027607453553600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/final_release_preview.cjs",
+    "files": 1,
+    "logical_bytes": 1092,
+    "mtime_utc_ns": 1793042980453335900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/final_release_pytest.log",
+    "files": 1,
+    "logical_bytes": 7489,
+    "mtime_utc_ns": 1793027840823709700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/final_release_pytest_verified.log",
+    "files": 1,
+    "logical_bytes": 3177,
+    "mtime_utc_ns": 1793043599425195700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/final_release_score_check.log",
+    "files": 1,
+    "logical_bytes": 351,
+    "mtime_utc_ns": 1793043177411577300,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/finish_api.py",
+    "files": 1,
+    "logical_bytes": 263,
+    "mtime_utc_ns": 1792951639541055800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/finish_state_labels.py",
+    "files": 1,
+    "logical_bytes": 412,
+    "mtime_utc_ns": 1792951965813994900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/frontend-after.log",
+    "files": 1,
+    "logical_bytes": 36275,
+    "mtime_utc_ns": 1792950925654313000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/frontend-before.log",
+    "files": 1,
+    "logical_bytes": 35394,
+    "mtime_utc_ns": 1792950016597189000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/frontend-final.log",
+    "files": 1,
+    "logical_bytes": 36271,
+    "mtime_utc_ns": 1792953400819425200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/frontend_clean_logs",
+    "files": 4,
+    "logical_bytes": 39461,
+    "mtime_utc_ns": 1793027578864991700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/github-push-20261021-045637.json",
+    "files": 1,
+    "logical_bytes": 480,
+    "mtime_utc_ns": 1792558597909122400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/github-release-20261020",
+    "files": 21,
+    "logical_bytes": 100761,
+    "mtime_utc_ns": 1792492819386938800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/graph-demo-run-20261021-090935-770",
+    "files": 2,
+    "logical_bytes": 768,
+    "mtime_utc_ns": 1792573778644688700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/groundwater_source_coverage.py",
+    "files": 1,
+    "logical_bytes": 8796,
+    "mtime_utc_ns": 1792968464684867300,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/gwl_dist_stats.py",
+    "files": 1,
+    "logical_bytes": 841,
+    "mtime_utc_ns": 1791780964180837600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/home-build.log",
+    "files": 1,
+    "logical_bytes": 1046,
+    "mtime_utc_ns": 1792954433698164000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/home-catalog-1440.png",
+    "files": 1,
+    "logical_bytes": 205750,
+    "mtime_utc_ns": 1792954277958280800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/home-catalog-390.png",
+    "files": 1,
+    "logical_bytes": 57210,
+    "mtime_utc_ns": 1792954278063091800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/home-catalog-768.png",
+    "files": 1,
+    "logical_bytes": 77793,
+    "mtime_utc_ns": 1792954278018591900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/home-catalog-browser.json",
+    "files": 1,
+    "logical_bytes": 540,
+    "mtime_utc_ns": 1792954283296919200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/home-catalog-browser.log",
+    "files": 1,
+    "logical_bytes": 552,
+    "mtime_utc_ns": 1792954283305898900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/home-catalog-build",
+    "files": 8,
+    "logical_bytes": 6246483,
+    "mtime_utc_ns": 1792954280872181100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/home-frontend-tests.log",
+    "files": 1,
+    "logical_bytes": 37395,
+    "mtime_utc_ns": 1792954431149173100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/home-lint.log",
+    "files": 1,
+    "logical_bytes": 38,
+    "mtime_utc_ns": 1792954432351358600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/inspect_auxiliary.py",
+    "files": 1,
+    "logical_bytes": 1208,
+    "mtime_utc_ns": 1792968290324075200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/inspect_auxiliary_pdfs.py",
+    "files": 1,
+    "logical_bytes": 1397,
+    "mtime_utc_ns": 1792968372466274400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/inspect_completion.py",
+    "files": 1,
+    "logical_bytes": 2195,
+    "mtime_utc_ns": 1792949943653686400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/inspect_crisis_scores_schema.py",
+    "files": 1,
+    "logical_bytes": 777,
+    "mtime_utc_ns": 1791782471973306400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/inspect_sources.py",
+    "files": 1,
+    "logical_bytes": 1116,
+    "mtime_utc_ns": 1792950048284441100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/inspect_xgb.py",
+    "files": 1,
+    "logical_bytes": 852,
+    "mtime_utc_ns": 1791780879267574800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/integration-final.log",
+    "files": 1,
+    "logical_bytes": 113,
+    "mtime_utc_ns": 1792951938137939600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/integration.log",
+    "files": 1,
+    "logical_bytes": 2081,
+    "mtime_utc_ns": 1792951571423943000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/interval-tests.log",
+    "files": 1,
+    "logical_bytes": 101,
+    "mtime_utc_ns": 1793025803468234300,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/interval-tests.xml",
+    "files": 1,
+    "logical_bytes": 5130,
+    "mtime_utc_ns": 1793025803333796800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/lint-final.log",
+    "files": 1,
+    "logical_bytes": 38,
+    "mtime_utc_ns": 1792953402210907000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/local-research-run-20261021-040726-754",
+    "files": 5,
+    "logical_bytes": 5565,
+    "mtime_utc_ns": 1792555656330490200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/local-scoring-run.log",
+    "files": 1,
+    "logical_bytes": 351,
+    "mtime_utc_ns": 1792954860062203000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/missing-graph-diagnostic-20261021T100746007558Z",
+    "files": 1,
+    "logical_bytes": 3566,
+    "mtime_utc_ns": 1792577266007893800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/nationwide-complete",
+    "files": 3,
+    "logical_bytes": 14919048,
+    "mtime_utc_ns": 1792950376581284100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/nationwide-ui-build",
+    "files": 11,
+    "logical_bytes": 8852508,
+    "mtime_utc_ns": 1792951013489236000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/nwdp-audit-replay",
+    "files": 2,
+    "logical_bytes": 53425,
+    "mtime_utc_ns": 1792987341823794200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/prediction-graph-visibility-build-20261021-01",
+    "files": 6,
+    "logical_bytes": 5078703,
+    "mtime_utc_ns": 1792577694719862900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/probe_auxiliary.py",
+    "files": 1,
+    "logical_bytes": 2879,
+    "mtime_utc_ns": 1792968232934846400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/probe_imd_overlap_20261014.py",
+    "files": 1,
+    "logical_bytes": 861,
+    "mtime_utc_ns": 1791945027987384600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/project-run-20261021-095955-798767",
+    "files": 6,
+    "logical_bytes": 13037,
+    "mtime_utc_ns": 1792576842683952100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/promote_nwdp_audit.py",
+    "files": 1,
+    "logical_bytes": 1954,
+    "mtime_utc_ns": 1792968516466653400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/public_score_snapshot.py",
+    "files": 1,
+    "logical_bytes": 1157,
+    "mtime_utc_ns": 1792954822688261200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/publish-final-frozen.log",
+    "files": 1,
+    "logical_bytes": 1473,
+    "mtime_utc_ns": 1792953026894325700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/publish-final.log",
+    "files": 1,
+    "logical_bytes": 1473,
+    "mtime_utc_ns": 1792952470207399200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/publish-release.log",
+    "files": 1,
+    "logical_bytes": 1473,
+    "mtime_utc_ns": 1792952757133103000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/publish-test.log",
+    "files": 1,
+    "logical_bytes": 1473,
+    "mtime_utc_ns": 1792951482843714100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/publish-verified.log",
+    "files": 1,
+    "logical_bytes": 1474,
+    "mtime_utc_ns": 1792952927936407900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/pytest-audit-2026-10-17",
+    "files": 0,
+    "logical_bytes": 0,
+    "mtime_utc_ns": 1793100115203866200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/pytest-audit-2026-10-17-diagnose",
+    "files": 0,
+    "logical_bytes": 0,
+    "mtime_utc_ns": 1793100115207866200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/pytest-audit-root-final-20261017",
+    "files": 0,
+    "logical_bytes": 0,
+    "mtime_utc_ns": 1793100115192866000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/pytest-data-refresh-final-20261013",
+    "files": 0,
+    "logical_bytes": 0,
+    "mtime_utc_ns": 1793100115206866300,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/pytest-download-and-provenance",
+    "files": 0,
+    "logical_bytes": 0,
+    "mtime_utc_ns": 1793100115209867000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/pytest-pipeline-stage-final-20261014",
+    "files": 0,
+    "logical_bytes": 0,
+    "mtime_utc_ns": 1793100115210867200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/pytest-refresh-full-20261013",
+    "files": 0,
+    "logical_bytes": 0,
+    "mtime_utc_ns": 1793100115197866300,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/pytest-simplification-20261027",
+    "files": 3,
+    "logical_bytes": 16312462,
+    "mtime_utc_ns": 1793100604641516200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/pytest-simplification-archive",
+    "files": 0,
+    "logical_bytes": 0,
+    "mtime_utc_ns": 1793100360306416200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/pytest-update-adapters-fixed-20261013",
+    "files": 0,
+    "logical_bytes": 0,
+    "mtime_utc_ns": 1793100115207866200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/raw_pytest.xml",
+    "files": 1,
+    "logical_bytes": 227067,
+    "mtime_utc_ns": 1793043849289993400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/raw_pytest_verified.xml",
+    "files": 1,
+    "logical_bytes": 226422,
+    "mtime_utc_ns": 1793043849316999000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/record_nwdp_validation.py",
+    "files": 1,
+    "logical_bytes": 1336,
+    "mtime_utc_ns": 1792987379232214800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/release-final.log",
+    "files": 1,
+    "logical_bytes": 661,
+    "mtime_utc_ns": 1792953443325253700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/release-verification.log",
+    "files": 1,
+    "logical_bytes": 661,
+    "mtime_utc_ns": 1792952581374228300,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/repair_encoding.py",
+    "files": 1,
+    "logical_bytes": 902,
+    "mtime_utc_ns": 1792951687943606100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/repository_cleanup_20261027",
+    "files": 0,
+    "logical_bytes": 0,
+    "mtime_utc_ns": 1793096259202156700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/request7.txt",
+    "files": 1,
+    "logical_bytes": 7427,
+    "mtime_utc_ns": 1792688358448150400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retrained-evaluation-tests-final.xml",
+    "files": 1,
+    "logical_bytes": 12012,
+    "mtime_utc_ns": 1793057239133769600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retrained-evaluation-tests-verified.xml",
+    "files": 1,
+    "logical_bytes": 7959,
+    "mtime_utc_ns": 1793057149018920400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retrained-evaluation-tests.xml",
+    "files": 1,
+    "logical_bytes": 8667,
+    "mtime_utc_ns": 1793057112357274100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retrained-shared-tests-final.xml",
+    "files": 1,
+    "logical_bytes": 13051,
+    "mtime_utc_ns": 1793066352443153900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retrained-shared-tests.xml",
+    "files": 1,
+    "logical_bytes": 3729,
+    "mtime_utc_ns": 1793066232795073900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retraining-acceptance-tests-final.xml",
+    "files": 1,
+    "logical_bytes": 9575,
+    "mtime_utc_ns": 1793064110916381300,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retraining-acceptance-tests.xml",
+    "files": 1,
+    "logical_bytes": 3355,
+    "mtime_utc_ns": 1793063993562583500,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retraining-complete-final.xml",
+    "files": 1,
+    "logical_bytes": 247223,
+    "mtime_utc_ns": 1793067085192098600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retraining-complete.xml",
+    "files": 1,
+    "logical_bytes": 243755,
+    "mtime_utc_ns": 1793064761192443900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retraining-data-audit.xml",
+    "files": 1,
+    "logical_bytes": 3901,
+    "mtime_utc_ns": 1793057206837894200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retraining-focused-final.xml",
+    "files": 1,
+    "logical_bytes": 14334,
+    "mtime_utc_ns": 1793063559090652700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retraining-focused-verified.xml",
+    "files": 1,
+    "logical_bytes": 13714,
+    "mtime_utc_ns": 1793057399357773200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retraining-focused.xml",
+    "files": 1,
+    "logical_bytes": 54334,
+    "mtime_utc_ns": 1793057373971905300,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retraining_20261027",
+    "files": 3,
+    "logical_bytes": 318322,
+    "mtime_utc_ns": 1793063568779482500,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retraining_api.log",
+    "files": 1,
+    "logical_bytes": 661,
+    "mtime_utc_ns": 1793064495807504800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retraining_candidate_outputs",
+    "files": 3,
+    "logical_bytes": 14614453,
+    "mtime_utc_ns": 1793064116938211800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retraining_fit.log",
+    "files": 1,
+    "logical_bytes": 2539,
+    "mtime_utc_ns": 1793063763122398000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retraining_generation.log",
+    "files": 1,
+    "logical_bytes": 1470,
+    "mtime_utc_ns": 1793064121814103400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retraining_parallel.log",
+    "files": 1,
+    "logical_bytes": 3344,
+    "mtime_utc_ns": 1793066873097336700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retraining_parallel_20261027",
+    "files": 9,
+    "logical_bytes": 3369537,
+    "mtime_utc_ns": 1793066873081252300,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retraining_pytest.log",
+    "files": 1,
+    "logical_bytes": 3339,
+    "mtime_utc_ns": 1793064761461434100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retraining_pytest_final.log",
+    "files": 1,
+    "logical_bytes": 3339,
+    "mtime_utc_ns": 1793067085727103200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retraining_retrospective.log",
+    "files": 1,
+    "logical_bytes": 306,
+    "mtime_utc_ns": 1793064845292194800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retraining_staged_model",
+    "files": 3,
+    "logical_bytes": 877677,
+    "mtime_utc_ns": 1793068071153866900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retraining_staged_whitespace.log",
+    "files": 1,
+    "logical_bytes": 0,
+    "mtime_utc_ns": 1793067935116331600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retraining_staged_whitespace_final.log",
+    "files": 1,
+    "logical_bytes": 0,
+    "mtime_utc_ns": 1793068329252083600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retraining_working_whitespace.log",
+    "files": 1,
+    "logical_bytes": 0,
+    "mtime_utc_ns": 1793067937387001000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/retraining_working_whitespace_final.log",
+    "files": 1,
+    "logical_bytes": 0,
+    "mtime_utc_ns": 1793068331380759900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/score-release-verification.log",
+    "files": 1,
+    "logical_bytes": 1322,
+    "mtime_utc_ns": 1792955824303640100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/scored-alerts.png",
+    "files": 1,
+    "logical_bytes": 115470,
+    "mtime_utc_ns": 1793043372334037900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/scored-build.log",
+    "files": 1,
+    "logical_bytes": 1066,
+    "mtime_utc_ns": 1792955680920717800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/scored-complete-tests.log",
+    "files": 1,
+    "logical_bytes": 1597,
+    "mtime_utc_ns": 1792955762835016200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/scored-dashboard-browser.json",
+    "files": 1,
+    "logical_bytes": 633,
+    "mtime_utc_ns": 1793043374651622900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/scored-dashboard-browser.log",
+    "files": 1,
+    "logical_bytes": 652,
+    "mtime_utc_ns": 1792955539627665000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/scored-dashboard-build",
+    "files": 8,
+    "logical_bytes": 6247366,
+    "mtime_utc_ns": 1792955384470294000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/scored-frontend-tests.log",
+    "files": 1,
+    "logical_bytes": 37388,
+    "mtime_utc_ns": 1792955678927859800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/scored-lint.log",
+    "files": 1,
+    "logical_bytes": 38,
+    "mtime_utc_ns": 1792955679658982700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/scored-map-1440.png",
+    "files": 1,
+    "logical_bytes": 115472,
+    "mtime_utc_ns": 1793043361600276600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/scored-map-390.png",
+    "files": 1,
+    "logical_bytes": 116945,
+    "mtime_utc_ns": 1793043362576727900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/scored-map-768.png",
+    "files": 1,
+    "logical_bytes": 113744,
+    "mtime_utc_ns": 1793043361919297500,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/scores-base-tests.log",
+    "files": 1,
+    "logical_bytes": 101,
+    "mtime_utc_ns": 1792954843916279100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/scores_response.json",
+    "files": 1,
+    "logical_bytes": 464099,
+    "mtime_utc_ns": 1792687323034538400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/scoring-public-before.json",
+    "files": 1,
+    "logical_bytes": 303,
+    "mtime_utc_ns": 1792954828076360500,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/scoring-storage-integration.log",
+    "files": 1,
+    "logical_bytes": 101,
+    "mtime_utc_ns": 1792955262351786800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/scoring-storage-unit.log",
+    "files": 1,
+    "logical_bytes": 112,
+    "mtime_utc_ns": 1792955255605345300,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/shadow-combined-tests-20261018.log",
+    "files": 1,
+    "logical_bytes": 184,
+    "mtime_utc_ns": 1792302144309844400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/shadow-demo-20261018-final.log",
+    "files": 1,
+    "logical_bytes": 5213,
+    "mtime_utc_ns": 1792302238432732900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/shadow-demo-20261018.log",
+    "files": 1,
+    "logical_bytes": 5207,
+    "mtime_utc_ns": 1792301976302002200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/shadow-final-combined-20261018.log",
+    "files": 1,
+    "logical_bytes": 184,
+    "mtime_utc_ns": 1792319618772434200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/simplification_archive_verification",
+    "files": 380,
+    "logical_bytes": 2335727,
+    "mtime_utc_ns": 1793100041414694500,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/six-month-20261017-pytest-final.log",
+    "files": 1,
+    "logical_bytes": 3164,
+    "mtime_utc_ns": 1792232119738764500,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/six-month-20261017-pytest.log",
+    "files": 1,
+    "logical_bytes": 3164,
+    "mtime_utc_ns": 1792231859869757800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/six-month-20261017-report.log",
+    "files": 1,
+    "logical_bytes": 26311,
+    "mtime_utc_ns": 1792232429465294400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/six-month-20261017-reproduction.log",
+    "files": 1,
+    "logical_bytes": 329,
+    "mtime_utc_ns": 1792213404839188200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/six-month-20261017-targeted-final.log",
+    "files": 1,
+    "logical_bytes": 112,
+    "mtime_utc_ns": 1792231898410326300,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/six-month-20261017-test.log",
+    "files": 1,
+    "logical_bytes": 4117,
+    "mtime_utc_ns": 1792232361819847400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/six-month-20261017-validation-v2.log",
+    "files": 1,
+    "logical_bytes": 7828,
+    "mtime_utc_ns": 1792232332883692700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/six-month-20261017-validation.log",
+    "files": 1,
+    "logical_bytes": 7828,
+    "mtime_utc_ns": 1792232019951747600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/six-month-diagnostics-20261017.log",
+    "files": 1,
+    "logical_bytes": 5361,
+    "mtime_utc_ns": 1792234248219229900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/six-month-raw-lineage-20261017.log",
+    "files": 1,
+    "logical_bytes": 156,
+    "mtime_utc_ns": 1792250489573957200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/spatial-audit.log",
+    "files": 1,
+    "logical_bytes": 5818,
+    "mtime_utc_ns": 1792951951837355900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/staged-scan-final.json",
+    "files": 1,
+    "logical_bytes": 48,
+    "mtime_utc_ns": 1792953463101285200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/staged-scan.json",
+    "files": 1,
+    "logical_bytes": 151,
+    "mtime_utc_ns": 1792952854732324100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/stage_completion.py",
+    "files": 1,
+    "logical_bytes": 1313,
+    "mtime_utc_ns": 1792952848700864400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/stage_imd_realtime_20261014.py",
+    "files": 1,
+    "logical_bytes": 1445,
+    "mtime_utc_ns": 1791945223412019100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/stage_release_reports.py",
+    "files": 1,
+    "logical_bytes": 560,
+    "mtime_utc_ns": 1792953181174878000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/state-browser-54Ntbl",
+    "files": 7,
+    "logical_bytes": 355282,
+    "mtime_utc_ns": 1792913587751048500,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/state-browser-c26U22",
+    "files": 0,
+    "logical_bytes": 0,
+    "mtime_utc_ns": 1792907058906363800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/state-browser-qFpEb0",
+    "files": 0,
+    "logical_bytes": 0,
+    "mtime_utc_ns": 1792907160719290200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/state-browser-wTuk7U",
+    "files": 4,
+    "logical_bytes": 1078693,
+    "mtime_utc_ns": 1792907206754649900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/state-complete-1440.png",
+    "files": 1,
+    "logical_bytes": 57795,
+    "mtime_utc_ns": 1793064862180815500,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/state-complete-390.png",
+    "files": 1,
+    "logical_bytes": 38729,
+    "mtime_utc_ns": 1793064862443756100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/state-complete-768.png",
+    "files": 1,
+    "logical_bytes": 60217,
+    "mtime_utc_ns": 1793064862325783100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/state-isolation-tests.xml",
+    "files": 1,
+    "logical_bytes": 4860,
+    "mtime_utc_ns": 1793042840435203200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/state-performance-reference",
+    "files": 3,
+    "logical_bytes": 67965,
+    "mtime_utc_ns": 1792932159328262800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/step165.txt",
+    "files": 1,
+    "logical_bytes": 810,
+    "mtime_utc_ns": 1792688411795644600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/storage-final.log",
+    "files": 1,
+    "logical_bytes": 113,
+    "mtime_utc_ns": 1792952966069069900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/submission-build-20261019",
+    "files": 6,
+    "logical_bytes": 5061783,
+    "mtime_utc_ns": 1792382451257751700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/task165_cmd.txt",
+    "files": 1,
+    "logical_bytes": 819,
+    "mtime_utc_ns": 1792688424630382100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/tests-after-unit.log",
+    "files": 1,
+    "logical_bytes": 1517,
+    "mtime_utc_ns": 1792950903165240800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/tests-before.log",
+    "files": 1,
+    "logical_bytes": 11575,
+    "mtime_utc_ns": 1792950156462903700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/tests-final.log",
+    "files": 1,
+    "logical_bytes": 1597,
+    "mtime_utc_ns": 1792951706889653900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/tests-release-final.log",
+    "files": 1,
+    "logical_bytes": 1598,
+    "mtime_utc_ns": 1792952920521337200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/test_4way_weights.py",
+    "files": 1,
+    "logical_bytes": 3426,
+    "mtime_utc_ns": 1791781439117179200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/test_climate_state.py",
+    "files": 1,
+    "logical_bytes": 5456,
+    "mtime_utc_ns": 1792860327598095700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/test_drought_freq.py",
+    "files": 1,
+    "logical_bytes": 1294,
+    "mtime_utc_ns": 1791781186241601000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/test_fis_speed.py",
+    "files": 1,
+    "logical_bytes": 297,
+    "mtime_utc_ns": 1791781250494013700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/test_purged_cv.py",
+    "files": 1,
+    "logical_bytes": 3742,
+    "mtime_utc_ns": 1791781348745293700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/test_xgb_pred.py",
+    "files": 1,
+    "logical_bytes": 856,
+    "mtime_utc_ns": 1791780898155383600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/tiered-final.log",
+    "files": 1,
+    "logical_bytes": 101,
+    "mtime_utc_ns": 1792953273132547600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/tiered-validation.log",
+    "files": 1,
+    "logical_bytes": 5339,
+    "mtime_utc_ns": 1792951369019024500,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/train_12m_test.py",
+    "files": 1,
+    "logical_bytes": 10057,
+    "mtime_utc_ns": 1792833432085231500,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/twelve-month-app-backend-final-02",
+    "files": 377,
+    "logical_bytes": 1097397,
+    "mtime_utc_ns": 1792535766266506100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/twelve-month-app-build-final-01",
+    "files": 6,
+    "logical_bytes": 5072414,
+    "mtime_utc_ns": 1792535641389233700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/twelve-month-app-build-final-02",
+    "files": 6,
+    "logical_bytes": 5072654,
+    "mtime_utc_ns": 1792535762714224500,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/twelve-month-app-build-final-03",
+    "files": 6,
+    "logical_bytes": 5072874,
+    "mtime_utc_ns": 1792535973171713900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/twelve-month-app-tests-final-01",
+    "files": 415,
+    "logical_bytes": 1120940,
+    "mtime_utc_ns": 1792535629540626000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/twelve-month-app-tests-final-03",
+    "files": 429,
+    "logical_bytes": 1161594,
+    "mtime_utc_ns": 1792535981849761200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/twelve-month-backend-fixtures-20261020-a",
+    "files": 293,
+    "logical_bytes": 841419,
+    "mtime_utc_ns": 1792517257287341300,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/twelve-month-backend-fixtures-20261020-b",
+    "files": 377,
+    "logical_bytes": 1024728,
+    "mtime_utc_ns": 1792517351442221200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/twelve-month-backend-tests-20261020-a.xml",
+    "files": 1,
+    "logical_bytes": 6752,
+    "mtime_utc_ns": 1792517257340337700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/twelve-month-backend-tests-20261020-b.xml",
+    "files": 1,
+    "logical_bytes": 21713,
+    "mtime_utc_ns": 1792517351555221300,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/twelve-month-combined-tests-20261020",
+    "files": 28,
+    "logical_bytes": 8649,
+    "mtime_utc_ns": 1792513967477988100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/twelve-month-final-tests-20261020",
+    "files": 28,
+    "logical_bytes": 8649,
+    "mtime_utc_ns": 1792514267040019500,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/twelve-month-graph-backend-tests-20261021-a",
+    "files": 377,
+    "logical_bytes": 1097397,
+    "mtime_utc_ns": 1792558993342070200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/twelve-month-graph-build-20261021",
+    "files": 6,
+    "logical_bytes": 5071239,
+    "mtime_utc_ns": 1792559172300781800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/twelve-month-graph-build-20261021-v2",
+    "files": 6,
+    "logical_bytes": 5071396,
+    "mtime_utc_ns": 1792573899142422700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/twelve-month-graph-final-tests-20261021",
+    "files": 429,
+    "logical_bytes": 1161594,
+    "mtime_utc_ns": 1792559192201669500,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/twelve-month-horizon-pytest-final-20261020",
+    "files": 25,
+    "logical_bytes": 8593,
+    "mtime_utc_ns": 1792493602302222100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/twelve-month-horizon-pytest-second-20261020",
+    "files": 25,
+    "logical_bytes": 8593,
+    "mtime_utc_ns": 1792493580528451600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/twelve-month-six-regressions-20261020",
+    "files": 24,
+    "logical_bytes": 55548,
+    "mtime_utc_ns": 1792493733003375100,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/update_completion_docs.py",
+    "files": 1,
+    "logical_bytes": 5406,
+    "mtime_utc_ns": 1792952283864902200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/validate-only-final.log",
+    "files": 1,
+    "logical_bytes": 457,
+    "mtime_utc_ns": 1792953208685250600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/validation-final.log",
+    "files": 1,
+    "logical_bytes": 4983,
+    "mtime_utc_ns": 1792952765402648400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/verify_saved_monthly_eval_20261014.py",
+    "files": 1,
+    "logical_bytes": 2145,
+    "mtime_utc_ns": 1791945393832990000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/verify_score_release.py",
+    "files": 1,
+    "logical_bytes": 2861,
+    "mtime_utc_ns": 1792955818546627000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/weather-boundary-tests-final.xml",
+    "files": 1,
+    "logical_bytes": 3621,
+    "mtime_utc_ns": 1793027190633233400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/write_completion_report.py",
+    "files": 1,
+    "logical_bytes": 13032,
+    "mtime_utc_ns": 1792953044049477900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/write_weather_release_reports.py",
+    "files": 1,
+    "logical_bytes": 9854,
+    "mtime_utc_ns": 1793027317599677600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/xgb-states-backend-final.txt",
+    "files": 1,
+    "logical_bytes": 102,
+    "mtime_utc_ns": 1792913750136349800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/xgb-states-backend-tests-elevated.txt",
+    "files": 1,
+    "logical_bytes": 3556,
+    "mtime_utc_ns": 1792906958353079600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/xgb-states-backend-tests.txt",
+    "files": 1,
+    "logical_bytes": 3446020,
+    "mtime_utc_ns": 1792906973790950000,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/xgb-states-build",
+    "files": 7,
+    "logical_bytes": 5358398,
+    "mtime_utc_ns": 1792906727812782900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/xgb-states-build-final",
+    "files": 7,
+    "logical_bytes": 5359041,
+    "mtime_utc_ns": 1792907676109713800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/xgb-states-build-final.txt",
+    "files": 1,
+    "logical_bytes": 1066,
+    "mtime_utc_ns": 1792907676122804800,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/xgb-states-build.txt",
+    "files": 1,
+    "logical_bytes": 1416,
+    "mtime_utc_ns": 1792906727846985500,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/xgb-states-frontend-final.txt",
+    "files": 1,
+    "logical_bytes": 35189,
+    "mtime_utc_ns": 1792906967065333300,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/xgb-states-frontend-final2.txt",
+    "files": 1,
+    "logical_bytes": 58387,
+    "mtime_utc_ns": 1792907523686659400,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/xgb-states-frontend-pass.txt",
+    "files": 1,
+    "logical_bytes": 35392,
+    "mtime_utc_ns": 1792907674741762200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/xgb-states-frontend-tests.txt",
+    "files": 1,
+    "logical_bytes": 40401,
+    "mtime_utc_ns": 1792906695281388300,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/xgb-states-lint-final.txt",
+    "files": 1,
+    "logical_bytes": 38,
+    "mtime_utc_ns": 1792907519331249500,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/xgb-states-lint.txt",
+    "files": 1,
+    "logical_bytes": 38,
+    "mtime_utc_ns": 1792906720192312900,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/xgb-states-live",
+    "files": 4,
+    "logical_bytes": 39928,
+    "mtime_utc_ns": 1792907041836980600,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/xgb_states_preservation_before.json",
+    "files": 1,
+    "logical_bytes": 260105,
+    "mtime_utc_ns": 1792906108873970700,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "scratch/__pycache__",
+    "files": 12,
+    "logical_bytes": 27981,
+    "mtime_utc_ns": 1791813612717646200,
+    "classification": "REVIEW \u2014 ambiguous; keep",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "data/backup_pre_d1_migration.dump",
+    "files": 1,
+    "logical_bytes": 22464250,
+    "mtime_utc_ns": 1791777678281774200,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "data/processed",
+    "files": 82,
+    "logical_bytes": 374003969,
+    "mtime_utc_ns": 1793010125726513200,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "data/raw",
+    "files": 210,
+    "logical_bytes": 1526827196,
+    "mtime_utc_ns": 1793010125725512300,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/accuracy_challengers.py",
+    "files": 1,
+    "logical_bytes": 12596,
+    "mtime_utc_ns": 1793070979335595000,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/accuracy_experiments.py",
+    "files": 1,
+    "logical_bytes": 15338,
+    "mtime_utc_ns": 1793071528032583500,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/ann_classifier.py",
+    "files": 1,
+    "logical_bytes": 8161,
+    "mtime_utc_ns": 1792351961438905800,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/artifacts",
+    "files": 15,
+    "logical_bytes": 3504403,
+    "mtime_utc_ns": 1793088393419794200,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/audit_evaluation.py",
+    "files": 1,
+    "logical_bytes": 10598,
+    "mtime_utc_ns": 1792178282834076500,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/backtest.py",
+    "files": 1,
+    "logical_bytes": 11099,
+    "mtime_utc_ns": 1791977121546291100,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/checkpoints",
+    "files": 22,
+    "logical_bytes": 13363436,
+    "mtime_utc_ns": 1792833610662585000,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/climate_forecast.py",
+    "files": 1,
+    "logical_bytes": 29362,
+    "mtime_utc_ns": 1792178229301197700,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/climate_forecast_12m.py",
+    "files": 1,
+    "logical_bytes": 37259,
+    "mtime_utc_ns": 1792988575505749000,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/climate_inputs.py",
+    "files": 1,
+    "logical_bytes": 18484,
+    "mtime_utc_ns": 1792988575507756800,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/crisis_validation.py",
+    "files": 1,
+    "logical_bytes": 11694,
+    "mtime_utc_ns": 1792034617706962400,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/data_readiness.py",
+    "files": 1,
+    "logical_bytes": 2082,
+    "mtime_utc_ns": 1792178246104466000,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/district_registry.py",
+    "files": 1,
+    "logical_bytes": 3245,
+    "mtime_utc_ns": 1792988575509682600,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/enriched_training_data.py",
+    "files": 1,
+    "logical_bytes": 12284,
+    "mtime_utc_ns": 1793057286812403200,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/ensemble.py",
+    "files": 1,
+    "logical_bytes": 18258,
+    "mtime_utc_ns": 1792988575511762000,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/experimental_scenario.py",
+    "files": 1,
+    "logical_bytes": 9575,
+    "mtime_utc_ns": 1792600465106806500,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/forecast_cache.py",
+    "files": 1,
+    "logical_bytes": 2253,
+    "mtime_utc_ns": 1792988575513684300,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/forecast_storage.py",
+    "files": 1,
+    "logical_bytes": 33877,
+    "mtime_utc_ns": 1793030492059933200,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/fuzzy_logic.py",
+    "files": 1,
+    "logical_bytes": 8944,
+    "mtime_utc_ns": 1793042976127250000,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/interval_evidence.py",
+    "files": 1,
+    "logical_bytes": 9156,
+    "mtime_utc_ns": 1793030492059933200,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/linear_regression.py",
+    "files": 1,
+    "logical_bytes": 8417,
+    "mtime_utc_ns": 1792351961126827500,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/monthly_projection.py",
+    "files": 1,
+    "logical_bytes": 9608,
+    "mtime_utc_ns": 1791977121558284800,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/plot_predictions.py",
+    "files": 1,
+    "logical_bytes": 5085,
+    "mtime_utc_ns": 1792178919360246900,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/policy_recommendations.py",
+    "files": 1,
+    "logical_bytes": 4783,
+    "mtime_utc_ns": 1789196744923177200,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/prospective_validation.py",
+    "files": 1,
+    "logical_bytes": 12080,
+    "mtime_utc_ns": 1792069802229121200,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/research_forecast.py",
+    "files": 1,
+    "logical_bytes": 23699,
+    "mtime_utc_ns": 1792600465107804200,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/research_graph.py",
+    "files": 1,
+    "logical_bytes": 5551,
+    "mtime_utc_ns": 1792600465107804200,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/research_horizon.py",
+    "files": 1,
+    "logical_bytes": 14183,
+    "mtime_utc_ns": 1792600465108805600,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/scenario_sources.py",
+    "files": 1,
+    "logical_bytes": 8345,
+    "mtime_utc_ns": 1792600465109805500,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/score_all.py",
+    "files": 1,
+    "logical_bytes": 6630,
+    "mtime_utc_ns": 1792988575516755100,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/shadow_ledger.py",
+    "files": 1,
+    "logical_bytes": 31098,
+    "mtime_utc_ns": 1792302172496385700,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/six_month_selection.py",
+    "files": 1,
+    "logical_bytes": 24268,
+    "mtime_utc_ns": 1792231992284597200,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/state_forecast.py",
+    "files": 1,
+    "logical_bytes": 18692,
+    "mtime_utc_ns": 1792988575519683400,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/state_mapping.py",
+    "files": 1,
+    "logical_bytes": 6588,
+    "mtime_utc_ns": 1792874582469096200,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/statistical_tests.py",
+    "files": 1,
+    "logical_bytes": 7564,
+    "mtime_utc_ns": 1792178903352576800,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/tiered_forecast.py",
+    "files": 1,
+    "logical_bytes": 19906,
+    "mtime_utc_ns": 1793030492060932700,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/tiers.py",
+    "files": 1,
+    "logical_bytes": 1301,
+    "mtime_utc_ns": 1791014325017322600,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/uncertainty.py",
+    "files": 1,
+    "logical_bytes": 30857,
+    "mtime_utc_ns": 1792069890639887500,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/xgboost_gridsearch.py",
+    "files": 1,
+    "logical_bytes": 5336,
+    "mtime_utc_ns": 1791977121562283400,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/xgboost_model.py",
+    "files": 1,
+    "logical_bytes": 24676,
+    "mtime_utc_ns": 1792988586937553600,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "models/__init__.py",
+    "files": 1,
+    "logical_bytes": 0,
+    "mtime_utc_ns": 1786896229386435300,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "docs/ACCURACY_EXPERIMENTS.md",
+    "files": 1,
+    "logical_bytes": 4214,
+    "mtime_utc_ns": 1793071528051578100,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "docs/AquaIQ_Architecture_Diagram.png",
+    "files": 1,
+    "logical_bytes": 519198,
+    "mtime_utc_ns": 1786983341966617900,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "docs/AquaIQ_Architecture_Diagram.svg",
+    "files": 1,
+    "logical_bytes": 11425,
+    "mtime_utc_ns": 1788862316320571200,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "docs/AquaIQ_Context_Brief.md",
+    "files": 1,
+    "logical_bytes": 19173,
+    "mtime_utc_ns": 1792210301543125400,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "docs/AquaIQ_ProjectPlan.html",
+    "files": 1,
+    "logical_bytes": 19909,
+    "mtime_utc_ns": 1791014325013670700,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "docs/AUDIT_REPORT.md",
+    "files": 1,
+    "logical_bytes": 31876,
+    "mtime_utc_ns": 1792210301105306500,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "docs/ENRICHED_XGBOOST_RETRAINING.md",
+    "files": 1,
+    "logical_bytes": 7042,
+    "mtime_utc_ns": 1793063760794477000,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "docs/EXPERIMENTAL_SCENARIO.md",
+    "files": 1,
+    "logical_bytes": 5749,
+    "mtime_utc_ns": 1792600465105807700,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "docs/FINAL_RELEASE_REPRODUCTION.md",
+    "files": 1,
+    "logical_bytes": 17536,
+    "mtime_utc_ns": 1793043492531340200,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "docs/MAINTENANCE.md",
+    "files": 1,
+    "logical_bytes": 3846,
+    "mtime_utc_ns": 1793100300129669400,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "docs/NATIONWIDE_FORECASTS.md",
+    "files": 1,
+    "logical_bytes": 14328,
+    "mtime_utc_ns": 1793030492057932100,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "docs/OFFICIAL_DATA_ENRICHMENT.md",
+    "files": 1,
+    "logical_bytes": 9035,
+    "mtime_utc_ns": 1793030492058932000,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "docs/phase2_eval",
+    "files": 10,
+    "logical_bytes": 220481,
+    "mtime_utc_ns": 1790736631259470600,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "docs/Phase3_Presentation.html",
+    "files": 1,
+    "logical_bytes": 22428,
+    "mtime_utc_ns": 1792939179960873800,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "docs/prospective_shadow.md",
+    "files": 1,
+    "logical_bytes": 17415,
+    "mtime_utc_ns": 1792382394570667800,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "docs/README.md",
+    "files": 1,
+    "logical_bytes": 2473,
+    "mtime_utc_ns": 1793100300128752100,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "docs/STATE_XGBOOST.md",
+    "files": 1,
+    "logical_bytes": 6201,
+    "mtime_utc_ns": 1792988575500682400,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/accuracy_experiments_20261027",
+    "files": 316,
+    "logical_bytes": 235678713,
+    "mtime_utc_ns": 1793100300129669400,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/actual_forecast_validation_20261019",
+    "files": 155,
+    "logical_bytes": 329478327,
+    "mtime_utc_ns": 1792425216840272300,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/AquaIQ_Audit_2026-10-17.md",
+    "files": 1,
+    "logical_bytes": 33855,
+    "mtime_utc_ns": 1792210373358186300,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/AquaIQ_Climate_12M_Forecasting_Report.md",
+    "files": 1,
+    "logical_bytes": 13570,
+    "mtime_utc_ns": 1792874582469096200,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/AquaIQ_Data_Refresh_Update.md",
+    "files": 1,
+    "logical_bytes": 10547,
+    "mtime_utc_ns": 1791977121570285000,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/AquaIQ_Loading_Update.md",
+    "files": 1,
+    "logical_bytes": 2531,
+    "mtime_utc_ns": 1791977121571286900,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/AquaIQ_Monthly_Prediction_Update.md",
+    "files": 1,
+    "logical_bytes": 3794,
+    "mtime_utc_ns": 1791977121572297400,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/AquaIQ_Repair_Report.md",
+    "files": 1,
+    "logical_bytes": 7800,
+    "mtime_utc_ns": 1791977121573296400,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/AquaIQ_State_Wise_Groundwater_Forecasting_Report.md",
+    "files": 1,
+    "logical_bytes": 12037,
+    "mtime_utc_ns": 1792874582470095400,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/AquaIQ_Weather_Prediction_Update.md",
+    "files": 1,
+    "logical_bytes": 6224,
+    "mtime_utc_ns": 1791977121574294100,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/ARCHIVE.md",
+    "files": 1,
+    "logical_bytes": 2492,
+    "mtime_utc_ns": 1793100300130675500,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/audit-2026-10-17",
+    "files": 11,
+    "logical_bytes": 684799,
+    "mtime_utc_ns": 1792210373360187600,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/backtest_results.json",
+    "files": 1,
+    "logical_bytes": 5342,
+    "mtime_utc_ns": 1791977121577295000,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/candidates",
+    "files": 497,
+    "logical_bytes": 648458552,
+    "mtime_utc_ns": 1792600465145338500,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/CGWB_January_Station_Comparison_2026-10-15.md",
+    "files": 1,
+    "logical_bytes": 5641,
+    "mtime_utc_ns": 1792051494616032100,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/climate_12m_independent_audit_20261024_01",
+    "files": 18,
+    "logical_bytes": 973774,
+    "mtime_utc_ns": 1792874582478164600,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/climate_forecast_12m_evaluation.json",
+    "files": 1,
+    "logical_bytes": 35673,
+    "mtime_utc_ns": 1792874582479101700,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/climate_forecast_evaluation.json",
+    "files": 1,
+    "logical_bytes": 10960,
+    "mtime_utc_ns": 1791977121584296900,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/climate_forecast_live_verification.json",
+    "files": 1,
+    "logical_bytes": 42355,
+    "mtime_utc_ns": 1791977121585299300,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/climate_forecast_review.json",
+    "files": 1,
+    "logical_bytes": 12820,
+    "mtime_utc_ns": 1791977121586292600,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/climate_inputs_table_20261024_01",
+    "files": 12,
+    "logical_bytes": 5277211,
+    "mtime_utc_ns": 1792829324326945700,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/collapsed_rows_log.json",
+    "files": 1,
+    "logical_bytes": 133615696,
+    "mtime_utc_ns": 1791778230944868400,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/data_audit.json",
+    "files": 1,
+    "logical_bytes": 19707,
+    "mtime_utc_ns": 1791774009421865800,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/data_enrichment",
+    "files": 52,
+    "logical_bytes": 22253833,
+    "mtime_utc_ns": 1793030492073952500,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/data_quality_audit_2026-10-17.json",
+    "files": 1,
+    "logical_bytes": 1115649,
+    "mtime_utc_ns": 1792210179657934100,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/data_quality_audit_2026-10-17.md",
+    "files": 1,
+    "logical_bytes": 7916,
+    "mtime_utc_ns": 1792210179659934300,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/data_refresh_backup.json",
+    "files": 1,
+    "logical_bytes": 39251,
+    "mtime_utc_ns": 1791977121586797600,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/data_refresh_forecast.jpg",
+    "files": 1,
+    "logical_bytes": 79330,
+    "mtime_utc_ns": 1791977121588804900,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/data_refresh_graph.jpg",
+    "files": 1,
+    "logical_bytes": 297158,
+    "mtime_utc_ns": 1791977121591804700,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/data_refresh_live_verification.json",
+    "files": 1,
+    "logical_bytes": 799683,
+    "mtime_utc_ns": 1791977121595443200,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/district_coverage_audit_20261025",
+    "files": 8,
+    "logical_bytes": 146762,
+    "mtime_utc_ns": 1792988586977446000,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/end_to_end_verification_20261022",
+    "files": 107,
+    "logical_bytes": 15098301,
+    "mtime_utc_ns": 1792751057774221400,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/final_release_20261026",
+    "files": 42,
+    "logical_bytes": 1399097,
+    "mtime_utc_ns": 1793043883379986900,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/final_research_readiness_20261022_audit",
+    "files": 4,
+    "logical_bytes": 76053,
+    "mtime_utc_ns": 1792692731515608100,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/final_stabilization_20261020",
+    "files": 26,
+    "logical_bytes": 367615,
+    "mtime_utc_ns": 1792478576764167100,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/frontend_ux_20261023_01",
+    "files": 33,
+    "logical_bytes": 6328787,
+    "mtime_utc_ns": 1792829324380131800,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/github_release_20261020",
+    "files": 4,
+    "logical_bytes": 42504,
+    "mtime_utc_ns": 1792492574448297300,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/github_release_20261021",
+    "files": 5,
+    "logical_bytes": 32765,
+    "mtime_utc_ns": 1792600465189337300,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/history_hover_continuity_20261024_01",
+    "files": 14,
+    "logical_bytes": 5265729,
+    "mtime_utc_ns": 1792829324411413100,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/history_reference_style_20261024_01",
+    "files": 13,
+    "logical_bytes": 5208663,
+    "mtime_utc_ns": 1792829324440539200,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/history_trend_fix_20261024_01",
+    "files": 13,
+    "logical_bytes": 5233315,
+    "mtime_utc_ns": 1792829324469214900,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/IMD_Realtime_2026_Verification.md",
+    "files": 1,
+    "logical_bytes": 4167,
+    "mtime_utc_ns": 1791977121575294300,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/loading_after.json",
+    "files": 1,
+    "logical_bytes": 854,
+    "mtime_utc_ns": 1791977121596436500,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/loading_before.json",
+    "files": 1,
+    "logical_bytes": 857,
+    "mtime_utc_ns": 1791977121596436500,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/loading_comparison.json",
+    "files": 1,
+    "logical_bytes": 458,
+    "mtime_utc_ns": 1791977121597438800,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/loading_verified.jpg",
+    "files": 1,
+    "logical_bytes": 16443,
+    "mtime_utc_ns": 1791977121599437400,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/monthly_prediction_graph.jpg",
+    "files": 1,
+    "logical_bytes": 62661,
+    "mtime_utc_ns": 1791977121600437900,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/monthly_projection_evaluation.json",
+    "files": 1,
+    "logical_bytes": 20758,
+    "mtime_utc_ns": 1791977121601444700,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/monthly_projection_live_verification.json",
+    "files": 1,
+    "logical_bytes": 11122,
+    "mtime_utc_ns": 1791977121602436300,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/nationwide_20261025",
+    "files": 14,
+    "logical_bytes": 8934528,
+    "mtime_utc_ns": 1792988575554711900,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/post_audit_safe_fixes_20261019",
+    "files": 6,
+    "logical_bytes": 153452,
+    "mtime_utc_ns": 1792352177507228500,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/Prediction_Pipeline_Continuation_2026-10-15.md",
+    "files": 1,
+    "logical_bytes": 13155,
+    "mtime_utc_ns": 1792143974051660800,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/Prediction_Pipeline_Implementation_2026-10-14.md",
+    "files": 1,
+    "logical_bytes": 8606,
+    "mtime_utc_ns": 1792070110124082000,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/preservation_incident_20261019",
+    "files": 14,
+    "logical_bytes": 240436,
+    "mtime_utc_ns": 1792426800173252600,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/provenance_issuance_20261019",
+    "files": 9,
+    "logical_bytes": 333799,
+    "mtime_utc_ns": 1792353884677629900,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/publication_20261027",
+    "files": 1,
+    "logical_bytes": 1434,
+    "mtime_utc_ns": 1793098298777753700,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/README.md",
+    "files": 1,
+    "logical_bytes": 4097,
+    "mtime_utc_ns": 1793100300129669400,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/repair_applied_files.json",
+    "files": 1,
+    "logical_bytes": 3104,
+    "mtime_utc_ns": 1791977121603437200,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/repair_live_verification.json",
+    "files": 1,
+    "logical_bytes": 18532,
+    "mtime_utc_ns": 1791977121605438100,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/repair_pipeline.log",
+    "files": 1,
+    "logical_bytes": 7824,
+    "mtime_utc_ns": 1791855314601549100,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/repository_cleanup_20261027",
+    "files": 52,
+    "logical_bytes": 4293258,
+    "mtime_utc_ns": 1793096774834429200,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/retraining_20261027",
+    "files": 36,
+    "logical_bytes": 47920646,
+    "mtime_utc_ns": 1793068221972301200,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/scientific_validation_audit_20261018",
+    "files": 14,
+    "logical_bytes": 1137502,
+    "mtime_utc_ns": 1792321221688045900,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/score_depth_clarity.jpg",
+    "files": 1,
+    "logical_bytes": 39455,
+    "mtime_utc_ns": 1791977121606439800,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/score_direction_verification.json",
+    "files": 1,
+    "logical_bytes": 8667,
+    "mtime_utc_ns": 1791977121607436700,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/state_forecast_evaluation.json",
+    "files": 1,
+    "logical_bytes": 18655,
+    "mtime_utc_ns": 1792874582480094700,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/state_performance_20261025",
+    "files": 17,
+    "logical_bytes": 1701880,
+    "mtime_utc_ns": 1792988587024628100,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/Station_and_Crisis_Validation_2026-10-15.md",
+    "files": 1,
+    "logical_bytes": 6430,
+    "mtime_utc_ns": 1792051467621189500,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/statistical_audit_correction_20261022",
+    "files": 3,
+    "logical_bytes": 49755,
+    "mtime_utc_ns": 1792688840661418700,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/statistical_inference_review_20261022",
+    "files": 3,
+    "logical_bytes": 34064,
+    "mtime_utc_ns": 1792689340696150200,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/submission_finalization_20261019",
+    "files": 6,
+    "logical_bytes": 139392,
+    "mtime_utc_ns": 1792382730670728600,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/visual_rehearsal_preservation_20261023_01",
+    "files": 25,
+    "logical_bytes": 2045673,
+    "mtime_utc_ns": 1792762936231273700,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/weather_prediction_graph.jpg",
+    "files": 1,
+    "logical_bytes": 131110,
+    "mtime_utc_ns": 1791977121609452600,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/Weather_Refresh_Readiness_2026-10-13.md",
+    "files": 1,
+    "logical_bytes": 5450,
+    "mtime_utc_ns": 1791977121577295000,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  },
+  {
+    "path": "reports/xgboost_only_states_20261025",
+    "files": 8,
+    "logical_bytes": 1415147,
+    "mtime_utc_ns": 1792988587047646200,
+    "classification": "KEEP \u2014 essential/authoritative evidence",
+    "reason": "Existing local work, runtime, source or evidence; no additional deletion authorized by this inventory."
+  }
+]

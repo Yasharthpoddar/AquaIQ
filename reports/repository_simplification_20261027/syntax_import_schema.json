@@ -1,0 +1,85 @@
+{
+  "python_sources_compiled_in_memory": 294,
+  "modules_imported": [
+    "api.app",
+    "db.connection",
+    "db.init_db",
+    "models.climate_forecast_12m",
+    "models.accuracy_challengers",
+    "preprocessing.pipeline",
+    "data_ingestion.data_completeness",
+    "scripts.restore_report_archive"
+  ],
+  "migration_safety_cases": [
+    {
+      "name": "test_crosswalk_cannot_borrow_same_name_from_other_state",
+      "passed": true
+    },
+    {
+      "name": "test_same_name_in_two_states_is_not_an_automatic_alias",
+      "passed": true
+    },
+    {
+      "name": "test_existing_canonical_district_cannot_be_remapped",
+      "passed": true
+    },
+    {
+      "name": "test_recorded_mapping_cannot_be_silently_changed",
+      "passed": true
+    },
+    {
+      "name": "test_retained_mapping_absent_from_csv_is_still_checked_for_state",
+      "passed": true
+    },
+    {
+      "name": "test_ambiguous_legacy_id_is_rejected",
+      "passed": true
+    },
+    {
+      "name": "test_missing_canonical_zone_comes_only_from_exact_mapped_identity",
+      "passed": true
+    },
+    {
+      "name": "test_state_normalization_accepts_recorded_variants[Orissa-Odisha]",
+      "passed": true
+    },
+    {
+      "name": "test_state_normalization_accepts_recorded_variants[The Dadra And Nagar Haveli And Daman And Diu-Dadra and Nagar Haveli and Daman and Diu]",
+      "passed": true
+    },
+    {
+      "name": "test_state_normalization_accepts_recorded_variants[NCT of Delhi-Delhi]",
+      "passed": true
+    },
+    {
+      "name": "test_state_normalization_accepts_recorded_variants[Andaman & Nicobar Islands-Andaman and Nicobar Islands]",
+      "passed": true
+    },
+    {
+      "name": "test_migration_preserves_mumbai_and_unmapped_rows_and_is_idempotent",
+      "passed": true
+    },
+    {
+      "name": "test_conflicting_feature_generation_rolls_back_whole_migration",
+      "passed": true
+    },
+    {
+      "name": "test_legacy_model_outputs_block_migration_without_silent_merge",
+      "passed": true
+    },
+    {
+      "name": "test_clean_ingestion_populates_alias_registry_without_reconciling_source_records",
+      "passed": true
+    }
+  ],
+  "migration_safety_passed": true,
+  "skips": [
+    {
+      "classname": "tests.test_six_month_selection",
+      "name": "test_candidate_output_rejects_a_symlink_that_escapes_the_candidate_root",
+      "reason": "Creating directory symlinks needs Windows developer mode or privileges"
+    }
+  ],
+  "public_schema_initialization": "not run against populated public schema; isolated rollback integration tests used",
+  "passed": true
+}

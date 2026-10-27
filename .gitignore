@@ -105,3 +105,11 @@ reports/candidates/six_month_selection_*/experiment*/validation/
 reports/climate_12m_independent_audit_20261024_01/build/
 reports/climate_12m_independent_audit_20261024_01/pytest_tmp/
 reports/climate_12m_independent_audit_20261024_01/*.txt
+
+# Historical generated captures/drafts archived by the final simplification.
+reports/end_to_end_verification_20261022/checks_20261023/pytest_tmp/
+reports/accuracy_experiments_20261027/REPORT_analysis_*.md
+reports/accuracy_experiments_20261027/analysis_v1/development_comparison.png
+reports/accuracy_experiments_20261027/analysis_v1/historical_diagnostics.png
+reports/accuracy_experiments_20261027/analysis_v1/figure_checksums.json
+reports/accuracy_experiments_20261027/run_v2/progress.json

@@ -1,0 +1,9 @@
+{
+  "removed_files": 399,
+  "logical_bytes_removed": 40331852,
+  "removed_empty_directories": 338,
+  "disk_free_before": 20434100224,
+  "disk_free_after": 20471209984,
+  "scope": "Only disposable files created by this cleanup verification, not added to the pre-existing byte-savings claim.",
+  "no_recursive_parent_deletion": true
+}

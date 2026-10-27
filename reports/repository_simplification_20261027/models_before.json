@@ -1,0 +1,12 @@
+{
+  "models/artifacts/aquaiq_climate_12m.json": {
+    "pointer_sha256": "1a0dde587ccd6b005a4bac32cbc81105b80ef956052191dbdb5cf2b6bec1e83b",
+    "model_sha256": "4b22e2165664e1c1dd21c81ccf95d894655f0a0d589017a9ab87df0588a73a03",
+    "card_sha256": "d542ec17faeae8cd5c5a289b42736308b121f74f6477d905a63bbcbc5ec1076d"
+  },
+  "models/artifacts/enriched_retraining_20261027/checkpoint.json": {
+    "pointer_sha256": "cda6d6197fb0d646df041ddefb61ca96aa390b583215941ffdb43ed3316be634",
+    "model_sha256": "e4e57de9f681b2f2702c9b86a00be06b04147123ecea0579f6abcf3cdc586192",
+    "card_sha256": "30d837e15fac7184609330197c1bb3ff6d3e6daf6154dcb4267fe26784662176"
+  }
+}

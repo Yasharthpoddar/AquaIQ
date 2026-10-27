@@ -1,0 +1,9 @@
+{
+  "removed_files": 9482,
+  "removed_empty_directories": 2730,
+  "logical_bytes_removed": 3766005808,
+  "disk_free_before": 16780840960,
+  "disk_free_after": 20560166912,
+  "tracked_files_removed": 380,
+  "no_recursive_parent_deletion": true
+}

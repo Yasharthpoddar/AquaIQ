@@ -1,0 +1,18 @@
+{
+  "captured_fixture_code_test_ci_input_references": [],
+  "captured_fixture_historical_references": [
+    "reports/end_to_end_verification_20261022/EVIDENCE_MANIFEST.json",
+    "reports/end_to_end_verification_20261022/commands_verified_20261023.json",
+    "reports/repository_cleanup_20261027/preservation/protected_hashes.json"
+  ],
+  "remaining_ignored_pytest_reference_kinds": [
+    "reports/data_quality_audit_2026-10-17.json file inventory",
+    "previous cleanup snapshots/inventories"
+  ],
+  "required_scientific_input_references": [],
+  "current_test_source_preserved": 93,
+  "historical_builds_retained": 7,
+  "historical_build_process_inspection": "not available: CimException; builds kept",
+  "archive_files_verified_by_actual_recovery": 380,
+  "scope_note": "Historical manifests describe the old tree and remain unedited. Restoring their report payloads from the pinned commit is documented in reports/ARCHIVE.md."
+}

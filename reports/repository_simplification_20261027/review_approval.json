@@ -1,0 +1,11 @@
+{
+  "status": "reviewed_before_deletion",
+  "manifest_sha256": "9a3933c169a4f41a5d8a7c6d5b5decf1bb683d3d686f175ac9d3c35a9a702fef",
+  "tracked_files_archived": 380,
+  "total_exact_files": 9482,
+  "logical_bytes": 3766005808,
+  "application_or_test_source_deletions": 0,
+  "required_models_data_and_licenses_excluded": true,
+  "unrecoverable_candidates_kept": 6,
+  "recovery_verified": true
+}

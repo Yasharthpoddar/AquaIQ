@@ -1,0 +1,2 @@
+# Keep inventory/checksum receipt bytes stable across platform checkouts.
+** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
