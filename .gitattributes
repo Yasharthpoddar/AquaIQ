@@ -1,5 +1,10 @@
-# Model pointers and experiment seals bind exact bytes across checkouts.
-/models/artifacts/enriched_retraining_*/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
-/reports/retraining_*/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
-/models/artifacts/accuracy_experiments_*/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
-/reports/accuracy_experiments_*/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Byte-bound contracts and scientific inputs must keep their verified bytes.
+# JSON/CSV values and model weights are unchanged; disable checkout EOL conversion.
+/config.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/data_ingestion/district_crosswalk.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/models/artifacts/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/research/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/reports/**/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/reports/**/*.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# The provider's original blank measurement field is a space; retain source bytes.
+/reports/actual_forecast_validation_20261019/acquired/telangana_monthly_2007_2026.csv -text whitespace=-blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

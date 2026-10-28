@@ -43,8 +43,6 @@ def markdown_report(root, run_directory, protocol_path, summary, protocol, recor
     audit=Path(protocol['audit_directory'])
     baseline=json.loads((audit/'baseline_audit.json').read_text())
     decision=summary['final_decision']
-    verification_path=root/('verification_v2.json' if (root/'verification_v2.json').exists() else 'verification.json')
-    verification=json.loads(verification_path.read_text())
     inputs=json.loads((run_directory/'fold_inputs.json').read_text())
     by_name={r['method']:r for r in summary['primary_table']}
     selected=by_name['nested_selected'];old=baseline['panels']['four_way']['methods']
@@ -211,14 +209,6 @@ npm.cmd --prefix dashboard run build
 
 The executed result uses `protocol_v2.json` and `run_v2`. To rebuild figures/tables, run `python -B -m scripts.summarize_accuracy_experiments --root reports/accuracy_experiments_20261027 --run reports/accuracy_experiments_20261027/run_v2 --protocol reports/accuracy_experiments_20261027/protocol_v2.json --analysis-version analysis_replay`. The tool refuses existing analysis/report paths. See [the workflow guide](../../docs/ACCURACY_EXPERIMENTS.md) for required ignored data and isolated inference.
 
-## Executed verification and modified files
-
-Full Python integration suite: **{verification['full_python']['passed']:,} passed, one skipped, zero failures/errors, seventy warnings**, {verification['full_python']['seconds']:.2f} seconds. Focused scientific/contract suite: **136 passed** in 28.86 seconds; it overlaps the full suite. Three additional reporting regression tests passed after the final reporting correction. Frontend: **160 passed**, lint exit zero, build exit zero; largest JS chunk 365,385 bytes. [Verification receipt]({verification_path.name}) records actual commands, [pytest.xml](pytest.xml) the full run.
-
-The skip requires Windows directory-symlink privileges. Warnings comprise one sklearn single-label diagnostic, one netCDF4/NumPy binary-size import warning and sixty-eight xarray NumPy-shape deprecations. The first full attempt exhausted disk while retaining raster fixtures and has no valid final summary; only this task's resolved temporary directory was removed, and pytest's passing-fixture cleanup setting fixed the rerun. An initial focused run had one sandbox atomic-replace failure (135 passed); the identical elevated rerun passed all 136. These unsuccessful attempts are recorded, not counted as passes. The initial audit harness reference-helper issue and support-limited partial modeling attempt are also recorded.
-
-Modified files: `.gitignore`, `.gitattributes`; `models/accuracy_experiments.py`, `models/accuracy_challengers.py`; `scripts/audit_accuracy_baselines.py`, `scripts/run_accuracy_experiments.py`, `scripts/summarize_accuracy_experiments.py`; `tests/test_accuracy_experiments.py`, `tests/test_accuracy_challengers.py`, `tests/test_accuracy_reporting.py`; `docs/ACCURACY_EXPERIMENTS.md`; versioned report evidence and any separately named final experimental artifact. Existing candidate, production, training and serving source files are unchanged.
-
 ## Evidence still needed
 
 Freeze the selected procedure before collecting genuinely new future measurements, document forecast issuance and source receipt dates, check stable wells/datum/aggregation, and evaluate matching observed targets across all twelve horizons and supported district-history groups. Reassess nationwide serving, stale-anchor behavior, API/rollback contracts and independent interval calibration for the exact candidate weights. Pumping/extraction and observation-panel changes remain unverified explanations, not established causes. This development study cannot establish skill for unlabelled districts or replace the required future test.
@@ -325,8 +315,7 @@ def run(root,run_directory,protocol_path,analysis_version='analysis_v1'):
     axes[0].legend();axes[1].legend();fig.suptitle('Previously inspected January 2026: 6,756 cases / 563 districts\nPersistence and seasonal naive use the identical January 2025 observation')
     fig.savefig(destination/'historical_diagnostics.png',dpi=170);plt.close(fig)
     _write_json(destination/'figure_checksums.json',{p.name:sha256_file(p) for p in destination.glob('*.png')})
-    if (root/'verification.json').exists():
-        markdown_report(root,run_directory,protocol_path,report,protocol,records,historical_diag,analysis_version)
+    markdown_report(root,run_directory,protocol_path,report,protocol,records,historical_diag,analysis_version)
     print(json.dumps({'common_cases':len(common),'common_districts':int(common.district_id.nunique()),
                       'development_gates':gates,'final_selected':decision['selected']},indent=2))
 

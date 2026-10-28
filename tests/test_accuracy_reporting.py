@@ -1,4 +1,8 @@
 """Reporting must preserve failed safety gates and distinguish labels/metrics."""
+import json
+from pathlib import Path
+
+from scripts.summarize_accuracy_experiments import markdown_report
 from scripts.summarize_accuracy_experiments import subgroup_checks, subgroup_gate, differences
 
 
@@ -28,3 +32,34 @@ def test_report_differences_keep_case_macro_and_rmse_signs():
     assert result['mae_difference_m']>0
     assert result['macro_mae_difference_m']<0
     assert result['rmse_difference_m']==1.
+
+
+def test_completed_scientific_report_renders_without_software_verification_receipt(tmp_path):
+    """Render retained completed metadata only; no raw cases, fits or new metrics."""
+    source=Path(__file__).resolve().parents[1]/'reports/accuracy_experiments_20261027'
+    root=tmp_path/'report';root.mkdir()
+    audit=root/'audit';audit.mkdir()
+    run=root/'run';run.mkdir()
+    (audit/'baseline_audit.json').write_bytes((source/'audit_v2/baseline_audit.json').read_bytes())
+    (run/'fold_inputs.json').write_bytes((source/'run_v2/fold_inputs.json').read_bytes())
+    protocol=json.loads((source/'protocol_v2.json').read_text(encoding='utf-8'))
+    protocol['audit_directory']=str(audit)
+    summary=json.loads((source/'analysis_v2/comparison.json').read_text(encoding='utf-8'))
+    records=json.loads((source/'run_v2/results.json').read_text(encoding='utf-8'))
+    assert not (root/'verification.json').exists()
+    assert not (root/'verification_v2.json').exists()
+
+    markdown_report(root,run,source/'protocol_v2.json',summary,protocol,records,None,'analysis_test')
+
+    report=(root/'REPORT_analysis_test.md').read_text(encoding='utf-8')
+    assert '## Results and model selection' in report
+    assert '2 failed checks and 8 unsupported checks' in report
+    assert 'supported subgroup gate versus frozen: False' in report
+    assert 'Untouched post-refit test: **absent**' in report
+    assert 'Promotion remains prohibited' in report
+    assert '## Executed verification and modified files' not in report
+    assert 'Full Python integration suite:' not in report
+    assert '136 passed' not in report
+    assert '160 passed' not in report
+    assert 'verification.json' not in report
+    assert 'verification_v2.json' not in report

@@ -1,6 +1,6 @@
 # Scientific evaluation and candidate reproduction
 
-The [retraining report](../reports/retraining_20261027/REPORT.md), [accuracy experiment](../reports/accuracy_experiments_20261027/REPORT.md) and their locked protocols are authoritative. Experiments did not establish a sufficiently robust improvement to replace frozen production. The enriched candidate remains unpromoted; grouped horizons are a rejected replacement. Inspected historical diagnostics, coverage and software tests do not establish prospective forecasting skill or calibrated uncertainty.
+The [retraining report](SCIENTIFIC_LIMITATIONS.md#evaluation-and-model-status), [accuracy experiment](SCIENTIFIC_LIMITATIONS.md#evaluation-and-model-status) and their locked protocols are authoritative. Experiments did not establish a sufficiently robust improvement to replace frozen production. The enriched candidate remains unpromoted; grouped horizons are a rejected replacement. Inspected historical diagnostics, coverage and software tests do not establish prospective forecasting skill or calibrated uncertainty.
 
 Use the activated Python 3.13 project environment and the exact V3, original baseline and source assets in [release requirements](FINAL_RELEASE_REPRODUCTION.md). Generated case exports, per-fold learners and full observations remain local. Every replay needs new report/model paths; never overwrite a locked study, active pointer or published production generation. The following commands are deliberate research operations and are not application startup or cleanup steps.
 

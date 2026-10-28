@@ -1,6 +1,6 @@
 # Data, models and release reproduction
 
-A code-only clone is not a populated forecasting service. Match the source commit, configuration, source observations, feature generation, model cards/checkpoints, calibration and PostgreSQL publications before running AquaIQ. The [final release](../reports/final_release_20261026/REPORT.md) is an isolated supplied-asset result, not proof that all historical inputs can be downloaded afresh. The canonical registry has 725 project districts; it is not a verified current national administrative inventory.
+A code-only clone is not a populated forecasting service. Match the source commit, configuration, source observations, feature generation, model cards/checkpoints, calibration and PostgreSQL publications before running AquaIQ. The [final release](SCIENTIFIC_LIMITATIONS.md#data-and-source-provenance) is an isolated supplied-asset result, not proof that all historical inputs can be downloaded afresh. The canonical registry has 725 project districts; it is not a verified current national administrative inventory.
 
 ## Environment and required assets
 
@@ -31,6 +31,20 @@ Legacy six-month/monthly checkpoints and matching cards under `models/checkpoint
 The V3 enriched snapshot is `data/processed/enrichment/final_release_20261026_v3`, generation `physical-v3-official-c9ade81d95720f91`, CSV SHA-256 `3a4a560667d732b50c6a1712f4d9ceb13b411d4ae2c7a984e08ffc2aada21042`. It contains 43,384 source-marked observed district-months; previous measured means, weather definitions and frozen model weights remain unchanged. Its frozen bundle is `frozen_bundle/checkpoint.json`. Calibration is `reports/final_release_20261026/calibration_v3.json`, SHA-256 `feff5b397b5567b73e62e48a1cb535f51e93b65ced1386cbfc72aa337e139d01`.
 
 A complete V3 source replay also requires the original `data/raw/official_enrichment/nwdp_20261026/` acquisition manifest and exact CSVs; manual parent candidate `reports/candidates/groundwater_updates/enrichment_20261026/nwdp_manual_v1/`; parent snapshot `data/processed/enrichment/nwdp_manual_20261026_v1/`; parent calibration `reports/data_enrichment/final_evaluation/calibration.json`; PDF `data/raw/updates/20261015/cgwb/January_WL_1994-2025.pdf` (SHA-256 `6ebb9cbf401c3fb7aca65c31b421ccf586c6fadbce5abb4d2a222e538b0534cd`); verified extraction `reports/candidates/station_history_20261015/january_2025_verified/`; and final candidate `reports/candidates/groundwater_updates/final_release_20261026/pdf_january_2025_v2/` (manifest SHA-256 `a6e32fab5b3b9f16aa734b53e96a28bc8cf702dd306a27fd559fb549d93f420e`). These local generated inputs and raw observations require separate restoration where excluded from Git. Manifest-relative paths and hashes bind the chain; a newer source revision needs a new identity and evaluation.
+
+## Full validation and code-only CI
+
+The full backend regression suite is **asset-dependent**, including tests that do not query PostgreSQL. Before running it, restore genuine matching files to their expected repository-relative paths and run the [validation-asset preflight](../scripts/check_validation_assets.py):
+
+```powershell
+python -B -m scripts.check_validation_assets
+```
+
+The preflight checks the real `data/processed/features_matrix.csv` and `feature_manifest.json`, their generation/hash bindings to `research/experimental_scenario_sources.json` and `data_ingestion/district_crosswalk.csv`, the monthly bundle resolved by `models/checkpoints/aquaiq_monthly_climate.json`, and the active twelve-month artifact resolved by `models/artifacts/aquaiq_climate_12m.json`. Referenced cards, model bytes and fingerprints must agree. Restore the complete matching bundle, not merely a pointer or a different generation's metadata. API/integration verification additionally needs the other legacy serving assets and a provisioned local/test database described above.
+
+There is currently no external validation-asset distribution configured for hosted CI. A code-only runner therefore fails early with the missing paths and restoration guidance; that is an actionable unmet prerequisite, not a passing full test run. CI keeps the existing regressions enabled and does not weaken assertions, add skips, replace the Kaithal source with synthetic data, or upload private observations. Only an authorized restoration of the exact inputs can satisfy this requirement. Do not commit local credentials, raw observations or private dataset bundles to make a hosted job green.
+
+After preflight succeeds, use the [full software commands](../README.md#verify) with fresh temporary paths and isolated database schemas. The independent frontend/schema jobs verify their own scope; their success does not establish that asset-dependent Python tests ran or that forecasts are scientifically valid. A new source revision requires its own reviewed manifest/model compatibility and evaluation, not rewriting metadata or expected values to match a missing historical release. Windows local validation does not by itself verify native Linux/macOS installation or hosted deployment.
 
 ## Acquisition and measurement policy
 

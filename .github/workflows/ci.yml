@@ -20,6 +20,8 @@ jobs:
           python-version: '3.13'
           cache: pip
           cache-dependency-path: requirements.txt
+      - name: Require matching private regression assets
+        run: python -B -m scripts.check_validation_assets
       - name: Install core dependencies
         run: |
           python -m pip install --upgrade pip
@@ -73,13 +75,23 @@ jobs:
           connection = get_connection()
           try:
               with connection.cursor() as cursor:
-                  cursor.execute("SELECT version FROM schema_migrations")
-                  assert cursor.fetchall() == [('003_pipeline_provenance',)]
+                  cursor.execute("SELECT version FROM schema_migrations ORDER BY version")
+                  assert cursor.fetchall() == [
+                      ('003_pipeline_provenance',),
+                      ('004_xgboost_forecast_storage',),
+                      ('005_scoring_storage',),
+                  ]
                   expected = {
                       'features': {'is_observed', 'is_imputed', 'months_since_observation', 'feature_generation'},
                       'predictions': {'run_id', 'origin_date', 'as_of_date', 'model_version', 'feature_generation'},
                       'crisis_scores': {'run_id', 'last_observed_date', 'feature_generation', 'model_version'},
-                      'scoring_runs': {'run_id', 'as_of', 'model_sha256', 'district_count', 'status'},
+                      'scoring_runs': {'run_id', 'as_of', 'model_sha256', 'district_count', 'status', 'scoring_signature'},
+                      'forecast_generations': {'generation_id', 'status', 'as_of', 'horizon_months', 'model_sha256', 'model_card_sha256', 'feature_generation_id', 'feature_data_sha256', 'generation_signature'},
+                      'district_forecast_records': {'generation_id', 'district_id', 'status', 'payload_json'},
+                      'district_forecast_horizons': {'generation_id', 'district_id', 'horizon', 'target_date', 'predicted_gwl'},
+                      'state_forecast_records': {'generation_id', 'state_id', 'status', 'payload_json'},
+                      'state_forecast_horizons': {'generation_id', 'state_id', 'horizon', 'target_date', 'predicted_gwl'},
+                      'nationwide_summary_records': {'generation_id', 'as_of', 'payload_json'},
                   }
                   for table, columns in expected.items():
                       cursor.execute("SELECT column_name FROM information_schema.columns WHERE table_schema='public' AND table_name=%s", (table,))
@@ -90,9 +102,18 @@ jobs:
                   assert cursor.fetchone()[0] >= 2
                   cursor.execute("SELECT count(*) FROM pg_constraint WHERE conrelid='predictions'::regclass AND contype='f'")
                   assert cursor.fetchone()[0] >= 2
+                  cursor.execute("SELECT indexdef FROM pg_indexes WHERE schemaname='public' AND indexname='idx_unique_published_generation'")
+                  published_index = cursor.fetchone()[0]
+                  assert 'UNIQUE' in published_index and "'published'::text" in published_index
+                  for table in ('district_forecast_records', 'district_forecast_horizons', 'state_forecast_records', 'state_forecast_horizons', 'nationwide_summary_records'):
+                      cursor.execute("SELECT count(*) FROM pg_constraint WHERE conrelid=%s::regclass AND confrelid='forecast_generations'::regclass AND contype='f'", (table,))
+                      assert cursor.fetchone()[0] == 1, table
+                  for table in ('crisis_scores', 'predictions'):
+                      cursor.execute("SELECT count(*) FROM pg_constraint WHERE conrelid=%s::regclass AND confrelid='scoring_runs'::regclass AND contype='f'", (table,))
+                      assert cursor.fetchone()[0] == 1, table
           finally:
               connection.close()
-          print('Repeated initialization, provenance columns, unique index, and foreign keys verified.')
+          print('Repeated initialization, exact 003/004/005 versions, forecast/scoring tables, unique indexes and foreign keys verified.')
           PY
       - name: Exercise canonical migration safety in isolated PostgreSQL namespaces
         run: python -m pytest --integration -v tests/test_migration_safety.py
