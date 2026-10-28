@@ -1,5 +1,0 @@
-# Raw first-attempt output stays local; compact failure receipt is published.
-pytest.xml
-*.log
-# Written after committing; a commit cannot include its own object ID.
-commit_receipt.json

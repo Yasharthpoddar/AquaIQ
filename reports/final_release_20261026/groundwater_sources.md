@@ -2,7 +2,7 @@
 
 The reused, verified CGWB January 2025 archive supplies **542 additional genuine district-month observations**. Five districts gain their first local observation: `AR-Kamle`, `AR-Longding`, `SK-East_Sikkim`, `UK-Pithoragarh` and `UK-Rudraprayag`. **57 districts still have no accepted local history.** New downloads supplied documentation and availability checks; they supplied no additional accepted numerical groundwater records.
 
-The frozen candidate is `reports/candidates/groundwater_updates/final_release_20261026/pdf_january_2025_v2/manifest.json`, SHA-256 `a6e32fab5b3b9f16aa734b53e96a28bc8cf702dd306a27fd559fb549d93f420e`. Its new metadata paths are repository-relative. The original v1 candidate remains intact, and both candidates contain identical physical monthly CSV bytes. Generation of this candidate and this review does not write the database, deployed features or models.
+The frozen candidate is `reports/candidates/groundwater_updates/final_release_20261026/pdf_january_2025_v2/manifest.json`, SHA-256 `a6e32fab5b3b9f16aa734b53e96a28bc8cf702dd306a27fd559fb549d93f420e`. Its metadata paths are repository-relative. Generation of this candidate and this review does not write the database, deployed features or models.
 
 ## Measured targets and source precedence
 
@@ -40,13 +40,12 @@ All rows have numeric `RL_MSL`; a zero elevation alone is not a proof of error. 
 
 The new official guidance requires fixed measuring points, reference elevation, sensor/cable information, calibration and manual dip checks. It screens negative/zero depths and supplies no blanket sign-flip instruction or station-specific correction logs. No sign flip, elevation subtraction or telemetry integration was performed. Release requires provider-certified variable/sign/units, stable well IDs, installation/reference metadata and correction/maintenance/clock logs, followed by independent overlap checks and station-balanced aggregation.
 
-## Offline verification
+## Reproduction prerequisites
 
-`data_ingestion/groundwater_release.py` creates a new ignored candidate only when its output directory does not exist; it verifies immutable input hashes. The focused suite covers date/flag validation, identity and duplicates, conflicts, coordinate/state/boundary quarantine, location-balanced aggregation, source-chain checks and portable metadata paths. **24 tests passed.**
+`data_ingestion/groundwater_release.py` creates a new ignored candidate only when its output directory does not exist; it verifies immutable input hashes. The source checks cover date/flag validation, identity and duplicates, conflicts, coordinate/state/boundary quarantine, location-balanced aggregation, source-chain checks and portable metadata paths.
 
 ```powershell
-.\venv\Scripts\python.exe -B -m pytest tests/test_groundwater_release.py -p no:cacheprovider -q --disable-warnings --basetemp=scratch/pytest-final-groundwater-verified
-.\venv\Scripts\python.exe -B -m data_ingestion.groundwater_release --review-output reports/final_release_20261026/groundwater_sources.json
+.\venv\Scripts\python.exe -B -m data_ingestion.groundwater_release --review-output reports/candidates/groundwater_sources_replay.json
 ```
 
-Both commands operate on restored local evidence. Acquisition evidence, source raw files, the original NWDP candidate, verified PDF extraction, fixed boundaries and prior feature snapshot must be present for full reproduction; this report alone does not replace them.
+Choose a fresh output path and run only with restored local evidence. Acquisition evidence, source raw files, the original NWDP candidate, verified PDF extraction, fixed boundaries and prior feature snapshot must be present for full reproduction; this report alone does not replace them.

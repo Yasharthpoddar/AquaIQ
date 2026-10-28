@@ -1,4 +1,0 @@
-{
-  "command": "npm.cmd --prefix dashboard run build -- --outDir ../scratch/repository_cleanup_20261027/frontend-dist",
-  "exit_code": 0
-}

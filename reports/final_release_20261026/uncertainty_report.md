@@ -34,14 +34,10 @@ The guard withholds 202 previously available development-band cases and 19 final
 
 For the current unchanged calibration, A has supported bands at horizons 1/3/4/6/7/8/9/10/12; B at 1/4/6/7/8/10/12; C/D have none. Adequate count still gives no present-day local coverage guarantee.
 
-## Reproduction and verification
+## Reproduction
 
 ```powershell
-.\venv\Scripts\python.exe -B -m scripts.audit_interval_reliability --output reports/final_release_20261026/uncertainty_audit.json --evidence-output models/artifacts/interval_reliability.json --report-date 2026-10-26
-.\venv\Scripts\python.exe -B -m pytest tests/test_interval_evidence.py tests/test_tiered_forecast.py -q -p no:cacheprovider
-node --test dashboard/tests/intervalDisclosure.test.js dashboard/tests/tieredForecast.test.js
-npm.cmd --prefix dashboard run lint
-npm.cmd --prefix dashboard run build
+.\venv\Scripts\python.exe -B -m scripts.audit_interval_reliability --output reports/candidates/interval_reliability_replay.json --evidence-output reports/candidates/interval_evidence_replay.json --report-date 2026-10-26
 ```
 
-Verification completed: **35 Python tests passed**, **9 focused frontend tests passed**, lint passed and production build passed with a largest JavaScript chunk of 365.50 kB. Full release-suite and browser/API checks are recorded separately by the release coordinator. No database or existing publication was modified by this audit.
+Choose fresh output files and restore the exact local case/calibration inputs before running. The replay writes candidate evidence, never the active production evidence artifact or a database publication.

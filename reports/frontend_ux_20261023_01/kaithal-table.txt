@@ -1,4 +1,0 @@
-{
-  "url": "http://127.0.0.1:5183/district/HR-Kaithal#forecast-graph",
-  "table": "Experimental depth estimates, not observed measurements\nMonth\tDepth (m below ground)\nNov 2026\t26.00\nDec 2026\t25.56\nJan 2027\t25.15\nFeb 2027\t24.90\nMar 2027\t24.90\nApr 2027\t25.15\nMay 2027\t25.61\nJun 2027\t26.16\nJul 2027\t26.68\nAug 2027\t27.05\nSep 2027\t27.16\nOct 2027\t27.02"
-}

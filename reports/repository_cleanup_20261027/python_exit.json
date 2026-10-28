@@ -1,4 +1,0 @@
-{
-  "command": ".\\venv\\Scripts\\python.exe -B -m pytest --integration -p no:cacheprovider -o tmp_path_retention_policy=failed --basetemp scratch/pytest-repository-cleanup-20261027 --junitxml reports/repository_cleanup_20261027/pytest.xml -q",
-  "exit_code": 0
-}

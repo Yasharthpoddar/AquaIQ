@@ -44,72 +44,13 @@ dashboard/build/
 mlruns/
 
 # Test coverage
+.pytest_cache/
 .coverage
 htmlcov/
 
 # Scratch & temporary investigation scripts
 scratch/
 
-# Generated row-level ingestion audit (can exceed GitHub's file limit)
-reports/collapsed_rows_log.json
-reports/candidates/groundwater_updates/**/*.csv
-reports/candidates/groundwater_updates/**/*.png
-reports/candidates/**/climate_bundles/
-reports/candidates/**/climate_12m_bundles/
-reports/candidates/pytest-*/
-
-
-# Generated station comparison inputs and source renderings
-reports/candidates/station_history_20261015/**/*.csv
-reports/candidates/station_history_20261015/*.csv
-reports/candidates/station_history_20261015/*.png
-
-reports/candidates/rainfall_refresh/
-
-reports/candidates/forecast_replay/*.csv
-reports/nationwide_*/cases.csv
-reports/nationwide_*/candidate_*.csv
-reports/nationwide_*/outputs/
-
-# Official enrichment keeps station rows and generated forecasts local.
-reports/data_enrichment/*evaluation/*.csv
-reports/data_enrichment/outputs/
-reports/data_enrichment/*.png
-# Intermediate seal superseded by final_evaluation after portability review.
-reports/data_enrichment/release_evaluation/
-
-# Final-release diagnostics retain aggregate metrics, not observation cases.
-reports/final_release_20261026/**/cases.csv
-reports/final_release_20261026/**/cold_cases.csv
-reports/final_release_20261026/outputs/
-
-# Retraining retains compact aggregate reports and model bundles, not target cases.
-reports/retraining_20261027/**/*.csv
-reports/retraining_20261027/outputs/
-
-# Accuracy studies keep row-level observations and per-fold learners local.
-reports/accuracy_experiments_*/**/*.csv
-reports/accuracy_experiments_*/**/fold_artifacts/
-reports/accuracy_experiments_*/**/*diagnostics*.json
-
-# Reproducible audit row exports; retain compact aggregate reports in Git.
-reports/audit-*/**/*.csv
-reports/candidates/correlation/
-
-# Paired six-month experiments retain compact summaries/protocols in Git.
-reports/candidates/six_month_selection_*/**/*.csv
-reports/candidates/six_month_selection_*/experiment*/validation/
-
-# Reproducible independent-audit build output, temporary fixtures and run logs.
-# Keep reconstructed cases, metrics, diagnostics, verification and audit scripts.
-reports/climate_12m_independent_audit_20261024_01/build/
-reports/climate_12m_independent_audit_20261024_01/pytest_tmp/
-reports/climate_12m_independent_audit_20261024_01/*.txt
-
-# Historical generated captures/drafts archived by the final simplification.
-reports/end_to_end_verification_20261022/checks_20261023/pytest_tmp/
-reports/accuracy_experiments_20261027/REPORT_analysis_*.md
-reports/accuracy_experiments_20261027/analysis_v1/development_comparison.png
-reports/accuracy_experiments_20261027/analysis_v1/historical_diagnostics.png
-reports/accuracy_experiments_20261027/analysis_v1/figure_checksums.json
-reports/accuracy_experiments_20261027/run_v2/progress.json
+# Generated reports stay local by default. Reviewed scientific inputs/evidence
+# already tracked remain versioned; add new evidence only after explicit review.
+reports/

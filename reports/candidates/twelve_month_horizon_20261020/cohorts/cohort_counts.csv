@@ -1,5 +1,0 @@
-dataset,period,registered,observed_origin_target,common_eligible,districts,same_origin_target_panel,target_start,target_end
-full_coordinate,primary,792,792,792,33,380,2024-01-01,2025-12-01
-full_coordinate,secondary,165,165,66,33,28,2026-01-01,2026-02-01
-exact_name_coordinate,primary,144,116,24,1,19,2024-01-01,2025-12-01
-exact_name_coordinate,secondary,30,30,2,1,1,2026-01-01,2026-02-01

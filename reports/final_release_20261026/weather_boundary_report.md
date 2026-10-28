@@ -58,9 +58,9 @@ An in-memory candidate filling only Mumbai Suburban temperature and PET from the
 
 No alternative weather method was promoted or scored as a trained district model. A fair skill comparison would require a separate artifact trained with the candidate feature definition and a prespecified evaluation period that has not already informed selection. The current inspected holdout cannot honestly supply that new independent evidence. This investigation therefore reports measured coverage and feature differences, preserves Tier D, and makes no held-out accuracy improvement claim. No historical observation was moved between boundary vintages.
 
-## Validation and reproduction
+## Reproduction
 
-Focused tests actually completed: **25 passed, 0 failed, 0 skipped, 13 warnings, 10.67 seconds**. They cover sanitized terms/authorization failures, bounded job cancellation, immutable output scope, exact months/grid/physical conversions, numerical overlap, coordinate/attribute preservation, corrupt and deleted source records, pinned partial-download continuation, and official URL restrictions. Two diagnostic runs produced bitwise-identical CSVs. Aggregate evidence is in `weather_validation.json`, `weather_boundary_sources.json`, `weather_boundary_subset_provenance.json` and `weather_attribution.json` beside this report. Diagnostic CSVs and polygons remain in ignored candidate paths.
+Controlled-array/source tests cover sanitized terms/authorization failures, bounded job cancellation, immutable output scope, exact months/grid/physical conversions, numerical overlap, coordinate/attribute preservation, corrupt and deleted source records, pinned partial-download continuation, and official URL restrictions. Two diagnostic runs produced bitwise-identical CSVs. Aggregate source evidence is retained in [source records](weather_boundary_sources.json), [subset provenance](weather_boundary_subset_provenance.json) and [weather attribution](weather_attribution.json). Diagnostic CSVs and polygons are external inputs; none establishes a production feature improvement.
 
 From the repository root on Windows:
 
@@ -80,7 +80,6 @@ From the repository root on Windows:
 .\venv\Scripts\python.exe -B -m data_ingestion.release_boundaries --archive data/raw/official_release/boundaries_20261026/SoI_ABDB_2025.rar --output data/processed/final_release/soi_mumbai_rerun/subset
 .\venv\Scripts\python.exe -B -m data_ingestion.release_boundaries --archive data/raw/official_release/boundaries_20261026/SoI_ABDB_2025.rar --output data/processed/final_release/soi_mumbai_rerun/subset --weather-audit data/processed/final_release/soi_mumbai_rerun/weather_audit
 
-.\venv\Scripts\python.exe -B -m pytest -q tests/test_release_weather.py tests/test_release_boundaries.py -p no:cacheprovider
 ```
 
 The offline attribution command requires the documented existing ERA5, DataMeet and IMD baseline assets. It does not make a clean clone self-contained or establish permission to redistribute those source files. Acquisition, diagnostics and production integration remain separate operations.

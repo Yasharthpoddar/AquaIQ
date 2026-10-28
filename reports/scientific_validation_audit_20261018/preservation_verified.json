@@ -1,9 +1,0 @@
-{
-  "protected_files_checked": 615,
-  "changed": [],
-  "missing": [],
-  "database_accessed": false,
-  "models_fitted": false,
-  "no_existing_file_changes": true,
-  "git_status": "?? reports/scientific_validation_audit_20261018/REPORT.md\n?? reports/scientific_validation_audit_20261018/artifact_inventory.json\n?? reports/scientific_validation_audit_20261018/audit_saved.py\n?? reports/scientific_validation_audit_20261018/baseline_inventory.json\n?? reports/scientific_validation_audit_20261018/data_inventory.json\n?? reports/scientific_validation_audit_20261018/district_observation_freshness.csv\n?? reports/scientific_validation_audit_20261018/error_distributions.csv\n?? reports/scientific_validation_audit_20261018/group_metrics.csv\n?? reports/scientific_validation_audit_20261018/pooled_metrics.csv\n?? reports/scientific_validation_audit_20261018/primary_leave_one_district_out.csv\n?? reports/scientific_validation_audit_20261018/shadow-tests.xml\n?? reports/scientific_validation_audit_20261018/validation_reproduction.json"
-}

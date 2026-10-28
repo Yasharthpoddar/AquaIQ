@@ -1,7 +1,0 @@
-﻿"district_id","district_name","state","scenario","rainfall_change_pct","extraction_change_pct","baseline_score","baseline_tier","scenario_score","scenario_tier","delta","availability_status","source_status","last_observed_date","message"
-"RJ-Jaipur","Jaipur","Rajasthan","Baseline",0,0,70,"Warning",70,"Warning",0,"available","historical_forecast","2026-01-01",""
-"RJ-Jaipur","Jaipur","Rajasthan","Drier monsoon",-20,0,70,"Warning",70,"Warning",0,"available","historical_forecast","2026-01-01",""
-"RJ-Jaipur","Jaipur","Rajasthan","Wetter monsoon",20,0,70,"Warning",70,"Warning",0,"available","historical_forecast","2026-01-01",""
-"RJ-Jaipur","Jaipur","Rajasthan","Higher extraction",0,20,70,"Warning",74,"Warning",4,"available","historical_forecast","2026-01-01",""
-"RJ-Jaipur","Jaipur","Rajasthan","Reduced extraction",0,-20,70,"Warning",66,"Warning",-4,"available","historical_forecast","2026-01-01",""
-"RJ-Jaipur","Jaipur","Rajasthan","Combined stress",-20,20,70,"Warning",74,"Warning",4,"available","historical_forecast","2026-01-01",""

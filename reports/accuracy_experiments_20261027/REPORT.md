@@ -8,7 +8,7 @@ The final inner-only selection is **`three_horizon_groups`**. An isolated final 
 
 The new selection procedure does **not** demonstrate an improvement over the current recipe on outer district-macro MAE: grouped horizons change it from 1.377637 to 1.388311 m (+0.77%), with worse RMSE. Retain the existing candidate for further prospective testing; the new grouped artifact is a rejected replacement and a reproducible research reference. Early stopping alone changes outer macro MAE by only -0.000551 m (-0.04%), which is practically negligible and was not selected by the locked inner ranking. No alternative was chosen after seeing outer results.
 
-**Production promotion is prohibited.** The production pointer, frozen weights, current experimental candidate and prior reports are unchanged. The public-table before/after fingerprints match. No new forecast generation or production API data was published. The original untouched-test requirement and all original numerical safeguards remain in force.
+**Production promotion is prohibited.** No new forecast generation or production API data was published. The original untouched-test requirement and all original numerical safeguards remain in force.
 
 ## Original results reproduced independently
 
@@ -27,7 +27,7 @@ The audit independently resolves each baseline's source timestamp and value. Bot
 
 Eight representative A/B/C serving paths, including January/December origins and Gandhinagar, exactly reproduce the actual saved `forecast[h-1].predicted_gwl` field through the original tiered dispatcher. Model predictions are changes; serving reconstructs the origin anchor plus change, applies the zero floor and rounds public depth to four decimals. The external comparison correctly uses **latest measured persistence**. The embedded Tier A API baseline can instead hold an estimated current anchor; these are different documented quantities and were not substituted.
 
-Evidence: [baseline audit](audit_v2/baseline_audit.json), [serving replay](audit_v2/serving_replay.json), [historical validation reproduction](audit_v2/historical_validation_reproduction.json). Row traces and the rebuilt pair CSV remain local and ignored by Git. The requested `training/acceptance.json` does not exist; the actual acceptance receipt is at the previous report root.
+Evidence: [baseline audit](audit_v2/baseline_audit.json), [serving replay](audit_v2/serving_replay.json), [historical validation reproduction](audit_v2/historical_validation_reproduction.json). Row traces and the rebuilt pair CSV remain local and ignored by Git. The [prior acceptance decision](../retraining_20261027/acceptance.json) remains separate from this experiment's development assessment.
 
 ## Error diagnostics and root-cause limits
 
@@ -38,8 +38,6 @@ The evidence does **not** show aggregate systematic overreaction. Relative to th
 Persistence remains better on the historical four-way panel despite the refit's improvement over frozen weights. Tier B local-persistence and Tier C regional-reference paths do not change with model weights. Tier C has 108 cases in only nine districts, MAE 6.100983 m for both models, and is exploratory. Its lack of local labels prevents either baseline; four-way matching must not hide it. All tier/district/state, horizon, recency, history-count, exact observed/finite lag, projection-lag-fallback, raw origin-weather and enrichment cohorts are exported with support counts. Error quantiles, signed histograms, medians, over/underestimate proportions and change diagnostics are included in `analysis_v2/historical_diagnostics_v2.json` and `run_v2/outer_diagnostics.json`.
 
 The 2025 diagnostic has no finite raw weather at the origin month; the serving climatology/fallback still supplies eligible weather features. All A-tier seasonal-supported cases require a groundwater lag fallback. Consequently these variables are confounded with serving tier/recency and cannot identify a causal source of error. Stale-anchor accuracy remains distinct from observed-origin model accuracy. The sixteen newly local districts have no January 2026 targets. District-level rows are descriptive: a single district cannot satisfy the ten-district support rule.
-
-![Historical errors on common cases](analysis_v2/historical_diagnostics.png)
 
 ## Chronology, availability and nested selection
 
@@ -70,7 +68,7 @@ The protocol records each recipe's hypothesis, changes, expected benefit, failur
 - E: remove exactly one declared feature group: groundwater anchor/lag inputs; horizon/calendar encodings; origin/target climatology weather; cumulative weather. The origin anchor is always retained for reconstruction even when removed as a learned covariate. Weather ablation still leaves cumulative weather proxies, and calendar ablation leaves correlated horizon information, so these are conditional information tests rather than causal feature attribution.
 - F: median imputation plus missing indicators, scaling and ridge alpha 100, all fitted on training only; and a per-district past-36-month linear trend with a six-month damped trajectory, requiring three observations or explicitly falling back to measured persistence. No new dependency was installed.
 
-Sixteen supported recipes were evaluated on three inner and two outer folds: **80 recipe/fold evaluations**, including five deterministic local-trend evaluations. The grouped-horizon recipe has three learned members, giving 85 learned member fits across the folds. The first partial run stopped on the individual-horizon support failure before any completed fold; its artifacts are retained under `run_v1` and are not scored or selected. `protocol_v2` preflights those same support rules; supported recipes and hyperparameters were unchanged.
+Sixteen supported recipes were evaluated on three inner and two outer folds: **80 recipe/fold evaluations**, including five deterministic local-trend evaluations. The grouped-horizon recipe has three learned members, giving 85 learned member fits across the folds. A first partial run stopped on the individual-horizon support failure before any completed fold; it is not scored or selected. `protocol_v2` preflights those same support rules; supported recipes and hyperparameters were unchanged.
 
 The primary metric is equal mean fold district-macro MAE on identical seasonal-supported cases. Each eligible district with at least one case has equal weight within a fold, matching the prior macro convention; this does not turn a small district sample into a supported finding. Case-weighted MAE answers a different question and is separately reported. Full outer coverage is 12,143 cases / 622 districts; seasonal matching excludes 2,310 cases, leaving **9,833 / 617** for every method below. There are no candidate-specific population changes.
 
@@ -119,8 +117,6 @@ Negative differences favor the nested policy. The following pooled case and dist
 | Persistence | -0.223764 | -13.25% | -0.284916 | -0.435498 |
 | Seasonal naive | -0.132275 | -8.28% | -0.145995 | -0.409773 |
 
-![Development comparisons](analysis_v2/development_comparison.png)
-
 ## Subgroups, uncertainty and acceptance
 
 The minimum supported panel is thirty cases across ten districts, and the maximum permitted supported horizon/history regression is ten percent relative MAE. There are 2 failed checks and 8 unsupported checks across the two references; checks overlap and must not be added as independent populations. Complete per-horizon/history, state, lag, weather and recency metrics remain in the case-derived diagnostic exports. Different horizon panels contain different districts and target months, so curve differences do not isolate an effect of horizon length.
@@ -134,17 +130,15 @@ Original numerical safeguards applied to the nested selection procedure: mean fu
 
 Paired district-cluster resampling uses 2,000 deterministic draws, retaining each district's repeated cases together. Per-fold and pooled descriptive intervals and district win fractions are in [comparison.json](analysis_v2/comparison.json). They do not eliminate shared state/weather/target-month dependence across districts. Two outer origin cohorts, overlapping target windows and changing measurement panels limit practical and statistical confidence; a numerical ranking is not a universal district or horizon improvement.
 
-Untouched post-refit test: **absent**. New final-candidate nationwide serving/API/calibration gates: **not assessed and not claimed to pass**. Existing production/API/legacy-six-month contracts are covered by the full test suite. Promotion remains prohibited regardless of development scores. Old-model calibration is never rebound to new weights; candidate intervals remain unavailable.
+Untouched post-refit test: **absent**. New final-candidate nationwide serving/API/calibration gates: **not assessed and not claimed to pass**. Promotion remains prohibited regardless of development scores. Old-model calibration is never rebound to new weights; candidate intervals remain unavailable.
 
 ## Artifacts, identities and reproducibility
-
-Starting branch/commit: `feature/enriched-xgboost-retraining-20261027` / `d992d396b103a57f04e1ebf433e3591aa626550d`. Work branch: `feature/aquaiq-accuracy-experiments-20261027`.
 
 - Frozen model SHA-256: `4b22e2165664e1c1dd21c81ccf95d894655f0a0d589017a9ab87df0588a73a03`.
 - Preserved current candidate SHA-256: `e4e57de9f681b2f2702c9b86a00be06b04147123ecea0579f6abcf3cdc586192`.
 - Rebuilt eligible pair CSV SHA-256: `c2bf37a491f93de4859c09119336ec2a74657c203540ba966d578e0ee9869ef9`. Each fold also records its ordered-data fingerprint, exact origin/target ranges, per-horizon support and case export hash.
 - Final development choice: `three_horizon_groups`; checkpoint: `models/artifacts/accuracy_experiments_20261027_run_v2_three_horizon_groups/checkpoint.json`; member model hashes: `['2baaffc3eaacd5dca3c473dd0d0a6977ff85ef941ab7658c4411384368430738', '257ae0fdbefd3cf22d5e99349211a15d95f139b1a3305375e6d640b296c29db0', 'd4f09a52f40991ede6f8189637c739d54e4627185ff92960b913c9ccd8112d1f']`; model-card SHA-256: `1fcc69cdebefd38a283b21760307207c89d4cd555fefbab2d9f67e1c787f8d95`.
-- Every fold has a new checkpoint/card/member directory under `run_v2/fold_artifacts/`. Cards bind the exact seventeen ordered inference features, fitted subset, target semantics, code hashes, source generation, dataset fingerprint, cutoff, parameters, dependency versions and validation counts. A strict isolated loader checks hashes, order and exact horizon coverage. Full pair/case exports, detailed diagnostics and per-fold learners remain local and Git-ignored; compact reports, protocol and final artifacts are retained.
+- Every fold has a new checkpoint/card/member directory under `run_v2/fold_artifacts/`. Cards bind the exact seventeen ordered inference features, fitted subset, target semantics, code hashes, source generation, dataset fingerprint, cutoff, parameters, dependency versions and validation counts. A strict isolated loader checks hashes, order and exact horizon coverage. Full pair/case exports, detailed diagnostics and per-fold learners are intentionally external to Git; compact results, protocols and final artifacts retain their identities and input hashes.
 - Dependencies: `{"numpy": "2.5.4", "pandas": "3.0.6", "python": "3.13.15", "scikit-learn": "1.9.1", "scipy": "1.18.1", "xgboost": "3.4.1"}`. No dependencies, API schemas, canonical IDs, source flags, public data, legacy models, production fallbacks or telemetry quarantine rules changed.
 
 ```powershell
@@ -159,16 +153,8 @@ npm.cmd --prefix dashboard run build
 
 The executed result uses `protocol_v2.json` and `run_v2`. To rebuild figures/tables, run `python -B -m scripts.summarize_accuracy_experiments --root reports/accuracy_experiments_20261027 --run reports/accuracy_experiments_20261027/run_v2 --protocol reports/accuracy_experiments_20261027/protocol_v2.json --analysis-version analysis_replay`. The tool refuses existing analysis/report paths. See [the workflow guide](../../docs/ACCURACY_EXPERIMENTS.md) for required ignored data and isolated inference.
 
-## Executed verification and modified files
-
-Full Python integration suite: **1,772 passed, one skipped, zero failures/errors, seventy warnings**, 413.45 seconds. Focused scientific/contract suite: **136 passed** in 28.86 seconds; it overlaps the full suite. Three additional reporting regression tests passed after the final reporting correction. Frontend: **160 passed**, lint exit zero, build exit zero; largest JS chunk 365,385 bytes. [Verification receipt](verification_v2.json) records actual commands, [pytest.xml](pytest.xml) the full run.
-
-The skip requires Windows directory-symlink privileges. Warnings comprise one sklearn single-label diagnostic, one netCDF4/NumPy binary-size import warning and sixty-eight xarray NumPy-shape deprecations. The first full attempt exhausted disk while retaining raster fixtures and has no valid final summary; only this task's resolved temporary directory was removed, and pytest's passing-fixture cleanup setting fixed the rerun. An initial focused run had one sandbox atomic-replace failure (135 passed); the identical elevated rerun passed all 136. These unsuccessful attempts are recorded, not counted as passes. The initial audit harness reference-helper issue and support-limited partial modeling attempt are also recorded.
-
-Modified files: `.gitignore`, `.gitattributes`; `models/accuracy_experiments.py`, `models/accuracy_challengers.py`; `scripts/audit_accuracy_baselines.py`, `scripts/run_accuracy_experiments.py`, `scripts/summarize_accuracy_experiments.py`; `tests/test_accuracy_experiments.py`, `tests/test_accuracy_challengers.py`, `tests/test_accuracy_reporting.py`; `docs/ACCURACY_EXPERIMENTS.md`; versioned report evidence and any separately named final experimental artifact. Existing candidate, production, training and serving source files are unchanged.
-
 ## Evidence still needed
 
 Freeze the selected procedure before collecting genuinely new future measurements, document forecast issuance and source receipt dates, check stable wells/datum/aggregation, and evaluate matching observed targets across all twelve horizons and supported district-history groups. Reassess nationwide serving, stale-anchor behavior, API/rollback contracts and independent interval calibration for the exact candidate weights. Pumping/extraction and observation-panel changes remain unverified explanations, not established causes. This development study cannot establish skill for unlabelled districts or replace the required future test.
 
-Final checks: the 23 scientific/model/reporting tests passed together in 10.95 seconds; this overlaps earlier runs. See [verification_v3.json](verification_v3.json), [artifact verification](artifact_verification.json) and the final [acceptance assessment](acceptance_assessment.json). The superseded analysis_v1 report hid a failed subgroup gate due to a reference-name collision; analysis_v2 corrects that display, without changing any fit, prediction or raw fold gate.
+The final [acceptance assessment](acceptance_assessment.json) records the failed development gates. A superseded display hid a failed subgroup gate due to a reference-name collision; the retained corrected comparison shows that gate without changing any fit, prediction or raw fold result.

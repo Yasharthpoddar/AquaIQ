@@ -2,8 +2,6 @@
 
 A new XGBoost model was fitted on the enriched measured dataset, selected using earlier chronological validation and saved separately. The final fit uses **145,494 observed-origin/observed-target pairs across 641 districts**, including **20,720 pairs with newly accepted targets and 431 January 2025 target pairs**. This is an actual refit with changed model bytes. The candidate remains **experimental and unpromoted**: all supported validation-accuracy and contract gates pass, but no genuinely untouched post-refit test observations exist. The frozen production model stays active.
 
-Work is on `feature/enriched-xgboost-retraining-20261027`, with protocol reference commit `73cb6feda5ad641c7500f28da01e087d81be4c52`. Main remains at `bfd2ed0`. No production pointer or public source table is replaced. The complete twelve-origin retrospective serving comparison is recorded below with matched baseline populations and explicit limitations.
-
 ## Model and dataset identities
 
 | Artifact | Identity |
@@ -26,7 +24,7 @@ The candidate [checkpoint](../../models/artifacts/enriched_retraining_20261027/c
 
 ## Accepted data, quality checks and inclusion
 
-The [executed data audit](data_audit.md) verifies the local `data/processed/enrichment/final_release_20261026_v3` snapshot: **215,325 rows**, **725 districts**, and a complete 297-month grid from January 2002 through September 2026. It contains **43,384 observed**, **85,816 causally imputed** and **86,125 missing groundwater rows**. Fifty-seven districts have no accepted local observation. The matrix's end date does not establish equally recent labels.
+The [executed data audit](data_audit.json) verifies the local `data/processed/enrichment/final_release_20261026_v3` snapshot: **215,325 rows**, **725 districts**, and a complete 297-month grid from January 2002 through September 2026. It contains **43,384 observed**, **85,816 causally imputed** and **86,125 missing groundwater rows**. Fifty-seven districts have no accepted local observation. The matrix's end date does not establish equally recent labels.
 
 Across both enrichment releases, CGWB/NWIC manual quarterly records add **5,952** missing measured months, and the strictly verified CGWB January archive adds **542**, for **6,494** gains across 653 districts compared with the original 36,890-label baseline. Sixteen districts gain their first local history. Against the immediate NWDP parent, the gain is 542 January 2025 months and five newly local districts. Existing measured values take precedence: zero original observations were removed or changed. The recursively hashed source chain, accepted monthly aggregates and exact union of old plus new measured keys were checked. The prior [source catalog](../../data_sources/catalog.yaml) and [groundwater report](../final_release_20261026/groundwater_sources.md) retain official URLs, acquisition dates, licenses and acceptance/quarantine details.
 
@@ -97,15 +95,13 @@ The [locked acceptance assessment](acceptance.json) reports mean fold district-m
 
 The supported subgroup gate permits at most a 10% relative MAE regression and requires at least 30 cases and ten districts. All **22 supported panels** pass; **eight panels lack support**, including M+1/M+9/M+11 panels and newly local-history groups. Passing a gate does not mean every point estimate improved: rolling-2023 M+12 MAE changes from 2.080 to 2.088 m. Newly local history has only 17 cases in three districts in rolling 2023, with frozen/retrained MAE 0.872/1.026 m, and zero cases in rolling 2024. No broad improvement is claimed for that group. For substantial original history, case MAE is 1.955→1.891 m across 2,384 cases/406 districts and 1.919→1.814 m across 829 cases/246 districts. Full per-horizon and group values/counts are retained in the selection and acceptance JSON.
 
-![Earlier-fold validation error and matched-case support by horizon](validation_horizons.png)
-
-The [figure data and checksums](validation_horizons.json) use **3,324 identical seasonal-supported cases for all four methods**, from 3,602 eligible earlier-validation cases; 278 cases lack seasonal support. The plot reports pooled case-weighted MAE of fold-specific models, while selection used mean fold district-macro MAE. It is not a final-refit or blind-test curve. M+1 has only 13 common cases and M+11 only two, so their plotted errors have very weak support.
+The earlier per-horizon comparison uses **3,324 identical seasonal-supported cases for all four methods**, from 3,602 eligible earlier-validation cases; 278 cases lack seasonal support. It reports pooled case-weighted MAE of fold-specific models, while selection used mean fold district-macro MAE. It is not a final-refit or blind-test curve. M+1 has only 13 common cases and M+11 only two, so their plotted errors have very weak support.
 
 ## Completed twelve-origin retrospective serving diagnostic
 
 The [complete executed summary](retrospective/summary.json) contains **7,668 cases across 639 districts and 31 states**, from twelve month-end origins in 2025. Every scored target is **January 2026**. These are twelve dependent forecasts per measured district, not twelve independent future target months or a blind test. Fitting/selection remained locked and no uncertainty calibration was performed.
 
-The unchanged original evaluator ran in three disjoint origin groups, all successful; the complete merged case set passed the model/code/identity checks. Wall time was 1,838.35 seconds. An earlier serial run stopped after four origins solely to use this parallel execution. The optional shared-input helper was **not used** for these primary results. Its separate [real A/B/C/D parity check](shared_actual_parity.json) confirms twelve points and metadata match except computation timestamps; it supplies no extra accuracy evidence.
+The unchanged original evaluator ran in three disjoint origin groups, all successful; the complete merged case set passed the model/code/identity checks. Wall time was 1,838.35 seconds. An earlier serial run stopped after four origins solely to use this parallel execution. The optional shared-input helper was **not used** for these primary results.
 
 **Label coverage differs from output coverage.** Of 104,400 potential district/origin/horizon target slots, 7,668 have accepted measured targets and 96,732 lack a target. The scoring population covers 639 of 725 districts. The separate complete-generation contract still produces all 725 district outputs and 36 state/UT outputs; missing truth is not silently filled to enlarge the evaluation.
 
@@ -197,22 +193,13 @@ Old empirical radii bind the old model weights. They are not transferred to the 
 
 The isolated verification generation is `14544bb9-8ce0-5dfc-b5c7-2907dfc1392b`, as of **27 October 2026**, in `aquaiq_test_retraining_20261027`. It has all **725 districts**, **8,700 finite monthly district outputs**, all **36 states/UTs**, and an evidence mix of **551 A / 116 B / 57 C / 1 D**. This local test-namespace publication is separate from production model promotion. [Candidate identity/contract verification](candidate_contracts.json) binds the stored generation to the new model and final V3 features. State aggregation and legacy six-month contracts passed.
 
-The [production-preservation receipt](production_preservation.json) records unchanged default pointer SHA-256 `1a0dde587ccd6b005a4bac32cbc81105b80ef956052191dbdb5cf2b6bec1e83b`, unchanged frozen model bytes and the existing running generation `600edc35-506d-501d-82c2-5cc2ebcfe699`. The [Git artifact integrity check](git_artifact_integrity.json) verifies filters preserve the new pointer/model/card bytes and their recorded hashes. Only dedicated `enriched_retraining_*` artifact directories receive the `-text` rule; deployed artifact attributes and bytes remain unchanged.
-
-## Executed verification
-
-- [Full Python verification](python_validation.json), with integration enabled: **1,752 passed**, zero failures/errors, one skipped, 70 warnings, **571.06 seconds**. This final source-complete run includes the 24 newly added shared-helper tests; the earlier complete run of 1,728 passes is preserved in the receipt. The skip requires Windows directory-symlink privileges. Warnings comprise one sklearn single-label diagnostic, one netCDF4/NumPy binary-size import warning and 68 xarray/netCDF4 NumPy-shape deprecations; numerical fixtures passed. The [JUnit receipt](pytest.xml) redacts only known synthetic userinfo fixture labels; raw output remains ignored.
-- **98 focused retraining tests** passed in 34.64 seconds. A later focused helper run passed **86 tests** in 52.25 seconds, including the 24 shared-helper tests. The separate real A/B/C/D parity receipt is linked above. An initial sandbox TEMP setup attempt had six setup errors; setting an explicit workspace `--basetemp` resolved them without a product change. Focused and full counts overlap and must not be summed.
-- [Frontend verification](frontend_validation.json): **160 tests passed**, lint passed and Vite 8.3.3 production build passed. Largest JavaScript chunk: **365,385 bytes**. A plugin-timings advisory was informational. This check did not install dependencies or rerun a vulnerability audit.
-- [API verification](api_verification.json): **761 district/state reads**, all twelve horizons, registry reconciliation, invalid/missing requests, default-vintage/missing-asset behavior and six-month endpoints passed. Normal published forecast reads invoked model inference **zero** times.
-- [Real-generation browser verification](browser.json): **nine flows passed**, covering tiers A–D, state evidence, desktop/tablet/mobile overflow, injected API errors and retries, and keyboard search; zero recorded browser exceptions.
-- The before/after [public-table fingerprints](public_before.json) and [final fingerprints](public_after.json) match across **14 public tables**. Training, evaluation and publication checks use isolated paths/namespaces; no public source data was rewritten.
+At the conclusion of this experiment, the default pointer SHA-256 remained `1a0dde587ccd6b005a4bac32cbc81105b80ef956052191dbdb5cf2b6bec1e83b`, with unchanged frozen model bytes and running generation `600edc35-506d-501d-82c2-5cc2ebcfe699`. The candidate bundle remains separate from the deployed pointer.
 
 Environment recorded by training: Python **3.13.15**, XGBoost **3.4.1**, NumPy **2.5.4**, pandas **3.0.6**, scikit-learn **1.9.1**, SciPy **1.18.1**. Frontend: Node **22.18.0**, npm **10.9.3**, Vite **8.3.3**. The pinned runtime files are unchanged by this experiment.
 
 ## Reproduce, inspect and roll back
 
-The [retraining guide](../../docs/ENRICHED_XGBOOST_RETRAINING.md) contains prerequisite/isolated-publication details. A code-only clone still needs the exact ignored final V3/raw/baseline assets described in the [prior release reproduction guide](../../docs/FINAL_RELEASE_REPRODUCTION.md). This task reuses accepted local evidence; it does not reacquire a new source revision. Use new output directories so the executed evidence and candidate remain immutable.
+The [reproduction guide](../../docs/FINAL_RELEASE_REPRODUCTION.md) contains prerequisites and isolated-publication details. A code-only clone still needs the exact ignored final V3/raw/baseline assets described there. This task reuses accepted local evidence; it does not reacquire a new source revision. Use new output directories so the executed evidence and candidate remain immutable.
 
 ```powershell
 .\venv\Scripts\python.exe -B -m scripts.audit_retraining_data --feature-directory data/processed/enrichment/final_release_20261026_v3 --output scratch/retraining_data_audit_replay.json
@@ -237,27 +224,15 @@ As an alternative to the serial diagnostic command, reproduce the three-worker e
 .\venv\Scripts\python.exe -u -B -m scripts.evaluate_retraining_parallel --features data/processed/enrichment/final_release_20261026_v3 --frozen-checkpoint data/processed/enrichment/final_release_20261026_v3/frozen_bundle/checkpoint.json --candidate-checkpoint models/artifacts/enriched_retraining_20261027_replay/checkpoint.json --protocol reports/retraining_20261027/protocol.json --added-districts reports/retraining_20261027/gained_history_districts.json --work-dir scratch/retraining_parallel_replay --output reports/retraining_20261027/replay_diagnostic_parallel --workers 3
 ```
 
-**Rollback:** no production switch was made, so the original pointer and existing production forecast namespace remain the default. A verified backup also exists locally at `scratch/retraining_20261027/rollback/checkpoint.json`. It can be checked without writes:
+**Rollback:** no production switch was made, so the original pointer and existing production forecast namespace remain the default. The retained frozen V3 bundle is available at `data/processed/enrichment/final_release_20261026_v3/frozen_bundle/checkpoint.json`. It can be checked without writes:
 
 ```powershell
-.\venv\Scripts\python.exe -B -c "from models.climate_forecast_12m import load_bundle; _, card = load_bundle('scratch/retraining_20261027/rollback/checkpoint.json', expected_generation='physical-v3-official-c9ade81d95720f91'); assert card['model_sha256'] == '4b22e2165664e1c1dd21c81ccf95d894655f0a0d589017a9ab87df0588a73a03'"
+.\venv\Scripts\python.exe -B -c "from models.climate_forecast_12m import load_bundle; _, card = load_bundle('data/processed/enrichment/final_release_20261026_v3/frozen_bundle/checkpoint.json', expected_generation='physical-v3-official-c9ade81d95720f91'); assert card['model_sha256'] == '4b22e2165664e1c1dd21c81ccf95d894655f0a0d589017a9ab87df0588a73a03'"
 ```
 
 To leave a candidate-only API session, restore that session's previous `AQUAIQ_FORECAST_SCHEMA` and retain its original checkpoint configuration. Do not replace the deployed pointer with an experimental pointer or reuse old-model calibration with new weights. Same-seed refit, saved-model reload, frozen-input preservation and backup loading are checked by the executed trainer and tests.
 
-## Modified files, remaining limits and next experiment
-
-The task's modified/new file groups are:
-
-- `.gitignore`, `.gitattributes` and `README.md`.
-- `models/enriched_training_data.py` and the separate `models/artifacts/enriched_retraining_20261027/` checkpoint/model/card bundle.
-- `scripts/audit_retraining_data.py`, `scripts/retrain_enriched_xgboost.py`, `scripts/evaluate_retrained_model.py`, `scripts/evaluate_retraining_parallel.py`, optional `scripts/evaluate_retrained_shared.py`, `scripts/plot_retraining_validation.py` and `scripts/assess_retraining_candidate.py`.
-- `tests/test_enriched_training_data.py`, `tests/test_enriched_retraining.py`, `tests/test_retrained_evaluation.py`, `tests/test_retraining_acceptance.py`, `tests/test_retraining_data_audit.py` and `tests/test_retrained_shared.py`.
-- `docs/ENRICHED_XGBOOST_RETRAINING.md` and aggregate receipts/documentation under `reports/retraining_20261027/`.
-
-`.gitignore` keeps full pair/case/generated-output files local. Existing source data, the production model pointer and weights, frontend components and dependency lockfiles are not rewritten. The [staged audit](staged_scan.json) reports zero secret or large-file findings; the largest staged file is the 2,531,226-byte aggregate diagnostic. Working and staged whitespace checks pass. Dedicated experiment snapshots preserve exact bytes, with CRLF explicitly recognized by the normal whitespace checks. No raw observations, pair/case CSVs or full forecast exports are staged.
-
-The [staged-model replay](staged_model_replay.json) reconstructs the pointer/model/card from actual Git index blobs, verifies their checksums, loads the model through the existing loader, and obtains 120 finite predictions exactly equal to the working candidate. Protocol and selection bytes also survive Git filtering unchanged. The final staged scan includes these audit receipts themselves. Git commit/remote identity is reported in the completion response; main stays unchanged.
+## Remaining limits and next experiment
 
 The remaining scientific blocker is an independent later observed test period with documented source availability. Other limits include changing station/datum panels, seasonal sampling, missing/currently stale weather, omitted pumping/extraction, weak geographic transfer support and uncertain estimated anchors. Eight newly local districts do not contribute final-fit pairs, and newly local validation is too small to establish local skill. No historical average is a present-district accuracy guarantee.
 

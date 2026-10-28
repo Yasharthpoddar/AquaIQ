@@ -1,4 +1,0 @@
-{
-  "command": "npm.cmd --prefix dashboard run lint",
-  "exit_code": 0
-}

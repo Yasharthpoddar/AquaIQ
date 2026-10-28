@@ -1,2 +1,0 @@
-# Preserve plan/checksum receipt bytes without touching the root's existing edits.
-** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
