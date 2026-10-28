@@ -1,8 +1,0 @@
-{
-  "passed": true,
-  "model_sha256": "e4e57de9f681b2f2702c9b86a00be06b04147123ecea0579f6abcf3cdc586192",
-  "card_sha256": "30d837e15fac7184609330197c1bb3ff6d3e6daf6154dcb4267fe26784662176",
-  "git_filters_preserve_pointer_model_and_card_bytes": true,
-  "scope": "Dedicated enriched_retraining_* model bundles and retraining_* evidence trees preserve exact bytes; existing deployed files unchanged.",
-  "git_filters_preserve_protocol_and_selection_bytes": true
-}

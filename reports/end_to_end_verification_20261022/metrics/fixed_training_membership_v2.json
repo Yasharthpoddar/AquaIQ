@@ -1,8 +1,0 @@
-{
-  "n": 164,
-  "complete_n": 158,
-  "train_target_cutoff": "2021-12-31",
-  "max_target": "2021-12-01",
-  "first_evaluation_origin": "2023-01-01",
-  "membership_sha256": "f2c651cf71f2ebb14b32a1619f022bb7fb8afdea7ce78a7249e5754861294947"
-}

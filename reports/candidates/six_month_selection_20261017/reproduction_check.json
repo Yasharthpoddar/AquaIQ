@@ -1,6 +1,0 @@
-{
-  "metrics_and_cases_reproduced": true,
-  "absolute_tolerance": 1e-12,
-  "max_numeric_difference": 6.661338147750939e-16,
-  "note": "Pooled metrics and case coverage; Random Forest thread accumulation can differ by rounding. Near-constant district R\u00b2 is now undefined."
-}

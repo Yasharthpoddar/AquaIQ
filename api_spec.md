@@ -1,10 +1,16 @@
 # AquaIQ API contract
 
-The district UI defaults to the separate experimental twelve-month monthly scenario at `/api/research/scenario/<district_id>?months=12`, documented below. The direct research APIs in the next section retain their historical Adilabad-only scope and are selected explicitly in the UI. Preserved legacy endpoints retain their six-month contracts; they are not relabelled as twelve-month models.
+The default dashboard reads persistent twelve-month district forecasts and equal-district state summaries. The [serving guide](docs/NATIONWIDE_FORECASTS.md) defines tiered methods, immutable generations, evidence fields and namespace operations. Historical research, the seasonal/trend scenario and legacy six-month risk products have separate contracts below. HTTP success, model loading and coverage do not establish forecasting accuracy.
 
-## Primary: direct twelve-calendar-month research
+## Published twelve-month products
 
-`GET /api/research/forecast` describes the primary product, supported canonical district IDs, source-backed origin months, artifact scope and limitations. `GET /api/research/forecast/<district_id>` defaults to the **latest observed source month**; `origin_month=YYYY-MM` selects an explicit origin. The optional `months` parameter must equal `12`. Unknown, repeated or incompatible query parameters are rejected. This route is separate from the preserved legacy endpoint below and does not connect to the database.
+`GET /api/districts` returns the canonical district registry independently of optional score publications. `GET /api/states` lists the state/UT registry. `GET /api/states/summary?horizon=12`, `GET /api/predict/state/<state_id>?horizon=12` and `GET /api/predict/climate-12m/<district_id>?months=12` read published generations. Optional `as_of=YYYY-MM-DD` selects that date exactly; omission selects the latest published vintage no later than today and retains its actual dates. Missing generations return HTTP 503 rather than triggering nationwide inference. Explicit dates/horizons are validated.
+
+Each district returns twelve month-start absolute depths in `m_bgl`, with separate changes from estimated current depth, method/evidence tier, observation counts/dates, uncertainty availability and generation/model/data identities. Reference tiers never manufacture local observations or weather. States use equal weights across registered districts, with evidence proportions and constituent methods; this is neither area/well weighting nor groundwater volume. Source/history and risk evidence can have different dates from the published outlook.
+
+## Historical direct twelve-calendar-month research
+
+`GET /api/research/forecast` describes the historical research product, supported canonical district IDs, source-backed origin months, artifact scope and limitations. `GET /api/research/forecast/<district_id>` defaults to the **latest observed source month**; `origin_month=YYYY-MM` selects an explicit origin. The optional `months` parameter must equal `12`. Unknown, repeated or incompatible query parameters are rejected. This route is separate from the preserved legacy endpoint below and does not connect to the database.
 
 The target is exactly **origin M + 12 calendar months**. The response includes `product: direct_12month_research`, `horizon_months: 12`, `units: m_bgl`, `origin_month`, `target_month`, nullable `ml_estimate_m`, one nullable `annual_baseline_m`, `status`, `output_kind`, `source`, `model`, `scope`, `unavailable_reasons` and `limitations`. `computed_at` is timezone-aware UTC and `forecast_issued_at` stays null: these are retrospective/current-vintage research calculations, not an archive of issued prospective forecasts. A source month is not a certified acquisition day.
 
@@ -16,9 +22,7 @@ ML calculation additionally requires an observed origin and historical observed 
 
 For the retained source, a default Adilabad request has origin `2026-05`, target `2027-05`, and unavailable ML; an explicit `origin_month=2024-01` targets `2025-01` for historical research. `source` distinguishes latest observed month from selected origin, reported dates from unknown acquisition/availability times, observed versus imputed values and per-input carry/derived/missing status. Scope agreement does not certify geographic truth, a stable physical well panel or datum continuity. No twelve-full-month operational lead or prospective skill is claimed.
 
-The preserved 792-case expanding historical study has XGBoost RMSE 1.420 m versus annual baseline 1.458 m, with paired difference interval −0.317 to +0.264 m and reversed sensitivities. Those scores are not validation of the new fixed-cutoff application artifact. The baseline outperformed XGBoost in the strict Adilabad sensitivity. No risk-index calculation or extraction simulation was recalibrated by this integration.
-
-The new fixed artifact's separate 24-case historical check has ML MAE 2.145 m / RMSE 2.664 m versus annual baseline MAE .645 m / RMSE .877 m. The baseline performs better on these previously inspected cases. No model superiority or prospective skill follows from the application integration. Artifact failures return a research-shaped unavailable response (HTTP 503, null estimates, public-safe reasons); invalid query errors use HTTP 400 and the shared error schema below.
+Previously inspected historical checks did not establish robust model superiority; the annual baseline performed better on the fixed application artifact's checks. Historical study metrics cannot validate the current/future application. Artifact failures return HTTP 503 with null estimates and public-safe research reasons; invalid queries return HTTP 400. No risk-index or extraction-simulation recalibration follows from this integration.
 
 ### Historical graph mode: twelve calendar positions
 
@@ -184,7 +188,7 @@ Zero-change inputs preserve the exact available baseline. If the baseline is una
 
 ## `GET /api/health`
 
-Checks a real PostgreSQL query and validates both the historical endpoint and monthly climate serving bundles, including their checksums, feature schemas, units, supported horizons, and matching feature generation. Returns `status`, `database`, `model_loaded`, `monthly_climate_model_loaded`, and project `version`.
+Checks a real PostgreSQL query and validates the historical, monthly climate and twelve-month serving bundles, including their checksums, feature schemas, units, supported horizons, and matching feature generation. Returns `status`, `database`, `model_loaded`, `monthly_climate_model_loaded`, `climate_12m_model_loaded`, and project `version`.
 
 - HTTP 200: `status: healthy`, `database: connected`, `model_loaded: true`, `monthly_climate_model_loaded: true`.
 - HTTP 503: `status: degraded`; the other fields identify failed readiness.
@@ -198,3 +202,8 @@ Separate experimental scenario approved for local demonstration; defaults to tod
 The calculation reuses the existing robust damped seasonal/trend fit in memory from explicitly source-marked observed history strictly before the scenario month. It loads no estimator, trains no active ML, accesses no DB and saves no parameters or prediction ledger. It estimates the observation gap, omits weather and extraction effects, and is unvalidated. Responses separate `as_of`, timezone-aware `computed_at`, null `forecast_issued_at`, last observed depth/date, estimated scenario-month depth, age, fit history/phase coverage, source/method/configuration hashes, assumptions and limitations. Availability remains unverified. Past `as_of` requests use the retained current source vintage and are not causal historical backtests. Existing `/research/forecast`, `/research/graph` and six-month endpoints retain their contracts.
 
 National source units follow the repository's `m_bgl` convention; certified per-well datum/continuity are unknown. National well counts, panels, acquisition and availability timestamps are absent and remain null. `source.scope` is `district_own_observed_history`, with source-specific `name`, `units_qualification`, district metadata, generation and byte hashes. Observation age and sparse phase coverage do not establish current forecasting skill. Cached parsing never skips verifying the pinned bytes on a subsequent request.
+
+
+The retained robust scenario requires at least 24 source-marked observations spanning 36 months. Where enough recent data exist it uses a 120-month window; otherwise full history, with 60-month age half-life, four robust fitting iterations, a penalized linear/annual-seasonal fit, recent-residual adjustment and 36-month trend damping. It estimates the gap from the last observation and evaluates each future month directly; depths are floored at zero. Calendar phases without observations are inferred from assumptions, not measurements. Weather, pumping, extraction and policy interventions are excluded. The method is an in-memory NumPy fit, not an extrapolated six-month estimator or interpolated M+12 point. Sparse sampling, old anchors and uncertain panel continuity limit credibility.
+
+The explicit UI scenario view uses `/district/<district_id>?view=scenario#forecast-graph`; historical `origin_month` links retain their research scope. Scenario and historical risk are independent products. Future labels, verified source availability and stable well/datum evidence plus preregistered baseline comparisons would be necessary to establish skill. No scenario result is recorded as prospective issuance or promoted to an active model.

@@ -1,6 +1,6 @@
 # Complete district forecasting
 
-The [26 October official-data enrichment guide](OFFICIAL_DATA_ENRICHMENT.md) describes a later isolated snapshot: 5,952 additional genuine district months, unchanged model weights/training/weather definitions, and 551 A / 111 B / 62 C / 1 D. The original nationwide snapshot and validation below remain the preserved comparison baseline. Use the release-specific feature, model, calibration and namespace paths to reproduce the enrichment.
+The [final data-release guide](FINAL_RELEASE_REPRODUCTION.md) documents the isolated V3 snapshot, exact external inputs and unchanged frozen model. The [release report](SCIENTIFIC_LIMITATIONS.md#data-and-source-provenance) distinguishes it from the original nationwide comparison baseline below. Use matching feature, checkpoint, calibration and namespace identities; never infer one generation's validation from another.
 
 The serving product is a persistent, versioned twelve-month generation for **every district registered in the repository crosswalk**. The 2026-10-25 snapshot contains 725 districts in 36 states/UTs. This is a fixed project inventory, not a claim to match the latest national administrative inventory. Registry metadata is validated and counts are calculated at runtime.
 
@@ -35,14 +35,16 @@ When `as_of` is omitted, the twelve-month APIs and state registry pin the latest
 
 Use the existing Python environment or install `requirements.txt` into a clean Python 3.13 environment. Install the dashboard with `npm ci --prefix dashboard` on Node 22.12+. Configure a **local/test PostgreSQL database** using `.env.example`; never commit `.env`. A code-only clone needs the private/local runtime assets: verified `data/processed/features_matrix.csv`, its matching manifest and the existing compact tracked XGBoost bundle. Raw sources are required only for source-audit/reprocessing commands. No downloads or model refits are part of precomputation.
 
+Choose a new scratch directory and lowercase `aquaiq_test_*` schema for each replay. The following uses existing matching calibration and never rewrites the active calibration artifact:
+
 ```powershell
-.\venv\Scripts\python.exe -m scripts.validate_tiered_forecasts --write-calibration
-.\venv\Scripts\python.exe -m scripts.audit_spatial_recovery
-.\venv\Scripts\python.exe -m scripts.precompute_forecasts --test-schema aquaiq_test_nationwide_20261025 --as-of 2026-10-25 --export-dir scratch/nationwide-complete --output reports/nationwide_20261025/generation.json
-.\venv\Scripts\python.exe -m scripts.precompute_forecasts --test-schema aquaiq_test_nationwide_20261025 --as-of 2026-10-25 --validate-only
-$env:AQUAIQ_FORECAST_SCHEMA='aquaiq_test_nationwide_20261025'
-.\venv\Scripts\python.exe -m api.app
+.\venv\Scripts\python.exe -B -m scripts.precompute_forecasts --test-schema aquaiq_test_nationwide_replay_new --as-of 2026-10-25 --export-dir scratch/nationwide_replay_new/outputs --output scratch/nationwide_replay_new/generation.json
+.\venv\Scripts\python.exe -B -m scripts.precompute_forecasts --test-schema aquaiq_test_nationwide_replay_new --as-of 2026-10-25 --validate-only --output scratch/nationwide_replay_new/stored_validation.json
+$env:AQUAIQ_FORECAST_SCHEMA='aquaiq_test_nationwide_replay_new'
+.\venv\Scripts\python.exe -B -m api.app
 ```
+
+Historical evaluation and spatial audits are separate optional operations requiring their original source inputs. Use `python -B -m scripts.validate_tiered_forecasts --output-dir scratch/tiered_validation_new` and `python -B -m scripts.audit_spatial_recovery --output-dir scratch/spatial_audit_new` with fresh output directories. Omit `--write-calibration`: that option overwrites `models/artifacts/tiered_calibration.json`. A calibration revision belongs to a deliberate release/evaluation procedure with matching inputs and validation, not routine startup or verification of an existing publication.
 
 `--test-schema` accepts only `aquaiq_test_*` identifiers and applies migration 004 in that namespace. Public source tables and production forecasts are preserved. The schema remains available for local inspection. `--dry-run` computes/validates without publishing. Repeating identical inputs validates and reuses the existing immutable generation, including with `--force`; different implementation, model, registry, configuration, feature or calibration identities create a new generation. `--validate-only` checks stored JSON and normalized monthly rows, not just the publication status. To deploy elsewhere, apply migrations and run the same precomputation against that deployment's configured test database before publishing there.
 
@@ -50,12 +52,12 @@ API examples: `/api/states`, `/api/states/summary?horizon=12&as_of=2026-10-25`, 
 
 `GET /api/districts` returns every canonical district ID, name and state independently of the database, model artifacts and scoring runs. Home and Simulate use this registry for navigation; optional risk records enrich it without removing districts. Home's primary cards show published forecast evidence counts. The separate six-month risk index may be unavailable or awaiting a matching scoring run without blocking district search, map navigation or twelve-month forecasts. Map colours retain their explicit risk-index meaning; grey does not imply a missing district forecast.
 
-To populate the separate risk index and Alerts locally, reuse the existing scoring pipeline with output-only migration 005. This computes historical six-month index components, not new twelve-month forecasts or calibrated crisis probabilities:
+To populate the separate risk index and Alerts in the same fresh local namespace, reuse the existing scoring pipeline with output-only migration 005. This computes historical six-month index components, not new twelve-month forecasts or calibrated crisis probabilities:
 
 ```powershell
-.\venv\Scripts\python.exe -m models.score_all --date 2026-10-26 --test-schema aquaiq_test_nationwide_20261025
-$env:AQUAIQ_FORECAST_SCHEMA='aquaiq_test_nationwide_20261025'
-$env:AQUAIQ_SCORING_SCHEMA='aquaiq_test_nationwide_20261025'
+.\venv\Scripts\python.exe -m models.score_all --date 2026-10-26 --test-schema aquaiq_test_nationwide_replay_new
+$env:AQUAIQ_FORECAST_SCHEMA='aquaiq_test_nationwide_replay_new'
+$env:AQUAIQ_SCORING_SCHEMA='aquaiq_test_nationwide_replay_new'
 .\venv\Scripts\python.exe -m api.app
 ```
 
@@ -63,12 +65,12 @@ The scoring namespace contains only `scoring_runs`, `crisis_scores` and legacy `
 
 ## Validation design and limitations
 
-The [saved validation](../reports/nationwide_20261025/validation.json) contains tier, district, horizon and experiment metrics on identical target observations. Fallback calibration origins are January/July 2017–2018. Evaluation starts July 2019, then rolls across January/July 2020–2023 plus January 2025. XGBoost calibration uses January/July 2021 after its frozen 2019 training-label cutoff and twelve-month embargo; its evaluation starts July 2022, after all calibration targets. Earlier evaluation origins are purged. Empty origins remain recorded. January 2025 tests include the January 2026 refresh at M+12. Tests condition on calendar observation months; provider publication timestamps remain unknown.
+The [saved validation and methodology](SCIENTIFIC_LIMITATIONS.md#nationwide-output-and-uncertainty) contains tier, district, horizon and experiment metrics on identical target observations. Fallback calibration origins are January/July 2017–2018. Evaluation starts July 2019, then rolls across January/July 2020–2023 plus January 2025. XGBoost calibration uses January/July 2021 after its frozen 2019 training-label cutoff and twelve-month embargo; its evaluation starts July 2022, after all calibration targets. Earlier evaluation origins are purged. Empty origins remain recorded. January 2025 tests include the January 2026 refresh at M+12. Tests condition on calendar observation months; provider publication timestamps remain unknown.
 
 Pseudo-sparse experiments retain only the last 1/3/9/23 genuine observations, using a deterministic pre-outcome district hash to select the cap. Pseudo-cold experiments exclude all target district history from donor statistics. Neither sparse nor cold experiments use XGBoost, which saw those districts in earlier training. Mutating hidden history or future observations does not change reference predictions. Tests also mask environmental inputs and exercise the actual XGBoost serving anchor across historical observation gaps. Persistence and available same-month seasonal naive use exactly the same local history as their paired method. Zero-history persistence and seasonal-naive baselines are undefined; global reference is the valid comparable baseline instead.
 
 These are reused historical data, not a blind or prospective study. Donor districts can be spatially correlated; leave-one-district-out is **not** geographically blocked validation. An additional state-blocked reference sensitivity excludes every target-state history and is reported separately. Few target-specific environmental features and uncertain spatial attribution do not support a defensible new geospatial learned model for truly unmonitored districts. The empirical regional reference therefore remains explicitly a fallback. Most natural sparse districts have only a January 2026 observation; natural sparse validation has just seven target cases, so pseudo-sparse evidence must not be overstated. Most post-2021 monthly labels occur in a handful of districts. A January 2026 nationwide refresh expands horizon-12 evidence but does not validate every monthly trajectory.
 
-The [spatial audit](../reports/nationwide_20261025/spatial_audit.json) preserves Telangana candidate assignments from the existing strict coordinate resolver, including invalid/ambiguous/duplicate checks and boundary/source hashes. The boundary contains mixed dates; 40,845 accepted candidate readings disagree with their historical parent crosswalk. These candidates are not ingested into the immutable feature generation. The supplied Mumbai polygon lacks a separate Suburban boundary; raw IMD and cleaned ERA5 grid probes select a nearest usable cell at 19°N, 73°E, approximately 15.1 km from the representative point. A common coarse cell does not verify district-specific weights. No unsupported Mumbai alias or station reassignment is applied.
+The [retained spatial evidence](SCIENTIFIC_LIMITATIONS.md#nationwide-output-and-uncertainty) preserves Telangana candidate assignments from the existing strict coordinate resolver, including invalid/ambiguous/duplicate checks and boundary/source hashes. The boundary contains mixed dates; 40,845 accepted candidate readings disagree with their historical parent crosswalk. These candidates are not ingested into the immutable feature generation. The supplied Mumbai polygon lacks a separate Suburban boundary; raw IMD and cleaned ERA5 grid probes select a nearest usable cell at 19°N, 73°E, approximately 15.1 km from the representative point. A common coarse cell does not verify district-specific weights. No unsupported Mumbai alias or station reassignment is applied.
 
 Source conventions: [CGWB monitoring and source access](https://cgwb.gov.in/en/ground-water-level-monitoring), [CGWB monitoring schedule](https://www.cgwb.gov.in/en/faq-general), [IMD daily 0.25° product](https://www.imdpune.gov.in/cmpg/Realtimedata/Rainfall/Rain_Download.html). These support data conventions; none establishes this project's forecast accuracy or the internal 24-observation rule.

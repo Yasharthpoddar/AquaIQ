@@ -1,70 +1,43 @@
-# Historical accuracy experiments
+# Scientific evaluation and candidate reproduction
 
-The candidate-only workflow audits the already inspected serving diagnostic,
-then compares seventeen prespecified recipes and two simple baselines using
-nested chronological development folds. It does not promote models, write
-database forecasts, alter serving dispatch, or recalibrate intervals.
+The [retraining report](SCIENTIFIC_LIMITATIONS.md#evaluation-and-model-status), [accuracy experiment](SCIENTIFIC_LIMITATIONS.md#evaluation-and-model-status) and their locked protocols are authoritative. Experiments did not establish a sufficiently robust improvement to replace frozen production. The enriched candidate remains unpromoted; grouped horizons are a rejected replacement. Inspected historical diagnostics, coverage and software tests do not establish prospective forecasting skill or calibrated uncertainty.
 
-The executed findings and limitations are in
-[`reports/accuracy_experiments_20261027/REPORT.md`](../reports/accuracy_experiments_20261027/REPORT.md).
-The exact ignored V3 data and original baseline assets are required, as described
-in [the release reproduction guide](FINAL_RELEASE_REPRODUCTION.md).
+Use the activated Python 3.13 project environment and the exact V3, original baseline and source assets in [release requirements](FINAL_RELEASE_REPRODUCTION.md). Generated case exports, per-fold learners and full observations remain local. Every replay needs new report/model paths; never overwrite a locked study, active pointer or published production generation. The following commands are deliberate research operations and are not application startup or cleanup steps.
 
-Use fresh output paths for each replay. From the repository root:
+## Enriched XGBoost candidate
+
+[The retraining protocol](../reports/retraining_20261027/protocol.json) fixes the 17 ordered serving features, observed-origin/observed-target calendar joins and horizons 1-12. The model predicts depth change; inference adds the observed anchor and clips depth at zero. Weather climatology/lag fallback use origin-available prefixes. Generated/imputed labels and unresolved telemetry are excluded; pre-existing deep observations remain flagged rather than arbitrarily clipped.
+
+Three prespecified parameter sets use two earlier chronological folds: training targets end December 2021/2022; validation origins follow the twelve-month embargo in 2023/2024 and targets end January 2024/2025. Mean fold district-macro MAE selects settings, RMSE breaks ties, and median selected best tree count is locked before the final fit through January 2025. Earlier validation alone controls early stopping. The frozen artifact used realized-weather conditional training; the candidate uses origin-available assumptions and fixes a month-boundary mismatch, so differences cannot be attributed only to added observations.
+
+January 2026 labels are excluded from fitting/selection but were previously inspected. There are no accepted post-January-2026 observations or untouched observed-origin/future-target pairs strictly after January 2025. The final 2025 serving-origin comparison is retrospective and dependent. Promotion still requires every locked gate, including an untouched post-refit test; the absence of that test blocks promotion. Old calibration binds frozen weights and cannot be transferred to the candidate.
 
 ```powershell
-.\venv\Scripts\python.exe -u -B -m scripts.audit_accuracy_baselines --output reports/accuracy_experiments_replay/audit
-.\venv\Scripts\python.exe -u -B -m scripts.run_accuracy_experiments prepare --audit reports/accuracy_experiments_replay/audit --protocol reports/accuracy_experiments_replay/protocol.json
-.\venv\Scripts\python.exe -u -B -m scripts.run_accuracy_experiments run --protocol reports/accuracy_experiments_replay/protocol.json --output reports/accuracy_experiments_replay/run_replay
-.\venv\Scripts\python.exe -B -m pytest --integration --basetemp scratch/pytest-accuracy-replay -q
-npm.cmd --prefix dashboard test
-npm.cmd --prefix dashboard run lint
-npm.cmd --prefix dashboard run build
+python -B -m scripts.audit_retraining_data --feature-directory data/processed/enrichment/final_release_20261026_v3 --output scratch/retraining_data_NEW.json
+python -u -B -m scripts.retrain_enriched_xgboost --feature-directory data/processed/enrichment/final_release_20261026_v3 --frozen-checkpoint data/processed/enrichment/final_release_20261026_v3/frozen_bundle/checkpoint.json --output reports/candidates/retraining_NEW/training --checkpoint models/artifacts/enriched_retraining_NEW/checkpoint.json
+python -B -m scripts.evaluate_retrained_model --features data/processed/enrichment/final_release_20261026_v3 --frozen-checkpoint data/processed/enrichment/final_release_20261026_v3/frozen_bundle/checkpoint.json --candidate-checkpoint models/artifacts/enriched_retraining_NEW/checkpoint.json --output reports/candidates/retraining_NEW/diagnostic --origins 2025-01-31 2025-02-28 2025-03-31 2025-04-30 2025-05-31 2025-06-30 2025-07-31 2025-08-31 2025-09-30 2025-10-31 2025-11-30 2025-12-31
 ```
 
-`prepare` requires a successful audit and seals the training source, candidate
-recipes, dependencies, fold rules, data fingerprint and ranking rule before any
-new fitting. `run` refuses changed code, changed inputs or an existing output
-directory. A stopped run remains an incomplete record; use a new run path.
-Per-fold models, cards, traces and predictions remain local under the report
-directory. A new final learner, when selected strictly from the inner folds, is
-stored under a new `models/artifacts/accuracy_experiments_20261027_*/` directory.
+The trainer checks same-seed model-byte/prediction equality, saved-model reload and a frozen rollback copy; it records data/code/model/software hashes and eligibility counts. The recorded enriched model SHA-256 is `e4e57de9f681b2f2702c9b86a00be06b04147123ecea0579f6abcf3cdc586192`; active frozen SHA-256 remains `4b22e2165664e1c1dd21c81ccf95d894655f0a0d589017a9ab87df0588a73a03`.
 
-Use the explicit isolated loader for these research artifacts:
+For candidate output verification, use `scripts.precompute_forecasts` with the explicit candidate checkpoint, V3 features, a new export/output path and `--dry-run`. Specify a deliberately absent `--calibration-path` so candidate ranges stay unavailable. A separately inspected persisted trial uses a fresh `--test-schema aquaiq_test_retraining_new` and `scripts.verify_nationwide_release` with identical inputs. The source registry is read for reconciliation; no public production namespace or pointer is changed. Continuing to use the frozen pointer and existing published schema is the rollback for an unpromoted experiment. A saved rollback bundle must verify against its own card/generation before loading.
 
-```python
-from models.accuracy_challengers import load
-model, card = load("path/to/new/checkpoint.json")
-# pairs must contain the seventeen ordered serving features and observed anchors.
-predicted_depths_m_bgl = model.depth(pairs)
+## Nested accuracy development
+
+The executed [protocol_v2.json](../reports/accuracy_experiments_20261027/protocol_v2.json) prespecified seventeen recipes, with sixteen eligible for all required folds, and two baselines. [The acceptance assessment](../reports/accuracy_experiments_20261027/acceptance_assessment.json) records failed gates. Fresh replays seal support before fitting rather than removing validation cases to rescue a recipe.
+
+```powershell
+python -u -B -m scripts.audit_accuracy_baselines --output reports/candidates/accuracy_NEW/audit
+python -u -B -m scripts.run_accuracy_experiments prepare --audit reports/candidates/accuracy_NEW/audit --protocol reports/candidates/accuracy_NEW/protocol.json
+python -u -B -m scripts.run_accuracy_experiments run --protocol reports/candidates/accuracy_NEW/protocol.json --output reports/candidates/accuracy_NEW/run
 ```
 
-The loader checks hashes, feature order and exact horizon coverage. Ridge stores
-train-fitted transforms as JSON, without executable pickle artifacts. A trend
-artifact requires its source frame explicitly because inference consumes the
-observed origin history. These checkpoints intentionally use a separate format
-and cannot replace the active production pointer.
+`prepare` requires a successful serving audit and seals data, source, software, candidate recipes, folds and ranking before fitting. `run` rejects changed inputs/code or an existing output directory. Per-fold models/cards/traces/predictions stay in the new local report tree; any final research learner uses a separate `models/artifacts/accuracy_experiments_*` identity. A stopped run is incomplete and must not be overwritten or represented as a completed comparison.
 
-The primary statistic averages district-macro MAE across inner folds on a common
-seasonal-eligible population. Full-population case and macro MAE, RMSE, signed
-error and coverage are also published. A district with one eligible case is
-included in the macro average, consistent with the prior protocol; it does not
-become a supported district-level finding. Subgroup interpretation requires at
-least thirty cases across ten districts.
+The primary statistic averages inner-fold district-macro MAE on the same seasonal-eligible cases for every candidate and baseline; RMSE breaks ties. Full-population macro/case MAE, RMSE, signed error and coverage remain separate. Districts with one case contribute to the macro mean but do not support local findings. Subgroup interpretation requires thirty cases across ten districts.
 
-Each validation origin can contribute all twelve horizons through the following
-December. Thus the last outer origin cohorts are 2020 and 2021, with complete
-target windows ending before 2023. Inner target windows must end before their
-outer training cutoff. All new development targets precede 2023. The frozen artifact was trained through
-2019 and is a valid temporal reference only on later origins. The current
-experimental artifact was trained through January 2025; its predictions on the
-new historical folds are contaminated and are never selection evidence. Refitted
-production/current recipes provide comparable chronological controls.
+Outer origin years are 2020/2021, with full twelve-horizon target windows ending before 2023. Inner targets end by their outer training cutoff. Outer folds evaluate the inner-selection procedure; secondary recipe comparisons on outer labels cannot select a replacement winner. The existing frozen artifact is temporally valid only after its 2019 cutoff; the enriched artifact fit through January 2025 is contaminated on these earlier folds and cannot be selection evidence. Refitted current/production recipes supply chronological controls. Previously inspected 2023/2024 folds and January 2026 labels remain historical references.
 
-Outer folds evaluate a selection procedure. Showing every recipe on outer folds
-is a secondary exploratory comparison and must not be used to pick another
-winner. January 2026 labels and the old 2023/2024 folds remain historical
-references. Historical publication times are unknown, and the controlled
-observed-origin experiment does not validate stale estimated serving anchors.
-Fresh prospective observations and complete original promotion gates remain
-necessary before any production change.
+Research loading uses `models.accuracy_challengers.load(checkpoint)`, then `model.depth(pairs)` with the seventeen ordered serving features and observed anchors. The loader verifies hashes, feature order and exact horizon coverage. Ridge transforms are train-fitted JSON; trend artifacts require explicit source history. Research checkpoints use a separate format and cannot replace the production pointer. Historical publication times and current stale-anchor behavior remain unverified by this controlled observed-origin experiment. Fresh prospective observations and all promotion gates are still necessary.
+
+To rebuild corrected tables/figures from the retained local case exports, use `python -B -m scripts.summarize_accuracy_experiments --root reports/accuracy_experiments_20261027 --run reports/accuracy_experiments_20261027/run_v2 --protocol reports/accuracy_experiments_20261027/protocol_v2.json --analysis-version analysis_NEW`; existing output/report names are refused. Use the [root software checks](../README.md#verify) independently of any scientific reproduction.

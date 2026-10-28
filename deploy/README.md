@@ -1,36 +1,14 @@
-# AquaIQ release and update operations
+# Release, deployment and recovery
 
-## Twelve-month research application scope
+The package runs Nginx for the React SPA and same-origin `/api/` proxy, with Waitress/Flask connected to an existing PostgreSQL database. It does not provision a database, train models or initialize schema automatically. Only the Nginx port is published, bound to loopback by default. Docker build/run, host recovery, HTTPS and monitoring require verification on the target host; passing local tests is not a deployment or scientific guarantee.
 
-The primary research panel uses `/api/research/forecast/<district_id>` and the separate local descriptor `research/twelve_month_app.json` (override: `AQUAIQ_RESEARCH_CONFIG`). Its compatible XGBoost artifact and frozen feature/provenance snapshots support historical Adilabad research only. Missing assets and current/future requests produce unavailable ML. Preserve the active six-month checkpoints and database.
+The default product reads persisted twelve-month generations. [Serving contracts](../docs/NATIONWIDE_FORECASTS.md) explain publication selection, separate risk outputs and namespace configuration. [Required assets](../docs/FINAL_RELEASE_REPRODUCTION.md) include matching data, models/cards, registry and database publications. The file-only historical research APIs also require `research/twelve_month_app.json` and its pinned local artifact; their Adilabad-only scope never expands merely because the dashboard covers all districts.
 
-The deployment instructions below are maintainer references. No deployment was verified or authorized by twelve-month finalization. A successful legacy readiness check does not validate this research artifact, its scientific skill, or production release. A clean clone lacks ignored runtime assets and a populated legacy database. The [finalization report](../reports/candidates/twelve_month_horizon_finalization_20261020/REPORT.md) gives precise assets and safe local commands; no refresh, migration or scoring run is needed for its file-only route.
+## Prepare and verify one matching release
 
-This is a concrete local production-style topology: Nginx serves the compiled
-SPA and forwards same-origin `/api/` requests to Waitress. The API connects to an
-existing PostgreSQL database. No database container, schema initialization or
-automatic training is performed. Only the Nginx port is published, bound to
-`127.0.0.1` by default. Dockerfiles and Compose require a real build/run check on
-a Docker host before any public deployment.
-
-## Prepare one matching release
-
-1. Take a **new** `pg_dump --format=custom` backup plus copies/hashes of
-   `config.yaml`, `data/processed`, required `data/raw` inputs (including the
-   canonical district GeoJSON), and the entire `models/checkpoints` directory.
-   Preserve pointer JSONs, cards, both immutable bundle directories and physical
-   feature manifests together. Git alone does not contain these artifacts.
-2. Restore the database into a separate database on the serving host using the
-   matching PostgreSQL client. Use the matching source/configuration commit and
-   model/data release. Do not initialize an empty database and expect it to work.
-3. Provision a dedicated serving role with `CONNECT`, schema `USAGE` and `SELECT`
-   on AquaIQ tables; keep ingestion/schema-write credentials outside the serving
-   application. Configure PostgreSQL to accept only the Docker/private network
-   as needed. A container's `localhost` is the container, not the Windows host.
-4. Copy `deploy/environment.example` privately to `deploy/.env`. Replace the
-   placeholders, including a random private secret of at least 32 characters.
-   Set absolute data/checkpoint paths. Bind mounts are read-only and missing
-   host folders fail rather than silently creating empty directories.
+1. Take a new `pg_dump --format=custom` backup plus exact copies/hashes of `config.yaml`, processed/raw prerequisites and the complete checkpoint/pointer/card trees. Restore the database into a separate database on the serving host using the matching PostgreSQL client. Source, data, configuration and models must belong to the same release; Git alone is insufficient.
+2. Provision a serving role with `CONNECT`, schema `USAGE` and `SELECT`; keep ingestion/schema-write credentials separate. Permit only the necessary private/container network. A container's `localhost` is the container itself.
+3. Copy `deploy/environment.example` privately to `deploy/.env`. Replace placeholders, set a random private secret of at least 32 characters and specify the absolute host data/checkpoint paths. Read-only bind mounts refuse missing host directories rather than creating empty ones.
 
 From the repository root:
 
@@ -41,104 +19,34 @@ docker compose --env-file deploy/.env -f deploy/compose.yaml up -d
 docker compose --env-file deploy/.env -f deploy/compose.yaml ps
 ```
 
-Open `http://127.0.0.1:8080`. Waitress refuses startup unless both model bundles
-match the feature generation, district/raw/features tables are populated and
-`/api/scores` returns a complete matching publication. The expected district
-count defaults to 725 and can be configured deliberately for another release.
-The healthcheck repeats database/model checks; it is not an accuracy guarantee.
-The shipped secret/password placeholders and blank or surrounding-whitespace
-credentials are refused at startup. Nginx's upstream uses Docker's embedded DNS
-with `resolve` and a shared zone so API container address changes can be refreshed
-without pinning the original address. This follows the [Nginx upstream docs](https://nginx.org/en/docs/http/ngx_http_upstream_module.html#server)
-and [Docker DNS documentation](https://docs.docker.com/engine/network/#dns-services).
-Container recreation/recovery still needs a runtime test on a Docker host.
+Open `http://127.0.0.1:8080`. Waitress requires all three matching model bundles to pass health, populated district/raw/features tables and a complete matching `/api/scores` publication. Expected district count defaults to 725. Secret/password placeholders and blank/surrounding-whitespace credentials are refused. The healthcheck repeats real database/model checks, not forecast validation. Nginx uses Docker DNS with `resolve` and a shared upstream zone to follow API container address changes; container recreation still needs a host runtime test.
 
-Validate `/api/health`, `/api/scores`, one district/history response, the
-six-month graph and a zero-change simulation. Confirm the SPA still opens after
-refreshing a district URL. Inspect logs with `docker compose ... logs --tail 100`
-(substitute the same `--env-file` and `-f` options; never post credentials).
+Verify `/api/health`, registry, a published twelve-month district/state forecast, `/api/scores`, history, a six-month graph, zero-change simulation and a district SPA URL after browser refresh. Inspect `docker compose --env-file deploy/.env -f deploy/compose.yaml logs --tail 100` privately. Public serving additionally needs a tested HTTPS reverse proxy, DNS, certificates and host monitoring. These are not created by Compose.
 
-For public serving, put an HTTPS reverse proxy in front of this loopback port,
-configure DNS/certificates and host monitoring, then test the deployed origin.
-This package does not create accounts, DNS, certificates or a remote host. The
-API uses same-origin requests here, so `AQUAIQ_CORS_ORIGINS` is explicitly empty.
-For an intentionally separate frontend, use a comma-separated allowlist such
-as `https://aquaiq.example.org`; wildcards, credentials and URL paths are rejected.
-Local development retains the four existing localhost/127.0.0.1 origins when
-the variable is unset. CORS is not authentication.
+The package uses same-origin API requests and explicitly empty `AQUAIQ_CORS_ORIGINS`. A separate frontend requires an exact comma-separated origin allowlist; wildcards, credentials and URL paths are rejected. Unset local-development settings retain the existing localhost/127.0.0.1 origins. CORS is not authentication. Keep synchronization fallback disabled for normal persisted twelve-month serving.
 
-## Stage rainfall updates safely
-
-The orchestrator defaults to a read-only, offline plan:
+## Stage rainfall updates
 
 ```powershell
 .\venv\Scripts\python.exe -m scripts.stage_rainfall_update
 .\venv\Scripts\python.exe -m scripts.stage_rainfall_update --run --max-days 10
 ```
 
-The default `--start auto` checks the published rainfall CSV hash, units,
-complete-day aggregation, canonical boundary hash and source manifest entries.
-Every district must cover every month from the dataset's first through last
-month; missing district/months are refused rather than skipped. The next
-unimported month is inferred only after those checks. Publishing a new verified
-rainfall artifact therefore advances later scheduled runs; the job does not
-infer or alter database publication. Promote that artifact with its matching
-database/models through the audited release procedure. If all completed months
-are already present, the job returns `no_new_completed_months` without locking,
-downloading or writing. An explicit `--start YYYY-MM` remains available for a
-reviewed manual range; it is not the scheduling default.
+Default invocation prints a read-only offline plan. `--start auto` verifies the published rainfall CSV hash, units, complete-day aggregation, boundary hash, source manifest and complete district/month grid before finding the next unimported month. Omitting `--end` selects the last completed month. A fully current dataset returns `no_new_completed_months` without locking/downloading/writing. Explicit `--start YYYY-MM` is available for an inspected range.
 
-Omitting `--end` selects the last completed month. A run first downloads the
-three 2025 overlap dates and compares them to the annual archive. Failed
-downloads or differing products stop the job before the target-year batch.
-The first-phase limit is at most three dates and the target phase is limited to
-ten pending dates by default; retries and connection/read timeouts are bounded.
-Cached grids are strictly revalidated. Do not relax comparison thresholds to
-force a pass. Every daily record of the requested range is required for export.
+A run first checks three 2025 overlap dates against the annual archive; missing/different products stop acquisition. Default limits are three comparison dates and ten pending target dates, with bounded retries/timeouts. Cached grids are revalidated and every requested date is required for export. Progress stays under `reports/candidates/rainfall_refresh/<start>_<end>/progress.json`, with downloader progress under `data/raw/updates/rainfall_refresh`. An OS lock prevents overlapping runs and releases on crashes. Verified merged candidates can resume; tampered/unrelated/partial outputs fail closed. Exit 0 means a plan or ready candidate; exit 1 means blocked/incomplete.
 
-Progress is checkpointed at
-`reports/candidates/rainfall_refresh/<start>_<end>/progress.json`, with separate
-downloader progress in `data/raw/updates/rainfall_refresh`. An OS lock prevents
-overlapping manual/scheduled runs and releases on crashes. Verified merged
-candidates are reused; unrelated/tampered/partial candidate outputs are refused.
-Exit 0 means an offline plan or ready candidate; exit 1 means blocked/incomplete.
-Source files and provisional product provenance remain available for review.
+Staging never ingests, retrains, replaces production CSVs or publishes scores. Before promotion, preserve a matching backup, inspect source coverage/provenance, use the audited ingestion/rebuild/evaluation process and publish a complete matching database/model/configuration release. A successful staging run is not approval to change the service.
 
-This job never ingests, retrains, changes production CSVs or publishes scores.
-After a candidate is ready, take a new backup; review source coverage and
-provenance; use the existing audited ingestion and rebuild procedure; check
-matching generations, evaluate models and publish one complete scoring run.
-Only then release the matching database, artifacts and code together.
-
-## Prepare Windows scheduling
+## Windows scheduling and recovery
 
 ```powershell
-# Preview only: does not register or start a task.
+# Preview; no registration or execution.
 .\scripts\register_refresh_task.ps1 -EveryHours 24 -MaxDays 10
-# After reviewing the concrete preview, install explicitly:
+# Explicit installation after inspecting the preview.
 .\scripts\register_refresh_task.ps1 -EveryHours 24 -MaxDays 10 -Install
 ```
 
-The task invokes the exact project Python and working directory through a hidden
-PowerShell window, ignores overlapping instances, and writes per-run logs under
-`reports/candidates/rainfall_refresh/task_logs`. It starts five minutes after
-registration, repeats for ten years, and has a one-hour execution limit. The
-default principal requires the current user to remain logged in and stores no
-password. Logged-out operation needs a separately provisioned service identity;
-it is not silently enabled. Re-running the installer refuses to replace an
-existing task. To remove it deliberately: `Unregister-ScheduledTask -TaskName
-'AquaIQ-Rainfall-Staging' -Confirm:$false`.
+The task invokes the exact project interpreter/working directory in a hidden PowerShell window, ignores overlapping instances and writes per-run logs to `reports/candidates/rainfall_refresh/task_logs`. It begins five minutes after registration, repeats for ten years and has a one-hour execution limit. Default operation requires the current user logged in and stores no password. Logged-out execution needs a separately provisioned service identity. Existing tasks are never silently replaced. Deliberate removal uses `Unregister-ScheduledTask -TaskName 'AquaIQ-Rainfall-Staging' -Confirm:$false`.
 
-## Recovery and monitoring
-
-Inspect staging progress/error type, source freshness, API health, complete-score
-counts, container restarts and the latest successful backup. Stale sources and
-zone estimates remain labelled in the UI. A failed staging run leaves the active
-release intact and is safe to resume. If a production release fails checks, stop
-the API, restore the **same release's** database dump, configuration, processed
-data and complete checkpoint tree, then restart and repeat readiness checks.
-Do not mix a restored database with newer model pointers or vice versa. Keep
-older backups until the replacement release has been verified.
-
-Software/deployment readiness does not establish current-period forecast
-accuracy, prediction intervals or independently calibrated crisis thresholds.
+Monitor source freshness, progress/errors, complete-score counts, API health, restarts and verified backups. Failed staging leaves the active release intact. If release checks fail, stop the API and restore the same release's database, configuration, processed data and complete model/checkpoint trees, then repeat readiness checks. Do not mix generations. Retain old backups until replacement verification finishes. Neither deployment readiness nor software checks establishes forecast skill, calibrated probability or operational suitability.

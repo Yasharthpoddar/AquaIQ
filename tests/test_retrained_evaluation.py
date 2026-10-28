@@ -46,9 +46,13 @@ def test_same_production_frames_reference_and_eligibility_are_used_once(panel, b
     original = panel.copy(deep=True)
     predictor = evaluation.tiered.forecast_district
     calls = []
+    # Keep spy arguments alive: CPython may recycle an expired object's id on
+    # the next cutoff. The identity assertions below must compare live objects.
+    references = []
 
     def record(did, frame, cutoff, generation, bundle, reference, *, calibration):
         assert calibration is None
+        references.append(reference)
         calls.append((did, str(cutoff), id(frame), id(reference), bundle))
         return predictor(did, frame, cutoff, generation, bundle, reference, calibration=calibration)
 

@@ -1,4 +1,0 @@
-{
-  "command": ".\\venv\\Scripts\\python.exe -B reports/repository_cleanup_20261027/cleanup.py verify",
-  "exit_code": 0
-}
