@@ -116,10 +116,11 @@ test('coverage card counts actual complete records from both methods and keeps u
   ] };
   assert.deepEqual(medianSummaryRecords(summary), { available: 2, unavailable: 1, forecastMonths: 24, xgboost: 1, persistence: 1, noObservations: 1 });
   const html = renderToStaticMarkup(createElement(StateMedianCoverageCard, { summary }));
-  assert.match(html, /2 <small>\/ 3/); assert.match(html, /1 XGBoost · 1 persistence fallback · 1 unavailable/);
-  assert.match(html, /24 forecast-month values/); assert.match(html, /does not establish accuracy/);
+  assert.match(html, /Forecastable States/);
+  assert.match(html, /2 <small>\/ 3/);
+  assert.match(html, /1 XGBoost · 1 Persistence · 1 unavailable/);
   const unknown = renderToStaticMarkup(createElement(StateMedianCoverageCard, { summary: { total_states: 36, states: [{ status: 'available' }] } }));
-  assert.match(unknown, /Unverified/); assert.doesNotMatch(unknown, /12 forecast-month/);
+  assert.match(unknown, /Unverified/);
 });
 
 test('state tooltip exposes actual historical coverage and labels forecast reference coverage as historical', () => {

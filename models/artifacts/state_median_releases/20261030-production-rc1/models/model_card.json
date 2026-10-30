@@ -1,0 +1,534 @@
+{
+  "model_name": "state_median_xgboost",
+  "model_version": "1.0-state-median-xgboost",
+  "product": "state_median_groundwater_12m_forecast",
+  "promotion_status": "experimental",
+  "train_target_cutoff": "2026-09-01",
+  "training_cutoff": "2026-09-01",
+  "validation_start": "2017-01-01",
+  "initial_fit_target_cutoff": "2016-12-01",
+  "features": [
+    "horizon",
+    "target_month_sin",
+    "target_month_cos",
+    "origin_month_sin",
+    "origin_month_cos",
+    "last_depth",
+    "observation_age_months",
+    "previous_month_depth",
+    "previous_month_coverage",
+    "lag_1",
+    "lag_2",
+    "lag_3",
+    "lag_6",
+    "lag_12",
+    "rolling_median_3",
+    "rolling_mean_3",
+    "rolling_std_3",
+    "rolling_median_6",
+    "rolling_mean_6",
+    "rolling_std_6",
+    "rolling_median_12",
+    "rolling_mean_12",
+    "rolling_std_12",
+    "change_3",
+    "rainfall_current_lag1",
+    "temperature_lag1",
+    "evapotranspiration_lag1"
+  ],
+  "parameters": {
+    "n_estimators": 120,
+    "max_depth": 2,
+    "learning_rate": 0.04,
+    "objective": "reg:squarederror",
+    "subsample": 1.0,
+    "colsample_bytree": 1.0,
+    "random_state": 42,
+    "n_jobs": 1,
+    "tree_method": "hist"
+  },
+  "xgboost_version": "3.4.1",
+  "min_coverage": 0.5,
+  "min_history": 36,
+  "min_span_months": 60,
+  "min_training_targets": 24,
+  "max_reference_age_months": 12,
+  "feature_generation_id": "physical-v3-official-c9ade81d95720f91",
+  "data_sha256": "2982c2d53bfe2b747a7d86821323d0f8bd58d1d755baa713d1b8741a40999209",
+  "registry_sha256": "5765965f7cf0fbbaecfb93983e72d248baaeca07e1b9b43e47ad80921dda7835",
+  "implementation_sha256": "e90d1dd62443579cced8d51b4a263c2f115c41eb9cacc7c91f4094f6265cd9f2",
+  "created_at": "2026-10-29T08:58:41.678122+00:00",
+  "states": {
+    "AN": {
+      "status": "insufficient_data",
+      "observed_months": 16,
+      "span_months": 114,
+      "reason": "Requires 36 coverage-qualified months spanning 60 months, 24 supervised target months, and chronological validation evidence."
+    },
+    "AP": {
+      "status": "trained",
+      "observed_months": 85,
+      "span_months": 289,
+      "reason": null,
+      "file": "AP.json",
+      "model_sha256": "820ef30924b6b991c7ea8baffd8a5dc43a2faa82baa466bb7f430a5e6900f300",
+      "training_rows": 848,
+      "training_target_months": 73,
+      "first_training_target": "2005-01-01",
+      "last_training_target": "2026-01-01",
+      "validation": {
+        "n": 291,
+        "unique_target_months": 26,
+        "mae_m": 0.5354106433911869,
+        "rmse_m": 0.682018177098814,
+        "period_start": "2017-05-01",
+        "period_end": "2026-01-01",
+        "role": "development_diagnostic_only_not_test_accuracy"
+      }
+    },
+    "AR": {
+      "status": "insufficient_data",
+      "observed_months": 0,
+      "span_months": 0,
+      "reason": "Requires 36 coverage-qualified months spanning 60 months, 24 supervised target months, and chronological validation evidence."
+    },
+    "AS": {
+      "status": "insufficient_data",
+      "observed_months": 40,
+      "span_months": 157,
+      "reason": "Requires 36 coverage-qualified months spanning 60 months, 24 supervised target months, and chronological validation evidence."
+    },
+    "BR": {
+      "status": "trained",
+      "observed_months": 82,
+      "span_months": 289,
+      "reason": null,
+      "file": "BR.json",
+      "model_sha256": "1fb10c0e6c90339dfa2fac9f3e9edb0cfe1f26f47af04d13729ed2691e3020cb",
+      "training_rows": 805,
+      "training_target_months": 69,
+      "first_training_target": "2005-01-01",
+      "last_training_target": "2023-05-01",
+      "validation": {
+        "n": 237,
+        "unique_target_months": 21,
+        "mae_m": 0.5781871804412115,
+        "rmse_m": 0.6865909728753218,
+        "period_start": "2017-05-01",
+        "period_end": "2023-05-01",
+        "role": "development_diagnostic_only_not_test_accuracy"
+      }
+    },
+    "CG": {
+      "status": "trained",
+      "observed_months": 75,
+      "span_months": 289,
+      "reason": null,
+      "file": "CG.json",
+      "model_sha256": "adbcc47f7371bdfddb78c777368d0eb8d81b4c5d98278bfc6fe5d18ae3390f2e",
+      "training_rows": 707,
+      "training_target_months": 63,
+      "first_training_target": "2005-05-01",
+      "last_training_target": "2026-01-01",
+      "validation": {
+        "n": 309,
+        "unique_target_months": 27,
+        "mae_m": 0.5631596713177881,
+        "rmse_m": 0.6787195469510595,
+        "period_start": "2017-05-01",
+        "period_end": "2026-01-01",
+        "role": "development_diagnostic_only_not_test_accuracy"
+      }
+    },
+    "CH": {
+      "status": "insufficient_data",
+      "observed_months": 46,
+      "span_months": 157,
+      "reason": "Requires 36 coverage-qualified months spanning 60 months, 24 supervised target months, and chronological validation evidence."
+    },
+    "DD": {
+      "status": "insufficient_data",
+      "observed_months": 32,
+      "span_months": 145,
+      "reason": "Requires 36 coverage-qualified months spanning 60 months, 24 supervised target months, and chronological validation evidence."
+    },
+    "DL": {
+      "status": "insufficient_data",
+      "observed_months": 42,
+      "span_months": 157,
+      "reason": "Requires 36 coverage-qualified months spanning 60 months, 24 supervised target months, and chronological validation evidence."
+    },
+    "GA": {
+      "status": "insufficient_data",
+      "observed_months": 45,
+      "span_months": 157,
+      "reason": "Requires 36 coverage-qualified months spanning 60 months, 24 supervised target months, and chronological validation evidence."
+    },
+    "GJ": {
+      "status": "trained",
+      "observed_months": 83,
+      "span_months": 289,
+      "reason": null,
+      "file": "GJ.json",
+      "model_sha256": "17f90cb21e9157904657b74adef2ecddaae5b46f13399c0ab7bb915db36dc927",
+      "training_rows": 821,
+      "training_target_months": 71,
+      "first_training_target": "2005-01-01",
+      "last_training_target": "2026-01-01",
+      "validation": {
+        "n": 253,
+        "unique_target_months": 23,
+        "mae_m": 1.5061965003323405,
+        "rmse_m": 1.8181871272902077,
+        "period_start": "2017-05-01",
+        "period_end": "2026-01-01",
+        "role": "development_diagnostic_only_not_test_accuracy"
+      }
+    },
+    "HP": {
+      "status": "trained",
+      "observed_months": 85,
+      "span_months": 285,
+      "reason": null,
+      "file": "HP.json",
+      "model_sha256": "12a4bc468a297b11877d496c0501180290259e20af8e893efd1be38ebc15a04b",
+      "training_rows": 857,
+      "training_target_months": 73,
+      "first_training_target": "2005-05-01",
+      "last_training_target": "2026-01-01",
+      "validation": {
+        "n": 297,
+        "unique_target_months": 26,
+        "mae_m": 1.4113382510332084,
+        "rmse_m": 2.361938335998638,
+        "period_start": "2017-05-01",
+        "period_end": "2026-01-01",
+        "role": "development_diagnostic_only_not_test_accuracy"
+      }
+    },
+    "HR": {
+      "status": "trained",
+      "observed_months": 89,
+      "span_months": 289,
+      "reason": null,
+      "file": "HR.json",
+      "model_sha256": "223ada8d1c680de012140082ed491843f50c751c502905578394465599bdd520",
+      "training_rows": 901,
+      "training_target_months": 77,
+      "first_training_target": "2005-01-01",
+      "last_training_target": "2026-01-01",
+      "validation": {
+        "n": 332,
+        "unique_target_months": 29,
+        "mae_m": 2.180165562351178,
+        "rmse_m": 2.5805905737072092,
+        "period_start": "2017-05-01",
+        "period_end": "2026-01-01",
+        "role": "development_diagnostic_only_not_test_accuracy"
+      }
+    },
+    "JH": {
+      "status": "trained",
+      "observed_months": 89,
+      "span_months": 289,
+      "reason": null,
+      "file": "JH.json",
+      "model_sha256": "0478ea9bce1ee1a32d5c174ec760878b1ee9807d4535ebf829878d23a1bba0b0",
+      "training_rows": 900,
+      "training_target_months": 77,
+      "first_training_target": "2005-01-01",
+      "last_training_target": "2026-01-01",
+      "validation": {
+        "n": 332,
+        "unique_target_months": 29,
+        "mae_m": 0.649355290609974,
+        "rmse_m": 0.7846355160142213,
+        "period_start": "2017-05-01",
+        "period_end": "2026-01-01",
+        "role": "development_diagnostic_only_not_test_accuracy"
+      }
+    },
+    "JK": {
+      "status": "insufficient_data",
+      "observed_months": 3,
+      "span_months": 22,
+      "reason": "Requires 36 coverage-qualified months spanning 60 months, 24 supervised target months, and chronological validation evidence."
+    },
+    "KA": {
+      "status": "trained",
+      "observed_months": 88,
+      "span_months": 289,
+      "reason": null,
+      "file": "KA.json",
+      "model_sha256": "46f27089cd1c1ee5ac637b2f7de71d0e98ef8d4d8fdad78196b04c0b8433edf2",
+      "training_rows": 889,
+      "training_target_months": 76,
+      "first_training_target": "2005-01-01",
+      "last_training_target": "2026-01-01",
+      "validation": {
+        "n": 321,
+        "unique_target_months": 28,
+        "mae_m": 1.4160343276556253,
+        "rmse_m": 1.7879024923276527,
+        "period_start": "2017-05-01",
+        "period_end": "2026-01-01",
+        "role": "development_diagnostic_only_not_test_accuracy"
+      }
+    },
+    "KL": {
+      "status": "trained",
+      "observed_months": 89,
+      "span_months": 289,
+      "reason": null,
+      "file": "KL.json",
+      "model_sha256": "f373f2b677d722ef47c74ec32ca8e257456260802c1ba8b5e5a2f4d1a04e80a9",
+      "training_rows": 892,
+      "training_target_months": 77,
+      "first_training_target": "2005-01-01",
+      "last_training_target": "2026-01-01",
+      "validation": {
+        "n": 275,
+        "unique_target_months": 25,
+        "mae_m": 0.5472952954727563,
+        "rmse_m": 0.7815137787640859,
+        "period_start": "2017-04-01",
+        "period_end": "2026-01-01",
+        "role": "development_diagnostic_only_not_test_accuracy"
+      }
+    },
+    "LA": {
+      "status": "insufficient_data",
+      "observed_months": 0,
+      "span_months": 0,
+      "reason": "Requires 36 coverage-qualified months spanning 60 months, 24 supervised target months, and chronological validation evidence."
+    },
+    "LD": {
+      "status": "insufficient_data",
+      "observed_months": 0,
+      "span_months": 0,
+      "reason": "Requires 36 coverage-qualified months spanning 60 months, 24 supervised target months, and chronological validation evidence."
+    },
+    "MH": {
+      "status": "trained",
+      "observed_months": 81,
+      "span_months": 289,
+      "reason": null,
+      "file": "MH.json",
+      "model_sha256": "226ba0de3b683eda48b3c147ea32bd6c14f2248bb0c5333c07a8abfd0a84c731",
+      "training_rows": 797,
+      "training_target_months": 69,
+      "first_training_target": "2005-08-01",
+      "last_training_target": "2026-01-01",
+      "validation": {
+        "n": 253,
+        "unique_target_months": 23,
+        "mae_m": 1.1064108142324545,
+        "rmse_m": 1.333739113405778,
+        "period_start": "2017-05-01",
+        "period_end": "2026-01-01",
+        "role": "development_diagnostic_only_not_test_accuracy"
+      }
+    },
+    "ML": {
+      "status": "insufficient_data",
+      "observed_months": 37,
+      "span_months": 289,
+      "reason": "Requires 36 coverage-qualified months spanning 60 months, 24 supervised target months, and chronological validation evidence."
+    },
+    "MN": {
+      "status": "insufficient_data",
+      "observed_months": 0,
+      "span_months": 0,
+      "reason": "Requires 36 coverage-qualified months spanning 60 months, 24 supervised target months, and chronological validation evidence."
+    },
+    "MP": {
+      "status": "trained",
+      "observed_months": 86,
+      "span_months": 289,
+      "reason": null,
+      "file": "MP.json",
+      "model_sha256": "19a49375cbdff4724a7f566d536a73faa3d8b149655f0248690792b356a237f6",
+      "training_rows": 860,
+      "training_target_months": 74,
+      "first_training_target": "2005-01-01",
+      "last_training_target": "2026-01-01",
+      "validation": {
+        "n": 292,
+        "unique_target_months": 26,
+        "mae_m": 1.106342716839031,
+        "rmse_m": 1.3295707420556093,
+        "period_start": "2017-05-01",
+        "period_end": "2026-01-01",
+        "role": "development_diagnostic_only_not_test_accuracy"
+      }
+    },
+    "MZ": {
+      "status": "insufficient_data",
+      "observed_months": 0,
+      "span_months": 0,
+      "reason": "Requires 36 coverage-qualified months spanning 60 months, 24 supervised target months, and chronological validation evidence."
+    },
+    "NL": {
+      "status": "insufficient_data",
+      "observed_months": 3,
+      "span_months": 37,
+      "reason": "Requires 36 coverage-qualified months spanning 60 months, 24 supervised target months, and chronological validation evidence."
+    },
+    "OD": {
+      "status": "trained",
+      "observed_months": 91,
+      "span_months": 289,
+      "reason": null,
+      "file": "OD.json",
+      "model_sha256": "43b2feee40bdafd3949b3cd5e8e20bf21e2bb9ca77b854d5887389c34d0b8991",
+      "training_rows": 925,
+      "training_target_months": 79,
+      "first_training_target": "2005-01-01",
+      "last_training_target": "2026-01-01",
+      "validation": {
+        "n": 308,
+        "unique_target_months": 27,
+        "mae_m": 0.45876498928929055,
+        "rmse_m": 0.5260161686153114,
+        "period_start": "2017-04-01",
+        "period_end": "2026-01-01",
+        "role": "development_diagnostic_only_not_test_accuracy"
+      }
+    },
+    "PB": {
+      "status": "trained",
+      "observed_months": 89,
+      "span_months": 289,
+      "reason": null,
+      "file": "PB.json",
+      "model_sha256": "26beb68190cdf7a287356d668ac37189f1702aacca7969a6e977fcca0283273e",
+      "training_rows": 901,
+      "training_target_months": 77,
+      "first_training_target": "2005-01-01",
+      "last_training_target": "2026-01-01",
+      "validation": {
+        "n": 332,
+        "unique_target_months": 29,
+        "mae_m": 1.9199528787157316,
+        "rmse_m": 2.329856447219907,
+        "period_start": "2017-05-01",
+        "period_end": "2026-01-01",
+        "role": "development_diagnostic_only_not_test_accuracy"
+      }
+    },
+    "PY": {
+      "status": "insufficient_data",
+      "observed_months": 44,
+      "span_months": 157,
+      "reason": "Requires 36 coverage-qualified months spanning 60 months, 24 supervised target months, and chronological validation evidence."
+    },
+    "RJ": {
+      "status": "trained",
+      "observed_months": 81,
+      "span_months": 289,
+      "reason": null,
+      "file": "RJ.json",
+      "model_sha256": "fe253a47ca3a74eed7559a56c176fb626116b10217b56a58c3c1b4e05952e738",
+      "training_rows": 805,
+      "training_target_months": 69,
+      "first_training_target": "2006-08-01",
+      "last_training_target": "2026-01-01",
+      "validation": {
+        "n": 309,
+        "unique_target_months": 27,
+        "mae_m": 0.9231708207009255,
+        "rmse_m": 1.1829177670428126,
+        "period_start": "2017-05-01",
+        "period_end": "2026-01-01",
+        "role": "development_diagnostic_only_not_test_accuracy"
+      }
+    },
+    "SK": {
+      "status": "insufficient_data",
+      "observed_months": 0,
+      "span_months": 0,
+      "reason": "Requires 36 coverage-qualified months spanning 60 months, 24 supervised target months, and chronological validation evidence."
+    },
+    "TN": {
+      "status": "trained",
+      "observed_months": 91,
+      "span_months": 289,
+      "reason": null,
+      "file": "TN.json",
+      "model_sha256": "116fa40b81bc3988aa8d2639072e20d9bad303597ef6e08e72a380e7fe2f7cfb",
+      "training_rows": 925,
+      "training_target_months": 79,
+      "first_training_target": "2005-01-01",
+      "last_training_target": "2026-01-01",
+      "validation": {
+        "n": 357,
+        "unique_target_months": 31,
+        "mae_m": 1.1676631920590614,
+        "rmse_m": 1.4405842126507238,
+        "period_start": "2017-05-01",
+        "period_end": "2026-01-01",
+        "role": "development_diagnostic_only_not_test_accuracy"
+      }
+    },
+    "TR": {
+      "status": "trained",
+      "observed_months": 83,
+      "span_months": 289,
+      "reason": null,
+      "file": "TR.json",
+      "model_sha256": "ca15605e84d6df25a1d8bbccd8a424273567c06952f1fc5e895e523d5dd6899c",
+      "training_rows": 824,
+      "training_target_months": 71,
+      "first_training_target": "2005-01-01",
+      "last_training_target": "2026-01-01",
+      "validation": {
+        "n": 278,
+        "unique_target_months": 25,
+        "mae_m": 0.4292302103579062,
+        "rmse_m": 0.5452095591331653,
+        "period_start": "2017-03-01",
+        "period_end": "2026-01-01",
+        "role": "development_diagnostic_only_not_test_accuracy"
+      }
+    },
+    "TS": {
+      "status": "insufficient_data",
+      "observed_months": 12,
+      "span_months": 61,
+      "reason": "Requires 36 coverage-qualified months spanning 60 months, 24 supervised target months, and chronological validation evidence."
+    },
+    "UK": {
+      "status": "insufficient_data",
+      "observed_months": 7,
+      "span_months": 37,
+      "reason": "Requires 36 coverage-qualified months spanning 60 months, 24 supervised target months, and chronological validation evidence."
+    },
+    "UP": {
+      "status": "trained",
+      "observed_months": 83,
+      "span_months": 285,
+      "reason": null,
+      "file": "UP.json",
+      "model_sha256": "f9ae6619f0c4f5e159cf735b12a23daaa6411274fa6cc431c3ba26a01ffceec7",
+      "training_rows": 821,
+      "training_target_months": 71,
+      "first_training_target": "2005-05-01",
+      "last_training_target": "2026-01-01",
+      "validation": {
+        "n": 261,
+        "unique_target_months": 24,
+        "mae_m": 0.44525462890512835,
+        "rmse_m": 0.5103963308797332,
+        "period_start": "2017-05-01",
+        "period_end": "2026-01-01",
+        "role": "development_diagnostic_only_not_test_accuracy"
+      }
+    },
+    "WB": {
+      "status": "insufficient_data",
+      "observed_months": 42,
+      "span_months": 157,
+      "reason": "Requires 36 coverage-qualified months spanning 60 months, 24 supervised target months, and chronological validation evidence."
+    }
+  }
+}

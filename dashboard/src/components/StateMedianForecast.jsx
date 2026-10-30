@@ -52,9 +52,9 @@ export function useStateMedianHistory(forecast) {
 
 export function StateMedianCoverageCard({ summary, loading = false }) {
   const records = medianSummaryRecords(summary);
-  return <article className="card"><span>States with complete 12-month forecasts</span><strong>{records ? <>{records.available} <small>/ {summary.total_states}</small></> : loading ? 'Loading…' : 'Unverified'}</strong>
-    {records && <><small>{records.xgboost} XGBoost · {records.persistence} persistence fallback · {records.unavailable} unavailable</small><small>{records.forecastMonths} forecast-month values</small></>}
-    <small>Availability does not establish accuracy</small></article>;
+  return <article className="card"><span>Forecastable States</span><strong>{records ? <>{records.available} <small>/ {summary.total_states}</small></> : loading ? 'Loading…' : 'Unverified'}</strong>
+    {records && <small>{records.xgboost} XGBoost · {records.persistence} Persistence{records.unavailable > 0 ? ` · ${records.unavailable} unavailable` : ''}</small>}
+  </article>;
 }
 
 /** Legacy combined tooltip maintained for compatibility with existing tests */
@@ -78,7 +78,7 @@ export function stateMedianForecastPlot(value, dimensions = {}) {
     <YAxis width={66} tickLine={false} axisLine={false} tick={{ fontSize: 12, fill: '#475569' }} label={{ value: 'Depth (m below ground)', angle: -90, position: 'insideLeft', style: { textAnchor: 'middle', fill: '#475569', fontSize: 12 } }} />
     <Tooltip trigger="hover" shared filterNull={false} content={<StateMedianTooltip />} isAnimationActive={false} cursor={{ stroke: '#64748b', strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 20, pointerEvents: 'none' }} /><Legend wrapperStyle={{ fontSize: 13, paddingTop: 12 }} />
     <ReferenceLine x={value.forecast_origin.slice(0, 7)} stroke="#64748b" strokeDasharray="4 4" label={{ value: 'Forecast origin', position: 'insideTopRight', fontSize: 11 }} />
-    <Line dataKey="observed" name="Observed district median" stroke="#2563eb" strokeWidth={1.2} dot={{ r: 3, fill: '#fff', strokeWidth: 1.2 }} activeDot={{ r: 5, fill: '#fff' }} connectNulls={false} isAnimationActive={false} />
+    <Line dataKey="observed" name="Observed state median" stroke="#2563eb" strokeWidth={1.2} dot={{ r: 3, fill: '#fff', strokeWidth: 1.2 }} activeDot={{ r: 5, fill: '#fff' }} connectNulls={false} isAnimationActive={false} />
     <Line dataKey="lowCoverage" name="Low coverage observation" stroke="#94a3b8" strokeWidth={0} legendType="circle" dot={{ r: 3, fill: '#94a3b8', stroke: '#94a3b8' }} connectNulls={false} isAnimationActive={false} />
     <Line dataKey="predicted" name={fallback ? 'Persistence fallback forecast' : `${medianMethodLabel(value)} forecast`} stroke="#0f766e" strokeWidth={1.8} strokeDasharray="6 3" dot={{ r: 3, fill: '#fff', strokeWidth: 2 }} activeDot={{ r: 5, fill: '#fff' }} connectNulls={false} isAnimationActive={false} />
   </LineChart>;
@@ -149,14 +149,14 @@ export function stateRecordedHistoryPlot(rows, dimensions = {}) {
       <XAxis dataKey="month" allowDuplicatedCategory={false} minTickGap={45} tickLine={false} tick={{ fontSize: 12, fill: '#475569' }} />
       <YAxis width={66} tickLine={false} tick={{ fontSize: 12, fill: '#475569' }} label={{ value: 'Depth (m below ground)', angle: -90, position: 'insideLeft', style: { textAnchor: 'middle', fill: '#475569', fontSize: 12 } }} />
       <Tooltip trigger="hover" shared filterNull={false} content={<StateRecordedHistoryTooltip rows={rows} />} isAnimationActive={false} cursor={{ stroke: '#64748b', strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 20, pointerEvents: 'none' }} />
-      <Legend itemSorter={item => item.value === 'Observed district median' ? 0 : 1} wrapperStyle={{ fontSize: 13, paddingTop: 12 }} />
+      <Legend itemSorter={item => item.value === 'Observed state median' ? 0 : 1} wrapperStyle={{ fontSize: 13, paddingTop: 12 }} />
       {recordedHistoryGapSegments(rows).map(segment => (
         <Line key={`gap-${segment[0].month}`} className="history-gap-guide" dataKey={recordedHistoryGuideValue(segment)} name="Missing-period guide" type="linear" stroke="#2563eb" strokeWidth={1.2} strokeDasharray="5 5" strokeOpacity={0.65} dot={false} activeDot={false} legendType="none" tooltipType="none" connectNulls isAnimationActive={false} />
       ))}
       {recordedHistoryObservationSegments(rows).map(segment => (
         <Line key={segment[0].month} className="history-observation-guide" dataKey={recordedHistoryGuideValue(segment)} name="Observation guide" type="linear" stroke="#2563eb" strokeWidth={1.2} dot={false} activeDot={false} legendType="none" tooltipType="none" connectNulls isAnimationActive={false} />
       ))}
-      <Line dataKey="observed" name="Observed district median" stroke="#2563eb" strokeWidth={1.2} dot={{ r: 3, fill: '#fff', strokeWidth: 1.2 }} activeDot={{ r: 5, fill: '#fff' }} connectNulls={false} isAnimationActive={false} />
+      <Line dataKey="observed" name="Observed state median" stroke="#2563eb" strokeWidth={1.2} dot={{ r: 3, fill: '#fff', strokeWidth: 1.2 }} activeDot={{ r: 5, fill: '#fff' }} connectNulls={false} isAnimationActive={false} />
       <Line dataKey="lowCoverage" name="Low coverage observation" stroke="#94a3b8" strokeWidth={0} legendType="circle" dot={{ r: 3, fill: '#94a3b8', stroke: '#94a3b8' }} connectNulls={false} isAnimationActive={false} />
       <Line dataKey="filled" name="Forward-filled history" stroke="#94a3b8" strokeWidth={1} dot={{ r: 1.8, fill: '#fff', strokeWidth: 1 }} connectNulls={false} strokeDasharray="3 3" isAnimationActive={false} />
     </LineChart>
@@ -317,13 +317,10 @@ export function StateMedianForecastView({
           <div>
             <h2>Recorded History</h2>
             <p className="muted">
-              Depth in metres below ground across reporting districts · {stateName}
+              Historical state median groundwater depth (m bgl) · {stateName}
             </p>
           </div>
         </header>
-        <p className="forecast-note">
-          Depth is measured in metres below ground (m bgl). Larger values mean a deeper water table. Depth below ground is not the same as total groundwater volume or availability.
-        </p>
         {historyLoading && (
           <div className="forecast-placeholder" role="status">
             <span className="loading-spinner" />Loading recorded state history…
@@ -344,11 +341,6 @@ export function StateMedianForecastView({
         )}
         {!historyLoading && hasHistory && (
           <>
-            {fullHistory && firstGenuine && (
-              <p className="forecast-note">
-                First genuine state median: {formatStateMonth(fullHistory.earliest_observation_date || firstGenuine.date)}. {earliestQualified ? `First coverage-qualified state median: ${formatStateMonth(earliestQualified)}.` : 'No historical month meets the XGBoost training-target coverage criteria; genuine low-coverage medians appear as grey points only.'}
-              </p>
-            )}
             <div className="chart-caption">
               <span>
                 {fullHistory ? 'Full source history' : 'History window bundled with forecast'}
@@ -361,9 +353,16 @@ export function StateMedianForecastView({
                 {stateRecordedHistoryPlot(historyRows)}
               </ResponsiveContainer>
             </div>
-            <p className="compact-note">
-              Hover or tap the chart for monthly values. Blue lines join eligible observations; dashed portions bridge missing periods as visual guides only. Grey points are forward fills or low-coverage medians, not new training targets. Depth in metres below ground does not represent total groundwater volume.
-            </p>
+            <details className="history-details">
+              <summary>About this history</summary>
+              <p className="forecast-note">Depth is measured in metres below ground (m bgl). Larger values mean a deeper water table. Depth below ground is not the same as total groundwater volume or availability.</p>
+              {fullHistory && firstGenuine && (
+                <p className="forecast-note">
+                  First genuine state median: {formatStateMonth(fullHistory.earliest_observation_date || firstGenuine.date)}. {earliestQualified ? `First coverage-qualified state median: ${formatStateMonth(earliestQualified)}.` : 'No historical month meets the XGBoost training-target coverage criteria; genuine low-coverage medians appear as grey points only.'}
+                </p>
+              )}
+              <p className="forecast-note">Blue lines join eligible observations. Dashed portions bridge missing periods as visual guides only. Grey points are forward fills or low-coverage medians.</p>
+            </details>
           </>
         )}
       </section>
@@ -374,35 +373,15 @@ export function StateMedianForecastView({
           <div>
             <h2>12-Month Groundwater Prediction</h2>
             <p className="muted">
-              State median forecast · next 12 full calendar months · m bgl
+              State median forecast · m bgl · {fallback ? 'persistence fallback' : 'XGBoost'}
             </p>
           </div>
-          <span className="experimental-badge">
-            {fallback ? 'Limited-history fallback' : 'Limited historical evidence'}
-          </span>
         </header>
-        <p className="forecast-note">
-          The median represents the typical district among districts observed that month. It does not measure groundwater volume, total availability or the most severely depleted district. Higher depth means a lower water table.
-        </p>
-        <p className="forecast-note">
-          Forecast vintage: {value.as_of}. Generated {value.computed_at}. Model {value.model_version}; {fallback ? 'persistence uses no fitted model' : `training cutoff ${value.training_cutoff || 'unavailable'}`}.
-        </p>
         {fallback && (
           <div className="inline-state" role="note">
             <strong>Persistence fallback</strong>
-            <p>The latest genuine observed state median is held constant for all 12 forecast months. This fallback does not use XGBoost and does not estimate an emerging trend.</p>
-            <p>XGBoost was not used: {value.fallback_reason}</p>
+            <p>The latest genuine observed state median is held constant for all 12 forecast months. XGBoost was not used: {value.fallback_reason}</p>
           </div>
-        )}
-        {value.historical_reference_date && (
-          <p className="forecast-note">
-            Reference observation: {value.historical_reference_date}{Number.isInteger(referenceAge) ? ` · ${referenceAge} months old at this vintage` : ''}. {value.reference_training_eligible === false ? 'Reference coverage is below the XGBoost training-target criteria; it remains a genuine observation.' : ''}{value.reference_is_stale === true || (Number.isInteger(referenceAge) && referenceAge > 12) ? ' This is a stale historical measurement, not a recent reading.' : ''}
-          </p>
-        )}
-        {value.latest_observation_date && value.latest_observation_date !== value.historical_reference_date && (
-          <p className="forecast-note">
-            Latest genuine observation: {value.latest_observation_date} · {value.observation_age_months} months old. The forecast method uses the separately dated reference above.
-          </p>
         )}
         {value.status !== 'forecast' && (
           <div className="inline-state" role="status">
@@ -421,23 +400,6 @@ export function StateMedianForecastView({
             <button className="button button-secondary" type="button" onClick={onRetry}>Retry state median</button>
           </div>
         )}
-        <dl className="state-median-evidence">
-          <div>
-            <dt>Historical reference coverage</dt>
-            <dd>{value.contributing_districts_count} / {value.total_districts_in_state} districts · {value.district_coverage_pct.toFixed(1)}%</dd>
-          </div>
-          <div>
-            <dt>Held-out backtest MAE</dt>
-            <dd>{evaluation?.n ? errorDistance(evaluation.mae_m) : 'Unavailable'}</dd>
-          </div>
-          <div>
-            <dt>Held-out backtest RMSE</dt>
-            <dd>{evaluation?.n ? errorDistance(evaluation.rmse_m) : 'Unavailable'}</dd>
-          </div>
-        </dl>
-        <p className="forecast-note">
-          {evaluation?.n ? `Historical error period: ${evaluation.period_start}–${evaluation.period_end}. ` : 'Historical error estimates are unavailable for this method. '}Forecast accuracy is not guaranteed; sample and horizon details are below.
-        </p>
         {hasPrediction && (
           <>
             <div className="forecast-context" style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', margin: '14px 0', color: '#475569', fontSize: '.86rem' }}>
@@ -477,9 +439,34 @@ export function StateMedianForecastView({
           </>
         )}
         <details className="technical-details">
-          <summary>Median model, backtest details and limitations</summary>
+          <summary>Model details and backtest evidence</summary>
+          <p className="forecast-note">
+            The median represents the typical district among districts observed that month. It does not measure groundwater volume, total availability or the most severely depleted district.
+          </p>
+          <dl className="state-median-evidence">
+            <div>
+              <dt>Historical reference coverage</dt>
+              <dd>{value.contributing_districts_count} / {value.total_districts_in_state} districts · {value.district_coverage_pct.toFixed(1)}%</dd>
+            </div>
+            <div>
+              <dt>Held-out backtest MAE</dt>
+              <dd>{evaluation?.n ? errorDistance(evaluation.mae_m) : 'Unavailable'}</dd>
+            </div>
+            <div>
+              <dt>Held-out backtest RMSE</dt>
+              <dd>{evaluation?.n ? errorDistance(evaluation.rmse_m) : 'Unavailable'}</dd>
+            </div>
+          </dl>
+          <p className="forecast-note">
+            {evaluation?.n ? `Historical error period: ${evaluation.period_start}–${evaluation.period_end}. ` : 'Historical error estimates are unavailable for this method. '}Forecast accuracy is not guaranteed.
+          </p>
+          {value.historical_reference_date && (
+            <p className="forecast-note">
+              Reference observation: {value.historical_reference_date}{Number.isInteger(referenceAge) ? ` · ${referenceAge} months old` : ''}. {value.reference_training_eligible === false ? 'Reference coverage is below the XGBoost training-target criteria; it remains a genuine observation.' : ''}{value.reference_is_stale === true || (Number.isInteger(referenceAge) && referenceAge > 12) ? ' This is a stale historical measurement, not a recent reading.' : ''}
+            </p>
+          )}
           <p>Policy: {value.model_name} · {value.model_version}. Method: {medianMethodLabel(value)}. Status: {value.status}; promotion: {value.promotion_status}.</p>
-          <p>As of {value.as_of}; generated {value.computed_at}. Training cutoff: {value.training_cutoff || (fallback ? 'Not applicable to persistence' : 'No eligible model trained')}.</p>
+          <p>Forecast vintage: {value.as_of}. Generated {value.computed_at}. Training cutoff: {value.training_cutoff || (fallback ? 'Not applicable to persistence' : 'No eligible model trained')}.</p>
           {Number.isInteger(value.genuine_observed_months) && <p>{value.genuine_observed_months} genuine observed state months; {value.genuine_observation_count} valid district-month observations.</p>}
           <p>Evaluation status: {evaluation?.status}.</p>
           {evaluationContext}
