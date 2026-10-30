@@ -117,6 +117,8 @@ jobs:
           PY
       - name: Exercise canonical migration safety in isolated PostgreSQL namespaces
         run: python -m pytest --integration -v tests/test_migration_safety.py
+      - name: Validate independent median migration and atomic publication
+        run: python -m pytest --integration -v tests/test_state_median_release_storage.py tests/test_state_median_v2_api.py
 
   dashboard-build:
     name: React Dashboard Validation
@@ -139,3 +141,7 @@ jobs:
         run: npm test
       - name: Build dashboard
         run: npm run build
+      - name: Verify legacy States rollback build
+        run: npm run build -- --outDir ../scratch/ci-legacy-states-build
+        env:
+          VITE_STATE_FORECAST_MODE: legacy

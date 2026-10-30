@@ -7,7 +7,9 @@ Endpoints:
 """
 
 import os
+import re
 from copy import deepcopy
+from datetime import date, datetime, timezone
 from flask import Blueprint, request
 
 from models.state_mapping import list_states, resolve_state_id, get_state_metadata
@@ -19,11 +21,60 @@ from models.state_forecast import (
     PRODUCT_NAME,
     MODEL_VERSION,
 )
-from models import forecast_storage
+from models import forecast_storage, state_median_storage
 from models.district_registry import get_registry
-from api.contracts import response, failure, parse_forecast_as_of
+from api.contracts import response, failure, parse_forecast_as_of, parse_as_of_value
 
 state_bp = Blueprint("state", __name__)
+
+
+def _median_state_prediction(state_id):
+    """Read the independent experimental candidate; never launch inference."""
+    canonical = resolve_state_id(state_id)
+    requested_as_of = request.args.get('as_of')
+    if requested_as_of is not None:
+        if not re.fullmatch(r'\d{4}-\d{2}-\d{2}', requested_as_of):
+            raise ValueError('Median candidate as_of must be YYYY-MM-DD.')
+        requested_as_of = parse_as_of_value(requested_as_of)
+    unavailable_reason = 'candidate_generation_missing'
+    try:
+        stored = state_median_storage.get_state_forecast(canonical, requested_as_of)
+    except (ValueError, LookupError):
+        raise
+    except Exception:
+        stored = None
+        unavailable_reason = 'candidate_storage_unavailable'
+    if stored is None:
+        unavailable_as_of = requested_as_of or date.today()
+        registered = sum(row['state_id'] == canonical for row in get_registry())
+        stored = {
+            'product': state_median_storage.PRODUCT_NAME,
+            'model_version': state_median_storage.MODEL_VERSION,
+            'model_name': state_median_storage.MODEL_NAME,
+            'state_id': canonical,
+            'state_name': get_state_metadata(canonical)['name'],
+            'status': 'model_unavailable',
+            'promotion_status': 'experimental',
+            'evaluation_status': 'experimental',
+            'units': 'm_bgl', 'horizon_months': 12,
+            'as_of': unavailable_as_of.isoformat(),
+            'forecast_origin': unavailable_as_of.replace(day=1).isoformat(),
+            'computed_at': datetime.now(timezone.utc).isoformat(),
+            'training_cutoff': None, 'model_sha256': None,
+            'contributing_districts_count': 0,
+            'total_districts_in_state': registered,
+            'district_coverage_pct': 0.,
+            'evaluation': {'status': 'not_evaluated', 'n': 0, 'mae_m': None,
+                           'rmse_m': None, 'period_start': None, 'period_end': None,
+                           'description': 'No persisted candidate or independent held-out evaluation is available.'},
+            'history': [], 'forecast': [],
+            'unavailable_reason': unavailable_reason,
+            'message': 'No persisted experimental median forecast is available for this state and vintage. '
+                       'Run python -m scripts.state_median_forecasts generate with candidate artifacts in an isolated test namespace.',
+        }
+    data = deepcopy(stored)
+    data.update(requested_state_id=state_id, resolved_state_id=canonical)
+    return response(data, 503 if data.get('status') == 'model_unavailable' else 200)
 
 
 @state_bp.route("/states")
@@ -93,6 +144,12 @@ def get_state_prediction(state_id):
 
         if horizon != 12:
             raise ValueError(f"Only a twelve-month prediction horizon is supported; horizon must equal 12.")
+
+        model = request.args.get('model', 'current')
+        if model == 'median_xgboost':
+            return _median_state_prediction(state_id)
+        if model != 'current':
+            raise ValueError('model must be current or median_xgboost.')
 
         cutoff = parse_forecast_as_of()
         canonical_state_id = resolve_state_id(state_id)

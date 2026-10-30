@@ -207,3 +207,80 @@ National source units follow the repository's `m_bgl` convention; certified per-
 The retained robust scenario requires at least 24 source-marked observations spanning 36 months. Where enough recent data exist it uses a 120-month window; otherwise full history, with 60-month age half-life, four robust fitting iterations, a penalized linear/annual-seasonal fit, recent-residual adjustment and 36-month trend damping. It estimates the gap from the last observation and evaluates each future month directly; depths are floored at zero. Calendar phases without observations are inferred from assumptions, not measurements. Weather, pumping, extraction and policy interventions are excluded. The method is an in-memory NumPy fit, not an extrapolated six-month estimator or interpolated M+12 point. Sparse sampling, old anchors and uncertain panel continuity limit credibility.
 
 The explicit UI scenario view uses `/district/<district_id>?view=scenario#forecast-graph`; historical `origin_month` links retain their research scope. Scenario and historical risk are independent products. Future labels, verified source availability and stable well/datum evidence plus preregistered baseline comparisons would be necessary to establish skill. No scenario result is recorded as prospective issuance or promoted to an active model.
+# Primary States API (v2)
+
+State release format 2 additionally supports `state_median_tiered`, version
+`2.0-state-median-tiered`, with `forecast_method=state_median_xgboost`,
+`persistence_fallback`, or `no_observations`. Persistence has a genuine reference,
+12 constant values, null fitted-model metadata and no inherited XGBoost errors.
+Responses expose genuine counts, actual dates, age and coverage. Unknown or
+corrupt releases remain service failures, not no-observation claims. R1 release
+responses remain compatible. `model=median_tiered` can explicitly select the
+policy when a matching generation is published; an explicit mismatched model
+returns 400. The actual r2 coverage release has not been published in this task;
+its staged UUID correctly returns 503 through normal published-only endpoints.
+See [STATE_MEDIAN_COVERAGE.md](docs/STATE_MEDIAN_COVERAGE.md).
+
+The main States page selects the active published state median release:
+
+- `GET /api/v2/states`: canonical 36-state registry and district membership;
+  navigation remains available before publication (`as_of`/`generation_id` null).
+- `GET /api/v2/states/summary?horizon=12`: active published median generation.
+- `GET /api/v2/predict/state/TN?horizon=12`: active state median forecast/history.
+- `GET /api/v2/history/state/TN`: full observed state history from the exact
+  source snapshot of the selected published forecast.
+- `as_of=YYYY-MM-DD` selects an exact published vintage; `generation_id=UUID`
+  pins an exact previously published release. Supplying both requires both to
+  match. The frontend pins summary/detail to the same generation.
+
+These endpoints use the selected release's explicit method policy, never run inference, never
+fall back to a district mean, and return explicit experimental/limited evidence.
+`insufficient_data` returns HTTP 200 with observed history and an empty forecast;
+missing/corrupt publications return 503 `model_unavailable`. Invalid/repeated
+parameters or horizons return 400; unknown states return 404. Explicit
+`model=median_xgboost` or `model=median_tiered` must match the selected generation;
+the parameter is normally omitted. The legacy `/api/states/summary` and
+`/api/predict/state/*` retain their prior default behavior; `model=current` is
+also explicit. District endpoints and Home consumers are unchanged.
+
+Summary product is `state_median_groundwater_summary`, with the selected
+`model_version`, `artifact_release`, `generation_id`, `as_of`,
+training cutoff, counts, historical reference dates/depth/coverage, M+12 values,
+and changes relative to the dated historical median (not estimated current
+depth). The summary additionally derives `forecast_month_count`,
+`unavailable_states_count`, `counts_by_forecast_method` and each state's
+`forecast_month_count` from the actual validated persisted forecast arrays.
+`forecast_coverage_basis=validated_persisted_forecast_records` distinguishes
+these response-only counts from historical-data availability. A state requires
+all twelve monthly records to count as forecastable. The immutable stored
+summary/signature is unchanged. For r1, unavailable states are not classified
+as having no observations merely because that release has no trained model.
+
+Detail retains its immutable saved display window (normally the last 60
+calendar months), with null gaps/quality,
+twelve forecast rows when eligible, model/source hashes, generation time and
+historical evaluation. Evaluation identifies the frozen evaluated artifact,
+its horizon/sample/date coverage and the distinction from latest refitted
+weights. See [STATE_MEDIAN_RELEASE.md](docs/STATE_MEDIAN_RELEASE.md).
+
+Full historical display uses `/api/v2/history/state/<state_id>` with the same
+`generation_id` and `as_of` as the forecast. This read-only endpoint requires
+a published generation; staged UUIDs remain unavailable. It verifies the
+manifest and CSV bytes, dataframe generation/hash, registry and minimum coverage
+against that publication before aggregating genuine district-month means into
+state medians. It never trains, predicts, substitutes another source or rewrites
+the release. `AQUAIQ_STATE_MEDIAN_HISTORY_SOURCE_DIR` explicitly selects a
+processed source directory and fails if it differs; otherwise only exact
+manifest matches in the repository's approved processed locations qualify.
+
+The `state_median_groundwater_history` response retains every calendar month
+from the state's earliest genuine observation through the release's completed
+input cutoff, with earliest genuine/eligible dates, observation counts,
+coverage, quality and source/publication identity. No-data states have empty
+history. Missing months remain null and low-coverage medians remain ineligible
+training targets. Missing/corrupt sources return explicit 503 with reason
+`historical_source_unavailable`; a forecast may still display its clearly
+labelled shorter saved window. The frontend validates the same state, generation,
+vintage and source before replacing that window. See
+[STATE_HISTORY_DISPLAY.md](docs/STATE_HISTORY_DISPLAY.md) for actual all-state
+dates and the count/publication distinction.

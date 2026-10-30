@@ -1,5 +1,10 @@
 # Release, deployment and recovery
 
+The primary States page serves the independent state-level groundwater median release (2026.10.29-r2).
+Follow docs/STATE_MEDIAN_PRODUCTION_RUNBOOK.md and docs/STATE_MEDIAN_RELEASE.md for its independent
+migration, staging, compare-and-swap publication, and rollback sequence.
+Use scripts/provision_readonly_serving_role.sql to provision the least-privilege serving identity.
+
 The package runs Nginx for the React SPA and same-origin `/api/` proxy, with Waitress/Flask connected to an existing PostgreSQL database. It does not provision a database, train models or initialize schema automatically. Only the Nginx port is published, bound to loopback by default. Docker build/run, host recovery, HTTPS and monitoring require verification on the target host; passing local tests is not a deployment or scientific guarantee.
 
 The default product reads persisted twelve-month generations. [Serving contracts](../docs/NATIONWIDE_FORECASTS.md) explain publication selection, separate risk outputs and namespace configuration. [Required assets](../docs/FINAL_RELEASE_REPRODUCTION.md) include matching data, models/cards, registry and database publications. The file-only historical research APIs also require `research/twelve_month_app.json` and its pinned local artifact; their Adilabad-only scope never expands merely because the dashboard covers all districts.

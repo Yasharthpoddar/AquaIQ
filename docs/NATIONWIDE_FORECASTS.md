@@ -1,5 +1,20 @@
 # Complete district forecasting
 
+## Primary States median model
+
+The [r2 state coverage policy](STATE_MEDIAN_COVERAGE.md) adds a distinctly named
+persistence method for data-bearing states that cannot support XGBoost. District
+tiers below are unchanged; state fallback predictions never enter district
+history or district outputs. The r2 state artifact is staged/validated only.
+
+The main States page now uses versioned `/api/v2/states` median publications,
+including its cards, map, table and primary chart. The [release guide](STATE_MEDIAN_RELEASE.md)
+documents immutable artifacts, latest-source refitting, historical evidence,
+staging/publication and rollback. Product selection is primary; forecast skill
+remains experimental. Legacy `/api/states/summary` and `/api/predict/state/*`
+retain the existing mean-based contract for Home and other consumers. The
+district workflow described below is unchanged.
+
 The [final data-release guide](FINAL_RELEASE_REPRODUCTION.md) documents the isolated V3 snapshot, exact external inputs and unchanged frozen model. The [release report](SCIENTIFIC_LIMITATIONS.md#data-and-source-provenance) distinguishes it from the original nationwide comparison baseline below. Use matching feature, checkpoint, calibration and namespace identities; never infer one generation's validation from another.
 
 The serving product is a persistent, versioned twelve-month generation for **every district registered in the repository crosswalk**. The 2026-10-25 snapshot contains 725 districts in 36 states/UTs. This is a fixed project inventory, not a claim to match the latest national administrative inventory. Registry metadata is validated and counts are calculated at runtime.

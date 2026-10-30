@@ -49,7 +49,9 @@ def test_incomplete_score_publication_rejected(monkeypatch):
 
 @pytest.mark.parametrize("secret,password", [
     ("replace_with_private_random_value", "private-db-value"),
+    ("replace_with_at_least_32_random_characters", "private-db-value"),
     ("e14d7c3f9a662b80f0ae49d1794b7e12", "replace_locally"),
+    ("e14d7c3f9a662b80f0ae49d1794b7e12", "replace_with_private_serving_password"),
     (" " * 40, "private-db-value"),
     ("e14d7c3f9a662b80f0ae49d1794b7e12", "   "),
     (" e14d7c3f9a662b80f0ae49d1794b7e12", "private-db-value"),

@@ -3,6 +3,9 @@
 /config.yaml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 /data_ingestion/district_crosswalk.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 /models/artifacts/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# State releases bind this implementation's exact bytes in their model cards.
+/models/state_median_forecast.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/models/state_median_policy.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 /research/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 /reports/**/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 /reports/**/*.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

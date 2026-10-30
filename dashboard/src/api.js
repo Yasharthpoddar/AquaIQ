@@ -129,6 +129,36 @@ export async function fetchStatePredict(stateId, horizon = 12, asOf = null) {
   return getJson(`/api/predict/state/${encodeURIComponent(stateId)}?${params}`, 'State forecast', true, 'state_groundwater_12m_forecast');
 }
 
+// An independent experimental state model; production district/state reads are unchanged.
+export async function fetchStateMedianPredict(stateId, asOf = null) {
+  const params = new URLSearchParams({ model: 'median_xgboost', horizon: '12' });
+  if (asOf) params.set('as_of', asOf);
+  return getJson(`/api/predict/state/${encodeURIComponent(stateId)}?${params}`, 'State median forecast', true, 'state_median_groundwater_12m_forecast');
+}
+
+// Versioned primary States experience. Legacy helpers continue serving Home.
+export async function fetchPrimaryStates() {
+  return getJson('/api/v2/states', 'State median registry', true);
+}
+
+export async function fetchPrimaryStatesSummary(asOf = null) {
+  const params = new URLSearchParams({ horizon: '12' });
+  if (asOf) params.set('as_of', asOf);
+  return getJson(`/api/v2/states/summary?${params}`, 'State median summary', true);
+}
+
+export async function fetchPrimaryStatePredict(stateId, asOf = null, generationId = null) {
+  const params = new URLSearchParams({ horizon: '12' });
+  if (asOf) params.set('as_of', asOf);
+  if (generationId) params.set('generation_id', generationId);
+  return getJson(`/api/v2/predict/state/${encodeURIComponent(stateId)}?${params}`, 'State median forecast', true, 'state_median_groundwater_12m_forecast');
+}
+
+export async function fetchPrimaryStateHistory(stateId, asOf, generationId) {
+  const params = new URLSearchParams({ as_of: asOf, generation_id: generationId });
+  return getJson(`/api/v2/history/state/${encodeURIComponent(stateId)}?${params}`, 'State median history', true, 'state_median_groundwater_history');
+}
+
 export async function postSimulate(payload) {
   const res = await fetch(`${API_BASE}/api/simulate`, {
     method: 'POST',

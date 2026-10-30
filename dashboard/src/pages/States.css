@@ -56,6 +56,9 @@
 .states-page details { margin-top: 18px; }
 .states-page summary { cursor: pointer; font-weight: 600; color: #1d4ed8; padding-block: 8px; }
 .states-page code { overflow-wrap: anywhere; }
+.state-median-evidence { display: flex; gap: 20px 32px; flex-wrap: wrap; margin: 18px 0; }
+.state-median-evidence dt { font-size: .82rem; color: #475569; }
+.state-median-evidence dd { margin: 6px 0 0; font-size: 1rem; font-weight: 600; }
 .state-loading, .states-page .forecast-placeholder { display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 180px; }
 .states-page :is(button, input, a, summary, [tabindex]):focus-visible { outline: 3px solid #2563eb; outline-offset: 3px; }
 @media (max-width: 900px) { .state-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .state-explorer-grid { grid-template-columns: minmax(0, 1fr); } .state-selected-panel { border-left: 0; border-top: 1px solid #e2e8f0; padding: 20px 0 0; } }

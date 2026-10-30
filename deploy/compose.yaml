@@ -4,6 +4,8 @@ services:
     build:
       context: ..
       dockerfile: deploy/Dockerfile.api
+      args:
+        PYTHON_IMAGE: ${AQUAIQ_PYTHON_IMAGE:-python:3.13.15-slim}
     restart: unless-stopped
     environment:
       POSTGRES_HOST: ${POSTGRES_HOST:?Set the host of the restored existing PostgreSQL database}
@@ -14,6 +16,11 @@ services:
       SECRET_KEY: ${SECRET_KEY:?Set a private randomly generated application secret}
       AQUAIQ_CORS_ORIGINS: ""
       AQUAIQ_EXPECTED_DISTRICTS: ${AQUAIQ_EXPECTED_DISTRICTS:-725}
+      AQUAIQ_STATE_MEDIAN_SCHEMA: ${AQUAIQ_STATE_MEDIAN_SCHEMA:-public}
+      AQUAIQ_REQUIRE_STATE_MEDIAN_RELEASE: ${AQUAIQ_REQUIRE_STATE_MEDIAN_RELEASE:-true}
+      AQUAIQ_STATE_MEDIAN_ARTIFACT_DIR: ${AQUAIQ_STATE_MEDIAN_ARTIFACT_DIR:?Set the exact image-relative median release directory}
+      AQUAIQ_STATE_MEDIAN_EXPECTED_RELEASE: ${AQUAIQ_STATE_MEDIAN_EXPECTED_RELEASE:?Set the exact median artifact release}
+      AQUAIQ_STATE_MEDIAN_MANIFEST_SHA256: ${AQUAIQ_STATE_MEDIAN_MANIFEST_SHA256:?Set the verified median manifest SHA-256}
       OMP_NUM_THREADS: "1"
       OPENBLAS_NUM_THREADS: "1"
     volumes:
@@ -48,6 +55,8 @@ services:
     build:
       context: ..
       dockerfile: deploy/Dockerfile.web
+      args:
+        VITE_STATE_FORECAST_MODE: ${VITE_STATE_FORECAST_MODE:-median}
     restart: unless-stopped
     ports:
       - "127.0.0.1:${AQUAIQ_WEB_PORT:-8080}:8080"

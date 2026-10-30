@@ -1,13 +1,35 @@
 # Save privately as deploy/.env (never commit real credentials).
 # Compose reads this file via: docker compose --env-file deploy/.env -f deploy/compose.yaml ...
+
+# Target PostgreSQL connection (container localhost is not the host DB)
 POSTGRES_HOST=host.docker.internal
 POSTGRES_PORT=5432
 POSTGRES_DB=aquaiq
 POSTGRES_USER=replace_with_readonly_serving_role
-POSTGRES_PASSWORD=replace_locally
-SECRET_KEY=replace_with_private_random_value
-# Docker Desktop on Windows accepts forward-slash absolute paths.
+POSTGRES_PASSWORD=replace_with_private_serving_password
+SECRET_KEY=replace_with_at_least_32_random_characters
+
+# Absolute paths on host for read-only bind mounts
+# Docker Desktop on Windows accepts forward-slash absolute paths (e.g., C:/path/to/AquaIQ/data)
 AQUAIQ_DATA_DIR=C:/path/to/AquaIQ/data
 AQUAIQ_CHECKPOINT_DIR=C:/path/to/AquaIQ/models/checkpoints
+
+# Operational constraints
 AQUAIQ_EXPECTED_DISTRICTS=725
 AQUAIQ_WEB_PORT=8080
+
+# Pinned Python image matching release runtime (manifest requires Python 3.13.15)
+# Operator must test and pin an immutable digest on target: python:3.13.15-slim@sha256:...
+AQUAIQ_PYTHON_IMAGE=python:3.13.15-slim
+
+# Independent primary States publication (r2 release identity).
+# AQUAIQ_STATE_MEDIAN_SCHEMA: Reviewed production schema (e.g. public or dedicated namespace)
+AQUAIQ_STATE_MEDIAN_SCHEMA=public
+AQUAIQ_REQUIRE_STATE_MEDIAN_RELEASE=true
+AQUAIQ_STATE_MEDIAN_ARTIFACT_DIR=/app/models/artifacts/state_median_releases/20261029-r2
+AQUAIQ_STATE_MEDIAN_EXPECTED_RELEASE=2026.10.29-r2
+AQUAIQ_STATE_MEDIAN_MANIFEST_SHA256=8e97f543b406a83fe854b1501b34c66c4dc1732d0752cf44c2f493ce8c2644c3
+
+# Frontend state forecast mode: 'median' (default tiered r2 release) or 'legacy' (mean-based States UI rollback)
+VITE_STATE_FORECAST_MODE=median
+

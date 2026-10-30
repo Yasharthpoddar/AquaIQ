@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { getStateColor, buildStateLookup, matchState, stateSelectionId } from '../stateMap.js';
+import { getStateColor, getMedianStateColor, medianStateMapDescription, buildStateLookup, matchState, stateSelectionId } from '../stateMap.js';
 
 export { getStateColor };
 
-export default function StateMapComponent({ states = [], selectedStateId = null, onSelectState = null, metric = 'depth', geojsonUrl = '/india_states.geojson' }) {
+export default function StateMapComponent({ states = [], selectedStateId = null, onSelectState = null, metric = 'depth', mode = 'legacy', geojsonUrl = '/india_states.geojson' }) {
   const container = useRef(null), mapRef = useRef(null);
   const [boundary, setBoundary] = useState(null), [error, setError] = useState(null), [retry, setRetry] = useState(0);
   useEffect(() => {
@@ -36,12 +36,12 @@ export default function StateMapComponent({ states = [], selectedStateId = null,
     const style = feature => {
       const state = matchState(feature.properties, lookup);
       const selected = state?.state_id === selectedStateId;
-      return { fillColor: getStateColor(state, metric), color: selected ? '#1d4ed8' : '#64748b', weight: selected ? 3.5 : 1, fillOpacity: state?.status === 'available' ? .75 : .4 };
+      return { fillColor: mode === 'median' ? getMedianStateColor(state, metric) : getStateColor(state, metric), color: selected ? '#1d4ed8' : '#64748b', weight: selected ? 3.5 : 1, fillOpacity: state?.status === 'available' ? .75 : .4 };
     };
     const layer = L.geoJSON(boundary, { style, onEachFeature: (feature, item) => {
       const state = matchState(feature.properties, lookup), id = stateSelectionId(states, feature.properties.state_id);
       const label = document.createElement('div');
-      label.textContent = state ? state.state_name + ' · ' + (state.status === 'available'
+      label.textContent = mode === 'median' ? medianStateMapDescription(state) : state ? state.state_name + ' · ' + (state.status === 'available'
         ? 'Estimated current depth: ' + state.current_gwl_m_bgl + ' m bgl. M+12 estimate: ' + state.forecast_12m_gwl_m_bgl + ' m bgl. Panel: ' + state.contributing_districts + '/' + state.total_districts + ' districts. Evidence: ' + Object.entries(state.evidence_tier_counts || {}).map(([tier,count]) => tier+': '+count).join(', ')
         : state.status === 'pending' ? 'Forecast summary loading. Select to load this state independently.'
           : state.status === 'summary_error' ? 'Forecast summary unavailable. Select to load this state independently.'
@@ -63,15 +63,15 @@ export default function StateMapComponent({ states = [], selectedStateId = null,
     } }).addTo(map);
     map.fitBounds(layer.getBounds(), { padding: [12, 12] });
     return () => { map.removeLayer(layer); };
-  }, [boundary, states, selectedStateId, metric, onSelectState]);
+  }, [boundary, states, selectedStateId, metric, mode, onSelectState]);
   const legend = metric === 'depth'
     ? [['#22c55e', '<5 m'], ['#eab308', '5–<10 m'], ['#f97316', '10–<20 m'], ['#ef4444', '≥20 m']]
     : [['#059669', '<−1 m'], ['#10b981', '−1 to 0 m'], ['#f59e0b', '>0 to 1 m'], ['#ef4444', '>1 m']];
   return <div className="state-map-wrapper">
     {error ? <p role="alert">{error} <button type="button" onClick={() => setRetry(value => value + 1)}>Retry boundaries</button></p> : !boundary && <p role="status">Loading state boundaries…</p>}
     <div ref={container} className="state-map-canvas" aria-label="India state boundaries; use the state selector as a keyboard alternative" />
-    <div className="state-map-legend" aria-label={metric === 'depth' ? 'Estimated depth in metres below ground' : 'M+12 change in metres'}>
-      {legend.concat([['#e2e8f0', states.some(state => ['pending', 'summary_error'].includes(state.status)) ? 'Summary pending / unavailable' : 'Unavailable']]).map(([color, label]) => <span key={label}><i style={{ background: color }} />{label}</span>)}
+    <div className="state-map-legend" aria-label={metric === 'depth' ? (mode === 'median' ? 'Last observed median depth in metres below ground' : 'Estimated depth in metres below ground') : (mode === 'median' ? 'M+12 change from historical median reference in metres' : 'M+12 change in metres')}>
+      {legend.concat([['#e2e8f0', states.some(state => ['pending', 'summary_error'].includes(state.status)) ? 'Summary pending / unavailable' : mode === 'median' && metric === 'depth' ? 'No genuine reference' : 'Unavailable']]).map(([color, label]) => <span key={label}><i style={{ background: color }} />{label}</span>)}
     </div>
   </div>;
 }

@@ -64,11 +64,42 @@ def main():
     app = create_app()
     try:
         validate_release(app, int(os.getenv("AQUAIQ_EXPECTED_DISTRICTS", "725")))
+        if os.getenv('AQUAIQ_REQUIRE_STATE_MEDIAN_RELEASE', 'false').lower() == 'true':
+            validate_state_median_release(app)
     except Exception as error:
         # Do not dump credentials, source values or response payloads into logs.
-        raise SystemExit(f"AquaIQ release readiness failed ({type(error).__name__}). Check restored data, bundles and /api/health.") from None
+        raise SystemExit(f"AquaIQ release readiness failed ({type(error).__name__}). Check restored data, bundles, /api/health and the exact median artifact/publication/runtime settings.") from None
     serve(app, host="0.0.0.0", port=5000, threads=4, channel_timeout=180,
           max_request_body_size=32768, expose_tracebacks=False)
+
+
+def validate_state_median_release(app):
+    """Read-only readiness: exact local artifact and complete pinned publication."""
+    from models.state_median_release import verify_release
+    from models.state_median_release_storage import get_published_manifest
+    from models.state_median_storage import validate_generation
+    directory = os.getenv('AQUAIQ_STATE_MEDIAN_ARTIFACT_DIR')
+    expected = os.getenv('AQUAIQ_STATE_MEDIAN_EXPECTED_RELEASE')
+    signature = os.getenv('AQUAIQ_STATE_MEDIAN_MANIFEST_SHA256')
+    if not directory or not expected or not signature:
+        raise RuntimeError('Configure the median artifact directory, expected release and manifest SHA-256.')
+    _, _, manifest, _ = verify_release(directory, expected, signature)
+    if get_published_manifest() != manifest:
+        raise RuntimeError('Published state median manifest differs from the exact runtime artifact.')
+    client = app.test_client()
+    summary = client.get('/api/v2/states/summary')
+    if summary.status_code != 200 or summary.json.get('artifact_release') != expected:
+        raise RuntimeError('No matching primary median States publication is ready.')
+    payloads = {}
+    for state in summary.json['states']:
+        response = client.get('/api/v2/predict/state/' + state['state_id'],
+            query_string={'generation_id': summary.json['generation_id'], 'as_of': summary.json['as_of']})
+        if response.status_code != 200:
+            raise RuntimeError('A primary median state response is unavailable or corrupt.')
+        payloads[state['state_id']] = response.json
+    validate_generation(payloads)
+    return dict(generation_id=summary.json['generation_id'], artifact_release=expected,
+                states=len(payloads), available=summary.json['available_states_count'])
 
 
 if __name__ == "__main__":

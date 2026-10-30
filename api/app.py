@@ -85,6 +85,7 @@ def create_app(config_override=None):
     from api.routes.scores import scores_bp
     from api.routes.research import research_bp
     from api.routes.state import state_bp
+    from api.routes.state_median import state_median_bp
 
     app.register_blueprint(predict_bp, url_prefix="/api")
     app.register_blueprint(district_bp, url_prefix="/api")
@@ -95,6 +96,7 @@ def create_app(config_override=None):
     app.register_blueprint(scores_bp, url_prefix="/api")
     app.register_blueprint(research_bp, url_prefix="/api")
     app.register_blueprint(state_bp, url_prefix="/api")
+    app.register_blueprint(state_median_bp, url_prefix="/api")
 
     # Root route
     @app.route("/")
